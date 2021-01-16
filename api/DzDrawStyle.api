@@ -1,0 +1,81 @@
+CLS DzDrawStyle : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/drawstyle_dz
+  > summary
+    Encapsulates the drawing parameters for a 3D view.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU ShadeStyle
+  > summary
+    A list of shading styles for rendering scene objects in OpenGL
+  + WireBox - Draws unlit wire-frame bounding boxes
+  + SolidBox - Draws smooth-shaded bounding boxes
+  + Wireframe - Draws unlit wire-frames
+  + LitWireframe - Draws lit wire-frames
+  + HiddenLine - Draws unlit wire-frames, front geometry facing only
+  + WireShaded - Draws lit smooth shaded objects with wireframes imposed
+  + SmoothShaded - Draws lit smooth shaded objects
+  + WireTextured - Draws lit smooth shaded objects with any texture/transparency maps applied and wireframes imposed
+  + Textured - Draws lit smooth shaded objects with any texture/transparency maps applied
+  + GLSLShader - Draws lit smooth shaded objects with a GLSL shader applied
+  + Unshaded - Draws unlit smooth shaded objects
+  + Picking - Special mode for using OpenGL to determine a selected object when the user clicks in the view
+
+### properties
+
+PRP Boolean : drawCuesDefault
+  > summary
+    Whether or not visual cues (such as bounding boxes for selected nodes) should be drawn when appropriate.
+
+PRP Boolean : drawObjectsOnly
+  > summary
+    Whether or not only objects should be drawn
+
+PRP Boolean : drawShadowCastersOnly
+  > summary
+    Whether or not only shadow casters should be drawn
+
+PRP Boolean : isUserStyle
+  > summary
+    Read-Only - Whether or not the style is a user style
+
+PRP Boolean : renderQuality
+  > summary
+    Whether or not the draw is render quality.
+
+### methods
+
+FUN Boolean : drawCues()
+  > returns
+    true if visual cues (such as bounding boxes for selected nodes) should be drawn for the current drawing operation, false if visual cues should not be drawn.
+  > seealso
+    setDrawCuesDefault(), getDrawCuesDefault()
+
+FUN void : forceUseLighting()
+  > summary
+    If the current shade style is not using lighting, this method will set the shade style to the nearest match that uses single-pass drawing and lighting.
+
+FUN Number : pass()
+  > returns
+    The current pass number (second passes are draw for the hidden line and wire shaded styles)
+  > seealso
+    setPass()
+
+FUN Boolean : selectionMapsEnabled()
+  > returns
+    true if selection maps are enabled, false if selection maps are disabled. This is only valid for node picking draw operations.
+  > seealso
+    setRenderQuality()
+
+FUN sceneshader_dz : shader()
+  > returns
+    The scene shader for this draw operation, if any.
+
+FUN DzDrawStyle.ShadeStyle : shadeStyle()
+  > returns
+    The shading style for the current drawing operation

@@ -1,0 +1,59 @@
+CLS Point : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/point
+  > summary
+    DAZScript wrapper for QPoint.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QPoint type used in the DAZ Studio SDK. A Point object is a two dimensional representation of a x (horizontal) and y (vertical) position.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Number : x
+  > summary
+    Holds the point's x position.
+  > example
+    var pntTemp = new Point( 10, 20 );
+    print( oPoint.x ); //10
+
+PRP Number : y
+  > summary
+    Holds the point's y position.
+  > example
+    var pntTemp = new Point( 10, 20 );
+    print( oPoint.y ); //20
+
+### statics
+
+STA Point : cursorPos()
+  > returns
+    The position of the cursor in global screen coordinates.
+  > example
+    var pntCursor = (new Point).cursorPos();
+  > since
+    4.11.0.35
+
+### constructors
+
+CTR Point()
+  > summary
+    Default constructor.
+  > example
+    var pntTemp = new Point();
+
+CTR Point( Point pnt )
+  > parameters
+    + pnt - The point to copy.
+  > example
+    var pntTemp1 = new Point( 10, 20 );
+    var pntTemp2 = new Point( oPoint );
+
+CTR Point( Number x, Number y )
+  > parameters
+    + x - The x coordinate for the point.
+    + y - The y coordinate for the point.
+  > example
+    var pntTemp = new Point( 10, 20 );

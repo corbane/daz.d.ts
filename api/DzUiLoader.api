@@ -1,0 +1,82 @@
+CLS DzUiLoader : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uiloader_dz
+  > summary
+    DAZScript wrapper for QUiLoader.
+
+### description
+  > summary
+    Provides functionality that allows QtDesigner to be used in the creation of graphical user interfaces used by scripts.
+  > seealso
+    designer-manual
+
+### constructors
+
+CTR DzUiLoader()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : addPluginPath( String path )
+  > summary
+    Adds a path to the list of paths the .ui loader searches when locating QtDesigner plug-ins.
+  > parameters
+    + path - The path to add.
+
+FUN Array : availableLayouts()
+  > returns
+    A list of the names of layouts that can be built using createLayout().
+
+FUN Array : availableWidgets()
+  > returns
+    A list of the names of widgets that can be built using createWidget().
+
+FUN void : clearPluginPaths()
+  > summary
+    Clears the list of paths the .ui loader searches when locating QtDesigner plug-ins.
+
+FUN DzLayout : createLayout( String className, QObject parent=0, String name=“” )
+  > summary
+    Creates a new layout.
+  > parameters
+    + className - The name of the class to create an instance of.
+    + parent - The object to parent the layout to.
+    + name - The name to assign to the layout.
+  > returns
+    The created layout (if any), otherwise null.
+
+FUN DzWidget : createWidget( String className, DzWidget parent, String name=“” )
+  > summary
+    Creates a new widget.
+  > parameters
+    + className - The name of the class to create an instance of.
+    + parent - The widget to parent the widget to.
+    + name - The name to assign to the widget.
+  > returns
+    The created widget (if any), otherwise null.
+  > seealso
+    load()
+
+FUN DzWidget : load( String filePath, DzWidget parent=0 )
+  > summary
+    Loads a QtDesigner form (*.ui) and creates a new widget.
+  > parameters
+    + filename - The path of the .ui file to load.
+    + parent - The widget to parent the contents of the file to.
+  > returns
+    A widget parented to parent that holds the contents of the loaded form (if any), otherwise null.
+
+FUN Array : pluginPaths()
+  > returns
+    A list of the paths the .ui loader searches when locating custom QtDesigner widget plug-ins.
+
+FUN void : setWorkingDirectory( String dir )
+  > summary
+    Sets the base directory of the .ui loader. The .ui loader looks for other resources, such as icons and resource files, in paths relative to this directory.
+  > parameters
+    + dir - The path to use as the base directory for other resources.
+
+FUN String : workingDirectory()
+  > returns
+    The working directory of the .ui loader.

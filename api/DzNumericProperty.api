@@ -1,0 +1,371 @@
+CLS DzNumericProperty : DzProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/numericproperty_dz
+  > summary
+    Base class of all numeric properties.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU XYZInterest
+  > summary
+    The axis that this properties value is applied to.
+  + NO_INTEREST - Default - this property is not associated with an axis.
+  + X_INTEREST - Value is used by an X Axis control.
+  + Y_INTEREST - Value is used by an Y Axis control.
+  + Z_INTEREST - Value is used by an Z Axis control.
+  + ALL_INTEREST - Value is used by the General Scale control.
+
+### methods
+
+FUN void : clearMap()
+  > summary
+    Clear the image map for this property.
+
+FUN void : copyMapFrom( DzNumericProperty otherProp )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : doesClampChangeValue()
+  > summary
+    TODO: Add description.
+
+FUN DzProperty : findMatchingProperty( DzNode node, Boolean useStrictMatching=true )
+  > summary
+    Searches node for a property that matches the name of this property.
+  > parameters
+    + node - The node to search.
+    + useStrictMatching - If true (default), any found property will only be considered a match if it is the same type as this property. If false, any found property will be considered a match if it inherits from DzNumericProperty.
+  > seealso
+    DzProperty::findMatchingProperty()
+
+FUN Number : getDefaultMapGamma()
+  > returns
+    The default map gamma.
+  > since
+    4.5.2.23
+
+FUN Number : getDefaultMapTextureType()
+  > returns
+    The default map texture type.
+  > since
+    4.6.4.30
+
+FUN Number : getDoubleDefaultValue()
+  > summary
+    TODO: Add description.
+
+FUN Number : getDoubleValue( DzTime tm )
+  > parameters
+    + tm - The scene time at which to get the value of the property.
+  > returns
+    The value of the property at the given time, as a double precision number.
+  > seealso
+    getDoubleValue()
+    setDoubleValue()
+
+FUN Number : getDoubleValue()
+  > returns
+    The value of the property at the current time, as a double precision number.
+  > seealso
+    getDoubleValue( DzTime )
+    setDoubleValue()
+
+FUN DzNumericProperty : getFollowProperty()
+  > summary
+    TODO: Add description.
+
+FUN Number : getFollowValue()
+  > summary
+    TODO: Add description.
+
+FUN Number : getFollowValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzNumericProperty : getLinkProperty()
+  > returns
+    The property that this property is directly linked to (if any), otherwise NULL.
+  > seealso
+    isLinked()
+    isMaster()
+    linkTo()
+    unlink()
+
+FUN DzTexture : getMapValue()
+  > returns
+    The image map at the current time. If this property is not mappable, the returned image will be empty.
+
+FUN DzTexture : getMapValue( DzTime time )
+  > parameters
+    + time - The time at which to get the map value for this property.
+  > returns
+    The image map for the given time. If the object is not mappable, the returned image will be empty.
+
+FUN DzDoubleVector : getNDoubleValue()
+  > summary
+    TODO: Add description.
+
+FUN DzDoubleVector : getNDoubleValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN Number : getNValueCount()
+  > summary
+    TODO: Add description.
+
+FUN DzTextureModifier : getTextureModifier()
+  > returns
+    The texture modifier for this property (if any), otherwise NULL.
+  > since
+    4.6.4.80
+
+FUN Number : getTextureModifierFlags()
+  > returns
+    The texture modifier flags.
+  > since
+    4.6.4.82
+
+FUN DzFloatColor : getValueAsFloatColor( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getValueAsFloatColor()
+  > summary
+    TODO: Add description.
+
+FUN DzInt2 : getValueAsInt2()
+  > summary
+    TODO: Add description.
+
+FUN DzInt2 : getValueAsInt2( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzVec2 : getValueAsVec2()
+  > summary
+    TODO: Add description.
+
+FUN DzVec2 : getValueAsVec2( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzVec3 : getValueAsVec3()
+  > summary
+    TODO: Add description.
+
+FUN DzVec3 : getValueAsVec3( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzNumericProperty.XYZInterest : getXYZInterest()
+  > returns
+    The XYZ interest for this property (if any).
+
+FUN void : insertController( DzNumericController controller, Number idx=-1 )
+  > summary
+    Adds a controller to this property.
+  > parameters
+    + controller - The controller to insert.
+    + idx - The index where the controller should be inserted.
+
+FUN Boolean : isClamped()
+  > returns
+    true if this property's value is clamped (for display purposes), otherwise false.
+
+FUN Boolean : isInvalidWithoutMap()
+  > returns
+    true if the value of this property is invalid unless a map is assigned, otherwise false.
+
+FUN Boolean : isLinked()
+  > returns
+    true if this property has a direct link to another property, otherwise false.
+  > seealso
+    isMaster()
+    getLinkProperty()
+    linkTo()
+    unlink()
+
+FUN Boolean : isMappable()
+  > returns
+    true if this property is mappable (i.e., can have an associated image map), otherwise false.
+
+FUN Boolean : isMapped()
+  > returns
+    true if this property is currently mapped, otherwise false.
+
+FUN Boolean : isMaster()
+  > returns
+    true if this property is the master in a direct link between two properties.
+  > seealso
+    isLinked()
+    getLinkProperty()
+    linkTo()
+    unlink()
+
+FUN Boolean : isModulo()
+  > returns
+    true if this property is modulo over min and max (i.e., the amount in which the value exceeds the min or max is applied as the value in the same direction from the opposite limit), otherwise false.
+
+FUN void : linkTo( DzNumericProperty master )
+  > summary
+    Establishes a direct link between this property and the given property.
+  > parameters
+    + master - The property to be linked with this property.
+  > Attention
+    This is the DAZ Studio equivalent of a LinkParm in Poser.
+  > seealso
+    unlink()
+    isMaster()
+    isLinked()
+    getLinkProperty()
+
+FUN void : setDefaultMapGamma( Number gamma )
+  > summary
+    Sets the default map gamma.
+  > parameters
+    + gamma - The gamma value to set.
+  > since
+    4.5.2.23
+
+FUN void : setDefaultMapTextureType( Number type )
+  > summary
+    Sets the default map texture type.
+  > parameters
+    + type - The map texture type to set.
+  > since
+    4.6.4.30
+
+FUN void : setDoubleDefaultValue( Number val )
+  > summary
+    TODO: Add description.
+
+FUN void : setDoubleValue( Number val )
+  > summary
+    Sets the value for this property at the current time, or the default value if this property is not animatable, as a double precision number.
+  > parameters
+    + val - The value to set the property to.
+  > seealso
+    getDoubleValue()
+
+FUN void : setDoubleValue( DzTime tm, Number val )
+  > summary
+    Sets the value of the property at the given time, with the double precision number.
+  > parameters
+    + tm - The scene time at which to set the value of the property.
+    + val - The value to set the property to.
+  > seealso
+    getDoubleValue()
+    setDoubleValue()
+
+FUN void : setIsClamped( Boolean val )
+  > summary
+    Sets whether or not the value is clamped to its min and max.
+  > parameters
+    + val - If true, this property is clamped.
+
+FUN void : setIsMappable( Boolean val )
+  > summary
+    Sets whether or not this property is mappable.
+  > parameters
+    + val - If true, this property is mappable.
+
+FUN void : setIsModulo( Boolean val )
+  > summary
+    Sets whether or not the value is modulo over min and max; i.e., the amount in which the value exceeds the min or max is applied as the value in the same direction from the opposite limit.
+    min = 0, max = 359, value = 365 = 5.
+    min = 0, max = 359, value = -60 = 300.
+    Has no effect if isClamped() is true.
+  > parameters
+    + val - If true, this value is modulo over min and max.
+
+FUN void : setMap( String imgFile )
+  > summary
+    Set the image map for this property.
+  > parameters
+    + imgFile - The name of the file to use as an image map.
+
+FUN void : setMap( DzTexture img )
+  > summary
+    Set the image map for this property.
+  > parameters
+    + img - The image map for this property.
+
+FUN void : setMustHaveMap( Boolean val )
+  > summary
+    Sets whether or not this property value is valid when no map is assigned.
+  > parameters
+    + val - If true, this property must have a map assigned.
+
+FUN void : setTextureModifier( DzTextureModifier txtMod )
+  > summary
+    Sets the texture modifier.
+  > parameters
+    + txtMod - The texture modifier to set.
+  > since
+    4.6.4.80
+
+FUN void : setTextureModifierFlags( Number flags )
+  > summary
+    Sets texture modifier flags for this property.
+  > parameters
+    + flags - The texture modifier flags to set.
+  > since
+    4.6.4.82
+
+FUN void : setXYZInterest( DzNumericProperty.XYZInterest interest )
+  > summary
+    Set the XYZ interest for this property.
+  > parameters
+    + interest - The new XYZ interest for this property.
+
+FUN void : unlink()
+  > summary
+    Unlinks this property.
+
+### signals
+
+SIG void : clampedChanged( Boolean onOff )
+  > summary
+    Emitted when the clamped state for this property has changed.
+  > parameters
+    + onOff - If true, then this property is clamped
+
+SIG void : defaultMapGammaChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : defaultMapTextureTypeChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : isMappableChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : linked()
+  > summary
+    Emitted when the property is linked to another property.
+
+SIG void : mapChanged()
+  > summary
+    Emitted when the image map for this property has changed.
+
+SIG void : minMaxChanged()
+  > summary
+    Emitted when the min and/or max values for this property have changed.
+
+SIG void : textureModifierChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : textureModifierFlagsChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : unlinked()
+  > summary
+    Emitted when the property is unlinked from another property.

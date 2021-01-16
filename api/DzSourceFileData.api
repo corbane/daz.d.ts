@@ -1,0 +1,40 @@
+CLS DzSourceFileData : DzElementData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/sourcefiledata_dz
+  > summary
+    DzElementData implementation that stores the source file of an imported item.
+
+### description
+  > summary
+    This class is mainly used by the framework to store source paths for imported Poser content. The class can be used as follows to retrieve the path of the CR2 file from which a figure was loaded:
+    Todo
+    Examples:
+    This class could also be used by plug-in developers for other custom importers to store the source file for imported items.
+
+### properties
+
+PRP String : sourceFilePath
+  > summary
+    The path to the source file.
+
+### constructors
+
+CTR DzSourceFileData( String filePath=“” )
+  > summary
+    Creates a new Source File Data object that stores the given file path.
+
+### methods
+
+FUN Boolean : getGeometryChanged()
+  > returns
+    true if the source geometry has changed, otherwise false.
+
+FUN String : getPoserRuntimeRelativePath()
+  > summary
+    Tries to convert the source path into a “Poser” style Runtime-relative path (i.e. “:Runtime:Libraries:Character:FileName.cr2”). Returns the converted path if successful, and an empty string if unsuccessful.
+  > returns
+    The source path.
+
+FUN void : setGeometryChanged( Boolean onoff )
+  > summary
+    Sets whether or not the source geometry has changed.

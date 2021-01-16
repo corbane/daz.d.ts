@@ -1,0 +1,51 @@
+CLS DzTimer : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/timer_dz
+  > summary
+    DAZScript wrapper for QTimer.
+
+### description
+  > summary
+    Provides repetitive and single-shot timers.
+
+### properties
+
+PRP Boolean : active
+  > summary
+    Holds whether the timer is running. (Read Only)
+
+PRP Number : interval
+  > summary
+    Holds the timeout interval in milliseconds; default is 0 - will time out as soon as all events in the window system's event queue have been processed.
+
+PRP Number : singleShot
+  > summary
+    Holds whether the timer is the type that runs only once; if false, timer runs every interval milliseconds.
+
+### constructors
+
+CTR DzTimer( QObject parent=undefined )
+  > summary
+    Construct a timer with the given parent.
+
+### methods
+
+FUN void : start( Number msec )
+  > summary
+    Starts, or restarts, the timer with a timeout interval of msec milliseconds. If the timer is already running, it will be stopped and restarted. If singleShot is true, the timer will be started only once.
+  > parameters
+    + msec - The duration, in milliseconds, for the timer to run.
+
+FUN void : start()
+  > summary
+    Starts, or restarts, the timer with a timeout interval of interval milliseconds. If the timer is already running, it will be stopped and restarted. If singleShot is true, the timer will be started only once.
+
+FUN void : stop()
+  > summary
+    Stops the timer.
+
+### signals
+
+SIG void : timeout()
+  > summary
+    Emitted when the timer times out.

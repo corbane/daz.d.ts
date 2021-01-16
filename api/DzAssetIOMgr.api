@@ -1,0 +1,142 @@
+CLS DzAssetIOMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/assetiomgr_dz
+  > summary
+    Manager of all scene setting save filter classes.
+
+### description
+  > summary
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getAssetIOMgr().
+  > seealso
+    Sample: Save Filter Settings
+
+### enumerations
+
+ENU DzOpenMethod
+  > summary
+    TODO: Add description.
+  + DefaultMethod - TODO: Add description.
+  + OpenNew - TODO: Add description.
+  + MergeFile - TODO: Add description.
+
+### statics
+
+STA Number : findFilter( String className )
+  > parameters
+    + className - The class name of the save filter to find.
+  > returns
+    The index of the save filter with the given class name.
+
+STA QObject : findObjectInstance( DzUri uri )
+  > returns
+    The object for the given URI to a file instance during a file load.
+  > since
+    4.9.4.111
+
+STA DzAssetIOFilter : getFilter( Number i )
+  > parameters
+    + i - The index of the save filter to get.
+  > returns
+    A new instance of the i'th save filter in the list.
+
+STA String : getFilterName( Number i )
+  > parameters
+    + i - The index of the save filter to get the name of.
+  > returns
+    The name of the i'th save filter.
+
+STA Number : getNumFilters()
+  > returns
+    The number of save filters currently supported.
+
+### methods
+
+FUN DzError : doLoad( String filePath, DzAssetIOMgr.DzOpenMethod open=DzAssetIOMgr.DzOpenMethod.DefaultMethod, DzFileLoadFilter filter=null )
+  > summary
+    Loads an asset file.
+  > parameters
+    + filePath - The full path of the file to load.
+    + open - The open method to use.
+    + filter - The filter to use.
+  > returns
+    DZ_NO_ERROR if the file load was successful.
+  > seealso
+    DzUri::fromLocalFilename()
+    loadFromUri()
+
+FUN DzError : doSave( Number filterIndex )
+  > summary
+    Save the scene contents to a file with the given save filter. Prompts the user for a file to save to.
+  > parameters
+    + filterIndex - The index of the save filter to use.
+  > returns
+    DZ_NO_ERROR if the file save was successful.
+
+FUN DzError : doSaveWithOptions( DzAssetIOFilter filter, DzFileIOSettings options, Boolean saveOnly=false, String filePath=“”, String startingDir=“”, String category=“” )
+  > summary
+    Save the scene contents to a file with the given save filter. Prompts the user for a file to save to.
+  > parameters
+    + filter - The filter to use.
+    + options - The options to use.
+    + saveOnly - Whether to only save the file, or to also create an associated icon and assign metadata.
+    + filePath - The full path of the file to save to.
+    + startingDir - The path of the directory to start the save dialog in.
+    + category - The category to assign the saved file to.
+  > returns
+    DZ_NO_ERROR if the file save was successful.
+
+FUN DzError : doSceneSaveAs()
+  > summary
+    Save the scene contents to a file. Prompts the user for a file to save to.
+  > returns
+    DZ_NO_ERROR if the file save was successful.
+
+FUN String : getDefaultDSONAssetCachePath()
+  > returns
+    The default path for the DSON assets cache.
+
+FUN String : getDSONAssetCachePath()
+  > returns
+    The path that the DSON assets cache resides in.
+
+FUN String : getLoadPath()
+  > returns
+    The last directory that files were loaded from.
+
+FUN String : getSavePath()
+  > returns
+    The last directory that files were saved to.
+
+FUN DzError : loadFromUri( DzUri fileUri, DzAssetIOMgr.DzOpenMethod open=DzAssetIOMgr.DzOpenMethod.DefaultMethod, DzFileLoadFilter filter=null )
+  > summary
+    Loads an asset from URI.
+  > parameters
+    + fileUri - The URI of the file to load.
+    + open - The open method to use.
+    + filter - The filter to use.
+  > returns
+    DZ_NO_ERROR if the file load was successful.
+  > seealso
+    doLoad()
+
+FUN void : setDSONAssetCachePath( String cacheFullPath )
+  > parameters
+    + cacheFullPath - The path to set for the DSON assets cache.
+
+### signals
+
+SIG void : assetImported()
+  > summary
+    TODO: Add description.
+
+SIG void : assetImportStarting()
+  > summary
+    TODO: Add description.
+
+SIG void : assetSaved()
+  > summary
+    TODO: Add description.
+
+SIG void : missingNodeParent( DzNode node, DzUri uri )
+  > summary
+    TODO: Add description.

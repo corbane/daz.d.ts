@@ -1,0 +1,43 @@
+CLS DzNumericController : DzController
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/numericcontroller_dz
+  > summary
+    Base class for controllers that operate on DzNumericProperty types.
+
+### description
+  > summary
+    This is the base class for all controllers that can control the value of a DzNumericProperty-derived object. DzNumericProperty objects can have multiple controllers, these controllers are applied in the order they appear in the controller list.
+    The application of controllers in a DzNumeric-derived property begins with the keyed (raw) value of the property at the given time, this is the value that is passed to the apply() function of the first controller. The result returned by the apply() call to the first controller is then passed into the apply() function on the second controller, and so on. The result returned by the apply() function of the last controller on the property is then returned as the final value of the property for the given time.
+    The applyInverse function is used to determine the keyed (raw) value of the property when the user enters a number for the final value of the property. Controllers which have an 'Additive' effect must reimplement this method so that the value of the property appears to respond correctly to user input. Controllers which have a 'Replace' effect need not reimplement this function, since they have no inverse because they do not use the raw value of the property in their calculation.
+
+### methods
+
+FUN Number : apply( Number val, DzTime tm, Boolean local )
+  > summary
+    This function is called to apply the controller to the numeric property that it controls.
+  > parameters
+    + val - The raw value of the property
+    + tm - The scene time at which the controller is being evaluated
+  > returns
+    The final value for the property
+    This function is called to apply the controller to the numeric property that it controls. Subclasses must reimplement this function to perform the controller logic.
+  > parameters
+    + val - The raw value of the property
+    + tm - The scene time at which the controller is being evaluated
+  > returns
+    The final value for the property
+
+FUN Number : applyInverse( Number val, DzTime tm, Boolean local )
+  > summary
+    This function is called to 'unapply' the controller to the numeric property that it controls.
+  > parameters
+    + val - The final value of the property
+    + tm - The scene time at which the controller is being evaluated
+  > returns
+    The raw value for the property
+    This function is called to 'unapply' the controller to the numeric property that it controls. Subclasses must reimplement this function to perform the inverse of the controller logic.
+  > parameters
+    + val - The final value of the property
+    + tm - The scene time at which the controller is being evaluated
+  > returns
+    The raw value for the property

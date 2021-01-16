@@ -1,0 +1,31 @@
+CLS DzElementData : DzCustomData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/elementdata_dz
+  > summary
+    DzCustomData implementation that can be associated with an individual DzElement instance.
+
+### description
+  > seealso
+    DzElement::addDataItem()
+    DzElement::removeDataItem()
+    DzElement::deleteDataItem()
+    DzElement::getNumDataItems()
+    DzElement::getDataItem()
+    DzElement::getDataItemList()
+    DzElement::isDataItemNameUnique()
+    DzElement::getUniqueDataItemName()
+    DzElement::findDataItem()
+    DzElement::moveDataItemToIndex()
+    DzElement::findDataItemIndex()
+
+### methods
+
+FUN DzElementData : duplicate( DzElement owner )
+  > parameters
+    + owner - The element to duplicate this data item on.
+  > returns
+    A uplicate of the data item that can be added to the given owner (if any), otherwise NULL.
+
+FUN DzElement : getOwner()
+  > returns
+    The element that this data item is associated with (if any), otherwise NULL.

@@ -1,0 +1,139 @@
+CLS DzCallBack : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/callback_dz
+  > summary
+    DAZ Script callback object.
+
+### description
+  > summary
+    Encapsulates an object that is used to execute a script when a signal that it is connected to is triggered.
+  > seealso
+    DzCallBackMgr::createCallBack(), DzCallBackMgr::getCallBack()
+
+### methods
+
+FUN void : addToGroup( String group )
+  > summary
+    Adds the callback to the given callback group.
+  > parameters
+    + group - The name of the group to add the callback to.
+
+FUN void : clearConnection()
+  > summary
+    Disconnects from the signal that triggers this callback.
+
+FUN Object : getArg( Number i )
+  > returns
+    The i'th argument from the current execution of the callback.
+  > attention
+    Callbacks that are processed as events or blocked during scene load are provided no arguments and getSender() always returns the first QObject connected to, which is not necessarily the one sending the signal.
+  > seealso
+    setProcessAsEvent()
+    setBlockedDuringSceneLoad()
+
+FUN Number : getArgCount()
+  > returns
+    The number of arguments for the current execution of the callback.
+  > attention
+    Callbacks that are processed as events or blocked during scene load are provided no arguments and getSender() always returns the first QObject connected to, which is not necessarily the one sending the signal.
+  > seealso
+    setProcessAsEvent()
+    setBlockedDuringSceneLoad()
+
+FUN Boolean : getBlockedDuringSceneLoad()
+  > returns
+    true if this callback is not processed during a scene load but is instead processed at the end of a scene load, otherwise false.
+
+FUN Boolean : getDeleteAfterExecution()
+  > returns
+    true if this callback is set to be deleted after it has been executed, otherwise false.
+  > since
+    4.6.4.67
+
+FUN QVariant : getDynamicProperty( String name )
+  > returns
+    QVariant for QObject property
+  > since
+    4.9.4.90
+
+FUN Array : getGroups()
+  > returns
+    A list of the groups that this callback belongs to.
+
+FUN Boolean : getProcessAsEvent()
+  > returns
+    true if this callback is processed as an event, otherwise false.
+
+FUN String : getScript()
+  > returns
+    The script that is executed when the signal is emitted.
+
+FUN QObject : getSender()
+  > returns
+    The object that sent the signal, or NULL.
+
+FUN Boolean : isEvaluated()
+  > returns
+    true if getScript() for this callback is the actual code that gets executed, false if getScript() contains the filename of the script to execute.
+
+FUN void : removeFromGroup( String group )
+  > summary
+    Removes this callback from the group callback group.
+  > parameters
+    + group - The name of the group to remove the callback from.
+
+FUN void : setBlockedDuringSceneLoad( Boolean onOff )
+  > parameters
+    + onOff - If true, this callback will not be processed while the scene is loading, it will be processed when the scene is finished loading.
+  > attention
+    Callbacks that are blocked during scene load are provided no arguments and getSender() always returns the first QObject connected to, which is not necessarily the one sending the signal.
+
+FUN Boolean : setConnection( QObject sender, String signal, Boolean garbageCollect )
+  > summary
+    Makes the connection that triggers this callback.
+  > parameters
+    + sender - The object that the signal belongs to.
+    + signal - The signature of the signal to connect to.
+    + garbageCollect - If true, remove this callback from the DzCallBackMgr when sender is deleted.
+
+FUN Boolean : setConnection( QObject sender, String signal )
+  > summary
+    Makes the connection that triggers this callback.
+  > parameters
+    + sender - The object that the signal belongs to.
+    + signal - The signature of the signal to connect to.
+
+FUN Number : setConnections( QObject sender, Array signalList, Boolean garbageCollect )
+  > summary
+    Makes the connection that triggers this callback.
+  > parameters
+    + sender - The object that the signal belongs to.
+    + signalList - List of signal signatures to connect to.
+    + garbageCollect - If true, remove this callback from the DzCallBackMgr when sender is deleted.
+  > returns
+    The number of connections in signalList that are established, or -1 if sender is null.
+
+FUN void : setDeleteAfterExecution( Boolean onOff )
+  > parameters
+    + onOff - If true, sets this callback to be deleted after it has been executed.
+  > since
+    4.6.4.67
+
+FUN void : setDynamicProperty( String name, QVariant value )
+  > summary
+    Set QObject dynamic property on this callback
+  > since
+    4.9.4.90
+
+FUN void : setProcessAsEvent( Boolean onOff )
+  > parameters
+    + onOff - If true, sets this callback to trigger as it is encountered in the event stack.
+  > attention
+    Callbacks that are processed as events are provided no arguments and getSender() always returns the first QObject connected to, which is not necessarily the one sending the signal.
+
+FUN void : setScript( String script, Boolean evaluate )
+  > summary
+    Sets the script that will be executed by this callback.
+  > parameters
+    + script - The filename or code of the script to execute.
+    + evaluate - If script is the actual code and it should be embedded, set this to true, otherwise it is assumed that script is the path of a script file to execute.

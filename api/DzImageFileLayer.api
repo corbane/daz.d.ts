@@ -1,0 +1,23 @@
+CLS DzImageFileLayer : DzImageLayer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagefilelayer_dz
+  > summary
+    A single layer in a multi-layer texture image that references an image file for its data.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP String : filename
+  > summary
+    The filename of the image that this layer references.
+
+### signals
+
+SIG void : filenameChanged( String filename )
+  > summary
+    Emitted when the file name associated with this layer changes
+  > parameters
+    + filename - The new file name

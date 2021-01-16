@@ -1,0 +1,165 @@
+CLS DzZipFile : DzFileInfo
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/zipfile_dz
+  > summary
+    DAZ Script *.zip (zlib) file I/O class.
+
+### description
+  > summary
+    Provides functionality for reading and writing zlib compressed *.zip files.
+
+### enumerations
+
+ENU AccessMode
+  > summary
+    Enumerated values used with open() to describe the mode in which a file is opened.
+  + ReadOnly - Open the file for reading only.
+  + WriteOnly - Open the file for writing only.
+  + Append - The file is opened in append mode, so that all data is written to the end of the file.
+
+### constructors
+
+CTR DzZipFile( String file )
+  > summary
+    Creates a zip file with the given file name.
+  > parameters
+    + file - The path of the *.zip file.
+
+### methods
+
+FUN Boolean : addDirToZip( String pathOnDisk, String pathInZip )
+  > summary
+    Compresses all the files in the given directory.
+  > parameters
+    + pathOnDisk - The path of the directory that contains the directory to compress.
+    + pathInZip - The path of the directory to compress to within the zip.
+  > since
+    4.9.3.149
+
+FUN Boolean : addFileToZip( String pathOnDisk, String pathInZip )
+  > summary
+    Compresses the file into the zip.
+  > parameters
+    + pathOnDisk - The path of the directory that contains the file to compress.
+    + pathInZip - The path of the file to compress to within the zip.
+  > since
+    4.9.3.149
+
+FUN void : close()
+  > summary
+    Close the file.
+
+FUN Boolean : compressAll( String path, Boolean recursive=true )
+  > summary
+    Compresses all the files in the given directory.
+  > parameters
+    + path - The path to the directory to compress files from.
+    + recursive - If true, path represents the base path of the directory tree to compress (i.e., the contents of the directory, all subdirectories, and the contents of those directories, recursively). If false, only files in the given path are compressed.
+
+FUN Boolean : extractAll( String basePath )
+  > summary
+    Extracts all the files from the zip file. The relative path of the files are appended to the specified base path.
+  > parameters
+    + basePath - The base path to extract the files to.
+
+FUN Boolean : extractCurrentFile( String basePath )
+  > summary
+    Extracts the current file from the zip file. The relative path of the current file is appended to the specified base path.
+  > parameters
+    + basePath - The base path to extract to.
+  > since
+    4.9.3.149
+
+FUN Number : getCurrentFileAtributes()
+  > returns
+    The number of the entry in the current file (if any).
+  > since
+    4.9.3.149
+
+FUN String : getCurrentFileComment()
+  > returns
+    The comment for the current file (if any).
+
+FUN Number : getCurrentFileCompressedSize()
+  > returns
+    The compressed size of the current file.
+  > since
+    4.9.3.149
+
+FUN String : getCurrentFileCompressionMethod()
+  > returns
+    The compression method of the current file.
+  > since
+    4.9.3.149
+
+FUN Number : getCurrentFileCompressionRatio()
+  > returns
+    The ratio of compression on the current file.
+  > since
+    4.9.3.149
+
+FUN String : getCurrentFileCRC()
+  > returns
+    The CRC value of the current file.
+  > since
+    4.9.3.149
+
+FUN Boolean : getCurrentFileIsFolder()
+  > returns
+    true if the current entry is a folder, otherwise false.
+  > since
+    4.9.3.149
+
+FUN String : getCurrentFileName()
+  > returns
+    The name of the current file.
+
+FUN Number : getCurrentFileUncompressedSize()
+  > returns
+    The compressed size of the current file.
+  > since
+    4.9.3.149
+
+FUN Array : getFileNames()
+  > returns
+    A list of the file names in the zip file.
+
+FUN String : getGlobalComment()
+  > returns
+    The global comment for the zip file.
+
+FUN Number : getNumEntries()
+  > returns
+    The number of entries in the zip file.
+
+FUN Boolean : goToFirstFile()
+  > summary
+    Set the current file of the zip file to the first file.
+
+FUN Boolean : goToNextFile()
+  > summary
+    Set the current file of the zip file to the next file.
+
+FUN Boolean : locateFile( String pathInZip )
+  > summary
+    Attempts to locate an entry in the zip file.
+  > parameters
+    + pathInZip - The path of the entry to locate within the zip.
+  > returns
+    true if the file was found, otherwise false.
+  > attention
+    If the entry is found, it becomes the current.
+
+FUN Boolean : open( DzZipFile.AccessMode mode )
+  > summary
+    Open the file with the given mode.
+  > returns
+    true if the file was opened successfully, otherwise false.
+
+FUN Boolean : setGlobalComment( String comment )
+  > summary
+    The global comment for the zip file.
+  > returns
+    true if the comment was set, otherwise false.
+  > since
+    4.9.3.149

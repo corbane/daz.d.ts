@@ -1,0 +1,28 @@
+CLS DzImageBlend : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imageblend_dz
+  > summary
+    The base class for objects that blend image layers together.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN void : blendImage( Image dest, Image src )
+  > summary
+    Used to blend src into dest.
+  > parameters
+    + dest - The destination image that the blending operation will add to.
+    + src - The source image that is being blended into the destination image.
+
+FUN String : getDescription()
+  > returns
+    The description of the blending operation that will be displayed to the user.
+
+### signals
+
+SIG void : blendMethodChanged()
+  > summary
+    Emitted when the blend method has changed.

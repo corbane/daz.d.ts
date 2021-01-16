@@ -1,0 +1,1111 @@
+CLS DzAssetMgr : DzBase
+  > summary
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/assetmgr_dz
+    Content asset (database) manager.
+
+### description
+  > summary
+    The manager that is responsible for all content assets.
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Do not create an instance of this class, rather request the instance from DzApp via DzApp::getAssetMgr().
+
+### enumerations
+
+ENU SearchOption
+  > summary
+    Search options used to search assets with the Asset Manager.
+  + None - No options
+  + WholeWord - A whole word search. Only works with file system based searches.
+  + RegExp - A Regular Expression search. Only works with file system based searches.
+  + NativeScenes - Include native scene files (*.duf, *.dsf, *.daz) in the search.
+  + NativeScripts - Include native script files (*.ds, *.dsa, *.dsb, *.dse) in the search.
+  + PoserFigures - Include Poser Character files (*.cr2, *.crz) in the search.
+  + PoserPoses - Include Poser Pose files (*.pz2, *.p2z) in the search.
+  + PoserProps - Include Poser Prop files (*.pp2, *.ppz) in the search.
+  + PoserHair - Include Poser Hair files (*.hr2, *.hrz) in the search.
+  + PoserFaces - Include Poser Face (Expression) files (*.fc2,*.fcz) in the search.
+  + PoserLights - Include Poser Light files (*.lt2, *.ltz) in the search.
+  + PoserCameras - Include Poser Camera files (*.cm2, *.cmz) in the search.
+  + PoserHands - Include Poser Hand files (*.hd2, *.hdz) in the search.
+  + PoserMaterials - Include Poser Material Collection files (*.mc6, *.mcz) in the search.
+  + PoserScenes - Include Poser Scene files (*.pz3, *.pzz) in the search.
+  + ImportFiles - Include general import files in the search.
+  + AllNativeFiles - Include all native files (*.duf, *.dsf, *.daz, *.ds, *.dsa, *.dsb, *.dse) in the search.
+  + NoNativeFilesMask - Mask for no native files in the search.
+  + AllPoserFiles - Include all Poser files in the search.
+  + NoPoserFilesMask - Mask for no Poser files in the search.
+  + AllFiles - Search through all files.
+  + DefaultOptions - Same as AllFiles.
+
+### statics
+
+STA String : escapeSearchTerm( String searchTerm )
+  > parameters
+    + searchTerm - The search term to be escaped.
+  > returns
+    An escaped version of searchTerm
+
+STA String : findCommonBaseCategoryPath( Array categoryPaths, Boolean flatten=false )
+  > parameters
+    + categoryPaths - The list of category paths to find a common path in. This can be a list of strings, or a list of lists of strings.
+    + flatten - If true, the categories are processed as if they are a single list. If false (default), the deepest path common to all lists will be chosen. In either case, non-default categorization is preferred over default categorization.
+  > returns
+    A string representing the portion of categoryPaths that is common.
+  > since
+    4.9.2.68
+
+STA String : getAssetUriForNode( DzNode node )
+  > parameters
+    + node - The node to get the asset URI for.
+  > returns
+    The asset URI for node, or an empty string if node is null.
+
+STA String : getCategoriesID()
+  > returns
+    An identifier for the top level categories container.
+
+STA String : getCompatibilityBasePathForNode( DzNode node )
+  > parameters
+    + node - The node to get compatibility base for.
+  > returns
+    A slash (“/”) delimited string version of the node's compatibility base path (if any), otherwise an empty string.
+
+STA String : getImportDirID()
+  > returns
+    An identifier for the top level import formats container.
+
+STA String : getPoserDirID()
+  > returns
+    An identifier for the top level Poser formats container.
+
+STA Array : getPoserVirtualDirID()
+  > returns
+    The identifier for the virtual folder container within the top level Poser formats container.
+  > since
+    4.9.2.68
+
+STA String : getProductsID()
+  > returns
+    An identifier for the top level products container.
+
+STA String : getRealPathCasing( String path, String search )
+  > parameters
+    + path - The path to the file/folder that real, on disk, casing is desired for.
+    + search - A file/folder in the path to get the on disk casing for.
+  > returns
+    A string path/search combination or empty string if search is not in path.
+
+STA String : getRelativeProductMetafilePath( String store, String token, String title, String extension=“dsx” )
+  > parameters
+    + store - The store ID for the product.
+    + token - The token for the product.
+    + title - The title of the product.
+    + extension - The extension of the meta file.
+  > returns
+    The relative metadata file path.
+  > since
+    4.9.4.31
+
+STA Array : getSpecialPoserFolders()
+  > returns
+    A list of the folder names that are considered special, and thus handled in specific ways, in a Poser runtime.
+
+STA String : getStudioDirID()
+  > returns
+    An identifier for the top level DAZ Studio formats container.
+
+STA Array : getStudioExcludes()
+  > returns
+    A list of the folder names excluded when building the native user-facing folder structure.
+
+STA Array : getStudioVirtualDirID()
+  > returns
+    The identifier for the virtual folder container within the top level DAZ Studio formats container.
+  > since
+    4.9.2.68
+
+STA String : normalizePath( String type, Boolean relative=true )
+  > parameters
+    + type - The path/type to be normalized.
+    + relative - Whether or not this is a relative (or absolute) path.
+  > returns
+    A normalized version of type.
+
+STA DzError : saveUserDBData( String dirPath, String filePrefix )
+  > summary
+    Saves user owned metadata to an XML file (or a series of XML files).
+  > parameters
+    + dirPath - The path to save user metadata files in.
+    + filePrefix - The prefix for the filename sequence.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+STA void : setFileMetadata( String filepath, String contentType, String compatibleWith, String category, DzNode assetNode=undefined, String compatiblityBase=“” )
+  > summary
+    Sets the metadata associated with a file.
+  > parameters
+    + filepath - The path of the file to set the metadata on.
+    + contentType - The content type to set.
+    + compatibleWith - The compatibility base the asset is an add-on for.
+    + category - The category to put the asset in.
+    + assetNode - The node to get the compatibility base from.
+    + compatiblityBase - The compatibility base to set; for add-ons to target.
+  > since
+    4.9.0.17
+
+### methods
+
+FUN Boolean : canStartAndStopCMS()
+  > returns
+    true if the currently connected Content Management Service (CMS) is of the type that can be started and stopped, otherwise false.
+
+FUN void : checkforNewMetadataScripts()
+  > summary
+    Checks for new metadata scripts within the RunOnce directories.
+
+FUN void : clearAllGroupIDs( Boolean notify=true )
+  > summary
+    Removes all groups from all assets.
+  > parameters
+    + notify - If true, causes product and category containers to update.
+
+FUN void : clearDBMetaFileQueue()
+  > summary
+    Clears the metadata queue.
+
+FUN Number : createCompatibilityBase( String base )
+  > summary
+    Creates a compatibility base.
+  > parameters
+    + base - The compatibility base to create.
+  > returns
+    A 64-bit integer used to identify base.
+
+FUN DzProductAssetContainer : createProduct( String name, String storeID=“”, String token=“” )
+  > summary
+    Creates a new product.
+  > parameters
+    + name - The name for the product.
+    + storeID - The ID of the store for the product. If the store does not exist in the database or this arguement is empty (default), the “LOCAL USER” store will be used.
+    + token - The token (i.e., SKU) used to identify the product in the storeID store.
+  > returns
+    The product named name, from store storeID, with the token token. If a product with the storeID and token already exists, a new product will not be created and the existing product will be returned instead.
+  > since
+    4.9.3.39
+
+FUN DzProductAssetContainer : createProductFromAssets( Array assets, String name=“” )
+  > summary
+    Creates a new product from a list of assets.
+  > parameters
+    + assets - The list of assets to create the product from.
+    + name - The name for the product. If empty (default), the user will be prompted to provide a name.
+  > since
+    4.9.3.41
+
+FUN DzProductAssetContainer : createProductFromContainer( DzAbstractAssetContainer container, String name=“” )
+  > summary
+    Creates a new product from container and its children.
+  > parameters
+    + container - The asset container to create the product from.
+    + name - The name for the product. If empty (default), the user will be prompted to provide a name.
+  > since
+    4.9.3.39
+
+FUN Boolean : createStore( String storeID, String token, String url )
+  > summary
+    Attempts to create a store in the database.
+  > parameters
+    + storeID - The identifier for the store.
+    + token - The value used within url to be replaced by a product's token.
+    + url - The URL for the store.
+  > returns
+    true if the store is successfully created, otherwise false.
+    Attention:
+    The “DAZ 3D” and “LOCAL USER” storeIDs are reserved. Attempting to create a store with either ID will fail immediately and return a value of false.
+  > seealso
+    showMoreProductInfo()
+
+FUN Number : createType( String type, Boolean defaultLoad )
+  > summary
+    Creates a content type.
+  > parameters
+    + type - The content type to create.
+    + defaultLoad - If true, assets that the type is assigned to will be opened by default; the contents of the scene will be cleared prior to loading the asset. If false , assets that the type is assigned to will be merged by default; the asset will be added to the existing scene.
+  > returns
+    A 64-bit integer used to identify type.
+
+FUN void : emitCategoryChanged( Array idPath )
+  > summary
+    Causes the category identified by idPath to update.
+  > parameters
+    + idPath - The id path of the category to update.
+
+FUN String : findAssetPathFromShortFilename( String fileName )
+  > parameters
+    + fileName - The short name of the file to find the asset path for.
+  > returns
+    If fileName can be found, the physical path of the asset on disk, otherwise an empty string.
+
+FUN Array : findAssetsForFile( String relativePath, Boolean userFacing, Boolean installed )
+  > parameters
+    + relativePath - The relative path of a file to find assets for.
+    + userFacing - Whether or not the file is user-facing.
+    + installed - Whether or not the file is installed.
+  > returns
+    A list of assets that relativePath refers to.
+  > since
+    4.9.2.69
+
+FUN Number : findAudienceID( String audience )
+  > returns
+    The id used to identify audience.
+
+FUN Number : findCompatibilityBaseID( String base, Boolean create=true )
+  > summary
+    Attempts to find a compatibility base, and potentially create it if it doesn't already exist.
+  > parameters
+    + base - The compatibility base to find (or create).
+    + create - If true, the compatibility base is created if it cannot be found.
+  > returns
+    A 64-bit integer used to identify base.
+
+FUN DzProductAssetContainer : findProductByGuid( String guid )
+  > parameters
+    + guid - The Globally Unique Identifier (GUID) of the product to find.
+  > returns
+    The product with the globally unique identifier guid, otherwise NULL.
+  > since
+    4.9.2.69
+
+FUN DzProductAssetContainer : findProductByStoreToken( String storeID, String token )
+  > parameters
+    + storeID - The identifier of the store for the product.
+    + token - The token (i.e., SKU) used to identify the product in the store storeID.
+  > returns
+    The product from store storeID with the token token, otherwise NULL.
+  > since
+    4.9.3.39
+
+FUN Array : findProductsByName( String name )
+  > parameters
+    + name - The name of the products to find.
+  > returns
+    A list of products (if any) that are named name.
+  > since
+    4.9.3.39
+
+FUN Array : findProductsForFile( String relativePath )
+  > parameters
+    + relativePath - The relative path of a file to find products that contain it.
+  > returns
+    A list of products that contain relativePath in their respective list of assets.
+  > since
+    4.8.1.73
+
+FUN Number : findTypeID( String type, Boolean create=false, Boolean defaultLoad=false )
+  > summary
+    Attempts to find the identifier used to identify a content type.
+  > parameters
+    + type - The content type to find.
+    + create - If true, the content type is created if it cannot be found.
+    + defaultLoad - If true, assets that the type is assigned to will be opened by default; the contents of the scene will be cleared prior to loading the asset. If false , assets that the type is assigned to will be merged by default; the asset will be added to the existing scene.
+  > returns
+    A 64-bit integer used to identify type.
+
+FUN String : getAudience( Number id )
+  > parameters
+    + id - The unsigned 32-bit integer used to identify the audience.
+  > returns
+    The audience identified by id.
+
+FUN Array : getAudiences()
+  > returns
+    The list of available audiences.
+
+FUN DzCategoryAssetContainer : getCategories()
+  > returns
+    A top-level container with child containers that match the hierarchy of categories in the content database.
+
+FUN String : getCategoryPath( Number id )
+  > parameters
+    + id - The 64-bit integer used to identify the category.
+  > returns
+    The full slash (“/”) delimited path of the category (if any), otherwise an empty string.
+  > since
+    4.9.3.11
+
+FUN Object : getCMSOptions()
+  > returns
+    A JSON object consisting of options for the currently connected Content Management Service (CMS)
+
+FUN String : getCompatibilityBase( Number id )
+  > parameters
+    + id - The 64-bit integer used to identify the compatibility base.
+  > returns
+    The compatibility base identified by id.
+
+FUN DzTopLevelAssetContainer : getContentDirs()
+  > returns
+    A top-level container with all of the mapped native content directories.
+
+FUN String : getDatabaseDsn()
+  > returns
+    The Data Source Name (DSN) -i.e. “connection string”- for the PostgreSQL server if the server version is valid, otherwise an empty string.
+  > since
+    4.9.0.17
+
+FUN String : getDatabaseFilePath()
+  > returns
+    The path on disk where database files are located; for backup purposes.
+
+FUN Array : getDBMetaFileQueue()
+  > returns
+    A list of metadata files queued for processing.
+
+FUN String : getFirstCategory( String assetPath, String preferredCategory )
+  > parameters
+    + assetPath - The path of the asset to find the first category for.
+    + preferredCategory - The path of the category preferred if it exists and the asset at assetPath is assigned to it.
+  > returns
+    The full path of the first category that the file at assetPath is assigned to.
+
+FUN Boolean : getGroupNewProductsAsNew()
+  > returns
+    true if new products should be assigned to the “New” group, otherwise false.
+  > seealso
+    setGroupNewProductsAsNew()
+  > since
+    4.9.0.23
+
+FUN DzTopLevelAssetContainer : getImportDirs()
+  > returns
+    A top-level container with all of the mapped import content directories.
+
+FUN Number : getMaxFileSearchResultSize()
+  > returns
+    The maximum number of items returned by a file search.
+  > since
+    4.9.0.15
+
+FUN Number : getNumMaxItemsPerPage()
+  > returns
+    The maximum number of items to show per page.
+
+FUN DzTopLevelAssetContainer : getPoserDirs()
+  > returns
+    A top-level container with all of the mapped Poser directories.
+
+FUN DzTopLevelAssetContainer : getProducts()
+  > returns
+    A top-level container with child containers for intermediate alpha-numeric organization of products by name. Each intermediate container then has its respective children for the products in the content database.
+  > seealso
+    Sample: Metadata : List Products
+
+FUN Array : getRelativePaths( String absolutePath, Boolean useImportFolders )
+  > summary
+    Attempts to shorten absolutePath to a list of paths that are relative to one of the mapped content directories.
+  > parameters
+    + absolutePath - The path to make relative.
+    + useImportFolders - If true, the mapped import folders will also be searched.
+  > returns
+    A list of relative paths to the file if one can be made, otherwise and empty list
+  > seealso
+    DzContentMgr::getRelativePaths()
+
+FUN Array : getRootCategoryStrings()
+  > returns
+    A list of root category paths.
+
+FUN Boolean : getShowHiddenVendorCategorization()
+  > returns
+    true if hidden vendor categorizations are shown, otherwise false.
+  > since
+    4.9.3.4
+
+FUN Array : getStoresIDs()
+  > returns
+    A list of store identifiers.
+
+FUN String : getStoreToken( String storeID )
+  > returns
+    The token used in the URL for the store with the given storeID, to be replaced by a product's token.
+
+FUN String : getStoreUrl( String storeID )
+  > returns
+    The URL for the store with the given storeID.
+
+FUN String : getType( Number id )
+  > parameters
+    + id - The 64-bit integer used to identify the content type.
+  > returns
+    The content type identified by id.
+
+FUN String : getTypeForContentFile( String fullPath )
+  > summary
+    Performs a database lookup on a user-facing content file to get its content type.
+  > parameters
+    + path - The path of the file to get the content type for.
+  > returns
+    The content type of the file if the file is in the content database and is user-facing, otherwise an empty string.
+
+FUN String : getTypeForNode( DzNode node )
+  > summary
+    Checks the given node for content type in its presentation (if any), falls back to a source file data item and performs a content database lookup on the path it specifies (if any), and finally falls back to the content file path of the node (if any) to find its content type.
+  > parameters
+    + node - The node in the scene to get the contnet type of.
+  > returns
+    The content type for the node (if any), otherwise an empty string.
+
+FUN Array : getTypes()
+  > returns
+    A list of hierarchical, slash (“/”) delimited, content types
+
+FUN Boolean : haveDatabase()
+  > returns
+    true if the PostgreSQL server version is valid and the DSN is non-empty, otherwise false.
+  > since
+    4.9.0.17
+  > seealso
+    getDatabaseDsn()
+
+FUN Array : importMetadataFiles( Array productRelativePaths, Boolean runSilent=false, Boolean markAsVendor=false )
+  > summary
+    Causes metadata files at absoluteProductPaths to be imported.
+  > parameters
+    + absoluteProductPaths - The list of absolute paths to import product metadata from.
+    + runSilent - If true, the progress dialog will not be shown.
+    + markAsVendor - If true, the data is considered vendor owned.
+
+FUN Boolean : isClothingType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of the base type of Clothing, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isConnectedToCMS()
+  > returns
+    true if the Content Management Service (CMS) is currently connected, otherwise false.
+
+FUN Boolean : isFigureType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of the base type of Figure, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isFollowingType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of a following type, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isHairType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of the base type of Hair, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isNeedsBaseFigureType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of a type that needs a base figure, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isPresetForFigureType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is a Preset for a Figure, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isPresetType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of the base type of Preset, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isPropType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of the base type of Prop, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isReplaceableType( String type )
+  > parameters
+    + type - The content type to test.
+  > returns
+    true if type is of a replaceable type, otherwise false.
+  > seealso
+    DzContentReplaceMgr
+
+FUN Boolean : isResettingDatabase()
+  > returns
+    true if the connected PostgreSQL database is currently being reset, otherwise false.
+  > since
+    4.9.0.17
+
+FUN Boolean : isSynchronizing()
+  > returns
+    true if the database is currently synchronizing, otherwise false.
+    4.9.3.71
+
+FUN void : markCategoriesChanged()
+  > summary
+    Signals that categories need to be updated.
+
+FUN void : markProductsChanged()
+  > summary
+    Signals that products need to be updated.
+
+FUN Array : processDBMetaFile( String productRelativePath, Boolean runSilent=false, Boolean markAsVendor=false, Boolean groupAsNew=true )
+  > summary
+    Causes the metadata file at productRelativePath to be processed and category containers to update.
+  > parameters
+    + productRelativePath - The relative product path to import metadata from.
+    + runSilent - If true, the progress dialog will not be shown.
+    + markAsVendor - If true, the data is considered vendor owned.
+    + groupAsNew - If true, the product/assets are grouped as “New”.
+
+FUN Array : processDBMetaFileNoEmit( String productRelativePath, Boolean runSilent=false, Boolean markAsVendor=false, Boolean groupAsNew=true )
+  > summary
+    Causes the metadata file at productRelativePath to be processed, without causing category containers to update.
+  > parameters
+    + productRelativePath - The relative product path to import metadata from.
+    + runSilent - If true, the progress dialog will not be shown.
+    + markAsVendor - If true, the data is considered vendor owned.
+    + groupAsNew - If true, the assets are grouped as “New”.
+
+FUN void : processDBMetaFileQueue()
+  > summary
+    If metadata files are queued, causes the metadata import dialog to be displayed and allows the user to select which products to process metadata for, then starts the import process on the selected products.
+
+FUN void : queueDBMetaFile( String productRelativePath )
+  > summary
+    Adds the file at productRelativePath to the metadata queue.
+
+FUN void : refreshCategoryRoots()
+  > summary
+    Causes the internal list of root categories to be rebuilt.
+
+FUN void : refreshStores()
+  > summary
+    Causes the internal list of stores to be rebuilt.
+
+FUN void : refreshTypes()
+  > summary
+    Causes the internal list of content types to be rebuilt
+
+FUN void : reimportDBMetaFiles()
+  > summary
+    Causes all *.dsx metadata files in the “./Runtime/Support” folder of each mapped native and Poser content directory to be queued, and then imported.
+
+FUN void : removeOrphanedAssetReferences( Array list )
+  > summary
+    Removes assets in list that have been orphaned (no longer exist) from the database.
+  > parameters
+    + list - The list of DzAsset to check whether the files still exist.
+  > since
+    4.9.0.17
+
+FUN Boolean : removeStore( String storeID )
+  > summary
+    Attempts to remove a store from the database.
+  > parameters
+    + storeID - The identifier for the store to remove.
+  > returns
+    true if the store is successfully removed, otherwise false.
+    Attention:
+    The “DAZ 3D” and “LOCAL USER” storeIDs are reserved. Attempting to remove a store with either ID will fail immediately and return a value of false.
+  > since
+    4.9.1.24
+
+FUN void : resetDatabase()
+  > summary
+    Triggers the connected PostgreSQL server to reset (delete) the current database and re-establish the default content types, compatibility bases, and categories.
+    Attention:
+    Stops all running searches and logs the current user out, if needed.
+  > since
+    4.9.0.17
+
+FUN void : scanFiles( DzAssetMgr.SearchOption options, Boolean assignToGroup, Boolean addToCategory, Boolean onlyNewToCategory )
+  > summary
+    Performs a user-facing file scan, ultimately mapping any directories found to contain compatible content.
+  > parameters
+    + options - A bitwise OR of the options to use for filtering the file scan.
+    + assignToGroup - If true, groups any found files as “New”.
+    + addToCategory - If true, found files are assigned to the “Scan Results” category.
+    + onlyNewToCategory - If true, only “new” files are assigned to the “Scan Results” category.
+
+FUN DzSearchContainer : searchFiles( String filename, DzAssetMgr.SearchOption options )
+  > summary
+    Performs a user-facing file search on the mapped content directories.
+  > parameters
+    + filename - The name of the file to search for.
+    + options - A bitwise OR of the options to use for filtering the results.
+  > returns
+    A container consisting of DzAsset instances for any files found during the search.
+
+FUN DzSearchContainer : searchForAssetAddOns( DzAsset asset, String filterText, Array categories, Number sorting )
+  > summary
+    Performs a user-facing asset search on the content database, where the results are confined to those that indicate they are compatible with the compatibility base of the specified asset.
+  > parameters
+    + asset - The context asset; the asset to find addons for.
+    + filterText - The text to use for filtering the results.
+    + categories - A list of category paths to use for filtering the results.
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzAsset instances found during the search.
+  > since
+    4.9.0.32
+
+FUN DzSearchContainer : searchForAssets( String filterText, Array categories, Array compatibilityBases, Array contentTypes, Number sorting )
+  > summary
+    Performs a user-facing asset search on the content database.
+  > parameters
+    + filterText - The text to use for filtering the results.
+    + categories - A list of category paths to use for filtering the results.
+    + compatibilityBases - A list of compatibility bases to use for filtering the results.
+    + contentTypes - A list of content types to use for filtering the results.
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzAsset instances found during the search.
+  > since
+    4.9.0.32
+
+FUN DzSearchContainer : searchForAssetsByKeywords( String keywords, DzAssetMgr.SearchOption options, Number sorting )
+  > summary
+    Performs a user-facing asset search on the content database.
+  > parameters
+    + keywords - The keywords to use for filtering the results.
+    + options - A bitwise OR of the options to use for filtering the results.
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzAsset instances found during the search.
+  > since
+    4.9.0.32
+
+FUN DzSearchContainer : searchForAssetsInCategory( String categoryPath, Boolean userFacing=true, Boolean installed=true )
+  > parameters
+    + categoryPath - The full path of the category to search for assets.
+    + userFacing - Whether or not to limit the search to user-facing assets. (since 4.9.3.56)
+    + installed - Whether or not to limit the search to installed assets. (since 4.9.3.56)
+  > returns
+    A search container containing the assets matching the criteria specified.
+  > since
+    4.9.1.17
+
+FUN DzSearchContainer : searchForAssetTargets( DzAsset asset, String filterText, Array categories, Number sorting )
+  > summary
+    Performs a user-facing asset search on the content database, where the results are confined to those that indicate they are the compatibility base of the specified asset.
+  > parameters
+    + asset - The context asset; the asset to find targets for.
+    + filterText - The text to use for filtering the results.
+    + categories - A list of category paths to use for filtering the results.
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzAsset instances found during the search.
+  > since
+    4.9.0.32
+
+FUN DzSearchContainer : searchForProductAssets( DzProductAssetContainer product, String filterText, Array categories, Array compatibilityBases, Array contentTypes, Number sorting )
+  > summary
+    Performs a user-facing asset search on the content database, where the results are confined to a specified product.
+  > parameters
+    + product - The context product; the product to filter results by.
+    + filterText - The text to use for filtering the results.
+    + categories - A list of category paths to use for filtering the results.
+    + compatibilityBases - A list of compatibility bases to use for filtering the results.
+    + contentTypes - A list of content types to use for filtering the results.
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzAsset instances found during the search.
+  > since
+    4.9.0.32
+
+FUN DzProductHolderContainer : searchForProducts( String filterText, Array categories, Array compatibilityBases, Array contentTypes, Number installStateFlags, Number sorting )
+  > parameters
+    + filterText - The text to use for filtering the results.
+    + categories - A list of category paths to use for filtering the results.
+    + compatibilityBases - A list of compatibility bases to use for filtering the results.
+    + contentTypes - A list of content types to use for filtering the results.
+    + installStateFlags - The install state flags to use for filtering the results.
+      - None = 0x0,
+      - Installed = 0x1,
+      - NotInstalled = 0x2,
+      - Damaged = 0x4,
+      - NeedsUpdate = 0x8,
+      - Pending = 0x10,
+      - Any = Installed | NotInstalled | Damaged | NeedsUpdate | Pending
+    + sorting - The sorting filter index to use for ordering the results.
+      - 0 = None,
+      - 1 = Name,
+      - 2 = Date Purchased,
+      - 3 = Date Installed,
+      - 4 = Date Created,
+      - 5 = Release Date,
+      - 6 = Last Update,
+      - 7 = Group ID,
+      - 8 = Product ID (SKU),
+      For Descending add 0x80000000 to the value
+  > returns
+    A container consisting of any DzProductAssetContainer instances found during the search.
+  > since
+    4.9.0.32
+
+FUN void : setCMSOptions( String clusterDirectory, Number port )
+  > summary
+    Sets the options for the Content Management Service (CMS), if it is of the type that can accept options.
+  > parameters
+    + clusterDirectory - The path of the directory that contains the database files.
+    + port - The port number to use for connecting to the database server.
+
+FUN void : setGroupNewProductsAsNew( Boolean onOff )
+  > parameters
+    + onOff - If true, new products will be assigned to the “New” group.
+  > seealso
+    getGroupNewProductsAsNew()
+  > since
+    4.9.0.23
+
+FUN void : setMaxFileSearchResultSize( Number maxNum )
+  > parameters
+    + maxNum - The maximum number of items to return from a standard file search.
+  > seealso
+    getMaxFileSearchResultsSize()
+  > since
+    4.9.0.15
+
+FUN void : setMaxItemsPerPage( Number maxNum )
+  > parameters
+    + maxNum - The maximum number of items to show on a page in the content view
+  > seealso
+    getNumMaxItemsPerPage()
+
+FUN void : setProductGroupIDs( Array guids, Number groupId, Boolean groupProduct=true, Boolean groupFiles=true )
+  > summary
+    Sets the group identifier on products and/or files, for a list of products.
+  > parameters
+    + guids - A list of guids for the products to set the group identifier on.
+    + groupId - The group identifier to set.
+    + groupProduct - If true, sets the group identifier on the product.
+    + groupFiles - If true, sets the group identifier on the user-facing files in the product.
+  > since
+    4.9.0.25
+
+FUN void : setShowAssetToolTip( Boolean onOff )
+  > parameters
+    + onOff - Whether or not to show tool tips on assets.
+  > seealso
+    showAssetToolTip()
+
+FUN void : setShowExtensions( Boolean onOff )
+  > parameters
+    + onOff - Whether or not to show extensions on assets.
+  > seealso
+    showExtensions()
+
+FUN void : setShowHiddenVendorCategorization( Boolean shown )
+  > summary
+    Sets whether or not hidden vendor categorizations are shown.
+  > parameters
+    + shown - If true, hidden vendor categorizations are shown.
+  > since
+    4.9.3.4
+
+FUN void : setShowLargeIcons( Boolean onOff )
+  > parameters
+    + onOff - Whether or not to show large icons.
+  > seealso
+    showLargeIcons()
+
+FUN Boolean : showAssetToolTip()
+  > returns
+    true if showing asset tool tips, otherwise false.
+  > seealso
+    setShowAssetToolTip()
+
+FUN Boolean : showDatabaseEditor( DzAbstractAssetContainer assetContainer )
+  > summary
+    Causes the Content DB Editor to be displayed, allowing the user to view/edit metadata for products and/or assets all within a centralized dialog.
+  > parameters
+    + assetContainer - The asset container to load into the editor. If the asset container is a DzProductAssetContainer, the dialog will display two pages: one for the product specific data, and one for the asset specific data. If the asset container is any other type, only the page for the asset specific data is displayed.
+  > returns
+    true if the dialog is accepted, otherwise false.
+
+FUN Boolean : showExtensions()
+  > returns
+    true if showing asset file extensions, otherwise false.
+  > seealso
+    setShowExtensions()
+
+FUN Boolean : showLargeIcons()
+  > returns
+    true if showing large asset icons, otherwise false.
+  > seealso
+    setShowLargeIcons()
+
+FUN void : showMoreProductInfo( DzProductAssetContainer product )
+  > summary
+    Executes a script named after the store associated with product, in the ./resources/stores directory. A single anonymous JSON object is passed to the script, which can be retrieved using the global “getArguments()” function. The properties on the Object consist of values stored in the content database.
+    - store_id - A String containing the identifier for the store product is associated with.
+    - store_token - A String containing the token in store_url to be replaced by product_token.
+    - store_url - A String containing the URL with more information about product.
+    - product_token - A String containing the token (SKU) from product.
+    - product_name - A String containing the name of product.
+    - product_artists - An Array of String values containing the names of artists that contributed to product.
+    - product_description - A String containing the description of product.
+    - product_guid - A String containing the Globally Unique Identifier for product.
+    - product_is_vendor - A Boolean indicating whether product is provided by a vendor or the user.
+    - product_has_cloud_meta - A Boolean indicating whether product has metadata provided via the cloud (or manual/local).
+    - product_is_cloud_owned - A Boolean indicating whether product is managed via the cloud (or manual/local).
+  > parameters
+    + product - The product to show more information for.
+  > seealso
+    createStore()
+    DzApp::getResourcesPath()
+    DzScriptContext::getArguments()
+    ./resources/stores/default.dsa
+  > since
+    4.8.1.70
+
+FUN void : startCMS()
+  > summary
+    Starts the Content Management Service (CMS), if it is not already running.
+
+FUN void : stopAllSearches()
+  > summary
+    Stops all searches that were started by any of the search* methods on DzAssetMgr.
+
+FUN void : stopCMS( Number mode, Boolean wait, Number timeout=0 )
+  > summary
+    Stops the Content Management Service (CMS), if it is running and is of the type that can be stopped.
+  > parameters
+    + mode - The mode to use to stop the service;
+      - 0 = Smart
+      - 1 = Fast
+      - 2 = Immediate
+    + wait - Whether or not to wait for the CMS to stop before continuing.
+    + timeout - The number of seconds to wait for the service to stop before continuing.
+
+FUN void : stopFileScan()
+  > summary
+    Stops any searches that were started by DzAssetMgr.scanFiles().
+
+FUN void : stopFileSearch()
+  > summary
+    Stops any searches that were started by DzAssetMgr.searchFiles().
+
+FUN void : stopSearchForAssetAddOns()
+  > summary
+    Stops any searches that were started by DzAssetMgr.searchForAssetAddOns().
+
+FUN void : stopSearchForAssets()
+  > summary
+    Stops any searches that were started by DzAssetMgr.searchForAssets(), DzAssetMgr.searchForAssetsByKeywords() or DzAssetMgr.searchForProductAssets().
+
+FUN void : stopSearchForAssetTargets()
+  > summary
+    Stops any searches that were started by DzAssetMgr.searchForAssetTargets().
+
+FUN void : stopSearchForProducts()
+  > summary
+    Stops any searches that were started by DzAssetMgr.searchForProducts().
+
+FUN void : updateCategoryContainers()
+  > summary
+    Triggers an update to asset containers within the Categories top-level container.
+  > seealso
+    getCategories()
+  > since
+    4.8.1.65
+
+FUN void : updateContentContainers()
+  > summary
+    Triggers an update to asset containers within the native formats top-level container.
+  > seealso
+    getContentDirs()
+  > since
+    4.8.1.65
+
+FUN void : updateFolderBasedContainers()
+  > summary
+    Triggers an update to asset containers within the folder based top-level containers.
+  > seealso
+    getContentDirs()
+    getPoserDirs()
+    getImportDirs()
+  > since
+    4.8.1.65
+
+FUN void : updateImportContainers()
+  > summary
+    Triggers an update to asset containers within the other import formats top-level container.
+  > seealso
+    getImportDirs()
+  > since
+    4.8.1.65
+
+FUN void : updatePoserContainers()
+  > summary
+    Triggers an update to asset containers within the Poser formats top-level container.
+  > seealso
+    getPoserDirs()
+  > since
+    4.8.1.65
+
+FUN void : updateProductContainers()
+  > summary
+    Triggers an update to asset containers within the Products top-level container.
+  > seealso
+    getProducts()
+
+FUN Boolean : vacuumDatabase()
+  > summary
+    Reclaims space in the database previously occupied by deleted or updated data.
+  > returns
+    true if the operation was successful, otherwise false.
+
+### signals
+
+SIG void : basePathsChanged()
+  > summary
+    Emitted when the base paths list has changed.
+
+SIG void : categoryUpdate( Array idPath )
+  > summary
+    Emitted when a category has been changed.
+  > parameters
+    + idPath - The list of ids leading to the changed category.
+
+SIG void : cmsDSNChanged()
+  > summary
+    Emitted when the Data Source Name (DSN) for the Content Management Service (CMS) has changed.
+
+SIG void : cmsStarted()
+  > summary
+    Emitted when the Content Management Service (CMS) has started.
+
+SIG void : cmsStopped()
+  > summary
+    Emitted when the Content Management Service (CMS) has stopped.
+
+SIG void : compatibilityBaseListChanged()
+  > summary
+    Emitted when the compatibility base list has changed.
+
+SIG void : containerUpdate( Array idPath )
+  > summary
+    Emitted when a container has been changed.
+  > parameters
+    + idPath - The list of ids leading to the changed container.
+
+SIG void : itemsPerPageChanged( Number newPerPage )
+  > summary
+    Emitted when itemsPerPage() will return a new value.
+  > parameters
+    + newPerPage - The number of items to show per page.
+
+SIG void : maxFileSearchResultSizeChanged( Number maxFileSearchResultSize )
+  > summary
+    Emitted when the maximum file search result size has changed.
+  > parameters
+    + maxFileSearchResultSize - The new maximum.
+
+SIG void : productCreated( String guid )
+  > summary
+    Emitted when a product has been created.
+  > parameters
+    + guid - The Globally Unique Identifier (GUID) for the created product.
+
+SIG void : showAssetToolTipChanged()
+  > summary
+    Emitted when showAssetToolTipChanged() will return a new value.
+
+SIG void : showExtensionsChanged()
+  > summary
+    Emitted when showExtensions() will return a new value.
+
+SIG void : showLargeIconsChanged()
+  > summary
+    Emitted when showLargeIcons() will return a new value.
+
+SIG void : storeListChanged()
+  > summary
+    Emitted when the store list has changed.
+
+SIG void : typeListChanged()
+  > summary
+    Emitted when the type list has changed.
+
+SIG void : uiAboutToSearch( QObject sender, String text, Array categories, Array compatibilityBases, Array contentTypes )
+  > summary
+    Emitted when the user interface is about to perform a database query.
+  > parameters
+    + sender - The UI component that invoked the query.
+    + text - The search text entered by the user.
+    + categories - The categories to limit the query to.
+    + compatibilityBases - The compatibility bases to limit the query to.
+    + contentTypes - The content types to limit the query to.

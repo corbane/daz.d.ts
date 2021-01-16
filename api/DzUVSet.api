@@ -1,0 +1,65 @@
+CLS DzUVSet : vertexmap_dz DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uvset_dz
+  > summary
+    Represents vertex map containing the data for a UV set.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    The author of the file for this vertex map. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    The revision version of the asset file for this vertex map. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    The asset id for this vertex map.
+  > since
+    4.8.1.18
+
+PRP Date : assetModifiedDate
+  > summary
+    The modified date of the asset file for this vertex map. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    The URI of the asset source for this vertex map; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for this vertex map. (Read Only)
+  > since
+    4.8.1.18
+
+### constructors
+
+CTR DzUVSet()
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : assetModified()
+  > null
+  > summary
+    Emitted when the UV set has been modified.
+
+SIG void : assetWasSaved()
+  > null
+  > summary
+    Emitted after the UV set has been saved.

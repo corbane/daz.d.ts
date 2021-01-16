@@ -1,0 +1,68 @@
+CLS DzActionMenuItem : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/actionmenuitem_dz
+  > summary
+    Class that encapsulates an 'Action Menu Item'.
+
+### description
+  > summary
+    Action Menu Items are registered with a DzActionMenu and are available to access via methods on that class.
+
+### enumerations
+
+ENU Type
+  > summary
+    The types of action menu items
+  + Separator - A menu separator (i.e. horizontal divider)
+  + Action - A menu entry that activates a DzAction object
+  + CustomAction - A menu entry that activates a custom action. See Also: DzActionMgr - for more about custom actions.
+  + SubMenu - A menu entry that opens a submenu
+  + FileOpenAction - A menu entry that opens a file, replacing the contents of the current scene See Also: DzContentMgr::openFile() - for more about opening a file.
+  + FileMergeAction - A menu entry that merges a file with the current scene See Also: DzContentMgr::openFile() - for more about merging a file.
+
+### properties
+
+PRP String : action
+  > summary
+    The action to perform for an item of the Action, CustomAction, FileOpenAction or FileMergeAction type
+
+PRP Boolean : isDefault
+  > summary
+    Whether the menu item is considered to be in a default location.
+  > since
+    4.6.0.83
+
+PRP String : label
+  > summary
+    The label to display within the interface for an item of the SubMenu, FileOpenAction or FileMergeAction type.
+  > since
+    4.6.0.76
+
+PRP String : subMenuLabel
+  > summary
+    Deprecated
+    Use label instead
+
+PRP DzActionMenuItem.Type : type
+  > summary
+    The type of the menu item (Read Only)
+  > returns
+    The type of the menu item
+
+### methods
+
+FUN DzActionMenu : getSubMenu()
+  > returns
+    A pointer to the submenu that is displayed by this menu entry. This function returns NULL if the menu has not been set, or if the type of the item is not SubMenu.
+
+FUN void : loadFile()
+  > summary
+    Causes the file for a FileOpenAction or FileMergeAction item to load
+  > since
+    4.6.0.44
+
+FUN void : setSubMenu( DzActionMenu menu )
+  > summary
+    Sets the menu that is displayed as the submenu when this menu item is activated. This call has no effect unless the type of this item is SubMenu.
+  > parameters
+    + menu - The menu that is displayed as a submenu when this menu entry is activated. The menu item takes ownership of the menu - the menu will be deleted when this item is destroyed.

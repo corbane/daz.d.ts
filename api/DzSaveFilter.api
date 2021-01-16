@@ -1,0 +1,71 @@
+CLS DzSaveFilter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/savefilter_dz
+  > summary
+    Base class for all classes that save DAZ Script-based scene settings.
+
+### description
+  > summary
+    Save filter classes save out a subset of scene settings in a DAZ Script format such as poses, light sets, camera sets, etc.
+
+### enumerations
+
+ENU ScriptFileMode
+  > summary
+    Save mode for saving the script to file. Values correspond with DzScript.ScriptFileMode.
+  + UseExtension - If the file name extension is .dsb, the file is saved as DAZScriptFile, otherwise as TextScriptFile
+  + TextScriptFile - Plain text file - no Unicode support
+  + DAZScriptFile - Binary DAZ file format - supports Unicode characters
+  + EncDAZScriptFile - Encrypted Binary DAZ file format - supports Unicode characters
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    The name of the filter.
+
+FUN String : getLoadSavePath()
+  > summary
+    TODO: Add description.
+
+FUN void : setLoadSavePath( String path )
+  > summary
+    TODO: Add description.
+
+FUN DzError : writeFile( String filename, DzSaveFilter.ScriptFileMode mode )
+  > summary
+    Saves to a file.
+  > parameters
+    + filename - Name of the file to export to.
+    + mode - The type of file to save.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+  > example
+    Export a DAZ Script based Pose Preset.
+    var oSaveFilterMgr = App.getSaveFilterMgr();
+    var nSaveFilter = oSaveFilterMgr.findFilter( "DzPoseFilter" );
+    var oSaveFilter = oSaveFilterMgr.getFilter( nSaveFilter );
+    if( oSaveFilter ){
+    	oSaveFilter.writeFile( "c:/test", oSaveFilter.TextScriptFile );
+    }
+
+FUN DzError : writeFile( String filename, DzSaveFilter.ScriptFileMode mode, DzFileIOSettings options )
+  > summary
+    Saves to a file.
+  > parameters
+    + filename - Name of the file to export to.
+    + mode - The type of file to save.
+    + options - The options for the save filter.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+  > example
+    Export a DAZ Script based Pose Preset, without displaying the Save Options dialog.
+    var oSaveFilterMgr = App.getSaveFilterMgr();
+    var nSaveFilter = oSaveFilterMgr.findFilter( "DzPoseFilter" );
+    var oSaveFilter = oSaveFilterMgr.getFilter( nSaveFilter );
+    if( oSaveFilter ){
+    	var oSettings = new DzFileIOSettings();
+    	//oSaveFilter.getDefaultOptions( oSettings );
+    	oSaveFilter.getOptions( oSettings, false, "c:/test" );
+    	oSaveFilter.writeFile( "c:/test", oSaveFilter.TextScriptFile, oSettings );
+    }

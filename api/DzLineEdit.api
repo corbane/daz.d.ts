@@ -1,0 +1,246 @@
+CLS DzLineEdit : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/lineedit_dz
+  > summary
+    DAZScript wrapper for QLineEdit.
+
+### description
+  > summary
+    This class provides a single line text editor.
+
+### enumerations
+
+ENU EchoMode
+  > summary
+    Enumerated values for describing how a line edit should display its contents.
+  + Normal - Display characters as they are entered.
+  + NoEcho - Do not display anything. This may be appropriate for passwords where even the length of the password should be kept secret.
+  + Password - Display asterisks instead of the characters actually entered.
+  + PasswordEchoOnEdit - Display characters as they are entered while editing otherwise display asterisks.
+
+### properties
+
+PRP Boolean : acceptableInput
+  > summary
+    Holds whether or not the input satisfies the inputMask and the validator. (Read Only)
+    DzWidget::AlignmentFlags : alignment
+    Holds the alignment of the text displayed in the editor.
+
+PRP Number : cursorPosition
+  > summary
+    Holds the position of the cursor in the editor.
+
+PRP DzLineEdit.EchoMode : echoMode
+  > summary
+    Holds the value that determines how the text entered is displayed to the user.
+
+PRP Boolean : frame
+  > summary
+    Holds whether or not the editor is drawn with a frame.
+
+PRP Boolean : hasSelectedText
+  > summary
+    Holds whether or not text is selected. (Read Only)
+
+PRP String : inputMask
+  > summary
+    Holds the input mask for the editor. Set this to an empty string to clear the input mask.
+
+PRP Number : maxLength
+  > summary
+    Holds the maximum length of the text in the editor.
+
+PRP Boolean : modified
+  > summary
+    Holds whether or not the text in the editor has been modified. (Read Only < 4.9.3.93)
+
+PRP String : placeholderText
+  > summary
+    Holds the text string displayed in the editor when its text string is empty.
+
+PRP Boolean : readOnly
+  > summary
+    Holds whether or not the text in the editor can be edited by the user.
+
+PRP Boolean : redoAvailable
+  > summary
+    Holds whether or not a redo operation is available. (Read Only)
+
+PRP String : selectedText
+  > summary
+    Holds the selected text (if any) of the editor.
+
+PRP String : text
+  > summary
+    Holds the text value of the editor.
+
+PRP Boolean : undoAvailable
+  > summary
+    Holds whether or not an undo operation is available. (Read Only)
+
+### constructors
+
+CTR DzLineEdit( DzWidget parent )
+  > summary
+    Creates a line edit as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the editor.
+
+### methods
+
+FUN void : backspace()
+  > summary
+    If text is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no text is selected, the cursor will be moved one character to the left and the character will be deleted.
+
+FUN void : clear()
+  > summary
+    Clears the text in the editor.
+
+FUN void : clearModified()
+  > summary
+    Deprecated
+    Exists only to keep old code working. Do not use in new code. Use the modified property instead.
+
+FUN void : copy()
+  > summary
+    Copies the selected text into the clipboard.
+
+FUN void : cursorBackward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor backward the given number of characters.
+  > parameters
+    + mark - If true, each character that is stepped over will be added to the current selection.
+    + steps - The number of characters to move the cursor.
+
+FUN void : cursorForward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor forward the given number of characters.
+  > parameters
+    + mark - If true, each character that is stepped over will be added to the current selection.
+    + steps - The number of characters to move the cursor.
+
+FUN void : cursorWordBackward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor backward one word.
+  > parameters
+    + mark - If true, the word will be added to the current selection.
+    + steps - The number of words to move the cursor. (since 4.9.3.93)
+
+FUN void : cursorWordForward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor forward one word.
+  > parameters
+    + mark - If true, the word will be added to the current selection.
+    + steps - The number of words to move the cursor. (since 4.9.3.93)
+
+FUN void : cut()
+  > summary
+    Copies the selected text into the clipboard and removes it from the editor.
+
+FUN void : del()
+  > summary
+    If text is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no text is selected, the character to the right of the cursor will be deleted.
+
+FUN void : deselect()
+  > summary
+    Clears any selection in the editor.
+
+FUN void : end( Boolean mark=false )
+  > summary
+    Moves the cursor to the end of the line.
+  > parameters
+    + mark - If true, the text from the cursor's previous position to the end of the line will be added to the current selection.
+
+FUN Boolean : hasAcceptableInput()
+  > returns
+    true if the input satisfies the inputMask and the validator, otherwise false.
+
+FUN Boolean : hasSelectedText()
+  > returns
+    true if some or all of the text in the editor is selected, otherwise false.
+
+FUN void : home( Boolean mark=false )
+  > summary
+    Moves the cursor to the beginning of the line.
+  > parameters
+    + mark - If true, the text from the beginning of the line to the cursor's previous position will be added to the current selection.
+
+FUN void : paste()
+  > summary
+    Inserts any text on the clipboard into the line at the cursor's current position.
+
+FUN void : redo()
+  > summary
+    If redoAvailable is true, redoes the next operation in the editor.
+
+FUN void : selectAll()
+  > summary
+    Selects all the text in the editor.
+
+FUN String : selectedText()
+  > returns
+    The currently selected text (if any) in the editor.
+
+FUN Number : selectionStart()
+  > returns
+    The position in the editor where the current selection begins.
+
+FUN void : setDoubleValidator( Number bottom, Number top, Number decimals, Boolean scientific=false )
+  > summary
+    Causes this line edit to only accept characters that represent double precision floating point (decimal) numbers.
+  > parameters
+    + bottom - The minimum acceptable value.
+    + top - The maximum acceptable value.
+    + decimals - The maximum number of digits after the decimal point to allow.
+    + scientific - If true, the text of the editor is expressed in scientific form; i.e., it may have an exponent part; i.e., 1.5E-2. If false (default), the text of the editor is expressed as a standard number; i.e., 0.015.
+
+FUN void : setIntValidator( Number minimum, Number maximum )
+  > summary
+    Causes this line edit to only accept characters that represent whole numbers (integers).
+  > parameters
+    + minimum - The minimum acceptable value.
+    + maximum - The maximum acceptable value.
+
+FUN void : setRegExValidator( String rx, Boolean caseSensitive=true )
+  > summary
+    Causes this line edit to only accept characters that satisfy a Regular Expression.
+  > parameters
+    + regx - The Regular Expression to use.
+    + caseSensitive - If true (default), the expression is case sensitive.
+
+FUN void : setSelection( Number start, Number length )
+  > summary
+    Sets the selected portion of the text in the editor.
+  > parameters
+    + start - The position to start the selection from.
+    + length - The number of characters from start to select.
+
+FUN void : undo()
+  > summary
+    If undoAvailable is true, undoes the last operation in the editor.
+
+### signals
+
+SIG void : cursorPositionChanged( Number oldPos, Number newPos )
+  > summary
+    Emitted when the current position changes.
+
+SIG void : editingFinished()
+  > summary
+    Emitted when the [Return] or [Enter] key is pressed or the editor loses focus.
+
+SIG void : returnPressed()
+  > summary
+    Emitted when the user presses the [Return] key in the editor.
+
+SIG void : selectionChanged()
+  > summary
+    Emitted when the selected text in the editor changes.
+
+SIG void : textChanged( String text )
+  > summary
+    Emitted when the text of the editor changes, passes the new text.
+
+SIG void : textEdited( String text )
+  > summary
+    Emitted when the text edited, passes the new text.

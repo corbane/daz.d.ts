@@ -1,0 +1,49 @@
+CLS DzRenderHandler : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/renderhandler_dz
+  > summary
+    Base class for all render handlers.
+
+### description
+  > summary
+    Render handler classes are responsible for the settings of a render, as well as collecting the final image data passed back from the renderer.
+  > seealso
+    DzRenderer::render(), DzRenderer::customRender(), Dz3DViewport::hardwareRender(), Dz3DViewport::renderThumbnail(), pbufferview_dz::hardwareRender(), pbufferview_dz::renderThumbnail()
+
+### methods
+
+FUN Color : getBackColor()
+  > returns
+    The background color
+
+FUN Rect : getCropWindow()
+  > returns
+    The area of the view to render, if the whole view is not to be rendered
+
+FUN Number : getNumFrames()
+  > returns
+    The number of frames to be rendered
+
+FUN Size : getSize()
+  > returns
+    The width & height of the rendered image
+
+FUN DzTime : getStartingTime()
+  > returns
+    The scene time at which rendering will begin
+
+FUN Boolean : getUseCropWindow()
+  > returns
+    true if only a portion of the view will be rendered
+
+FUN void : setBackColor( Color color )
+  > summary
+    Set background color for the render
+
+FUN void : setCropWindow( Rect window )
+  > summary
+    Set the portion of the view to be rendered, if the whole view is not to be rendered
+
+FUN void : setUseCropWindow( Boolean onOff )
+  > summary
+    Set the render to be limited to a portion of the view, or the whole view

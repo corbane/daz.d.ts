@@ -1,0 +1,79 @@
+CLS DzImageComponent : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagecomponent_dz
+  > summary
+    A single layer in a multi-layer texture image.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP String : label
+  > summary
+    The label for the layer.
+
+PRP Boolean : visible
+  > summary
+    Holds whether or not the layer contributes to the final image.
+
+### methods
+
+FUN void : addManipulator( DzImageManip manip )
+  > summary
+    TODO: Add description.
+
+FUN void : freeImageData()
+  > summary
+    TODO: Add description.
+
+FUN Image : getImageData()
+  > returns
+    The image data of the component.
+
+FUN DzImageManip : getManipulator( Number idx )
+  > summary
+    TODO: Add description.
+
+FUN Number : getNumManipulators()
+  > summary
+    TODO: Add description.
+
+FUN Size : getSize()
+  > returns
+    The size of the image data of the component.
+
+FUN void : insertManipulator( Number idx, DzImageManip manip )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : removeManipulator( Number idx )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : removeManipulator( DzImageManip manip )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : toTextureLayer( DzTextureLayer layer, Size imageSize )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : imageDataChanged()
+  > summary
+    Emitted when the image data for the component has been changed.
+
+SIG void : labelChanged( String label )
+  > summary
+    Emitted when the label of the component has been changed.
+
+SIG void : manipulatorListChanged()
+  > summary
+    Emitted when the list of manipulators for the component has been changed.
+
+SIG void : visibilityChanged( Boolean onOff )
+  > summary
+    Emitted when the visibility of the component has been changed.

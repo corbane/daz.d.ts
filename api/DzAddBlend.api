@@ -1,0 +1,15 @@
+CLS DzAddBlend : DzImageBlend
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/addblend_dz
+  > summary
+    An additive image blending operation.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzAddBlend()
+  > summary
+    Default Constructor.

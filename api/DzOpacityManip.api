@@ -1,0 +1,34 @@
+CLS DzOpacityManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/opacitymanip_dz
+  > summary
+    A manipulator that sets the alpha channel of an entire image layer to a specified value.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : opacity
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzOpacityManip( Number opacity=1.0 )
+  > summary
+    Holds the opacity value.
+    Default Constructor
+
+### methods
+
+FUN Number : getOpacity()
+  > returns
+    The opacity value for the image.
+
+FUN void : setOpacity( Number opacity )
+  > summary
+    Sets the opacity for the image.
+  > parameters
+    + opacity - The new opacity value for the image. This should be in the range 0.0 - 1.0.

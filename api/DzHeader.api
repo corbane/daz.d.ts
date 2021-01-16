@@ -1,0 +1,79 @@
+CLS DzHeader : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/header_dz
+  > summary
+    DAZScript wrapper for Q3Header.
+
+### description
+  > seealso
+    DzListView::header()
+
+### properties
+
+PRP Boolean : clickEnabled
+  > summary
+    Holds whether the header sections respond to mouse clicks.
+
+PRP Boolean : movingEnabled
+  > summary
+    Holds whether the header sections can be moved.
+
+PRP Boolean : resizeEnabled
+  > summary
+    Holds whether the header sections can be resized.
+
+PRP Boolean : stretchEnabled
+  > summary
+    Holds whether the header sections can be stretched.
+
+### methods
+
+FUN Boolean : isClickEnabled( Number section )
+  > returns
+    Whether or not the header for a given section responds to mouse clicks
+
+FUN Boolean : isResizeEnabled( Number section )
+  > returns
+    Whether or not resizing for a given section is enabled
+
+FUN Boolean : isStretchEnabled( Number section )
+  > returns
+    Whether or not stretch for a given section is enabled
+
+FUN void : setClickEnabled( Boolean enable, Number section )
+  > summary
+    Sets whether or not the header for a given section responds to mouse clicks
+
+FUN void : setResizeEnabled( Boolean enable, Number section )
+  > summary
+    Sets whether or not resizing for a given section is enabled
+
+FUN void : setStretchEnabled( Boolean enable, Number section )
+  > summary
+    Sets whether or not stretch for a given section is enabled
+
+### signals
+
+SIG void : clicked( Number section )
+  > summary
+    Emitted when an item in the header is clicked
+
+SIG void : indexChange( Number section, Number fromIndex, Number toIndex )
+  > summary
+    Emitted when an item in the header changes index
+
+SIG void : pressed( Number section )
+  > summary
+    Emitted when an item in the header is pressed
+
+SIG void : released( Number section )
+  > summary
+    Emitted when an item in the header is released
+
+SIG void : sectionHandleDoubleClicked( Number section )
+  > summary
+    Emitted when an item in the header is double clicked
+
+SIG void : sizeChange( Number section, Number oldSize, Number newSize )
+  > summary
+    Emitted when an item in the header changes size

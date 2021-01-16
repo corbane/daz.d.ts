@@ -1,0 +1,160 @@
+CLS DzStyle : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/style_dz
+  > summary
+    Class that defines the look and feel of the DAZ Studio interface.
+
+### description
+  > example
+    Reset the current style colors to their default values.
+    		var oSTYLE = App.getStyle();
+    		var nCOLORS = oSTYLE.getNumInterfaceColors();
+    		for( var i = 0; i < nCOLORS; i += 1 )
+    		{
+    			oSTYLE.setInterfaceColor( i, oSTYLE.getInterfaceColorDefault( i ) );
+    		}
+
+### enumerations
+
+ENU PixmapMode
+  > summary
+    TODO: Add description.
+  + Normal - The mode when the user is not interacting with the pixmap, but the item represented by the pixmap is available.
+  + Disabled - The mode when the item represented by the pixmap is not available.
+  + Active - The mode when the item represented by the pixmap is available and the user is interacting with it.
+  + Selected - The mode when the item represented by the pixmap is selected.
+
+ENU PixmapState
+  > summary
+    TODO: Add description.
+  + On - The pixmap when the widget is in the On state.
+  + Off - The pixmap when the widget is in the Off state.
+
+### methods
+
+FUN Pixmap : actionPixmap( String className, DzStyle.PixmapMode mode, DzStyle.PixmapState state )
+  > returns
+    A Pixmap from the DzAction with the class name.
+
+FUN DzError : compileStyleDefinition( String infile, String outfile )
+  > summary
+    Compiles a text-based style definition and its images into a single binary style definition file.
+  > parameters
+    + infile - The name of the XML-based text style description
+    + outfile - The name of the DAZ Studio style definition file to create
+  > returns
+    true on success, false on failure
+
+FUN Number : findInterfaceColor( String name )
+  > returns
+    The index of the given interface color, or -1 if the color cannot be found.
+
+FUN Number : findInterfaceNumber( String name )
+  > returns
+    The index of the given interface number, or -1 if the number cannot be found.
+  > since
+    4.9.0.43
+
+FUN Color : getInterfaceColor( String name )
+  > returns
+    The current value of the given interface color.
+
+FUN Color : getInterfaceColor( Number which )
+  > returns
+    The current value of the given interface color.
+
+FUN Color : getInterfaceColorDefault( Number which )
+  > returns
+    The default value of the given interface color.
+
+FUN String : getInterfaceColorDescription( Number which )
+  > returns
+    A user-readable description for the given interface color
+
+FUN void : getInterfaceColorDisplaySettings( Number which, DzSettings settings )
+  > since
+    4.9.0.43
+
+FUN String : getInterfaceColorName( Number which )
+  > returns
+    The name for the given interface color
+
+FUN Number : getInterfaceNumber( String name )
+  > returns
+    The current value of the given interface number.
+  > since
+    4.9.0.43
+
+FUN Number : getInterfaceNumber( Number which )
+  > returns
+    The current value of the given interface number.
+  > since
+    4.9.0.43
+
+FUN Number : getInterfaceNumberDefault( Number which )
+  > returns
+    The default value of the given interface number.
+  > since
+    4.9.0.43
+
+FUN String : getInterfaceNumberDescription( Number which )
+  > returns
+    A user-readable description for the given interface number
+  > since
+    4.9.0.43
+
+FUN void : getInterfaceNumberDisplaySettings( Number which, DzSettings settings )
+  > since
+    4.9.0.43
+
+FUN String : getInterfaceNumberName( Number which )
+  > returns
+    The name for the given interface number
+  > since
+    4.9.0.43
+
+FUN Number : getNumInterfaceColors()
+  > returns
+    The number of user-customizable interface colors for the current style
+
+FUN Number : getNumInterfaceNumbers()
+  > returns
+    The number of user-customizable interface numbers for the current style
+  > since
+    4.9.0.43
+
+FUN String : getStyleDefinition()
+  > returns
+    The name of the currently active style definition.
+
+FUN Number : pixelMetric( String metricName )
+  > returns
+    The value of the pixel metric with the given name. The name must match one of the pixel metric names from the style definition.
+
+FUN void : setInterfaceColor( Number which, Color color )
+  > summary
+    Sets the given interface color to the new value. The interface will not automatically update - the current style must be reloaded before the changes will take affect.
+
+FUN void : setInterfaceNumber( Number which, Number number )
+  > summary
+    Sets the given interface number to the new value. The interface will not automatically update - the current style must be reloaded before the changes will take affect.
+  > since
+    4.9.0.43
+
+FUN Pixmap : standardPixmap( String pixmapName )
+  > returns
+    A Pixmap with the given name. The name must match one of the standard pixmap names from the style definition.
+
+FUN Font : textStyle( String styleName )
+  > returns
+    The Font of the text style with the given name. The name must match one of the text style names from the style definition.
+
+FUN Color : textStyleColor( String styleName )
+  > returns
+    The Color of the text style with the given name. The name must match one of the text style names from the style definition.
+
+### signals
+
+SIG void : interfaceColorsChanged()
+  > summary
+    Emitted when the interface color settings have changed.

@@ -1,0 +1,91 @@
+CLS DzGridLayout : DzLayout
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gridlayout_dz
+  > summary
+    DAZScript wrapper for QGridLayout.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzGridLayout( DzWidget parent )
+  > summary
+    Creates a grid layout that manages the children widgets of the given parent widget
+
+CTR DzGridLayout( DzLayout parent )
+  > summary
+    Creates a grid layout as a sub-layout of the given layout
+
+### methods
+
+FUN void : addLayout( DzLayout layout, Number row, Number col, Number rowSpan=1, Number colSpan=1 )
+  > summary
+    Adds the given layout to the items managed by this layout
+  > parameters
+    + layout - The layout to add to this layout
+    + row - The row to insert the layout into.
+    + col - The column to insert the layout into.
+    + rowspan - The number of rows the layout should span (1 if not specified)
+    + colspan - The number of columns the layout should span (1 if not specified)
+
+FUN void : addMultiCellLayout( DzLayout layout, Number fromRow, Number toRow, Number fromCol, Number toCol )
+  > summary
+    Deprecated
+    Use addLayout() instead
+
+FUN void : addMultiCellWidget( DzWidget widget, Number fromRow, Number toRow, Number fromCol, Number toCol )
+  > summary
+    Deprecated
+    Use addWidget() instead
+
+FUN void : addWidget( DzWidget widget, Number row?, Number col?, Number rowSpan=1, Number colSpan=1 )
+  > summary
+    Adds the given widget to the items managed by this layout
+  > parameters
+    + widget - The widget to add to the layout
+    + row - The row to insert the widget into.
+    + col - The column to insert the widget into.
+    + rowspan - The number of rows the widget should span (1 if not specified)
+    + colspan - The number of columns the widget should span (1 if not specified)
+
+FUN Number : colCount()
+  > returns
+    The number of columns in this grid
+
+FUN Number : colSpacing( Number col )
+  > returns
+    The the minimum width for the given column
+
+FUN Number : colStretch( Number col )
+  > returns
+    The relative amount of stretch for the given column
+
+FUN Number : rowCount()
+  > returns
+    The number of rows in this grid
+
+FUN Number : rowSpacing( Number row )
+  > returns
+    The the minimum height for the given row
+
+FUN Number : rowStretch( Number row )
+  > returns
+    The relative amount of stretch for the given row
+
+FUN void : setColSpacing( Number col, Number minSize )
+  > summary
+    Sets the minimum width for the given column
+
+FUN void : setColStretch( Number col, Number stretch )
+  > summary
+    Sets the relative amount of stretch for the given column
+
+FUN void : setRowSpacing( Number row, Number minSize )
+  > summary
+    Sets the minimum height for the given row
+
+FUN void : setRowStretch( Number row, Number stretch )
+  > summary
+    Sets the relative amount of stretch for the given row

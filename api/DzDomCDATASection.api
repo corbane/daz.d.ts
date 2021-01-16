@@ -1,0 +1,15 @@
+CLS DzDomCDATASection : DzDomText
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domcdatasection_dz
+  > summary
+    DAZ Script DOM CDATA Section node.
+
+### description
+  > summary
+    Represents a CDATA Section node in a DOM document. CDATA Sections can contain special characters that would otherwise be interpreted as part of the markup language. This provides a way for embedding text that contains special characters without the need for escaping all those characters.
+
+### constructors
+
+CTR DzDomCDATASection()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomDocument::createCDATASection() to create a new CDATA node as a member of a document.

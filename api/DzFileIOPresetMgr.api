@@ -1,0 +1,206 @@
+CLS DzFileIOPresetMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fileiopresetmgr_dz
+  > summary
+    Class for managing File I/O preset settings.
+
+### description
+  > summary
+    This class manages presets in the form of DzFileIOSettings objects for various importers, exporters, and other forms of File I/O.
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request it from DzApp via DzApp::getFileIOPresetMgr().
+    File I/O presets are defined by a unique name. They have two types of settings: Specific Settings and Common Settings.
+    Specific Settings
+    Specific settings are tied to a class name. This class name is typically, but not always, the name of an importer or exporter, such as “DzObjImporter” or “DzObjExporter.” The key values for specific settings will vary based on the class.
+    Common Settings
+    Common settings for a preset are common to all class names. These include settings that define scale values and axis settings. Common keys can be accessed via the following methods: * getLateralAxisKey()
+    getVerticalAxisKey()
+    getDepthAxisKey()
+    getInvertLateralAxisKey()
+    getInvertVerticalAxisKey()
+    getInvertDepthAxisKey()
+    getScaleKey()
+    The scale value used by the presets is for importers. If you are working with an exporter then the scale value needs to be converted to 1/scale. As an example, if the scale value for a preset is 2.54 then the scale value for an exporter would be 1/2.54 = 0.3937
+
+### methods
+
+FUN Boolean : getAllCurrentSettings( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getAllDefaults( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getAllSettings( String presetName, String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Array : getAvailableClasses( String presetName )
+  > parameters
+    + presetName - The name of the preset to get available classes for.
+  > returns
+    the available classes (typically importers or exporters) of the given preset
+
+FUN Array : getAvailablePresets( String className )
+  > parameters
+    + className - The name of the class to get available presets for. This is typically, but not always, the name of an importer or exporter, such as “DzObjImporter.” If className is empty, returns all presets
+  > returns
+    the available presets for the given class name
+
+FUN void : getCommonApplicationDefaults( DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getCommonDefaults( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getCommonSettings( String presetName, String className, DzFileIOSettings settings )
+  > summary
+    Populates settings with the values for common to all presets named presetName
+  > parameters
+    + presetName - The name of the preset to get common settings for
+    + settings - The settings object to populate with preset values
+  > returns
+    true if successful, false if presetName does not represent a valid preset
+
+FUN Boolean : getCurrentCommonSettings( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getCurrentSpecificSettings( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN String : getCustomPresetLabel()
+  > returns
+    The name of the custom preset
+
+FUN String : getDepthAxisKey()
+  > returns
+    The key for the depth axis common setting
+
+FUN String : getInvertDepthAxisKey()
+  > returns
+    The key for the invert depth axis common setting
+
+FUN String : getInvertLateralAxisKey()
+  > returns
+    The key for the invert lateral axis common setting
+
+FUN String : getInvertVerticalAxisKey()
+  > returns
+    The key for the invert vertical axis common setting
+
+FUN String : getLateralAxisKey()
+  > returns
+    The key for the lateral axis common setting
+
+FUN Number : getPresetID( String presetName, String className=String )
+  > parameters
+    + String - The name of the desired preset
+    + className - The optional class name for the given preset. If not passed in or empty then the method will not take into account whether the preset has settings for the given class name.
+  > returns
+    the id of the preset with the given name, or an -1 if the preset does not exist. Will also return -1 even if the preset exists when className is not empty and the given preset does not have settings for that specific class.
+
+FUN String : getPresetName( Number id, String className=String )
+  > parameters
+    + id - The id of the desired preset
+    + className - The optional class name for the given preset. If not passed in or empty then the method will not take into account whether the preset has settings for the given class name.
+  > returns
+    the name of the preset with the given id, or an empty string if the preset does not exist. Will also return an empty string even if the preset exists when className is not empty and the given preset does not have settings for that specific class.
+
+FUN String : getScaleKey()
+  > summary
+    Note:
+    The scale value for all presets is the value to use as an importer. If this value is going to be used as an exporter it needs to be converted. See the class description for an explanation
+  > returns
+    The key for the scale common setting
+
+FUN Boolean : getSpecificDefaults( String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getSpecificSettings( String presetName, String className, DzFileIOSettings settings )
+  > summary
+    TODO: Add description.
+
+FUN Array : getSystemPresets( String className )
+  > parameters
+    + className - The name of the class to get available presets for. This is typically, but not always, the name of an importer or exporter, such as “DzObjImporter.” If className is empty, returns all system presets
+  > returns
+    the available system-defined presets for the given class name
+
+FUN Array : getUserPresets( String className )
+  > parameters
+    + className - The name of the class to get available presets for. This is typically, but not always, the name of an importer or exporter, such as “DzObjImporter.” If className is empty, returns all user presets
+  > returns
+    the available user-defined presets for the given class name
+
+FUN String : getVerticalAxisKey()
+  > returns
+    The key for the vertical axis common setting
+
+FUN Boolean : isSystemPreset( String presetName )
+  > parameters
+    + presetName - The name of the preset to check
+  > returns
+    true if the preset is a system preset, false if it is a user preset or does not exist
+
+FUN Boolean : isUserPreset( String presetName )
+  > parameters
+    + presetName - The name of the preset to check
+  > returns
+    true if the preset is a user preset, false if it is a system preset or does not exist
+
+FUN Boolean : presetExists( Number id, String className=String )
+  > parameters
+    + id - The id of the preset to check
+    + className - The optional class name for the given preset. If not passed in or empty then the check will not take into account whether the preset has settings for the given class name
+  > returns
+    true if the given preset exists, false otherwise
+
+FUN Boolean : presetExists( String presetName, String className=String )
+  > parameters
+    + presetName - The name of the preset to check
+    + className - The optional class name for the given preset. If not passed in or empty then the check will not take into account whether the preset has settings for the given class name
+  > returns
+    true if the given preset exists, false otherwise
+
+FUN Boolean : removeUserPreset( String presetName, String className )
+  > summary
+    Attempts to remove the preset with the given preset name and class name.
+  > returns
+    true if successful, false if the preset could not be removed
+
+FUN Boolean : saveUserPreset( String presetName, String className, Boolean keepCommonSettings, DzFileIOSettings settings )
+  > summary
+    Attempts to save a user preset with the given preset name and class name
+  > parameters
+    + presetName - The name of the preset to save
+    + className - The name of the class to save settings for presetName
+    + keepCommonSettings - If a preset named presetName already exists, this settings determines what to do with common settings in the settings parameter. If true, the existing common settings will be kept and those in the settings will be ignored.
+    + keepSpecificSettings - If a preset presetName and className already exists, this setting determines what to do with the specific settings. If true, the specific settings will remain unchanged.
+    + settings - The settings to associate with the new preset
+  > returns
+    true if the preset was saved, false otherwise
+
+### signals
+
+SIG void : presetAdded( String presetName, String className )
+  > summary
+    Emitted when a preset is added
+  > parameters
+    + presetName - The name of the preset that was added
+    + className - The name of the class that was added
+
+SIG void : presetLoadFinished()
+  > summary
+    Emitted when presets have been loaded from file and are ready to use
+
+SIG void : presetRemoved( String presetName, String className )
+  > summary
+    Emitted when a preset is removed
+  > parameters
+    + presetName - The name of the preset that was removed
+    + className - The name of the class that was removed

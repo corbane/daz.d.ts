@@ -1,0 +1,17 @@
+CLS DzVGroupBox : DzGroupBox
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/vgroupbox_dz
+  > summary
+    DAZScript wrapper for Q3VGroupBox.
+
+### description
+  > summary
+    A DzHGroupBox provides a DzGroupBox with a vertical layout.
+
+### constructors
+
+CTR DzVGroupBox( DzWidget parent )
+  > summary
+    Creates a group box as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the group box.

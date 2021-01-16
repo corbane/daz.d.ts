@@ -1,0 +1,19 @@
+CLS DzVBoxLayout : DzBoxLayout
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/vboxlayout_dz
+  > summary
+    DAZScript wrapper for QVBoxLayout.
+
+### description
+  > summary
+    Provided as a convenience for creating a DzBoxLayout where the direction is automatically initially set to DzBoxLayout::TopToBottom.
+
+### constructors
+
+CTR DzVBoxLayout( DzWidget parent )
+  > summary
+    Creates a vertical box layout that manages the children widgets of the given parent widget
+
+CTR DzVBoxLayout( DzLayout parent )
+  > summary
+    Creates a vertical box layout as a sub-layout of the given layout

@@ -1,0 +1,31 @@
+CLS DzPersistentMenu : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/persistentmenu_dz
+  > summary
+    Abstract base class of all persistant menus.
+
+### description
+  > summary
+    Persistant menus are registered with the DzActionMgr singleton and are available to access and modifiy via script.
+
+### methods
+
+FUN void : clearActiveWgt()
+  > summary
+    Clear the active widget for this persistent menu.
+
+FUN DzActionMenu : getActionMenu()
+  > returns
+    The DzActionMenu that belongs to this persistent menu. If one does not exist, it is created.
+  > since
+    4.6.0.76
+
+FUN QWidget : getActiveWgt()
+  > returns
+    The widget that launched this persistent menu (if any), otherwise null.
+
+FUN void : setActiveWgt( QWidget wgt )
+  > summary
+    Sets the active widget for this persistent menu.
+  > parameters
+    + wgt - The widget that launches the persistent menu.

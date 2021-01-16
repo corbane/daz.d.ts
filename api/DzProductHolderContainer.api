@@ -1,0 +1,21 @@
+CLS DzProductHolderContainer : DzTopLevelAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/productholdercontainer_dz
+  > summary
+    A container type for collecting product search results.
+
+### description
+  > summary
+    This container type does not directly support assets. The primary purpose of this container type is to collect results returned by a database query for products.
+  > seealso
+    DzAssetMgr::searchForProducts()
+
+### methods
+
+FUN Boolean : insertChildProductContainer( DzProductAssetContainer container )
+  > summary
+    Attempts to insert the given container as a child to this container.
+  > parameters
+    + container - The container to insert as a child.
+  > returns
+    true if the child was successfully added, otherwise false.

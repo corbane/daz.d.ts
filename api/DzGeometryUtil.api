@@ -1,0 +1,36 @@
+CLS DzGeometryUtil : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/geometryutil_dz
+  > summary
+    DAZ Script's global static object for geometry manipulation utility functions.
+
+### description
+
+### methods
+
+FUN DzError : convertToSubD( DzNode node, Number defaultLevel=1 )
+  > summary
+    Converts a scene item with polygon mesh geometry to a SubD object. If the node passed in is a DzBone or DzSkeleton, the entire figure will be converted to SubD.
+  > parameters
+    + node - The scene item to convert.
+    + defaultLevel - The default subdivision level of the item after conversion.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN DzError : convertToSubD( DzNode node, Number defaultViewLevel, Number defaultRenderLevel )
+  > summary
+    Converts a scene item with polygon mesh geometry to a SubD object. If the node passed in is a DzBone or DzSkeleton, the entire figure will be converted to SubD.
+  > parameters
+    + node - The scene item to convert.
+    + defaultLevel - The default subdivision level of the item after conversion.
+    + defaultRenderLevel - The default subdivision render level of the item after conversion.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN DzNode : createPrimitive( DzSettings settings )
+  > summary
+    Creates a primitive based on the settings supplied.
+  > parameters
+    + settings - The settings that specify the type of primitive and corresponding dimensions.
+  > returns
+    DzNode The new primitive node in the scene. NULL if nothing was created.

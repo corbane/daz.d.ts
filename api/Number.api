@@ -1,0 +1,81 @@
+NOT Number : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/number
+  > summary
+    ECMAScript Number prototype object.
+
+### description
+  > summary
+    This is the only numeric type in DAZScript. When a script is interacting with classes from the DAZ Studio SDK, all the C++ numeric types (int, float, double, etc) are converted to/from this type.
+    Numbers are not typically contructed, rather they are created by simple assignment.
+  > example
+    var nTemp = 3;
+    var nTemp2 = 3.14579;
+
+### properties
+
+PRP Number : MAX_VALUE
+  > summary
+    The largest positive finite value of the Number type; approximately 1.7976931348623157 x 10308.
+
+PRP Number : MIN_VALUE
+  > summary
+    The smallest positive value of the Number type; approximately 5 x 10-324.
+
+PRP Number : NaN
+  > summary
+    A number value that is a IEEE 754 “Not-a-Number” value.
+
+PRP Number : NEGATIVE_INFINITY
+  > summary
+    A number value that is the negative infinite Number value.
+
+PRP Number : POSITIVE_INFINITY
+  > summary
+    A number value that is the positive infinite Number value.
+
+### constructors
+
+CTR Number()
+  > summary
+    Default Constructor.
+
+CTR Number( Number num )
+  > summary
+    Copy Constructor.
+  > parameters
+    + num - The Number to copy.
+
+### methods
+
+FUN String : toExponential( Number fractionDigits )
+  > parameters
+    + fractionDigits - The number of digits following the decimal point after conversion. This must be in the range 0 to 20, if undefined, as many digits as necessary will be displayed.
+  > returns
+    A string representation of the number in exponential notation with one digit before the decimal point, and the given number of digits following the decimal point.
+
+FUN String : toFixed( Number fractionDigits )
+  > parameters
+    + fractionDigits - The number of digits following the decimal point after conversion. This must be in the range 0 to 20, if undefined, 0 is assumed.
+  > returns
+    A string representation of the number in fixed-point notation with the given number of digits following the decimal point.
+
+FUN String : toLocaleString()
+  > returns
+    A string representation of the number, formatted for the current locale.
+
+FUN String : toPrecision( Number precision )
+  > parameters
+    + precision - The number of digits following the decimal point after conversion. This must be in the range 0 to 20, if undefined, the results of toString() are returned.
+  > returns
+    A string representation of the number in either exponential or fixed-point notation with the given number of digits following the decimal point.
+
+FUN String : toString( Number radix )
+  > parameters
+    + radix - The base of the number system to use when converting the number. If the value is 10, or undefined, then the result is the same as toString(). This must be in the range 2 to 36.
+  > returns
+    A string representation of the number.
+
+FUN String : toString()
+  > returns
+    A string representation of the Number.

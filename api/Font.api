@@ -1,0 +1,130 @@
+CLS Font : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/font
+  > summary
+    DAZScript wrapper for QFont.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QFont type used in the DAZ Studio SDK.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Boolean : bold
+  > summary
+    Holds whether or not the Font is bolded.
+
+PRP String : family
+  > summary
+    Holds the family name of the Font.
+
+PRP Boolean : italic
+  > summary
+    Holds whether or not the Font is italicized.
+
+PRP Number : pixelSize
+  > summary
+    The pixel size of the font (the device dependent size of the font)
+
+PRP Number : pointSize
+  > summary
+    The point size of the font (the device independent size of the font)
+
+PRP Boolean : strikeout
+  > summary
+    Holds whether or not the Font is striked.
+
+PRP Boolean : underline
+  > summary
+    Holds whether or not the Font is underlined.
+
+### constructors
+
+CTR Font()
+  > summary
+    Default Constructor.
+
+CTR Font( Font font )
+  > summary
+    Copy Constructor.
+  > parameters
+    + font - The Font to copy.
+
+CTR Font( String familyName )
+  > summary
+    Constructs a new font of the given family.
+  > parameters
+    + familyName - The name of the font family that the new font will be of.
+
+### methods
+
+FUN Rect : boundingRect( Rect maxRect, String text, Number flags=0 )
+  > parameters
+    + maxRect - The rectangle to constrain the bounding rectangle to.
+    + text - The text to get the bounding rectangle of.
+    + flags - A bitwise OR of the following flags:
+      DzWidget.AlignLeft
+      DzWidget.AlignRight
+      DzWidget.AlignHCenter
+      DzWidget.AlignJustify
+      DzWidget.AlignTop
+      DzWidget.AlignBottom
+      DzWidget.AlignVCenter
+      DzWidget.AlignCenter
+      DzWidget.TextSingleLine
+      DzWidget.TextExpandTabs
+      DzWidget.TextShowMnemonic
+      DzWidget.TextWordWrap
+  > returns
+    The bounding rectangle of the characters in text, which is the set of pixels the text would cover if drawn at (0, 0), constrained to maxRect.
+  > since
+    4.10.0.121
+
+FUN String : elidedText( String text, DzWidget.TextElideMode mode, Number width, Number flags=0 )
+  > parameters
+    + text - The text to get an elided version of.
+    + mode - The mode to elide the text with.
+    + width - The width (in pixels) to test text with.
+    + flags - Currently only supports DzWidget.TextShowMnemonic.
+  > returns
+    If text is wider than width, an elided version of text, otherwise the original string.
+  > since
+    4.10.0.121
+
+FUN Array : families()
+  > returns
+    A list of the font families available on the current machine (if any), otherwise an empty list.
+  > since
+    4.10.0.121
+
+FUN Array : pointSizes( String family, String style )
+  > parameters
+    + family - The name of the font family to get sizes for.
+    + style - The style of the font family to get sizes for.
+  > returns
+    A list of the point sizes for the font specified by family and style.
+  > since
+    4.10.0.121
+
+FUN Size : size( String text, Number flags=0 )
+  > parameters
+    + text - The text to get the size of.
+    + flags - A bitwise OR of the following flags:
+      DzWidget.TextSingleLine
+      DzWidget.TextExpandTabs
+      DzWidget.TextShowMnemonic
+      DzWidget.TextWordWrap
+  > returns
+    The size (in pixels) of text.
+  > since
+    4.10.0.121
+
+FUN Array : styles( String family )
+  > parameters
+    + family - The name of the font family to get styles for.
+  > returns
+    A list of the styles for the font specified by family (if any), otherwise an empty list.
+  > since
+    4.10.0.121

@@ -1,0 +1,172 @@
+CLS DzRenderer : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/renderer_dz
+  > summary
+    Base class for all offline renderers.
+
+### description
+  > summary
+    Implements a standard RenderMan interface for the scene to render itself through an offline renderer.
+
+### methods
+
+FUN String : compileShader( String shaderPath )
+  > summary
+    Compiles the shader at the given path, if necessary, and returns the path to the compiled shader.
+  > parameters
+    + shaderPath - The path to the shader source to compile
+  > returns
+    The path to the compiled shader.
+
+FUN Boolean : customRender( DzRenderHandler handler, DzCamera camera, Array lights, Array nodes, DzRenderOptions opt )
+  > summary
+    Render a custom set of items.
+  > parameters
+    + handler - Settings and handler for the render.
+    + camera - Camera to render from.
+    + lights - List of lights for the render.
+    + nodes - List of items to be rendered.
+    + opt - Options for this render.
+  > returns
+    true if rendering was successful. false if rendering was canceled by user or there were errors during the render.
+
+FUN DzNode : getCurrentNode()
+  > returns
+    The DzNode that is currently being rendered.
+
+FUN iprrenderhandler_dz : getIPRRenderHandler()
+  > returns
+    The handler used for Interactive Progressive Rendering (IPR) on this renderer (if any). NULL if this renderer does not support IPR.
+
+FUN String : getName()
+  > returns
+    The name of this renderer.
+
+FUN DzRendererMode : getRendererMode()
+  > returns
+    The renderer mode (feature set) for this renderer.
+
+FUN String : getShaderCompilerPath()
+  > returns
+    The path to the utility that compiles shaders for the renderer.
+
+FUN String : getShaderExtension()
+  > returns
+    The file extension that this renderer uses for compiled shaders
+
+FUN String : getShaderFileName( String shaderName )
+  > summary
+    Given a shader name (e.g. “metal”), this method returns the file name for it by appending the shader extension for the renderer (e.g. “metal.sdl”).
+
+FUN DzShaderDescription : getShaderInfo( String shaderPath )
+  > summary
+    Gets the parameter information for the given shader. The passed shader name should be the path to the compiled shader.
+
+FUN String : getShaderPath( String shaderName, Boolean withExtension=true )
+  > summary
+    Given a shader name (e.g. “metal”), looks in all the shader directories attempting to find the file for it. If withExtension is true, the shader path including the extension for the renderer is returned. Otherwise, it returns the full shader path without the extension appended. If it fails to find the shader, it returns an empty string.
+
+FUN Array : getShaderSearchPaths()
+  > returns
+    A list of paths which are used to search for shaders while rendering.
+  > seealso
+    getShaderPath()
+
+FUN String : getTextureUtilityPath()
+  > returns
+    The path to the utility that converts textures for the renderer.
+
+FUN Boolean : isRendering()
+  > returns
+    true if the application is currently rendering, otherwise false.
+
+FUN void : killRender()
+  > summary
+    Stops the render.
+
+FUN void : prepareImage( DzTexture img, String filename )
+  > summary
+    Called by the framework to prepare/convert an image into a format that this renderer can understand/use when rendering. In derived classes, the function should result in a new image file being generated along with a path that the renderer can use to refer to the file. If the image could not be converted or is not usable by this renderer, the returned string should be empty.
+  > parameters
+    + img - The DzTexture object for which the image is being prepared.
+    + filename - The path to the original image file that needs to be processed.
+  > seealso
+    imagePrepared()
+
+FUN String : processShaderName( String shaderName )
+  > summary
+    Processes the given shader name into a form the renderer can use (i.e. appending file extensions, finding absolute paths, etc.).
+
+FUN Boolean : render( DzRenderHandler handler, DzCamera camera, DzRenderOptions opt )
+  > summary
+    Render the current scene.
+  > parameters
+    + handler - Settings and handler for the render.
+    + camera - Camera to render the scene from.
+    + opt - Options for this render.
+  > returns
+    true if rendering was successful. false if rendering was canceled by user or there were errors during the render.
+
+FUN void : saveBakeImage( DzBakerOptions opt, Boolean wait )
+  > summary
+    Converts a .bake file into an image file.
+  > parameters
+    + opt - Shader baker options.
+    + wait - If true, this method is exited only when the conversion has ended. If false the method returns immediately after starting conversion; the baker's saveFileFinished() slot will be invoked after the conversion finishes.
+
+FUN void : setIPRRenderHandler( iprrenderhandler_dz handler )
+  > summary
+    Sets the handler used for Interactive Progressive Rendering (IPR) on this renderer.
+  > parameters
+    + handler - The render handler to set.
+
+FUN void : stopBaking()
+  > summary
+    Stops an active baking operation, if possible.
+
+FUN Boolean : textureConvert( DzRenderHandler handler, DzCamera camera, DzTextureConvertorOptions opt )
+  > summary
+    Performs texture conversion.
+  > parameters
+    + handler - The render handler to use for the conversion.
+    + camera - The camera to use for the conversion.
+    + opt - The options to use in the conversion.
+  > returns
+    true if the conversion succeeds, false if the conversion is cancelled or in case of error.
+
+### signals
+
+SIG void : aboutToRender( DzRenderer renderer )
+  > summary
+    Emitted when just before the renderer begins rendering
+  > parameters
+    + renderer - A pointer to this renderer
+
+SIG void : imagePrepared( DzTexture img, String filename )
+  > summary
+    Emitted when the image preparation for img is finished. Derived classes need to make sure to emit this signal at the appropriate times.
+  > parameters
+    + img - A pointer to the DzTexture object for which image preparation is complete.
+    + filename - The path to the prepared image file to be associated with img.
+
+SIG void : IPRRenderHandlerChanged( DzRenderer renderer, iprrenderhandler_dz handler )
+  > summary
+    TODO: Add description.
+
+SIG void : rendererModeChanged( DzRenderer renderer )
+  > summary
+    TODO: Add description.
+
+SIG void : renderFinished( DzRenderer renderer )
+  > summary
+    Emitted when just after the renderer finishes rendering
+  > parameters
+    + renderer - A pointer to this renderer
+
+SIG void : shapeRenderBeginning( shape_dz shape )
+  > summary
+    TODO: Add description.
+
+SIG void : shapeRenderFinished( shape_dz shape )
+  > summary
+    TODO: Add description.

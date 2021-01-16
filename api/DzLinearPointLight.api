@@ -1,0 +1,53 @@
+CLS DzLinearPointLight : DzPointLight
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/linearpointlight_dz
+  > summary
+    A light that emits in all directions from a single point and has fall off start/end controls.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzLinearPointLight()
+  > summary
+    Default Constructor. Creates a new linear point light.
+
+### methods
+
+FUN Number : getFallOffEnd()
+  > returns
+    The distance from the origin of the node where the intensity reaches 0.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getFallOffEndControl()
+  > returns
+    The property that controls the distance from the origin of the node where the intensity reaches 0.
+
+FUN Number : getFallOffStart()
+  > returns
+    The distance from the origin of the node where the intensity begins to decrease.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getFallOffStartControl()
+  > returns
+    The property that controls the distance from the origin of the node where the intensity begins to decrease.
+
+FUN void : setFallOffEnd( Number end )
+  > summary
+    Sets the distance from the origin of the node where the intensity reaches 0.
+  > since
+    4.9.3.145
+  > parameters
+    + end - The distance from the origin to set.
+
+FUN void : setFallOffStart( Number start )
+  > summary
+    Sets the distance from the origin of the node where the intensity begins to decrease.
+  > parameters
+    + start - The distance from the origin to set.
+  > since
+    4.9.3.145

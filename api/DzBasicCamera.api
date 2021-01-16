@@ -1,0 +1,294 @@
+CLS DzBasicCamera : DzCamera
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/basiccamera_dz
+  > summary
+    A basic camera.
+
+### description
+  > summary
+    This is the basic camera implementation for DAZ Studio. It supplies commonly-used features like focal length adjustment and depth of field alteration.
+
+### properties
+
+PRP Number : currentViewHeight
+  > summary
+    Holds the current height of the view. (Read Only)
+
+PRP Number : currentViewWidth
+  > summary
+    Holds the current width of the view. (Read Only)
+
+PRP Boolean : depthOfField
+  > summary
+    Holds whether or not the camera performs depth of field calculations.
+
+PRP Number : fStop
+  > summary
+    Holds the f/stop of the camera.
+
+PRP Boolean : isPerspective
+  > summary
+    Holds whether or the camera is a perspective or orthographic view.
+
+PRP Boolean : useActiveViewport
+  > summary
+    Holds whether or not the local dimensions will use the active viewport when enabled. (since 4.9.3.108)
+
+### constructors
+
+CTR DzBasicCamera( DzCamera.CameraType type=DzCamera.PERSPECTIVE_CAMERA, Boolean isViewCamera=false )
+  > summary
+    Create a camera of the given type.
+  > parameters
+    + type - The type of the camera.
+    + isViewCamera - If true, the camera is a view camera - that is, it only exists as a camera for the purpose of viewing the scene, but is not a member of the scene and is non-animatable. If false, the camera is a normal camera that is a member of the scene.
+  > example
+    // Create a new orthographic camera that looks forward on the Z axis.
+    DzCamera	*cam = new DzBasicCamera( DzCamera::FRONT_CAMERA );
+     
+    // Name the camera and add it to the scene
+    cam->setName( "My Camera" );
+    dzScene->addNode( cam );
+
+### methods
+
+FUN Boolean : applyDimensionsPreset( String preset )
+  > summary
+    Applies the settings in a dimensions preset.
+  > parameters
+    + preset - The name of the preset to retrieve the settings for. An empty string is interpreted to mean “Custom.”
+  > returns
+    if preset was found, otherwise false.
+  > since
+    4.9.3.108
+
+FUN DzVec3 : cursorToRay( Number x, Number y )
+  > summary
+    A ray through the scene for a perspective view.
+  > parameters
+    + x - The x position of the cursor in the viewport.
+    + y - The y position of the cursor in the viewport.
+  > returns
+    A directional vector that defines a ray that intersects the camera's center point.
+
+FUN DzVec3 : cursorToScene( Number x, Number y, Number z )
+  > summary
+    Calculates a location in the scene based on an x, y position in the viewport and distance from the camera.
+  > parameters
+    + x - The x coordinate of the cursor in the viewport.
+    + y - The y coordinate of the cursor in the viewport.
+    + z - The distance from the camera in world space at which to calculate the target point.
+  > returns
+    A positional vector that represents the resulting location in the scene.
+
+FUN DzFloatProperty : getApertureBladeRotationAngleControl()
+  > returns
+    The angle of the aperture blades for the camera.
+  > since
+    4.9.3.121
+
+FUN DzIntProperty : getApertureNumBladesControl()
+  > returns
+    The number of aperture blades for the camera.
+  > since
+    4.9.3.121
+
+FUN DzBoolProperty : getDepthOfFieldChannel()
+  > returns
+    The depth of field property for the camera.
+
+FUN Boolean : getDimensionsPreset( String preset, DzSettings settings )
+  > summary
+    Retrieves the settings of a dimensions preset.
+  > parameters
+    + preset - The name of the preset to retrieve the settings for. An empty string is interpreted to mean “Custom.”
+    + settings - The settings object that the settings will be assigned to.
+  > returns
+    if preset was found, otherwise false.
+  > since
+    4.9.3.108
+
+FUN DzBoolProperty : getDisplayPersistenceChannel()
+  > returns
+    The Display Persistence property for the camera.
+
+FUN DzColorProperty : getDofColorChannel()
+  > returns
+    The DOF Color property for the camera.
+
+FUN DzColorProperty : getDofOverlayColorChannel()
+  > returns
+    The DOF Overlay Color property for the camera.
+
+FUN DzFloatProperty : getDofOverlayOpacityChannel()
+  > returns
+    The DOF Overlay Opacity property for the camera.
+
+FUN DzBoolProperty : getDofVisibilityChannel()
+  > returns
+    The DOF Visibility property for the camera.
+
+FUN DzBoolProperty : getFarDofVisibilityChannel()
+  > returns
+    The Far DOF Visibility property for the camera.
+
+FUN DzFloatProperty : getFocalDistChannel()
+  > returns
+    The depth of field property for this camera.
+
+FUN DzFloatProperty : getFocalLengthChannel()
+  > returns
+    The focal length property for this camera.
+
+FUN DzFloatProperty : getFocalPointScaleChannel()
+  > returns
+    The Focal Point Scale property for the camera.
+
+FUN DzColorProperty : getFovColorChannel()
+  > returns
+    The FOV Color property for the camera.
+
+FUN DzFloatProperty : getFovLengthChannel()
+  > returns
+    The FOV Length property for the camera.
+
+FUN DzFloatProperty : getFovOpacityChannel()
+  > returns
+    The FOV Opacity property for the camera.
+
+FUN DzFloatProperty : getFrameWidthChannel()
+  > returns
+    The frame size property for this camera.
+  > since
+    4.6.4.67
+
+FUN DzFloatProperty : getFStopChannel()
+  > returns
+    The f/stop property for this camera.
+
+FUN DzFloatProperty : getHeadlampIntensityControl()
+  > returns
+    The Headlamp Intensity property for the camera.
+  > since
+    4.7.1.94
+
+FUN DzFloatProperty : getLensDistortionK1Control()
+  > returns
+    The camera lens k1 for the camera.
+  > seealso
+    getLensDistortionTypeControl()
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensDistortionK2Control()
+  > returns
+    The camera lens k2 for the camera.
+  > seealso
+    getLensDistortionTypeControl()
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensDistortionK3Control()
+  > returns
+    The camera lens k3 for the camera.
+  > seealso
+    getLensDistortionTypeControl()
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensDistortionScaleControl()
+  > returns
+    The camera distortion scale for the camera.
+  > since
+    4.9.3.121
+
+FUN DzEnumProperty : getLensDistortionTypeControl()
+  > returns
+    The camera lens distortion type for the camera.
+    	"none" ? no distortion.
+     
+    	"spherical" ? Conventional spherical camera mapping.
+     
+    	"cylindrical" ? Conventional cylindrical camera mapping.
+     
+    	"poly3" ? Third order radial distortion model: rd = ru * (1 - k1 + k1 * ru2)
+     
+    	"inv_poly3" ? Third order inverse radial distortion model: ru = rd * (1 - k1 + k1 * rd2)
+     
+    	"poly5" ? Fifth order radial distortion model: rd = ru * (1 + k1 * ru2 + k2 * ru4)
+     
+    	"inv_poly5" ? Fifth order inverse radial distortion model: ru = rd * (1 + k1 * rd2 + k2 * rd4)
+     
+    	"ptlens" ? Fourth order radial distortion model: rd = ru * (1 - k1 - k2 - k3 + k1 * ru + k2 * ru2 + k3 * ru3)
+     
+    	"inv_ptlens" ? Fourth order inverse radial distortion model: ru = rd * (1 - k1 - k2 - k3 + k1 * rd + k2 * rd2 + k3 * rd3)
+  > seealso
+    getLensDistortionK1Control()
+    getLensDistortionK2Control()
+    getLensDistortionK3Control()
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensRadialBiasControl()
+  > returns
+    The camera lens radial bias property for the camera.
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensShiftXControl()
+  > returns
+    The camera lens shift x property for the camera in mm.
+  > since
+    4.9.3.121
+
+FUN DzFloatProperty : getLensShiftYControl()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatProperty : getLensStereoOffsetControl()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatProperty : getLensThicknessControl()
+  > returns
+    The camera lens thickness property for the camera. Thickness is in mm.
+  > since
+    4.8.0.16
+
+FUN DzBoolProperty : getNearDofVisibilityChannel()
+  > returns
+    The Near DOF Visibility property for the camera.
+
+FUN DzFloatProperty : getSightLineOpacityChannel()
+  > returns
+    The Sight Line Opacity property for the camera.
+
+FUN Boolean : isAtDefaultSceneCameraValues()
+  > returns
+    true if this camera is at default scene camera values, otherwise false.
+
+FUN Boolean : isDefaultSceneCamera()
+  > returns
+    true if this camera is the default scene camera, otherwise false.
+
+FUN void : setIsDefaultSceneCamera( Boolean yesNo )
+  > parameters
+    + yesNo - If true, sets this camera as the default scene camera.
+  > attention
+    Assigning more than one camera as the default scene camera will not be preserved across save/load sequences.
+
+FUN void : setType( DzCamera.CameraType type )
+  > summary
+    Changes the type of the camera.
+  > parameters
+    + type - The new type for the camera.
+
+### signals
+
+SIG void : depthOfFieldChanged()
+  > summary
+    Emitted when the camera's depth of field setting has changed.
+
+SIG void : fStopChanged( DzTimeRange range )
+  > summary
+    Emitted when the camera's f-Stop setting has changed.

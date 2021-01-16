@@ -1,0 +1,37 @@
+CLS QDesktopWidget : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/desktopwidget_q
+  > summary
+    DAZScript accessible portions of the Qt native QDesktopWidget class.
+
+### description
+  > summary
+    This pages exists in order to indicate the DAZScript accessible properties and signals of the Qt native QDesktopWidget class.
+
+### properties
+
+PRP Number : primaryScreen
+  > summary
+    Holds the index of the screen that is configured to be the primary screen on the system.
+
+PRP Number : screenCount
+  > summary
+    Holds the number of screens currently available on the system.
+
+PRP Boolean : virtualDesktop
+  > summary
+    Holds if the system manages the available screens in a virtual desktop.
+
+### signals
+
+SIG void : resized( Number screen )
+  > summary
+    Emitted when the size of screen changes.
+
+SIG void : screenCountChanged( Number newCount )
+  > summary
+    Emitted when the number of screens changes to newCount.
+
+SIG void : workAreaResized( Number screen )
+  > summary
+    Emitted when the work area available on screen changes.

@@ -1,0 +1,36 @@
+CLS DzShaderDescription : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shaderdescription_dz
+  > summary
+    Describes the properties of a RenderMan shader.
+
+### description
+  > summary
+    DzShaderDescription contains information about a RenderMan shader - this includes the type of the shader, and a list of its parameters.
+
+### enumerations
+
+ENU DzShaderType
+  > summary
+    Enumerated types of RenderMan shaders.
+  + SurfaceShader - Surface shader.
+  + LightShader - Light Shader.
+  + DisplacementShader - Displacement Shader.
+  + VolumeShader - Volume Shader.
+  + ImageShader - Image Shader.
+
+### properties
+
+PRP DzShaderDescription.DzShaderType : type
+  > summary
+    The type of the shader
+
+### methods
+
+FUN Number : getNumParameters()
+  > returns
+    The number of parameters in the shader.
+
+FUN DzShaderParameter : getParameter( Number i )
+  > returns
+    The i'th parameter in the shader.

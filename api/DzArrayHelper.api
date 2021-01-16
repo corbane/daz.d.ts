@@ -1,0 +1,37 @@
+CLS DzArrayHelper : QObject
+  > summary
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/arrayhelper_dz
+    Convenience object to make working with an Array object easier.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzArrayHelper()
+  > summary
+    Default Constructor
+
+### methods
+
+FUN Array : addToArray<T>( Array<T> list, T value )
+  > parameters
+    + list - The Array to append object to
+    + value - The Object to append to list
+  > returns
+    A copy of list with object appended if object did not already exist in list
+
+FUN Number : isInArray<T>( Array<T> list, T value )
+  > parameters
+    + list - The Array to check for object
+    + value - The Object to check list for
+  > returns
+    The index into list if object was found, otherwise -1
+
+FUN Number : isInArrayByName<T>( Array<T> list, T obj )
+  > parameters
+    + list - The Array to check for object
+    + value - The Object to check list for; using the objects .name property
+  > returns
+    The index into list if object was found, otherwise -1

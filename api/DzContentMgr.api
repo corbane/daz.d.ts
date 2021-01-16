@@ -1,0 +1,887 @@
+CLS DzContentMgr : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/contentmgr_dz
+  > summary
+    Content library (folder & file) manager.
+
+### description
+  > summary
+    The manager that is responsible for all the content folder & file trees that are accessible from the content library.
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Do not create an instance of this class, rather request the instance from DzApp via DzApp::getContentMgr().
+
+### enumerations
+
+ENU DirectoryTypes
+  > summary
+    The types of directories that can be specified when working with this manager.
+  + NativeDirs - Represents the directories that are mapped and expected to contain files in the DAZ Studio native file format.
+  + PoserDirs - Represents the directories that are mapped and expected to contain files in the Poser file formats.
+  + ImportDirs - Represents the directories that are mapped and expected to contain files in formats supported by the various importers a user has installed (with the exception of the Poser format importer - see PoserDirs).
+  + BuiltInDirs - Represents the built-in directories that are expected to contain files in compatible formats.
+  + MDLDirs - Represents the built-in MDL directories and the directories that are expected to contain files in the MDL format. Since: 4.8.1.50
+  + CloudDB - Represents the directories managed by the database, a given storeId_productId subdirectory, within a CloudDir directory. Since: 4.9.0.46
+  + CloudDir - Represents the mapped cloud directory and any ./data/cloud subdirectory located within NativeDirs and PoserDirs. Since: 4.9.0.46
+  + NativeAndBuiltInDirs - Represents the directory types defined by NativeDirs and BuiltInDirs (typically used to provide legacy support for methods that now use this enum).
+  + CloudNativeAndBuiltInDirs - Represents the directory types defined by NativeDirs and BuiltInDirs, CloudDir, and CloudDB.
+  + AllLocalNonCloudDirs - Represents the directory types defined by NativeDirs and BuiltInDirs, PoserDirs, ImportDirs, and MDLDirs. Since: 4.9.0.51
+  + AllLocalDirs - Represents the directory types defined by NativeDirs and BuiltInDirs, PoserDirs, ImportDirs, MDLDirs, and CloudDir. Since: 4.9.0.51
+  + AllDirs - Represents all directory types except those defined by MDLDirs, CloudDir and CloudDB. The “all” prior to 4.8.
+  + AllDirsAndCloud - Represents all directory types. Since: 4.9.0.51
+
+### properties
+
+PRP Boolean : autoRefresh
+  > summary
+    Holds whether or not the content manager automatically refreshes itself.
+
+PRP Number : maxRecentFiles
+  > summary
+    Holds the maximum length of the File > Open Recent submenu, in the main menu bar.
+
+PRP String : newScene
+  > summary
+    Holds the path of the scene that will load when the scene is cleared (if any).
+  > since
+    4.9.3.68
+
+PRP Boolean : showBuiltInContent
+  > summary
+    Holds whether or not the built-in content is shown in the content panes.
+
+PRP String : startupScene
+  > summary
+    Holds the path of the scene that will load on startup (if any).
+
+### statics
+
+STA String : getCloudPathPrefix()
+  > returns
+    Prefix where cloud places installed products.
+  > since
+    4.9.0.46
+
+STA String : getContentPath( DzNode node )
+  > summary
+    Checks the given node for a source file data item, and returns the path of the source file if one is found.
+  > parameters
+    + node - The scene node to get the source file of.
+  > returns
+    The path of the source file for the node if the node contains a source file data item, otherwise an empty string.
+
+### methods
+
+FUN void : addContentDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Adds a native content directory to the list.
+  > parameters
+    + directory - The path of the native content directory to add.
+    + saveSetting - If true, causes the native content directory mappings to be saved immediately instead of when the application is closed.
+
+FUN void : addImportDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Adds an import directory to the list.
+  > parameters
+    + directory - The name of the directory to add.
+    + saveSetting - If true, causes the Import directory mappings to be saved immediately instead of when the application is closed.
+
+FUN void : addMDLDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Adds a directory where MDL files can reside to the list.
+  > parameters
+    + directory - The name of the directory to add.
+    + saveSetting - If true, causes the MDL directory mappings to be saved immediately instead of when the application is closed.
+  > since
+    4.8.0.23
+
+FUN void : addPoserDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Adds a Poser import content directory to the list.
+  > parameters
+    + directory - The Poser content directory to add.
+    + saveSetting - If true, causes the Poser directory mappings to be saved immediately instead of when the application is closed.
+  > attention
+    Poser import paths are folders one level above any Poser Runtime folder.
+
+FUN void : addRecentFile( String filename )
+  > summary
+    Adds a file to the list of recent files.
+  > parameters
+    + filename - The path of the file to add.
+
+FUN void : clearRecentFileList()
+  > summary
+    Clears the list of recent files.
+
+FUN Boolean : contentDirectoryIsMapped( String dirPath )
+  > summary
+    Attempts to locate dirPath among the mapped native content directories.
+  > parameters
+    + dirPath - The directory path to locate.
+  > returns
+    true if the directory is mapped as a native content directory, otherwise false.
+  > since
+    4.5.0.124
+
+FUN Boolean : doContentSearch()
+  > summary
+    Displays a dialog to the user to perform a Poser content search on the local machine.
+  > returns
+    true if the user accepted and a search was performed, otherwise false.
+
+FUN void : doDirNumCheck()
+  > summary
+    Causes the content manager to check the number of mapped content directories, and display a warning to the user if it is excessive.
+
+FUN void : fileCreated( String filename )
+  > summary
+    Notifies the content manager that a new content file has been saved.
+
+FUN DzContentFolder : findBaseDirectory( DzContentMgr.DirectoryTypes dirTypes, String path )
+  > summary
+    Given an absolute path, this method traverses the content directories and attempts to find the base (mapped) folder.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + path - The absolute path.
+  > returns
+    The given content folder if successful, otherwise NULL.
+  > since
+    4.8.1.51
+
+FUN DzContentFolder : findBaseDirectory( String path, Boolean useImportFolders )
+  > summary
+    Given an absolute path, this method traverses the content directories and attempts to find the base (mapped) folder.
+  > parameters
+    + path - The absolute path.
+    + useImportFolders - If true, the import folders will also be searched.
+  > returns
+    The given content folder if successful, otherwise NULL.
+
+FUN String : findFile( String partialPath, DzContentMgr.DirectoryTypes dirTypes=DzContentMgr.DirectoryTypes.CloudNativeAndBuiltInDirs )
+  > summary
+    Given a partial path (a file path that is relative to a content directory) this function traverses all folders of the specified mapped directory types in the following order (NativeDirs, PoserDirs, ImportDirs, BuiltInDirs)
+  > parameters
+    + partialPath - The relative path to the file to find.
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+  > returns
+    The full path to the file if successful, otherwise an empty string.
+  > seealso
+    DirectoryTypes
+
+FUN String : findSourcePathForNode( DzNode sceneNode )
+  > summary
+    Finds the source path for a node in the scene.
+  > parameters
+    + sceneNode - The node to find the source path for.
+  > returns
+    The source path of the node.
+
+FUN String : getAbsolutePath( DzContentMgr.DirectoryTypes dirTypes, String relativePath, String preferredPath=“” )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped content directory.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativePath - The relative path to find.
+    + preferredPath - (Optional) If provided, first directory to check for.
+  > returns
+    The absolute path for the file if it can be found, otherwise an empty string.
+  > since
+    4.8.1.51
+
+FUN String : getAbsolutePath( String relativePath, Boolean useImportFolders, String preferredPath=“” )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped content directory.
+  > parameters
+    + relativePath - The relative path to find.
+    + useImportFolders - If true, the mapped import folders will also be searched.
+    + preferredPath - (Optional) If provided, first directory to check for.
+  > returns
+    The absolute path for the file if it can be found, otherwise an empty string.
+
+FUN Array : getAbsolutePaths( DzContentMgr.DirectoryTypes dirTypes, String relativePath )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped content directory.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativePath - The relative path to find.
+  > returns
+    A list of absolute paths for the file if it can be found, otherwise an empty list.
+  > since
+    4.8.1.51
+
+FUN Array : getAbsolutePaths( String relativePath, Boolean useImportFolders )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped directory.
+  > parameters
+    + relativePath - The relative path to find.
+    + useImportFolders - If true, the mapped import folders will also be searched.
+  > returns
+    A list of absolute paths for the file if it can be found, otherwise an empty list.
+
+FUN DzUri : getAbsoluteUri( DzContentMgr.DirectoryTypes dirTypes, String relativePath, String preferredPath=“” )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped content directory.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativePath - The relative path to find.
+    + preferredPath - (Optional) If provided, first directory to check for.
+  > returns
+    The URI for the file if it can be found, otherwise an empty URI.
+  > since
+    4.9.0.38
+
+FUN DzContentFolder : getBuiltInContentDirectory()
+  > returns
+    The built-in content directory used for content and utilities that are shipped with the application.
+
+FUN String : getBuiltInContentDirectoryPath()
+  > returns
+    The path of the built-in content directory used for content and utilities that are shipped with the application.
+
+FUN DzContentFolder : getBuiltInMDLDirectory( Number which )
+  > parameters
+    + which - The index of the built in MDL directory to return.
+  > returns
+    The given built in MDL directory.
+  > since
+    4.8.0.23
+
+FUN String : getBuiltInMDLDirectoryPath( Number which )
+  > parameters
+    + which - The index of the built in MDL directory to return the path of.
+  > returns
+    The path of the given MDL directory.
+  > since
+    4.8.0.23
+
+FUN String : getCloudAbsolutePath( String relativePath )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for the mapped cloud directory.
+  > parameters
+    + relativePath - The relative path to find.
+  > returns
+    The absolute path for the file, or an empty string if the file cannot be found.
+  > since
+    4.9.0.33
+
+FUN DzContentFolder : getCloudContentDirectory()
+  > returns
+    The directory used for content that is downloaded and installed through the application.
+  > since
+    4.9.0.33
+
+FUN String : getCloudContentDirectoryPath()
+  > returns
+    The path of the content directory used for content and utilities that are downloaded and installed through the application.
+  > since
+    4.9.0.33
+
+FUN String : getCloudRelativePath( String absolutePath )
+  > summary
+    Attempts to shorten absolutePath to a path that is relative to the cloud directory. If the path cannot be shortened, the original string is returned.
+  > parameters
+    + absolutePath - The path to make relative.
+  > returns
+    A relative path to the file if one can be made, otherwise the original path.
+  > since
+    4.9.0.33
+
+FUN DzContentFolder : getContentDirectory( Number which )
+  > parameters
+    + which - The index of the content directory to be returned.
+  > returns
+    The given content directory.
+
+FUN String : getContentDirectoryPath( Number which )
+  > parameters
+    + which - The index of the content directory to return the path of.
+  > returns
+    The path of the given content directory.
+
+FUN DzContentReplaceMgr : getContentReplaceMgr()
+  > returns
+    The content replace manager that belongs to the DzContentMgr.
+
+FUN String : getDefaultContentDir()
+  > returns
+    The path of the default content directory.
+
+FUN Array : getDirectoryContentsUrisList( DzContentMgr.DirectoryTypes dirTypes, Array relativeDirPaths, Array fileSuffixes )
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativeDirPaths - The relative directory paths to list from.
+    + fileSuffixes - The list of filename suffixes to filter by.
+  > returns
+    A list of the URIs for the files in the specified relative paths.
+  > since
+    4.9.0.38
+
+FUN String : getImportAbsolutePath( String relativePath )
+  > summary
+    Attempts to locate a file with the given relative path by pre-pending the path information for each mapped import directory, finally falling back to the Built-In content directory.
+  > parameters
+    + relativePath - The relative path to find.
+  > returns
+    The absolute path for the file, or an empty string if the file cannot be found.
+
+FUN DzContentFolder : getImportDirectory( Number which )
+  > parameters
+    + which - The index of the import directory to return.
+  > returns
+    The given inport directory.
+
+FUN String : getImportDirectoryPath( Number which )
+  > parameters
+    + which - The index of the import directory to return the path of.
+  > returns
+    The path of the given import directory.
+
+FUN Array : getImportFileExtensions()
+  > returns
+    A list of the extensions for files that can be imported.
+  > attention
+    Specifically excludes Poser file extensions even though they are technically imported.
+  > seealso
+    getPoserFileExtensions()
+  > since
+    4.9.4.64
+
+FUN String : getMappedPath( String path, Boolean useImportFolders, Boolean isRelative )
+  > summary
+    Attempts to extract the mapped directory portion of path.
+  > parameters
+    + path - An absolute or relative path to find a corresponding content path for.
+    + useImportFolders - If true, the import folders will also be searched.
+    + isRelative - If true, path is treated as a relative path. If false, path is treated as an absolute path.
+  > returns
+    The portion of the absolute path that matches a mapped content directory, or an empty string if no match was found.
+
+FUN String : getMappedPath( DzContentMgr.DirectoryTypes dirTypes, String path, Boolean isRelative )
+  > summary
+    Attempts to extract the mapped directory portion of path.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search
+    + path - An absolute or relative path to find a corresponding content path for.
+    + isRelative - If true, path is treated as a relative path. If false, path is treated as an absolute path.
+  > returns
+    The portion of the absolute path that matches a mapped content directory, or an empty string if no match was found.
+
+FUN String : getMDLAbsolutePath( String relativePath )
+  > summary
+    Attempts to locate a file with the given relative path by pre-pending the path information for each mapped MDL directory, as well as the built-in MDL directories, finally falling back to the built-in content directory.
+  > parameters
+    + relativePath - The relative path to find.
+  > returns
+    The absolute path for the file, or an empty string if the file cannot be found.
+
+FUN DzContentFolder : getMDLDirectory( Number which )
+  > parameters
+    + which - The index of the MDL directory to return.
+  > returns
+    The given MDL directory.
+  > since
+    4.8.0.23
+
+FUN String : getMDLDirectoryPath( Number which )
+  > parameters
+    + which - The index of the MDL directory to return the path of.
+  > returns
+    The path of the given MDL directory.
+  > since
+    4.8.0.23
+
+FUN String : getMDLRelativePath( String absolutePath )
+  > summary
+    Attempts to shorten absolutePath to a path that is relative to one of the mapped MDL directories. If the path cannot be shortened, the original string is returned.
+  > parameters
+    + absolutePath - The path to make relative.
+  > returns
+    A relative path to the file if one can be made, otherwise the original path.
+  > since
+    4.8.0.35
+
+FUN String : getNativeAbsolutePath( String relativePath )
+  > summary
+    Attempts to locate relativePath by pre-pending the path information for each mapped native directory, finally falling back to the Built-In content directory.
+  > parameters
+    + relativePath - The relative path to find.
+  > returns
+    The absolute path for the file, or an empty string if the file cannot be found.
+
+FUN Array : getNativeBaseUserFacingExcludedDirs()
+  > returns
+    A list of the folder names that are excluded when building the native user-facing folder structure.
+  > since
+    4.9.4.64
+
+FUN Array : getNativeFileExtensions()
+  > returns
+    A list of the native file extensions.
+  > since
+    4.9.4.64
+
+FUN Number : getNumBuiltInMDLDirectories()
+  > returns
+    The number of content directories for imported content.
+  > since
+    4.8.0.23
+
+FUN Number : getNumContentDirectories()
+  > returns
+    The number of content directories.
+
+FUN Number : getNumImportDirectories()
+  > returns
+    The number of content directories for imported content.
+
+FUN Number : getNumMDLDirectories()
+  > returns
+    The number of content directories for imported content.
+  > since
+    4.8.0.23
+
+FUN Number : getNumPoserDirectories()
+  > returns
+    The number of stored paths to Poser content directories.
+
+FUN String : getPoserAbsolutePath( String relativePath )
+  > summary
+    Attempts to locate a file with the given relative path by pre-pending the path information for each mapped Poser directory, finally falling back to the Built-In content directory.
+  > parameters
+    + relativePath - The relative path to find.
+  > returns
+    The absolute path for the file, or an empty string if the file cannot be found.
+
+FUN Array : getPoserBaseUserFacingDirs()
+  > returns
+    A list of the folder names within a Poser runtime folder that are considered user-facing.
+  > since
+    4.9.4.64
+
+FUN DzContentFolder : getPoserDirectory( Number which )
+  > parameters
+    + which - The index of the Poser directory to return.
+  > returns
+    The given Poser content directory, otherwise null.
+
+FUN String : getPoserDirectoryPath( Number which )
+  > parameters
+    + which - The index of the Poser directory to return the path of.
+  > returns
+    The path of the given Poser content directory, otherwise an empty string.
+
+FUN Array : getPoserFileExtensions()
+  > returns
+    A list of the Poser file extensions.
+  > since
+    4.9.4.64
+
+FUN Array : getRecentFileList()
+  > returns
+    A list of recent files
+
+FUN String : getRelativePath( DzContentMgr.DirectoryTypes dirTypes, String absolutePath )
+  > summary
+    Attempts to shorten absolutePath to a path that is relative to one of the mapped content directories. If the path cannot be shortened, the original path is returned.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + absolutePath - The path to make relative.
+  > returns
+    A relative path to the file if one can be made, otherwise absolutePath.
+  > since
+    4.8.1.51
+
+FUN String : getRelativePath( String absolutePath, Boolean useImportFolders )
+  > summary
+    Attempts to shorten absolutePath to a path that is relative to one of the mapped content directories. If the path cannot be shortened, the original string is returned.
+  > parameters
+    + absolutePath - The path to make relative.
+    + useImportFolders - If true, the mapped import folders will also be searched.
+  > returns
+    A relative path to the file if one can be made, otherwise absolutePath.
+
+FUN Array : getRelativePaths( DzContentMgr.DirectoryTypes dirTypes, String absolutePath )
+  > summary
+    Attempts to shorten absolutePath to a list of paths that are relative to one of the mapped content directories.
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + absolutePath - The path to make relative.
+  > returns
+    A list of relative paths to the file if one can be made, otherwise absolutePath.
+  > since
+    4.8.1.51
+
+FUN Array : getRelativePaths( String absolutePath, Boolean useImportFolders )
+  > summary
+    Attempts to shorten absolutePath to a list of paths that are relative to one of the mapped content directories.
+  > parameters
+    + absolutePath - The path to make relative.
+    + useImportFolders - If true, the mapped import folders will also be searched.
+  > returns
+    A list of relative paths to the file if one can be made, otherwise an empty list.
+
+FUN Boolean : importDirectoryIsMapped( String dirPath )
+  > summary
+    Attempts to locate dirPath among the mapped import directories.
+  > parameters
+    + dirPath - The directory path to locate.
+  > returns
+    true if the directory is mapped as an import directory, otherwise false.
+  > since
+    4.5.0.124
+
+FUN Boolean : importFile( String path )
+  > summary
+    Imports the file at the given path. A companion file (a DAZ Script file with the same name as the file being imported, or a DUF file if a DAZ Script does not exist) will be executed if one exists. This function should only be used in special circumstances. Use openFile() instead.
+  > parameters
+    + filename - The path to the file to import.
+  > returns
+    true if the file was imported successfully, otherwise false.
+  > seealso
+    openFile()
+
+FUN Boolean : isDirectoryMapped( String directory )
+  > parameters
+    + directory - The path of the directory to check.
+  > returns
+    true if directory is mapped, otherwise false.
+
+FUN Boolean : isUserFacingDirectoryPath( DzContentMgr.DirectoryTypes dirTypes, String relativePath )
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativePath - The relative path to find.
+  > returns
+    true if relativePath is considered “user facing” for the given directory type.
+  > since
+    4.9.4.64
+
+FUN Boolean : isUserFacingFilePath( DzContentMgr.DirectoryTypes dirTypes, String relativePath )
+  > parameters
+    + dirTypes - Bitwise OR of flags for which directory types to search.
+    + relativePath - The relative path to find.
+  > returns
+    true if relativePath is considered “user facing” for the given directory type.
+  > since
+    4.9.4.64
+
+FUN Boolean : loadAsset( DzAsset asset )
+  > summary
+    Loads an asset as a new scene.
+  > parameters
+    + asset - The asset to load.
+  > returns
+    true if asset is loaded successfully, otherwise false. (since 4.9.3.68)
+  > since
+    4.9.3.41
+
+FUN Boolean : loadAsset( DzAsset asset, Boolean merge )
+  > summary
+    Loads an asset into the scene.
+  > parameters
+    + asset - The asset to load.
+    + merge - If true, combine the new asset with the existing scene. Othererwise, replace the existing scene with the new asset.
+  > returns
+    true if asset is loaded successfully, otherwise false. (since 4.9.3.68)
+  > since
+    4.9.3.41
+
+FUN Boolean : mdlDirectoryIsMapped( String dirPath )
+  > summary
+    Attempts to locate dirPath among the mapped MDL directories.
+  > parameters
+    + dirPath - The directory path to locate.
+  > returns
+    true if the directory is mapped as a MDL directory, otherwise false.
+  > since
+    4.8.0.23
+
+FUN Boolean : mergeFiles( Array filenames )
+  > summary
+    Merges a list of files, either as native files or imported files, by calling openNativeFile() or importFile() based on the file extension. For file imports, a companion file (a DAZ Script file with the same name as the file being imported, or a DUF file if a DAZ Script does not exist) will be executed if one exists.
+  > parameters
+    + filenames - A list of names of the files to merge into the current scene.
+  > returns
+    true if the file was loaded successfully, otherwise false.
+
+FUN Boolean : openFile( String filename, Boolean merge=true )
+  > summary
+    Loads the file, either as a native file or an imported file, by calling openNativeFile() or importFile() based on the file extension. For file imports, a companion file (a DAZ Script file with the same name as the file being imported, or a DUF file if a DAZ Script does not exist) will be executed if one exists.
+  > parameters
+    + filename - The name of the file to load.
+    + merge - True to merge file, false to open it (applies only for native files).
+  > returns
+    true if the file was loaded successfully, otherwise false.
+
+FUN Boolean : openNativeFile( String filename, Boolean isMerge=true )
+  > summary
+    Loads a native file into the scene. This function should only be used in special circumstances. Use openFile() instead.
+  > parameters
+    + filename - The path to the native file to open.
+    + isMerge - If true, the file is merged into the scene. If false, the file is loaded as the scene.
+  > returns
+    true if the file was loaded successfully, otherwise false.
+  > seealso
+    openFile()
+
+FUN Boolean : openNativeUri( DzUri uri, String filename=“”, Boolean isMerge=true )
+  > summary
+    Loads a native file into the scene. This function should only be used in special circumstances. Use openFile() instead.
+  > parameters
+    + uri - The URI of the native file to open. This can be empty if a filename is supplied.
+    + filename - The path to the native file to open. This can be empty if a valid URI is supplied.
+    + isMerge - If true, the file is merged into the scene. If false, the file is loaded as the scene.
+  > returns
+    true if the file was loaded successfully, otherwise false.
+  > seealso
+    openFile()
+
+FUN Boolean : openUri( DzUri uri, String filename=“”, Boolean merge=true )
+  > summary
+    Loads the file, either as a native file or an imported file, by calling openNativeFile() or importFile() based on the file extension. For file imports, a companion file (a DAZ Script file with the same name as the file being imported, or a DUF file if a DAZ Script does not exist) will be executed if one exists.
+  > parameters
+    + uri - The URI of the file to load. This can be empty if a valid filename is supplied.
+    + filename - The name of the file to load. This can be empty if a valid URI is supplied.
+    + merge - true to merge the file, false to open it (applies only to native files).
+  > returns
+    true if the file was loaded successfully, otherwise false.
+
+FUN Boolean : poserDirectoryIsMapped( String dirPath )
+  > summary
+    Attempts to locate dirPath path among the mapped Poser content directories.
+  > parameters
+    + dirPath - The directory path to locate.
+  > returns
+    true if the directory is mapped as a Poser directory, otherwise false.
+
+FUN void : refresh( Boolean reloadIcons=false )
+  > summary
+    Refreshes any currently loaded content directories. Call this after any operation that makes changes to the file system, e.g. saving or deleting files, etc.
+  > parameters
+    + reloadIcons - If true, all file icons will be reloaded - good for updating the current content directory when a file has been saved over, etc.
+
+FUN DzError : reloadAssetsFromSource( DzNode sceneNode, DzSettings settings, String srcFilePath=“” )
+  > summary
+    Causes assets for a given node in the scene to be reloaded, using the given settings, from source files at the given path.
+  > parameters
+    + sceneNode - TODO
+    + settings - TODO
+    + srcFilePath - TODO
+  > returns
+
+FUN Boolean : reloadSceneAssetsFromSource( DzSettings settings )
+  > summary
+    Causes the assets for all nodes in the scene to be reloaded from their respective source files.
+  > parameters
+    + settings - TODO
+  > returns
+
+FUN void : removeAllContentDirectories()
+  > summary
+    Removes all native content mapped directories.
+
+FUN void : removeAllImportDirectories()
+  > summary
+    Removes all import content directory mappings from the list.
+
+FUN void : removeAllMDLDirectories()
+  > summary
+    Removes all MDL directory mappings from the list.
+  > since
+    4.8.0.23
+
+FUN void : removeAllPoserDirectories()
+  > summary
+    Removes all Poser import content directory mappings from the list.
+
+FUN Boolean : removeContentDirectory( String directory )
+  > summary
+    Removes a navtive content directory mapping from the list.
+  > parameters
+    + directory - The path of the native content directory to remove.
+  > returns
+    true if the directory was removed, false if the given directory is not in the list.
+
+FUN Boolean : removeImportDirectory( String directory )
+  > summary
+    Removes an import content directory mapping from the list.
+  > parameters
+    + directory - The path of the import content directory to remove.
+  > returns
+    true if the directory was removed, false if the given directory is not in the list.
+
+FUN Boolean : removeMDLDirectory( String directory )
+  > summary
+    Removes a MDL directory mapping from the list.
+  > parameters
+    + directory - The path of the MDL directory to remove.
+  > returns
+    true if the directory was removed, false if the given directory is not in the list.
+  > since
+    4.8.0.23
+
+FUN Boolean : removePoserDirectory( String directory )
+  > summary
+    Removes a Poser import content directory mapping from the list.
+  > parameters
+    + directory - The path of the Poser import content directory to remove.
+  > returns
+    true if the directory was removed, false if the given directory is not in the list.
+
+FUN void : saveAllMappedDirectories()
+  > summary
+    Saves all currently mapped directories to the registry.
+
+FUN void : setCheckCompatibilityOn( Boolean useCheckCompatibility )
+  > summary
+    Deprecated
+    This function is provided to keep old source working. This function does nothing.
+
+FUN void : setCloudContentDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Sets the directory for content and utilities downloaded and installed through the application.
+  > parameters
+    + directory - The path of the directory to add.
+    + saveSetting - Whether or not to save the setting immediately or wait until the application exits.
+  > since
+    4.9.0.33
+
+FUN void : setContentDirectories( Array directories, Boolean saveSettings=true )
+  > summary
+    Sets the list of directories for native format files.
+  > parameters
+    + directories - The list of directory paths to set.
+    + saveSettings - Whether or not to save the settings immediately or wait until the application exits.
+  > since
+    4.9.0.35
+
+FUN void : setImportDirectories( Array directories, Boolean saveSettings=true )
+  > summary
+    Sets the list of directories for other import format files.
+  > parameters
+    + directories - The list of directory paths to set.
+    + saveSettings - Whether or not to save the settings immediately or wait until the application exits.
+  > since
+    4.9.0.35
+
+FUN void : setPoserDirectories( Array directories, Boolean saveSettings=true )
+  > summary
+    Sets the list of directories for Poser format files.
+  > parameters
+    + directories - The list of directory paths to set.
+    + saveSettings - Whether or not to save the settings immediately or wait until the application exits.
+  > since
+    4.9.0.35
+
+FUN void : setUseDatabaseSearch( Boolean useDatabase )
+  > summary
+    Sets whether or not to use the database.
+  > parameters
+    + useDatabaseSearch - If true, turns database use on, if false, turns database use off.
+
+FUN Boolean : shouldMerge( String filename )
+  > summary
+    Given the filename, determines if the file should be treated as a merge or an open when loaded. This is determined first by content type. If that does not exist and the file is a .duf it will attempt to retrieve the type from inside the file.
+  > parameters
+    + filename - The name of the file to check.
+  > returns
+    true if the file should be merged, otherwise false.
+
+FUN Boolean : usingCheckCompatibility()
+  > summary
+    Deprecated
+    This function is provided to keep old source working. This function does nothing and always returns false.
+
+FUN Boolean : usingDatabaseSearch()
+  > returns
+    true if database use is turned on, otherwise false.
+
+### signals
+
+SIG void : autoRefreshChanged( Boolean onOff )
+  > summary
+    Emitted when the enabled state of the auto refresh has changed
+  > parameters
+    + onOff - The new state of auto refresh.
+
+SIG void : cloudContentDirectoryChanged()
+  > summary
+    Emitted when the cloud content directory has changed.
+
+SIG void : contentDirectoryListChanged()
+  > summary
+    Emitted when a content directory is added or removed.
+
+SIG void : folderTreeChanged()
+  > summary
+    Emitted when the currently loaded tree of folders has changed and needs to be rebuilt. Usually a result of a call to refresh(), or when one of the content directory lists has changed.
+
+SIG void : importDirectoryListChanged()
+  > summary
+    Emitted when an import directory is added or removed.
+
+SIG void : loadScriptFinished()
+  > summary
+    Emitted when the loading of a script has failed, or when the execution of a script has finished or failed.
+  > since
+    4.6.4.62
+
+SIG void : loadScriptStarting()
+  > summary
+    Emitted when the loading of a script is starting.
+  > since
+    4.6.2.103
+
+SIG void : mdlDirectoryListChanged()
+  > summary
+    Emitted when a MDL directory is added or removed.
+
+SIG void : newFileCreated( String filename )
+  > summary
+    Emitted when a new content file has been created.
+
+SIG void : onNewSceneChanged( String filename )
+  > summary
+    Emitted when the file that is loaded on 'new' has been changed.
+
+SIG void : poserDirectoryListChanged()
+  > summary
+    Emitted when a poser import directory is added or removed.
+
+SIG void : recentFileListChanged()
+  > summary
+    Emitted when a recent file is added or removed.
+
+SIG void : scriptFailed( String filename )
+  > summary
+    Emitted when the execution of a script fails.
+  > since
+    4.6.4.62
+
+SIG void : scriptFinished( String filename )
+  > summary
+    Emitted when the execution of a script has finished.
+  > since
+    4.6.4.62
+
+SIG void : scriptLoadFailed( String filename )
+  > summary
+    Emitted when the loading of a script fails.
+  > since
+    4.6.4.62
+
+SIG void : scriptLoadStarting( String filename )
+  > summary
+    Emitted when the loading of a script is starting.
+  > since
+    4.6.4.62
+
+SIG void : scriptStarting( String filename )
+  > summary
+    Emitted when the execution of a script is starting.
+  > since
+    4.6.4.62
+
+SIG void : startupSceneChanged( String filename )
+  > summary
+    Emitted when the startup scene file has changed
+  > parameters
+    + filename - The new startup scene file.

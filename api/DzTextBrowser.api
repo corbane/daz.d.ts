@@ -1,0 +1,154 @@
+CLS DzTextBrowser : DzTextEdit
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/textbrowser_dz
+  > summary
+    DAZScript wrapper for QTextBrowser.
+
+### description
+  > summary
+    A DzTextBrowser extends DzTextEdit (in read-only mode), adding functionality that allows users to navigate hyper-linked documents.
+
+### properties
+
+PRP Number : backwardCount
+  > summary
+    Holds the number of locations backward in the history. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Number : forwardCount
+  > summary
+    Holds the number of locations forward in the history. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Boolean : isBackwardAvailable
+  > summary
+    Holds whether or not the browser can go backward in the document history. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Boolean : isForwardAvailable
+  > summary
+    Holds whether or not the browser can go forward in the document history. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Boolean : openExternalLinks
+  > summary
+    Holds whether or not the browser should open links to external sources using App.showUrl() instead of emitting the anchorClicked signal. Links are considered external if their scheme is not 'file://'. (since 4.9.3.93)
+
+PRP Boolean : openLinks
+  > summary
+    Holds whether or not the browser should automatically open links the user tries to activate by mouse or keyboard.
+  > since
+    4.9.3.93
+
+PRP Array : searchPaths
+  > summary
+    Holds the search paths used by the browser to find supporting content.
+  > since
+    4.9.3.93
+
+PRP String : source
+  > summary
+    Holds the name of the displayed document. This will be empty if the URL is invalid, if no document is displayed, or if the source is unknown.
+    When setting this property the browser attempts to find a document with the specified name in searchPaths and the directory of the current source, unless the value is an absolute path. It also checks for optional anchors and scrolls the document accordingly.
+    If the first tag in the document is <qt type=detail>, the document is displayed as a popup rather than as new document in the browser itself. Otherwise, the document is displayed normally in the browser with the text set to the contents of the named document with DzTextEdit::html.
+
+### constructors
+
+CTR DzTextBrowser( DzWidget parent )
+  > summary
+    Creates a text browser widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the text browser.
+
+### methods
+
+FUN void : backward()
+  > summary
+    Changes the document displayed to the previous document in the list built by navigating links. Does nothing if there is no previous document.
+
+FUN void : clearHistory()
+  > summary
+    Clears the history of visited documents and disables the forward and backward navigation.
+  > since
+    4.9.3.93
+
+FUN void : forward()
+  > summary
+    Changes the document displayed to the next document in the list built by navigating links. Does nothing if there is no next document.
+
+FUN String : historyTitle( Number index )
+  > parameters
+    + index - The zero-based index of the history item. * index < 0 : backward() history
+      - index == 0 : current
+      - index > 0 : forward() history
+  > returns
+    The DzTextEdit::documentTitle of the history item.
+  > since
+    4.9.3.93
+
+FUN String : historyUrl( Number index )
+  > parameters
+    + index - The zero-based index of the history item. * index < 0 : backward() history
+      - index == 0 : current, see source
+      - index > 0 : forward() history
+  > returns
+    The URL of the history item.
+  > since
+    4.9.3.93
+
+FUN void : home()
+  > summary
+    Changes the current document displayed to be the first document displayed.
+
+FUN void : reload()
+  > summary
+    Reloads the current document.
+
+### signals
+
+SIG void : anchorClicked( String name, String link )
+  > summary
+    Emitted when the user clicks an anchor.
+  > parameters
+    + name - The value of the href, or the name of the target document
+    + link - The name of the anchor
+
+SIG void : backwardAvailable( Boolean available )
+  > summary
+    Emitted when the availability of backward() changes.
+  > parameters
+    + available - false when user is at home(), otherwise true.
+
+SIG void : forwardAvailable( Boolean available )
+  > summary
+    Emitted when the availability of forward() changes.
+  > parameters
+    + available - true when the user navigates backward(), false when the user goes forward() or if there is no next document.
+
+SIG void : highlighted( String link )
+  > summary
+    Emitted when the user selects a link but does not activate it.
+  > parameters
+    + link - The selected link.
+
+SIG void : historyChanged()
+  > summary
+    Emitted when the history changes.
+
+SIG void : linkClicked( String link )
+  > summary
+    Emitted when the user clicks a link.
+  > parameters
+    + link - The value of the href, or the name of the target document.
+  > attention
+    The link will be the absolute location of the document, based on the value of the anchor's href tag.
+
+SIG void : sourceChanged( String src )
+  > summary
+    Emitted when the mime source of the browser changes.
+  > parameters
+    + src - The name of the document being displayed in the browser.

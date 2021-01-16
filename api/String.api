@@ -1,0 +1,135 @@
+RAW 
+
+interface String
+{
+    /**
+        * @returns This string object.
+        */
+    valueOf (): string;
+    /**
+        * @returns The modified string, replacing the lowest occurrence of %1, %2,… with value.
+        * @param value - The text to represent as a string.
+        * @param [fieldWidth=0] - Specifies the minimum amount of space that value is padded to. A positive fieldWidth will produce right aligned text, a negative fieldWidth will produce left aligned text.
+        */
+    arg (value: string, fieldWidth?: number): string;
+    /**
+        * @returns The modified string, replacing the lowest occurrence of %1, %2,… with value.
+        * @param value - The Number to represent as a string.
+        * @param [fieldWidth=0] - Specifies the minimum amount of space that value is padded to. A positive fieldWidth will produce right aligned text, a negative fieldWidth will produce left aligned text.
+        */
+    arg (value: number, fieldWidth?: number): string;
+    /**
+        * Specialized for cases where value is a decimal.
+        * @returns The modified string, replacing the lowest occurrence of %1, %2,… with value.
+        * @example
+        * var fValue = Math.PI;
+        * var sValue = String( "%1" ).argDec( fValue, 0, 'f', 5 );
+        *  
+        * MessageBox.information( String( "Variable : sValue\nType : %1\nValue : %2" )
+        * 	.arg( typeof sValue ).arg( sValue ), "String.argDec(...)", "&OK" );
+        * @param value - The Number to represent as a string.
+        * @param [fieldWidth=0] - Specifies the minimum amount of space that value is padded to. A positive fieldWidth will produce right aligned text, a negative fieldWidth will produce left aligned text.
+        * @param [format="g"] - The format to use:   *         - 'e' : format as [-]9.9e[+|-]999   *         - 'E' : format as [-]9.9E[+|-]999   *         - 'f' : format as [-]9.9   *         - 'g' : use 'e' or 'f' format, whichever is more concise   *         - 'G' : use 'E' or 'f' format, whichever is more concise
+        * @param precision - With 'e', 'E' and 'f', this is the numbers of digits after the decimal point. With 'g' and 'G', this is the maximum number of significant digits.
+        */
+    argDec (value: number, fieldWidth?: number, format?: number, precision?: number): string;
+    /**
+        * Specialized for cases where value is an integer.
+        * @returns The modified string, replacing the lowest occurrence of %1, %2,… with value.
+        * @example
+        * var nValue = 32;
+        * var sValue = String( "%1" ).argInt( nValue, 0, 10 );
+        *  
+        * MessageBox.information( String( "Variable : sValue\nType : %1\nValue : %2" )
+        * 	.arg( typeof sValue ).arg( sValue ), "String.argInt(...)", "&OK" );
+        * @param value - The Number to represent as a string.
+        * @param [fieldWidth=0] - Specifies the minimum amount of space that value is padded to. A positive fieldWidth will produce right aligned text, a negative fieldWidth will produce left aligned text.
+        * @param [base=10] - The base, which must be between 2 and 36.
+        */
+    argInt (value: number, fieldWidth?: number, base?: number): string;
+    /**
+        * @returns true if the string ends with pattern, otherwise false.
+        * @param pattern - The pattern to search the string for.
+        */
+    endsWith (pattern: string): boolean;
+    /**
+        * @returns true if the string ends with pattern, otherwise false.
+        * @param pattern - The pattern to search the string for.
+        */
+    endsWith (pattern: RegExp): boolean;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at position startPos. If startPos is not specified, the function starts at the beginning of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        * @param [startPos=0] - The [zero-based] index to begin the search at.
+        */
+    find (pattern: RegExp, startPos?: number): number;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at position startPos. If startPos is not specified, the function starts at the beginning of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        * @param [startPos=0] - The [zero-based] index to begin the search at.
+        */
+    find (pattern: string, startPos?: number): number;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at position startPos. If startPos is not specified, the function starts at the end of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        * @param [startPos=length-1] - The [zero-based] index to begin the search at.
+        */
+    findRev (pattern: RegExp, startPos?: number): number;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at position startPos. If startPos is not specified, the function starts at the end of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        * @param [startPos=length-1] - The [zero-based] index to begin the search at.
+        */
+    findRev (pattern: string, startPos?: number): number;
+    /**
+        * @returns true if the string is empty (has a length of 0), otherwise false.
+        */
+    isEmpty (): boolean;
+    /**
+        * @returns The substring of this string containing the num leftmost characters.
+        * @param num - The number of characters to copy from the beginning of the string.
+        */
+    left (num: number): string;
+    /**
+        * @returns The string, with all characters converted to lower case.
+        * @seealso toLowerCase()
+        */
+    lower (): string;
+    /**
+        * @returns The substring of this string starting at startIndex including num characters.
+        * @seealso substring()
+        * @param startIndex - The index of the first character to copy from the string.
+        * @param num - The number of characters to copy from the string.
+        */
+    mid (startIndex: number, num: number): string;
+    /**
+        * @returns The substring of this string containing the num rightmost characters.
+        * @param num - The number of characters to copy from the end of the string.
+        */
+    right (num: number): string;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at the end of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        */
+    searchRev (pattern: RegExp): number;
+    /**
+        * @returns The index of the first occurrence of pattern in the string, starting at the end of the string. If the pattern is not found in the string, -1 is returned.
+        * @param pattern - The pattern to search the string for.
+        */
+    searchRev (pattern: string): number;
+    /**
+        * @returns true if the string starts with pattern, otherwise false.
+        * @param pattern - The pattern to search the string for.
+        */
+    startsWith (pattern: RegExp): boolean;
+    /**
+        * @returns true if the string starts with pattern, otherwise false.
+        * @param pattern - The pattern to search the string for.
+        */
+    startsWith (pattern: string): boolean;
+    /**
+        * @returns The string, with all characters converted to upper case.
+        * @seealso toUpperCase()
+        */
+    upper (): string;
+}

@@ -1,0 +1,52 @@
+CLS DzRotateManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rotatemanip_dz
+
+### description
+  > summary
+    A manipulator that rotates an image layer in 90 degree increments.
+
+### enumerations
+
+ENU Rotation
+  > summary
+    The enumerated values of possible rotations to be performed.
+  + RotNone - No rotation is performed.
+  + Rot90 - A 90 degree (clockwise) rotation is performed.
+  + Rot180 - A 180 degree rotation is performed.
+  + Rot270 - A 270 degree (clockwise) rotation is performed.
+
+### properties
+
+PRP Number : degrees
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzRotateManip( DzRotateManip.Rotation rot=DzRotateManip.Rotation.RotNone )
+  > summary
+    Holds the amount of rotation, in degrees.
+    Default Constructor
+
+### methods
+
+FUN Number : getDegrees()
+  > returns
+    The number of degrees the image will be rotated. Currently, the only possible values are 0, 90, 180, 270.
+
+FUN DzRotateManip.Rotation : getRotation()
+  > returns
+    The type of rotation for the image.
+
+FUN void : setDegrees( Number deg )
+  > summary
+    Sets the amount of rotation for the image.
+  > parameters
+    + degrees - The number of degrees to rotate the image. Currently, the only supported values are 0, 90, 180, 270. All other values are ignored.
+
+FUN void : setRotation( DzRotateManip.Rotation rot )
+  > summary
+    Sets the type of rotation for the image.
+  > parameters
+    + rot - The rotation to apply to the image.

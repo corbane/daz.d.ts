@@ -1,0 +1,72 @@
+CLS DzLight : DzCamera
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/light_dz
+  > summary
+    Base class for all lights.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU ShadowType
+  > summary
+    The type of shadowing to use for the light.
+  + None - The light does not utilize shadows.
+  + DeepShadowMap - The light utilizes a Deep Shadow Map (DSM).
+  + Raytraced - The light utilizes ray-traced shadows.
+
+### methods
+
+FUN Array : getCategories()
+  > returns
+    A list of [trimmed] categories on this light.
+  > since
+    4.8.0.7
+
+FUN DzStringProperty : getCategoriesControl()
+  > returns
+    The property that holds the categories for this light.
+  > since
+    4.8.0.7
+
+FUN Color : getDiffuseColor()
+  > returns
+    The current diffuse light color, including adjustment for intensity.
+
+FUN DzLight.ShadowType : getShadowType()
+  > returns
+    The enumerated value indicating the type of shadow utilized by the light.
+
+FUN DzEnumProperty : getShadowTypeControl()
+  > returns
+    The property used to indicate the type of shadow utilized by the light.
+
+FUN DzVec3 : getWSDirection()
+  > summary
+    Calculates the direction that light is being cast from this light.
+    Only valid for directional light sources.
+  > returns
+    The current world-space light-casting direction vector.
+
+FUN Boolean : isAreaLight()
+  > returns
+    true if this is an area light source, otherwise false. If true, the light source center will be given by the position of the light. Additional light geometry will be defined in the derived classes.
+
+FUN Boolean : isDirectional()
+  > summary
+    Indicates if this light is an infinite directional light.
+    Directional lights do not have a position per se. They are assumed to lie at infinity and cast parallel rays of light into the scene.
+  > returns
+    true if this light is directional, otherwise (e.g., omni-directional) false.
+
+FUN Boolean : isOn()
+  > returns
+    true if this light is currently on, otherwise false.
+
+### signals
+
+SIG void : categoriesChanged()
+  > summary
+    Emitted when the categories that a light is in changes.

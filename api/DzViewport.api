@@ -1,0 +1,55 @@
+CLS DzViewport : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/viewport_dz
+  > summary
+    A viewport.
+
+### description
+  > summary
+    Encapsulation of a 3D viewport. This object includes the surrounding decoration and camera manipulation controls. It contains the actual 3D viewport.
+
+### methods
+
+FUN Dz3DViewport : get3DViewport()
+  > returns
+    The embedded 3D viewport that this viewport encapsulates.
+
+FUN DzViewportMgr : getManager()
+  > returns
+    The manager of this viewport.
+
+FUN DzView : getView()
+  > returns
+    The alternate view currently being displayed in the viewport; NULL if an alternate view is not displayed (i.e. the 3D viewport is active).
+
+FUN Boolean : isCustom()
+  > returns
+    true if this viewport is custom; otherwise false.
+  > since
+    4.7.1.104
+
+FUN void : setView( DzView view )
+  > summary
+    Sets the alternate view for the viewport; this replaces the 3D viewport while active. Pass in NULL to clear the alternate view and restore the 3D viewport.
+  > parameters
+    + view - The view to display in the viewport.
+
+FUN void : setViewVisible( Boolean onOff )
+  > summary
+    Sets the visible state of the alternate view for this viewport, if an alternate view has been set.
+  > seealso
+    setView()
+
+### signals
+
+SIG void : dimensionsChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : view3dCurrentDimensionsChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : viewChanged( DzView view )
+  > summary
+    TODO: Add description.

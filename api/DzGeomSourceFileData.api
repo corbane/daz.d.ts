@@ -1,0 +1,21 @@
+CLS DzGeomSourceFileData : DzSourceFileData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/geomsourcefiledata_dz
+  > summary
+    DzSourceFileData implementation that stores the file and group name for a geometry source.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP String : groupName
+  > summary
+    The name of the group that the geometry came from.
+
+### constructors
+
+CTR DzGeomSourceFileData( String filePath=“”, String groupName=“” )
+  > summary
+    Creates a new Geometry Source File Data object that stores the given file path and group name.

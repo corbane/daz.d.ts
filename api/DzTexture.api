@@ -1,0 +1,88 @@
+CLS DzTexture : QObject DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/texture_dz
+  > summary
+    Class that handles sharing of data for image maps.
+
+### description
+  > summary
+    This is a sharable object that stores information for a texture (image map) that is used in OpenGL. Do not create a texture, rather, request one from DzImageMgr - this insures that there is only one instance of a given image in memory at a time, and also ensures that necessary conversions for rendering the image via OpenGL and offline renderers occurs correctly.
+
+### enumerations
+
+ENU TextureType
+  > summary
+    TODO: Add description.
+  + Standard - TODO: Add description.
+  + LatLong - TODO: Add description.
+  + LightProbe - TODO: Add description.
+  + CustomTexture - TODO: Add description.
+
+### methods
+
+FUN String : getFilename()
+  > returns
+    The source file name for this image.
+
+FUN Number : getGamma()
+  > returns
+    The gamma of the source file for this image. This is used for gamma correction. gamma⇐0 - do best guess of the image gamma gamma==1 - no gamma correction needed gamma>0 != 1 - the image is at the specified gamma
+
+FUN Size : getGLAlphaTextureSize()
+  > returns
+    The actual size of the OpenGL texture alpha image.
+
+FUN Size : getGLTextureSize()
+  > returns
+    The actual size of the OpenGL texture image.
+
+FUN Size : getOriginalImageSize()
+  > returns
+    The size of the original image that was the source of this texture.
+
+FUN Pixmap : getPreviewPixmap( Size size )
+  > parameters
+    + size - size for the pixmap.
+  > returns
+    A pixmap for this texture
+
+FUN Pixmap : getPreviewPixmap( Number width, Number height )
+  > parameters
+    + width - for the pixmap.
+    + height - for the pixmap.
+  > returns
+    A pixmap for this texture
+
+FUN String : getTempFilename()
+  > returns
+    The temp file name for this image.
+
+FUN Number : getTextureType()
+  > returns
+    The texture type of this texture
+
+FUN Boolean : loadImageData( Image image )
+  > summary
+    TODO: Add description.
+
+FUN void : refresh()
+  > summary
+    Reloads the image if its source file has changed
+
+FUN void : setGamma( Number gamma )
+  > parameters
+    + gamma - the gamma for this image. gamma⇐0 - do best guess of the image gamma, gamma==1 - no gamma correction needed, gamma>0 != 1 - the image is at the specified gamma
+
+FUN void : setTextureType( Number type )
+  > parameters
+    + type - the texture type for this texture
+
+### signals
+
+SIG void : drawnDataChanged()
+  > summary
+    Emitted when the data of the texture has changed - e.g. after a call to refresh()
+
+SIG void : tempFilenameChanged( String filename )
+  > summary
+    Emitted when the temp filename for the image has changed

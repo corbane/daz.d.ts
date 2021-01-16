@@ -1,0 +1,19 @@
+CLS DzScrollView : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scrollview_dz
+  > summary
+    DAZScript wrapper for Q3ScrollView.
+
+### description
+  > summary
+    A DzScrollView provides a scrolling area with on-demand scroll bars.
+    Deprecated
+    Exists only to keep old code working. Do not use in new code. Use DzScrollArea where possible instead.
+
+### constructors
+
+CTR DzScrollView( DzWidget parent )
+  > summary
+    Creates a scroll view as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the scroll view.

@@ -1,0 +1,155 @@
+CLS DzLayeredTexture : DzTexture DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/layeredtexture_dz
+  > summary
+    Class that handles sharing of data for layered image maps.
+
+### description
+  > summary
+    This is a sharable object that stores information for a layered texture (image map) that is used in OpenGL. Do not create a layered texture, rather, request one from DzImageMgr - this insures that there is only one instance of a given image in memory at a time, and also ensures that necessary conversions for rendering the image via OpenGL and offline renderers occurs correctly.
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    The author of the file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    The revision version of the asset file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    The asset id for this texture.
+  > since
+    4.8.1.18
+
+PRP Date : assetModifiedDate
+  > summary
+    The modified date of the asset file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    The URI of the asset source for this texture; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for this texture. (Read Only)
+  > since
+    4.8.1.18
+
+PRP Boolean : size
+  > summary
+    The size of the texture.
+
+### methods
+
+FUN void : addLayer( DzTextureLayer layer )
+  > summary
+    TODO: Add description.
+
+FUN void : beginEditing()
+  > summary
+    TODO: Add description.
+
+FUN void : copyFrom( DzLayeredTexture texture )
+  > summary
+    TODO: Add description.
+
+FUN DzTextureLayer : createLayer( String name )
+  > summary
+    TODO: Add description.
+
+FUN void : endEditing()
+  > summary
+    TODO: Add description.
+
+FUN Number : findLayer( DzTextureLayer layer )
+  > summary
+    TODO: Add description.
+
+FUN DzTextureLayer : getLayer( Number index )
+  > summary
+    TODO: Add description.
+
+FUN Number : getNumLayers()
+  > summary
+    TODO: Add description.
+
+FUN String : getSourceDSI()
+  > summary
+    TODO: Add description.
+
+FUN void : insertLayer( Number index, DzTextureLayer layer )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : moveLayer( Number fromIndex, Number toIndex )
+  > summary
+    TODO: Add description.
+
+FUN void : refeshLayeredTexture()
+  > summary
+    TODO: Add description.
+
+FUN void : removeAllLayers()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : removeLayer( Number index )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : removeLayer( DzTextureLayer layer )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : replaceLayer( DzTextureLayer oldLayer, DzTextureLayer newLayer )
+  > summary
+    TODO: Add description.
+
+FUN DzTextureLayer : takeLayer( Number index )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : aboutToInsertLayers( Number index, Number count )
+  > summary
+    TODO: Add description.
+
+SIG void : aboutToRemoveLayers( Number index, Number count )
+  > summary
+    TODO: Add description.
+
+SIG void : assetModified()
+  > summary
+    TODO: Add description.
+
+SIG void : assetWasSaved()
+  > summary
+    TODO: Add description.
+
+SIG void : layerListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : layersInserted( Number index, Number count )
+  > summary
+    TODO: Add description.
+
+SIG void : layersRemoved( Number index, Number count )
+  > summary
+    TODO: Add description.
+
+SIG void : sizeChanged( Size size )
+  > summary
+    TODO: Add description.

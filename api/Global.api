@@ -1,0 +1,568 @@
+GLO Global
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/global
+  > summary
+    Global objects, methods, variables and constants available to all scripts via the global namespace.
+
+### description
+  > summary
+    The global object is never used directly, and cannot be created using the new operator. It is automatically created when the scripting engine is initialized, and its functions and properties are available immediately. The global object has no syntax. Its functions and properties are accessed directly.
+
+### properties
+
+NOT Boolean : false
+  > summary
+    A special value corresponding to the primitive value, false. (Read Only)
+  > example
+    var nTest = 0 > 1;
+    print( typeof nTest ); // boolean
+    print( nTest ); // false
+
+PRP Number : Infinity
+  > summary
+    A special value used to indicate a division by zero occurrence. In Daz Script, division by zero does not raise an error, instead it assigns the Infinity value. Use isFinite() to test if a value is finite or not. (Read Only)
+  > example
+    var nNum = 1/0;
+    print( typeof nNum ); // number
+    print( nNum ); // Infinity
+
+PRP JSON : JSON
+  > summary
+    Global variable giving all DAZ Scripts access to the ECMAScript JSON object.
+
+PRP Math : Math
+  > summary
+    Global variable giving all DAZ Scripts access to the ECMAScript Math object.
+
+PRP Number : NaN
+  > summary
+    A special value used to indicate that the value of a Number, is “Not a Number”. (Read Only)
+  > example
+    var nNum = 1/"six";
+    print( typeof nNum ); // number
+    print( nNum ); // NaN
+
+NOT Object : null
+  > summary
+    A special value used to indicate a variable does not have a value. (Read Only)
+  > example
+    var nNum = null;
+    print( typeof nNum ); // object
+    print( nNum ); // null
+
+NOT Boolean : true
+  > summary
+    A special value corresponding to the primitive value, true. (Read Only)
+  > example
+    var nTest = 0 < 1;
+    print( typeof nTest ); // boolean
+    print( nTest ); // true
+
+NOT Undefined : undefined
+  > summary
+    A special value used to indicate a variable does not have a defined value (e.g., has not yet been assigned). (Read Only)
+  > example
+    var nNum;
+    print( typeof nNum ); // undefined
+    print( nNum ); // undefined
+
+PRP DzApp : App
+  > summary
+    A global variable giving all DAZ Scripts access to the application object.
+
+PRP DzColorDialog : ColorDialog
+  > summary
+    A global variable giving all DAZ Scripts access to public static members on QColorDialog.
+
+PRP DzFileDialog : FileDialog
+  > summary
+    A global variable giving all DAZ Scripts access to the file dialog object.
+
+PRP DzGeometryUtil : Geometry
+  > summary
+    A global variable giving all DAZ Scripts access to the geometry object.
+
+PRP DzMainWindow : MainWindow
+  > summary
+    A global variable giving all DAZ Scripts access to the interface object.
+
+PRP DzMessageBox : MessageBox
+  > summary
+    A global variable giving all DAZ Scripts access to public static members on QMessageBox.
+
+PRP DzOpenGL : OpenGL
+  > summary
+    A global variable giving all DAZ Scripts access to the OpenGL object.
+
+PRP DzScene : Scene
+  > summary
+    A global variable giving all DAZ Scripts access to the scene object.
+
+PRP DzSystem : System
+  > summary
+    A global variable giving all DAZ Scripts access to the system object.
+
+PRP DzUndoStack : UndoStack
+  > summary
+    A global variable giving all DAZ Scripts access to the undo stack object.
+
+### methods
+
+FUN String : decodeURI( String encodedURI )
+  > parameters
+    + encodedURI - The encoded URI to decode.
+  > returns
+    A new version of encodedURI in which each escape sequence and UTF-8 encoding of the kind that might be introduced by encodeURI() is replaced with the character that it represents. Escape sequences that could not have been introduced by encodeURI() are not replaced.
+
+FUN String : decodeURIComponent( String encodedURIComponent )
+  > returns
+    A new version of encodedURIComponent in which each escape sequence and UTF-8 encoding of the kind that might be introduced by encodeURIComponent() is replaced with the character that it represents.
+
+FUN String : encodeURI( String uri )
+  > parameters
+    + uri - The URI to encode.
+  > returns
+    A new version of uri in which each instance of certain characters is replaced by one, two, three, or four escape sequences representing the UTF-8 encoding of the character.
+
+FUN String : encodeURIComponent( String uriComponent )
+  > returns
+    A new version of uri in which each instance of certain characters is replaced by one, two, three, or four escape sequences representing the UTF-8 encoding of the character.
+
+FUN String : escape( String text )
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use encodeURI() or encodeURIComponent() instead.
+
+FUN Object : eval( String str )
+  > summary
+    Parses and executes str, and returns the result.
+  > parameters
+    + str - The statement to evaluate.
+  > example
+    var sTmp = "x";
+    var nTmp = 5;
+    sTmp = eval( "sTmp + nTmp" );
+    // sTmp: "x5"
+  > example
+    var nTmp = 2;
+    var nTmp2 = 5;
+    nTmp = eval( "nTmp + nTmp2" );
+    // nTmp: 7
+
+FUN Boolean : isFinite( Object expression )
+  > parameters
+    + expression - The script expression to evaluate.
+  > returns
+    false if expression coerces to NaN or Infinity, otherwise true.
+  > example
+    print( "isFinite( NaN ) //", isFinite( NaN ) );
+    print( "isFinite( undefined ) //", isFinite( undefined ) );
+    print( "isFinite( {} ) //", isFinite( {} ) );
+     
+    print( "isFinite( true ) //", isFinite( true ), ":", Number( true ) );
+    print( "isFinite( true ) //", isFinite( false ), ":", Number( false ) );
+    print( "isFinite( null ) //", isFinite( null ), ":", Number( null ) );
+    print( "isFinite( 5 ) //", isFinite( 5 ) );
+     
+    print( "isFinite( \"5\" ) //", isFinite( "5" ), ":", Number( "5" ) );
+    print( "isFinite( \"5.5\" ) //", isFinite( "5.5" ), ":", Number( "5.5" ) );
+    print( "isFinite( \"5,5\" ) //", isFinite( "5,5" ), ":", Number( "5,5" ) );
+    print( "isFinite( \"ABC123\" ) //", isFinite( "ABC123" ), ":", Number( "ABC123" ) );
+    print( "isFinite( \"\" ) //", isFinite( "" ), ":", Number( "" ) );
+    print( "isFinite( \" \" ) //", isFinite( " " ), ":", Number( " " ) );
+     
+    var dateNow = new Date();
+    print( "isFinite( new Date() ) //", isFinite( dateNow ), ":", Number( dateNow ) );
+    var sDate = dateNow.toString();
+    print( "isFinite( (new Date()).toString() ) //", isFinite( sDate ), ":", Number( sDate ) );
+
+FUN Boolean : isNaN( Object expression )
+  > parameters
+    + expression - The script expression to evaluate.
+  > returns
+    true if expression is NaN (Not a Number), otherwise false.
+  > example
+    print( "isNaN( NaN ) //", isNaN( NaN ) );
+    print( "isNaN( undefined ) //", isNaN( undefined ) );
+    print( "isNaN( {} ) //", isNaN( {} ) );
+     
+    print( "isNaN( true ) //", isNaN( true ), ":", Number( true ) );
+    print( "isNaN( true ) //", isNaN( false ), ":", Number( false ) );
+    print( "isNaN( null ) //", isNaN( null ), ":", Number( null ) );
+    print( "isNaN( 5 ) //", isNaN( 5 ) );
+     
+    print( "isNaN( \"5\" ) //", isNaN( "5" ), ":", Number( "5" ) );
+    print( "isNaN( \"5.5\" ) //", isNaN( "5.5" ), ":", Number( "5.5" ) );
+    print( "isNaN( \"5,5\" ) //", isNaN( "5,5" ), ":", Number( "5,5" ) );
+    print( "isNaN( \"ABC123\" ) //", isNaN( "ABC123" ), ":", Number( "ABC123" ) );
+    print( "isNaN( \"\" ) //", isNaN( "" ), ":", Number( "" ) );
+    print( "isNaN( \" \" ) //", isNaN( " " ), ":", Number( " " ) );
+     
+    var dateNow = new Date();
+    print( "isNaN( new Date() ) //", isNaN( dateNow ), ":", Number( dateNow ) );
+    var sDate = dateNow.toString();
+    print( "isNaN( (new Date()).toString() ) //", isNaN( sDate ), ":", Number( sDate ) );
+
+FUN Number : parseFloat( String str )
+  > summary
+    Parses str and returns the floating point number that it represents or NaN if the parse fails. Leading and trailing whitespace is ignored, and if the string contains a number followed by non-numeric characters, the value of the number is returned and the remainder of the string is ignored.
+  > parameters
+    + str - The string to convert to a floating point number.
+  > returns
+    A floating point number or NaN.
+  > example
+    print( "parseFloat( \"5\" ) //", parseFloat( "5" ) );
+    print( "parseFloat( \"5.5\" ) //", parseFloat( "5.5" ) );
+    print( "parseFloat( \"5,5\" ) //", parseFloat( "5,5" ) );
+    print( "parseFloat( \"5ABC\" ) //", parseFloat( "5ABC" ) );
+    print( "parseFloat( \"ABC5\" ) //", parseFloat( "ABC5" ) );
+
+FUN Number : parseInt( String str, Number radix )
+  > summary
+    Parses the string and returns the integer that it represents or NaN if the parse fails. Leading and trailing whitespace is ignored, and if the string contains a number followed by non-numeric characters, the value of the number is returned and the remainder of the string is ignored.
+  > parameters
+    + str - The string to convert to an integer.
+    + radix - The (optional) base of the number; [2,36]; if not specified, base is determined as follows:
+      - base 16 if the number begins with “0x” or “0X”
+      - base 8 if the number begins with “0”
+      - base 10 otherwise
+  > returns
+    An integer or NaN.
+  > example
+    print( "parseInt( \"5\" ) //", parseInt( "5" ) );
+    print( "parseInt( \"5.5\" ) //", parseInt( "5.5" ) );
+    print( "parseInt( \"5,5\" ) //", parseInt( "5,5" ) );
+    print( "parseInt( \"5ABC\" ) //", parseInt( "5ABC" ) );
+    print( "parseInt( \"ABC5\" ) //", parseInt( "ABC5" ) );
+    print( "parseInt( \"0x0123456789abcdef\" ) //", parseInt( "0x0123456789abcdef" ) );
+    print( "parseInt( \"0123456789abcdef\", 16 ) //", parseInt( "0123456789abcdef", 16 ) );
+    print( "parseInt( \"01234567\" ) //", parseInt( "01234567" ) );
+    print( "parseInt( \"01234567\", 8 ) //", parseInt( "01234567", 8 ) );
+    print( "parseInt( \"10001110101\", 2 ) //", parseInt( "10001110101", 2 ) );
+
+FUN String : unescape( String text )
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use decodeURI() or decodeURIComponent() instead.
+
+FUN void : gc()
+  > summary
+    While the garbage collector is automatically run for script objects that are no longer referenced, there is no guarantee on when it will take place. This function can be used to explicitly request garbage collection.
+
+FUN void : print( String expression, String[] … )
+  > summary
+    Prints the expression to the console (if executed from within the Script Editor) or to the log.
+  > parameters
+    + expression - The expression to print - the argument will be converted to a string (via toString) if necessary.
+  > example
+    print( "Hello, World!" );
+
+FUN String : qsTr( String sourceText )
+  > returns
+    A translated version of sourceText if an appropriate translated string is available, otherwise returns sourceText itself.
+
+FUN String : qsTranslate( String sourceText )
+  > returns
+    The translation text for sourceText, by querying the installed translation files. Translation files are searched from the most recently installed file back to the first installed file.
+
+FUN String : qsTrId( String id )
+  > returns
+    A translated string identified by id. If no matching string is found, id itself is returned.
+
+FUN void : acceptUndo( String caption )
+  > summary
+    Scripts can call this function to accept and finish a hold on the undo stack started by calling beginUndo().
+  > parameters
+    + caption - The brief description for the action that will be displayed to the user.
+
+FUN Boolean : backgroundProgressIsActive()
+  > returns
+    true if one or more background progress operations are currently being tracked.
+  > seealso
+    Sample: Wait For Background Progress
+
+FUN Boolean : backgroundProgressIsCancelled()
+  > returns
+    true if the user has cancelled the current operation by pressing the 'Cancel' button on the background progress.
+
+FUN void : beginNodeSelectionHold()
+  > summary
+    Captures a view of scene seletion.
+  > seealso
+    restoreNodeSelectionHold()
+    dropNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : beginUndo()
+  > summary
+    Starts a hold on the undo stack. It is recommended that scripts use this function rather than accessing DzUndoStack directly, since if the script crashes or a logic error results in leaving the undo stack open, calling this function insures that the undo stack will be closed at the end of script execution.
+
+FUN void : cancelUndo()
+  > summary
+    Scripts can call this function to cancel a hold on the undo stack started by calling beginUndo().
+
+FUN void : clearBusyCursor()
+  > summary
+    Clears the application-standard busy cursor and returns the mouse cursor to the previous cursor. Match every call to setBusyCursor() with a call to this function.
+  > example
+    setBusyCursor();
+    // ... do something ...
+    clearBusyCursor();
+
+FUN void : clearNodeSelectionHolds()
+  > summary
+    Clears all selection holds without restoring the selection.
+  > seealso
+    beginNodeSelectionHold()
+    dropNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : clearUndoStack()
+  > summary
+    Scripts can call this function to clear the undo stack.
+
+FUN void : connect( Object sender, String signal, Object receiver, String slot )
+  > summary
+    Connects a signal from one object to a function (slot) on another object.
+  > parameters
+    + sender - The object emitting the signal.
+    + signal - The signal being emitted.
+    + receiver - The object that will receive the signal.
+    + slot - The method on receiver to execute when sender emits signal.
+  > seealso
+    Signals and Slots
+
+FUN void : connect( Object sender, String signal, Function functionRef )
+  > summary
+    Connects a signal from an object to a Daz Script function (slot).
+  > parameters
+    + sender - The object emitting the signal.
+    + signal - The signal being emitted.
+    + functionRef - The function to execute when sender emits signal.
+  > seealso
+    Sample: Version Conversion
+    Signals and Slots
+
+FUN Boolean : ctrlPressed()
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use DzApp::modifierKeyState() instead.
+    var bControlPressed = App.modifierKeyState() & 0x04000000;
+    This deprecated function allows a script to determine what meta keys were pressed when the script was activated.
+  > returns
+    true if the control button was pressed when the script was activated, otherwise false.
+
+FUN void : debug( any expression )
+  > summary
+    Prints expression to the output console (stderr), followed by a newline.
+  > example
+    debug( "Um... Houston?" );
+
+FUN void : disconnect( Object sender, String signal, Function functionRef )
+  > summary
+    Disconnects a signal from one object to a function (slot).
+  > parameters
+    + sender - The object emitting the signal.
+    + signal - The signal being emitted.
+    + functionRef - The function to disconnect from signal.
+  > seealso
+    Signals and Slots
+
+FUN void : disconnect( Object sender, String signal, Object receiver, String slot )
+  > summary
+    Disconnects a signal from one object to a function (slot) on another object.
+  > parameters
+    + sender - The object emitting the signal.
+    + signal - The signal being emitted.
+    + receiver - The object that receives the signal.
+    + slot - The method on receiver to disconnect from signal.
+  > seealso
+    Signals and Slots
+
+FUN void : dropNodeSelectionHold()
+  > summary
+    Removes a scene node selection hold on scene selection without restoring the selection.
+  > seealso
+    beginNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : dropUndo()
+  > summary
+    Scripts can call this function to drop a hold on the undo stack started by calling beginUndo().
+
+FUN void : finishBackgroundProgress()
+  > summary
+    Ends the current background progress tracking operation, and closes the background progress if no other background progress tracking operations are active.
+  > seealso
+    Sample: Wait For Background Progress
+
+FUN void : finishProgress()
+  > summary
+    Ends the current progress tracking operation, and closes the progress dialog if no other progress tracking operations are active.
+  > seealso
+    Sample: Progress
+
+FUN Array : getArguments()
+  > returns
+    The list of arguments passed to the script (if any) upon execution, otherwise an empty Array.
+  > seealso
+    DzScript::execute( Array )
+
+FUN QDesktopWidget : getDesktop()
+  > summary
+    This function provides access to the desktop widget. This can be useful to get the size of the machine's desktop.
+  > returns
+    The desktop widget.
+
+FUN String : getErrorMessage( DzError errCode )
+  > summary
+    This function converts an error code into a string message.
+  > parameters
+    + errCode - The Daz Studio error code.
+  > returns
+    A user-readable message that describes the error represented by the error code.
+
+FUN QObject : getObjectParent( QObject obj )
+  > summary
+    This function allows a script to get the object-parent of a QObject.
+  > parameters
+    + obj - The QObject to get the parent of.
+  > returns
+    The QObject parent of obj.
+
+FUN DzAuthor : getScriptAuthor()
+  > returns
+    The author of the current script (if any).
+
+FUN String : getScriptFileName()
+  > returns
+    The file name of the current script (if any).
+
+FUN String : getScriptType()
+  > returns
+    The file type that this script was saved out as.
+
+FUN String : getScriptVersionString()
+  > returns
+    The version of the current script (if any).
+
+FUN void : include( String scriptPath )
+  > summary
+    Includes the contents of scriptPath in the same context as the calling script. This function should only be called within the global scope of the script; it should not be called within a nested scope and it should not be called inline. As a safeguard against circular references, the script engine keeps an internal list of unique paths for included scripts; per script context, per execution. Each time the function is called, scriptPath is checked against the list to ensure that the path has only been included once within the context of the script.
+  > parameters
+    + scriptPath - The path of the script to include. The path is assumed to be relative to the ./scripts directory. Absolute paths are also supported.
+  > example
+    include( "MyFolder/MyScript.dse" );
+    oMyObject.myFunction();
+
+FUN Boolean : pointersAreEqual( QObject ptr1, QObject ptr2 )
+  > summary
+    This function allows a script to test if two QObject derived variables point to the same instance.
+  > parameters
+    + ptr1 - The first object.
+    + ptr2 - The second object.
+  > returns
+    true if the pointers point to the same object, otherwise false.
+
+FUN void : processEvents()
+  > summary
+    Pauses execution of the script and allows the GUI thread time to process events.
+
+FUN Boolean : progressIsActive()
+  > returns
+    true if one or more progress operations are currently being tracked, otherwise false.
+
+FUN Boolean : progressIsCancelled()
+  > returns
+    true if the user has cancelled the current operation by pressing the 'Cancel' button on the progress dialog.
+
+FUN void : restoreNodeSelectionHold()
+  > summary
+    Restores the scene selection to the view at last call to beginNodeSelectionHold().
+  > seealso
+    beginNodeSelectionHold()
+    dropNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : setBusyCursor()
+  > summary
+    Sets the application-standard busy cursor. Match every call to this function with a call to clearBusyCursor() to restore the previous cursor.
+  > example
+    setBusyCursor();
+    // ... do something ...
+    clearBusyCursor();
+
+FUN Boolean : shiftPressed()
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use DzApp::modifierKeyState() instead.
+    var bShiftPressed = App.modifierKeyState() & 0x02000000;
+    This deprecated function allows a script to determine what meta keys were pressed when the script was activated.
+  > returns
+    true if the shift button was pressed when the script was activated, otherwise false.
+
+FUN void : sleep( Number milliseconds )
+  > summary
+    Pauses the script for the specified number of milliseconds without blocking the application event loop.
+  > parameters
+    + milliseconds - The duration, in milliseconds, to sleep.
+  > example
+    print( new Date );
+    sleep( 6000 ); // 0.1 min
+    print( new Date );
+  > since
+    4.8.0.45
+
+FUN void : startBackgroundProgress( String info, Number totalSteps=0, Boolean isCancellable=false )
+  > summary
+    Displays a background progress bar to the user if one is not already being displayed and starts a progress tracking operation.
+  > parameters
+    + info - The string to display in the status bar as the current description of the operation.
+    + totalSteps - The number of progress steps for the operation to be complete.
+    + isCancellable - If true, the user is given the option to cancel the operation.
+  > seealso
+    Sample: Background Progress
+    Sample: Wait For Background Progress
+
+FUN void : startProgress( String info, Number totalSteps=0, Boolean isCancellable=false, Boolean showTimeElapsed=false )
+  > summary
+    Displays a progress dialog to the user if one is not already being displayed and starts a progress tracking operation.
+  > parameters
+    + info - The string to display in the progress dialog as the current description of the operation.
+    + totalSteps - The number of progress steps for the operation to be complete.
+    + isCancellable - If true, the user is given the option to cancel the operation.
+    + showTimeElapsed - If true, the amount of time since the progress operation was started will be displayed in the dialog.
+  > seealso
+    Sample: Progress
+
+FUN void : stepBackgroundProgress( Number numSteps=1 )
+  > summary
+    Steps the current background progress forward the given number of steps.
+  > parameters
+    + numSteps - The number of steps to move the progress indicator forward.
+
+FUN void : stepProgress( Number numSteps=1 )
+  > summary
+    Steps the current progress dialog forward the given number of steps.
+  > parameters
+    + numSteps - The number of steps to move the progress indicator forward.
+  > seealso
+    Sample: Progress
+
+FUN void : updateBackgroundProgress( Number position )
+  > summary
+    Sets the current background progress to the given number of steps.
+  > parameters
+    + position - The number of steps to set as the current position for the progress indicator.
+  > seealso
+    Sample: Wait For Background Progress
+
+FUN void : updateProgress( Number position )
+  > summary
+    Sets the current progress dialog to the given number of steps.
+  > parameters
+    + position - The number of steps to set as the current position for the progress indicator.

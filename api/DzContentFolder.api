@@ -1,0 +1,174 @@
+CLS DzContentFolder : DzBase DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/contentfolder_dz
+
+### description
+  > summary
+    Represents a folder in the content library that holds DzContentFile objects as well as other DzContentFolder objects.
+  > seealso
+    DzContentMgr::getContentDirectory(), DzContentMgr::getImportDirectory(), DzContentMgr::getPoserDirectory(), DzContentMgr::findBaseDirectory()
+
+### enumerations
+
+ENU FolderType
+  > summary
+    The possible types of content folders.
+  + NATIVE_TYPE - Folder containing native content.
+  + POSER_TYPE - Folder containing Poser content.
+  + IMPORT_TYPE - Folder containing other importable content.
+
+### properties
+
+PRP Boolean : canAddSubFolder
+  > summary
+    Holds whether or not a sub folder can be added in this folder. (Read Only)
+
+PRP Boolean : canDelete
+  > summary
+    Holds whether or not this folder can be deleted. (Read Only)
+
+PRP Boolean : canRename
+  > summary
+    Holds whether or not this folder can be renamed. (Read Only)
+
+PRP Boolean : filesAreLoaded
+  > summary
+    Holds whether or not the files of this folder are loaded. (Read Only)
+
+PRP String : folderName
+  > summary
+    Holds the name of the folder on disk. (Read Only)
+
+PRP Boolean : foldersAreLoaded
+  > summary
+    Holds whether or not the subfolders of this folder are loaded. (Read Only)
+  > returns
+    true if the child folders of this folder are already loaded, otherwise false.
+
+PRP DzContentFolder.FolderType : folderType
+  > summary
+    Holds the type of this folder. (Read Only)
+
+PRP String : fullPath
+  > summary
+    Holds the full path of the folder on disk. (Read Only)
+
+PRP Pixmap : icon
+  > summary
+    Holds the icon of the folder. (Read Only)
+
+PRP Boolean : isBuiltInContentFolder
+  > summary
+    Holds whether or not this folder is a built-in content folder. (Read Only)
+
+PRP String : label
+  > summary
+    Holds the label of the folder as it is displayed to the user. (Read Only)
+
+### methods
+
+FUN Boolean : addSubFolder( String folderName )
+  > summary
+    Adds a new subfolder with the given name to this folder.
+  > parameters
+    + folderName - The name of the new sub folder.
+  > returns
+    true if the new subfolder was created successfully, otherwise false.
+
+FUN Boolean : canMoveFile( DzContentFile file )
+  > parameters
+    + file - The file to test for moving.
+  > returns
+    true if the file is a type that can be moved or copied to this folder, otherwise false.
+
+FUN Boolean : copyFile( DzContentFile file )
+  > summary
+    Copies the given content file to this folder.
+  > parameters
+    + file - The file to copy to this folder.
+  > returns
+    true if the file was copied successfully, otherwise false.
+
+FUN Boolean : deleteFolder()
+  > summary
+    Removes this content folder. The default implementation of this function deletes all files and subfolders in this directory from the disk, so use with care!
+  > returns
+    true if the file was removed successfully, otherwise false.
+
+FUN DzContentFile : getFirstFile()
+  > returns
+    The first file in this folder (if any), otherwise null.
+
+FUN DzContentFolder : getFirstFolder()
+  > returns
+    The first child folder (if any), otherwise null.
+
+FUN DzContentFile : getFirstHiddenFile()
+  > returns
+    The first hidden file in this folder (if any), otherwise null.
+
+FUN DzContentFolder : getFirstHiddenFolder()
+  > returns
+    The first hidden folder (if any), otherwise null.
+
+FUN DzContentFolder : getNext()
+  > returns
+    The next sibling folder (if any), otherwise null.
+
+FUN DzContentFolder : getParent()
+  > returns
+    The parent folder of this folder (if any), otherwise null.
+
+FUN Boolean : hasSubFolders()
+  > returns
+    true if this folder has subfolders, otherwise false.
+
+FUN Boolean : isModifiable()
+  > returns
+    true if the folder can be modified, otherwise false.
+
+FUN Boolean : moveFile( DzContentFile file )
+  > summary
+    Moves the given content file to this folder.
+  > parameters
+    + file - The file to move to this folder.
+  > returns
+    true if the file was moved successfully, otherwise false.
+
+FUN Boolean : refresh( Boolean reloadIcons=false )
+  > summary
+    Checks for changes in sub folders and files (if loaded).
+  > parameters
+    + reloadIcons - If true, the icons will be reloaded from disk.
+  > returns
+    true if a change in subfolders was found and the tree needs to be reloaded, otherwise false.
+
+FUN Boolean : rename( String newName )
+  > summary
+    Rename the folder to the given name.
+  > parameters
+    + newName - The new name for the folder.
+  > returns
+    true if the folder was successfully renamed, otherwise false.
+
+### signals
+
+SIG void : addedFolder( DzContentFolder newFolder )
+  > summary
+    Emitted when a new folder is added.
+  > parameters
+    + newFolder - The folder that was added.
+
+SIG void : fileListChanged()
+  > summary
+    Emitted when the file list has changed.
+
+SIG void : folderListChanged()
+  > summary
+    Emitted when a folder is added or removed.
+
+SIG void : removedFolder( DzContentFolder folder )
+  > summary
+    Emitted when a folder is removed.
+  > parameters
+    + folder - The folder that was removed.

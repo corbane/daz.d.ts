@@ -1,0 +1,114 @@
+CLS ByteArray : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/bytearray
+  > summary
+    DAZScript wrapper for QByteArray.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QByteArray type used in the DAZ Studio SDK.
+    Attention:
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Number : length
+  > summary
+    The number of bytes in the array
+
+PRP Number : size
+  > summary
+    The number of bytes in the array
+
+### constructors
+
+CTR ByteArray()
+  > summary
+    Default Constructor.
+
+CTR ByteArray( ByteArray byteArray )
+  > summary
+    Copy Constructor.
+  > parameters
+    + byteArray - The ByteArray to copy.
+
+CTR ByteArray( String str )
+  > summary
+    Creates a byte array containing the ascii representation of the string.
+  > parameters
+    + str - The string to copy into the byte array.
+
+### methods
+
+FUN Number : byteAt( Number index )
+  > parameters
+    + index - The index of the byte to return.
+  > returns
+    The byte at the given index in the array of bytes.
+
+FUN String : charAt( Number index )
+  > parameters
+    + index - The index of the byte to return.
+  > returns
+    The character at the given index in the array of bytes.
+
+FUN String : convertToString()
+  > returns
+    The array of bytes as a string.
+
+FUN String : convertToStringFromUtf16()
+  > returns
+    The array of bytes as a string.
+
+FUN String : convertToStringFromUtf8()
+  > returns
+    The array of bytes as a string.
+
+FUN ByteArray : fromBase64( ByteArray base64 )
+  > returns
+    A decoded copy of the Base64 encoded array base64.
+    Attention:
+    Input is not checked for validity; invalid characters in the input are skipped, enabling the decoding process to continue with subsequent characters.
+  > since
+    4.10.0.88
+
+FUN ByteArray : fromHex( ByteArray hexEncoded )
+  > returns
+    A decoded copy of the hexidecimal encoded array hexEncoded.
+    Attention:
+    Input is not checked for validity; invalid characters in the input are skipped, enabling the decoding process to continue with subsequent characters.
+  > since
+    4.10.0.88
+
+FUN ByteArray : fromPercentEncoding( ByteArray pctEncoded )
+  > returns
+    A decoded copy of the URI/URL-style percent-encoded pctEncoded.
+  > since
+    4.10.0.88
+
+FUN ByteArray : toBase64()
+  > returns
+    A copy of the byte array, encoded as Base64.
+    Attention:
+    The algorithm used to encode Base64-encoded data is defined in RFC 2045.
+  > since
+    4.10.0.88
+
+FUN ByteArray : toHex()
+  > returns
+    A hexidecimal encoded copy of the byte array.
+    Attention:
+    Hexidecimal encoding uses the numbers 0-9 and the letters a-f.
+  > since
+    4.10.0.88
+
+FUN ByteArray : toPercentEncoding( ByteArray exclude=ByteArray, ByteArray include=ByteArray )
+  > parameters
+    + exclude - To characters to prevent from being encoded.
+    + exclude - To characters to force being encoded.
+  > returns
+    A URI/URL-style percent-encoded copy of this byte arra.
+    Attention:
+    By default, this function will encode all characters that are not one of the following: ALPHA (“a” to “z” and “A” to “Z”) / DIGIT (0 to 9) / “-” / “.” / “_” / “~”
+  > since
+    4.10.0.88

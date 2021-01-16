@@ -1,0 +1,37 @@
+CLS DzImageColorLayer : DzImageLayer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagecolorlayer_dz
+  > summary
+    A single layer in a multi-layer texture image that is filled with a solid color.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Color : color
+  > summary
+    The color for this layer.
+
+### methods
+
+FUN void : setSize( Size size )
+  > summary
+    Sets the size for this color layer.
+  > parameters
+    + size - The new size to use.
+
+### signals
+
+SIG void : colorChanged( Color color )
+  > summary
+    Emitted when the layer color changes
+  > parameters
+    + color - The new layer color
+
+SIG void : sizeChanged( Size size )
+  > summary
+    Emitted when the layer size changes
+  > parameters
+    + size - The new layer size

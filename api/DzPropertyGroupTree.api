@@ -1,0 +1,85 @@
+CLS DzPropertyGroupTree : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/propertygrouptree_dz
+  > summary
+    Represents the root of a property group tree.
+
+### description
+  > seealso
+    DzElement
+
+### methods
+
+FUN DzPropertyGroup : findChild( String name )
+  > parameters
+    + name - The name of the property group to look for.
+  > returns
+    The child with the given path (if any), otherwise NULL.
+
+FUN DzProperty : findProperty( String name )
+  > summary
+    Attempts to find a property with a given name.
+  > parameters
+    + name - The name of the property to find.
+  > returns
+    The found property (if any), otherwise NULL.
+  > since
+    4.7.1.43
+
+FUN Array : getAllPaths()
+  > returns
+    A list of all property group paths in this tree.
+
+FUN Array<DzProperty> : getAllProperties()
+  > returns
+    A list of all properties in this tree.
+  > since
+    4.9.4.101
+
+FUN DzPropertyGroup : getDefaultGroup()
+  > returns
+    The default property group for the tree; i.e., “General”
+
+FUN DzPropertyGroup : getFirstChild()
+  > returns
+    The first child group (if any), otherwise NULL.
+
+FUN DzElement : getOwner()
+  > returns
+    The element that this property group tree belongs to.
+
+FUN Boolean : isPrivate()
+  > returns
+    true if this property group tree is private, otherwise false.
+
+FUN void : setIsPrivate( Boolean onoff )
+  > summary
+    Sets whether or not this property group tree is private.
+
+FUN void : sortGroups()
+  > summary
+    Alpha-numerically sorts the property groups, keeping “General” at the top.
+
+### signals
+
+SIG void : childListChanged()
+  > summary
+    Emitted when the child list of the group has changed.
+    TODO: Add description.
+
+SIG void : propertyVisiblityChanged( DzPropertyGroup grp, DzProperty prop )
+  > summary
+    Emitted when the visibility of a property in the tree has changed.
+  > parameters
+    + grp - The group containing the property.
+    + prop - The property that changed.
+
+SIG void : treeChanged()
+  > summary
+    Emitted when the tree has changed.
+    TODO: Add description.
+
+SIG void : treeSorted()
+  > summary
+    Emitted when the tree is sorted.
+    TODO: Add description.

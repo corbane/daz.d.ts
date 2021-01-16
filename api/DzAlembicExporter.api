@@ -1,0 +1,18 @@
+CLS DzAlembicExporter : DzExporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/alembicexporter_dz
+  > summary
+    Class for exporting to the Alembic (*.abc) format.
+
+### description
+  > seealso
+    DzExportMgr::findExporterByClassName()
+    DzExportMgr::findExporter()
+  > attention
+    This class is provided by the Alembic Exporter for DAZ Studio plugin.
+
+### constructors
+
+CTR DzAlembicExporter()
+  > summary
+    Default Constructor.

@@ -1,0 +1,31 @@
+CLS DzFlipManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/flipmanip_dz
+  > summary
+    An image manipulator that flips an image layer horizontally and/or vertically.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Boolean : flipHorizontal()
+  > returns
+    true if the image will be flipped horizontally, false if the image is not flipped horizontally.
+
+FUN Boolean : flipVertical()
+  > returns
+    true if the image will be flipped vertically, false if the image is not flipped vertically.
+
+FUN void : setFlipHorizontal( Boolean onOff )
+  > summary
+    Sets whether or not the image is flipped horizontally.
+  > parameters
+    + onOff - If true, the image will be flipped horizontally, otherwise the image is not flipped horizontally.
+
+FUN void : setFlipVertical( Boolean onOff )
+  > summary
+    Sets whether or not the image is flipped vertically.
+  > parameters
+    + onOff - If true, the image will be flipped vertically, otherwise the image is not flipped vertically.

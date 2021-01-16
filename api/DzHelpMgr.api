@@ -1,0 +1,126 @@
+CLS DzHelpMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/helpmgr_dz
+  > summary
+    Class that maintains the all the inline help documentation for DAZ Studio.
+
+### description
+  > summary
+    Use DzApp::getHelpMgr() to access.
+    See daz_studio_help_generator for information on how to populate the Help Manager.
+
+### methods
+
+FUN void : browseToIdentifier( String identifier )
+  > summary
+    Opens the help browser at the given identifier.
+
+FUN void : browseToKeyword( String keyword )
+  > summary
+    Opens the help browser at the given keyword.
+
+FUN void : browseToPage( String page )
+  > summary
+    Opens the given page in the help browser.
+
+FUN void : browseToUrl( String urlString )
+  > summary
+    Opens the help browser at the given url.
+
+FUN Array : findFilterAttributes( String name )
+  > parameters
+    + name - The name of the help filter to get the attributes of.
+  > returns
+    The list of attributes for the help filter help keyword, or an empty list if the filter is not found.
+
+FUN String : findIdentifierUrl( String id )
+  > summary
+    TODO: Add description.
+
+FUN String : findKeywordUrl( String keyword )
+  > parameters
+    + keyword - The keyword to find the associated url for.
+  > returns
+    The url associated with the help keyword, or an empty url if the keyword is not found.
+
+FUN String : getDescription( String label )
+  > parameters
+    + label - The label of the help item
+  > returns
+    The description for the help item named label.
+
+FUN Array : getFilterAttributes( Number which )
+  > parameters
+    + which - The index of the help filter attributes to return.
+  > returns
+    The list of attributes for the help filter at the given index.
+
+FUN String : getFilterName( Number which )
+  > parameters
+    + which - The index of the help filter to return.
+  > returns
+    The name of the help filter at the given index.
+
+FUN String : getGroup( String label )
+  > parameters
+    + label - The label of the help item
+  > returns
+    The group for the help item named label.
+
+FUN DzHelpContentsItem : getHelpContents()
+  > returns
+    The root help contents item. The root contents item is usually not displayed, rather it serves to hold all the top-level help contents items.
+
+FUN String : getHelpString( String label )
+  > parameters
+    + label - The label of the help item
+  > returns
+    The help string text, named label.
+
+FUN String : getIdentifier( Number which )
+  > parameters
+    + which - The index of the help identifier to return.
+  > returns
+    The help identifier at the given index.
+
+FUN String : getIdentifierUrl( Number which )
+  > parameters
+    + which - The index of the help identifier url to return.
+  > returns
+    The url associated with the help identifier at the given index.
+
+FUN String : getKeyword( Number which )
+  > parameters
+    + which - The index of the help keyword to return.
+  > returns
+    The help keyword at the given index.
+
+FUN String : getKeywordUrl( Number which )
+  > parameters
+    + which - The index of the help keyword url to return.
+  > returns
+    The url associated with the help keyword at the given index.
+
+FUN Number : getNumFilters()
+  > returns
+    The number of help filters.
+
+FUN Number : getNumIdentifiers()
+  > returns
+    The number of help identifiers.
+
+FUN Number : getNumKeywords()
+  > returns
+    The number of help keywords.
+
+FUN String : getStatusTip( String label )
+  > parameters
+    + label - The label of the help item
+  > returns
+    The status tip text, named label.
+
+FUN String : getToolTip( String label )
+  > parameters
+    + label - The label of the help item
+  > returns
+    The tool tip text, named label.

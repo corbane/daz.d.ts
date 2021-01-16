@@ -1,0 +1,231 @@
+CLS DzMainWindow : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/mainwindow_dz
+  > summary
+    The main interface widget.
+
+### description
+  > summary
+    There is only one of these widgets in the application, which is created and owned by DzApp. It can be accessed by using the Global::MainWindow variable.
+
+### properties
+
+PRP Boolean : alwaysOnTop
+  > summary
+    Whether or not the main window is always on top of other application windows.
+
+PRP Boolean : toolTipsEnabled
+  > summary
+    Whether or not tool tips are enabled.
+
+### methods
+
+FUN Boolean : askSaveChanges()
+  > summary
+    Presents the user with a dialog that asks if they want to save changes to the scene, and does a scene save if the user selects yes.
+  > returns
+    false if the user selects 'Cancel', true if the user selects 'Yes' or 'No'.
+
+FUN Boolean : askTurnOffLimits()
+  > summary
+    Presents the user with a dialog that asks if they want to turn off limits to apply the preset currently being loaded.
+  > returns
+    true if limits should be turned off, false if limits should be left alone.
+
+FUN Boolean : checkExistingFile( String name )
+  > summary
+    Checks to see if the given file already exists - if it does, prompts the user if they want to overwrite it.
+  > parameters
+    + name - The name of the file to look for.
+  > returns
+    true if the file does not exist or the user wants to overwrite it, false if the user needs to select a new name.
+
+FUN void : clearUIPopUp()
+  > summary
+    Clears a the current UI popup if there is one.
+
+FUN void : displayPrompt( String msg, Number millisec=-1 )
+  > summary
+    Display a message in the status bar.
+  > parameters
+    + line - Message to display
+    + ms - If greater than zero, the message will be displayed for the given amount of time, otherwise the message will be displayed until another message is sent.
+
+FUN DzDockArea : dockArea( Point pos )
+  > returns
+    The dock area located at the goven position.
+
+FUN Boolean : doFileExport( QWidget parent=null )
+  > summary
+    Displays a dialog for saving the scene to a non-native file, and saves the scene if the user does not cancel.
+  > parameters
+    + parent - The widget that the file dialog will be parented to.
+  > returns
+    true if a file was selected and successfully saved, otherwise false.
+
+FUN Boolean : doFileImport( QWidget parent=null )
+  > summary
+    Displays a dialog for loading a non-native file, and loads the file if the user does not cancel.
+  > parameters
+    + parent - The widget that the file dialog will be parented to.
+  > returns
+    true if a file was selected and successfully loaded, otherwise false.
+
+FUN Boolean : doFileMerge( QWidget parent=null )
+  > summary
+    Displays a dialog for loading a native scene file, and merges the file into the current scene if the user does not cancel.
+  > returns
+    true if a file was selected and successfully loaded, otherwise false.
+
+FUN Boolean : doFileOpen( QWidget parent=null )
+  > summary
+    Displays a dialog for loading a native scene file, and opens the file as a new scene if the user does not cancel.
+  > returns
+    true if a file was selected and successfully loaded, otherwise false.
+
+FUN Boolean : doFileSave( QWidget parent=null )
+  > summary
+    Saves the scene to the current scene file - displaying a dialog to the user if a file needs to be selected.
+  > returns
+    true if a file was selected and successfully saved, otherwise false.
+
+FUN Image : doImageOpen( QWidget parent=null )
+  > summary
+    Displays a dialog for loading an image file, and loads the file if the user does not cancel.
+  > parameters
+    + parent - The widget that the file dialog will be parented to.
+  > returns
+    Empty image if the user cancels, or loading fails, otherwise the selected image.
+
+FUN Boolean : doImageSaveAs( Image image, QWidget parent=null )
+  > summary
+    Displays a dialog for saving the given image, and saves the image if the user does not cancel.
+  > parameters
+    + image - The Image to save.
+    + parent - The widget that the file dialog will be parented to.
+  > returns
+    true if a file was selected and successfully saved, otherwise false.
+
+FUN Boolean : doNewFile()
+  > summary
+    Clears the scene
+
+FUN Boolean : doVideoClipSaveAs( DzVideoClip clip, QWidget parent=null )
+  > summary
+    Displays a dialog for saving the given video clip, and saves the clip if the user does not cancel.
+  > parameters
+    + clip - The video clip to save.
+    + parent - The widget that the file dialog will be parented to.
+  > returns
+    true if a file was selected and successfully saved, otherwise false.
+
+FUN void : exitFullScreen()
+  > summary
+    Switches from full screen back to normal mode
+
+FUN DzActionMgr : getActionMgr()
+  > returns
+    A pointer to the global Action manager for the application interface
+
+FUN DzDockArea : getBottomDockArea()
+  > returns
+    The dock area located at the bottom of the main window.
+
+FUN DzDockArea : getCenterDockArea()
+  > returns
+    The dock area located in the center of the main window.
+
+FUN DzInteractiveLessonMgr : getInteractiveLessonMgr()
+  > returns
+    A pointer to the global interactive lesson manager for the application interface
+
+FUN DzDockArea : getLeftDockArea()
+  > returns
+    The dock area located at the left of the main window.
+
+FUN DzPaneMgr : getPaneMgr()
+  > returns
+    A pointer to the global pane manager for the application interface
+
+FUN DzDockArea : getRightDockArea()
+  > returns
+    The dock area located at the right of the main window.
+
+FUN DzDockArea : getTopDockArea()
+  > returns
+    The dock area located at the top of the main window.
+
+FUN DzUIPopUpWgt : getUIPopUp()
+  > returns
+    the current UI popup or NULL
+
+FUN DzViewportMgr : getViewportMgr()
+  > returns
+    A pointer to the global viewport manager for the application interface
+
+FUN void : goFullScreen()
+  > summary
+    Switches from normal to full screen mode
+
+FUN Boolean : isUILocked()
+  > returns
+    If the ui is locked.
+
+FUN void : positionUIPopUp( QWidget posWgt )
+  > summary
+    Position the popup according to a widget.
+  > parameters
+    + posWgt - The widget to position the popup on.
+
+FUN void : removePrompt()
+  > summary
+    Clear the message in the status bar.
+
+FUN void : repaintActive3DViewport()
+  > summary
+    A convenience method for forcing a repaint of the currently active 3D viewport (if any).
+
+FUN void : restoreUILockState()
+  > summary
+    Restores the state of the UI Lock variable to the setting in the registry.
+
+FUN void : setUILocked( Boolean onOff, Boolean storeSetting=true )
+  > parameters
+    + onOff - turn user interface locking on/off
+
+FUN void : showHomeDlg()
+  > summary
+    Show the Home page dialog.
+
+FUN DzUIPopUpWgt : showUIPopUpWgt( String filename, QWidget posWgt=null )
+  > parameters
+    + filename - The script that loads a .ui, or a .ui, file to show in the UIPopUpWgt.
+    + posWgt - The widget to position the popup on.
+  > returns
+    the DzUIPopUpWgt.
+
+FUN DzUIPopUpWgt : toggleUIPopUpWgt( String filename, QWidget posWgt=null )
+  > returns
+    The DzUIPopUpWgt that was created. If it was toggled off, then it returns undefined
+    If a popup already exists with the same filename, it is cleared (toggled). Otherwise it has the same effect as calling DzMainWindow::showUIPopUpWgt()
+  > parameters
+    + filename - The script that loads a .ui, or a .ui, file to show in the UIPopUpWgt.
+    + posWgt - The widget to position the popup on.
+
+### signals
+
+SIG void : aboutToClose()
+  > summary
+    Emitted just before the main window closes.
+
+SIG void : alwaysOnTopChanged( Boolean onOff )
+  > summary
+    Emitted when the main window is switched to/from being always on top.
+
+SIG void : started()
+  > summary
+    Emitted after the startup() function has finished.
+
+SIG void : uiLockedChanged()
+  > summary
+    Emitted when the main window is switched to/from having the ui locked.

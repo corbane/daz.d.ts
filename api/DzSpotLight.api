@@ -1,0 +1,263 @@
+CLS DzSpotLight : DzDistantLight
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/spotlight_dz
+  > summary
+    A basic spotlight.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzSpotLight()
+  > summary
+    Default Constructor. Creates a new spotlight.
+
+### methods
+
+FUN Number : getBaseOpacity()
+  > returns
+    The (scaled) base opacity.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getBaseOpacityControl()
+  > returns
+    The property that controls the base opacity.
+  > since
+    4.9.3.145
+
+FUN Number : getBeamDistribution()
+  > returns
+    The beam distribution.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getBeamDistributionControl()
+  > returns
+    The property that controls beam distribution.
+
+FUN Number : getDecay()
+  > returns
+    The decay of the light.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getDecayControl()
+  > returns
+    The property used to control decay.
+
+FUN Boolean : getDisplayPersistence()
+  > returns
+    true if the cone will be displayed when the node is not selected, otherwise false.
+  > since
+    4.9.3.145
+
+FUN DzBoolProperty : getDisplayPersistenceControl()
+  > returns
+    The property that controls the display persistence.
+  > since
+    4.9.3.145
+
+FUN Number : getEdgeOpacity()
+  > returns
+    The (scaled) edge opacity.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getEdgeOpacityControl()
+  > returns
+    The property that controls the edge opacity.
+  > since
+    4.9.3.145
+
+FUN Number : getFalloffDistance( Number lightPercent )
+  > summary
+    TODO: Add description.
+
+FUN Number : getLightExponent()
+  > returns
+    The exponent (rate of decay from center to edge) of the light.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getLightExponentControl()
+  > returns
+    The property that controls the beam exponent of the light.
+  > since
+    4.8.0.18
+
+FUN Boolean : getLightVisibility()
+  > summary
+    TODO: Add description.
+
+FUN Number : getLineOpacity()
+  > summary
+    TODO: Add description.
+
+FUN Number : getOpacityScale()
+  > returns
+    The opacity scale.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getOpacityScaleControl()
+  > returns
+    The property that controls the opacity scale.
+  > since
+    4.9.3.145
+
+FUN Number : getRayLength()
+  > returns
+    The ray length.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getRayLengthControl()
+  > returns
+    The property that controls the ray length.
+  > since
+    4.9.3.145
+
+FUN Number : getRayOpacity()
+  > returns
+    The (scaled) ray opacity.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getRayOpacityControl()
+  > returns
+    The property that controls the ray opacity.
+  > since
+    4.9.3.145
+
+FUN Boolean : getShowBase()
+  > returns
+    true if the base should be shown, otherwise false.
+  > since
+    4.9.3.145
+
+FUN DzBoolProperty : getShowBaseControl()
+  > returns
+    The property that controls whether or not to show the base control.
+  > since
+    4.9.3.145
+
+FUN Boolean : getShowEdge()
+  > returns
+    true if the edge should be shown, otherwise false.
+  > since
+    4.9.3.145
+
+FUN DzBoolProperty : getShowEdgeControl()
+  > returns
+    The property that controls whether or not to show the edge control.
+  > since
+    4.9.3.145
+
+FUN Number : getSpreadAngle()
+  > returns
+    The spread angle of the light.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getSpreadAngleControl()
+  > returns
+    The property that controls the outer spread angle of the light.
+
+FUN void : setBaseOpacity( Number opacity )
+  > summary
+    Sets the base opacity.
+  > parameters
+    + opacity - The opacity to set.
+  > since
+    4.9.3.145
+
+FUN void : setBeamDistribution( Number distribution )
+  > summary
+    Sets beam distribution.
+  > parameters
+    + distribution - The beam distribution to set.
+  > since
+    4.9.3.145
+
+FUN void : setDecay( Number decay )
+  > summary
+    Sets the amount of decay.
+  > parameters
+    + decay - The decay to set.
+  > since
+    4.9.3.145
+
+FUN void : setDisplayPersistence( Boolean persistence )
+  > summary
+    Sets the persistance of the display cone.
+  > parameters
+    + persistence - If true, the cone will be displayed when the node is not selected. If false, the cone will not be displayed when the node is not selected.
+  > since
+    4.9.3.145
+
+FUN void : setEdgeOpacity( Number opacity )
+  > summary
+    Sets the edge opacity.
+  > parameters
+    + opacity - The opacity to set.
+  > since
+    4.9.3.145
+
+FUN void : setLightExponent( Number exponent )
+  > summary
+    Sets the exponent (rate of decay from center to edge) of the light.
+  > parameters
+    + exponent - The exponent to set.
+  > since
+    4.9.3.145
+
+FUN void : setOpacityScale( Number scale )
+  > summary
+    Sets the opacity scale.
+  > parameters
+    + scale - The scale to set.
+  > since
+    4.9.3.145
+
+FUN void : setRayLength( Number length )
+  > summary
+    Sets the ray length.
+  > parameters
+    + length - The length to set.
+  > since
+    4.9.3.145
+
+FUN void : setRayOpacity( Number opacity )
+  > summary
+    Sets the ray opacity.
+  > parameters
+    + opacity - The opacity to set.
+  > since
+    4.9.3.145
+
+FUN void : setShowBase( Boolean yesNo )
+  > summary
+    Sets whether or not to show the base.
+  > parameters
+    + yesNo - If true, the base will be shown.
+  > since
+    4.9.3.145
+
+FUN void : setShowEdge( Boolean yesNo )
+  > summary
+    Sets whether or not to show the edge.
+  > parameters
+    + yesNo - If true, the edge will be shown.
+  > since
+    4.9.3.145
+
+FUN void : setSpreadAngle( Number spreadAngle )
+  > summary
+    Sets the spread angle.
+  > parameters
+    + spreadAngle - The angle to set.
+  > since
+    4.9.3.145

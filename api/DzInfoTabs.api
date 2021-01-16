@@ -1,0 +1,121 @@
+CLS DzInfoTabs : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/infotabs_dz
+  > summary
+    Tab bar that provides Tips, MetaData, and Info tabs…
+
+### description
+  > summary
+    Tab bar that provides Tips, MetaData, and Info tabs that can be used to provide various information about products.
+
+### methods
+
+FUN Number : currentTab()
+  > returns
+    The index of the current tab
+
+FUN void : hideStack()
+  > summary
+    Hides the widget responsible for displaying tab contents
+
+FUN Boolean : isStackHidden()
+  > returns
+    true if the widget responsible for displaying tab contents is hidden, false otherwise
+
+FUN void : setCurrentTab( Number which )
+  > summary
+    Sets the current tab to which
+  > parameters
+    + which - The tab to make current
+
+FUN void : setFileInfo( DzAsset asset )
+  > summary
+    Sets the file info for the given asset
+  > parameters
+    + asset - The asset file from which file info will be populated
+
+FUN void : setInfo( DzAsset asset )
+  > summary
+    Sets file and meta data info for the given asset
+  > parameters
+    + asset - The asset file from which file and metadata info will be populated
+
+FUN void : setMetaInfo( DzAsset asset )
+  > summary
+    Sets metadata info for the given asset
+  > parameters
+    + asset - The asset file from which file info will be populated
+
+FUN void : setNodeInfo( DzNode node )
+  > summary
+    Sets info for the given node
+  > parameters
+    + node - The node from which info will be populated
+
+FUN void : setProductInfo( DzProductAssetContainer product )
+  > summary
+    Sets file info from the given asset container
+  > parameters
+    + product - The product from which product info will be populated
+
+FUN DzError : setTipUIScript( String path )
+  > summary
+    Sets the UI script responsible for displaying the contents of the Tips tab
+  > parameters
+    + path - The path to the UI script file to use
+  > returns
+    A DzError error code indicating the status of setting the UI File
+
+FUN void : showFileTab( Boolean onOff )
+  > summary
+    Specifies whether the file tab is shown or not
+  > parameters
+    + onOff - If true, the file tab will be shown, otherwise it will be hidden
+
+FUN void : showMetaTab( Boolean onOff )
+  > summary
+    Specifies whether the metadata tab is shown or not
+  > parameters
+    + onOff - If true, the metadata tab will be shown, otherwise it will be hidden
+
+FUN void : showNodeTab( Boolean onOff )
+  > summary
+    Specifies whether the node tab is shown or not
+  > parameters
+    + onOff - If true, the node tab will be shown, otherwise it will be hidden
+
+FUN void : showRenderTab( Boolean onOff )
+  > summary
+    Specifies whether the render tab is shown or not
+  > parameters
+    + onOff - If true, the render tab will be shown, otherwise it will be hidden
+
+FUN void : showStack()
+  > summary
+    Shows the widget responsible for displaying the contents of the tabs
+
+FUN void : showStoreTab( Boolean onOff )
+  > summary
+    Specifies whether the store tab is shown or not
+  > parameters
+    + onOff - If true, the store tab will be shown, otherwise it will be hidden
+  > since
+    4.8.1.79
+
+### signals
+
+SIG void : keywordAddUniqueClicked( String keyword )
+  > summary
+    Emitted when a keyword is clicked and the CTRL modifier key is pressed.
+  > parameters
+    + keyword - The link text for the keyword clicked.
+
+SIG void : keywordSetClicked( String keyword )
+  > summary
+    Emitted when a keyword is clicked.
+  > parameters
+    + keyword - The link text for the keyword clicked.
+
+SIG void : renderApplyClicked()
+  > summary
+    Emitted when the apply button on the render tab is clicked.

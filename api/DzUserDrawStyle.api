@@ -1,0 +1,25 @@
+CLS DzUserDrawStyle : DzDrawStyle
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/userdrawstyle_dz
+  > summary
+    Base class for draw styles that the user can select from the viewport drop-down list.
+
+### description
+  > summary
+    Any draw styles which should be available to the user for selecting need to be derived from this class. Subclasses must implement the getPixmap() to return the icon that will be displayed in the viewport drop-down list, and getDescription() to return the text that accompanies the icon.
+
+### properties
+
+PRP Boolean : isEnabled
+  > summary
+    Read-Only - Whether or not the user style is available for use.
+
+### methods
+
+FUN String : getDescription()
+  > summary
+    Derived classes should return a description for display in the viewport drop-down list.
+
+FUN Pixmap : getPixmap()
+  > summary
+    Derived classes should return an icon for display in the viewport drop-down list.

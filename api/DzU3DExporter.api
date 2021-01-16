@@ -1,0 +1,16 @@
+CLS DzU3DExporter : DzExporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/u3dexporter_dz
+  > summary
+    Class for exporting to the Universal 3D (*.u3d) format.
+
+### description
+  > seealso
+    DzExportMgr::findExporterByClassName()
+    DzExportMgr::findExporter()
+
+### constructors
+
+CTR DzU3DExporter()
+  > summary
+    Default Constructor.

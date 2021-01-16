@@ -1,0 +1,325 @@
+CLS DzMaterial : DzElement DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/material_dz
+  > summary
+    Base class for all material types.
+
+### description
+  > summary
+    A “material” represents a collection of properties and settings that, when applied through the use of a “shader” (a small program/subroutine that describes how the settings are used), describe how the geometry associated with a 3D object interacts with light and ultimately what the surface of that 3D object looks like when rendered.
+  > seealso
+    shape_dz
+    facetmesh_dz
+    materialfacegroup_dz
+    materialselectionset_dz
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    The author of the file for this material. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    The revision version of the asset file for this material. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    The asset id for this material.
+  > since
+    4.8.1.18
+
+PRP Date : assetModifiedDate
+  > summary
+    The modified date of the asset file for this material. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    The URI of the asset source for this material; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for this material. (Read Only)
+  > since
+    4.8.1.18
+    DzRenderMgr::RenderPriority : renderPriority
+    The render priority for the material. Render priority controls the order in which materials are handled during a render. The higher the priority, the earlier the material will be handled. If several materials have the same render priority, those materials will be handled in an arbitrary order.
+    The render priority on all nodes that use this material (this will include the top-level skeleton node when dealing with figures) can automatically be set to match the material's new priority by calling enablePropagateRenderPriorityToNodes() with true before calling this method.
+    The default render priority is DzRenderMgr::RENDER_PRIORITY_NORMAL.
+
+### statics
+
+STA DzMaterial : getMaterial( Number which )
+  > returns
+    The material with the given index
+
+STA Number : getNumMaterials()
+  > returns
+    The number of materials that have been created
+
+### methods
+
+FUN DzMaterial : duplicateOrDefaultMaterial( DzElementDuplicateContext context )
+  > parameters
+    + context - The context of the material to duplicate.
+  > returns
+    The duplicate material if a material could be duplicated, otherwise a DzDefaultMaterial.
+  > since
+    4.6.2.104
+
+FUN void : enablePropagateRenderPriorityToNodes( Boolean propagate )
+  > summary
+    Sets whether or not this material should propagate its render priority up to all the nodes that use it. Setting this to true will also ensure that the render priority is set for nodes that the material is assigned to at a later time.
+    The default behaviour is to not propagate.
+  > parameters
+    + propagateOnOff - Whether or not the new priority value should be applied to all nodes that use this material (this will include the top-level skeleton node when dealing with figures).
+
+FUN DzUVSet : getActiveUVSet( shape_dz shape )
+  > returns
+    The uv set that is used by this material for the given shape. May be NULL if the shape does not have any UV Sets.
+  > since
+    4.9.3.69
+
+FUN DzUVSet : getActiveUVSet( DzGeometry geom )
+  > returns
+    The UV set that is used by this material for the given geometry. May be NULL if the geometry does not have any UV Sets.
+  > since
+    4.9.3.69
+
+FUN Array : getAllMaps()
+  > summary
+    Collects all the images that are being used by this material at the current time and inserts them into the given list if they are not already there.
+
+FUN DzTexture : getBakedMap()
+  > returns
+    The 'baked' map for the material. NULL if the material is not using a baked map.
+
+FUN Number : getBaseOpacity()
+  > returns
+    The opactiy value for this material.
+
+FUN DzBox3 : getBoundingBox()
+  > summary
+    TODO: Add description.
+
+FUN DzTexture : getColorMap()
+  > returns
+    The color ('texture') map for this material.
+
+FUN Color : getDiffuseColor()
+  > returns
+    The diffuse color for this material.
+
+FUN Number : getIndex()
+  > returns
+    The material index of this material.
+
+FUN String : getMaterialName()
+  > returns
+    The name for the type of shader (not the name for the material instance).
+
+FUN Number : getNumGLMaps()
+  > returns
+    The number of OpenGL texture maps necessary for rendering this material in OpenGL (e.g. one for a diffuse color map, one for an opacity map, etc.).
+
+FUN Number : getNumUVMaps()
+  > summary
+    Deprecated
+    This is deprecated because its name is somewhat of a misnomer. Use getNumGLMaps instead.
+  > returns
+    The number of OpenGL texture maps necessary for rendering this material in OpenGL (e.g. one for a diffuse color map, one for an opacity map, etc.).
+
+FUN DzTexture : getOpacityMap()
+  > returns
+    The opacity map for this material.
+
+FUN DzBoolProperty : getPropagatePriorityControl()
+  > returns
+    The property that controls the render priority propagation for this material.
+
+FUN DzEnumProperty : getRenderPriorityControl()
+  > returns
+    The property that controls the render priority for this material.
+
+FUN Array : getShapeList()
+  > returns
+    A list of the shapes this material is on.
+
+FUN DzFloatProperty : getSmoothAngleControl()
+  > returns
+    The property that controls the smoothing angle for this material.
+
+FUN DzBoolProperty : getSmoothControl()
+  > returns
+    The property that controls whether smoothing is enabled for this material.
+
+FUN Number : getSmoothingAngle()
+  > returns
+    The current smoothing angle for the material.
+
+FUN Array : getTags()
+  > returns
+    A list of [trimmed] tags on this material.
+  > since
+    4.7.1.29
+
+FUN DzStringProperty : getTagsControl()
+  > returns
+    The property that holds the tags for this material.
+  > since
+    4.7.1.29
+
+FUN DzEnumProperty : getUVSetControl()
+  > returns
+    The property that controls the active UV set for this material.
+
+FUN Boolean : isColorMappable()
+  > returns
+    true if the material supports mapping of the Diffuse channel, otherwise false.
+
+FUN Boolean : isHighlighted()
+  > returns
+    true if the material is currently drawn with a highlight, otherwise false.
+
+FUN Boolean : isOpacityMappable()
+  > returns
+    true if the material supports mapping of the Opacity channel, otherwise false.
+
+FUN Boolean : isOpaque()
+  > returns
+    true if this material is opaque, otherwise false.
+
+FUN Boolean : isPropagateRenderPriorityToNodesEnabled()
+  > returns
+    Whether or not this material should propagate its render priority up to all the nodes that use it.
+
+FUN Boolean : isSelected()
+  > summary
+    Retrieve selection state.
+  > returns
+    true if the material is selected, otherwise false.
+
+FUN Boolean : isSmoothingOn()
+  > returns
+    true if smoothing is enabled for the material, otherwise false.
+
+FUN Boolean : modifyAsset()
+  > summary
+    Marks the asset as being modified. Makes the current author the author of the file.
+  > returns
+    true if the asset was successfully marked as modified, otherwise false.
+
+FUN Boolean : modifyAsset( DzUri newUri )
+  > summary
+    Marks the asset as being modified. Makes the current author the author of the file. Sets the file URI for the asset to the given URI.
+  > parameters
+    + newUri - The new file URI to set for the asset.
+  > returns
+    true if the asset was successfully marked as modified, otherwise false.
+
+FUN Boolean : needsPtex()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : needsTangentSpaceParams()
+  > returns
+    true if the rendering geometry needs the additional dPds and dPdsM parameters for shaders, otherwise false.
+
+FUN void : select( Boolean onOff )
+  > summary
+    Set the selection state for this material.
+  > parameters
+    + onOff - If true, the material will be selected. If false, the material will be deselected.
+
+FUN void : setBakedMap( DzTexture img )
+  > summary
+    Set the 'baked' shader map for this material. This overrides any current material settings and just draws the map. This is useful for representing the results of off-line shaders that can not be represented in OpenGL - the results of the shader are 'baked' onto a texture map, and then applied to the material with this function.
+  > parameters
+    + img - The image that will be applied to the material instead of the current material settings. If NULL, the current baked map is cleared and the material is returned to using its current settings.
+
+FUN void : setBaseOpacity( Number val )
+  > summary
+    Set the opacity value for this material.
+
+FUN void : setColorMap( DzTexture img )
+  > summary
+    Set the color ('texture') map for this material.
+
+FUN void : setDiffuseColor( Color color )
+  > summary
+    Set the diffuse color for this material.
+
+FUN void : setOpacityMap( DzTexture img )
+  > summary
+    Set the opactiy map for this material.
+
+FUN void : setSmoothingAngle( Number angle )
+  > summary
+    Sets the smoothing angle for the material. This only has effect on the material if smoothing is enabled.
+  > parameters
+    + angle - The smoothing angle for the material. Any edges on the mesh where angle of the normals of the adjacent facets is less than this value will be smoothed. Higher values mean more smoothing, lower values mean less smoothing.
+
+FUN void : setSmoothingOn( Boolean onOff )
+  > summary
+    Sets whether or not smoothing is enabled for the material.
+  > parameters
+    + onOff - If true, smoothing is applied according to the smoothing angle. If false, no smoothing is applied to the material.
+
+FUN Boolean : shadersMatch( DzMaterial otherMat )
+  > returns
+    true if these materials are using the same shaders, otherwise false.
+    Default implementation returns true if the materials are the same class.
+
+FUN Boolean : shouldAlwaysEmbed()
+  > returns
+    true if this material should always embed into a DSON scene, otherwise false.
+
+FUN void : startDrawHighlight()
+  > summary
+    Causes this material to be drawn with a highlight based on the styles current highlight color. This is used by material selection tools, etc, to give visual feedback to the user about a material in the viewport.
+
+FUN void : stopDrawHighlight()
+  > summary
+    Causes this material to stop being drawn with a highlight.
+
+### signals
+
+SIG void : assetModified()
+  > summary
+    Emitted when the material has been modified.
+
+SIG void : assetWasSaved()
+  > summary
+    Emitted after the material has been saved.
+
+SIG void : bakedMapChanged()
+  > summary
+    Transmitted when the baked map of this material changes.
+
+SIG void : selectionStateChanged( DzMaterial mat, Boolean onOff )
+  > summary
+    Transmitted when the selection state of this material changes.
+
+SIG void : settingsChanged()
+  > summary
+    Transmitted when one of the values of this material changes.
+
+SIG void : smoothingChanged()
+  > summary
+    Transmitted when the smoothing settings of this material change.
+
+SIG void : tagsChanged()
+  > summary
+    Transmitted when the tags on this material change.
+
+SIG void : uvsChanged()
+  > summary
+    Transmitted when the uv settings of this material change.

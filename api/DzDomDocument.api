@@ -1,0 +1,106 @@
+CLS DzDomDocument : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domdocument_dz
+  > summary
+    DAZ Script DOM document node.
+
+### description
+  > summary
+    Represents a DOM document. This is typically the only DOM node that you will construct directly, all other nodes should be created as a member of a document by calling one of the following functions: * createElement( String tagName )
+    createDocumentFragment()
+    createTextNode( String value )
+    createComment( String value )
+    createCDATASection( String value )
+    createProcessingInstruction( String target, String data )
+    createAttribute( String name )
+    createEntityReference( String name )
+    createElementNS( String nsURI, String qName )
+    createAttributeNS( String nsURI, String qName )
+
+### constructors
+
+CTR DzDomDocument()
+  > summary
+    Default constructor
+
+CTR DzDomDocument( String filename )
+  > summary
+    Overloaded constructor. Loads the given file name as the content for this document.
+
+### methods
+
+FUN DzDomNode : createAttribute( String name )
+  > returns
+    A new attribute node that is a member of this document. You must still add it to an element in the document by calling DzDomElement::setAttributeNode(). An easier way to add attributes to an element is to call DzDomElement::setAttribute().
+
+FUN DzDomNode : createAttributeNS( String nsURI, String qName )
+  > returns
+    A new attribute node using the given namespace that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createCDATASection( String value )
+  > returns
+    A new CDATA node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createComment( String value )
+  > returns
+    A new comment node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createDocumentFragment()
+  > returns
+    A new document fragment node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createElement( String tagName )
+  > returns
+    A new element node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createElementNS( String nsURI, String qName )
+  > returns
+    A new element node using the given namespace that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createEntityReference( String name )
+  > returns
+    A new entity reference node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createProcessingInstruction( String target, String data )
+  > returns
+    A new processing instruction node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : createTextNode( String value )
+  > returns
+    A new text node that is a member of this document. You must still add it as a child of the document or one of its nodes
+
+FUN DzDomNode : doctype()
+  > returns
+    The document type node for this document.
+  > seealso
+    DzDomDocumentType
+
+FUN DzDomNode : elementById( String id )
+  > returns
+    The element with the given id. If no matching element was found, an invlaid (Null) node is returned.
+
+FUN DzDomNode : importNode( DzDomNode node, Boolean deep )
+  > returns
+    A new node that is a member of this document that is a (deep) copy of the given node. You must still add it as a child of the document or one of its nodes. If deep is true, the node and all its children are imported recursively.
+
+FUN Boolean : loadContent( String filename )
+  > summary
+    Sets the content of the document by reading the file with the given string.
+  > returns
+    true if the file was successfully loaded and parsed, false if an error was encountered.
+
+FUN Boolean : saveContent( String filename )
+  > summary
+    Saves the contents of the document to the file with the given name.
+  > returns
+    true if the file was successfully saved, false if an error occurred
+
+FUN Boolean : setContent( String text )
+  > summary
+    Sets the content of the document from the given string.
+  > returns
+    true if the string was successfully parsed, false if an error was encountered.
+
+FUN String : toString()
+  > returns
+    The contents of the document as a single string.

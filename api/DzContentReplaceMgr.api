@@ -1,0 +1,72 @@
+CLS DzContentReplaceMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/contentreplacemgr_dz
+  > summary
+    Content replacement manager.
+
+### description
+  > seealso
+    DzContentMgr.getContentReplaceMgr()
+
+### enumerations
+
+ENU ContentReplaceMode
+  > summary
+    Replacing methods when loading content
+  + ALWAYS_REPLACE - When a piece of content of a specific type is loaded, any content already in the scene of the same type is removed, so the new item replaces the old one.
+  + ASK_TO_REPLACE - When a piece of content is loaded, a dialog prompts the user to choose which (if any) items already in the scene should be removed.
+  + NEVER_REPLACE - Items already in the scene are never removed when loading a piece of content.
+  + ASK_WHEN_MATCHING - When a piece of content is loaded, a dialog prompts the user to choose which (if any) items already in the scene should be removed if there is an item of matching content type.
+
+### methods
+
+FUN void : clearReplaceData()
+  > summary
+    Resets all replace data to default values, excluding replace mode.
+
+FUN void : doReplace()
+  > summary
+    Performs all the necessary steps to remove content marked for replacement.
+
+FUN String : getNewContentPath()
+  > returns
+    The path of the new content.
+
+FUN String : getNewContentType()
+  > returns
+    The type of the new content.
+
+FUN DzContentReplaceMgr.ContentReplaceMode : getReplaceMode()
+  > returns
+    The content replace mode.
+
+FUN void : initReplaceForContentLoad( String path, DzNode baseNode )
+  > summary
+    Performs all the necessary initialization for doing content replacement when the given file will be loaded, using items attached to baseNode as potential items to replace.
+
+FUN void : removeReplaceNodes()
+  > summary
+    Removes all nodes in the replace list from the scene.
+
+FUN void : setNewContentPath( String contentPath )
+  > parameters
+    + contentPath - The path of the new content.
+
+FUN void : setNewContentType( String contentType )
+  > parameters
+    + contentType - The type of the new content.
+
+FUN void : setReplaceMode( DzContentReplaceMgr.ContentReplaceMode mode )
+  > summary
+    Sets the content replace mode.
+
+FUN void : updateReplaceNodes( DzNode baseNode )
+  > summary
+    Updates the replace list to contain all items that should be removed during content load. If the replace mode is ALWAYS_REPLACE, the list will contain all nodes attached (following, parented, etc.) to baseNode whose type matches the current “New Content Type” (as set through setNewContentType()). If the replace mode is ASK_TO_REPLACE, a dialog will allow the user to select what nodes should be replaced.
+
+### signals
+
+SIG void : contentReplaceModeChanged( DzContentReplaceMgr.ContentReplaceMode mode )
+  > summary
+    Emitted when the content replace mode has changed.
+    TODO: Add description.

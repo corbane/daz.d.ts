@@ -1,0 +1,1286 @@
+CLS DzNode : DzElement
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/node_dz
+  > summary
+    Base class for objects that can participate in a transform hierarchy.
+
+### description
+  > summary
+    DzNode objects all contain animatable position, rotation, and scale channels that can be set and accessed via the properties list in the DzElement class or through specialized calls in this class.
+    The transform order is Translate/Rotate/Scale. Non-uniform scaling is supported by implementing seperate X, Y, and Z scale channels. All channels are independent internally and can have keys set on them independent of any other channel.
+    Note that channel independence holds exactly true for translations and scales, but does not hold for rotations (which are represented as Euler angle degrees in each channel). Euler angles are inherently inter-dependent and prone to numerical singularities (gimbals) that make them less than perfect at representing rotations. For this reason, rotations are handled as DzQuat objects whenever possible. When setting keys on a DzNode, it is prefferable to use the set*Rot() methods or set*Transform() methods that take DzQuat arguments. Setting rotations as a DzQuat will create keys on all three rotation channels but will assure that the values are reasonable.
+    Nodes have an origin and an orientation that define their default state. The origin is the center point of the node and is given in untransformed world space. In other words, the origin is the center point of the node in relation to its untransformed and undeformed geometry. The orientation of the node defines the space in which this node's rotations occur. Orientation only has an effect on the rotation of the node, it does not affect translation or scale transforms.
+    Each node defines a local axis that is determined by evaluating the transforms of all nodes in the parent tree for this node in order.
+    Several functions are provided for accessing the transformation data of a node. Below are descriptions of the groups of functions, and the transform space that they return data for.
+    World Space Transforms:getWSTransform(), getWSPos(), getWSRot(), getWSScale() WS (world space) transforms are just that - the transformation of the node into world space, including keyed transformation data. These functions essentially traverse up the hierarchy evaluating the local transforms for each parent node, resulting in the final World Space transform of the node.
+    Local Transforms:getLocalTransform(), getLocalPos(), getLocalRot(), getLocalScale() Local transforms are the full transformation of the node in the space of its immediate parent - for root nodes, the nodes origin added to the local pos is equivalent to the worldspace transform.
+    Classes derived from DzNode may also be drawn in the interactive 3D views (via the draw() method) or/and may be rendered using a RenderMan- compliant renderer (via the render() method).
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    The author of the file for this node. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    The revision version of the asset file for this node. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    The asset id for this node.
+  > since
+    4.8.1.18
+
+PRP Array : assetIdAliases
+  > summary
+    The asset id aliases for this node.
+
+PRP Date : assetModifiedDate
+  > summary
+    The modified date of the asset file for this node. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    The URI of the asset source for this node; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for this node. (Read Only)
+  > since
+    4.8.1.18
+
+PRP Array : nameAliases
+  > summary
+    The name aliases for this node.
+    DzRenderMgr.RenderPriority : renderPriority
+    The render priority for the node. Render priority controls the order in which nodes are rendered. The higher the priority, the earlier the node will be rendered. If several nodes have the same render priority, those nodes will be rendered in an arbitrary order.
+    The default render priority is RENDER_PRIORITY_NORMAL.
+
+### statics
+
+STA DzNode : duplicate( DzNode node, Boolean propagate )
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzNode()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzError : addNodeChild( DzNode child, Boolean inPlace=false )
+  > summary
+    Adds a child to this node.
+  > parameters
+    + child - The node to add to this node's list of children. A child must be removed from one parent before it can be attached to another.
+    + inPlace - If true, the necessary transforms to parent 'In Place' will be calculated and applied to the child.
+
+FUN void : adjustEndPoint( DzVec3 endPnt )
+  > summary
+    Sets the end point for this node adjusting for controllers.
+  > parameters
+    + endPnt - The end point for the node. This is the node's end point in relation to its geometry.
+
+FUN void : adjustOrientation( DzQuat orientation )
+  > summary
+    Sets the orientation for the node adjusting for controllers.
+  > parameters
+    + orientation - The orientation for the node. This defines the space in which node rotations occur.
+
+FUN void : adjustOrientationAngles( DzVec3 angles )
+  > summary
+    Sets the orientation for the node adjusting for controllers.
+  > parameters
+    + angles - The orientation for the node in degrees. This defines the space in which node rotations occur.
+
+FUN void : adjustOrigin( DzVec3 origin )
+  > summary
+    Sets the origin for the node adjusting for controllers.
+  > parameters
+    + origin - The origin for the node. This is the node's center point in relation to its geometry.
+
+FUN Boolean : castsShadow()
+  > summary
+    Get the current shadow-casting status of this node.
+  > returns
+    true if the node is casting shadows or the active mode of the active renderer does not allow disabling shadows (and thus dynamically hides the property providing control to the user), otherwise false.
+
+FUN void : clearAllTransformData()
+  > summary
+    Removes all local transform data.
+
+FUN void : clearManipOverColor()
+  > summary
+    Clears the override color to be used to draw the node while using manipulation draw styles.
+
+FUN void : clearTransformData( DzTimeRange range )
+  > summary
+    Removes local transform data.
+  > parameters
+    + range - The timerange to clear transform data across.
+
+FUN DzNode : duplicate( Boolean propagate )
+  > parameters
+    + propagate - If true, the hierarchy of nodes that are children of this node will also be duplicated.
+  > returns
+    The (root) node (if any) that results from duplicating this node, otherwise null.
+  > since
+    4.9.3.80
+
+FUN void : finalize( Boolean isRender=false, Boolean allowResChange=true )
+  > summary
+    Finalizes the node's geometry cache.
+  > parameters
+    + isRender - If true, the geometry cache will be finalized for a render operation, otherwise, the geometry will be prepared for a drawing operation.
+    + allowResChange - If true, the geometry is allowed to change resolution in the finalize. otherwise, the geometry will stay at it's current resolution.
+
+FUN Number : findChildIndex( DzNode curNode )
+  > parameters
+    + curNode - The node to find the index of.
+  > returns
+    The index of curNode (if any), otherwise -1.
+
+FUN DzNode : findNodeChild( String name, Boolean recurse=false )
+  > summary
+    Get a child from this node by name.
+  > parameters
+    + name - The name of the child to find.
+    + recurse - If true, this will be called recursively until a child with a matching name is found.
+  > returns
+    A child node having a matching name (if any), otherwise NULL.
+
+FUN DzNode : findNodeChildByAssetID( String assetID, Boolean recurse=false, Boolean checkSource=true )
+  > summary
+    Get a child from this node by asset id.
+  > parameters
+    + assetID - The asset ID of the child to find.
+    + recurse - If true, this will be called recursively until a child with a matching asset ID is found.
+    + checkSource - If true, the asset's source will be checked for a match.
+  > returns
+    A child node having a matching asset ID (if any), otherwise NULL.
+
+FUN DzNode : findNodeChildByLabel( String label, Boolean recurse=false )
+  > summary
+    Get a child from this node by label.
+  > parameters
+    + label - The label of the child to find.
+    + recurse - If true, this will be called recursively until a child with a matching label is found.
+  > returns
+    A child node having a matching label (if any), otherwise NULL.
+  > since
+    4.10.0.68
+
+FUN DzNode : findNodeChildByNameOrAlias( String name, Boolean alaises, Boolean recurse=false )
+  > summary
+    Get a child from this node by name (or alias).
+  > parameters
+    + name - The name (or alias) of the child to find.
+    + aliases - If true, consider name aliases.
+    + recurse - If true, this will be called recursively until a child with a matching name (or alias) is found.
+  > returns
+    A child node having a matching name or alias (if any), otherwise NULL.
+
+FUN DzProperty : findPropertyReference( DzUri uri )
+  > parameters
+    + uri - The URI path to the property.
+  > returns
+    The property referred to by the uri or null if the property cannot be found.
+  > since
+    4.9.2.20
+
+FUN DzBoolProperty : getDisableTransfromControl()
+  > returns
+    The property used for controlling if the node's transfrom is disabled.
+  > since
+    4.9.2.11
+
+FUN DzVec3 : getEndPoint( Boolean defaultVal=false )
+  > parameters
+    + defaultVal - If true, the default value for the end point is returned, otherwise the current value is.
+  > returns
+    The endpoint for this node.
+
+FUN DzFloatProperty : getEndXControl()
+  > returns
+    The float property that controls the x position of the node's end point.
+
+FUN DzFloatProperty : getEndYControl()
+  > returns
+    The float property that controls the y position of the node's end point.
+
+FUN DzFloatProperty : getEndZControl()
+  > returns
+    The float property that controls the z position of the node's end point.
+
+FUN DzFloatProperty : getFirstAxisRotControl()
+  > returns
+    The float property that controls local rotation of the node around the first axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzBox3 : getLocalBoundingBox()
+  > summary
+    Calculate the local space bounding box for this node.
+  > returns
+    A box containing the current node (including an attached object) in the local space of the node.
+
+FUN DzOrientedBox3 : getLocalOrientedBox()
+  > summary
+    Calculate the local space bounding box for this node.
+  > returns
+    A box containing the current node (including an attached object) in the local space of the node.
+
+FUN DzVec3 : getLocalPos()
+  > returns
+    The local-space position of the node at the current time.
+
+FUN DzVec3 : getLocalPos( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The local-space position of the node.
+
+FUN DzQuat : getLocalRot()
+  > returns
+    The local-space rotation of the node at the current time.
+
+FUN DzQuat : getLocalRot( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The local-space rotation of the node.
+
+FUN DzMatrix3 : getLocalScale()
+  > returns
+    The local-space scale of the node at the time.
+
+FUN DzMatrix3 : getLocalScale( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The local-space scale of the node.
+
+FUN DzMatrix3 : getLocalTransform()
+  > summary
+    Get the composed local transform info for this node at the current time.
+  > returns
+    A matrix representing the composed local transform for this node.
+
+FUN DzMatrix3 : getLocalTransform( DzTime tm, Boolean defaultVal=false )
+  > summary
+    Get the composed local transform info for this node.
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    A matrix representing the composed local transform for this node.
+
+FUN DzNode : getNodeChild( Number i )
+  > summary
+    Get the child at the given index.
+  > returns
+    The i'th node attached to this node as a child. NULL if the index is invalid.
+
+FUN Array<DzNode> : getNodeChildren( Boolean recurse=false )
+  > parameters
+    + recurse - If true, recursively collect all this node's children, scanning the hierarchy from this node down. If false (default), collect only this node's immediate children.
+  > returns
+    A list containing the children of this node.
+
+FUN DzNode : getNodeParent()
+  > summary
+    Get the parent of this node.
+  > returns
+    The parent of this node in the scene hierarchy, NULL if this node is at root level.
+
+FUN Number : getNumNodeChildren()
+  > summary
+    Get the number of children attached to this node.
+  > returns
+    The number of nodes attached to this node as children in the scene hierarchy.
+
+FUN DzObject : getObject()
+  > summary
+    Get the object currently associated with this node.
+  > returns
+    The object that is associated with this node. NULL if node has no object.
+
+FUN DzQuat : getOrientation( Boolean defaultVal=false )
+  > parameters
+    + defaultVal - Get the default or current values of the orientation. defaultVal defaults to false or current position.
+  > returns
+    The orientation of the node.
+
+FUN DzFloatProperty : getOrientXControl()
+  > returns
+    The float property that controls the x rotation of the node's orientation.
+
+FUN DzFloatProperty : getOrientYControl()
+  > returns
+    The float property that controls the y rotation of the node's orientation.
+
+FUN DzFloatProperty : getOrientZControl()
+  > returns
+    The float property that controls the z rotation of the node's orientation.
+
+FUN DzVec3 : getOrigin( Boolean defaultVal=false )
+  > parameters
+    + defaultVal - Get the default or current values of the origin. Default is false for current.
+  > returns
+    The origin of the node.
+
+FUN DzFloatProperty : getOriginXControl()
+  > returns
+    The float property that controls the x position of the node's origin.
+
+FUN DzFloatProperty : getOriginYControl()
+  > returns
+    The float property that controls the y position of the node's origin.
+
+FUN DzFloatProperty : getOriginZControl()
+  > returns
+    The float property that controls the z position of the node's origin.
+
+FUN DzNumericNodeProperty : getPointAtControl()
+  > returns
+    The property used for tracking the point-at target.
+
+FUN DzPresentation : getPresentation()
+  > returns
+    The presentation for this property or NULL if there is none.
+
+FUN DzOrientedBox3 : getPreviewBox()
+  > summary
+    Get the local-space preview box for this node, if any.
+  > returns
+    The preview box for this node, or an invalid box if none has been set.
+
+FUN DzEnumProperty : getRenderPriorityControl()
+  > returns
+    The enum property that controls the render priority of this node.
+
+FUN DzBoolProperty : getRenderVisibilityControl()
+  > returns
+    The boolean property that controls render visibility of this node.
+
+FUN DzRotationOrder : getRotationOrder()
+  > summary
+    Get the node rotation order.
+  > returns
+    The order that the axis rotations are applied to this node.
+
+FUN DzFloatProperty : getScaleControl()
+  > returns
+    The float property that controls general scale of the node.
+
+FUN DzFloatProperty : getSecondAxisRotControl()
+  > returns
+    The float property that controls local rotation of the node around the second axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzBoolProperty : getSelectabilityControl()
+  > returns
+    The boolean property that controls selectability of this node.
+
+FUN DzSelectionMap : getSelectionMap()
+  > returns
+    The selection map for this node.
+
+FUN DzNode : getSelectionNode()
+  > returns
+    The node to be selected if selection is promoted, otherwise this node.
+
+FUN DzBoolProperty : getShadowControl()
+  > returns
+    The boolean property that controls whether this light is casting shadows.
+
+FUN DzBoolProperty : getSimulationVisibilityControl()
+  > returns
+    The boolean property that controls simulation visibility of this node.
+  > since
+    4.9.4.25
+
+FUN DzSkeleton : getSkeleton()
+  > summary
+    Traverse up the hierarchy and attempt to find a DzSkeleton.
+  > returns
+    The first DzSkeleton node encountered. NULL if this node is not in the hierarchy of a skeleton.
+
+FUN DzFloatProperty : getThirdAxisRotControl()
+  > returns
+    The float property that controls local rotation of the node around the third axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzFloatProperty : getToolFirstAxisRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the first axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzQuat : getToolLocalRot()
+  > returns
+    The local-space rotation of the node at the current time, in the context of the current tool.
+  > since
+    4.9.3.16
+
+FUN DzQuat : getToolLocalRot( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The local-space rotation of the node, in the context of the current tool.
+  > since
+    4.8.1.13
+
+FUN DzFloatProperty : getToolSecondAxisRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the second axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzFloatProperty : getToolThirdAxisRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the third axis of the rotation order.
+  > since
+    4.9.3.17
+
+FUN DzQuat : getToolWSRot()
+  > returns
+    The world-space rotation of the node at the current time, in the context of the current tool.
+  > since
+    4.9.3.16
+
+FUN DzQuat : getToolWSRot( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space rotation of the node, in the context of the current tool.
+  > since
+    4.8.1.13
+
+FUN DzMatrix3 : getToolWSTransform()
+  > summary
+    Get the world-space transformation data for this node at the current time, in the context of the current tool.
+  > returns
+    A matrix representing the composed WS transform for this node.
+  > since
+    4.9.3.16
+
+FUN DzMatrix3 : getToolWSTransform( DzTime tm, Boolean defaultVal=false )
+  > summary
+    Get the world-space transformation data for this node, in the context of the current tool.
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    A matrix representing the composed WS transform for this node.
+  > since
+    4.8.1.13
+
+FUN DzFloatProperty : getToolXRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the x axis.
+
+FUN DzFloatProperty : getToolYRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the y axis.
+
+FUN DzFloatProperty : getToolZRotControl()
+  > returns
+    The float property that tools should use to control local rotation of the node around the z axis.
+
+FUN DzBoolProperty : getVisibilityControl()
+  > returns
+    The boolean property that controls visibility of this node.
+
+FUN DzBox3 : getWSBoundingBox()
+  > summary
+    Calculate a world space oriented bounding box for this node.
+  > returns
+    A box containing the current node (including an attached object) in the world-space coordinates.
+
+FUN DzOrientedBox3 : getWSOrientedBox()
+  > summary
+    Calculate a world-space oriented bounding box for this node.
+  > returns
+    An oriented box derived from a local-space bounding box containing the current node (including an attached object) in the world-space coordinates.
+
+FUN DzVec3 : getWSPos()
+  > returns
+    The world-space position of the node at the current time.
+
+FUN DzVec3 : getWSPos( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space position of the node.
+
+FUN DzQuat : getWSRot()
+  > returns
+    The world-space rotation of the node at the current time.
+
+FUN DzQuat : getWSRot( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space rotation of the node.
+
+FUN DzMatrix3 : getWSScale()
+  > returns
+    The world-space scale of the node at the current time.
+
+FUN DzMatrix3 : getWSScale( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space scale of the node.
+
+FUN DzMatrix3 : getWSTransform()
+  > summary
+    Get the world-space transformation data for this node at the current time.
+  > returns
+    A matrix representing the composed WS transform for this node.
+
+FUN DzMatrix3 : getWSTransform( DzTime tm, Boolean defaultVal=false )
+  > summary
+    Get the world-space transformation data for this node.
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    A matrix representing the composed WS transform for this node.
+
+FUN DzFloatProperty : getXPosControl()
+  > returns
+    The float property that controls the local x position of the node.
+
+FUN DzFloatProperty : getXRotControl()
+  > returns
+    The float property that controls local rotation of the node around the x axis.
+
+FUN DzFloatProperty : getXScaleControl()
+  > returns
+    The float property that controls scaling of the node along the x axis.
+
+FUN DzFloatProperty : getYPosControl()
+  > returns
+    The float property that controls the local y position of the node.
+
+FUN DzFloatProperty : getYRotControl()
+  > returns
+    The float property that controls local rotation of the node around the y axis.
+
+FUN DzFloatProperty : getYScaleControl()
+  > returns
+    The float property that controls scaling of the node along the y axis.
+
+FUN DzFloatProperty : getZPosControl()
+  > returns
+    The float property that controls the local z position of the node.
+
+FUN DzFloatProperty : getZRotControl()
+  > returns
+    The float property that controls local rotation of the node around the z axis.
+
+FUN DzFloatProperty : getZScaleControl()
+  > returns
+    The float property that controls scaling of the node along the z axis.
+
+FUN Boolean : inheritsScale()
+  > returns
+    true if this node inherits scale from its parent, otherwise false.
+
+FUN void : invalidateBoundingBoxes( Boolean checkSkeleton=true )
+  > summary
+    Invalidates the bounding boxes for this node, causing them to be recalculated.
+  > parameters
+    + checkSkeleton - Whether or not to invalidate the bounding box for this node's skeleton, if it has one.
+
+FUN Boolean : invisibleByGroup()
+  > returns
+    true if this node is set invisible by a group node, otherwise false.
+
+FUN Boolean : invisibleInRenderByGroup()
+  > returns
+    true if this node is set invisible in render by a group node, otherwise false.
+  > since
+    4.9.4.73
+
+FUN Boolean : invisibleInSimulationByGroup()
+  > returns
+    true if this node is set invisible in simulation by a group node, otherwise false.
+  > since
+    4.9.4.73
+
+FUN Boolean : isBoneSelectingNode()
+  > returns
+    true if the parent of this node, or any of its ancestors, is a DzBone and this node or any of its ancestors should redirect their viewport selection to their ancestors.
+
+FUN Boolean : isEditorNode()
+  > returns
+    true if this node is considered an editor node, otherwise false.
+
+FUN Boolean : isHidden()
+  > returns
+    true if this node should not be shown in the interface, otherwise false.
+
+FUN Boolean : isInScene()
+  > returns
+    true if the node is in the scene, otherwise false.
+  > since
+    4.6.4.67
+
+FUN Boolean : isNodeChild( DzNode node )
+  > summary
+    Checks to see if given node is one of this node's children.
+  > parameters
+    + node - The node to look for in this node's hierarchy.
+  > returns
+    true if the node is a child of this node in the scene hierarchy, otherwise false.
+
+FUN Boolean : isRootNode()
+  > summary
+    Check to see if this is a root level node.
+  > returns
+    true if this object has no parent in the scene hierarchy, otherwise false.
+
+FUN Boolean : isSelectable()
+  > returns
+    true if this node is selectable via the 3D viewport, otherwise false.
+
+FUN Boolean : isSelected()
+  > summary
+    Get the current selection state of this node.
+  > returns
+    true if the node is selected, otherwise false.
+
+FUN Boolean : isSelectionPromoted()
+  > returns
+    true if this node should redirect its viewport selection to its parent, otherwise false.
+
+FUN Boolean : isVisibileInRender()
+  > summary
+    Get the current render visibility status of this node.
+  > returns
+    true if the node set to be visible in the render, otherwise false.
+
+FUN Boolean : isVisibileInSimulation()
+  > summary
+    Get the current simulation visibility status of this node.
+  > returns
+    true if the node set to be visible in the simulation, otherwise false.
+  > since
+    4.9.4.25
+
+FUN Boolean : isVisible()
+  > summary
+    Get the current visibility status of this node.
+  > returns
+    true if the node is visible, otherwise false.
+
+FUN Boolean : modifyAsset( DzUri newUri )
+  > summary
+    Marks the asset as being modified.
+  > parameters
+    + newUri - The new file URI for the asset.
+  > returns
+    true on success, otherwise false.
+
+FUN Boolean : modifyAsset()
+  > summary
+    Marks the asset as being modified.
+  > returns
+    true on success, otherwise false.
+
+FUN DzError : moveNodeChildToIndex( DzNode child, Number index )
+  > parameters
+    + child - The node child to move.
+    + index - The index to put the node at, -1 for end of list, 0 for beginning.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : moveNodeChildToIndex( Number childIndex, Number newChildIndex )
+  > parameters
+    + childIndex - The index for the child to move.
+    + newChildIndex - The index to put the node at, -1 for end of list, 0 for beginning.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN void : removeAllNodeChildren()
+  > summary
+    Removes all the children of this node.
+
+FUN DzError : removeNodeChild( DzNode child, Boolean inPlace=false )
+  > summary
+    Removes a child from this node.
+  > parameters
+    + child - The node to remove from this node's list of children. A child must be removed from one parent before it can be attached to another.
+    + inPlace - If true, the necessary transforms to unparent 'In Place' will be calculated and applied to the child.
+
+FUN void : select( Boolean onOff=true )
+  > summary
+    Sets the selection state of this node.
+  > parameters
+    + onOff - If true, sets selection on for this node. If false, sets selection off.
+
+FUN void : setEndPoint( DzVec3 endPnt, Boolean makeDefault=false )
+  > summary
+    Sets the end point for this node.
+  > parameters
+    + endPnt - The end point for the node. This is the node's end point in relation to its geometry.
+    + makeDefault - Whether or not to set the default value as well as the current value.
+
+FUN void : setHidden( Boolean onOff )
+  > summary
+    Hide or show this node in the interface.
+  > parameters
+    + onOff - If true, the node will not appear in the hierarchy list. If false, the node will be displayed in the scene hierarchy.
+
+FUN void : setInheritScale( Boolean onOff )
+  > summary
+    Sets whether or not this node inherits the scale of its parent.
+  > parameters
+    + onOff - If true, scaling the parent of this node will scale this node also.
+
+FUN void : setInvisibleByGroup( Boolean yesNo )
+  > summary
+    Sets whether this nodes visibility is controlled by a DzGroupNode.
+
+FUN void : setInvisibleInRenderByGroup( Boolean yesNo )
+  > summary
+    Sets whether or not this node's visibility to rendering is controlled by a group node.
+  > since
+    4.9.4.73
+
+FUN void : setInvisibleInSimulationByGroup( Boolean yesNo )
+  > summary
+    Sets whether or not this node's visibility to simulation is controlled by a group node.
+  > since
+    4.9.4.73
+
+FUN void : setLocalPos( DzVec3 pos )
+  > summary
+    Sets local-space translation for the node at the current time.
+  > parameters
+    + vec - The local space translation for the node.
+
+FUN void : setLocalPos( DzTime tm, DzVec3 pos )
+  > summary
+    Sets local-space translation for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + vec - The local space translation for the node.
+
+FUN void : setLocalRot( DzTime tm, DzQuat rot )
+  > summary
+    Sets local-space rotation for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The local space rotation for the node.
+
+FUN void : setLocalRot( DzQuat rot )
+  > summary
+    Sets local-space rotation for the node at the current time.
+  > parameters
+    + val - The local space rotation for the node.
+
+FUN void : setLocalScale( DzMatrix3 scale )
+  > summary
+    Sets local-space scale for the node at the current time.
+  > parameters
+    + val - The local space scale for the node
+
+FUN void : setLocalScale( DzTime tm, DzMatrix3 scale, Number generalScale )
+  > summary
+    Sets local-space scale for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The local space scale for the node
+    + generalScale - The general scale factor for the node.
+
+FUN void : setLocalScale( DzTime tm, DzMatrix3 scale )
+  > summary
+    Sets local-space scale for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The local space scale for the node.
+
+FUN void : setLocalScale( DzMatrix3 scale, Number generalScale )
+  > summary
+    Sets local-space scale for the node at the current time.
+  > parameters
+    + val - The local space scale for the node.
+    + generalScale - The general scale factor for the node.
+
+FUN void : setLocalTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Calculates the local transform matrix for this node at the given time.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+
+FUN void : setLocalTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale, Number generalScale )
+  > summary
+    Calculates the local transform matrix for this node at the current time.
+  > parameters
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+    + generalScale - The general scale for the transform.
+
+FUN void : setLocalTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Calculates the local transform matrix for this node at the current time.
+  > parameters
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+
+FUN void : setLocalTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale, Number generalScale )
+  > summary
+    Calculates the local transform matrix for this node at the given time.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+    + generalScale - The general scale for the transform.
+
+FUN void : setManipOverColor( Color color )
+  > summary
+    Sets the override color to be used to draw the node while using manipulation draw styles.
+  > parameters
+    + color - The value for the override color.
+
+FUN void : setObject( DzObject object )
+  > summary
+    Sets the object for this node.
+  > parameters
+    + object - The object that will be drawn by this node. The node takes ownership of this object and deletes it when it is no longer used.
+
+FUN void : setOrientation( DzQuat orientation, Boolean makeDefault=false )
+  > summary
+    Sets the orientation for the node.
+  > parameters
+    + orientation - The orientation for the node. This defines the space in which node rotations occur.
+    + makeDefault - Whether or not to set the default value as well as the current value.
+
+FUN void : setOrientationAngles( DzVec3 angles, Boolean makeDefault=false )
+  > summary
+    Sets the orientation for the node.
+  > parameters
+    + angles - The orientation for the node in degrees. This defines the space in which node rotations occur.
+    + makeDefault - Whether or not to set the default value as well as the current value.
+
+FUN void : setOrigin( DzVec3 origin, Boolean makeDefault=false )
+  > summary
+    Sets the origin for the node.
+  > parameters
+    + origin - The origin for the node. This is the node's center point in relation to its geometry.
+    + makeDefault - Whether or not to set the default value as well as the current value.
+
+FUN void : setPointAtStrength( Number strength )
+  > summary
+    Set the strength of the point at parameter.
+  > parameters
+    + strength - A value in the range [0.0, 1.0] that determines how closely this node aims at its point-at target.
+
+FUN void : setPointAtTarget( DzNode target )
+  > summary
+    Set the target for this node to be pointed toward.
+  > parameters
+    + target - The node whose centerpoint will serve as the target of point-at functionality.
+
+FUN void : setPresentation( DzPresentation pres )
+  > summary
+    Sets the presentation for this node.
+  > parameters
+    + pres - The new presentation for this node.
+
+FUN void : setPreviewBox( DzOrientedBox3 box )
+  > summary
+    Sets the preview box for the node.
+  > parameters
+    + box - The oriented box to set.
+
+FUN void : setPromoteSelection( Boolean onOff )
+  > summary
+    Sets whether or not to redirect selection.
+  > parameters
+    + onOff - If true, the node will redirect its selection to its parent.
+
+FUN void : setRotationOrder( DzRotationOrder order )
+  > summary
+    Sets the node rotation order.
+  > parameters
+    + order - The order that the axis rotations will be applied in for this node.
+
+FUN void : setSelectable( Boolean onOff )
+  > summary
+    Sets whether or not this node is selectable via the 3D viewport.
+  > parameters
+    + onOff - If true, the node will be selectable (the default). If false, the node will not participate in the pick image.
+
+FUN void : setSelectionMap( DzSelectionMap map )
+  > summary
+    Sets the selection map to use for this node.
+  > parameters
+    + map - The selection map to use for this node.
+
+FUN void : setToolLocalRot( DzTime tm, DzQuat rot )
+  > summary
+    Sets the local-space rotation for the node, in the context of the current tool, at the current time.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The local space rotation for the node.
+
+FUN void : setToolLocalRot( DzQuat rot )
+  > summary
+    Sets the local-space rotation for the node, in the context of the current tool.
+  > parameters
+    + val - The local space rotation for the node.
+
+FUN void : setToolLocalTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Calculates the local transform matrix for this node at the current time, in the context of the current tool.
+  > parameters
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+  > since
+    4.9.3.16
+
+FUN void : setToolLocalTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale, Number generalScale )
+  > summary
+    Calculates the local transform matrix for this node at the given time, in the context of the current tool.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+    + generalScale - The general scale for the transform.
+  > since
+    4.8.1.13
+
+FUN void : setToolLocalTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale, Number generalScale )
+  > summary
+    Calculates the local transform matrix for this node at the current time, in the context of the current tool.
+  > parameters
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+    + generalScale - The general scale for the transform.
+  > since
+    4.9.3.16
+
+FUN void : setToolLocalTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Calculates the local transform matrix for this node, in the context of the current tool, at the given time.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The local-space position offset for this node.
+    + rot - The local-space rotation for this node.
+    + scale - The local-space scale for this node.
+  > since
+    4.8.1.13
+
+FUN void : setToolWSRot( DzTime tm, DzQuat val )
+  > summary
+    Sets world-space rotation for the node, in the context of the current tool.
+  > parameters
+    + tm - The scene time at which to set the rotation for the node.
+    + val - The World-Space rotation for the node.
+  > since
+    4.9.3.16
+
+FUN void : setToolWSRot( DzQuat val )
+  > summary
+    Sets world-space rotation for the node at the current time, in the context of the current tool.
+  > parameters
+    + val - The World-Space rotation for the node.
+  > since
+    4.9.3.16
+
+FUN void : setToolWSTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Set world-space transform values for this node at the current time, in the context of the current tool.
+  > parameters
+    + pos - The world-space position offset for this node.
+    + rot - The world-space rotation for this node.
+    + scale - The world-space scale for this node.
+  > since
+    4.9.3.16
+
+FUN void : setToolWSTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Set world-space transform values for this node, in the context of the current tool.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The world-space position offset for this node.
+    + rot - The world-space rotation for this node.
+    + scale - The world-space scale for this node.
+  > since
+    4.9.3.16
+
+FUN void : setUnselectableByGroup( Boolean yesNo )
+  > summary
+    Sets whether or not this node's selectability is controlled by a group node.
+
+FUN void : setVisible( Boolean onOff )
+  > summary
+    Sets whether or not this node is visible in the 3D viewport.
+  > parameters
+    + onOff - If true, the node will be visible (the default). If false, the node will not be drawn in the 3D viewport.
+
+FUN void : setVisibleInRender( Boolean onOff )
+  > summary
+    Sets whether or not this node is visible during a render.
+  > parameters
+    + onOff - If true, the node is visible during a render, otherwise it is not.
+
+FUN void : setVisibleInSimulation( Boolean onOff )
+  > summary
+    Sets whether or not this node is visible during a simulation.
+  > parameters
+    + onOff - If true, the node is visible during a simulation, otherwise it is not.
+  > since
+    4.9.4.25
+
+FUN void : setWSPos( DzVec3 pos )
+  > summary
+    Sets world-space translation for the node at the current time.
+  > parameters
+    + vec - The World-Space translation for the node.
+
+FUN void : setWSPos( DzTime tm, DzVec3 pos )
+  > summary
+    Sets world-space translation for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + vec - The World-Space translation for the node.
+
+FUN void : setWSRot( DzQuat val )
+  > summary
+    Sets world-space rotation for the node at the current time.
+  > parameters
+    + val - The World-Space rotation for the node.
+
+FUN void : setWSRot( DzTime tm, DzQuat val )
+  > summary
+    Sets world-space rotation for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The World-Space rotation for the node.
+
+FUN void : setWSScale( DzMatrix3 scale )
+  > summary
+    Sets world-space scale for the node at the current time.
+  > parameters
+    + val - The World-Space sacle for the node.
+
+FUN void : setWSScale( DzTime tm, DzMatrix3 scale )
+  > summary
+    Sets world-space scale for the node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + val - The World-Space scale for the node.
+
+FUN void : setWSTransform( DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Set world-space transform values for this node at the current time.
+  > parameters
+    + pos - The world-space position offset for this node.
+    + rot - The world-space rotation for this node.
+    + scale - The world-space scale for this node.
+
+FUN void : setWSTransform( DzTime tm, DzVec3 pos, DzQuat rot, DzMatrix3 scale )
+  > summary
+    Set world-space transform values for this node.
+  > parameters
+    + tm - The scene time at which to set the transform for the node.
+    + pos - The world-space position offset for this node.
+    + rot - The world-space rotation for this node.
+    + scale - The world-space scale for this node.
+
+FUN Boolean : unselectableByGroup()
+  > returns
+    true if this node is set unselectable by a group node, otherwise false.
+
+FUN void : update( Boolean isRender=false )
+  > summary
+    Called to update any cached or display data for this object.
+  > parameters
+    + isRender - If true, the node should prepare itself for a render quality presentation.
+
+FUN void : updateOrientation()
+  > summary
+    Update the orientation of the node.
+
+### signals
+
+SIG void : aboutToBeRemoved()
+  > summary
+    Emitted immediately before the node is removed from the scene.
+
+SIG void : aboutToDelete( DzNode node )
+  > summary
+    Emitted when the node is about to be deleted.
+  > parameters
+    + node - Thes node being deleted.
+
+SIG void : added()
+  > summary
+    Emitted when the node is added to the scene.
+
+SIG void : assetModified()
+  > summary
+    Emitted when the node has been modified.
+
+SIG void : assetWasSaved()
+  > summary
+    Emitted after the node has been saved.
+
+SIG void : boundBoxInvalidated()
+  > summary
+    Emitted after the bounding box for this node has been invalidated.
+
+SIG void : childAdded( DzNode child )
+  > summary
+    Emitted when a child is added to the node.
+  > parameters
+    + node - The child added to the node.
+
+SIG void : childListChanged()
+  > summary
+    Emitted when a child is added to or removed from the node.
+
+SIG void : childListOrderChanged()
+  > summary
+    Emitted after the order of this node's children has changed.
+
+SIG void : childRemoved( DzNode child )
+  > summary
+    Emitted when a child is removed from the node.
+  > parameters
+    + node - The child removed from the node.
+
+SIG void : drawnDataChanged()
+  > summary
+    Emitted when the visual representation of this node needs to be redrawn.
+
+SIG void : hiddenChanged( Boolean hidden )
+  > summary
+    Emitted when the hidden state of this node is changed.
+  > parameters
+    + hidden - true if the node is currently hidden in the interface, otherwise false.
+
+SIG void : inheritScaleChanged()
+  > summary
+    Emitted when the state of this node's scale inherience has changed.
+
+SIG void : materialListChanged()
+  > summary
+    Emitted when the list of materials for this node has changed.
+
+SIG void : materialSelectionChanged()
+  > summary
+    Emitted when the list of selected materials for this node has changed.
+
+SIG void : materialSelectionSetsChanged()
+  > summary
+    Emitted when the material selection sets for this node has changed.
+
+SIG void : objectChanged( DzNode node, DzObject oldObject, DzObject newObject )
+  > summary
+    Emitted when a different object becomes associated with this node.
+  > parameters
+    + node - This node.
+    + oldObject - The prior object, or NULL if none.
+    + newObject - The new object, or NULL if none.
+
+SIG void : parentChanged( DzNode node, DzNode oldParent, DzNode newParent )
+  > summary
+    Emitted when the parent of this node changes.
+  > parameters
+    + node - This node.
+    + oldParent - The previous parent of the node.
+    + newParent - The new parent of the node.
+
+SIG void : parentHierarchyChanged( DzNode node )
+  > summary
+    Emitted when the parent hierarchy for this node has changed.
+  > parameters
+    + node - This node.
+
+SIG void : promoteSelectionChanged( Boolean promoteSelection )
+  > summary
+    TODO: Add description.
+
+SIG void : removed()
+  > summary
+    Emitted when the node is removed from the scene.
+
+SIG void : riggingChanged()
+  > summary
+    Emitted when the rotation order, orientation, center point, or end point for this node have changed.
+
+SIG void : rotationOrderChanged()
+  > summary
+    Emitted when the rotation order of this node changes.
+
+SIG void : selectabilityChanged()
+  > summary
+    Emitted when the selectability of the node has changed.
+
+SIG void : selected( DzNode node, Boolean onOff )
+  > summary
+    Eitted when the selection state of this node changes.
+  > parameters
+    + node - This node.
+    + onOff - true if the node was selected, false if it was deselected.
+
+SIG void : topologyChanged()
+  > summary
+    Emitted when the topology for this node has changed.
+
+SIG void : transformChanged()
+  > summary
+    Emitted when transformation properties of this node change.
+
+SIG void : uvsChanged()
+  > summary
+    Emitted when the current uv set for this node has changed.
+
+SIG void : visibilityChanged()
+  > summary
+    Emitted when the visibility of the node has changed.
+
+SIG void : visibilityInRenderChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : visibilityInSimulationChanged()
+  > summary
+    TODO: Add description.

@@ -1,0 +1,19 @@
+CLS DzHBoxLayout : DzBoxLayout
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/hboxlayout_dz
+  > summary
+    DAZScript wrapper for QHBoxLayout.
+
+### description
+  > summary
+    Provided as a convenience for creating a DzBoxLayout where the direction is automatically initially set to DzBoxLayout::LeftToRight.
+
+### constructors
+
+CTR DzHBoxLayout( DzWidget parent )
+  > summary
+    Creates a horizontal box layout that manages the children widgets of the given parent widget
+
+CTR DzHBoxLayout( DzLayout parent )
+  > summary
+    Creates a horizontal box layout as a sub-layout of the given layout

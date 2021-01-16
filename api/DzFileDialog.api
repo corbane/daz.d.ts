@@ -1,0 +1,116 @@
+CLS DzFileDialog : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/filedialog_dz
+  > summary
+    DAZScript wrapper for QFileDialog.
+
+### description
+  > summary
+    The DzFileDialog class is available in DAZScript via Global::FileDialog.
+    It provides functions that display OS native file dialogs to the user.
+
+### methods
+
+FUN String : doAudioClipOpenDialog( String startWith=“”, DzWidget parent=undefined )
+  > summary
+    A convenience file dialog that automatically creates a filter list for all audio formats the application can import and displays a file open dialog.
+  > parameters
+    + startWith - The starting directory; can include a default file name.
+    + parent - The parent widget for the file dialog.
+  > returns
+    The path of the file selected by the user, undefined if the user cancels.
+  > seealso
+    DzMainWindow::doAudioClipOpenDialog()
+
+FUN String : doDirectoryDialog( String title=“”, String desc=“”, DzWidget parent=undefined )
+  > summary
+    Display a dialog for the user to choose a directory.
+  > parameters
+    + title - The title of the dialog box.
+    + desc - Unused; retained for backward compatibility.
+    + parent - The parent widget for the directory dialog.
+  > returns
+    The path of the directory selected by the user, undefined if the user cancels.
+  > example
+    Have the user select a directory.
+    var path = FileDialog.doDirectoryDialog( qsTr("Select a Directory") );
+  > seealso
+    DzMainWindow::doDirectoryDialog()
+
+FUN String : doDirectoryDialog( String title, String desc, String startWith, DzWidget parent=undefined )
+  > summary
+    Display a dialog for the user to choose a directory.
+  > parameters
+    + title - The title of the dialog box.
+    + desc - Unused; retained for backward compatibility.
+    + startWith - The directory that the dialog will start in.
+    + parent - The parent widget for the directory dialog.
+  > returns
+    The path of the directory selected by the user, undefined if the user cancels.
+  > example
+    Have the user select a directory.
+    var path = FileDialog.doDirectoryDialog( qsTr("Select a Directory"), "", App.getDocumentsPath() );
+  > seealso
+    DzMainWindow::doDirectoryDialog()
+
+FUN String : doFileDialog( Boolean open, String title=“”, String startWith=“”, String filter=“”, Number selectedFilter=0, DzWidget parent=undefined )
+  > summary
+    Display a dialog for the user to choose a file.
+  > parameters
+    + open - If true, displays an open file dialog, otherwise displays a save file dialog.
+    + title - The title of the dialog box.
+    + startWith - The starting directory (can include a default file name).
+    + filter - The file name filter; e.g., “TIFF files (*.tif *.tiff); JPEG files (*.jpg)”.
+    + selectedFilter - If not null, its value is set to the index of the filter that corresponds to the selected file.
+    + parent - The parent widget for the file dialog.
+  > returns
+    The path of the file selected by the user, undefined if the user cancels.
+  > example
+    Get the name of an existing jpeg file.
+    var filename = FileDialog.doFileDialog( true, qsTr("Select an Image File"), App.getImageMgr().getImportPath(), "JPEG Files (*.jpg)" );
+  > example
+    Get the name of an existing image file (w/ additional filters).
+    var filename = FileDialog.doFileDialog( true, qsTr("Select an Image File"), "",
+    					"Image Files (*.tif *.tiff *.jpg);TIFF Files (*.tif *.tiff);JPEG Files (*.jpg)" );
+  > example
+    Get the name of a text file to save to.
+    var filename = FileDialog.doFileDialog( false, qsTr("Save As"), "", "Text Files (*.txt)" );
+  > seealso
+    DzMainWindow::doFileDialog()
+
+FUN String : doImageDialog( Boolean open, String startWith=“”, DzWidget parent=undefined )
+  > summary
+    A convenience file dialog that automatically creates a filter list for all image formats the application can import/export and displays a file open/save dialog.
+  > parameters
+    + open - If true, displays an open image dialog, otherwise displays a save image dialog.
+    + startWith - The starting directory; can include a default file name.
+    + parent - The parent widget for the file dialog.
+  > returns
+    The path of the file selected by the user, undefined if the user cancels.
+  > seealso
+    DzMainWindow::doImageDialog()
+
+FUN String : doVideoClipSaveDialog( String startWith=“”, DzWidget parent=undefined )
+  > summary
+    A convenience file dialog that automatically creates a filter list for all video formats the application can export and displays a file save dialog.
+  > parameters
+    + startWith - The starting directory; can include a default file name.
+    + parent - The parent widget for the file dialog.
+  > returns
+    The path of the file selected by the user, undefined if the user cancels.
+  > seealso
+    DzMainWindow::doVideoClipSaveDialog()
+
+FUN Array : getOpenFileNames( String dir=“”, String filter=“”, String title=“”, DzWidget parent=undefined )
+  > summary
+    Shows an open file dialog to the user that allows selection of multiple files.
+  > parameters
+    + dir - The directory that the dialog will start with.
+    + filter - The file name filter; e.g., “TIFF files (*.tif *.tiff); JPEG files (*.jpg)”.
+    + title - The title of the dialog.
+    + parent - The parent widget of the dialog.
+  > returns
+    A list of paths (if any) for the files selected by the user.
+  > example
+    Have the user select one or more image files.
+    var files = FileDialog.getOpenFileNames( "", "Image files (*.tif *.jpg *.png)", qsTr("Select Image Files") );

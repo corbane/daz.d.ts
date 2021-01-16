@@ -1,0 +1,16 @@
+RAW 
+
+interface Array<T>
+{
+    /**
+        * Pushes one or more elements onto the end (right) of the array, if it doesn't already exist in the array.
+        * @returns The new length of the array.
+        * @example
+        * var aTemp = [ "a", "b", "c", "d" ];
+        * aTemp.pushIfNotExists( "e" );
+        * // aTemp == [ "a", "b", "c", "d", "e" ]
+        * @param element1 - The first element to append to the array.
+        * @param _ - Optional additional element(s) to insert into the array.
+        */
+    pushIfNotExists (element1: T, ..._: T[]): number;
+}

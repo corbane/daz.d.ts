@@ -1,0 +1,72 @@
+CLS DzStringHelper : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/stringhelper_dz
+  > summary
+    Convenience object to make working with a String object easier.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzStringHelper()
+  > summary
+    Default Constructor
+
+### methods
+
+FUN String : changeSpecialChars( String text, String chars )
+  > parameters
+    + text - The string to inspect for special characters; using the regular expression “[/\\\\:*?\”<>|!. ]“
+    + chars - The character(s) to replace each occurence of a special character with
+  > returns
+    A copy of the input string, with each occurence of a special character replaced by chars
+
+FUN Array : getMatches( String text, String expression )
+  > parameters
+    + text - The string to check for matches
+    + expression - The regular expression to use
+  > returns
+    An array of strings, where each element is a match
+
+FUN Array : getWords( String text, Boolean removeEmpties )
+  > parameters
+    + text - The string to split at each space
+    + removeEmpties - Whether or not to remove empty entries that result from multiple adjacent spaces
+  > returns
+    An array of strings, where each element is a word from the input string
+
+FUN String : indentString( String text, Number level )
+  > parameters
+    + text - The string to indent
+    + level - The number of tabs (\t) to prepend to the input string
+  > returns
+    A copy of the input string indented the specified number of times
+
+FUN String : prependCharsIfNumeric( String text, String chars )
+  > parameters
+    + text - The string to inspect for numeric characters; using the regular expression “^[0-9]”
+    + chars - The character(s) to prepend to the input string if it begines with a numeric character
+  > returns
+    A copy of the input string, with chars prepended if it began with a numeric character
+
+FUN String : replaceAll( String source, String findText, String replaceText )
+  > parameters
+    + source - The string to replace the specified character(s) in
+    + findText - The character(s) to replace
+    + replaceText - The character(s) to replace with
+  > returns
+    A copy of the input string with all occurrences of findText replaced by replaceText
+
+FUN String : stripCRLF( String text )
+  > parameters
+    + text - The string to strip all carriage return (\r) and linefeed (\n) characters from
+  > returns
+    A copy of the input string with all carriage return and linefeed characters removed
+
+FUN String : stripSpaces( String text )
+  > parameters
+    + text - The string to strip spaces from
+  > returns
+    A copy of the input string with all spaces removed

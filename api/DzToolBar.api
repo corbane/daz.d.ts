@@ -1,0 +1,143 @@
+CLS DzToolBar : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/toolbar_dz
+  > summary
+    Class that encapsulates a QToolBar that contains DzToolBarItem items.
+
+### description
+  > summary
+    This class provides access to a toolbar in the interface. This class is not intended to be constructed directly, rather an instance of the class is created using DzPaneMgr::createToolBar().
+
+### enumerations
+
+ENU DockArea
+  > summary
+    The areas of a DzActivityLayout where the toolbar can be docked.
+  + ToolBarTop - The dock area at the top of a DzActivityLayout.
+  + ToolBarBottom - The dock area at the bottom of a DzActivityLayout.
+  + ToolBarLeft - The dock area on the left side of a DzActivityLayout.
+  + ToolBarRight - The dock area on the right side of a DzActivityLayout.
+  + NoToolBarArea - No dock area. The toolbar cannot be docked.
+
+### methods
+
+FUN void : clear()
+  > summary
+    Removes all items from the bar.
+
+FUN void : dock( DzToolBar.DockArea area, String beforeBar=“” )
+  > summary
+    Docks the toolbar in the specified area on the DzActivityLayout, and shows the toolbar if it is hidden.
+  > parameters
+    + area - The DockArea to dock the toolbar to.
+    + beforeBar - The name of the bar in the area to dock before.
+
+FUN DzToolBar.DockArea : dockedArea()
+  > returns
+    The dock area that the toolbar is docked in.
+
+FUN DzToolBarItem : getItem( Number which )
+  > parameters
+    + which - The index of the item in the menu
+  > returns
+    A pointer to the toolbar item at the given index, NULL if the index is invalid
+
+FUN Array : getItemList()
+  > summary
+    This function is provided for DAZ Script access. Plug-in developers are encouraged to use the much more efficient itemListIterator() method.
+  > returns
+    A list of all the items in this toolbar.
+
+FUN Number : getNumItems()
+  > returns
+    The number of items in the toolbar
+
+FUN Boolean : hasItems()
+  > returns
+    true if there are items in this toolbar, false if the toolbar is empty.
+
+FUN void : insertAction( DzAction action, DzAction before )
+  > summary
+    Adds the given action to the toolbar.
+  > parameters
+    + action - The DzAction that will be added to the toolbar.
+    + before - The DzAction to insert action before.
+
+FUN void : insertAction( String action, Number index=-1 )
+  > summary
+    Adds the given action to the toolbar.
+  > parameters
+    + action - The class name of the DzAction that will be added to the toolbar.
+    + index - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertCustomAction( String action, Number index=-1 )
+  > summary
+    Adds the given custom action to the toolbar.
+  > parameters
+    + action - The name of the custom action that will be added to the toolbar.
+    + index - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertCustomWidget( String uiScript, Number index=-1 )
+  > summary
+    Adds a custom widget to the toolbar.
+  > parameters
+    + uiScript - A path to the DAZ Script that loads the QtDesigner .ui file for the custom widget. A global function named getWidget() is provided to uiScript that returns a DzWidget which should be used as the parent argument in a DzUiLoader::load() call.
+    + index - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertItem( DzToolBarItem item, Number index=-1 )
+  > summary
+    Inserts the given item into the toolbar at the given location.
+  > parameters
+    + item - The item to insert into the toolbar
+    + index - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the toolbar.
+
+FUN void : insertSeparator( Number index=-1 )
+  > summary
+    Adds a separator to the toolbar.
+  > parameters
+    + index - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertViewportAlignmentSpacer( Number alignment, Number index=-1 )
+  > summary
+    Adds a spacer to the toolbar which adjusts itself so that items added after it are aligned over the application viewport.
+  > parameters
+    + alignment - The alignment to use for toolbar items. Currently supports Qt::AlignLeft and Qt::AlignCenter
+    + index - The index at which to insert the spacer. If the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertViewportCenterAlignSpacer( Number index=-1 )
+  > summary
+    Adds a spacer to the toolbar which adjusts itself so that any items after it are centered over the application viewport.
+  > parameters
+    + index - The index at which to insert the spacer. If the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertViewportLeftAlignSpacer( Number index=-1 )
+  > summary
+    Adds a spacer to the toolbar which adjusts itself so that any items after it are left aligned over the application viewport.
+  > parameters
+    + index - The index at which to insert the spacer. If the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN Boolean : isClosed()
+  > returns
+    true if the toolbar is closed (not displayed), false if the toolbar is open (displayed).
+
+FUN void : removeItem( Number index )
+  > parameters
+    + index - The index of the item to remove.
+
+FUN void : removeItem( DzToolBarItem item )
+  > parameters
+    + item - The item to remove.
+
+FUN void : setClosed( Boolean onOff )
+  > summary
+    Sets whether the toolbar is closed (not displayed), or open (displayed).
+
+FUN void : undock( Point pos )
+  > summary
+    Undocks the toolbar, moves it to the given global coordinates, and shows the toolbar if it is hidden.
+
+### signals
+
+SIG void : itemListChanged()
+  > summary
+    Emitted when items are added to or removed from this toolbar

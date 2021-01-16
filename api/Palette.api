@@ -1,0 +1,120 @@
+CLS Palette : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/palette
+  > summary
+    DAZScript wrapper for QPalette.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QPalette type used in the DAZ Studio SDK.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Palette : active
+  > summary
+    The Palette for active windows (the window that has focus).
+
+PRP Color : alternateBase
+  > summary
+    Used as the alternate background color in views with alternating row colors.
+
+PRP Color : background
+  > summary
+    Obsolete. Use window instead.
+
+PRP Color : base
+  > summary
+    Used as background color for text entry widgets, for example; usually white or another light color.
+
+PRP Color : brightText
+  > summary
+    A text color that is very different from windowText, and contrasts well with e.g. dark. Typically used for text that needs to be drawn where text or windowText would give poor contrast, such as on a pressed DzPushButton. Note that text colors can be used for things other than just words; text colors are usually used for text, but it's quite common to use the text color roles for lines, icons, etc.
+
+PRP Color : button
+  > summary
+    General button background color.
+
+PRP Color : buttonText
+  > summary
+    A foreground color used with the button color.
+
+PRP Color : dark
+  > summary
+    Used for 3D bevel and shadow effects. Darker than button.
+
+PRP Palette : disabled
+  > summary
+    The Palette for disabled widgets.
+
+PRP Color : foreground
+  > summary
+    Obsolete. Use windowText instead.
+
+PRP Color : highlight
+  > summary
+    A color to indicate a selected item or the current item.
+
+PRP Color : highlightedText
+  > summary
+    A text color that contrasts with highlight.
+
+PRP Palette : inactive
+  > summary
+    The Palette for inactive windows (the other windows).
+
+PRP Color : light
+  > summary
+    Used for 3D bevel and shadow effects. Lighter than button color.
+
+PRP Color : link
+  > summary
+    A text color used for unvisited hyperlinks. By default, the link color is blue.
+
+PRP Color : linkVisited
+  > summary
+    A text color used for already visited hyperlinks. By default, the link visited color is magenta.
+
+PRP Color : mid
+  > summary
+    Used for 3D bevel and shadow effects. Between button and dark.
+
+PRP Color : midlight
+  > summary
+    Used for 3D bevel and shadow effects. Between button and light.
+
+PRP Color : shadow
+  > summary
+    Used for 3D bevel and shadow effects. A very dark color.
+
+PRP Color : text
+  > summary
+    The foreground color used with base.
+
+PRP Color : toolTipBase
+  > summary
+    Used as the background color for ToolTip and WhatsThis. Tool tips use the inactive Palette, because tool tips are not active windows.
+
+PRP Color : toolTipText
+  > summary
+    Used as the foreground color for ToolTip and WhatsThis. Tool tips use the inactive Palette, because tool tips are not active windows.
+
+PRP Color : window
+  > summary
+    General background color.
+
+PRP Color : windowText
+  > summary
+    General foreground color.
+
+### constructors
+
+CTR Palette( Palette active, Palette disabled, Palette inactive )
+  > summary
+    Default Constructor.
+    Creates a palette with the given color groups.
+  > parameters
+    + active - The Palette for the active state.
+    + disabled - The Palette for the disabled state.
+    + inactive - The Palette for the inactive state.

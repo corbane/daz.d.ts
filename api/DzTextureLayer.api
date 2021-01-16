@@ -1,0 +1,57 @@
+CLS DzTextureLayer : DzTextureComponent
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/texturelayer_dz
+  > summary
+    NEEDS BRIEF.
+
+### description
+  > summary
+    NEEDS DESCRIPTION
+
+### enumerations
+
+ENU BlendMode
+  > summary
+    TODO: Add description.
+  + BlendAlpha - TODO: Add description.
+  + BlendAdd - TODO: Add description.
+  + BlendSubtract - TODO: Add description.
+  + BlendMultiply - TODO: Add description.
+
+### properties
+
+PRP DzTextureLayer.BlendMode : blendMode
+  > summary
+    The blend mode of the texture.
+
+### methods
+
+FUN void : clearMask()
+  > summary
+    TODO: Add description.
+
+FUN DzTextureMask : createMask( String maskLabel )
+  > summary
+    TODO: Add description.
+
+FUN DzTextureMask : getMask()
+  > summary
+    TODO: Add description.
+
+FUN void : setMask( DzTextureMask mask )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : aboutToChangeMask( DzTextureMask oldMask, DzTextureMask newMask )
+  > summary
+    TODO: Add description.
+
+SIG void : blendModeChanged( DzTextureLayer.BlendMode mode )
+  > summary
+    TODO: Add description.
+
+SIG void : maskChanged( DzTextureMask oldMask, DzTextureMask newMask )
+  > summary
+    TODO: Add description.

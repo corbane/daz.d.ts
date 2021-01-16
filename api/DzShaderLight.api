@@ -1,0 +1,110 @@
+CLS DzShaderLight : DzLight
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shaderlight_dz
+  > summary
+    Custom scriptable class for lights using RenderMan Shader Language (RSL) Shaders.
+
+### description
+  > summary
+    This class provides a DzLight derived object with creator-defined properties that will be passed to the RSL Shader at render-time. By default, the light only has two properties - Color and Intensity. The values of these properties are not sent to the shader by default, nor are any attributes set representing the value of these properties. Unless put to use via DzRSLShader, these properties are purely for OpenGL purposes. These properties are not mappable by default, but can be made so by using DzRSLShader::addMapProperty() or DzRSLShader::addMappableProperty(). All other properties for the light must be added using DzRSLShader in order to be used to pass values as arguments to the shader. Properties for the light that will be used by the render-time scripts to set attributes must be added via DzElement::addProperty().
+
+### enumerations
+
+ENU LightType
+  > summary
+    Enumerated values for the light type
+  > seealso
+    setLightType
+  + NullLight - Null - Only in the scene to provide access to properties.
+  + AmbientLight - Emits global light.
+  + PointLight - Emits light in all directions.
+  + DistantLight - Emits parallel light.
+  + SpotLight - Emits light in a pattern.
+
+### constructors
+
+CTR DzShaderLight()
+  > summary
+    Default Constructor.
+
+CTR DzShaderLight( String definitionFile, DzShaderLight.LightType type )
+  > parameters
+    + definitionFile - The relative [from DzApp::getScriptsPath()] path to the script file that creates this light's property list.
+    + lightType - The enumerated type for the light. This controls certain aspects of the light, for instance whether or not the user can view through the light, the icon displayed in the Scene pane, the avatar representing the light in the viewport.
+  > seealso
+
+CTR setDefinitionFile()
+
+### methods
+
+FUN Boolean : addShader( DzRSLShader shader )
+  > summary
+    Adds shader to this light's internal list of shaders and sets shader 's owner to this light.
+  > returns
+    true if shader is successfully added to the list (e.g. does not already exist), otherwise false.
+
+FUN DzColorProperty : getColorControl()
+  > returns
+    The property that controls the color of this light.
+
+FUN String : getDefinitionFile()
+  > returns
+    The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this light's property list.
+
+FUN Number : getIntensity()
+  > returns
+    The value of the property that controls the intensity of this light.
+
+FUN DzFloatProperty : getIntensityControl()
+  > returns
+    The property that controls the intensity of this light.
+
+FUN String : getLightName()
+  > returns
+    The internal name of the light. This is not the same as the QObject::name property.
+
+FUN DzShaderLight.LightType : getLightType()
+  > returns
+    The type of the light.
+
+FUN Number : getNumShaders()
+  > returns
+    The number of DzRSLShaders on this light.
+
+FUN DzRSLShader : getShader( Number index )
+  > returns
+    The DzRSLShader at index or NULL if no shader exists at that index.
+
+FUN String : getShadowMapPath()
+  > returns
+    The path to the generated shadow map for this light.
+
+FUN Boolean : removeShader( DzRSLShader shader )
+  > summary
+    Removes shader from this light's internal list of shaders.
+  > returns
+    true if shader is successfully removed from the list, otherwise false.
+
+FUN void : setDefinitionFile( String definitionFile, Boolean doOverride=false, Boolean runScript=true )
+  > summary
+    Sets the relative path of the [DAZ Script] file that builds this light's property list.
+  > parameters
+    + definitionFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this light's property list
+  > attention
+    definitionFile is executed the moment the call to this method is made. A global transient variable named Light - referring to the current DzShaderLight being rendered, exists for the duration of definitionFile. Referencing this variable from outside definitionFile will result in an error.
+
+FUN void : setLightName( String name )
+  > summary
+    Sets the internal name of the light; this is not the same as the QObject::name property. By default, this is “Custom”.
+
+FUN void : setLightType( DzShaderLight.LightType type )
+  > summary
+    Sets the type of a light. A light's type determines the OpenGL representation.
+
+FUN void : setUseLocalShaderSpace( Boolean onOff )
+  > summary
+    Sets a flag so that transforms are applied to the coordinate space that the light is in, greatly simplifying shader math.
+
+FUN Boolean : usesLocalShaderSpace()
+  > returns
+    Whether transforms are applied to the coordinate space that the light is in. false by default

@@ -1,0 +1,43 @@
+CLS DzViewRenderHandler : DzImageRenderHandler
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/viewrenderhandler_dz
+  > summary
+    A render handler that renders to a new window.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzViewRenderHandler( Size size, DzTime time, String filename, Boolean isSoftware )
+  > summary
+    Create a new view render handler for rendering a single frame.
+  > parameters
+    + size - The width & height of the rendered image.
+    + time - The time to render the frame at.
+    + filename - The filename to save the image to.
+    + isSoftware - If true, the window shows itself at the beginning of rendering so that the user can see the progress of the render. If false, the window stays hidden until the render is complete so that it does not interfere with the OpenGL viewport.
+  > example
+    // Get the active viewport and camera
+    var oActiveView = MainWindow.getViewportMgr().getActiveViewport();
+    var oCamera = oActiveView.get3DViewport().getCamera();
+     
+    // Get the render options
+    var oRenderOptions = App.getRenderOptions();
+     
+    // Create a handler
+    var oHandler = new DzViewRenderHandler( oRenderOptions.getImageSize(), 0, App.getTempPath() + "/test.jpg", true );
+     
+    // If we have a valid handler
+
+    if( oHandler ){
+    	// Set the background color
+    	oHandler.setBackColor( oActiveView.get3DViewport().background );
+     
+    	// Get the renderer
+    	var oRenderer = oRenderOptions.getActiveRenderer();
+     
+    	// Render, using our handler and options
+    	oRenderer.render( oHandler, oCamera, oRenderOptions );
+    }

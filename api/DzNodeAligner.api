@@ -1,0 +1,222 @@
+CLS DzNodeAligner : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/nodealigner_dz
+  > summary
+    Implements the logic of adjusting node positions to align them.
+
+### description
+  > seealso
+    Sample: Node Align
+  > attention
+    This object is provided by the Align pane plugin. It is only available when the Align pane plugin is activated and enabled.
+  > since
+    4.10.0.122
+
+### enumerations
+
+ENU AlignX
+  > summary
+    TODO: Add description.
+  + NoneX - TODO: Add description.
+  + AlignXLefts - TODO: Add description.
+  + AlignXCenters - TODO: Add description.
+  + AlignXOrigins - TODO: Add description.
+  + AlignXRights - TODO: Add description.
+  + StackXLefts - TODO: Add description.
+  + StackXRights - TODO: Add description.
+  + DistributeXLefts - TODO: Add description.
+  + DistributeXCenters - TODO: Add description.
+  + DistributeXOrigins - TODO: Add description.
+  + DistributeXRights - TODO: Add description.
+
+ENU AlignY
+  > summary
+    TODO: Add description.
+  + NoneY - TODO: Add description.
+  + AlignYTops - TODO: Add description.
+  + AlignYCenters - TODO: Add description.
+  + AlignYOrigins - TODO: Add description.
+  + AlignYBottoms - TODO: Add description.
+  + StackYTops - TODO: Add description.
+  + StackYBottoms - TODO: Add description.
+  + DistributeYTops - TODO: Add description.
+  + DistributeYCenters - TODO: Add description.
+  + DistributeYOrigins - TODO: Add description.
+  + DistributeYBottoms - TODO: Add description.
+
+ENU AlignZ
+  > summary
+    TODO: Add description.
+  + NoneZ - TODO: Add description.
+  + AlignZFronts - TODO: Add description.
+  + AlignZCenters - TODO: Add description.
+  + AlignZOrigins - TODO: Add description.
+  + AlignZBacks - TODO: Add description.
+  + StackZFronts - TODO: Add description.
+  + StackZBacks - TODO: Add description.
+  + DistributeZFronts - TODO: Add description.
+  + DistributeZCenters - TODO: Add description.
+  + DistributeZOrigins - TODO: Add description.
+  + DistributeZBacks - TODO: Add description.
+
+ENU UnitSize
+  > summary
+    TODO: Add description.
+  + UnitsM - TODO: Add description.
+  + UnitsCM - TODO: Add description.
+  + UnitsYD - TODO: Add description.
+  + UnitsFT - TODO: Add description.
+  + UnitsIN - TODO: Add description.
+
+### constructors
+
+CTR DzNodeAligner()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzError : addNode( DzNode node )
+  > summary
+    Adds a node to the list of node to be processed.
+  > parameters
+    + node - The node to add to the list.
+  > returns
+    DZ_NO_ERROR (0x00000000) if node was sucessfully added to the list, DZ_ALREADY_EXISTS_ERROR (0x00000050) if node is already in the list, and DZ_ILLEGAL_ARGUMENT_ERROR (0x00000060) if node is null.
+  > attention
+    The order that nodes are added to the list impacts the results of the alignment operation. The first node in the list is used as the basis for any Align, Stack or Distribute operations. The last node in the list is used to establish the range for Distribute operations. All other nodes in the list are processed in their respective order within the list.
+
+FUN Boolean : canAlign()
+  > returns
+    true if the current list of nodes, in conjuction with the current option configuration, can be applied, otherwise false.
+  > attention
+    At least one alignment axis must be set to a value other than “None.” Aligning “To Grid” (UseInterval) requires at least one (1) node to be added. Aligning without using an interval requires at least two (2) nodes to be added. Distributing, with or without using an interval, requires at least three (3) nodes to be added. If any “UseInterval” option is active, the corresponding value must be greater than 0. No more than one (1) node within the hierarchy of a given skeleton can be added.
+  > seealso
+    addNode()
+
+FUN void : clearNodes()
+  > summary
+    Clears the list of nodes to be processed.
+
+FUN Boolean : doAlign()
+  > summary
+    Performs an alignment of nodes, based on the current options set.
+  > returns
+    true if the alignment operation was successful, otherwise false.
+  > seealso
+    canAlign()
+
+FUN Array : getNodes()
+  > returns
+    The list of nodes that alignment operations will be performed on (if any), otherwise an empty list.
+
+FUN DzNodeAligner.AlignX : getXAlign()
+  > returns
+    The align operation to perform along the X axis.
+
+FUN Number : getXUnits( DzNodeAligner.UnitSize size=UnitsCM )
+  > parameters
+    + size - The size of units to get.
+  > returns
+    The number of units along the X axis, in the specified size.
+
+FUN Boolean : getXUseInterval()
+  > returns
+    true if using an interval along the X axis is enabled, otherwise false.
+
+FUN DzNodeAligner.AlignY : getYAlign()
+  > returns
+    The align operation to perform along the Y axis.
+
+FUN Number : getYUnits( DzNodeAligner.UnitSize size=UnitsCM )
+  > parameters
+    + size - The size of units to get.
+  > returns
+    The number of units along the Y axis, in the specified size.
+
+FUN Boolean : getYUseInterval()
+  > returns
+    true if using an interval along the Y axis is enabled, otherwise false.
+
+FUN DzNodeAligner.AlignZ : getZAlign()
+  > returns
+    The align operation to perform along the Z axis.
+
+FUN Number : getZUnits( DzNodeAligner.UnitSize size=UnitsCM )
+  > parameters
+    + size - The size of units to get.
+  > returns
+    The number of units along the Z axis, in the specified size.
+
+FUN Boolean : getZUseInterval()
+  > returns
+    true if using an interval along the Z axis is enabled, otherwise false.
+
+FUN void : setXAlign( DzNodeAligner.AlignX align )
+  > summary
+    Sets the align operation to perform along the X axis.
+  > parameters
+    + align - The align operation to perform.
+
+FUN void : setXUnits( Number units, DzNodeAligner.UnitSize size=UnitsCM )
+  > summary
+    Sets the interval to use along the X axis.
+  > parameters
+    + units - The number of units to set.
+    + size - The size of the unit to set.
+
+FUN void : setXUseInterval( Boolean onOff )
+  > summary
+    Sets whether or not to use an interval along the X axis.
+  > parameters
+    + onOff - If true, the interval is used.
+  > attention
+    Intervals can be used for Align (grid) and Stack (space) operations, but have no meaning for Distribute operations.
+
+FUN void : setYAlign( DzNodeAligner.AlignY align )
+  > summary
+    Sets the align operation to perform along the Y axis.
+  > parameters
+    + align - The align operation to perform.
+
+FUN void : setYUnits( Number units, DzNodeAligner.UnitSize size=UnitsCM )
+  > summary
+    Sets the interval to use along the Y axis.
+  > parameters
+    + units - The number of units to set.
+    + size - The size of the unit to set.
+
+FUN void : setYUseInterval( Boolean onOff )
+  > summary
+    Sets whether or not to use an interval along the Y axis.
+  > parameters
+    + onOff - If true, the interval is used.
+  > attention
+    Intervals can be used for Align (grid) and Stack (space) operations, but have no meaning for Distribute operations.
+
+FUN void : setZAlign( DzNodeAligner.AlignZ align )
+  > summary
+    Sets the align operation to perform along the Z axis.
+  > parameters
+    + align - The align operation to perform.
+
+FUN void : setZUnits( Number units, DzNodeAligner.UnitSize size=UnitsCM )
+  > summary
+    Sets the interval to use along the Z axis.
+  > parameters
+    + units - The number of units to set.
+    + size - The size of the unit to set.
+
+FUN void : setZUseInterval( Boolean onOff )
+  > summary
+    Sets whether or not to use an interval along the Z axis.
+  > parameters
+    + onOff - If true, the interval is used.
+  > attention
+    Intervals can be used for Align (grid) and Stack (space) operations, but have no meaning for Distribute operations.
+
+### signals
+
+SIG void : canAlignChanged( Boolean onOff )
+  > summary
+    Emitted when the state of whether or not alignment is possible has changed.

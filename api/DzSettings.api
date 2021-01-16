@@ -1,0 +1,371 @@
+CLS DzSettings : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/settings_dz
+  > summary
+    Class for storing and passing simple sets of settings.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU Type
+  > summary
+    Enumerated types of the values stored in the DzSettings class.
+  + StringValue - A string value.
+  + IntValue - An integer (whole number) value.
+  + BoolValue - A boolean (true/false) value.
+  + FloatValue - A floating-point (decimal) value.
+  + SettingsValue - A nested settings value.
+
+### constructors
+
+CTR DzSettings()
+  > summary
+    Default constructor.
+
+CTR DzSettings( DzSettings settings )
+  > summary
+    Copy constructor.
+  > parameters
+    + settings - The settings object to copy data from.
+
+### methods
+
+FUN void : clear()
+  > summary
+    Clears all values from this settings object.
+
+FUN void : copySetting( Number which, DzSettings copyTo )
+  > summary
+    Copies the setting with the given index to the specified settings object.
+  > parameters
+    + which - The index of the setting to copy.
+    + copyTo - The settings object to copy the setting to.
+
+FUN void : copySetting( String key, DzSettings copyTo )
+  > summary
+    Copies the setting with the given index to the specified settings object.
+  > parameters
+    + key - The key of the setting to copy.
+    + copyTo - The settings object to copy the setting to.
+
+FUN Boolean : fromString( String settings )
+  > summary
+    Populates this settings object with the data encoded in a string.
+  > parameters
+    + settings - The encoded string to load the data from.
+  > returns
+    true if the data was read successfully, otherwise false.
+    XML Syntax
+    If settings consists of XML syntax, it is expected to contain an element tagged “Settings” at the root level; all other root level elements are ignored. This “Settings” element is expect to encapsulate child “Setting” tagged elements; all other child elements will be ignored. These “Setting” elements are expected to define “Key” and “Type” attributes. The “Key” attribute defines the named setting, and will depend on what this settings object is used for. The “Type” attribute should define a value of “Bool”, “Int”, “Float”, “String” or “SubSetting”; any non-recognized value will be interpreted as “String”. The text (or child elements in the case of “SubSetting”) of a “Setting” element defines the value of that setting.
+  > example
+    var sSettings = [
+    		'<Settings>',
+    		' <Setting Type="Bool" Key="testBool">yes</Setting>',
+    		' <Setting Type="Int" Key="testInt">123</Setting>',
+    		' <Setting Type="Float" Key="testFloat">123.123</Setting>',
+    		' <Setting Type="String" Key="testString">one two three</Setting>',
+    		' <Setting Type="SubSetting" Key="testSettings">',
+    		'  <Setting Type="Bool" Key="testBool">no</Setting>',
+    		'  <Setting Type="Int" Key="testInt">456</Setting>',
+    		'  <Setting Type="Float" Key="testFloat">456.456</Setting>',
+    		'  <Setting Type="String" Key="testString">four five six</Setting>',
+    		' </Setting>',
+    		'</Settings>'
+    	].join( "\n" );
+     
+    var oSettings = new DzSettings();
+    if( oSettings.fromString( sSettings ) ){
+    	print( "Read of XML encoded data was successful." );
+     
+    	print( oSettings.getIntValue( "testInt" ) ); //123
+     
+    	var oSubSettings = oSettings.getSettingsValue( "testSettings" );
+    	print( oSubSettings.getStringValue( "testString" ) ); //four five six
+    } else {
+    	print( "Could not read XML encoded data." );
+    }
+    JSON Syntax
+    (since 4.8.1.23)
+    If settings consists of JSON syntax, it is expected to contain an anonymous Object at the root level. This object is expected to define named members that will depend on the purpose of the settings object. These members serve as the keys for the values to be set. The value of a given member determines the type of setting that will be set.
+    The JSON format supports a single Number type, so a specific structure is used to produce a predictable result. Members that define a numeric value will set a float value on the settings object by default. Setting an integer value on the object is accomplished by defining a member as an Array of 2 values, where the first value is the string “i” and the second value is the integer value to be set. For the sake of continuity, the same structure can be used to indicate a float by substituting “i” with “f”.
+    Nested settings objects can be specified by defining a member as an Object that follows the structure of the root object.
+    For reasons of backward compatibility, the value of any member can be an object so long as that object contains a member named “type” whose value is one of “string”, “bool”, “int”, “float” or “setting”, and it also contains a member named “value” with the appropriate value.
+  > example
+    var oData = {
+    	"testBool" : true,
+    	"testInt" : [ "i", 123 ],
+    	"testFloat" : 123.123,
+    	"testString" : "one two three",
+    	"testSettings" : {
+    		"type" : "settings",
+    		"value" : {
+    			"testBool" : false,
+    			"testInt" : [ "i", 456 ],
+    			"testFloat" : 456.456,
+    			"testString" : "four five six"
+    		}
+    	}
+    };
+    //...
+    var oData = {
+    	"testBool" : true,
+    	"testInt" : [ "i", 123 ],
+    	"testFloat" : 123.123,
+    	"testString" : "one two three",
+    	"testSettings" : {
+    		"testBool" : false,
+    		"testInt" : [ "i", 456 ],
+    		"testFloat" : 456.456,
+    		"testString" : "four five six"
+    	}
+    };
+    //...
+    var oData = {
+    	"testBool" : true,
+    	"testInt" : {
+    		"type" : "int",
+    		"value" : 123
+    	},
+    	"testFloat" : 123.123,
+    	"testString" : "one two three",
+    	"testSettings" : {
+    		"testBool" : false,
+    		"testInt" : [ "i", 456 ],
+    		"testFloat" : 456.456,
+    		"testString" : "four five six"
+    	}
+    };
+    //...
+    //...
+    var oSettings = new DzSettings();
+    if( oSettings.fromString( JSON.stringify( oData ) ) ){
+    	print( "Read of JSON encoded data was successful." );
+     
+    	print( oSettings.getIntValue( "testInt" ) ); //123
+     
+    	var oSubSettings = oSettings.getSettingsValue( "testSettings" );
+    	print( oSubSettings.getStringValue( "testString" ) ); //four five six
+    } else {
+    	print( "Could not read JSON encoded data." );
+    }
+  > seealso
+    toString() and toJsonString()
+
+FUN Boolean : getBoolValue( String key, Boolean def=false )
+  > summary
+    Gets a boolean value from the settings.
+  > parameters
+    + key - The key for the value to get.
+    + defaultVal - The value to return if the key does not exist.
+  > returns
+    The value of the setting.
+
+FUN Number : getFloatValue( String key, Number def=0.0 )
+  > parameters
+    + key - The key for the value to get.
+    + defaultVal - The value to return if the key does not exist.
+  > returns
+    The value of the setting.
+
+FUN Number : getIntValue( String key, Number def=0 )
+  > summary
+    Gets an integer value from the settings.
+  > parameters
+    + key - The key for the value to get.
+    + defaultVal - The value to return if the key does not exist.
+  > returns
+    The value of the setting.
+
+FUN String : getKey( Number which )
+  > parameters
+    + which - The index of the value to get the key for.
+  > returns
+    The key for the setting at the given index (if valid), otherwise an empty string.
+
+FUN Number : getNumValues()
+  > returns
+    The number of values stored in the settings.
+
+FUN Number : getSettingIndex( String key )
+  > parameters
+    + key - The key of the value to find.
+  > returns
+    The index of the setting with the given key (if any), otherwise NULL.
+  > attention
+    The returned index is only valid while this object remains unchanged. Once a value is added or removed, this index may become invalid.
+
+FUN DzSettings : getSettingsValue( String key )
+  > parameters
+    + key - The key for the value to get.
+  > returns
+    The setting if key is found and is a SettingsValue, otherwise NULL.
+
+FUN String : getStringValue( String key, String def=“” )
+  > summary
+    Gets a string value from the settings.
+  > parameters
+    + key - The key for the value to get.
+    + defaultVal - The value to return if the key does not exist.
+  > returns
+    The value of the setting.
+
+FUN String : getValue( Number which )
+  > parameters
+    + which - The index of the value to get.
+  > returns
+    The value of the setting at the given index in string form (if valid), otherwise an empty string.
+
+FUN DzSettings.Type : getValueType( Number which )
+  > parameters
+    + which - The index of the value to get the type of.
+  > returns
+    The type of the setting at the given index (if valid), otherwise StringValue.
+
+FUN Number : hasKey( String key )
+  > parameters
+    + key - The name of the key to find.
+  > returns
+    The index of the key (if any), otherwise -1.
+
+FUN void : removeValue( String key )
+  > summary
+    Removes a value.
+  > parameters
+    + key - The key for the value to remove.
+
+FUN void : replaceWithSettings( DzSettings settings )
+  > summary
+    Replaces the settings of this object with the settings of the specified object.
+  > parameters
+    + settings - The object with the settings to replace this one with.
+
+FUN void : setBoolValue( String key, Boolean value )
+  > summary
+    Adds a boolean value.
+  > parameters
+    + key - The key for the value to set.
+    + value - The boolean value for the setting.
+
+FUN void : setFloatValue( String key, Number value )
+  > summary
+    Adds a float value.
+  > parameters
+    + key - The key for the value to set.
+    + value - The floating point value for the setting.
+
+FUN void : setIntValue( String key, Number value )
+  > summary
+    Adds an integer value.
+  > parameters
+    + key - The key for the value to set.
+    + value - The integer value for the setting.
+
+FUN DzSettings : setSettingsValue( String key, DzSettings settings )
+  > summary
+    Adds a nested settings value.
+  > parameters
+    + key - The key for the value to set.
+    + settings - The sub-setting value to add; a local copy is made.
+  > returns
+    The created settings object (if any), otherwise NULL.
+
+FUN DzSettings : setSettingsValue( String key )
+  > summary
+    Adds a nested (empty) settings value.
+  > parameters
+    + key - The key for the value to set.
+  > returns
+    An empty settings object with the given key.
+
+FUN void : setStringValue( String key, String value )
+  > summary
+    Adds a string value.
+  > parameters
+    + key - The key for the value to set.
+    + value - The string value for the setting.
+
+FUN Object : toJson()
+  > returns
+    A JSON object representation of the data.
+  > example
+    var oSettings = new DzSettings();
+    oSettings.setBoolValue( "testBool", true );
+    oSettings.setIntValue( "testInt", 123 );
+    oSettings.setFloatValue( "testFloat", 123.123 );
+    oSettings.setStringValue( "testString", "one two three" );
+     
+    var oSubSettings = new DzSettings();
+    oSubSettings.setBoolValue( "testBool", false );
+    oSubSettings.setIntValue( "testInt", 456 );
+    oSubSettings.setFloatValue( "testFloat", 456.456 );
+    oSubSettings.setStringValue( "testString", "four five six" );
+     
+    oSettings.setSettingsValue( "testSettings", oSubSettings );
+     
+    var oJsonSettings = oSettings.toJson();
+    print( JSON.stringify( oJsonSettings ) );
+     
+    print( oJsonSettings["testString"] ); //one two three
+     
+    var oJsonSubSettings = oJsonSettings["testSettings"]["value"];
+    print( oJsonSubSettings["testString"] ); //four five six
+  > seealso
+    toJsonString()
+  > since
+    4.8.1.23
+
+FUN String : toJsonString()
+  > returns
+    A JSON encoded string representation of the data.
+  > example
+    var oSettings = new DzSettings();
+    oSettings.setBoolValue( "testBool", true );
+    oSettings.setIntValue( "testInt", 123 );
+    oSettings.setFloatValue( "testFloat", 123.123 );
+    oSettings.setStringValue( "testString", "one two three" );
+     
+    var oSubSettings = new DzSettings();
+    oSubSettings.setBoolValue( "testBool", false );
+    oSubSettings.setIntValue( "testInt", 456 );
+    oSubSettings.setFloatValue( "testFloat", 456.456 );
+    oSubSettings.setStringValue( "testString", "four five six" );
+     
+    oSettings.setSettingsValue( "testSettings", oSubSettings );
+     
+    print( oSettings.toJsonString() );
+  > seealso
+    toJson()
+  > since
+    4.8.1.23
+
+FUN void : toScript( String varName, DzScript script, Number indent, Boolean define=false )
+  > summary
+    Appends lines of code to a script object that will reconstruct this DzSettings object.
+  > parameters
+    + varName - The identifier for the variable in the script that holds the settings object.
+    + script - The script object to generate the settings lines in.
+    + indent - The indention level for the generated lines.
+    + define - If true, prepends a variable definition statement to the lines generated in script. If false, it is the caller's responsibility to ensure that varName is already defined in script and holds a valid DzSettings object.
+
+FUN String : toString()
+  > returns
+    An XML encoded string representation of the data.
+  > example
+    var oSettings = new DzSettings();
+    oSettings.setBoolValue( "testBool", true );
+    oSettings.setIntValue( "testInt", 123 );
+    oSettings.setFloatValue( "testFloat", 123.123 );
+    oSettings.setStringValue( "testString", "one two three" );
+     
+    var oSubSettings = new DzSettings();
+    oSubSettings.setBoolValue( "testBool", false );
+    oSubSettings.setIntValue( "testInt", 456 );
+    oSubSettings.setFloatValue( "testFloat", 456.456 );
+    oSubSettings.setStringValue( "testString", "four five six" );
+     
+    oSettings.setSettingsValue( "testSettings", oSubSettings );
+     
+    print( oSettings.toString() );

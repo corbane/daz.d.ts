@@ -1,0 +1,475 @@
+CLS DzTransferUtility : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/transferutility_dz
+  > summary
+    Implements the logic of transferring weights, morph, maps, etc using projection.
+
+### description
+  > attention
+    This object is provided by the Transfer Utility plugin. It is only available when the Transfer Utility plugin is activated and enabled.
+  > since
+    4.6.2.85
+
+### enumerations
+
+ENU AssetType
+  > summary
+    TODO: Add description.
+  + NoAsset - TODO: Add description.
+  + GeometryAsset - TODO: Add description.
+  + NodeAsset - TODO: Add description.
+
+ENU BaseType
+  > summary
+    TODO: Add description.
+  + BaseGeom - TODO: Add description.
+  + BaseMorph - TODO: Add description.
+  + BaseCurrent - TODO: Add description.
+
+ENU SourceMorphTransferType
+  > summary
+    TODO: Add description.
+  + NoMorphs - TODO: Add description.
+  + NameList - TODO: Add description.
+  + Favorites - TODO: Add description.
+  + FavoritesAndSubComponets - TODO: Add description.
+  + ShapingAndPoseType - TODO: Add description.
+  + AllMorphs - TODO: Add description.
+
+### constructors
+
+CTR DzTransferUtility()
+  > summary
+    Default Constructor. Creates a transfer utility that can be used to transfer weights, morph, maps, etc using projection.
+
+### methods
+
+FUN Boolean : doTransfer()
+  > summary
+    Performs the projection transfer based on the current settings.
+  > returns
+    true if the transfer was successful, false if the transfer could not be completed.
+
+FUN Number : getAdaptiveTolerance()
+  > returns
+    The adaptive tolerance factor for calculating the projection.
+  > since
+    4.8.1.78
+
+FUN Boolean : getAddSmoothModifier()
+  > returns
+    true if a smoothing modifier will be added to the target figure., otherwise false.
+
+FUN Boolean : getAdjustTargetBase()
+  > returns
+    true if the target geometry will be adjusted to the source base geometry, otherwise false.
+
+FUN String : getContentType()
+  > returns
+    The content type to be set on the presentation of the figure.
+
+FUN Number : getDistanceSquaredTolerance()
+  > returns
+    The distance squared tolerance for calculating the projection.
+  > since
+    4.10.0.50
+
+FUN Boolean : getFitToFigure()
+  > returns
+    true if the target figure will be fit to the source figure once the projection has been performed, otherwise false.
+
+FUN Boolean : getLockViewOnTransfer()
+  > returns
+    true if the view will be locked during the transfer, otherwise false.
+
+FUN Boolean : getMergeHierarchies()
+  > returns
+    true if node hierarchies will be merged on the target figure, otherwise false.
+
+FUN Array : getMorphTransferList()
+  > returns
+    A list of morph names that will be transfered.
+
+FUN Number : getNearness()
+  > returns
+    The nearness factor for calculating the projection.
+
+FUN Boolean : getOverrideExistingMorphs()
+  > returns
+    true if existing morphs on the target figure will be replaced, otherwise false.
+
+FUN Boolean : getParentToFigure()
+  > returns
+    true if the target figure will be parented to the source figure once the projection has been performed, otherwise false.
+  > since
+    4.10.0.50
+
+FUN String : getProjectionTemplatePath()
+  > returns
+    The path to a template figure to use for projection.
+  > since
+    4.9.3.48
+
+FUN Boolean : getRemoveUnusedTargetBones()
+  > returns
+    Whether or not unused bones should be removed from the target after skin binding is transfered.
+
+FUN Boolean : getRespectHiddenFacets()
+  > returns
+    true if the transfer of weightmaps will respect hidden facets on the target figure, otherwise false.
+
+FUN Boolean : getSmartLeftRightHandling()
+  > returns
+    Whether or not smart left/right handling will be used during projection calculation.
+
+FUN DzTransferUtility.BaseType : getSourceBase()
+  > returns
+    The type of projection base that will be used for the source asset.
+
+FUN DzMorph : getSourceBaseMorph()
+  > returns
+    The morph that will be used for the source projection base, or NULL if a different base type will be used.
+
+FUN shape_dz : getSourceGeom()
+  > returns
+    The shape containing the source asset if the source asset type is GeometryAsset, otherwise NULL.
+
+FUN DzNode : getSourceNode()
+  > returns
+    The node containing the source asset if the source asset type is NodeAsset, otherwise NULL.
+
+FUN DzTransferUtility.AssetType : getSourceType()
+  > returns
+    The type of asset currently set for the projection source.
+
+FUN DzTransferUtility.BaseType : getTargetBase()
+  > returns
+    The type of projection base that will be used for the target asset.
+
+FUN DzMorph : getTargetBaseMorph()
+  > returns
+    The morph that will be used for the target projection base, or NULL if a different base type will be used.
+
+FUN shape_dz : getTargetGeom()
+  > returns
+    The shape containing the target asset if the target asset type is GeometryAsset, otherwise NULL.
+
+FUN DzNode : getTargetNode()
+  > returns
+    The node containing the target asset if the target asset type is NodeAsset, otherwise NULL.
+
+FUN figure_dz : getTargetOutputFigure()
+  > returns
+    The target output figure.
+
+FUN Boolean : getTargetReplacesSource()
+  > returns
+    Whether or not the target will replace the source in the scene.
+
+FUN DzTransferUtility.AssetType : getTargetType()
+  > returns
+    The type of asset currently set for the projection target.
+
+FUN Boolean : getTransferBinding()
+  > returns
+    true if skin binding will be projected, otherwise false.
+
+FUN Boolean : getTransferFaceGroups()
+  > returns
+    true if face grouping will be projected, otherwise false.
+
+FUN Boolean : getTransferMaterialGroups()
+  > returns
+    true if material grouping will be projected, otherwise false.
+
+FUN Boolean : getTransferMorphs()
+  > returns
+    true if morphs will be projected, otherwise false.
+
+FUN Boolean : getTransferRegionGroups()
+  > returns
+    true if region grouping will be projected, otherwise false.
+
+FUN Boolean : getTransferSelectionMap()
+  > returns
+    true if the selection map will be projected, otherwise false.
+
+FUN DzTransferUtility.SourceMorphTransferType : getTransferSourceMorphs()
+  > returns
+    Which morphs are projected from the source figure.
+
+FUN Boolean : getTransferTemplateMorphs()
+  > returns
+    true if morphs should be projected from the template figure, otherwise false.
+  > since
+    4.9.3.48
+
+FUN Boolean : getTransferUVs()
+  > returns
+    true if UV maps will be projected, otherwise false.
+
+FUN Boolean : getUseNearness()
+  > returns
+    true if near vertices will be used for calculation of the projection, otherwise false.
+
+FUN Boolean : getUseSpecifiedContentType()
+  > returns
+    true if the specified content type should be used to set the target content type, otherwise false.
+
+FUN Boolean : getUVSpaceProjection()
+  > returns
+    Whether or not UV space will be used during projection calculation.
+  > since
+    4.9.3.1
+
+FUN Boolean : getVertexFirstProjection()
+  > returns
+    Whether vertices or facets are looked at first on the source for projection.
+  > since
+    4.9.3.38
+
+FUN Boolean : isSourceBaseMorphClone()
+  > returns
+    true if the morph that will be used for the source projection base is a “clone”, otherwise false.
+  > since
+    4.9.4.84
+
+FUN void : removeUnusedBones( figure_dz figure )
+  > summary
+    Removes unused bones from the given figure. Unused bones are those whose bone binding weight maps are all filled with zero.
+
+FUN void : setAdaptiveTolerance( Number val )
+  > summary
+    Sets the adaptive tolerance factor if near vertices will be used to calculate the projection.
+  > parameters
+    + val - The adaptive tolerance factor.
+  > since
+    4.8.1.78
+
+FUN void : setAddSmoothModifier( Boolean yesNo )
+  > summary
+    Sets whether or not to add a smoothing modifier to the target figure.
+
+FUN void : setAdjustTargetBase( Boolean onOff )
+  > summary
+    Sets whether or not the target will be adjusted to the unmodified base geometry of the source.
+  > parameters
+    + onOff - If true, the target geometry will be adjusted, otherwiseThe target geometry will not be changed.
+
+FUN void : setContentType( String conType )
+  > summary
+    Sets the content type to be set on the presentation of the figure.
+  > parameters
+    + conType - The content type to set.
+
+FUN void : setDistanceSquaredTolerance( Number val )
+  > summary
+    Sets the distance squared tolerance to use for calculating the projection.
+  > parameters
+    + val - The distance squared tolerance value.
+  > since
+    4.10.0.50
+
+FUN void : setFitToFigure( Boolean yesNo )
+  > summary
+    Sets whether or not the target figure will be fit to the source figure once the projection has been performed.
+  > parameters
+    + yesNo - If true, the target figure will be fit to the source figure.
+
+FUN void : setLockViewOnTransfer( Boolean onOff )
+  > summary
+    Sets whether or not the view will be locked during the transfer.
+  > parameters
+    + onOff - If true, the view will be locked.
+
+FUN void : setMergeHierarchies( Boolean onOff )
+  > summary
+    Sets whether or not node hierarchies will be merged on the target figure.
+  > parameters
+    + onOff - If true, node hierarchies will be merged.
+
+FUN void : setMorphTransferList( Array list )
+  > summary
+    Sets the list of morph names to transfer.
+  > parameters
+    + list - The list of morph names to set.
+
+FUN void : setNearness( Number val )
+  > summary
+    Sets the nearness factor if near vertices will be used to calculate the projection.
+  > parameters
+    + val - The nearness factor.
+
+FUN void : setOverrideExistingMorphs( Boolean onOff )
+  > summary
+    Sets whether or not to override morphs that already exist onthe target figure.
+  > parameters
+    + onOff - If true (default), existing morphs on the target figure will be replaced.
+
+FUN void : setParentToFigure( Boolean yesNo )
+  > summary
+    Sets whether or not the target figure will be parented to the source figure once the projection has been performed.
+  > parameters
+    + yesNo - If true, the target figure will be parented to the source figure.
+  > since
+    4.10.0.50
+
+FUN void : setProjectionTemplatePath( String path )
+  > summary
+    Sets the path to a template figure to use for projection.
+  > parameters
+    + path - The path to set.
+  > since
+    4.9.3.48
+
+FUN void : setRemoveUnusedTargetBones( Boolean onOff )
+  > summary
+    Sets whether or not unused bones should be removed from the target after skin binding is transfered.
+
+FUN void : setRespectHiddenFacets( Boolean onOff )
+  > summary
+    Sets whether or not the transfer of weightmaps will respect hidden facets on the target figure.
+  > parameters
+    + onOff - If true, the transfer of weightmaps will respect hidden facets on the target figure.
+
+FUN void : setSilentImporters( Boolean onOff )
+  > summary
+    Sets whether importers that may need to be invoked should run silently, or with user input. Currently this only affects transfers using DzTransferPoserFigureAssets. This needs to be called before setSource() or setTarget() are called.
+
+FUN void : setSmartLeftRightHandling( Boolean onOff )
+  > summary
+    Sets whether or not smart left/right handling will be used during projection calculation.
+
+FUN Boolean : setSource( DzNode node )
+  > summary
+    Sets the source asset to be the geometry contained by the given node.
+  > parameters
+    + node - The node to use as a projection source.
+
+FUN Boolean : setSource( shape_dz geom )
+  > summary
+    Sets the source asset to be the geometry contained by the given shape.
+  > parameters
+    + shape - The shape containing the geometry to use as a projection source.
+
+FUN Boolean : setSourceBaseCurrent()
+  > summary
+    Sets the transfer utility to use the current world-space cached geometry of the source asset for the projection base instead of a morph or the unmodified base geometry. Only valid if the source asset is a node.
+  > returns
+    false if the source asset is not a node, otherwise true.
+
+FUN Boolean : setSourceBaseMorph( DzMorph morph )
+  > summary
+    Sets the morph that will be applied to the source geometry before the projection is calculated. Only valid if the source asset is a node.
+  > parameters
+    + morph - The morph that will act as the projection base.
+  > returns
+    true if the morph will be used, false if the morph is invalid or the source asset is not a node.
+
+FUN Boolean : setTarget( DzNode node )
+  > summary
+    Sets the target asset to be the geometry contained by the given node.
+  > parameters
+    + node - The node to use as a projection target.
+
+FUN Boolean : setTarget( shape_dz geom )
+  > summary
+    Sets the target asset to be the geometry contained by the given shape.
+  > parameters
+    + shape - The shape containing the geometry to use as a projection target.
+
+FUN Boolean : setTargetBaseCurrent()
+  > summary
+    Sets the transfer utility to use the current world-space cached geometry of the target asset for the projection base instead of a morph or the unmodified base geometry. Only valid if the target asset is a node.
+  > returns
+    false if the target asset is not a node, otherwise true.
+
+FUN Boolean : setTargetBaseMorph( DzMorph morph )
+  > returns
+    The morph that will be used for the target projection base, or NULL if a different base type will be used.
+
+FUN void : setTargetReplacesSource( Boolean onOff )
+  > summary
+    Sets whether or not the target will replace the source in the scene
+  > parameters
+    + onOff - true for on, false off
+
+FUN void : setTransferBinding( Boolean onOff )
+  > summary
+    Sets whether or not skin binding will be projected to the target.
+  > parameters
+    + onOff - If true, the skin binding weights will be projected, otherwise no binding will be projected.
+
+FUN void : setTransferFaceGroups( Boolean onOff )
+  > summary
+    Sets whether or not face grouping will be projected to the target.
+  > parameters
+    + onOff - If true, the face groups will be projected, otherwise no face grouping will be projected.
+
+FUN void : setTransferMaterialGroups( Boolean onOff )
+  > summary
+    Sets whether or not material grouping will be projected to the target.
+  > parameters
+    + onOff - If true, the material groups will be projected, otherwise no material groups will be projected.
+
+FUN void : setTransferMorphs( Boolean onOff )
+  > summary
+    Sets whether or not morphs will be projected to the target.
+  > parameters
+    + onOff - If true, the morphs will be projected, otherwise no morphs will be projected.
+
+FUN void : setTransferRegionGroups( Boolean onOff )
+  > summary
+    Sets whether or not region grouping will be projected to the target.
+  > parameters
+    + onOff - If true, the face groups will be projected, otherwise no face grouping will be projected.
+
+FUN void : setTransferSelectionMap( Boolean onOff )
+  > summary
+    Sets whether or not the selection map will be created on the target.
+  > parameters
+    + onOff - If true, the selection map will be projected, otherwise no selection map will be projected.
+
+FUN void : setTransferSourceMorphs( DzTransferUtility.SourceMorphTransferType type )
+  > summary
+    Sets which type of morphs to project from the source figure.
+  > parameters
+    + type - The type of morphs on the source figure to project.
+
+FUN void : setTransferTemplateMorphs( Boolean onOff )
+  > summary
+    Sets whether or not morphs should be projected from the template figure.
+  > parameters
+    + onOff - If true, morphs will be projected from the template figure.
+  > since
+    4.9.3.48
+
+FUN void : setTransferUVs( Boolean onOff )
+  > summary
+    Sets whether or not UV maps will be projected to the target.
+  > parameters
+    + onOff - If true, the UV maps will be projected, otherwise no UV mapping will be projected.
+
+FUN void : setUseNearness( Boolean onOff )
+  > summary
+    Sets whether or not face near vertices will be used to calculate the projection.
+  > parameters
+    + onOff - If true, near vertices will be used, otherwiseonly the closest mesh location will be used.
+
+FUN void : setUseSpecifiedContentType( Boolean yesNo )
+  > summary
+    Sets whether or not the specified content type should be used to set the target content type.
+  > parameters
+    + yesNo - If true, the specified content type will be set.
+
+FUN void : setUVSpaceProjection( Boolean onOff )
+  > summary
+    Sets whether or not UV space will be used during projection calculation.
+  > since
+    4.9.3.1
+
+FUN void : setVertexFirstProjection( Boolean onOff )
+  > summary
+    Sets whether vertices or facets are looked at first on the source for projection.
+  > since
+    4.9.3.38

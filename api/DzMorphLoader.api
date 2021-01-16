@@ -1,0 +1,498 @@
+CLS DzMorphLoader : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/morphloader_dz
+  > summary
+    Implements the loading and application of a morph from a geometry file.
+
+### description
+  > since
+    4.9.3.46
+  > attention
+    This object is provided by the Morph Loader Pro plugin. It is only available when the Morph Loader Pro plugin is activated and enabled.
+
+### enumerations
+
+ENU AttenuateMapType
+  > summary
+    TODO: Add description.
+  + WeightMap - TODO: Add description.
+  + FacetList - TODO: Add description.
+  + EdgeList - TODO: Add description.
+  + VertexList - TODO: Add description.
+  + UnknownMap - TODO: Add description.
+
+ENU LoadMode
+  > summary
+    TODO: Add description.
+  + EntireFigure - TODO: Add description.
+  + SelectedNodes - TODO: Add description.
+  + PrimaryNode - TODO: Add description.
+  + SingleSkinFigure - TODO: Add description.
+  + SingleSkinFigureFromGraft - TODO: Add description.
+
+ENU MirroringType
+  > summary
+    TODO: Add description.
+  + DoNotMirror - TODO: Add description.
+  + XSwap - TODO: Add description.
+  + XPosToNeg - TODO: Add description.
+  + XNegToPos - TODO: Add description.
+  + YSwap - TODO: Add description.
+  + YPosToNeg - TODO: Add description.
+  + YNegToPos - TODO: Add description.
+  + ZSwap - TODO: Add description.
+  + ZPosToNeg - TODO: Add description.
+  + ZNegToPos - TODO: Add description.
+
+ENU OverwriteMode
+  > summary
+    TODO: Add description.
+  + MakeUnique - TODO: Add description.
+  + DeltasAndERCLinks - TODO: Add description.
+  + DeltasOnly - TODO: Add description.
+
+### statics
+
+STA String : getPathForContext( DzWeightMapContext context, DzNode node )
+  > summary
+    Gets the path for a given weight map context and a given node.
+  > parameters
+    + context - The weight map context.
+    + node - The node.
+  > returns
+    The path for the weight map context on node.
+
+### constructors
+
+CTR DzMorphLoader()
+  > summary
+    Default Constructor. Creates a morph loader with default settings.
+
+### methods
+
+FUN String : createMorph( DzFileIOSettings settings, DzNode node, Boolean onlyErrorsOrWarnings=true, Boolean plainText=true )
+  > summary
+    Creates a morph on the node provided from the geometry loaded from the file. This function supports morph creation from vertex-only geometries.
+  > parameters
+    + settings - The scale to apply to the geometry that is read from the file.
+    + node - The node containing the geometry to create the morph for.
+    + onlyErrorsOrWarnings - If true (default), only errors and warnings will be returned.
+    + plainText - If true (default), the returned string will be plain text, otherwise the returned string will contain HTML.
+  > returns
+    The log containing messages about the creation of the morph.
+
+FUN String : createMorph( vertexmesh_dz mesh, DzNode node, Boolean onlyErrorsOrWarnings=true, Boolean plainText=true )
+  > summary
+    Creates a morph on the node provided from the given geometry. This function supports morph creation from vertex-only geometries.
+  > parameters
+    + mesh - The geometry for the morph.
+    + node - The node containing the geometry to create the morph for.
+    + onlyErrorsOrWarnings - If true (default), only errors and warnings will be returned.
+    + plainText - If true (default), the returned string will be plain text, otherwise the returned string will contain HTML.
+  > returns
+    The log containing messages about the creation of the morph.
+
+FUN Number : getAttenuateEdgeStrength()
+  > returns
+    The strength that will be used for attenuating the effect of the morph being loaded on the vertices that reside along the boundary of the current geometric selection.
+
+FUN String : getAttenuateMapPath()
+  > returns
+    The path to the map that will be used for attentuating the effect of the morph.
+
+FUN Number : getAttenuateStrength()
+  > returns
+    The strength that the map used to attenuate the effect of the morph will be applied at.
+
+FUN Boolean : getCleanUpOrphans()
+  > summary
+    Gets whether or not orphans should be cleaned up when overwriting existing morphs. An 'orphan' is a morph by the same name that does not have any deltas from a new morph.
+  > returns
+    true if orphans are to be cleaned up when overwriting existing morphs, otherwise false.
+
+FUN DzNode : getControlNode()
+  > returns
+    The node that the control property will be located on.
+  > attention
+    This has no meaning if getCreateControlProperty() is false.
+
+FUN DzNumericProperty : getControlProperty()
+  > returns
+    The property that will serve as the additional control property for the morph(s) created.
+  > attention
+    This has no meaning if getCreateControlProperty() is false.
+
+FUN String : getControlPropertyCustomLabel()
+  > returns
+    The custom label that will be used for secondary (non-control) properties.
+  > attention
+    This has no meaning if getControlPropertyUseCustomLabel() or getCreateControlProperty() are false.
+
+FUN Number : getControlPropertyERCCustomValue()
+  > returns
+    The custom value for creating ERC links to the control property.
+  > attention
+    This has no meaning if getControlPropertyERCUseCustomValue() or getCreateControlProperty() are false.
+    DzERCLink::ERCType : getControlPropertyERCType()
+  > returns
+    The ERC type to use when connecting secondary properties to the control property.
+
+FUN Boolean : getControlPropertyERCUseCustomValue()
+  > returns
+    true if a custom value will be used for the ERC links to the control property, otherwise false.
+  > attention
+    This has no meaning if getCreateControlProperty() is false.
+
+FUN Boolean : getControlPropertyUseCustomLabel()
+  > returns
+    true if a custom label will be used for the secondary (non-control) properties, otherwise false.
+  > attention
+    This has no meaning if getCreateControlProperty() is false.
+
+FUN Boolean : getCreateControlProperty()
+  > returns
+    true if the loader will create and use ERC links to an additional control property.
+
+FUN Number : getDeltaTolerance()
+  > summary
+    Gets the minimum amount of deviation from the original position of a given vertex that will be recorded in the morph.
+  > returns
+    The minimum amount of deviation from the original position of a given vertex to be recorded in the morph.
+
+FUN String : getFilename()
+  > returns
+    The full path to the file that this morph will load its geometry from.
+
+FUN Boolean : getHideSecondaryProperties()
+  > returns
+    true if secondary (non-control) properties are hidden, otherwise false.
+  > attention
+    This has no meaning if getCreateControlProperty() is false.
+
+FUN DzMorphLoader.MirroringType : getMorphMirroring()
+  > summary
+    Gets the type of mirroring to apply.
+  > returns
+    The type of mirroring that will be applied to the morph.
+
+FUN String : getMorphName()
+  > returns
+    The name of the morph(s) that will be created by this morph loader.
+
+FUN DzMorphLoader.OverwriteMode : getOverwriteExisting()
+  > returns
+    true if an existing morph by the same name will be replaced, otherwise false.
+
+FUN Boolean : getPreserveExistingDeltas()
+  > returns
+    true if existing deltas in a morph by the same name be preserved, otherwise false.
+
+FUN String : getPropertyGroupPath()
+  > returns
+    The path of the property group that morph value properties will be added to.
+
+FUN Boolean : getReverseDeformations()
+  > returns
+    true if joint deformations and other modifiers will be reversed from the current world-space geometry to calculate the deltas, otherwise false.
+
+FUN QString : getReverseDeformationsPose()
+  > returns
+    The path of the pose file to be applied to the figure before a morph is loaded.
+
+FUN Boolean : morphAlreadyExists( DzNode node )
+  > parameters
+    + node - The node to check for the morph.
+  > returns
+    true if the morph of the same name already exists, otherwise false.
+
+FUN Boolean : readObjectCommonSettingsFromConfigFile( String filename )
+  > summary
+    Reads common object settings from a configuration file (*.dsx).
+  > parameters
+    + filename - The full path of the file to read.
+  > returns
+    true if the file was successfully read, otherwise false.
+  > since
+    4.9.3.47
+
+FUN void : readObjectSettingsFromConfigFile( String filename, String filePath )
+  > summary
+    Reads the settings of the first object in a configuration file (*.dsx).
+  > parameters
+    + filename - The name of the file to read.
+    + filePath - The path of the directory that the file to read is in.
+  > since
+    4.9.3.47
+
+FUN void : saveObjectSettingsToConfigFile( String filename, String projectPath, Boolean saveProjectRelative )
+  > summary
+    Saves object settings to a configuration file (*.dsx).
+  > parameters
+    + filename - The full path of the file to write to.
+    + projectPath - The full path of the directory containing the files of a project.
+    + relativeToProject - If true, filename is saved relative to projectPath. If false, filename is considered to be absolute and projectPath is ignored.
+  > since
+    4.9.3.47
+
+FUN void : setAttenuateEdgeStrength( Number val )
+  > summary
+    Sets the strength to use for attenuating the effect of the morph on the vertices that reside along the boundary of the current geometric selection.
+  > parameters
+    + val - The strength value to set. A value of 0 yeilds no (0%) attenuation. A value of 1 yeilds full (100%) attenuation. Values between 0 and 1 yeild attentuation that is commensurate with the specified value.
+  > attention
+    This value is ignored when a weight map is used for attenuation.
+  > seealso
+    setAttenuateMapPath()
+    getAttenuateMapPath()
+
+FUN void : setAttenuateMapPath( String mapPath )
+  > summary
+    Sets the path to the map used to attenuate the effect of the morph.
+  > parameters
+    + mapPath - The path to the map.
+  > attention
+    The value of mapPath can be one of the following:
+    <NodeName>::<FacetListType>::<FaceGroupName>
+    <NodeName>::<FacetListType>::<SurfaceName>
+    <NodeName>::<FacetListType>::<SelectionSetName>
+    <NodeName>::<EdgeListType>::<SelectionSetName>
+    <NodeName>::<VertexListType>::<SelectionSetName>
+  > seealso
+    getPathForContext()
+
+FUN void : setAttenuateStrength( Number val )
+  > summary
+    Sets the strength to apply the map used to attenuate the effect of the morph.
+  > parameters
+    + val - The strength value to set. A value of 1.0 will cause the values in the map to be applied at their full respective values. A value of 0.0 will cause the values in the map to not be applied. A value of -1.0 will cause the values in the map to be inverted and applied at the opposite of their full respective values.
+
+FUN void : setCleanUpOrphans( Boolean onOff )
+  > summary
+    Sets whether or not orphans should be cleaned up when overwriting existing morphs. An 'orphan' is a morph by the same name that does not have any deltas from a new morph.
+  > parameters
+    + onOff - If true, orphans will be cleaned up.
+
+FUN void : setControlNode( DzNode node )
+  > summary
+    Sets the node that the control property will be located on.
+  > parameters
+    + node - The node that will own the control property.
+  > attention
+    This has no effect if getCreateControlProperty() is false.
+
+FUN void : setControlProperty( DzNumericProperty prop )
+  > summary
+    Sets the property that will serve as the additional control property for the morph(s) created by this loader.
+  > parameters
+    + prop - The control property for the new morph(s).
+  > attention
+    This has no effect if getCreateControlProperty() is false.
+
+FUN void : setControlPropertyCustomLabel( String label )
+  > summary
+    Sets the custom label that will be used for secondary (non-control) properties.
+  > parameters
+    + label - The custom label to use for the secondary (non-control) properties.
+  > attention
+    This has no effect if getControlPropertyUseCustomLabel() or getCreateControlProperty() are false.
+
+FUN void : setControlPropertyERCCustomValue( Number val )
+  > summary
+    Sets the custom value for creating ERC links to the control property.
+  > parameters
+    + val - The custom multiplier for the ERC links that are created to the control property.
+  > attention
+    This has no effect if getControlPropertyERCUseCustomValue() or getCreateControlProperty() are false.
+
+FUN void : setControlPropertyERCType( DzERCLink.ERCType type )
+  > summary
+    Sets the ERC link type to use when connecting secondary properties to the control property.
+  > parameters
+    + type - The ERC link type to use when connecting secondary properties to the control property.
+
+FUN void : setControlPropertyERCUseCustomValue( Boolean onOff )
+  > summary
+    Sets whether or not a custom value will be used for the ERC links to the control property.
+  > parameters
+    + onOff - If true, a custom value will be used for the links to the control property. Otherwise the default 1:1 ratio is assumed.
+  > attention
+    This has no effect if getCreateControlProperty() is false.
+
+FUN void : setControlPropertyUseCustomLabel( Boolean onOff )
+  > summary
+    Sets whether or not a custom label will be used for the secondary (non-control) properties.
+  > parameters
+    + onOff - If true, a custom label will be used for the secondary (non-control) properties. Otherwise the default label is used.
+  > attention
+    This has no effect if getCreateControlProperty() is false.
+
+FUN void : setCreateControlProperty( Boolean onOff )
+  > summary
+    Sets whether or not the loader will use and create ERC links to an additional control property.
+  > parameters
+    + onOff - If true, the loader will create links to an additional control property, otherwise, settings for the additional control property will be ignored.
+
+FUN void : setDeltaTolerance( Number val )
+  > summary
+    Sets the minimum amount of deviation from the original position of a given vertex that will be recorded in the morph.
+  > parameters
+    + val - The minimum amount of deviation from the original position of a given vertex to be recorded in the morph.
+
+FUN void : setFilename( String filename )
+  > summary
+    Sets the file to read the geometry from.
+  > parameters
+    + filename - The full path of the file to load this morph's geometry from.
+
+FUN void : setHideSecondaryProperties( Boolean onOff )
+  > summary
+    Sets whether or not secondary (non-control) properties are hidden.
+  > parameters
+    + onOff - If true, secondary (non-control) properties will be set as hidden.
+  > attention
+    This has no effect if getCreateControlProperty() is false.
+
+FUN Boolean : setLoadMode( DzMorphLoader.LoadMode mode, DzNode node )
+  > summary
+    Sets the mode to load the morph for node.
+  > parameters
+    + mode - The mode to set for the morph being loaded.
+    + node - The node with the geometry that the morph is being loaded for.
+  > returns
+    true if mode can be set for node, otherwise false.
+  > attention
+    If node is a “single skin” figure, only the SingleSkinFigure and SingleSkinFigureFromGraft modes are considered valid. If node is a figure, but not a “single skin” figure (e.g., a legacy figure), only the EntireFigure, SelectedNodes and PrimaryNode modes are considered valid. If node is a prop, only the PrimaryNode mode is considered valid.
+
+FUN void : setMorphMirroring( DzMorphLoader.MirroringType type )
+  > summary
+    Sets the type of mirroring to apply to the morph.
+  > parameters
+    + type - The type of mirroring to apply to the morph.
+
+FUN void : setMorphName( String name )
+  > summary
+    Sets the name of the morph(s) that will be created by this morph loader.
+  > parameters
+    + name - The name for the DzMorph object(s) that will be created by this loader.
+
+FUN void : setOverwriteExisting( DzMorphLoader.OverwriteMode mode )
+  > summary
+    Sets whether or not to override/replace existing morphs with the same name.
+  > parameters
+    + mode - If true, existing morphs on the node(s) with the same name will be replaced by the loaded morph.
+
+FUN void : setPreserveExistingDeltas( Boolean onOff )
+  > summary
+    Sets whether or not to preserve existing deltas in a morph by the same name.
+  > parameters
+    + mode - If true, existing deltas in a morph by the same name will be preserved.
+
+FUN void : setPropertyGroupPath( String path )
+  > summary
+    Sets the property group that morph value properties will be added to.
+  > parameters
+    + path - The path of the property group that value properties from the morph(s) created by this loader will be assigned to.
+
+FUN void : setReverseDeformations( Boolean onOff )
+  > summary
+    Sets whether or not joint deformations and other modifiers will be reversed before calculating deltas.
+  > parameters
+    + onOff - If true, joint deformations and other modifiers will be reversed from the current world-space geometry to calculate the deltas. If false, the deltas will be calculated from the base geometry.
+
+FUN void : setReverseDeformationsPose( String filePath )
+  > summary
+    Sets the path of the pose file to apply to the figure before a morph is loaded.
+  > parameters
+    + filePath - The path of the pose file to be used.
+
+### signals
+
+SIG void : applyAfterJointChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : attenuateChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : attenuateEdgeStrengthChanged( Number strength )
+  > summary
+    TODO: Add description.
+
+SIG void : attenuateStrengthChanged( Number strength )
+  > summary
+    TODO: Add description.
+
+SIG void : controlNodeChanged( DzNode node )
+  > summary
+    TODO: Add description.
+
+SIG void : controlPropertyChanged( DzNumericProperty prop )
+  > summary
+    TODO: Add description.
+
+SIG void : createControlPropertyChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : deltaToleranceChanged( Number val )
+  > summary
+    TODO: Add description.
+
+SIG void : ercCustomValueChanged( Number val )
+  > summary
+    TODO: Add description.
+
+SIG void : filenameChanged( String name )
+  > summary
+    Emitted when the filename has changed.
+  > parameters
+    + name - The new name of the file.
+
+SIG void : hideSecondaryChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : mirroringChanged( DzMorphLoader.MirroringType mirroring )
+  > summary
+    TODO: Add description.
+
+SIG void : morphNameChanged( String name )
+  > summary
+    Emitted when the morph name has changed.
+  > parameters
+    + name - The new name of the morph.
+
+SIG void : overwriteExistingChanged( DzMorphLoader.OverwriteMode value )
+  > summary
+    TODO: Add description.
+
+SIG void : preserveExistingDeltasChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : propertyGroupPathChanged( String path )
+  > summary
+    Emitted when the path of the property group has changed.
+  > parameters
+    + name - The new path of the property group.
+
+SIG void : reverseDeformationsChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : secondaryLabelChanged( String label )
+  > summary
+    TODO: Add description.
+
+SIG void : smoothCageChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : useErcCustomValueChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : useSecondaryLabelChanged( Boolean onOff )
+  > summary
+    TODO: Add description.

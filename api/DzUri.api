@@ -1,0 +1,188 @@
+CLS DzUri : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uri_dz
+  > summary
+    Represents a Uniform Resource Indicator as used for Scene Asset I/O.
+
+### description
+  > summary
+    Represents a URI as it is used for the DSON file format. DzUri provides functionality in addition to standard URI/URL representations that is specific to the DSON file format.
+    DzUri provides for a traditional URI with path and fragment portions. In addition, it further divides the fragment into 1 to 3 parts for ease of use in the DSON file format. The following is an example of a URI as represented by the DzURI class:
+    /Converted/Victoria4/Victoria4.dsf::rCollar?rotation/x
+    The file path portion of this URI is: “/Converted/Victoria4/Victoria4.dsf”
+    The fragment portion of this URI is: “rCollar?rotation/x”
+    The fragment is further divided into an identifier and a property path. In this case the identifier is “rCollar” and the property path is “rotation/x”.
+    All the sections of the fragment are optional, however, to be valid, each section in the fragment requires the preceding section to also be valid. So, the following URIs are valid:
+    /Converted/Victoria4/Victoria4.dsf::rCollar
+    /Converted/Victoria4/Victoria4.dsf::rCollar?rotation
+    /Converted/Victoria4/Victoria4.dsf::rCollar?rotation/x
+    And the following URIs are not valid:
+    /Converted/Victoria4/Victoria4.dsf#?rotation/x
+    /Converted/Victoria4/Victoria4.dsf#?/x
+    /Converted/Victoria4/Victoria4.dsf#?rotation
+  > since
+    4.8.1.18
+
+### enumerations
+
+ENU PartFlag
+  > summary
+    TODO: Add description.
+  + NoPart - TODO: Add description.
+  + Scheme - TODO: Add description.
+  + NodePath - TODO: Add description.
+  + ModifierPath - TODO: Add description.
+  + PropertyPath - TODO: Add description.
+  + IDPart - TODO: Add description.
+  + FilePath - TODO: Add description.
+  + AllParts - TODO: Add description.
+
+ENU SchemeType
+  > summary
+    TODO: Add description.
+  + NoScheme - TODO: Add description.
+  + ID - TODO: Add description.
+  + Name - TODO: Add description.
+
+### properties
+
+PRP String : filePath
+  > summary
+    Holds the file path portion of the URI, if any.
+
+PRP DzVersion : fileVersion
+  > summary
+    Holds the file version of this URI, as a 64 bit unsigned integer. If not read from a file, this will be invalid.
+
+PRP String : id
+  > summary
+    Holds the identifier portion of this URI's fragment, if any.
+
+PRP Array : modifierPath
+  > summary
+    Holds the modifier path portion of the URI, if any.
+
+PRP Array : nodePath
+  > summary
+    Holds the node path portion of this URI, if any.
+
+PRP Array : propertyPath
+  > summary
+    Holds the property portion of the URI, if any.
+
+PRP DzUri.SchemeType : schemeType
+  > summary
+    Holds the scheme type for this URI. Default is SchemeType.ID.
+
+### statics
+
+STA String : escape( String str, ByteArray exclude, ByteArray closer )
+  > summary
+    Escapes any reserved characters in the in the given string.
+  > parameters
+    + str - The string to replace reserved characters in.
+    + exclude - The list of characters to not be escaped from the resultant string
+    + include - The list of characters to be escaped from the resultant string
+  > returns
+    URI escape sequences.
+
+STA String : escapedPath( Array list, ByteArray exclude, ByteArray include )
+  > summary
+    Converts the string list into an escaped path string.
+  > parameters
+    + list - The string list to replace reserved characters in.
+    + exclude - The list of characters to not be escaped from the resultant string
+    + include - The list of characters to be escaped from the resultant string
+  > returns
+    URI path escape sequences.
+
+STA Boolean : fromLocalFilename( String filePath )
+  > summary
+    Holds wether or not this uri was points to a cloud asset.
+    Creates a new URI using the path of a local file.
+  > parameters
+    + filePath - A local file path.
+
+STA String : unescape( String str )
+  > summary
+    Converts any escape sequences in the given string back to the corresponding character.
+  > parameters
+    + str - The string to convert escape sequences in.
+  > returns
+    The given string with any escape sequences replaced with the appropriate character.
+
+STA Array : unescapePath( String path )
+  > summary
+    Converts the string into a string list of unescaped path pieces.
+
+### constructors
+
+CTR DzUri()
+  > summary
+    Default constructor. Creates an empty URI.
+
+CTR DzUri( DzUri uri )
+  > summary
+    Copy constructor. Creates a URI as a copy of another URI.
+
+CTR DzUri( String uri )
+  > summary
+    Constructor. Creates a URI from its string representation.
+
+### methods
+
+FUN void : clear()
+  > summary
+    Clears the current values of this URI.
+
+FUN void : clearFoundLocalFilename()
+  > summary
+    TODO: Add description.
+
+FUN void : detach()
+  > summary
+    Detaches this URI from any shared data. Makes the underlying data in this URI unique from all other URIs.
+
+FUN Boolean : isEmpty()
+  > returns
+    true if this URI is empty, otherwise false.
+
+FUN Boolean : isNull()
+  > returns
+    true if this URI is null, otherwise false. A DzUri may be empty without being Null, but a Null uri is always empty
+  > since
+    4.9.2.12
+
+FUN void : setUri( String uri )
+  > summary
+    Sets the value of this URI from a string representation of the full URI.
+  > parameters
+    + uri - The string containing the full URI.
+
+FUN String : toLocalFilename( String preferredPath )
+  > summary
+    Attempts to convert the URI to the path of a local file.
+  > parameters
+    + preferredPath - The path to attempt resolving against before other local drive paths are checked.
+  > returns
+    A string representation of the URI converted to a local file path.
+
+FUN String : toLocalFilename()
+  > summary
+    Attempts to convert the URI to the path of a local file.
+  > returns
+    A string representation of the path of the URI converted to a local file path.
+
+FUN String : toPath( String preferredPath=“” )
+  > summary
+    Attempts to convert the URI to the path of a local file.
+  > parameters
+    + preferredPath - The path to attempt resolving against before other local drive paths are checked.
+  > returns
+    A string representation of the URI converted to a file path. If the file represented by the URI exists, the string will be an absolute file path. If the file represented by the URI does not exist, the string will be a relative path.
+  > since
+    4.9.1.26
+
+FUN String : toString( DzUri.PartFlag flags? )
+  > returns
+    A string representation of the URI containing the parts specified by flags.

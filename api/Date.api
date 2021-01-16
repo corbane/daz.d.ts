@@ -1,0 +1,475 @@
+NOT Date : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/date
+  > summary
+    ECMAScript Date prototype object.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QDateTime type used in the DAZ Studio SDK.
+    Date Time String Format
+    ECMAScript defines a string interchange format for date-times based upon a simplification of the ISO 8601 Extended Format.
+    The format is as follows:
+    YYYY-MM-DDTHH:mm:ss.sssZ
+    Where the fields are as follows:
+    YYYY - is the decimal digits of the year 0000 to 9999 in the Gregorian calendar.
+    - - (hyphen) appears literally twice in the string; once between the year/month fields, and once between the month/day fields.
+    MM - is the month of the year from 01 (January) to 12 (December).
+    DD - is the day of the month from 01 to 31.
+    T - appears literally in the string, to indicate the beginning of the time element.
+    HH - is the number of complete hours that have passed since midnight as two decimal digits from 00 to 24.
+    - (colon) appears literally twice in the string; once between the hour/minute fields, and once between the minute/seconds fields.
+    mm - is the number of complete minutes since the start of the hour as two decimal digits from 00 to 59.
+    ss - is the number of complete seconds since the start of the minute as two decimal digits from 00 to 59.
+    . - (dot) appears literally in the string; between the seconds and milliseconds fields.
+    sss - is the number of complete milliseconds since the start of the second as three decimal digits.
+    Z - is the time zone offset specified as “Z” (for UTC) or either “+” or “-” followed by a time expression HH:mm
+    This format includes the date-only forms:
+    YYYY
+    YYYY-MM
+    YYYY-MM-DD
+    It also includes date-time forms that consist of one of the above date-only forms immediately followed by one of the following time forms with an optional time zone offset appended:
+    THH:mm
+    THH:mm:ss
+    THH:mm:ss.sss
+
+### statics
+
+STA Number : now()
+  > returns
+    A number that represents the current UTC date and time.
+
+STA Number : parse( String dateString )
+  > summary
+    Parses the given date string and returns the milliseconds since midnight on the 1st of January 1970.
+  > parameters
+    + dateString - The date string to parse into a date value.
+  > returns
+    A number that represents the specified UTC date and time.
+
+STA Number : UTC( Number year, Number month, Number date=0, Number hour=0, Number minutes=0, Number seconds=0, Number milliseconds=0 )
+  > parameters
+    + year - The year for the date.
+    + month - The month of the year [1 - 12].
+    + date - The day of the month [1 - 31].
+    + hour - The hour of the day [0 - 23].
+    + minutes - The minutes [0 - 59].
+    + seconds - The seconds [0 - 59].
+    + milliseconds - The milliseconds [0 - 999].
+  > returns
+    A number that represents the specified UTC date and time.
+
+### constructors
+
+CTR Date()
+  > summary
+    Default constructor. Creates a date and initializes it with the current date and time.
+
+CTR Date( Number year, Number month, Number date, Number hour=0, Number minutes=0, Number seconds=0, Number milliseconds=0 )
+  > summary
+    Creates a date with the given year, month, day; and optionally, hour, minutes, seconds, and milliseconds.
+  > parameters
+    + year - The year for the date.
+    + month - The month of the year [1 - 12].
+    + date - The day of the month [1 - 31].
+    + hour - The hour of the day [0 - 23].
+    + minutes - The minutes [0 - 59].
+    + seconds - The seconds [0 - 59].
+    + milliseconds - The milliseconds [0 - 999].
+
+CTR Date( Number milliseconds )
+  > summary
+    Creates a date from a timestamp.
+  > parameters
+    + milliseconds - The milliseconds after January 1st 1970.
+
+CTR Date( String dateTime )
+  > summary
+    Creates a date from the formatted date string.
+  > parameters
+    + dateTime - The date string to create the date from.
+
+### methods
+
+FUN Number : getDate()
+  > returns
+    The day of the month; in the range [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getDate() ); //15
+
+FUN Number : getDay()
+  > returns
+    A number that represents the day of the week; in the range [0 - 6], where Sunday is 0.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getDay() ); //1
+
+FUN Number : getFullYear()
+  > returns
+    A four digit number that represents a year.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getFullYear() ); //2005
+
+FUN Number : getHours()
+  > returns
+    The hours of a time; in the range [0 - 23].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getHours() ); //12
+
+FUN Number : getMilliseconds()
+  > returns
+    The milliseconds of a time; in the range [0 - 999].
+
+FUN Number : getMinutes()
+  > returns
+    The minutes of a time; in the range [0 - 59].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getMinutes() ); //30
+
+FUN Number : getMonth()
+  > returns
+    A number that represents a month; in the range [0 - 11], where January = 0.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getMonth() ); //7
+
+FUN Number : getSeconds()
+  > returns
+    The seconds of a time; in the range [0 - 59].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getSeconds() ); //30
+
+FUN Number : getTime()
+  > returns
+    The milliseconds since midnight on January 1st, 1970.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getTime() ); //1121452200000
+  > seealso
+    valueOf()
+
+FUN Number : getTimezoneOffset()
+  > returns
+    A number that represents the difference in minutes between Greenwich Mean Time (GMT) and local time.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getTimezoneOffset() );
+
+FUN Number : getUTCDate()
+  > returns
+    The day of the month according to the Universal Coordinated Time (UTC); in the range [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCDate() ); //15
+
+FUN Number : getUTCDay()
+  > returns
+    A number that represents the day of the week according to the Universal Coordinated Time (UTC); in the range [0 - 6], where Sunday is 0.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCDay() ); //1
+
+FUN Number : getUTCFullYear()
+  > returns
+    A four digit number that represents a year according to the Universal Coordinated Time (UTC).
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCFullYear() ); //2005
+
+FUN Number : getUTCHours()
+  > returns
+    The hours of a time according to the Universal Coordinated Time (UTC); in the range [0 - 23].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCHours() ); //12
+
+FUN Number : getUTCMilliseconds()
+  > returns
+    The milliseconds of a time according to the Universal Coordinated Time (UTC); in the range [0 - 999].
+
+FUN Number : getUTCMinutes()
+  > returns
+    The minutes of a time according to the Universal Coordinated Time (UTC); in the range [0 - 59].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCMinutes() ); //30
+
+FUN Number : getUTCMonth()
+  > returns
+    A number that represents a month according to the Universal Coordinated Time (UTC); in the range [0 - 11], where January = 0.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getMonth() ); //7
+
+FUN Number : getUTCSeconds()
+  > returns
+    The seconds of a time according to the Universal Coordinated Time (UTC); in the range [0 - 59].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getUTCSeconds() ); //30
+  > seealso
+    valueOf()
+
+FUN Number : getYear()
+  > returns
+    The year as a two, three or four digit number. For years between 1900 and 1999 the return value will be two digits. For years before 1900 the return value will be less than zero; i.e. 1800 == -100. For years greater than or equal to 2000 a value of 100 or greater is returned.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.getYear() ); //105
+
+FUN void : setDate( Number dayOfTheMonth )
+  > summary
+    Sets the day of the month for the Date object.
+  > parameters
+    + dayOfTheMonth - The day of the month in the range of [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setDate( 18 );
+    print( oDate.toString() ); //Thu Aug 18 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setFullYear( Number year, … )
+  > summary
+    Sets the year for the Date object, according to the Universal Coordinated Time (UTC). Optionally sets the month and date.
+  > parameters
+    + year - The 4 digit year to set.
+    + month - The month of the year to set; in the range [1 - 12].
+    + date - The day of the month to set; in the range [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setFullYear( 2003 );
+    print( oDate.toString() ); //Fri Aug 15 2003 12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setHours( Number hours, … )
+  > summary
+    Sets the hours for the Date object. Optionally sets the minutes, seconds and milliseconds.
+  > parameters
+    + hours - The hour of the day to set; in the range [0 - 23].
+    + minutes - The minutes to set; in the range [0 - 59].
+    + seconds - The seconds to set; in the range [0 - 59].
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setHours( 10 );
+    print( oDate.toString() ); //Mon Aug 15 2005 10:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setMilliseconds( Number milliseconds )
+  > summary
+    Sets the milliseconds for the Date object.
+  > parameters
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setMilliseconds( 10 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setMinutes( Number minutes, … )
+  > summary
+    Sets the minutes for the Date object. Optionally sets the seconds and milliseconds.
+  > parameters
+    + minutes - The minutes to set; in the range [0 - 59].
+    + seconds - The seconds to set; in the range [0 - 59].
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setMinutes( 10 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:10:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setMonth( Number month, … )
+  > summary
+    Sets the month of the year for the Date object. Optionally sets the date.
+  > parameters
+    + month - The month of the year, which must be in the range [0,11], in local time.
+    + date - The day of the month to set; in the range [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setMonth( 9 );
+    print( oDate.toString() ); //Sat Oct 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setSeconds( Number seconds, … )
+  > summary
+    Sets the seconds for the Date object. Optionally sets the milliseconds.
+  > parameters
+    + seconds - The seconds to set; in the range [0 - 59]
+    + milliseconds - The milliseconds to set; in the range [0 - 999]
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setSeconds( 20 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:20 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setTime( Number milliseconds )
+  > summary
+    Sets the date and time, according to the local date and time.
+  > parameters
+    + milliseconds - The milliseconds since midnight on January 1, 1970.
+  > example
+    var oDate = new Date();
+    oDate.setTime( 1124134200000 );
+    print( oDate.toString() ); //Mon Aug 15 2005 13:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN void : setUTCDate( Number dayOfTheMonth )
+  > summary
+    Sets the day of the month for the Date object, according to the Universal Coordinated Time (UTC).
+  > parameters
+    + dayOfTheMonth - The day of the month in the range of [1 - 31].
+
+FUN void : setUTCFullYear( Number year, … )
+  > summary
+    Sets the year for the Date object. Optionally sets the month and date.
+  > parameters
+    + year - The 4 digit year to set.
+    + month - The month of the year to set; in the range [1 - 12].
+    + date - The day of the month to set; in the range [1 - 31].
+
+FUN void : setUTCHours( Number hours, … )
+  > summary
+    Sets the hours for the Date object, according to the Universal Coordinated Time (UTC). Optionally sets the minutes, seconds and milliseconds.
+  > parameters
+    + hours - The hour of the day to set; in the range [0 - 23].
+    + minutes - The minutes to set; in the range [0 - 59].
+    + seconds - The seconds to set; in the range [0 - 59].
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+
+FUN void : setUTCMilliseconds( Number milliseconds )
+  > summary
+    Sets the milliseconds for the Date object, according to the Universal Coordinated Time (UTC).
+  > parameters
+    + milliseconds - The milliseconds to set; in the range [0 - 999];
+
+FUN void : setUTCMinutes( Number minutes, … )
+  > summary
+    Sets the minutes for the Date object, according to the Universal Coordinated Time (UTC). Optionally sets the seconds and milliseconds.
+  > parameters
+    + minutes - The minutes to set; in the range [0 - 59].
+    + seconds - The seconds to set; in the range [0 - 59].
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+
+FUN void : setUTCMonth( Number month, … )
+  > summary
+    Sets the month of the year for the Date object, according to the Universal Coordinated Time (UTC). Optionally sets the date.
+  > parameters
+    + month - The month of the year, which must be in the range [0,11], in local time.
+    + date - The day of the month to set; in the range [1 - 31].
+
+FUN void : setUTCSeconds( Number seconds, … )
+  > summary
+    Sets the seconds for the Date object, according to the Universal Coordinated Time (UTC). Optionally sets the milliseconds.
+  > parameters
+    + seconds - The seconds to set; in the range [0 - 59].
+    + milliseconds - The milliseconds to set; in the range [0 - 999].
+
+FUN void : setYear( Number year, … )
+  > summary
+    Sets the year for the Date object. Optionally sets the month and date.
+  > parameters
+    + year - The year to set. If year is a two digit number, like 91, it will be perceived as 1991. To set a year before 1900 or after 1999, use four digits.
+    + month - The month of the year to set; in the range [1 - 12].
+    + date - The day of the month to set; in the range [1 - 31].
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+     
+    oDate.setYear( 2003 );
+    print( oDate.toString() ); //Fri Aug 15 2003 12:30:00 GMT-0600 (Mountain Daylight Time)
+  > seealso
+    setFullYear()
+
+FUN String : toDateString()
+  > returns
+    A string representation of the date.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toDateString() ); //Mon Aug 15 2005
+
+FUN String : toGMTString()
+  > summary
+    Deprecated
+    Use toUTCString() instead
+  > returns
+    A string representation of the Date object, according to the Greenwich Mean Time (GMT).
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toGMTString() ); //Mon, 15 Aug 2005 18:30:00 GMT
+
+FUN String : toISOString()
+  > returns
+    A string representation of the Date object; the format of the String is ISO 8601 Extended Format; all fields are present in the String; the time zone is always UTC, denoted by the Z suffix
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toISOString() ); //2005-08-15T18:30:00.000Z
+
+FUN String : toJSON()
+  > returns
+    A string representation of the Date object for use by JSON::stringify()
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toJSON() ); //2005-08-15T18:30:00.000Z
+
+FUN String : toLocaleDateString()
+  > returns
+    A string representation of the date, according to local time.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toLocaleDateString() ); //Monday, August 15, 2005
+
+FUN String : toLocaleString()
+  > returns
+    A string representation of the Date object, according to local time.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toLocaleString() ); //Monday, August 15, 2005 12:30:00
+
+FUN String : toLocaleTimeString()
+  > returns
+    A string representation of the time, according to local time.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toLocaleTimeString() ); //12:30:00
+
+FUN String : toString()
+  > returns
+    A string representation of the Date object.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toString() ); //Mon Aug 15 2005 12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN String : toTimeString()
+  > returns
+    A string representation of the time.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toTimeString() ); //12:30:00 GMT-0600 (Mountain Daylight Time)
+
+FUN String : toUTCString()
+  > returns
+    A string representation of the Date object, according to the Universal Coordinated Time (UTC).
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.toUTCString() ); //Mon, 15 Aug 2005 18:30:00 GMT
+
+FUN Number : valueOf()
+  > returns
+    The time value of the Date object.
+  > example
+    var oDate = new Date( 2005, 7, 15, 12, 30 );
+    print( oDate.valueOf() ); //1124130600000
+  > seealso
+    getTime()

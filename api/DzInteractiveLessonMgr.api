@@ -1,0 +1,160 @@
+CLS DzInteractiveLessonMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/interactivelessonmgr_dz
+  > summary
+    Manager that handles interactive lessons.
+
+### description
+  > summary
+    This class manages interactive lessons that the user can perform in the interface via lessonstripwgt_dz. There is only one instance of this manager in an application. This instance is created and owned by DzMainWindow. Request the instance from DzMainWindow via DzMainWindow::getInteractiveLessonMgr().
+
+### properties
+
+PRP Number : progressWidth
+  > summary
+    The width of the progress indicator displayed above the instruction box.
+
+### methods
+
+FUN void : begin( String path )
+  > summary
+    Starts the lesson using a list of instructions in a separate file.
+  > parameters
+    + path - The absolute path to a file that provides a list of instructions for the lesson.
+  > seealso
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN void : begin( Array instructions )
+  > summary
+    Starts the lesson using the instructions list.
+  > parameters
+    + instructions - The list of instructions for the lesson.
+  > seealso
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN Number : currentIndex()
+  > returns
+    The index of the current instruction within the lesson.
+
+FUN String : currentPath()
+  > returns
+    The path of the current lesson.
+
+FUN Boolean : currentQuery()
+  > returns
+    The query of the current instruction within the lesson.
+
+FUN Number : currentQuery()
+  > summary
+    TODO: Add description.
+
+FUN String : currentQuery()
+  > summary
+    TODO: Add description.
+
+FUN String : currentType()
+  > returns
+    The type of the current instruction within the lesson.
+
+FUN String : getActionInstruction( String classname, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an “action” type instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getActivityInstruction( String activity, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an “activity” type instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getDisplayInstruction( String info, String button=“” )
+  > returns
+    A string representation of a “display” type instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getInstruction( String type, ByteArray query, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getInstruction( String type, String query, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an instruction if the type is valid, otherwise an empty string.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getInstruction( String type, Boolean query, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getInstruction( String type, Number query, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getLayoutInstruction( String layout, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of an “layout” type instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN String : getWidgetInstruction( String widgetPath, String info, String tag=“”, Boolean locateOnly=false )
+  > returns
+    A string representation of a “widget” type instruction.
+  > seealso
+    JSON::parse()
+    dzscript{api_reference/samples/education/interactive_lessons/start, Interactive Lessons}
+
+FUN Array : instructionTypes()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isRunning()
+  > returns
+    true if the lesson is currently running, otherwise false.
+
+FUN void : iterate()
+  > summary
+    TODO: Add description.
+
+FUN void : skip()
+  > summary
+    Skips the next instruction in the lesson.
+
+FUN void : stop()
+  > summary
+    Stops the lesson.
+
+### signals
+
+SIG void : skipped()
+  > summary
+    Emitted when an instruction in an interactive lesson has been skipped.
+
+SIG void : started()
+  > summary
+    Emitted when an interactive lesson has started.
+
+SIG void : stepped()
+  > summary
+    Emitted when an interactive lesson has stepped to the next instruction.
+
+SIG void : stopped( Boolean success )
+  > summary
+    Emitted when an interactive lesson is stopped.
+  > parameters
+    + success - Whether or not the lesson stopped because it has reached the end.

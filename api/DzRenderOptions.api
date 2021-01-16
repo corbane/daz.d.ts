@@ -1,0 +1,394 @@
+CLS DzRenderOptions : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/renderoptions_dz
+  > summary
+    This class manages the inclusion/exclusion of render options.
+
+### description
+  > summary
+    The RenderOptions class is responsible for the inclusion/exclusion of certain aspects of a render.
+
+### enumerations
+
+ENU GammaCorrection
+  > summary
+    States for gamma correction.
+  + GCOff - Gamma correction off.
+  + GCOn - Gamma correction on.
+
+ENU PixelFilter
+  > summary
+    The types of pixel filters available for RenderMan renders.
+  + Box - The Box filter.
+  + Triangle - The triangle filter.
+  + CatmullRom - The Catmull-Rom filter.
+  + Gaussian - The Gaussian filter.
+  + Sinc - The Sinc filter.
+
+ENU RenderImgTarget
+  > summary
+    Types of Render Destinations
+  + ActiveView - Renders the image in the active viewport.
+  + NewWindow - Renders the image in a new window.
+  + DirectToFile - Renders the image directly to a file.
+
+ENU RenderMovTarget
+  > summary
+    The Types of Movies that can be rendered
+  + MovieFile - A video file created/compressed by system specific video API's.
+  + ImageSeries - A series of image files, one for each frame in the movie.
+
+ENU RenderStyle
+  > summary
+    The style of the render
+  + Normal - The shaders/materials for the objects will be used to render.
+  + Cartoon - The entire scene will be rendered with a cartoon style shader.
+
+ENU RenderType
+  > summary
+    Types of Render Operations
+  + ScreenShot - Performs a 'Screen Shot' render, grabbing a frame from the interactive OpenGL viewport.
+  + HardwareAssisted - Performs a 'Fast Time' render, using OpenGL to create a render quality image.
+  + Software - Perfomrs an 'Offline' render with the current RenderMan renderer.
+
+### properties
+
+PRP Number : aspect
+  > summary
+    Holds the currently set aspect ratio (w / h). (Read Only)
+
+PRP Number : aspectHeight
+  > summary
+    Holds the currently set aspect ratio height. (Read Only)
+
+PRP Number : aspectWidth
+  > summary
+    Holds the currently set aspect ratio width. (Read Only)
+
+PRP Boolean : doubleSided
+  > summary
+    Holds whether or not to render polygons as double sided.
+
+PRP DzTime : endTime
+  > summary
+    Holds the scene time of the last frame to render.
+
+PRP Number : gain
+  > summary
+    Holds the gain value.
+
+PRP Number : gamma
+  > summary
+    Holds the gamma value.
+
+PRP DzRenderOptions.GammaCorrection : gammaCorrection
+  > summary
+    Holds whether or not gamma correction is enabled.
+
+PRP Size : imageSize
+  > summary
+    Holds the size of the image to render.
+
+PRP Boolean : isAspectConstrained
+  > summary
+    Holds whether or not to constrain the pixel dimensions of the render to the aspect ratio.
+
+PRP Boolean : isCurrentFrameRender
+  > summary
+    Holds whether or not to render only the current frame.
+
+PRP String : lastRenderImgFilename
+  > summary
+    Holds the filename of the last image rendered. (Read Only)
+
+PRP String : lastRenderMovFilename
+  > summary
+    Holds the filename of the last movie rendered. (Read Only)
+
+PRP String : lastRenderSerFilename
+  > summary
+    Holds the base filename of the image series rendered. (Read Only)
+
+PRP Number : motionBlurOffset
+  > summary
+    Holds the time offset for blurring.
+
+PRP Number : motionBlurPct
+  > summary
+    Holds the amount of time between frames to blur across (0.0 - 1.0).
+
+PRP Number : motionBlurSamples
+  > summary
+    Holds the number of samples for motion blur.
+
+PRP Number : openGLPasses
+  > summary
+    Holds the number of passes for rendering in OpenGL.
+
+PRP DzRenderOptions.PixelFilter : pixelFilter
+  > summary
+    Holds the pixel filter to use.
+
+PRP Number : rayTraceDepth
+  > summary
+    Holds the raytrace depth.
+
+PRP String : renderImgFilename
+  > summary
+    Holds the filename to save individual images to.
+
+PRP DzRenderOptions.RenderImgTarget : renderImgToId
+  > summary
+    Holds the target for rendering individual images.
+
+PRP String : renderMovFilename
+  > summary
+    Holds the filename to save movies to.
+
+PRP DzRenderOptions.RenderMovTarget : renderMovToId
+  > summary
+    Holds the target for rendering animations.
+
+PRP String : renderSerFilename
+  > summary
+    Holds the base filename to use when saving image series.
+
+PRP DzRenderOptions.RenderStyle : renderStyle
+  > summary
+    Holds the style of the render.
+
+PRP DzRenderOptions.RenderType : renderType
+  > summary
+    Holds the type of the render.
+
+PRP Boolean : renderViewport
+  > summary
+    Holds whether or not to use the aspect and size of the current viewport for the render.
+
+PRP Number : shadingRate
+  > summary
+    Holds the shading rate.
+
+PRP Number : shadowSamples
+  > summary
+    Holds the number of samples when rendering shadows.
+
+PRP Boolean : showPreview
+  > summary
+    Holds whether or not to show a preview.
+
+PRP DzTime : startTime
+  > summary
+    Holds the scene time of the first frame to render.
+
+PRP Boolean : useGLSL
+  > summary
+    Holds whether or not to use shaders when rendering in OpenGL.
+
+PRP Boolean : useMotionBlur
+  > summary
+    Holds whether or not to use motion blur.
+
+PRP Number : xFilterWidth
+  > summary
+    Holds the width of the pixel filter in x.
+
+PRP Number : xPixelSamples
+  > summary
+    Holds the number of samples per pixel in x.
+
+PRP Number : yFilterWidth
+  > summary
+    Holds the width of the pixel filter in y.
+
+PRP Number : yPixelSamples
+  > summary
+    Holds the number of samples per pixel in y.
+
+### constructors
+
+CTR DzRenderOptions()
+  > summary
+    Default Constructor. Initializes render options.
+  > since
+    4.9.3.57
+
+### methods
+
+FUN void : applyChanges()
+  > summary
+    Writes render options via the settings manager.
+
+FUN void : copyFrom( DzRenderOptions opt )
+  > summary
+    Copies the settings from another render options object.
+  > since
+    4.9.3.57
+
+FUN DzFloatColor : gammaCorrectColor( DzFloatColor color )
+  > parameters
+    + color - The color to gamma correct.
+  > returns
+    If gamma correction is enabled, a linearized version of color. If gamma correction is off, color is returned unchanged.
+
+FUN void : resetOptions()
+  > summary
+    Sets values for render options found in the stored settings.
+
+FUN void : restoreDefaultSettings()
+  > summary
+    Restores the applications default settings and replaces the stored values.
+
+FUN void : setAspectRatio( Number widthRatio, Number heightRatio )
+  > summary
+    Set current aspect width for this render. Represented as widthRatio : heightRatio.
+
+FUN void : setToDefaults()
+  > summary
+    Sets all options to the default values, but does not affect values of stored/remembered settings. Also, no “changed” signals are emitted when calling this method.
+
+### signals
+
+SIG void : aspectChanged( Number val )
+  > summary
+    Emitted when the aspect for the render has changed, or the viewport render status has changed.
+
+SIG void : aspectChanged( Number w, Number h )
+  > summary
+    Emitted when the aspect for the render has changed, or the viewport render status has changed.
+
+SIG void : aspectConstrainChanged( Boolean onOff )
+  > summary
+    Emitted when the constrain aspect ratio setting has changed.
+
+SIG void : defaultsRestored()
+  > summary
+    Emitted when the default options have been restored.
+
+SIG void : doubleSidedChanged( Boolean onOff )
+  > summary
+    Emitted when the double sided setting has changed.
+
+SIG void : endTimeChanged( DzTime time )
+  > summary
+    Emitted when the end time has changed.
+
+SIG void : gainChanged( Number gain )
+  > summary
+    Emitted when the gain value has changed.
+
+SIG void : gammaChanged( Number gamma )
+  > summary
+    Emitted when the gamma value has changed.
+
+SIG void : gammaCorrectionChanged( DzRenderOptions.GammaCorrection gc )
+  > summary
+    Emitted when gamma correction state has changed.
+
+SIG void : imageSizeChanged( Size size )
+  > summary
+    Emitted when the image size has changed.
+
+SIG void : motionBlurOffsetChanged( Number offset )
+  > summary
+    Emitted when the motion blur offset has changed.
+
+SIG void : motionBlurPctChanged( Number pct )
+  > summary
+    Emitted when the motion blur percentage has changed.
+
+SIG void : motionBlurSamplesChanged( Number samples )
+  > summary
+    Emitted when the motion blur samples has changed.
+
+SIG void : openGLPassesChanged( Number passes )
+  > summary
+    Emitted when the number of OpenGL passes has changed.
+
+SIG void : pixelFilterChanged( DzRenderOptions.PixelFilter filter )
+  > summary
+    Emitted when the pixel filter has changed.
+
+SIG void : rayTraceDepthChanged( Number depth )
+  > summary
+    Emitted when the ray trace depth has changed.
+
+SIG void : renderCurrentFrameChanged( Boolean onOff )
+  > summary
+    Emitted when the render current frame setting has changed.
+
+SIG void : renderImgFilenameChanged( String filename )
+  > summary
+    Emitted when the image filename for the render has changed.
+
+SIG void : renderImgTargetChanged( DzRenderOptions.RenderImgTarget id )
+  > summary
+    Emitted when the image target type for the render has changed.
+
+SIG void : renderMovFilenameChanged( String filename )
+  > summary
+    Emitted when the movie filename for the render has changed.
+
+SIG void : renderMovTargetChanged( DzRenderOptions.RenderMovTarget id )
+  > summary
+    Emitted when the movie target type for the render has changed.
+
+SIG void : renderSerFilenameChanged( String filename )
+  > summary
+    Emitted when the image series filename for the render has changed.
+
+SIG void : renderStyleChanged( DzRenderOptions.RenderStyle style )
+  > summary
+    Emitted when the render type has changed.
+
+SIG void : renderTypeChanged( DzRenderOptions.RenderType type )
+  > summary
+    Emitted when the render type has changed.
+
+SIG void : renderViewportChanged( Boolean onOff )
+  > summary
+    Emitted when the render to viewport setting has changed.
+
+SIG void : settingsChanged()
+  > summary
+    Emitted when any of the settings has changed.
+
+SIG void : shadingRateChanged( Number rate )
+  > summary
+    Emitted when the shading rate has changed.
+
+SIG void : shadowSamplesChanged( Number samples )
+  > summary
+    Emitted when the number of shadow samples has changed.
+
+SIG void : showPreviewChanged( Boolean onoff )
+  > summary
+    Emitted when the show preview setting has changed.
+
+SIG void : startTimeChanged( DzTime time )
+  > summary
+    Emitted when the start time has changed.
+
+SIG void : useGLSLChanged( Boolean onOff )
+  > summary
+    Emitted when the use GLSL setting has changed.
+
+SIG void : useMotionBlurChanged( Boolean onOff )
+  > summary
+    Emitted when the motion blur setting has changed.
+
+SIG void : xFilterWidthChanged( Number width )
+  > summary
+    Emitted when the X-axis filter width has changed.
+
+SIG void : xPixelSamplesChanged( Number samples )
+  > summary
+    Emitted when the number of X-axis pixel samples has changed.
+
+SIG void : yFilterWidthChanged( Number width )
+  > summary
+    Emitted when the Y-axis filter width has changed.
+
+SIG void : yPixelSamplesChanged( Number samples )
+  > summary
+    Emitted when the number of Y-axis pixel samples has changed.

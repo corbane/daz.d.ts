@@ -1,0 +1,204 @@
+CLS DzInt2 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/int2_dz
+  > summary
+    A two dimensional integer-based vector.
+
+### description
+  > seealso
+    DzVec2
+  > since
+    4.6.4.88
+
+### properties
+
+PRP Number : height
+  > summary
+    Holds the height of this vector; an alias to the y value.
+
+PRP Number : width
+  > summary
+    Holds the width of this vector; an alias for the x value.
+
+PRP Number : x
+  > summary
+    Holds the x value of this vector.
+
+PRP Number : y
+  > summary
+    Holds the y value of this vector.
+
+### constructors
+
+CTR DzInt2()
+  > summary
+    Default Constructor. Creates an uninitialized vector.
+
+CTR DzInt2( DzVec2 vec )
+  > summary
+    Copy Constructor.
+
+CTR DzInt2( DzInt2 vec )
+  > summary
+    Copy Constructor.
+
+CTR DzInt2( Array vals )
+  > summary
+    Creates and inititializes this vector with an array of 2 integer values.
+
+CTR DzInt2( Number x, Number y )
+  > summary
+    Creates and inititializes this vector with 2 integers.
+
+### methods
+
+FUN void : abs()
+  > summary
+    Sets the value of each component to its respective absolute value.
+
+FUN DzInt2 : add( DzInt2 vec )
+  > returns
+    The result of adding another vector to this vector.
+
+FUN Number : average()
+  > returns
+    The average of each component of this vector.
+  > since
+    4.9.3.118
+
+FUN void : clamp( Number min, Number max )
+  > summary
+    Clamps each component of this vector.
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN DzInt2 : clamped( Number min, Number max )
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been clamped to min and max.
+  > since
+    4.9.3.118
+
+FUN DzInt2 : clampedMax( Number max )
+  > parameters
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been clamped to max.
+  > since
+    4.9.3.118
+
+FUN DzInt2 : clampedMin( Number min )
+  > parameters
+    + min - The minimum value.
+  > returns
+    A copy of this vector where each component has been clamped to min.
+  > since
+    4.9.3.118
+
+FUN void : clampMax( Number max )
+  > summary
+    Clamps the maximum value for each component of this vector.
+  > parameters
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN void : clampMin( Number min )
+  > summary
+    Clamps the minimum value for each component of this vector.
+  > parameters
+    + max - The minimum value.
+  > since
+    4.9.3.118
+
+FUN DzInt2 : divide( DzInt2 vec )
+  > returns
+    The result of dividing this vector by another vector.
+
+FUN Boolean : isNull()
+  > returns
+    true if both values are zero (0, 0), otherwise false.
+
+FUN Number : length()
+  > returns
+    The length of this vector.
+
+FUN Number : lengthSquared()
+  > returns
+    The length of this vector, squared.
+
+FUN DzInt2 : linearInterp( Number t, DzInt2 v1, DzInt2 v2 )
+  > summary
+    Performs a linear interpolation between v1 and v2 based on the value of t.
+  > parameters
+    + t - The value to evaluate.
+    + vec1 - The first vector.
+    + vec2 - The second vector.
+  > returns
+    v1 if t = 0. v2 if t = 1. Values outside the 0 ⇐ t ⇐ 1 range may also be used to return an extrapolated vector.
+  > since
+    4.9.3.118
+
+FUN void : makeIdentity()
+  > summary
+    Sets this vector to (1, 1).
+
+FUN void : makeZero()
+  > summary
+    Sets this vector to (0, 0).
+
+FUN Number : manhattanLength()
+  > returns
+    The rectilinear distance of this vector.
+
+FUN DzInt2 : modulate( Number min, Number max )
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been modulated by min and max.
+  > since
+    4.9.3.118
+
+FUN void : modulo( Number min, Number max )
+  > summary
+    Modulates each component of this vector.
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN DzInt2 : multiply( DzInt2 vec )
+  > returns
+    The result of multiplying this vector by another vector.
+
+FUN void : negate()
+  > summary
+    Negates each component of this vector.
+
+FUN void : setLength( Number length )
+  > summary
+    Sets this vector to have a specific length in the current direction.
+  > parameters
+    + newLength - The length to set.
+  > seealso
+    length()
+    makeZero()
+
+FUN void : square()
+  > summary
+    Sets the value of each component to its respective squared value.
+
+FUN DzInt2 : subtract( DzInt2 vec )
+  > returns
+    The result of subtracting another vector from this vector.
+
+FUN void : transpose()
+  > summary
+    Swaps the values of x and y.

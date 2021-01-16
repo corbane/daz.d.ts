@@ -1,0 +1,725 @@
+CLS DzDefaultMaterial : DzMaterial DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/defaultmaterial_dz
+  > summary
+    The default RenderMan Shader Language (RSL) based implementation of a material.
+
+!!! Il y a un des fonctions presente ici mais non presente dans le fichier dzdefaultmaterial.h
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzDefaultMaterial()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN Color : getAmbientColor()
+  > returns
+    The ambient color for this material.
+  > seealso
+    setAmbientColor()
+
+FUN DzColorProperty : getAmbientColorControl()
+  > returns
+    The property that controls ambient color.
+
+FUN DzTexture : getAmbientColorMap()
+  > returns
+    The ambient color map for this material.
+  > seealso
+    setAmbientColorMap()
+
+FUN Number : getAmbientStrength()
+  > returns
+    The ambient strength for this material.
+  > seealso
+    setAmbientStrength()
+
+FUN DzFloatProperty : getAmbientStrengthControl()
+  > returns
+    The property that controls ambient strength.
+
+FUN DzTexture : getAmbientValueMap()
+  > returns
+    The ambient strength map for this material.
+  > seealso
+    setAmbientValueMap()
+
+FUN DzFloatProperty : getBumpControl()
+  > returns
+    The property that controls bump mapping.
+
+FUN DzTexture : getBumpMap()
+  > returns
+    The bump map for this material.
+  > seealso
+    setBumpMap()
+
+FUN Number : getBumpMax()
+  > returns
+    The maximum bump for this material.
+  > seealso
+    setBumpMax()
+
+FUN DzFloatProperty : getBumpMaxControl()
+  > returns
+    The property that controls the bump mapping maximum.
+
+FUN Number : getBumpMin()
+  > returns
+    The minimum bump for this material.
+  > seealso
+    setBumpMin()
+
+FUN DzFloatProperty : getBumpMinControl()
+  > returns
+    The property that controls the bump mapping minimum.
+
+FUN Number : getBumpStrength()
+  > returns
+    The bump strength for this material.
+  > seealso
+    setBumpStrength()
+
+FUN DzColorProperty : getDiffuseColorControl()
+  > returns
+    The property that controls diffuse color.
+
+FUN Number : getDiffuseStrength()
+  > returns
+    The diffuse strength for this material.
+  > seealso
+    setDiffuseStrength()
+
+FUN DzFloatProperty : getDiffuseStrengthControl()
+  > returns
+    The property that controls diffuse strength.
+
+FUN DzTexture : getDiffuseValueMap()
+  > returns
+    The diffuse strength map for this material.
+  > seealso
+    setDiffuseValueMap()
+
+FUN DzFloatProperty : getDisplacementControl()
+  > returns
+    The property that controls displacement mapping.
+
+FUN DzTexture : getDisplacementMap()
+  > returns
+    The displacement map for this material.
+  > seealso
+    setDisplacementMap()
+
+FUN Number : getDisplacementMax()
+  > returns
+    The maximum displacement (displacement that white maps to) for this material.
+  > seealso
+    setDisplacementMax()
+
+FUN DzFloatProperty : getDisplacementMaxControl()
+  > returns
+    The property that controls the displacement mapping maximum.
+
+FUN Number : getDisplacementMin()
+  > returns
+    The minimum displacement for this material.
+  > seealso
+    setDisplacementMin()
+
+FUN DzFloatProperty : getDisplacementMinControl()
+  > returns
+    The property that controls the displacement mapping minimum.
+
+FUN Number : getDisplacementStrength()
+  > returns
+    The displacement strength for this material.
+  > seealso
+    setDisplacementStrength()
+
+FUN DzFloatProperty : getGlossinessControl()
+  > returns
+    The property that controls glossiness.
+
+FUN Number : getGlossinessStrength()
+  > returns
+    The glossines strength for this material.
+  > seealso
+    setGlossinessStrength()
+
+FUN DzTexture : getGlossinessValueMap()
+  > returns
+    The glossines strength map for this material.
+  > seealso
+    setGlossinessValueMap()
+
+FUN Number : getHorizontalOffset()
+  > returns
+    The horizontal offset value.
+  > seealso
+    setHorizontalOffset()
+
+FUN DzFloatProperty : getHorizontalOffsetControl()
+  > returns
+    The property that controls the horizontal offset of an image.
+
+FUN Number : getHorizontalTiles()
+  > returns
+    The number of horizontal tiles.
+  > seealso
+    setHorizontalTiles()
+
+FUN DzFloatProperty : getHorizontalTilesControl()
+  > returns
+    The property that controls the horizontal tiling of an image.
+
+FUN Number : getIndexOfRefraction()
+  > returns
+    The index of refraction for this material.
+  > seealso
+    setIndexOfRefraction()
+
+FUN DzFloatProperty : getIndexOfRefractionControl()
+  > returns
+    The property that controls the index of refraction.
+
+FUN DzBoolProperty : getMultThroughOpacityControl()
+  > returns
+    The property that controls whether multiplication through opacity is enabled.
+
+FUN DzTexture : getNormalValueMap()
+  > returns
+    Image for the nomal map.
+
+FUN DzImageProperty : getNormalValueMapControl()
+  > returns
+    The property that controls the normal value map.
+
+FUN DzFloatProperty : getOpacityControl()
+  > returns
+    The property that controls opacity.
+
+FUN Color : getReflectionColor()
+  > returns
+    The reflection color for this material.
+  > seealso
+    setReflectionColor()
+
+FUN DzColorProperty : getReflectionColorControl()
+  > returns
+    The property that controls reflection color.
+
+FUN DzTexture : getReflectionMap()
+  > returns
+    The reflection map for this material.
+  > seealso
+    setReflectionMap()
+
+FUN Number : getReflectionStrength()
+  > returns
+    The reflection strength for this material.
+  > seealso
+    setReflectionStrength()
+
+FUN DzFloatProperty : getReflectionStrengthControl()
+  > returns
+    The property that controls reflection strength.
+
+FUN DzTexture : getReflectionValueMap()
+  > returns
+    The reflection strength map for this material.
+  > seealso
+    setReflectionValueMap()
+
+FUN Color : getRefractionColor()
+  > returns
+    The refraction color for this material.
+  > seealso
+    setRefractionColor()
+
+FUN DzColorProperty : getRefractionColorControl()
+  > returns
+    The property that controls refraction color.
+
+FUN DzTexture : getRefractionColorMap()
+  > returns
+    The refraction map for this material.
+  > seealso
+    setRefractionColorMap()
+
+FUN Number : getRefractionStrength()
+  > returns
+    The refraction strength for this material.
+  > seealso
+    setRefractionStrength()
+
+FUN DzFloatProperty : getRefractionStrengthControl()
+  > returns
+    The property that controls refraction strength.
+
+FUN DzTexture : getRefractionValueMap()
+  > returns
+    The refraction strength map for this material.
+  > seealso
+    setRefractionValueMap()
+
+FUN Color : getScatterColor()
+  > returns
+    The scatter color for this material.
+  > seealso
+    setScatterColor()
+
+FUN DzColorProperty : getScatterColorControl()
+  > returns
+    The property that controls scatter color.
+
+FUN DzTexture : getScatterColorMap()
+  > returns
+    The scatter map for this material.
+  > seealso
+    setScatterColorMap()
+
+FUN Color : getSheenColor()
+  > returns
+    The sheen color for this material.
+  > seealso
+    setSheenColor()
+
+FUN DzColorProperty : getSheenColorControl()
+  > returns
+    The property that controls sheen color.
+
+FUN DzTexture : getSheenColorMap()
+  > returns
+    The sheen map for this material.
+  > seealso
+    setSheenColorMap()
+
+FUN Color : getSpecularColor()
+  > returns
+    The specular color for this material.
+  > seealso
+    setSpecularColor()
+
+FUN DzColorProperty : getSpecularColorControl()
+  > returns
+    The property that controls specular color.
+
+FUN DzTexture : getSpecularColorMap()
+  > returns
+    The specular color map for this material.
+  > seealso
+    setSpecularColorMap()
+
+FUN Number : getSpecularStrength()
+  > returns
+    The specular strength for this material.
+  > seealso
+    setSpecularStrength()
+
+FUN DzFloatProperty : getSpecularStrengthControl()
+  > returns
+    The property that controls specular strength.
+
+FUN DzTexture : getSpecularValueMap()
+  > returns
+    The specular strength map for this material.
+  > seealso
+    setSpecularValueMap()
+
+FUN Number : getSurfaceType()
+  > returns
+    The surface type for this material.
+  > seealso
+    setSurfaceType()
+
+FUN DzEnumProperty : getSurfaceTypeControl()
+  > returns
+    The property that controls surface type.
+
+FUN Number : getThickness()
+  > returns
+    The thickness for this material.
+  > seealso
+    setThickness()
+
+FUN DzFloatProperty : getThicknessControl()
+  > returns
+    The property that controls thickness.
+
+FUN DzTexture : getThicknessValueMap()
+  > returns
+    The thickness map for this material.
+  > seealso
+    setThicknessValueMap()
+
+FUN Number : getVerticalOffset()
+  > returns
+    The vertical offset value.
+  > seealso
+    setVerticalOffset()
+
+FUN DzFloatProperty : getVerticalOffsetControl()
+  > returns
+    The property that controls the vertical offset of an image.
+
+FUN Number : getVerticalTiles()
+  > returns
+    The number of vertical tiles.
+  > seealso
+    setVerticalTiles()
+
+FUN DzFloatProperty : getVerticalTilesControl()
+  > returns
+    The property that controls the vertical tiling of an image.
+
+FUN Boolean : isMultThroughOpacity()
+  > returns
+    The value of the multiply through opacity parameter.
+  > seealso
+    setMultThroughOpacity()
+
+FUN Boolean : needsTangentSpaceParams()
+  > returns
+    Whether the renderman geometry needs the additional dPds adm dPdsM parameters,used for some shaders. This is true if the material has a normal map and it is in tangent space
+
+FUN void : setAmbientColor( Color color )
+  > summary
+    Set the ambient color for this material.
+  > parameters
+    + color - The new ambient color for the material.
+  > seealso
+    getAmbientColor()
+
+FUN void : setAmbientColorMap( DzTexture img )
+  > summary
+    Set the ambient color map for this material.
+  > parameters
+    + img - The new ambient color map for the material.
+  > seealso
+    getAmbientColorMap()
+
+FUN void : setAmbientStrength( Number val )
+  > summary
+    Set the ambient strength for this material.
+  > parameters
+    + val - The new ambient strength for the material.
+  > seealso
+    getAmbientStrength()
+
+FUN void : setAmbientValueMap( DzTexture img )
+  > summary
+    Set the ambient strength map for this material.
+  > parameters
+    + img - The new ambient strength map for this material.
+  > seealso
+    getAmbientValueMap()
+
+FUN void : setBumpMap( DzTexture img )
+  > summary
+    Set the map for the bump strength channel.
+  > parameters
+    + img - The new bump map for this material.
+  > seealso
+    getBumpMap()
+
+FUN void : setBumpMax( Number val )
+  > summary
+    Set the maximum bump for this material.
+  > parameters
+    + val - The new bump maximum
+  > seealso
+    getBumpMax()
+
+FUN void : setBumpMin( Number val )
+  > summary
+    Set the minimum bump for this material.
+  > parameters
+    + val - The new bump minimum.
+  > seealso
+    getBumpMin()
+
+FUN void : setBumpStrength( Number val )
+  > summary
+    Set the bump strength for this material.
+  > parameters
+    + val - The new bump strength for this material.
+  > seealso
+    getBumpStrength()
+
+FUN void : setDiffuseStrength( Number val )
+  > summary
+    Set the diffuse strength for this material.
+  > parameters
+    + val - The new diffuse strength for the material.
+  > seealso
+    getDiffuseStrength()
+
+FUN void : setDiffuseValueMap( DzTexture img )
+  > summary
+    Set the diffuse strength map for this material.
+  > parameters
+    + img - The new diffuse strength map for the material.
+  > seealso
+    getDiffuseValueMap()
+
+FUN void : setDisplacementMap( DzTexture img )
+  > summary
+    Set the displacement map for this material.
+  > parameters
+    + img - The new displacement map for the material.
+  > seealso
+    getDisplacementMap()
+
+FUN void : setDisplacementMax( Number val )
+  > summary
+    Set the maximum displacement for this material.
+  > parameters
+    + val - The new maximum displacement for this material.
+  > seealso
+    getDisplacementMax()
+
+FUN void : setDisplacementMin( Number val )
+  > summary
+    Set the minimum displacement for this material.
+  > parameters
+    + val - The new minimum displacement for this material.
+  > seealso
+    getDisplacementMin()
+
+FUN void : setDisplacementStrength( Number val )
+  > summary
+    Set the displacement strength for this material.
+  > parameters
+    + val - The new displacement strength for this material
+  > seealso
+    getDisplacementStrength()
+
+FUN void : setGlossinessStrength( Number size )
+  > summary
+    Set glossiness for this material.
+  > parameters
+    + size - The new highlight size (glossiness) for the material.
+  > seealso
+    getGlossinessStrength()
+
+FUN void : setGlossinessValueMap( DzTexture img )
+  > summary
+    Set glossiness value map for this material.
+  > parameters
+    + img - A pointer to the new glossiness value map for the material. NULL to clear the map.
+  > seealso
+    getGlossinessValueMap()
+
+FUN void : setHorizontalOffset( Number offset )
+  > summary
+    Set the horizontal offset for the material
+  > parameters
+    + offset - The value of the horizontal offset in each tile for the material
+  > seealso
+    getHorizontalOffset()
+
+FUN void : setHorizontalTiles( Number tiles )
+  > summary
+    Set the horizontal tiling for the material
+  > parameters
+    + tiles - The number of horizontal tiles for the material
+  > seealso
+    getHorizontalTiles()
+
+FUN void : setIndexOfRefraction( Number val )
+  > summary
+    Set the index of refraction for this material.
+  > parameters
+    + val - The new index of refraction for the material.
+  > seealso
+    getIndexOfRefraction()
+
+FUN void : setMultThroughOpacity( Boolean onOff )
+  > summary
+    Set the multiply through opacity parameter. If true, Specular highlights are multiplied through the opacity of the material (i.e. a transparent material will not show specular highlights). If false, specular highlights can contribute to the local opacity of the material (i.e. transparent objects show highlights)
+  > parameters
+    + onOff - Whether or not specularity is multiplied through opacity.
+  > seealso
+    isMultThroughOpacity()
+
+FUN void : setNormalValueMap( DzTexture img )
+  > summary
+    Set the normal map for this material.
+  > parameters
+    + img - A pointer to the new map map for the material. NULL to clear the map.
+  > seealso
+    getNormalValueMap()
+
+FUN void : setReflectionColor( Color color )
+  > summary
+    Set the reflection color for this material.
+  > parameters
+    + color - The new reflection color for the material.
+  > seealso
+    getReflectionColor()
+
+FUN void : setReflectionMap( DzTexture img )
+  > summary
+    Set the reflection map for this material.
+  > parameters
+    + img - The new reflection map for the material.
+  > seealso
+    getReflectionMap()
+
+FUN void : setReflectionStrength( Number val )
+  > summary
+    Set the reflection strength for this material.
+  > parameters
+    + val - The new reflection strength for the material.
+  > seealso
+    getReflectionStrength()
+
+FUN void : setReflectionValueMap( DzTexture img )
+  > summary
+    Set reflection strength map for this material.
+  > parameters
+    + img - The new reflection strength map for the material.
+  > seealso
+    getReflectionValueMap()
+
+FUN void : setRefractionColor( Color color )
+  > summary
+    Set the refraction color for this material.
+  > parameters
+    + color - The new refraction color for the material.
+  > seealso
+    getRefractionColor()
+
+FUN void : setRefractionColorMap( DzTexture img )
+  > summary
+    Set the refraction color map for this material.
+  > parameters
+    + img - The new refraction color map for the material.
+  > seealso
+    getRefractionColorMap()
+
+FUN void : setRefractionStrength( Number val )
+  > summary
+    Set the refraction strength for this material.
+  > parameters
+    + val - The new refraction strength for the material.
+  > seealso
+    getRefractionStrength()
+
+FUN void : setRefractionValueMap( DzTexture img )
+  > summary
+    Set the refraction strength map for this material.
+  > parameters
+    + img - A pointer to the new refraction strength map for the material. NULL to clear the map.
+  > seealso
+    getRefractionValueMap()
+
+FUN void : setScatterColor( Color color )
+  > summary
+    Set the scatter color for this material.
+  > parameters
+    + color - The new scatter color for the material.
+  > seealso
+    getScatterColor()
+
+FUN void : setScatterColorMap( DzTexture img )
+  > summary
+    Set the scatter color map for this material.
+  > parameters
+    + img - The new scatter color map for the material.
+  > seealso
+    getScatterColorMap()
+
+FUN void : setSheenColor( Color color )
+  > summary
+    Set the sheen color for this material.
+  > parameters
+    + color - The new sheen color for the material.
+  > seealso
+    getSheenColor()
+
+FUN void : setSheenColorMap( DzTexture img )
+  > summary
+    Set the sheen color map for this material.
+  > parameters
+    + img - The new sheen color map for the material.
+  > seealso
+    getSheenColorMap()
+
+FUN void : setSpecularColor( Color color )
+  > summary
+    Set base specular color for this material.
+  > parameters
+    + color - The new specular color for the material
+  > seealso
+    getSpecularColor()
+
+FUN void : setSpecularColorMap( DzTexture img )
+  > summary
+    Set the specular color map for this material.
+  > parameters
+    + img - A pointer to the new specular color map for the material. NULL to clear the map.
+  > seealso
+    getSpecularColorMap()
+
+FUN void : setSpecularStrength( Number size )
+  > summary
+    Set base specular strength for this material.
+  > parameters
+    + size - The new specular strength for the material.
+  > seealso
+    getSpecularStrength()
+
+FUN void : setSpecularValueMap( DzTexture img )
+  > summary
+    Set specular strength map for this material.
+  > parameters
+    + img - A pointer to the new specular strength map for the material. NULL to clear the map.
+  > seealso
+    getSpecularValueMap()
+
+FUN void : setSurfaceType( Number val )
+  > summary
+    Set the surface type for this material.
+  > parameters
+    + val - The index of the surface type for the material.
+  > seealso
+    getSurfaceType()
+
+FUN void : setThickness( Number val )
+  > summary
+    Set the refraction strength for this material.
+  > parameters
+    + val - The new refraction strength for the material.
+  > seealso
+    getRefractionStrength()
+
+FUN void : setThicknessValueMap( DzTexture img )
+  > summary
+    Set the thickness map for this material.
+  > parameters
+    + img - A pointer to the new thickness map for the material. NULL to clear the map.
+  > seealso
+    getThicknessValueMap()
+
+FUN void : setVerticalOffset( Number offset )
+  > summary
+    Set the vertical offset for the material
+  > parameters
+    + offset - The value of the vertical offset in each tile for the material
+  > seealso
+    setVerticalOffset()
+
+FUN void : setVerticalTiles( Number tiles )
+  > summary
+    Set the vertical tiling for the material
+  > parameters
+    + tiles - The number of vertical tiles for the material.
+  > seealso
+    getVerticalTiles()

@@ -1,0 +1,727 @@
+CLS DzRSLShader : DzBase DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rslshader_dz
+  > summary
+    Custom scriptable class for RenderMan Shader Language (RSL) Shader types.
+
+### description
+  > summary
+    This class provides the ability to define RSL shaders for the elements that can use them (DzShaderMaterial, DzShaderLight, DzShaderCamera).
+    Optimizations:
+    Two methods in this class that should not be overlooked are setActiveInShadowPass() and setOnlyInShadowPass(), as they can have a significant impact on render times.
+    In the context of Surface shaders, the data members set by these methods are used to identify whether the shader participates during the shadow [map] pass - the pass for each contributing light in the scene that indicates the use of Deep Shadow Maps for shadows. This affords developers a couple of key benifits:
+    One key benifit is the ability to use a single Displacement shader in both the shadow pass as well as the beauty pass. Not only does this alleviate the duplication of code, but by utilizing a Displacement shader for any bump/diplacement operations, rendering times become much faster than performing the same operations in a Surface shader. This is due to the frequency that the shader code is executed. Displacement shaders are evaluated once, at the begining of a pass, and a caching mechanism for the displaced geometry is used as the render progresses. When the same code is placed in a Surface shader, the bump/displacment calculations are performed at every evaluation of the surface.
+    Another key benifit is the ability to use a highly optimized Surface shader during the shadow [map] pass, which can have a significant impact on the time required to generate a shadow map - and thus complete the render.
+    In the context of Light shaders, the data members set by these methods are used to identify whether this shader participates when the DzLight.ShadowType indicates shadowing is used. This affords developers the benifit of being able to use Light shaders that are optimized for either condition.
+    Property Naming:
+    Standard Shader and Materials Presets make an effort to copy as much as possible from one element to the next via DzElement.copyFrom(). In order for this to occur, the properties must match in both name and type. Provided below are the names and types used by DzDefaultMaterial, DzLight, DzDistantLight, DzSpotLight and DzPointLight in the event that you would like use properties that will work with the copyFrom() method.
+    - Default Material:
+    - Default Lights:
+    - Default Camera:
+    - Name
+    - Type
+    - Name
+    - Type
+    - Diffuse Color
+    - DzColorProperty
+    - Negative Bump
+    - DzFloatProperty
+    - Diffuse Strength
+    - DzFloatProperty
+    - Positive Bump
+    - DzFloatProperty
+    - Glossiness
+    - DzFloatProperty
+    - Displacement Strength
+    - DzFloatProperty
+    - Specular Color
+    - DzColorProperty
+    - Minimum Displacement
+    - DzFloatProperty
+    - Specular Strength
+    - DzFloatProperty
+    - Maximum Displacement
+    - DzFloatProperty
+    - Multiply Specular
+    - Through Opacity
+    - DzBoolProperty
+    - Reflection Color
+    - DzColorProperty
+    - Ambient Color
+    - DzColorProperty
+    - Reflection Strength
+    - DzFloatProperty
+    - Ambient Strength
+    - DzFloatProperty
+    - Refraction Color
+    - DzColorProperty
+    - Opacity Strength
+    - DzFloatProperty
+    - Refraction Strength
+    - DzFloatProperty
+    - Bump Strength
+    - DzFloatProperty
+    - Index of Refraction
+    - DzFloatProperty
+    - Name
+    - Type
+    - Color
+    - DzColorProperty
+    - Intensity
+    - DzFloatProperty
+    - Shadow Type
+    - DzEnumProperty
+    - Shadow Bias
+    - DzFloatProperty
+    - Shadow Softness
+    - DzFloatProperty
+    - Illumination
+    - DzEnumProperty
+    - Spread Angle
+    - DzFloatProperty
+    - Name
+    - Type
+    - Focal Length
+    - DzFloatProperty
+    - DOF
+    - DzBoolProperty
+    - Depth of Field
+    - DzFloatProperty
+    - Aperature
+    - DzFloatProperty
+    Samples:
+    rispec_constant_shader_definition - The definition file for the standard RenderMan Constant Surface Shader, that builds the properties displayed to users in the Surfaces tab (Advanced sub tab).
+    ./samples/shader swapping/
+  > seealso
+    + rispec_constant_shader_preset - A [heavily commented] Shader Preset that applies a material definition script (below) for the standard RenderMan Constant Surface Shader.
+    + rispec_constant_material_definition - The definition file for the above, that builds the shader objects used by the render for the current material.
+    + rispec_constant_surface_shader - The RSL source for the standard RenderMan Constant Surface Shader.
+    + s_standard_render_time_script - The render-time script that sets various RiAttributes dependant on the values of properties provided to the user.
+    Recommended Reading:
+    The RenderMan Interface Specification (RISpec) - Pixar Animation Studios
+    Advanced RenderMan: Creating CGI for Motion Pictures - (ISBN:1558606181) - Tony Apodaca and Larry Gritz 1999
+    RenderMan Companion: A Programmer's Guide to Realistic Computer Graphics - (ISBN:0201508680) - Steve Upstill 1989
+    Texturing & Modeling: A Procedural Approach (3rd Edition) - (ISBN:1558608486) - David S. Ebert, F. Kenton Musgrave, Darwyn Peachey, Ken Perlin, and Steve Worley 1998
+    3Delight Documentation - The 3Delight Team
+
+### enumerations
+
+ENU ShaderType
+  > summary
+    Enumerated values for RSL shader types.
+  > attention
+    The enumerated values provided are a mechanism designed to allow the appropriate RI call to be made. These values do not guarantee support by the active renderer. It is strongly recommended that you become familiar with the target renderer and its capabilities; i.e. 3Delight does not support Exterior volumes, and some renderers may not support Area Light sources or Imagers.
+  > seealso
+    setShaderType
+  + None - Null
+  + Surface - Uses the RiSurfaceV API call when passed to the renderer.
+  + Light - Uses the RiLightSourceV API call when passed to the renderer.
+  + LightArea - Uses the RiAreaLightSourceV API call when passed to the renderer.
+  + VolumeAtmosphere - Uses the RiAtmosphereV API call when passed to the renderer.
+  + VolumeInterior - Uses the RiInteriorV API call when passed to the renderer.
+  + VolumeExterior - Uses the RiExteriorV API call when passed to the renderer.
+  + Displacement - Uses the RiDisplacementV API call when passed to the renderer.
+  + Imager - Uses the RiImagerV API call when passed to the renderer.
+
+### constructors
+
+CTR DzRSLShader()
+  > summary
+    Default Constructor.
+  > attention
+    Caution should be taken when instantiating this class. Until addShader(…) is called by DzShaderMaterial, DzShaderLight or DzShaderCamera, the object has no owner - which if you are not careful can lead to a memory leak. It is strongly suggested that the statement in the script immediately following that which instantiates this class add the object to the intended owner.
+
+### methods
+
+FUN Boolean : addMappableProperty( DzNumericProperty prop, String token, String mapToken )
+  > summary
+    Adds a mappable numeric property to this shader object. DzColorProperty instances are passed as color type variables to the shader - all other DzNumericProperty derived instances are passed as float type variables. If the property is mapped, the absolute path of the image file is passed as a string type variable to the shader.
+  > parameters
+    + prop - The property of which the value is passed to the shader for the param argument.
+    + token - The name of the argument to the shader that the value of prop is passed to.
+    + mapToken - The name of the argument to the shader that the path of prop 's map is passed to, if prop is mapped.
+  > returns
+    true if prop was successfully added to the list of properties used by this shader (e.g. did not already exist), otherwise false.
+
+FUN Boolean : addMapProperty( DzNumericProperty prop, String mapToken )
+  > summary
+    Adds a mappable numeric property to this shader object (intended for situations where the property itself is passed as an attribute via the render-time script, or simply for display purposes, but the associated map should be passed as an arg to the shader). If the property is mapped, the absolute path of the image file is passed as a string type variable to the shader.
+  > parameters
+    + prop - The property of which the map path is passed to the shader for the mapParam argument.
+    + mapToken - The name of the argument to the shader that the path of prop 's map is passed to, if prop is mapped.
+  > returns
+    true if prop was successfully added to the list of properties used by this shader (e.g. did not already exist), otherwise false.
+
+FUN Boolean : addShaderProperty( DzProperty prop, String token )
+  > summary
+    Adds a standard property to the list of properties used by this shader object, and adds the property to this shader object's owner if it does not already exist. DzColorProperty instances are passed as color type variables to the shader - all other DzNumericProperty derived instances are passed as float type variables. DzImageProperty instances are passed as string type variables (the value of which is the absolute path of the image file).
+  > parameters
+    + prop - The property of which the value is passed to the shader for the param argument.
+    + token - The name of the argument to the shader that the value of prop is passed to.
+  > returns
+    true if prop was successfully added to the list of properties used by this shader (e.g. did not already exist), otherwise false.
+
+FUN String : findMapTokenByProperty( DzNumericProperty prop )
+  > returns
+    The name of the argument to the shader that the map value of prop is passed to, if prop is mappable. Returns an empty string if prop is not found, or not mappable.
+
+FUN DzProperty : findProperty( String name )
+  > returns
+    The property named name if name is found, otherwise NULL.
+
+FUN DzProperty : findPropertyByToken( String token )
+  > returns
+    The property that passes a value to the shader via token, if token is found. Undefined by default.
+
+FUN String : findTokenByProperty( DzProperty prop )
+  > returns
+    The name of the argument to the shader that the value of prop is passed to. Returns an empty string if prop is not found.
+
+FUN String : getDefinitionFile()
+  > returns
+    The path to the definition script for this shader object.
+
+FUN Number : getNumProperties()
+  > returns
+    The number of properties currently used by this shader object.
+
+FUN DzElement : getOwner()
+  > returns
+    The owner (DzShaderMaterial, DzShaderLight, DzShaderCamera) of this object.
+
+FUN DzProperty : getProperty( Number which )
+  > summary
+    Get a property from this shader's property list.
+  > parameters
+    + which - Index of the property to return.
+  > returns
+    If which is within range, the property at the given index, otherwise NULL.
+  > since
+    4.9.0.46
+
+FUN Array : getPropertyList()
+  > returns
+    A list of all the properties on this shader.
+  > since
+    4.9.0.46
+
+FUN String : getRenderTimeFile()
+  > returns
+    The relative path [from DzApp.getScriptsPath()] to the DAZ Script that is executed at render-time.
+
+FUN String : getShaderFile()
+  > returns
+    The path to the RSL shader (sans-extension) for this shader object.
+
+FUN DzRSLShader.ShaderType : getShaderType()
+  > returns
+    The RSL shader type for this object.
+
+FUN Boolean : isActiveInBakePass()
+  > returns
+    true if this shader participates in the bake pass, otherwise false.
+
+FUN Boolean : isActiveInBeautyPass()
+  > returns
+    true if this shader participates in the beauty pass, otherwise false.
+
+FUN Boolean : isActiveInShadowPass()
+  > returns
+    true if this shader participates in the shadow pass, otherwise false.
+
+FUN Boolean : isOnlyInShadowPass()
+  > returns
+    true if this shader ONLY participates in the shadow pass, otherwise false. Same as isActiveInShadowPass() && !isActiveInBeautyPass().
+
+FUN Boolean : removeProperty( DzProperty prop )
+  > summary
+    Removes the given property, if it can be found.
+  > parameters
+    + prop - The property to remove from the shader.
+  > returns
+    true on success, otherwise false.
+
+FUN Boolean : removeProperty( String name )
+  > summary
+    Removes the property named name, if it can be found.
+  > parameters
+    + name - The name of the property to remove from the shader.
+  > returns
+    true on success, otherwise false.
+
+FUN void : setActiveInBakePass( Boolean yesNo )
+  > summary
+    Sets whether this shader object participates in the baking pass; false by default. If this is set to true, the shader must have a string input variable named “BakeFileName” and another string input variable named “BakeType”.
+    “BakeFileName” will not be set unless it is a baking pass. When set, it will contain the name of the file to bake into.
+    “BakeType” will be set to one of three values: “Illumination”, “Shader”, or “IllumShader”. They indicate as follows:
+    Illumination
+    Bake only the illumination seen by the surface.
+    Shader
+    Bake the shader without any illuminations. (Assume all points are lit uniformly at 100%).
+    IllumShader
+    Bake the shader and illumination contributions.
+    Note:
+    Only one of the RSL shaders on a material should have this set to true.
+
+FUN void : setActiveInBeautyPass( Boolean yesNo )
+  > summary
+    Sets whether this shader object participates in the beauty/final pass; true by default.
+  > seealso
+    setOnlyInShadowPass()
+
+FUN void : setActiveInShadowPass( Boolean yesNo )
+  > summary
+    Sets whether this shader object participates in the shadow pass; false by default.
+  > seealso
+    setOnlyInShadowPass()
+
+FUN Boolean : setDefinitionFile( String definitionFile, Boolean doOverride=false, Boolean runScript=true )
+  > summary
+    Sets the relative path of the (DAZ Script) file that builds this shader object's property list.
+  > parameters
+    + definitionFile - The relative path (from DzApp.getScriptsPath()) to the DAZ Script that creates this shader object's property list.
+    + doOverride - Whether or not to override the setting of the definition file if it has already been set.
+    + runScript - Whether or not to run the definition script upon setting it.
+  > returns
+    true if definitionFile is valid, otherwise false.
+  > attention
+    definitionFile is executed the moment the call to this method is made. A global variable named Shader - referring to the current DzRSLShader being rendered, exists for the duration of definitionFile. Referencing this variable from outside definitionFile will result in an error.
+  > seealso
+    rispec_constant_material_definition
+
+FUN void : setOnlyInShadowPass( Boolean yesNo )
+  > summary
+    Sets whether this shader object ONLY participates in the shadow pass; false by default. This is the same as calling setActiveInBeautyPass( false ) and setActiveInShadowPass( true ).
+  > seealso
+    setActiveInShadowPass()
+    setActiveInBeautyPass()
+
+FUN Boolean : setRenderTimeFile( String renderTimeFile )
+  > summary
+    Sets the relative path of the (DAZ Script) file that will be executed at render-time. This script can set attributes as well as shader parameters for the element, and implement custom logic for special effects.
+  > parameters
+    + renderTimeFile - The relative path (from DzApp.getScriptsPath()) to the DAZ Script that sets any attributes or shader parameters at render time.
+  > returns
+    true if renderTimeFile is valid, otherwise false.
+  > attention
+    When renderTimeFile is executed, a global variable named Shader - referring to the current DzRSLShader being rendered - exists for the duration of renderTimeFile. Referencing this variable from outside renderTimeFile will result in an error. See the Render Time Functions for a list of special functions only available to this script.
+  > seealso
+    rispec_constant_material_definition
+
+FUN Boolean : setShaderFile( String shaderFile )
+  > summary
+    Sets the shader file that this shader object calls when rendered.
+  > parameters
+    + shaderFile - The relative path, from DzApp.getShadersPath(), to the shader that this shader object calls when rendered. The filename is expected to be sans-extension; e.g., “dzplastic”, not “dzplastic.sl” or “dzplastic.sdl”.
+  > returns
+    true if shaderFile plus the shader extension for the active renderer exists, otherwise false.
+  > attention
+    Shaders built for use with DAZ Studio do not require any arguments in the main function. Surfaces, for instance, make use of the Standard Shading Attributes “Color” and “Opacity” and are set via the “Diffuse Color” and “Opacity Strength” properties, respectively. These properties are created by the DzShaderMaterial constructor. The values of these attributes are accessible in the shader via the Predefined Surface Shader Variables “Cs” and “Os”, respectively.
+    For Volume shaders the render option “standardatmosphere” is set to 0. See 3Delight documentations for more information on this option and its effect on volume shaders.
+  > seealso
+    rispec_constant_material_definition, rispec_constant_surface_shader
+
+FUN Boolean : setShaderType( DzRSLShader.ShaderType shaderType )
+  > summary
+    Sets the type for this shader object.
+  > parameters
+    + shaderType - The type of shader to set.
+  > example
+    var oShadObj = new DzRSLShader;
+    oShadObj.setShaderType( DzRSLShader.Surface );
+
+FUN DzVec3 : gammaCorrectColor( Color color )
+  > parameters
+    + color - The color to gamma correct.
+  > returns
+    The color as a DzVec3 gamma corrected if gamma correction is on and in the range of 0-1 for r, g, b. Alpha is ignored.
+
+FUN void : setFloatAttrib( String attrib, String token, Number val )
+  > summary
+    Adds a RiAttribute call with a float value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + val - The float value to set.
+  > example
+    Shader.setFloatAttrib( "user", "float myFloat", 1.0 );
+
+FUN void : setIntegerAttrib( String attrib, String token, Number val )
+  > summary
+    Adds a RiAttribute call with an integer value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + val - The integer value to set.
+  > example
+    Shader.setIntegerAttrib( "user", "integer myInteger", 1 );
+
+FUN void : setColorAttrib( String attrib, String token, Number r, Number g, Number b, Boolean isFloat=false )
+  > summary
+    Adds a RiAttribute call with a color value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + r - The value for the red color component.
+    + g - The value for the green color component.
+    + b - The value for the blue color component.
+    + isFloat - A flag for indicating whether or not the values passed to r, g and b are floating point numbers (in the 0-1 range).
+  > example
+    var color = new Color( 210, 210, 210 );
+    Shader.setColorAttrib( "user", "color myColor", color.red, color.green, color.blue );
+    //Shader.setColorAttrib( "user", "color myColor", color.red, color.green, color.blue, false );
+  > attention
+    If isFloat is false (the default), the values of r, g and b are assumed to be in the [0,255] range and will be converted to the [0,1] range prior to being passed on to the renderer. This allows for the values of the individual components to be driven beyond their normal range in cases where such an ability is needed, as with some subsurface scattering techniques.
+
+FUN void : setStringAttrib( String attrib, String token, String val )
+  > summary
+    Adds a RiAttribute call with a string value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + val - The string value to set.
+  > example
+    Shader.setStringAttrib( "user", "string myString", "foo.bar" );
+
+FUN void : setPointAttrib( String attrib, String token, DzVec3 vec )
+  > summary
+    Adds a RiAttribute call with a point value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + vec - The point value (x, y, z) to set.
+  > example
+    Shader.setPointAttrib( "user", "point myPoint", new DzVec3( 1, 1, 1 ) );
+
+FUN void : setVectorAttrib( String attrib, String token, DzVec3 vec )
+  > summary
+    Adds a RiAttribute call with a vector value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + vec - The vector value (x, y, z) to set.
+  > example
+    Shader.setVectorAttrib( "user", "vector myVector", new DzVec3( 1, 1, 1 ) );
+
+FUN void : setNormalAttrib( String attrib, String token, DzVec3 vec )
+  > summary
+    Adds a RiAttribute call with a normal value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + vec - The normal value (x, y, z) to set.
+  > example
+    Shader.setNormalAttrib( "user", "normal myNormal", new DzVec3( 1, 1, 1 ) );
+
+FUN void : setMatrixAttrib( String attrib, String token, DzMatrix4 mtx )
+  > summary
+    Adds a RiAttribute call with a matrix value.
+  > parameters
+    + attrib - The name of the attribute to set.
+    + token - The name of the token to set.
+    + mtx - The matrix value to set.
+  > example
+    Shader.setMatrixAttrib( "user", "matrix myMatrix", new DzMatrix4() );
+
+FUN void : setFloatToken( String token, Number val )
+  > summary
+    Sets the value of a float token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + val - The float value to set.
+
+FUN void : setIntegerToken( String token, Number val )
+  > summary
+    Sets the value of an integer token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + val - The integer value to set.
+
+FUN void : setColorToken( String token, Color val )
+  > summary
+    Sets the value of a color token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + val - The color value to set.
+
+FUN void : setStringToken( String token, String val )
+  > summary
+    Sets the value of a string token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + val - The string value to set.
+
+FUN void : setPointToken( String token, DzVec3 vec )
+  > summary
+    Sets the value of a point token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + vec - The point value (x, y, z) to set.
+
+FUN void : setVectorToken( String token, DzVec3 vec )
+  > summary
+    Sets the value of a vector token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + vec - The vector value (x, y, z) to set.
+
+FUN void : setNormalToken( String token, DzVec3 vec )
+  > summary
+    Sets the value of a normal token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + vec - The normal value (x, y, z) to set.
+
+FUN void : setMatrixToken( String token, DzMatrix4 mtx )
+  > summary
+    Sets the value of a matrix token in the list of tokens passed to the shader.
+  > parameters
+    + token - The name of the token to set.
+    + mtx - The matrix value to set.
+
+FUN void : makeCubeFaceEnvironment( String px, String nx, String py, String ny, String pz, String nz, String tex, Number fov, DzRenderOptions.PixelFilter filter, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Convert six images representing six viewing directions into an environment map in the format required by the renderer.
+  > parameters
+    + px - The path of the image as viewed from the positive x direction.
+    + nx - The path of the image as viewed from the negative x direction.
+    + py - The path of the image as viewed from the positive y direction.
+    + ny - The path of the image as viewed from the negative y direction.
+    + pz - The path of the image as viewed from the positive z direction.
+    + nz - The path of the image as viewed from the negative x direction.
+    + tex - The path of the resultant image.
+    + fov - The full horizontal field of view used to generate the input images.
+    + filter - The pre-defined filter to use.
+    + swidth - The filter width multiplier for the s direction.
+    + twidth - The filter width multiplier for the t direction.
+    + tokens - A list of additional String] tokens to set.
+    + params - A list of the corresponding basic type to set for each token.
+  > attention
+    In most cases, in DAZ Script 2, enumerated values are accessed like properties on the global object constructor (i.e. DzRenderOptions.Gaussian), but in this particular case the enumerations on DzRenderOptions for the filter argument are accessed like properties on an instance of the global object.
+    var oRenderMgr = App.getRenderMgr();
+    var oOptions = oRenderMgr.getRenderOptions();
+    ...
+    oOptions.Gaussian;
+    ...
+
+FUN void : makeLatLongEnvironment( String pic, String tex, DzRenderOptions.PixelFilter filter, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Convert an image representing a latitude-longitude map into an environment map in the format required by the renderer.
+  > parameters
+    + pic - The path of the source image.
+    + tex - The path of the resultant image.
+    + filter - The pre-defined filter to use.
+    + swidth - The filter width multiplier for the s direction.
+    + twidth - The filter width multiplier for the t direction.
+    + tokens - A list of additional String] tokens to set.
+    + params - A list of the corresponding basic type to set for each token.
+  > attention
+    In most cases, in DAZ Script 2, enumerated values are accessed like properties on the global object constructor (i.e. DzRenderOptions.Gaussian), but in this particular case the enumerations on DzRenderOptions for the filter argument are accessed like properties on an instance of the global object.
+    	var oRenderMgr = App.getRenderMgr();
+    	var oOptions = oRenderMgr.getRenderOptions();
+    	...
+    	oOptions.Gaussian;
+    	...
+
+FUN void : makeShadow( String pic, String tex, Array tokens, Array params )
+  > summary
+    Convert a depth image into a shadow map in the format required by the renderer.
+  > parameters
+    + pic - The path of the source image.
+    + tex - The path of the resultant image.
+    + tokens - A list of additional String] tokens to set.
+    + params - A list of the corresponding basic type to set for each token.
+
+FUN void : makeTexture( String pic, String tex, String swrap, String twrap, DzRenderOptions.PixelFilter filter, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Convert an image map into a map in the format required by the renderer.
+  > parameters
+    + pic - The path of the source image.
+    + tex - The path of the resultant image.
+    + swrap - The wrapping behavior of s coordinate.
+    + twrap - The wrapping behavior of t coordinate.
+    + filter - The pre-defined filter to use.
+    + swidth - The filter width multiplier for the s direction.
+    + twidth - The filter width multiplier for the t direction.
+    + tokens - A list of additional String] tokens to set.
+    + params - A list of the corresponding basic type to set for each token.
+  > attention
+    In most cases, in DAZ Script 2, enumerated values are accessed like properties on the global object constructor (i.e. DzRenderOptions.Gaussian), but in this particular case the enumerations on DzRenderOptions for the filter argument are accessed like properties on an instance of the global object.
+    var oRenderMgr = App.getRenderMgr();
+    var oOptions = oRenderMgr.getRenderOptions();
+    ...
+    oOptions.Gaussian;
+    ...
+
+FUN void : makeBump( String pic, String tex, String swrap, String twrap, DzRenderOptions.PixelFilter filter, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Convert a bump map into a map in the format required by the renderer.
+  > parameters
+    + pic - The path of the source image.
+    + tex - The path of the resultant image.
+    + swrap - The wrapping behavior of s coordinate.
+    + twrap - The wrapping behavior of t coordinate.
+    + filter - The pre-defined filter to use.
+    + swidth - The filter width multiplier for the s direction.
+    + twidth - The filter width multiplier for the t direction.
+    + tokens - A list of additional String] tokens to set.
+    + params - A list of the corresponding basic type to set for each token.
+  > attention
+    In most cases, in DAZ Script 2, enumerated values are accessed like properties on the global object constructor (i.e. DzRenderOptions.Gaussian), but in this particular case the enumerations on DzRenderOptions for the filter argument are accessed like properties on an instance of the global object.
+    var oRenderMgr = App.getRenderMgr();
+    var oOptions = oRenderMgr.getRenderOptions();
+    ...
+    oOptions.Gaussian;
+    ...
+
+FUN void : addTransformBegin()
+  > summary
+    Adds a RiSpec RiTransformBegin() call.
+  > attention
+    Each call to this method must be matched with a call to addTransformEnd() or addScheduledTransformEnd().
+  > since
+    4.10.0.108
+
+FUN void : addTransformEnd()
+  > summary
+    Adds a RiSpec RiTransformEnd() call.
+  > attention
+    Each call to this method must be matched with an earlier call to addTransformBegin().
+  > since
+    4.10.0.108
+
+FUN void : addScheduledTransformEnd()
+  > summary
+    Adds a RiSpec RiTransformEnd() call after the owner.
+  > attention
+    Each call to this method must be matched with an earlier call to addTransformBegin().
+    var oOwner = Shader.getOwner();
+    if( oOwner.inherits("DzShaderLight") && !oOwner.usesLocalShaderSpace() ){
+    	Shader.addTransformBegin();
+    	Shader.addIdentity();
+     
+    	var mtxTransform = new DzMatrix4( 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1 );
+    	Shader.addTransform( mtxTransform );
+     
+    	var vecPos = !oOwner.isDirectional() ? oOwner.getWSPos() : new DzVec3( 0, 0, -200 );
+    	var quatRot = oOwner.getWSRot();
+    	var vecAxis = quatRot.getAxisOfRotation();
+    	var nRadiansToDegrees = 180 / Math.PI;
+    	var nAngle = quatRot.getAngleOfRotation() * nRadiansToDegrees;
+     
+    	Shader.addTranslate( vecPos.x, vecPos.y, vecPos.z );
+    	Shader.addRotate( -nAngle, vecAxis.x, vecAxis.y, vecAxis.z );
+    	Shader.addCoordinateSystem( "3DLEnvSpace" );
+    	Shader.addScheduledTransformEnd();
+    }
+  > since
+    4.10.0.108
+
+FUN void : addConcatTransform( DzMatrix4 transform )
+  > summary
+    Adds a RiSpec RiConcatTransform() call.
+  > parameters
+    + transform - The transform to concatenate.
+  > since
+    4.10.0.108
+
+FUN void : addCoordinateSystem( String space )
+  > summary
+    Adds a RiSpec RiCoordinateSystem() call.
+  > parameters
+    + space - The name for the coordinate system.
+  > since
+    4.10.0.108
+
+FUN void : addCoordSysTransform( String space )
+  > summary
+    Adds a RiSpec RiCoordSysTransform() call.
+  > parameters
+    + space - The name for the coordinate system.
+  > since
+    4.10.0.108
+
+FUN void : addIdentity()
+  > summary
+    Adds a RiSpec RiIdentity() call.
+  > since
+    4.10.0.108
+
+FUN void : addRotate( Number angle, Number dx, Number dy, Number dz )
+  > summary
+    Adds a RiSpec RiRotate() call.
+  > parameters
+    + angle - TODO
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+  > since
+    4.10.0.108
+
+FUN void : addScale( Number dx, Number dy, Number dz )
+  > summary
+    Adds a RiSpec RiScale() call.
+  > parameters
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+  > since
+    4.10.0.108
+
+FUN void : addScopedCoordinateSystem( String space )
+  > summary
+    Adds a RiSpec DDiScopedCoordinateSystem() call.
+  > parameters
+    + space - The name for the coordinate system.
+  > since
+    4.10.0.108
+
+FUN void : addSkew( Number angle, Number dx1, Number dy1, Number dz1, Number dx2, Number dy2, Number dz2 )
+  > summary
+    Adds a RiSpec RiSkew() call.
+  > parameters
+    + angle - TODO
+    + dx1 - TODO
+    + dy1 - TODO
+    + dz1 - TODO
+    + dx2 - TODO
+    + dy2 - TODO
+    + dz2 - TODO
+  > since
+    4.10.0.108
+
+FUN void : addTransform( DzMatrix4 transform )
+  > summary
+    Adds a RiSpec RiTransform() call.
+  > parameters
+    + transform - The transform to set.
+  > since
+    4.10.0.108
+
+FUN void : addTranslate( Number dx, Number dy, Number dz )
+  > summary
+    Adds a RiSpec RiTranslate() call.
+  > parameters
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+  > since
+    4.10.0.108
+
+### signals
+
+SIG void : propertyAdded( DzProperty prop )
+  > summary
+    Transmitted when a property is added to this element.
+  > parameters
+    + prop - The property added.
+
+SIG void : propertyListChanged()
+  > summary
+    Transmitted when a property is added to or removed from this element.
+
+SIG void : propertyRemoved( DzProperty prop )
+  > summary
+    Transmitted when a property is removed from this element.
+  > parameters
+    + prop - The property removed.

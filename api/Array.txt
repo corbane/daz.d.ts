@@ -1,0 +1,612 @@
+# class Array : Object
+http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/array
+ECMAScript Array prototype object.
+
+Detailed Description
+An array is a data type that allows you to work with a list of elements. These elements can be any QObject derived object. Multi-dimensional arrays are achieved by using array elements that are arrays themselves.
+
+Array Creation
+
+Arrays can be constructed using array literals, or by using the new operator. They can be extended dynamically by simply creating elements at non-existent index positions.
+
+Example:
+
+Array literal
+
+var aTemp = [];
+Example:
+
+Array literal
+
+var aTemp = [ "a", "b", "c", "d" ];
+Example:
+
+Using the new operator, initialized with a size, but with undefined elements
+
+var aTemp = new Array( 4 );
+Example:
+
+Using the new operator, defining all elements
+
+var aTemp = new Array( "a", "b", "c", "d" );
+Example:
+
+Multi-Dimensional, dynamically extended
+
+var aTemp = [ "a", "b", "c", "d" ];
+var aTemp2 = [];
+ 
+for ( var i = 0; i < aTemp.length; i++ ) {
+	aTemp2[ i ] = new Array( 2 );
+	aTemp2[ i ][ 0 ] = i;
+	aTemp2[ i ][ 1 ] = aTemp[ i ];
+}
+// aTemp2 == [ [ 0, "a" ], [ 1, "b" ], [ 2, "c" ], [ 3, "d" ] ]
+Array Access:
+
+Array elements are accessed by their names. Names can be integers or strings. As integers, element names are zero-based, meaning the first element is at 0, the second element is at 1 and so on. As strings, elements can act as normal properties, and can be accessed by using the square bracket operator ([]) or by directly dereferencing the Array object and specifying the property name (.name). These two accessor types can be mixed freely.
+
+Example:
+
+Integer access
+
+var aTemp = [ "a", "b", "c", "d" ];
+var sTemp = aTemp[ 2 ];
+// sTemp == "c";
+Example:
+
+Multi-Dimensional, integer access
+
+var aTemp = [ [ "a", 5 ], [ "b", 10 ], [ "c", 15 ], [ "d", 20 ] ];
+var nTemp = aTemp[ 2 ][ 1 ];
+// nTemp == 15;
+Example:
+
+String access, using the square bracket operator
+
+var aTemp = [];
+ 
+// Assignment:
+aTemp[ "one" ] = "a";
+aTemp[ "two" ] = "b";
+ 
+// Retrieval:
+var sTemp = aTemp[ "one" ];
+// sTemp == "a"
+var sTemp2 = aTemp[ "two" ];
+// sTemp2 == "b"
+Example:
+
+String access, dereferencing the Array, specifying properties
+
+var aTemp = [];
+ 
+// Assignment:
+aTemp.one = "a";
+aTemp.two = "b";
+ 
+// Retrieval:
+var sTemp = aTemp.one;
+// sTemp == "a"
+var sTemp2 = aTemp.two;
+// sTemp2 == "b"
+Array Iteration
+
+An array can be iterated over by using a for or for...in loop.
+
+Example:
+
+Iteration of element names as integers, using the for control statement
+
+var aTemp = [ "a", "b", "c", "d" ];
+var sTemp = "";
+ 
+for( var i = 0; i < aTemp.length; i++ ){
+	sTemp += aTemp[ i ];
+}
+// sTemp == "abcd"
+Example:
+
+Iteration of element names as strings, using the for...in control statement
+
+var aTemp = [];
+aTemp[ "first" ] = "a";
+aTemp[ "second" ] = "b";
+aTemp[ "third" ] = "c";
+aTemp[ "fourth" ] = "d";
+// element names are sorted alphanumerically
+// aTemp == [ "first" : "a", "fourth" : "d", "second" : "b", "third" : "c" ]
+ 
+var sTemp = "";
+ 
+for( var sElement in aTemp ){
+	sTemp += aTemp[ sElement ];
+}
+// sTemp == "adbc"
+Todo
+
+Investigate whether there is a [Qt] bug in the return value of reverse, sort and slice; reference vs. copy.
+
+Properties
+Number : length
+
+Holds the number of elements in the array. (Read Only)
+
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp.length ); //4
+Static Methods
+Boolean : isArray( Object obj )
+
+Return Value:
+
+true if obj is an array, otherwise false.
+Example:
+
+var aTemp = [];
+print( Array.isArray( aTemp ) ); //true
+ 
+var oTmp = {};
+print( Array.isArray( oTmp ) ); //false
+Constructors
+Array()
+
+Default Constructor.
+
+Example:
+
+var aTemp = new Array();
+print( aTemp.length ); //0
+Array( Object firstElement, … )
+
+Constructs an array with one or more elements.
+
+Parameter(s):
+
+firstElement - The first element to add to the array.
+… - Optional additional elements to add to the array.
+Example:
+
+var aTemp = new Array( "a", "b", "c", "d" );
+print( aTemp.length ); //4
+Array( Number len )
+
+Constructs an array of the given length. The arrays elements will be uninitialized (undefined).
+
+Parameter(s):
+
+len - The number of items in the new array.
+Example:
+
+var aTemp = new Array( 10 );
+print( aTemp.length ); //10
+Methods
+Array : concat( Object element1, … )
+
+Parameter(s):
+
+element1 - The first element to concatenate with the array.
+… - Additional elements to concatenate with the array. (Optional)
+Return Value:
+
+A new array consisting of the concatenated contents.
+Example:
+
+var aTemp = [ "a", "b", "c" ];
+print( aTemp ); //a,b,c
+ 
+var nTemp = 5;
+print( aTemp.concat( nTemp ) ); //a,b,c,5
+var aTemp = [ "a", "b", "c" ];
+print( aTemp ); //a,b,c
+ 
+var aTemp2 = [ 1, 2, 3 ];
+print( aTemp2 ); //1,2,3
+ 
+print( aTemp.concat( aTemp2 ) ); //a,b,c,1,2,3
+Boolean : every( Function callbackfn, Object thisArg=undefined )
+
+Invokes a function for each non-empty element in the array, in ascending order, until or unless that function returns false.
+
+Parameter(s):
+
+callbackfn - A function that accepts 3 arguments and returns true or false; the arguments are the value of the element, the index of the element and the object being traversed
+thisArg - An optional argument that defines the this value for each invocation of callbackfn.
+Return Value:
+
+true if callbackfn returns true for every element in the array, otherwise false.
+Example:
+
+function greaterThan5( nValue, nIndex, aValues ) {
+	return nValue > 5;
+}
+ 
+function greaterThan10( nValue, nIndex, aValues ) {
+	return nValue > 10;
+}
+ 
+var aTmp = [10, 20, 30, 40, 50];
+print( aTmp.every( greaterThan5 ) ); //true
+print( aTmp.every( greaterThan10 ) ); //false
+Array : filter( Function callbackfn, Object thisArg=undefined )
+
+Invokes a function for each non-empty element in the array.
+
+Parameter(s):
+
+callbackfn - A function that accepts 3 arguments and returns true or false; the arguments are the value of the element, the index of the element and the object being traversed
+thisArg - An optional argument that defines the this value for each invocation of callbackfn.
+Return Value:
+
+A new array of all the elements for which callbackfn returns true.
+Example:
+
+function evenNumber( nValue, nIndex, aValues ) {
+	var nRemainder = nValue % 2;
+	return nRemainder == 0;
+}
+ 
+function oddNumber( nValue, nIndex, aValues ) {
+	var nRemainder = nValue % 2;
+	return nRemainder == 1;
+}
+ 
+var aTemp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+print( aTemp.filter( evenNumber ) ); //2,4,6,8,10
+print( aTemp.filter( oddNumber ) ); //1,3,5,7,9
+void : forEach( Function callbackfn, Object thisArg=undefined )
+
+Invokes a function for each non-empty element in the array.
+
+Parameter(s):
+
+callbackfn - A function that accepts 3 arguments; the value of the element, the index of the element and the object being traversed.
+thisArg - An optional argument that defines the this value for each invocation of callbackfn.
+Example:
+
+function printValue( nValue, nIndex, aValues ) {
+	print( nIndex, nValue, aValues[ nIndex ] );
+}
+ 
+var aTemp = [10, 20, 30, 40, 50];
+aTemp.forEach( printValue );
+//0 10 10
+//1 20 20
+//2 30 30
+//3 40 40
+//4 50 50
+Number : indexOf( Object searchElement, Number fromIndex=0 )
+
+Compares searchElement to the elements of the array, in ascending order, using Strict Equals.
+
+Parameter(s):
+
+searchElement - The Object to search for.
+fromIndex - An optional offset position within the array to begin searching from.
+Return Value:
+
+The index of the position of searchElement in the array, or -1 if searchElement is not found.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp.indexOf( "c" ) ); //2
+String : join( String separator=“,” )
+
+Parameter(s):
+
+separator - The character used to separate the elements in the list.
+Return Value:
+
+A string containing all elements in the array, with the given separator between each.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp.join( ":" ) ); //a:b:c:d
+See Also:
+
+toString()
+Number : lastIndexOf( Object searchElement, Number fromIndex=length-1 )
+
+Compares searchElement to the elements of the array, in descending order, using strict equality.
+
+Parameter(s):
+
+searchElement - The Object to search for.
+fromIndex - An optional offset position within the array to begin searching from.
+Return Value:
+
+The index of the position of searchElement in the array, or -1 if searchElement is not found.
+Example:
+
+var aTemp = [ "a", "b", "c", "d", "a", "b", "c", "d" ];
+print( aTemp.lastIndexOf( "c" ) ); //6
+Array : map( Function callbackfn, Object thisArg=undefined )
+
+Invokes a function for each non-empty element in the array.
+
+Parameter(s):
+
+callbackfn - A function that accepts 3 arguments; the arguments are the value of the element, the index of the element and the object being traversed.
+thisArg - An optional argument that defines the this value for each invocation of callbackfn.
+Return Value:
+
+A new array consisting of the results of calling callbackfn for each non-empty element in the array.
+Example:
+
+function addDoe( sValue, nIndex, aValues ) {
+	return sValue + " Doe";
+}
+ 
+var aTemp = ["John", "Jane", "Baby"];
+print( aTemp.map( addDoe ) ); //John Doe,Jane Doe,Baby Doe
+Object : pop()
+
+Removes the last (right-most) element from the array.
+
+Return Value:
+
+The removed element.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp ); //a,b,c,d
+ 
+print( aTemp.pop() ); //d
+print( aTemp ); //a,b,c
+Number : push( Object element1, … )
+
+Appends one or more elements onto the end (right) of the array.
+
+Parameter(s):
+
+element1 - The element to append.
+… - Optional additional elements to append.
+Return Value:
+
+The new length of the array.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp ); //a,b,c,d
+print( aTemp.push( "e" ) ); //a,b,c,d,e
+Object : reduce( Function callbackfn, Object initialValue=undefined )
+
+Invokes a function for each element in the array, in ascending order.
+
+Parameter(s):
+
+callbackfn - A function that accepts 4 arguments; the previousValue (or value from the previous call to callbackfn), the currentValue (value of the current element), the currentIndex and the object being traversed.
+initialValue - An optional argument that defines the previousValue for initial invocation of callbackfn; if not defined previousValue will be the first element in the array and currentValue will be the second element.
+Return Value:
+
+A new Object consisting of the result of calling callbackfn for each element in the array.
+Example:
+
+function accumulate( nPreviousValue, nValue, nIndex, aValues ) {
+	return nPreviousValue + nValue;
+}
+ 
+var aTemp = [10, 20, 30, 40, 50];
+print( aTemp.reduce( accumulate, 5 ) ); //155
+Object : reduceRight( Function callbackfn, Object initialValue=undefined )
+
+Invokes a function for each element in the array, in descending order.
+
+Parameter(s):
+
+callbackfn - A function that accepts 4 arguments; the previousValue (or value from the previous call to callbackfn), the currentValue (value of the current element), the currentIndex and the object being traversed.
+initialValue - An optional argument that defines the previousValue for initial invocation of callbackfn; if not defined previousValue will be the first element in the array and currentValue will be the second element.
+Return Value:
+
+A new Object consisting of the result of calling callbackfn for each element in the array.
+Example:
+
+function accumulate( nPreviousValue, nValue, nIndex, aValues ) {
+	return nPreviousValue - nValue;
+}
+ 
+var aTemp = [10, 20, 30, 40, 50];
+print( aTemp.reduceRight( accumulate, 155 ) ); //5
+Array : reverse()
+
+Reverses the order of the elements in the array.
+
+Return Value:
+
+A reference to the array.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp.reverse() ); //d,c,b,a
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp ); //a,b,c,d
+print( aTemp.reverse() ); //d,c,b,a
+Object : shift()
+
+Removes the first (left-most) element in the array.
+
+Return Value:
+
+The removed element.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+print( aTemp ); //a,b,c,d
+ 
+var sTemp = aTemp.shift();
+print( sTemp ); //a
+print( aTemp ); //b,c,d
+Array : slice( Number startIndex, Number endIndex=length )
+
+Parameter(s):
+
+startIndex - The index of the first element in the slice. If negative, the value is treated as length + startIndex, where length is the length of the array.
+endIndex - The index of the element to end the slice at. Defaults to the length of the array. If negative, the value is treated as length + endIndex, where length is the length of the array. (Optional)
+Return Value:
+
+A copy of the array from the element at startIndex to (but not including) the element at endIndex.
+Example:
+
+var aTemp = [ "a", "b", "c", "d", "e", "f" ];
+var aTemp2 = aTemp.slice( 2 );
+print( aTemp ); //a,b,c,d,e,f
+print( aTemp2 ); //c,d,e,f
+var aTemp = [ "a", "b", "c", "d", "e", "f" ];
+var aTemp2 = aTemp.slice( 1, 4 );
+print( aTemp ); //a,b,c,d,e,f
+print( aTemp2 ); //b,c,d
+Boolean : some( Function callbackfn, Object thisArg=undefined )
+
+Invokes a function for each non-empty element in the array, in ascending order.
+
+Parameter(s):
+
+callbackfn - A function that accepts 3 arguments and returns true or false; the arguments are the value of the element, the index of the element and the object being traversed.
+thisArg - An optional argument that defines the this value for each invocation of callbackfn.
+Return Value:
+
+true if callbackfn returns true for any element in the array, otherwise false.
+Array : sort( Function comparisonFunction )
+
+Sorts the array using comparisonFunction. If no Function is provided, default sorting is applied.
+
+Parameter(s):
+
+comparisonFunction - An optional function to call to compare items in the array.
+Return Value:
+
+A reference to the array.
+Example:
+
+No arguments
+
+var aTemp = new [ "a", "c", "d", "b" ];
+aTemp.sort();
+// aTemp == [ "a", "b", "c", "d" ]
+Example:
+
+Comparison function
+
+// -1 if a < b, 0 if a == b, 1 if a > b
+function numerically( a, b ){
+	return a < b ? -1 : a > b ? 1 : 0;
+}
+ 
+var aTemp = [ 8, 90, 1, 4, 843, 221 ];
+aTemp.sort( numerically );
+// aTemp == [ 1, 4, 8, 90, 221, 843 ]
+Array : splice( Number startIndex, Number deleteCount, … )
+
+Splices elements into the array.
+
+Parameter(s):
+
+startIndex - The index in the array to place the new element(s).
+deleteCount - The number of elements in the array to delete.
+… - Optional element(s) to insert into the array.
+Return Value:
+
+An array containing the deleted elements (if any).
+Example:
+
+Insert
+
+var aTemp = [ "a", "b", "c", "d" ];
+aTemp.splice( 2, 0, "X" );
+print( aTemp ); //a,b,X,c,d
+var aTemp = [ "a", "b", "c", "d" ];
+aTemp.splice( 2, 0, "X", "Y" );
+print( aTemp ); //a,b,X,Y,c,d
+Example:
+
+Remove
+
+var aTemp = [ "a", "b", "c", "d" ];
+var aTemp2 = aTemp.splice( 2, 1 );
+print( aTemp ); //a,b,d
+print( aTemp2 ); //c
+Example:
+
+Replace
+
+var aTemp = [ "a", "b", "c", "d" ];
+var aTemp2 = aTemp.splice( 2, 1, "X" );
+print( aTemp ); //a,b,X,d
+print( aTemp2 ); //c
+var aTemp = [ "a", "b", "c", "d" ];
+var aTemp2 = aTemp.splice( 2, 1, "X", "Y" );
+print( aTemp ); //a,b,X,Y,d
+print( aTemp2 ); //c
+String : toLocaleString()
+
+Provides a locale-aware version of toString().
+
+Return Value:
+
+A string containing all elements of an array together, separated by a locale-specific separator.
+See Also:
+
+toString(), join()
+String : toString()
+
+Return Value:
+
+A string containing all elements of an array together, separated by commas. This method is used when the array is used in the context of string concatenation or is used as a text value (e.g. for printing).
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+var sTemp = aTemp.toString();
+// sTemp == "a,b,c,d"
+See Also:
+
+join()
+Number : unshift( Object element1, … )
+
+Inserts the element(s) at the beginning (left) of the array.
+
+Parameter(s):
+
+element1 - The first element to insert into the array.
+… - Optional additional element(s) to insert into the array.
+Return Value:
+
+The number of objects in the array.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+var nTemp = aTemp.unshift( "X" );
+print( aTemp ); //X,a,b,c,d
+print( nTemp ); //5
+var aTemp = [ "a", "b", "c", "d" ];
+var nTemp = aTemp.unshift( "X", "Y" );
+print( aTemp ); //X,Y,a,b,c,d
+print( nTemp ); //6
+Number : find( Object element )
+
+Parameter(s):
+
+element - The item to search for in the array.
+Return Value:
+
+The index of element, if found. -1 if element is not found.
+Example:
+
+var aTemp = [ "a", "b", "c", "d", "e" ];
+print( aTemp.find( "d" ) ); //3
+Number : pushIfNotExists( Object element1, … )
+
+Pushes one or more elements onto the end (right) of the array, if it doesn't already exist in the array.
+
+Parameter(s):
+
+element1 - The first element to append to the array.
+… - Optional additional element(s) to insert into the array.
+Return Value:
+
+The new length of the array.
+Example:
+
+var aTemp = [ "a", "b", "c", "d" ];
+aTemp.pushIfNotExists( "e" );
+// aTemp == [ "a", "b", "c", "d", "e" ]

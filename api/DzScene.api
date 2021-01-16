@@ -1,0 +1,913 @@
+CLS DzScene : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scene_dz
+  > summary
+    The main scene container.
+
+### description
+  > summary
+    There is only one of these objects in the application. It is the communication hub between the core code and the interface, so it tracks all nodes, skeletons, lights, cameras, etc. that become part of the scene. This object is directly available using the Global::Scene variable.
+
+### enumerations
+
+ENU DzOpenMethod
+  > summary
+    Enumerated open methods.
+  + DefaultMethod - DefaultMethod - If no nodes (or only the default camera) exist, this behaves as OpenNew. Otherwise, this behaves as MergeFile.
+  + OpenNew - OpenNew - Resets the scene to its initial, clean state. All scene data is deleted and the undo stack is cleared.
+  + MergeFile - MergeFile - Merges the file with any pre-existing elements in the scene.
+
+ENU IncludeFlags
+  > summary
+    Enumerated flags for determining what to include when calculating the scene bounding box.
+  + DzObjectsOnly - Only visible items with geometry that cast shadows will be included.
+  + DzIncludeLightsFlag - Include lights in the bounding box.
+  + DzIncludeCamerasFlag - Include cameras in the bounding box.
+  + DzIncludeNonShadowersFlag - Include items that do not cast shadows in the bounding box.
+  + DzIncludeNonVisibleFlag - Include items that are not visible in the bounding box.
+  + DzIncludeAllFlag - Include all nodes in the bounding box.
+
+### properties
+
+PRP String : assetId
+  > summary
+    The asset id for the current scene.
+  > since
+    4.8.1.18
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for the current scene. (Read Only)
+  > since
+    4.8.1.18
+
+### statics
+
+STA String : stripLabelNumber( String label )
+  > parameters
+    + label - The string to remove the “(#)” suffix from.
+  > returns
+    label with the “(#)” suffix removed (if any), otherwise label.
+
+### methods
+
+FUN DzError : addDataItem( DzSceneData item )
+  > summary
+    Adds a scene data item to the scene.
+  > parameters
+    + item - The data item to add to the scene. The scene takes ownership of this object and deletes it when it is no longer used.
+  > returns
+    DZ_NO_ERROR on success, or an error code if it failed.
+
+FUN Boolean : addNode( DzNode node )
+  > summary
+    Adds a node to the scene if it is not already in the scene.
+  > parameters
+    + newNode - The node to add to the scene. The scene takes ownership of this object and deletes it when it is no longer used.
+
+FUN DzError : addWSModifier( wsmodifier_dz modifier, Number index=-1 )
+  > summary
+    Adds a world-space modifier to the scene's modifier stack.
+  > parameters
+    + modifier - The world-space modifier to add to the scene. The scene takes ownership of this object and deletes it when it is no longer used.
+    + index - The location in the list that where the modifier will be inserted. If index is less than 0, the modifier is appended to the end of the stack.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : beginTimeEdit()
+  > summary
+    Starts a time-editing operation. All changes to scene time, play range, and animation range that occur between this call and a call to finishTimeEdit() will be wrapped into a single undo item.
+    Every call to beginTimeEdit() should be matched with a call to finishTimeEdit().
+
+FUN void : clear()
+  > summary
+    Resets the scene to its initial, clean state. All data is deleted and the undo stack is cleared.
+
+FUN DzCamera : findCamera( String name )
+  > summary
+    Attempts to find a camera with the given name in the scene.
+  > parameters
+    + name - The name of the camera to find.
+  > returns
+    The first camera in the scene with the given name (if any), otherwise NULL.
+
+FUN DzCamera : findCameraByLabel( String label )
+  > summary
+    Attempts to find a camera with the given label in the scene.
+  > parameters
+    + label - The label of the camera to find.
+  > returns
+    The first camera in the scene with the given label (if any), otherwise NULL.
+
+FUN DzSceneData : findDataItem( String name )
+  > returns
+    The scene data item with the given name (if any), otherwise NULL.
+
+FUN DzLight : findLight( String name )
+  > summary
+    Attempts to find a light with the given name in the scene.
+  > parameters
+    + name - The name of the light to find.
+  > returns
+    The first light in the scene with the given name (if any), otherwise NULL.
+
+FUN DzLight : findLightByLabel( String label )
+  > summary
+    Attempts to find a light with the given label in the scene.
+  > parameters
+    + label - The label of the light to find.
+  > returns
+    The first light in the scene with the given label (if any), otherwise NULL.
+
+FUN DzMaterial : findMaterialByElementID( Number id )
+  > parameters
+    + id - The number used to uniquely identify the material in the scene.
+  > returns
+    The material with the matching element id (if any), otherwise NULL.
+  > seealso
+    DzElement
+
+FUN DzModifier : findModifierByElementID( Number id )
+  > parameters
+    + id - The number used to uniquely identify the modifier in the scene.
+  > returns
+    The modifier with the matching element id (if any), otherwise NULL.
+  > seealso
+    DzElement
+
+FUN DzNode : findNode( String name )
+  > summary
+    Attempts to find a node with the given name in the scene.
+  > parameters
+    + name - The name of the node to find.
+  > returns
+    The first node in the scene with the given name (if any), otherwise NULL.
+
+FUN DzNode : findNodeByElementID( Number id )
+  > parameters
+    + id - The number used to uniquely identify the node in the scene.
+  > returns
+    The node with the matching element id (if any), otherwise NULL.
+  > seealso
+    DzElement
+
+FUN DzNode : findNodeByLabel( String label )
+  > summary
+    Attempts to find a node with the given label in the scene.
+  > parameters
+    + label - The label of the node to find.
+  > returns
+    The first node in the scene with the given label (if any), otherwise NULL.
+
+FUN Number : findNodeIndex( DzNode node )
+  > parameters
+    + node - The node to search for in the nodes list.
+  > returns
+    The index of the node in the list, or -1 if not found.
+
+FUN DzObject : findObjectByElementID( Number id )
+  > parameters
+    + id - The number used to uniquely identify the object in the scene.
+  > returns
+    The object with the matching element id (if any), otherwise NULL.
+  > seealso
+    DzElement
+
+FUN shape_dz : findShapeByElementID( Number id )
+  > parameters
+    + id - The number used to uniquely identify the shape in the scene.
+  > returns
+    The shape with the matching element id (if any), otherwise NULL.
+  > seealso
+    DzElement
+
+FUN DzSkeleton : findSkeleton( String name )
+  > summary
+    Attempts to find a skeleton with the given name in the scene.
+  > parameters
+    + name - The name of the skeleton to find.
+  > returns
+    The first skeleton in the scene with the given name (if any), otherwise NULL.
+
+FUN DzSkeleton : findSkeletonByLabel( String label )
+  > summary
+    Attempts to find a skeleton with the given label in the scene.
+  > parameters
+    + label - The label of the skeleton to find.
+  > returns
+    The first skeleton in the scene with the given label, otherwise NULL.
+
+FUN Number : findSkeletonIndex( DzSkeleton skelton )
+  > parameters
+    + skeleton - The skeleton to search for in the nodes list.
+  > returns
+    The index of the skeleton in the list, or -1 if not found.
+
+FUN void : finishTimeEdit()
+  > summary
+    Ends a time editing operation started with a call to beginTimeEdit().
+
+FUN DzTimeRange : getAnimRange()
+  > returns
+    The current animation range.
+  > seealso
+    setAnimRange()
+
+FUN String : getAssetLoadPath()
+  > returns
+    The current asset load path of this scene.
+
+FUN DzAudioClip : getAudio()
+  > returns
+    An editable copy of the current audio clip for the scene. This will be NULL if there is no audio for the scene.
+  > seealso
+    setAudio()
+
+FUN Number : getAudioStartFrame()
+  > returns
+    The frame number on which the audio should start playing.
+
+FUN DzAuthor : getAuthor()
+  > returns
+    The author of the current scene (if any), otherwise NULL.
+  > since
+    4.8.1.19
+
+FUN DzBackdrop : getBackdrop()
+  > returns
+    The current backdrop object for the scene.
+  > seealso
+    setBackdrop()
+
+FUN DzBox3 : getBoundingBox( Number flags=DzIncludeAllFlag )
+  > summary
+    Calculate the bounding box for the current scene.
+  > parameters
+    + flags - A set of flags that specify which types of nodes should be included.
+  > returns
+    A world-space bounding box that encompasses all items in the scene (that match the criteria of the given flags).
+
+FUN DzCamera : getCamera( Number index )
+  > parameters
+    + index - The index of the camera to return.
+  > returns
+    The camera at the given index (if valid), otherwise NULL.
+
+FUN Array : getCameraList()
+  > returns
+    A list containing all cameras in the scene.
+
+FUN DzSceneData : getDataItem( Number index )
+  > parameters
+    + index - The index of the data item to return.
+  > returns
+    The data item for the scene at the given index (if valid), otherwise NULL.
+
+FUN Array : getDataItemList()
+  > returns
+    A list of the data items attached to the scene.
+
+FUN String : getFilename()
+  > returns
+    The filename that this scene was last saved to or read from (if any), otherwise an empty string.
+
+FUN Number : getFrame()
+  > returns
+    The current time as a frame number based on the current time step.
+  > seealso
+    getFrame()
+
+FUN DzNode : getHighlightNode()
+  > returns
+    The currently highlighted node in the scene.
+
+FUN DzLight : getLight( Number index )
+  > parameters
+    + index - The index of the light to return.
+  > returns
+    The light at the given index (if valid), otherwise NULL.
+
+FUN Array : getLightList()
+  > returns
+    A list containing all lights in the scene.
+
+FUN DzNode : getNode( Number index )
+  > parameters
+    + index - The index of the node to return.
+  > returns
+    The node at the given index (if valid), otherwise NULL.
+
+FUN Array<DzNode> : getNodeList()
+  > returns
+    A list of all nodes in the scene.
+
+FUN Number : getNumCameras()
+  > returns
+    The number of cameras in the scene.
+
+FUN Number : getNumDataItems()
+  > returns
+    The number of data items attached to the scene
+
+FUN Number : getNumLights()
+  > returns
+    The number of lights in the scene.
+
+FUN Number : getNumNodes()
+  > returns
+    The number of nodes in the scene.
+
+FUN Number : getNumSelectedCameras()
+  > returns
+    The number of currently selected cameras.
+
+FUN Number : getNumSelectedLights()
+  > returns
+    The number of currently selected lights.
+
+FUN Number : getNumSelectedNodes()
+  > returns
+    The number of currently selected nodes.
+
+FUN Number : getNumSelectedSkeletons()
+  > returns
+    The number of currently selected skeletons.
+
+FUN Number : getNumSelectedTimeRanges()
+  > returns
+    The number of selected time ranges.
+
+FUN Number : getNumSkeletons()
+  > returns
+    The number of skeletons in the scene.
+
+FUN Number : getNumStorablesInScene()
+  > returns
+    The number of storable_dz items in the scene.
+
+FUN Number : getNumWSModifiers()
+  > returns
+    The number of world-space modifiers in the scene.
+
+FUN DzTimeRange : getPlayRange()
+  > returns
+    The current play range.
+  > seealso
+    setPlayRange()
+
+FUN Boolean : getPreviewLights()
+  > returns
+    true if light preview is enabled, otherwise false.
+
+FUN DzNode : getPrimarySelection()
+  > returns
+    The primary selected node in the scene, or NULL if there is no currently selected node. The primary selected node is the last node that was selected, or can be set via function calls.
+
+FUN DzCamera : getSelectedCamera( Number index )
+  > parameters
+    + index - The index of the selected camera to return.
+  > returns
+    The camera at index in the list of selected cameras (if valid), otherwise NULL.
+
+FUN Array : getSelectedCameraList()
+  > returns
+    A list containing all selected cameras in the scene.
+
+FUN DzLight : getSelectedLight( Number index )
+  > parameters
+    + index - The index of the selected light to return.
+  > returns
+    The light at index in the list of selected lights (if valid), otherwise NULL.
+
+FUN Array : getSelectedLightList()
+  > returns
+    A list containing all selected lights in the scene.
+
+FUN DzNode : getSelectedNode( Number index )
+  > parameters
+    + index - The index of the selected node to return.
+  > returns
+    The node at index in the list of selected nodes (if valid), otherwise NULL.
+
+FUN Array<DzNode> : getSelectedNodeList()
+  > returns
+    A list containing all selected nodes in the scene.
+
+FUN DzSkeleton : getSelectedSkeleton( Number index )
+  > parameters
+    + index - The index of the selected skeleton to return.
+  > returns
+    The skeleton at index in the list of selected skeletons (if valid), otherwise NULL.
+
+FUN Array : getSelectedSkeletonList()
+  > returns
+    A list containing all selected skeletons in the scene.
+
+FUN DzSkeleton : getSkeleton( Number index )
+  > parameters
+    + index - The index of the skeleton to return.
+  > returns
+    The skeleton at the given index (if valid), otherwise NULL.
+
+FUN Array : getSkeletonList()
+  > returns
+    A list containing all skeletons in the scene.
+
+FUN Array : getSortedLightList()
+  > returns
+    A list containing all lights in the scene sorted by render priority.
+
+FUN DzTime : getTime()
+  > returns
+    The current scene time as a DzTime.
+  > seealso
+    setTime()
+
+FUN DzTime : getTimeStep()
+  > returns
+    The time step the animation is incremented by at each frame.
+  > seealso
+    setTimeStep()
+
+FUN String : getUniqueTopLevelLabel( String label, DzNode node=null )
+  > parameters
+    + label - The base label; see stripLabelNumber().
+    + destNode - The top-level node that the label is intended for; may be null; this node will be ignored when validating uniquenesses.
+  > returns
+    label if the value provided is already unique, otherwise label with a suffix that causes it to be unique.
+  > attention
+    Bones and hidden nodes that are parented to nodes within a skeleton's hierarchy are not taken into account when ensuring uniquenesses.
+
+FUN wsmodifier_dz : getWSModifier( Number index )
+  > parameters
+    + index - The index of the world-space modifier to return.
+  > returns
+    The world-space modifier at the given index (if valid), otherwise NULL.
+
+FUN Array : getWSModifierList()
+  > returns
+    A list containing all world-space modifiers in the scene.
+
+FUN void : invalidate()
+  > summary
+    Invalidates the scene, flagging it as needing to be redrawn.
+
+FUN void : invalidateLightSorting()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isClearing()
+  > returns
+    true if the scene is currently in a clearing operation, otherwise false.
+
+FUN Boolean : isDAZLoading()
+  > returns
+    true if the scene is currently in a loading from a .daz native scene.
+
+FUN Boolean : isLoading()
+  > returns
+    true if the scene is currently in a loading operation, otherwise false.
+
+FUN Boolean : isLoopingEnabled()
+  > returns
+    true if the looping of playback is enabled, otherwise false.
+
+FUN Boolean : isPlaying()
+  > returns
+    true if the animation is currently playing, otherwise false.
+
+FUN DzError : loadScene( String filename, DzScene.DzOpenMethod method )
+  > summary
+    Attempts to load a native file from the given filename.
+  > parameters
+    + filename - The name of the file to load.
+    + method - The method for combining the file contents with the current scene contents.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : loopPlayback( Boolean onOff )
+  > summary
+    Sets looping of playback on/off.
+  > parameters
+    + onOff - If true, playback of animation will continue until the user stops it, looping back to the first frame each time the end of the animation is reached. If false, playback of the animation will stop when the end of the animation is reached.
+
+FUN void : markChanged()
+  > summary
+    Indicate that the scene has changed since the last save.
+
+FUN Boolean : needsSave()
+  > returns
+    true if the scene needs to be saved, otherwise false.
+
+FUN void : pause()
+  > summary
+    Pauses playback of the current animation.
+
+FUN void : play( Boolean realtime=true )
+  > summary
+    Start playback of the current play range.
+  > parameters
+    + realtime - If true, frames will be dropped or paused as needed to keep the animation playing in realtime. Otherwise, the animation is played frame by frame as it can be drawn.
+
+FUN void : removeAllCameras()
+  > summary
+    Removes all cameras from the scene.
+
+FUN void : removeAllLights()
+  > summary
+    Removes all lights from the scene.
+
+FUN DzError : removeDataItem( DzSceneData item )
+  > summary
+    Removes the scene data item from the scene.
+  > parameters
+    + item - The data item to remove from the scene.
+  > returns
+    DZ_NO_ERROR if the item was successfully removed, otherwise an error code.
+
+FUN Boolean : removeNode( DzNode node )
+  > summary
+    Removes the given node from the scene.
+  > parameters
+    + node - The node to remove from the scene.
+  > returns
+    true if the node was in the scene and was successfully removed, otherwise false.
+
+FUN void : removeSelected()
+  > summary
+    Removes all nodes that have items in their hierarchy that are currently selected.
+
+FUN DzError : removeWSModifier( wsmodifier_dz modifier )
+  > summary
+    Removes the modifier from the scene's modifier stack if it exists.
+  > parameters
+    + modifier - The world-space modifier to remove from the scene.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN DzError : saveScene( String filename=“” )
+  > summary
+    Deprecated
+    Save of .daz is deprecated in favor of duf/dsf. Developers are encouraged to support backwards compatibility, but new functionality need not support .daz. See the projects under the saving folder for examples.
+    Saves the entire scene.
+  > parameters
+    + filename - The file to save the scene to. If empty, the scene will be saved to the filename that it was last saved to, if any. If no prior file name exists, DZ_ILLEGAL_ARGUMENT_ERROR is returned. If a filename is passed, it becomes the save filename that will be used for future saves. If the file cannot be opened or saved, DZ_OPERATION_FAILED_ERROR is returned.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : saveThumbnail( String filename )
+  > summary
+    Saves a thumbnail-size OpenGL render of the current viewport to the given file name.
+  > parameters
+    + filename - The filename to save the thumbnail to. This should have an extension that is supported by the image manager.
+
+FUN void : selectAllNodes( Boolean onOff )
+  > summary
+    Sets the selection state for all nodes in the scene.
+  > parameters
+    + onOff - If true all nodes in the scene will be selected. If false, all nodes will be deselected.
+
+FUN void : selectAllSkeletons( Boolean onOff )
+  > summary
+    Sets the selection state for all skeletons in the scene.
+  > parameters
+    + onOff - If true all skeletons in the scene will be selected. If false, all skeletons will be deselected.
+
+FUN void : selectAllTime( Boolean onOff )
+  > summary
+    Selects/Deselects all time range.
+  > parameters
+    + onOff - If true, all ranges are selected. If false, all ranges are deselected.
+
+FUN void : setAnimRange( DzTimeRange range )
+  > summary
+    Sets the animation range for the scene.
+  > parameters
+    + range - The time range to set for the entire animation.
+  > seealso
+    getAnimRange()
+
+FUN void : setAssetLoadPath( String absolutePath )
+  > summary
+    Sets the asset load path of this scene.
+  > parameters
+    + absolutePath - The absolute path to set.
+
+FUN void : setAudio( DzAudioClip audio, Number startFrame=0 )
+  > summary
+    Sets the current audio object and the frame on which it should start playing.
+  > parameters
+    + audio - The new audio clip for the scene. Pass in NULL to clear the current audio clip.
+    + startFrame - The frame at which the audio should begin playing.
+  > seealso
+    getAudio()
+
+FUN void : setBackdrop( DzBackdrop backdrop )
+  > summary
+    Sets the backdrop object.
+  > parameters
+    + backdrop - The new backdrop for the scene. The scene takes ownership of this object and deletes it when it is no longer needed.
+  > seealso
+    getBackdrop()
+
+FUN void : setFrame( Number frame )
+  > summary
+    Set the scene time to the given frame based on current time step.
+  > parameters
+    + frame - The frame to set as the current scene time.
+  > seealso
+    getFrame()
+
+FUN void : setHighlightNode( DzNode node )
+  > summary
+    Sets the currently highlighted node. This is typically called from DzViewTool-derived classes.
+  > parameters
+    + node - The node that will become the currently highlighted node.
+
+FUN void : setPlayRange( DzTimeRange range )
+  > summary
+    Sets the play range for the scene.
+  > parameters
+    + range - The time range to set for animation playback.
+  > seealso
+    getPlayRange()
+
+FUN void : setPreviewLights( Boolean onoff )
+  > summary
+    Sets whether or not light preview is enabled or disabled.
+  > parameters
+    + onOff - If true, the light preview is enabled.
+
+FUN Boolean : setPrimarySelection( DzNode node )
+  > summary
+    Sets the node to use as the primary selection.
+  > parameters
+    + node - The selected node that should be flagged as the primary selection. The node must already be selected.
+  > returns
+    true if the node was made the new primary selection, otherwise false.
+
+FUN void : setTime( DzTime time )
+  > summary
+    Set the scene time to the given time.
+  > parameters
+    + time - The time to set as the current scene time.
+  > seealso
+    getTime()
+
+FUN void : setTimeStep( DzTime time )
+  > summary
+    Sets the Frame rate for the scene.
+  > parameters
+    + tm - The number of time ticks per frame.
+  > seealso
+    getTimeStep()
+
+FUN void : stepTime( Number nFrames=1, Boolean forward=true )
+  > summary
+    Step time forward/back by number of frames.
+  > parameters
+    + nFrames - The number of frames to step from the current position.
+    + forward - If true, current frame count is increased nFrames. If false, current frame count is decreased.
+
+FUN void : update()
+  > summary
+    Recursively updates all nodes in the scene.
+
+### signals
+
+SIG void : aboutToRemoveNode( DzNode node )
+  > summary
+    Transmitted immediately before a node is removed from the scene.
+  > parameters
+    + node - The node to be removed from the scene.
+
+SIG void : aboutToRender( DzRenderer r )
+  > summary
+    Emitted just before the scene is rendered.
+  > parameters
+    + renderer - The renderer that will be rendering the scene.
+
+SIG void : animRangeChanged( DzTimeRange range )
+  > summary
+    Transmitted after the scene play range is changed.
+  > parameters
+    + range - The new animation range of the scene.
+
+SIG void : assetModified()
+  > summary
+    Transmitted just after the scene has been modified.
+
+SIG void : assetWasSaved()
+  > summary
+    Transmitted just after the scene has been saved.
+
+SIG void : backdropChanged()
+  > summary
+    Transmitted just after the backdrop has changed.
+
+SIG void : cameraAdded( DzCamera node )
+  > summary
+    Transmitted when cameras are added to the scene.
+  > parameters
+    + node - The camera added to the scene.
+
+SIG void : cameraListChanged()
+  > summary
+    Transmitted when cameras are added to or removed from the scene.
+
+SIG void : cameraRemoved( DzCamera node )
+  > summary
+    Transmitted when cameras are removed from the scene.
+  > parameters
+    + node - The camera removed from the scene.
+
+SIG void : cameraSelectionListChanged()
+  > summary
+    Transmitted after the camera selection list changes.
+
+SIG void : currentTimeChanged( DzTime oldTime, DzTime newTime )
+  > summary
+    Transmitted after the scene time is changed.
+  > parameters
+    + oldTime - The last time the scene was at.
+    + newTime - The new time of the scene.
+
+SIG void : drawnDataChanged()
+  > summary
+    Transmitted if the scene has changed and needs to be redrawn.
+
+SIG void : highlightNodeChanged( DzNode node )
+  > summary
+    Transmitted when the highlight node changes.
+  > parameters
+    + node - The new highlight node of the scene.
+
+SIG void : lightAdded( DzLight node )
+  > summary
+    Transmitted when lights are added to the scene.
+  > parameters
+    + node - The light added to the scene.
+
+SIG void : lightListChanged()
+  > summary
+    Transmitted when lights are added to or removed from the scene.
+
+SIG void : lightRemoved( DzLight node )
+  > summary
+    Transmitted when lights are removed from the scene.
+  > parameters
+    + node - The light removed from the scene.
+
+SIG void : lightSelectionListChanged()
+  > summary
+    Transmitted after the light selection list changes.
+
+SIG void : loopPlaybackChanged( Boolean onOff )
+  > summary
+    Transmitted when the enabled state of playback looping changes.
+
+SIG void : materialListChanged()
+  > summary
+    Emitted when the material list of a node in the scene has changed.
+
+SIG void : materialSelectionChanged()
+  > summary
+    Emitted when the material selection in the scene has changed.
+
+SIG void : nodeAdded( DzNode node )
+  > summary
+    Transmitted when nodes are added to the scene.
+  > parameters
+    + node - The node added to the scene.
+
+SIG void : nodeListChanged()
+  > summary
+    Transmitted when nodes are added to or removed from the scene.
+
+SIG void : nodeRemoved( DzNode node )
+  > summary
+    Transmitted when nodes are removed from the scene.
+  > parameters
+    + node - The node removed from the scene.
+
+SIG void : nodeSelectionListChanged()
+  > summary
+    Transmitted after the node selection list changes.
+
+SIG void : playbackFinished()
+  > summary
+    Transmitted when playback of the scene stops.
+
+SIG void : playbackStarted()
+  > summary
+    Transmitted when playback of the scene begins.
+
+SIG void : playRangeChanged( DzTimeRange range )
+  > summary
+    Transmitted after the scene play range is changed.
+  > parameters
+    + range - The new play range of the scene.
+
+SIG void : primarySelectionChanged( DzNode node )
+  > summary
+    Transmitted when the primary node selection changes.
+  > parameters
+    + node - The new primary selection of the scene.
+
+SIG void : renderFinished( DzRenderer r )
+  > summary
+    Emitted just after the scene is rendered.
+  > parameters
+    + renderer - The renderer that rendered the scene.
+
+SIG void : sceneCleared()
+  > summary
+    Transmitted after the scene gets cleared.
+
+SIG void : sceneClearStarting()
+  > summary
+    Emitted just before the scene is cleared.
+
+SIG void : sceneFilenameChanged( String newName )
+  > summary
+    Transmitted when the name of the current scene file has changed.
+  > parameters
+    + newName - The new name of the scene file.
+
+SIG void : sceneLoaded()
+  > summary
+    Transmitted after loading a scene file. This may not always be emitted after every sceneLoadStarting() signal if there were errors during file loading.
+
+SIG void : sceneLoadStarting()
+  > summary
+    Transmitted just before loading a scene.
+
+SIG void : sceneSaved( String filename )
+  > summary
+    Transmitted after saving a scene file. This may not always be emitted after every sceneSaveStarting() signal if there were errors during file saving.
+
+SIG void : sceneSaveStarting( String filename )
+  > summary
+    Transmitted just before saving a scene.
+
+SIG void : sceneTopologyChanged()
+  > summary
+    Transmitted just after the scene topology has changed.
+
+SIG void : skeletonAdded( DzSkeleton node )
+  > summary
+    Transmitted when skeletons are added to the scene.
+  > parameters
+    + node - The skeleton added to the scene.
+
+SIG void : skeletonListChanged()
+  > summary
+    Transmitted when skeletons are added to or removed from the scene.
+
+SIG void : skeletonRemoved( DzSkeleton node )
+  > summary
+    Transmitted when skeletons are removed from the scene.
+  > parameters
+    + node - The skeleton removed from the scene.
+
+SIG void : skeletonSelectionListChanged()
+  > summary
+    Transmitted after the skeleton selection list changes.
+
+SIG void : timeChanged( DzTime time )
+  > summary
+    Transmitted after the scene time is changed.
+  > parameters
+    + time - The new time of the scene.
+
+SIG void : timeChanging( DzTime newTime )
+  > summary
+    Transmitted when time is about to change.
+  > parameters
+    + newTime - The new time of the scene.
+
+SIG void : timeSelectionChanged()
+  > summary
+    Transmitted after the scene time selection is changed.
+
+SIG void : timeStepChanged( DzTime time )
+  > summary
+    Transmitted after the scene time step is changed.
+  > parameters
+    + time - The new time step of the scene.
+
+SIG void : wsModifierAdded( wsmodifier_dz modifier )
+  > summary
+    Transmitted when world-space modifiers are added to the scene.
+  > parameters
+    + modifier - The modifier added to the scene.
+
+SIG void : wsModifierRemoved( wsmodifier_dz modifier )
+  > summary
+    Transmitted when world-space modifiers are removed from the scene.
+  > parameters
+    + modifier - The modifier removed from the scene.
+
+SIG void : wsModifierStackChanged()
+  > summary
+    Transmitted when world-space modifiers are added to or removed from the scene.

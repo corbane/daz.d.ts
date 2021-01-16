@@ -1,0 +1,83 @@
+CLS DzTimeRange : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/timerange_dz
+  > summary
+    Represents an interval of time with a beginning and an end.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : end
+  > summary
+    The end of the time range.
+
+PRP Number : start
+  > summary
+    The start of the time range.
+
+### constructors
+
+CTR DzTimeRange()
+  > summary
+    Default Constructor. Creates the time range [DZ_MIN_TIME,DZ_MAX_TIME]
+
+CTR DzTimeRange( DzTimeRange interval )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+CTR DzTimeRange( DzTime start, DzTime end )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+### methods
+
+FUN DzTimeRange : add( Number time )
+  > returns
+    The result of adding the given amount of time to both ends of this range
+
+FUN void : extendEndsBy( Number time )
+  > summary
+    Extends the ends of this range by the given amount of time
+
+FUN Number : getDuration()
+  > returns
+    The length of the time range.
+
+FUN void : include( Number time )
+  > summary
+    Sets the time range to include the given time
+
+FUN void : include( DzTimeRange range )
+  > summary
+    Sets the time range to include the given time range
+
+FUN void : intersect( DzTimeRange range )
+  > summary
+    Sets this time range to the intersection with the given time range.
+
+FUN Boolean : isEmpty()
+  > returns
+    True if the range is length 0.
+
+FUN Boolean : isIncluded( Number time )
+  > returns
+    True if the given time falls inside this range
+
+FUN Boolean : isIncluded( DzTimeRange range )
+  > returns
+    True if the given range falls inside this range
+
+FUN void : makeEmpty()
+  > summary
+    Sets the time range to be empty.
+
+FUN Boolean : overlaps( DzTimeRange range )
+  > returns
+    True if the given range overlaps this range
+
+FUN DzTimeRange : subtract( Number time )
+  > returns
+    The result of subtracting the given amount of time from both ends of the range

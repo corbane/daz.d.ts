@@ -1,0 +1,9 @@
+NOT RangeError : NativeError
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rangeerror
+  > summary
+    ECMAScript RangeError prototype object.
+
+### description
+  > summary
+    This error is thrown by the interpreter to indicate that a numeric value has exceeded the allowable range. See the ECMA script specification for more information.

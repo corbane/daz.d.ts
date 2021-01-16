@@ -1,0 +1,88 @@
+CLS DzNodeProperty : DzProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/nodeproperty_dz
+  > summary
+    An animatable node property.
+
+### description
+  > summary
+    An animatable property whose value is a choice of one of the node objects in the current scene, or none. Instead of tracking a numeric value, this property maintains a pointer to another node in the scene. Use this property when you need an element to track a user-selected scene node; for example, this property could be used in a node to allow the user to select another node in the scene to follow, or it could be used by a modifier that uses a node in the scene to determine how it is applied, etc.
+
+### constructors
+
+CTR DzNodeProperty()
+  > summary
+    Constructor. Creates a non-animatable, non-user property.
+
+CTR DzNodeProperty( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN void : exclude( DzNode node )
+  > summary
+    Excludes the given node from becoming the value of this property.
+  > parameters
+    + node - The node to exclude.
+
+FUN DzNode : getDefaultValue()
+  > returns
+    The default value of the property (if any), otherwise NULL.
+
+FUN DzNode : getKeyValue( Number i )
+  > parameters
+    + index - The index of the key to get a value for.
+  > returns
+    The value of the property at the given key (if any), otherwise NULL.
+
+FUN DzNode : getValue( DzTime tm )
+  > parameters
+    + tm - The scene time for which to get the value of the property.
+  > returns
+    The value of the property at the given time (if any), otherwise NULL.
+
+FUN DzNode : getValue()
+  > returns
+    The value of the property (if any), otherwise NULL.
+
+FUN Boolean : isExcluded( DzNode node )
+  > parameters
+    + node - The node to check for exclusion.
+  > returns
+    true if the given node is excluded from becoming the value of this property, otherwise false.
+
+FUN void : setDefaultValue( DzNode val )
+  > summary
+    Set the default value of the property.
+  > parameters
+    + val - The default value for this property.
+
+FUN void : setKeyValue( Number which, DzNode val )
+  > summary
+    Set the value of the property for the given key.
+  > parameters
+    + which - The index of the key to set a value for.
+    + val - The node to associate with the given key.
+
+FUN void : setValue( DzTime tm, DzNode val )
+  > summary
+    Set the value of the property at the given time.
+  > parameters
+    + tm - The scene time for which to set the value.
+    + val - The node to associate with this property.
+
+FUN void : setValue( DzNode val )
+  > summary
+    Set the value of the property.
+  > parameters
+    + val - The node to associate with this property.
+
+### signals
+
+SIG void : aboutToChange()
+  > null
+  > summary
+    Emitted immediately before the value of the property changes.

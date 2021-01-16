@@ -1,0 +1,82 @@
+CLS DzFileFilter : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/filefilter_dz
+  > summary
+    Encapsulates one or more file filters to be chosen from in a file dialogs.
+
+### description
+  > summary
+    For each group of files that you want to make available to the user, create a new filter with the newFilter() call, then add one or more file extensions to be accepted by the filter.
+
+### constructors
+
+CTR DzFileFilter()
+  > summary
+    Default Constructor.
+
+CTR DzFileFilter( String description, Array extensions )
+  > summary
+    Creates a new file filter and adds a filter with the given description and extensions.
+  > parameters
+    + description - The description of the filter.
+    + extensions - The list of extensions for the filter.
+
+CTR DzFileFilter( String description, String extension )
+  > summary
+    Creates a new file filter and adds a filter with the given description and extension.
+  > parameters
+    + description - The description of the filter.
+    + extension - The extension for the filter.
+
+### methods
+
+FUN void : addExtension( String extension )
+  > summary
+    Adds a file extension to the current filter.
+  > parameters
+    + extension - A file extension that this filter will open/save e.g. “duf”
+
+FUN void : addExtensions( Array extensions )
+  > summary
+    Adds file extensions to the current filter.
+  > parameters
+    + extensions - A list of file extensions that this filter will open/save
+
+FUN Number : getDefaultFilter()
+  > returns
+    The default filter index, returns -1 if no default is set.
+
+FUN String : getExtension( Number filterIdx, Number extensionIdx )
+  > parameters
+    + filterIdx - The index of the filter to return an extension for.
+    + extensionIdx - The index of the extension to return.
+  > returns
+    The extension of the filter at the given index.
+
+FUN String : getFilterDescription( Number filterIdx )
+  > parameters
+    + filterIdx - The index of the filter to return a description for.
+  > returns
+    The description of the filter at the given index.
+
+FUN Number : getNumExtensions( Number filterIdx )
+  > parameters
+    + filterIdx - The index of the filter to get the number of extensions for.
+  > returns
+    The number of extensions in the filter at the given index.
+
+FUN Number : getNumFilters()
+  > returns
+    The number of filters.
+
+FUN void : newFilter( String description )
+  > summary
+    Starts a new filter with the given description.
+  > parameters
+    + description - The description of files this filter will open/save e.g. “DAZ Studio files”
+
+FUN void : setDefaultFilter( Number filterIdx )
+  > summary
+    Sets the default filter index - by default this is 0.
+  > parameters
+    + filterIdx - The index of the filter to become the default - if the index is invalid the default is not changed.

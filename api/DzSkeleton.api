@@ -1,0 +1,144 @@
+CLS DzSkeleton : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/skeleton_dz
+  > summary
+    The base class which owns a group of connected bones.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### statics
+
+STA DzNode : convertFigureToProp( DzSkeleton skeleton, String newName )
+  > summary
+    Converts an articulate figure to a static prop.
+  > parameters
+    + srcSkeleton - The skeleton to convert.
+    + nodeName - The name to assign to the new prop.
+
+### constructors
+
+CTR DzSkeleton()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : clearGeneratedMorphs()
+  > summary
+    Clears the generated morphs.
+
+FUN DzBone : findBone( String name )
+  > parameters
+    + name - The name of the bone to look for.
+  > returns
+    The bone in this skeleton's hierarchy with a matching name (if any), otherwise NULL.
+
+FUN DzBone : findBoneByLabel( String label )
+  > parameters
+    + label - The label of the bone to look for.
+  > returns
+    The bone in this skeleton's hierarchy with a matching label (if any), otherwise NULL.
+
+FUN String : findUniqueBoneName( String desiredName )
+  > parameters
+    + name - The name of the bone to make unique.
+  > returns
+    The unique bone name.
+
+FUN Array<DzBone> : getAllBones()
+  > returns
+    A list containing all bones that are part of this skeleton.
+
+FUN Boolean : getDrawGLBones()
+  > returns
+    true if OpenGL bones will draw in the viewport, otherwise false.
+
+FUN DzBoolProperty : getDrawGLBonesControl()
+  > returns
+    The boolean property that controls bone drawing in the viewport.
+
+FUN DzFloatProperty : getFigureIDControl()
+  > returns
+    The float property that controls the figure identifier.
+  > since
+    4.6.2.42
+
+FUN DzSkeletonProperty : getFollowControl()
+  > returns
+    The property that controls which skeleton this skeleton will follow.
+  > seealso
+    getFollowTarget()
+    setFollowTarget()
+
+!!! FollowMode : getFollowMode()
+FUN FollowMode : getFollowMode()
+  > returns
+    The current follow mode of the skeleton.
+  > since
+    4.8.0.23
+
+FUN DzEnumProperty : getFollowModeControl()
+  > returns
+    The enum property that controls the follow mode of the skeleton.
+  > since
+    4.8.0.23
+
+FUN DzSkeleton : getFollowSkeleton( Number which )
+  > returns
+    The i'th skeleton following this one.
+
+FUN DzSkeleton : getFollowTarget()
+  > returns
+    The skeleton that this skeleton is currently following (if any), otherwise NULL.
+  > seealso
+    setFollowTarget()
+    getFollowControl()
+
+FUN DzColorProperty : getGLBonesColorControl()
+  > returns
+    The color property that controls bone color in the viewport.
+
+FUN DzFloatProperty : getGLBonesEdgeOpacityControl()
+  > returns
+    The float property that controls bone edge opacity in the viewport.
+
+FUN DzEnumProperty : getGLBonesEdgeStyleControl()
+  > returns
+    The enum property that controls bone edge style in the viewport.
+
+FUN DzFloatProperty : getGLBonesFillOpacityControl()
+  > returns
+    The float property that controls bone fill opacity in the viewport.
+
+FUN Number : getNumFollowSkeletons()
+  > returns
+    The number of skeletons following this one.
+
+FUN void : invalidateBoundingBoxes( Boolean checkSkeleton=true )
+  > summary
+    Invalidates the bounding boxes for this node, causing them to be recalculated.
+  > parameters
+    + checkSkeleton - Whether or not to invalidate the bounding box for this node's skeleton, if it has one.
+
+FUN void : setDrawGLBones( Boolean onOff )
+  > summary
+    Sets whether or not OpenGL bones will draw in the viewport.
+  > parameters
+    + onOff - If true, bones will be drawn in the viewport.
+
+FUN void : setFollowTarget( DzSkeleton skeleton )
+  > summary
+    Sets the figure that we are currently following.
+  > parameters
+    + skeleton - A pointer to the new follow target for the skeleton. If NULL, clears the figure that this skeleton is following.
+  > seealso
+    getFollowTarget()
+    getFollowControl()
+
+### signals
+
+SIG void : followTargetChanged( DzSkeleton skeleton )
+  > summary
+    Emitted when the follow target for this skeleton has changed.

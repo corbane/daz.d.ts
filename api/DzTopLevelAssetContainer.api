@@ -1,0 +1,60 @@
+CLS DzTopLevelAssetContainer : DzAbstractAssetContainer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/toplevelassetcontainer_dz
+  > summary
+    A container type that represents the top level of an asset container hierarchy.
+
+### description
+  > summary
+    This container type does not directly support assets. The primary purpose of this container type is to serve as the top-most container in an asset containers hierarchy.
+
+### enumerations
+
+ENU ContainerState
+  > summary
+    The different states of a top-level asset container.
+  + csNone - The container is idle.
+  + csBusy - The container is busy with an update.
+  + csFinished - The update operation completed without errors.
+  + csCanceled - The update operation was canceled.
+  + csError - An error occured during the update operation.
+
+### methods
+
+FUN DzTopLevelAssetContainer.ContainerState : getState()
+  > returns
+    The current state of the containter.
+  > seealso
+    DzAssetMgr.getContentDirs()
+    DzAssetMgr.getPoserDirs()
+    DzAssetMgr.getImportDirs()
+    DzAssetMgr.getProducts()
+    DzAssetMgr.getCategories()
+    DzAssetMgr.getCompatibilityBases()
+    DzAssetMgr.searchFiles()
+    DzAssetMgr.searchForAssetsByKeywords()
+    DzAssetMgr.searchForAssets()
+    DzAssetMgr.searchForProductAssets()
+    DzAssetMgr.searchForAssetAddOns()
+    DzAssetMgr.searchForAssetTargets()
+    DzAssetMgr.searchForProducts()
+  > since
+    4.9.1.17
+
+FUN void : setState( DzTopLevelAssetContainer.ContainerState state )
+  > summary
+    Sets the state of this container.
+  > parameters
+    + state - The state to set.
+  > attention
+    Generally this should not be called from script.
+  > since
+    4.9.1.17
+
+### signals
+
+SIG void : stateChanged( DzTopLevelAssetContainer.ContainerState state )
+  > summary
+    Emitted when the state of this container has changed.
+  > parameters
+    + state - The new state of this container.

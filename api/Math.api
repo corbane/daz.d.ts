@@ -1,0 +1,163 @@
+NOT Math : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/math
+  > summary
+    The ECMAScript Math object.
+
+### description
+  > summary
+    This object implements ECMAScript math functions. One instance of the object is automatically created in the global namespace when the script engine is initialized. That instance is accessible via Global::Math. Additional instances of the object cannot be created. See the ECMA script specification for more information.
+    Todo
+    Examples:
+
+### properties
+
+PRP Number : E
+  > summary
+    Euler's constant. The base for natural logarithms. (Read Only)
+
+PRP Number : LN10
+  > summary
+    Natural logarithm of 10. (Read Only)
+
+PRP Number : LN2
+  > summary
+    Natural logarithm of 2. (Read Only)
+
+PRP Number : LOG10E
+  > summary
+    Base 10 logarithm of E. (Read Only)
+
+PRP Number : LOG2E
+  > summary
+    Base 2 logarithm of E. (Read Only)
+
+PRP Number : PI
+  > summary
+    Pi (3.141592653589793). (Read Only)
+
+PRP Number : SQRT1_2
+  > summary
+    Square root of 1/2. (Read Only)
+
+PRP Number : SQRT2
+  > summary
+    Square root of 2. (Read Only)
+
+### methods
+
+FUN Number : abs( Number num )
+  > parameters
+    + num - The number to take the absolute value of.
+  > returns
+    The absolute value of num.
+
+FUN Number : acos( Number num )
+  > summary
+    If num is out of range, returns NaN.
+  > parameters
+    + num - The number to calculate the arc cosine of.
+  > returns
+    The arccosine of num in radians between 0 and PI.
+
+FUN Number : asin( Number num )
+  > summary
+    If num is out of range, returns NaN.
+  > parameters
+    + num - The number to calculate the arc sine of.
+  > returns
+    The arcsine of num in radians between -PI/2 and PI/2.
+
+FUN Number : atan( Number num )
+  > summary
+    If num is out of range, returns NaN.
+  > parameters
+    + num - The number to calculate the arc tangent of.
+  > returns
+    The arctangent of num in radians between -PI/2 and PI/2.
+
+FUN Number : atan2( Number yCoord, Number xCoord )
+  > parameters
+    + yCoord - The y coordinate of the position to get the arc tangent for.
+    + xCoord - The x coordinate of the position to get the arc tangent for.
+  > returns
+    The counter-clockwise angle in radians between the positive x-axis and the point at (xCoord, yCoord). The value returned is always between -PI and PI.
+
+FUN Number : ceil( Number num )
+  > parameters
+    + num - The number to get the ceiling for.
+  > returns
+    If num is an integer, returns num. If num is a float, returns the smallest integer greater than num.
+
+FUN Number : cos( Number num )
+  > parameters
+    + num - The angle, in radians, to calculate the cosine of.
+  > returns
+    The cosine of num. The value will be in the range [-1,1].
+
+FUN Number : exp( Number num )
+  > parameters
+    + num - The exponent to calculate.
+  > returns
+    E raised to the power of num.
+
+FUN Number : floor( Number num )
+  > parameters
+    + num - The number to get the floor for.
+  > returns
+    If num is an integer, returns num. If num is a float, returns the greatest integer less than num.
+
+FUN Number : log( Number num )
+  > parameters
+    + num - The number to calculate the logarithm of.
+  > returns
+    If num is > 0, returns the natural logarithm of num. If num is 0, returns Infinity. If num is < 0, returns NaN.
+
+FUN Number : max( Number num1, Number num2 )
+  > parameters
+    + num1 - The first number to test.
+    + num2 - The second number to test.
+  > returns
+    The larger of num1 and num2.
+
+FUN Number : min( Number num1, Number num2 )
+  > parameters
+    + num1 - The first number to test.
+    + num2 - The second number to test.
+  > returns
+    The smaller of num1 and num2.
+
+FUN Number : pow( Number num, Number power )
+  > parameters
+    + num - The number to calculate the exponent of.
+    + power - The exponent of the number to calculate.
+  > returns
+    The value of num raised to power.
+
+FUN Number : random()
+  > returns
+    A pseudo-random float between 0 and 1. Pseudo random numbers are not truly random, but may be adequate for some applications, for example, games and simple simulations.
+
+FUN Number : round( Number num )
+  > parameters
+    + num - The number to round off.
+  > returns
+    num rounded to the nearest integer. If the fractional part of num is >= 0.5, num is rounded up; otherwise it is rounded down.
+
+FUN Number : sin( Number num )
+  > parameters
+    + num - The angle, in radians, to calculate the sine of.
+  > returns
+    The sine of num. The value will be in the range [-1,1].
+
+FUN Number : sqrt( Number num )
+  > parameters
+    + num - The number to calculate the square root of.
+  > returns
+    If num is >= 0, returns the square root. If num is < 0, returns NaN.
+
+FUN Number : tan( Number num )
+  > parameters
+    + num - The angle, in radians, to calculate the tangent of.
+  > returns
+    The tangent of num.

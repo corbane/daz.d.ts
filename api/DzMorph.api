@@ -1,0 +1,4 @@
+CLS DzMorph : DzModifier DzSceneAsset
+  > summary
+    Defines the DzMorph class.
+    

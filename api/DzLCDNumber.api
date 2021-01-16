@@ -1,0 +1,69 @@
+CLS DzLCDNumber : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/lcdnumber_dz
+  > summary
+    DAZScript wrapper for QLCDNumber.
+
+### description
+  > summary
+    A DzLCDNumber provides a LCD-style number display.
+    The following digits and symbols can be displayed:
+    0/O, 1, 2, 3, 4, 5/S, 6, 7, 8, 9/g, - (minus), . (decimal point), A, B, C, D, E, F, h, H, L, o, P, r, u, U, Y, : (colon), &deg; (degree sign - which is specified as single quote in the string) and space.
+    Illegal characters are substituted with spaces.
+
+### enumerations
+
+ENU Mode
+  > summary
+    Enumerated mode (number base) types.
+  + Hex - Hexadecimal (base 16)
+  + Dec - Decimal (base 10)
+  + Oct - Octal (base 8)
+  + Bin - Binary (base 2)
+  + HEX - Same as Hex
+  + DEC - Same as Dec
+  + OCT - Same as Oct
+  + BIN - Same as Bin
+
+ENU SegmentStyle
+  > summary
+    Enumerated segment style (visual appearance) types.
+  + Outline - Raised segments filled with the background color
+  + Filled - Raised segments filled with the foreground color
+  + Flat - Flat segments filled with the foreground color
+
+### properties
+
+PRP DzLCDNumber.Mode : mode
+  > summary
+    Holds the display mode of the number.
+
+PRP Number : numDigits
+  > summary
+    Holds the number of digits displayed in the widget.
+
+PRP DzLCDNumber.SegmentStyle : segmentStyle
+  > summary
+    Holds the style of the number.
+
+PRP Boolean : smallDecimalPoint
+  > summary
+    Holds whether the decimal point is drawn between digits - otherwise it takes up a digit of its own.
+
+PRP Number : value
+  > summary
+    Holds the value of the number.
+
+### constructors
+
+CTR DzLCDNumber( DzWidget parent )
+  > summary
+    Creates a LCD number widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the LCD number.
+
+### signals
+
+SIG void : overflow()
+  > summary
+    Emitted when the number is set to a value that exceeds the number of digits.

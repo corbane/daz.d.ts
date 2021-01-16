@@ -1,0 +1,68 @@
+CLS DzTypeAssetContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/typeassetcontainer_dz
+  > summary
+    A generic asset container for hierarchical structures that can be represented by a slash ('/') delimted path.
+
+### description
+  > summary
+    A generic asset container that takes on the type of the data assigned to it, which can be used to present hierarchical structures that are representable by a slash ('/') delimted path.
+
+### properties
+
+PRP Object : data
+  > summary
+    Holds the data associated with this container; type depends on the type of the data assigned.
+
+### methods
+
+FUN Number : addChildContainer( String typePath )
+  > summary
+    Adds a new container with the given name, if one doesn't already exist.
+  > parameters
+    + typePath - The slash ('/') delimited path of a container to add.
+  > returns
+    The index of the newly inserted container. If a container of the same type already exists, the index of that container will be returned.
+
+FUN Number : addChildContainer( DzTypeAssetContainer container )
+  > summary
+    Adds the given container if one of the same type name doesn't exist.
+  > parameters
+    + container - The child container to be inserted.
+  > returns
+    The index of the newly added container or, if a container already exists with the same name, the index of that container.
+
+FUN void : clear()
+  > summary
+    Clears all the child containers and assets associated with this container. Emits endAssetRemove() and endChildContainerRemove().
+
+FUN DzTypeAssetContainer : findChildContainer( String typePath )
+  > parameters
+    + typePath - The path of the container to find.
+  > returns
+    The container with the given type name, if it exists, otherwise null.
+
+FUN String : getTextPath( Boolean ignoreRoot=true )
+  > parameters
+    + ignoreRoot - If true, the root item will not be included in the path.
+  > returns
+    The displayed text path of this container.
+
+FUN String : getTypeName()
+  > returns
+    The type name for this container.
+
+FUN Boolean : insertToSpecificType( DzAsset asset, String typePath )
+  > summary
+    Attempts to insert the asset to a specific type.
+  > parameters
+    + asset - The asset to be inserted.
+    + typePath - The slash ('/') delimited path of the type for the asset.
+  > returns
+    true if successful, otherwise false.
+
+### signals
+
+SIG void : aboutToClear()
+  > summary
+    Emitted when this container is about to be cleared.

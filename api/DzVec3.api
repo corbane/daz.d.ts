@@ -1,0 +1,228 @@
+CLS DzVec3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/vec3_dz
+  > summary
+    A three dimensional floating-point-based vector.
+
+### description
+  > seealso
+    DzVec2
+    DzInt2
+
+### properties
+
+PRP Number : x
+  > summary
+    Holds the x value of this vector.
+
+PRP Number : y
+  > summary
+    Holds the y value of this vector.
+
+PRP Number : z
+  > summary
+    Holds the z value of this vector.
+
+### constructors
+
+CTR DzVec3()
+  > summary
+    Default Constructor. Creates an uninitialized vector.
+
+CTR DzVec3( DzVec3 vec )
+  > summary
+    Copy Constructor.
+
+CTR DzVec3( Array vals )
+  > summary
+    Creates and inititializes this vector with an array of 3 float values.
+  > since
+    4.6.4.88
+
+CTR DzVec3( Number x, Number y, Number z )
+  > summary
+    Creates and inititializes this vector with 3 floats.
+
+### methods
+
+FUN void : abs()
+  > summary
+    Sets the value of each component to its respective absolute value.
+
+FUN DzVec3 : add( DzVec3 vec )
+  > returns
+    The result of adding another vector to this vector.
+
+FUN Number : average()
+  > returns
+    The average of each component of this vector.
+  > since
+    4.9.3.118
+
+FUN void : clamp( Number min, Number max )
+  > summary
+    Clamps each component of this vector.
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN DzVec3 : clamped( Number min, Number max )
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been clamped to min and max.
+  > since
+    4.9.3.118
+
+FUN DzVec3 : clampedMax( Number max )
+  > parameters
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been clamped to max.
+  > since
+    4.9.3.118
+
+FUN DzVec3 : clampedMin( Number min )
+  > parameters
+    + min - The minimum value.
+  > returns
+    A copy of this vector where each component has been clamped to min.
+  > since
+    4.9.3.118
+
+FUN void : clampMax( Number max )
+  > summary
+    Clamps the maximum value for each component of this vector.
+  > parameters
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN void : clampMin( Number min )
+  > summary
+    Clamps the minimum value for each component of this vector.
+  > parameters
+    + max - The minimum value.
+  > since
+    4.9.3.118
+
+FUN DzVec3 : cross( DzVec3 vec )
+  > parameters
+    + vec - The target vector.
+  > returns
+    The cross product of this vector and another vector.
+
+FUN DzVec3 : divide( DzVec3 vec )
+  > returns
+    The result of dividing this vector by another vector.
+
+FUN Number : dot( DzVec3 vec )
+  > parameters
+    + vec - The target vector.
+  > returns
+    The dot product of this vector and another vector.
+
+FUN Boolean : equals( DzVec3 vec, Number tolerance=1e-6 )
+  > summary
+    Tests if this vector and another vector are considered equal, within a tolerance.
+  > parameters
+    + vec - The vector to compare this vector against.
+    + tolerance - The amount of deviation allowed.
+  > returns
+    true if all components are within tolerance of the components of the given vector.
+  > since
+    4.9.3.118
+
+FUN Number : getAngleTo( DzVec3 vec )
+  > parameters
+    + vec - The target vector.
+  > returns
+    The angle between this vector and a target vector. The sign of the angle is such that, when applied, it will swing this vector to the target vector.
+
+FUN DzQuat : getRotationTo( DzVec3 vec )
+  > parameters
+    + vec - The target vector.
+  > returns
+    The rotation that will swing this vector to the target vector.
+
+FUN Number : length()
+  > returns
+    The length of this vector.
+
+FUN Number : lengthSquared()
+  > returns
+    The length of this vector, squared.
+
+FUN DzVec3 : linearInterp( Number t, DzVec3 v1, DzVec3 v2 )
+  > summary
+    Performs a linear interpolation between v1 and v2 based on the value of t.
+  > parameters
+    + t - The value to evaluate.
+    + vec1 - The first vector.
+    + vec2 - The second vector.
+  > returns
+    v1 if t = 0.0. v2 if t = 1.0. Values outside the 0.0 ⇐ t ⇐ 1.0 range may also be used to return an extrapolated vector.
+  > since
+    4.9.3.118
+
+FUN void : makeIdentity()
+  > summary
+    Sets this vector to (1.0, 1.0, 1.0).
+
+FUN void : makeZero()
+  > summary
+    Sets this vector to (0.0, 0.0, 0.0).
+
+FUN DzVec3 : modulate( Number min, Number max )
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > returns
+    A copy of this vector where each component has been modulated by min and max.
+  > since
+    4.9.3.118
+
+FUN void : modulo( Number min, Number max )
+  > summary
+    Modulates each component of this vector.
+  > parameters
+    + min - The minimum value.
+    + max - The maximum value.
+  > since
+    4.9.3.118
+
+FUN DzVec3 : multiply( DzVec3 vec )
+  > returns
+    The result of multiplying this vector by another vector.
+
+FUN void : negate()
+  > summary
+    Negates each component of this vector.
+
+FUN void : normalize()
+  > summary
+    Modifies this vector to be its unit length.
+
+FUN DzVec3 : normalized()
+  > returns
+    A copy of this vector that has been normalized.
+
+FUN void : setLength( Number length )
+  > summary
+    Sets this vector to have a specific length in the current direction.
+  > parameters
+    + newLength - The length to set.
+  > seealso
+    length()
+    makeZero()
+
+FUN void : square()
+  > summary
+    Sets the value of each component to its respective squared value.
+
+FUN DzVec3 : subtract( DzVec3 vec )
+  > returns
+    The result of subtracting another vector from this vector.

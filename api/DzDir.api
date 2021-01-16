@@ -1,0 +1,454 @@
+CLS DzDir : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dir_dz
+  > summary
+    DAZ Script directory access class.
+
+### description
+  > summary
+    Provides access to the file system directory structure. It provides functions for creating, removing, traversing, and searching directories.
+
+### enumerations
+
+ENU Filter
+  > summary
+    Filtering options used by entryList().
+  + Dirs - List directories that match the filters.
+  + Files - List files that match the filters.
+  + Drives - List drives that match the filters.
+  + NoSymLinks - Do not list symbolic links.
+  + AllEntries - List directories, files, drives and symbolic links.
+  + All - List directories, files, drives and symbolic links.
+  + TypeMask - Type Mask
+  + Readable - List entries for which the application has read access. Needs to be combined with Dirs or Files.
+  + Writable - List entries for which the application has write access. Needs to be combined with Dirs or Files.
+  + Executable - List entries for which the application has execute access. Needs to be combined with Dirs or Files.
+  + PermissionMask - Include Readable, Writable, and Executable entries
+  + RWEMask - Include Readable, Writable, and Executable entries
+  + Modified - Only list entries that have been modified.
+  + Hidden - List hidden entries.
+  + System - List system entries.
+  + AccessMask - Access mask
+  + AllDirs - List all directories; don't apply filters to directory names.
+  + CaseSensitive - The filter should be treated as case sensitive.
+  + NoDotAndDotDot - Do not list the special entries '.' and '..'.
+  + NoDot - Do not list the special entry '.'.
+  + NoDotDot - Do not list the special entry '..'.
+  + NoFilter - Do not filter.
+
+ENU SortFlag
+  > summary
+    Sorting options used by entryList().
+  + Name - Sort by name.
+  + Time - Sort by time (modification time).
+  + Size - Sort by size.
+  + Unsorted - Do not sort.
+  + SortByMask - Mask for Sort by
+  + DirsFirst - Put the directories first, then the files.
+  + Reversed - Reverse the sort order.
+  + IgnoreCase - Sort case-insensitively.
+  + DirsLast - Put the files first, then the directories.
+  + LocaleAware - Sort items appropriately using the current locale settings.
+  + Type - Sort by file type (extension).
+  + NoSort - Not sorted by default.
+
+### statics
+
+STA String : cleanPath( String path )
+  > returns
+    The simplest version of the input, but not the canonical path; removes multiple adjacent directory separators (e.g. “//”) and resolves any dot and/or dotdot (e.g. “.” or “..”) found in the path. Symbolic links are kept.
+  > since
+    4.9.3.35
+
+STA DzDir : current()
+  > returns
+    The application's current directory. The directory is constructed using the absolute path of the current directory, ensuring that its path() will be the same as its absolutePath().
+  > seealso
+    currentPath(), setCurrent( String )
+  > since
+    4.9.3.35
+
+STA String : currentPath()
+  > returns
+    The absolute path of the application's current directory.
+  > seealso
+    current(), setCurrent( String )
+  > since
+    4.9.3.35
+
+STA String : fromNativeSeparators( String pathName )
+  > returns
+    pathName using '/' as the path separator instead of the native path separator.
+  > seealso
+    separator(), toNativeSeparators( String )
+  > since
+    4.9.3.35
+
+STA DzDir : home()
+  > returns
+    The user's home directory. The directory is constructed using the absolute path of the home directory, ensuring that its path() will be the same as its absolutePath().
+  > seealso
+    homePath()
+  > since
+    4.9.3.35
+
+STA String : homePath()
+  > returns
+    The absolute path of the user's home directory. Under Windows this function will return the directory of the current user's profile. Under non-Windows operating systems the HOME environment variable is used if it exists, otherwise the path returned by the rootPath().
+  > attention
+    Under Windows, if the directory of the current user's profile does not exist or cannot be retrieved, the following alternatives will be checked (in the given order) until an existing and available path is found: * The path specified by the USERPROFILE environment variable.
+    The path formed by concatenating the HOMEDRIVE and HOMEPATH environment variables.
+    The path specified by the HOME environment variable.
+    The path returned by the rootPath() function (which uses the SystemDrive environment variable).
+    The C:/ directory.
+  > since
+    4.9.3.35
+
+STA Boolean : isAbsolutePath( String path )
+  > returns
+    true if path is absolute, otherwise false.
+  > since
+    4.9.3.35
+
+STA Boolean : isRelativePath( String path )
+  > returns
+    true if path is relative, otherwise false.
+  > since
+    4.9.3.35
+
+STA Boolean : match( String filter, String fileName )
+  > returns
+    true if fileName matches the wildcard (glob) pattern filter, otherwise false. The filter may contain multiple patterns separated by spaces or semicolons. The matching is case insensitive.
+  > since
+    4.9.3.35
+
+STA Boolean : match( Array filters, String fileName )
+  > returns
+    true if fileName matches any of the wildcard (glob) patterns in the list of filters, otherwise false. The matching is case insensitive.
+  > since
+    4.9.3.35
+
+STA DzDir : root()
+  > returns
+    The root directory. The directory is constructed using the absolute path of the root directory, ensuring that its path() will be the same as its absolutePath().
+  > seealso
+    rootPath()
+  > since
+    4.9.3.35
+
+STA String : rootPath()
+  > returns
+    The absolute path of the root directory. For Windows this normally returns “c:/”; i.e. the root of the system drive. For Mac OS X this returns “/”.
+  > seealso
+    root()
+  > since
+    4.9.3.35
+
+STA String : separator()
+  > returns
+    The native directory separator; “\” under Windows, “/” under Mac OS X.
+  > attention
+    You do not need to use this function to build file paths. If you always use “/”, your paths will be translated to conform to the underlying operating system. If you want to display paths to the user using their operating system's separator use toNativeSeparators().
+  > since
+    4.9.3.35
+
+STA Boolean : setCurrent( String path )
+  > summary
+    Sets the application's current working directory to path.
+  > returns
+    true if the directory was successfully changed, otherwise false.
+  > seealso
+    current(), currentPath()
+  > since
+    4.9.3.35
+
+STA DzDir : temp()
+  > returns
+    The system's temporary directory. The directory is constructed using the absolute path of the temp directory, ensuring that its path() will be the same as its absolutePath().
+  > seealso
+    tempPath()
+  > since
+    4.9.3.35
+
+STA String : tempPath()
+  > returns
+    The absolute path of the system's temporary directory. On Windows this is usually the path in the TEMP or TMP environment variable. On Mac OS X this is the path in the TMPDIR environment variable or /tmp if TMPDIR is not defined. Whether a directory separator is added to the end or not, depends on the operating system.
+  > seealso
+    temp()
+  > since
+    4.9.3.35
+
+STA String : toNativeSeparators( String pathName )
+  > returns
+    pathName with the '/' separators converted to separators that are appropriate for the underlying operating system. On Windows, '/' will be converted to '\'. On Mac OS X the returned string may be the same as pathName.
+  > seealso
+    separator(), fromNativeSeparators( String )
+  > since
+    4.9.3.35
+
+### constructors
+
+CTR DzDir( String path )
+  > summary
+    Creates a directory object with the given path.
+  > parameters
+    + path - The path of the directory.
+
+### methods
+
+FUN String : absFilePath( String file )
+  > summary
+    Deprecated
+    Use absoluteFilePath() instead.
+
+FUN String : absoluteFilePath( String fileName )
+  > parameters
+    + fileName - The name of the file get the absolute path for.
+  > returns
+    The absolute path (a path that starts with “/” or with a drive specification) to file, which may contain symbolic links, but never contains redundant “.”, “..” or multiple separators. Does not check if the file actually exists in the directory.
+  > since
+    4.9.3.35
+
+FUN String : absolutePath()
+  > returns
+    The absolute path (a path that starts with “/” or with a drive specification), which may contain symbolic links, but never contains redundant “.”, “..” or multiple separators.
+  > since
+    4.9.3.35
+
+FUN String : absPath()
+  > summary
+    Deprecated
+    Use absolutePath() instead.
+
+FUN String : canonicalPath()
+  > returns
+    The canonical path, i.e. a path without symbolic links or redundant “.” or “..” elements.
+
+FUN Boolean : cd( String dirName )
+  > summary
+    Changes the current directory to dirName.
+  > parameters
+    + dirName - The path to change to; can be relative or absolute.
+  > returns
+    true if dirName exists and is readable, otherwise false.
+
+FUN Boolean : cdUp()
+  > summary
+    Changes the directory by moving one directory up from the current directory.
+  > returns
+    true if the new directory exists and is readable, otherwise false.
+
+FUN Boolean : copy( String srcFile, String destFile )
+  > summary
+    Makes a copy of a file.
+  > parameters
+    + srcFile - The path of the source file to copy.
+    + destFile - The path of the file that source will be copied to.
+  > returns
+    true if srcFile and destFile are the same or if the operation is successful, otherwise false.
+
+FUN Number : count()
+  > returns
+    The total number of directories and files in the directory.
+  > since
+    4.9.3.35
+
+FUN String : dirName()
+  > returns
+    The the name of the directory (not the whole path, just the folder name). If the directory has no name (e.g. it is the root directory) an empty string is returned.
+
+FUN Array : entryList( Array nameFilters, DzDir.Filter filters=DzDir.Filter.NoFilter, DzDir.SortFlag sort=DzDir.SortFlag.NoSort )
+  > summary
+    TODO: Add description.
+
+FUN Array : entryList( DzDir.Filter filters=DzDir.Filter.NoFilter, DzDir.SortFlag sort=DzDir.SortFlag.NoSort )
+  > summary
+    TODO: Add description.
+
+FUN Array : entryList( String nameFilter, DzDir.Filter filters=DzDir.Filter.NoFilter, DzDir.SortFlag sort=DzDir.SortFlag.NoSort )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : exists( String name )
+  > parameters
+    + name - The name of the file to check for.
+  > returns
+    true if the file exists, otherwise false.
+  > attention
+    Unless name contains an absolute file path, the file name is assumed to be relative to the directory itself, so this function is typically used to check for the presence of files within a directory.
+  > since
+    4.9.3.35
+
+FUN Boolean : exists()
+  > returns
+    true if the directory exists, otherwise false.
+  > attention
+    If a file with the same name is found this function will return false.
+
+FUN Boolean : fileExists( String fileName )
+  > summary
+    Deprecated
+    Use exists( String ) instead.
+
+FUN String : filePath( String fileName )
+  > returns
+    The path of a file named file in the directory; does not check if the file actually exists.
+  > attention
+    If the directory is relative the returned path name will also be relative. Redundant multiple separators or “.” and “..” directories in fileName are not removed.
+
+FUN DzDirFilter : filter()
+  > returns
+    The value set by setFilter().
+  > since
+    4.9.3.35
+
+FUN Array : getFilesFromDir( Array extentions, Boolean recursive=true )
+  > parameters
+    + extentions - Aa array containing extentions of files to find; format of strings should be “*.ext”.
+    + recursive - If true, the retrieval of file paths should recurse sub-directories.
+  > returns
+    An array containing the absolute paths of files under the directory.
+
+FUN Boolean : isAbsolute()
+  > returns
+    true if the directory's path is absolute, otherwise false.
+
+FUN Boolean : isReadable()
+  > returns
+    true if the directory is readable and we can open files by name, otherwise false.
+
+FUN Boolean : isRelative()
+  > returns
+    true if the directory path is relative, otherwise false.
+
+FUN Boolean : isRoot()
+  > returns
+    true if the directory is the root directory, otherwise false.
+  > attention
+    If the directory is a symbolic link to the root directory this function returns false. If you want to test for this use canonicalPath().
+
+FUN Boolean : makeAbsolute()
+  > summary
+    Converts the directory path to an absolute path. If it is already absolute nothing happens.
+  > returns
+    true if the conversion succeeded, otherwise false.
+  > since
+    4.9.3.35
+
+FUN Boolean : mkdir( String dirName=“” )
+  > summary
+    Creates a new directory.
+  > parameters
+    + dirName - The relative path of a sub-directory to create. If empty (default), this directory's absolute path will be used.
+  > returns
+    true if dirName does not already exist when this function is called and the sub-directory is successfully created, otherwise false.
+
+FUN Boolean : mkdirs( String dirName=“” )
+  > summary
+    Deprecated
+    Use mkpath() instead.
+
+FUN Boolean : mkpath( String dirpath=“” )
+  > summary
+    Creates all directories that do not already exist in dirpath.
+  > parameters
+    + dirpath - The path of the directories to create.
+  > returns
+    true if successful (the path already exists when this function is called), otherwise false.
+
+FUN Boolean : move( String srcFile, String destFile )
+  > summary
+    Moves a file to a new location.
+  > parameters
+    + srcFile - The path of the source file to move.
+    + destFile - The path that the file will be moved to.
+  > returns
+    true if srcFile and destFile are the same or if the operation is successful, otherwise false.
+
+FUN Array : nameFilters()
+  > returns
+    The string list set by setNameFilters().
+  > since
+    4.9.3.35
+
+FUN String : path()
+  > returns
+    The path of this directory. This may contain symbolic links, but never contains redundant “.”, “..” or multiple separators.
+
+FUN void : refresh()
+  > summary
+    Refreshes the directory information.
+
+FUN String : relativeFilePath( String fileName )
+  > returns
+    The path to file, relative to the current directory; does not check if the file actually exists.
+
+FUN Boolean : remove( String fileName )
+  > summary
+    Removes fileName from this directory.
+  > parameters
+    + fileName - The relative path of the file to remove.
+  > returns
+    true if the file is removed successfully, otherwise false.
+
+FUN Boolean : rename( String oldName, String newName )
+  > summary
+    Renames a file or directory from oldName to newName.
+  > parameters
+    + oldName - The relative path of the file/folder to rename.
+    + newName - The relative path to rename the file/folder to.
+  > returns
+    true if successful, otherwise false.
+
+FUN Boolean : rmdir( String dirName=“” )
+  > summary
+    Removes a directory.
+  > parameters
+    + dirName - The relative path of a sub-directory to remove. If empty (default), this directory's absolute path will be used.
+  > returns
+    true if dirName exists when this function is called, the directory is empty and the sub-directory is successfully removed, otherwise false.
+
+FUN Boolean : rmdirs( String dirName=“” )
+  > summary
+    Deprecated
+    Use rmpath() instead.
+
+FUN Boolean : rmpath( String dirPath=“” )
+  > summary
+    Removes all directories that exist in dirpath, provided that they are empty. This is the opposite of mkpath().
+  > parameters
+    + dirpath - The path to remove.
+  > returns
+    true if successful, otherwise false.
+
+FUN Boolean : setCurrent()
+  > summary
+    Sets the current working directory of the application to be this directory.
+  > returns
+    true if the current working directory was changed, otherwise false.
+
+FUN void : setFilter( DzDir.Filter filters )
+  > summary
+    TODO: Add description.
+
+FUN void : setNameFilters( Array nameFilters )
+  > summary
+    Sets the name filters used by entryList() to the list of filters specified by nameFilters. Each name filter is a wildcard (globbing) filter that understands * and ? wildcards.
+  > since
+    4.9.3.35
+
+FUN void : setPath( String path )
+  > summary
+    Sets the path of this directory to newPath.
+
+FUN void : setSorting( DzDir.SortFlag sort )
+  > summary
+    Sets the sort order used by entryList(). The sort is specified by OR-ing values from the enum SortFlag.
+  > since
+    4.9.3.35
+
+FUN DzDir.SortFlag : sorting()
+  > returns
+    The value set by setSorting().
+  > since
+    4.9.3.35

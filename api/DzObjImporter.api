@@ -1,0 +1,17 @@
+CLS DzObjImporter : DzGeometryImporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/objimporter_dz
+  > summary
+    Class for importing geometry in the Wavefront Object (*.obj) format.
+
+### description
+  > seealso
+    DzImportMgr::findImporterByClassName()
+    DzImportMgr::findImporter()
+    Silent OBJ Import
+
+### constructors
+
+CTR DzObjImporter()
+  > summary
+    Default Constructor.

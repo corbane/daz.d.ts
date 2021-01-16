@@ -1,0 +1,23 @@
+CLS DzImageMask : DzImageComponent
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagemask_dz
+  > summary
+    A mask component in a multi-layer texture image.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP String : filename
+  > summary
+    The filename of the image that this mask references.
+
+### signals
+
+SIG void : filenameChanged( String filename )
+  > summary
+    Emitted when the file name associated with this mask changes
+  > parameters
+    + filename - The new file name

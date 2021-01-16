@@ -1,0 +1,133 @@
+CLS DzMorphLoaderBatch : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/morphloaderbatch_dz
+  > summary
+    Implements the loading and application of a batch of morphs from geometry files.
+
+### description
+  > summary
+    This class implements a batch of morph loader objects that will be applied to the same node(s).
+  > since
+    4.9.3.46
+  > attention
+    This object is provided by the Morph Loader Pro plugin. It is only available when the Morph Loader Pro plugin is activated and enabled.
+
+### constructors
+
+CTR DzMorphLoaderBatch()
+  > summary
+    Default Constructor. Creates a morph loader batch that will be applied to the given node.
+
+### methods
+
+FUN void : addFromConfigFile( String filename )
+  > summary
+    TODO: Add description.
+
+FUN void : addFromFile( String file )
+  > summary
+    TODO: Add description.
+
+FUN void : addFromFiles( Array files )
+  > summary
+    TODO: Add description.
+
+FUN void : addFromMesh( vertexmesh_dz mesh )
+  > summary
+    TODO: Add description.
+
+FUN void : addMorph( DzMorphLoader morph )
+  > summary
+    TODO: Add description.
+
+FUN void : clear()
+  > summary
+    TODO: Add description.
+
+FUN String : createMorphs( vertexmesh_dz mesh, DzNode node, Boolean onlyErrorsOrWarnings=true, Boolean plainText=true )
+  > summary
+    Creates morphs on the node provided from the given geometry. This function supports morph creation from vertex-only geometries.
+  > parameters
+    + mesh - The geometry for the morphs.
+    + node - The node containing the geometry to create the morphs for.
+    + onlyErrorsOrWarnings - If true (default), only errors and warnings will be returned.
+    + plainText - If true (default), the returned string will be plain text, otherwise the returned string will contain HTML.
+  > returns
+    The log containing messages about the creation of the morphs.
+
+FUN String : createMorphs( DzFileIOSettings settings, DzNode node, Boolean onlyErrorsOrWarnings=true, Boolean plainText=true )
+  > summary
+    Creates morphs on the node provided from the geometry loaded from the files. This function supports morph creation from vertex-only geometries.
+  > parameters
+    + settings - The scale to apply to the geometry that is read from the file.
+    + node - The node containing the geometry to create the morph for.
+    + onlyErrorsOrWarnings - If true (default), only errors and warnings will be returned.
+    + plainText - If true (default), the returned string will be plain text, otherwise the returned string will contain HTML.
+  > returns
+    The log containing messages about the creation of the morph.
+
+FUN Number : findMorph( DzMorphLoader morph )
+  > summary
+    TODO: Add description.
+
+FUN DzMorphLoader : getMorph( Number index )
+  > summary
+    TODO: Add description.
+
+FUN DzNode : getNode()
+  > summary
+    TODO: Add description.
+
+FUN Number : getNumMorphs()
+  > summary
+    TODO: Add description.
+
+FUN void : moveMorph( DzMorphLoader morph, Boolean upDown )
+  > summary
+    TODO: Add description.
+
+FUN String : presetConfigurationFile()
+  > summary
+    TODO: Add description.
+
+FUN void : removeMorph( DzMorphLoader morph )
+  > summary
+    TODO: Add description.
+
+FUN void : saveProjectSettingsToConfigFile( String filename, Boolean saveRelative, Boolean saveObjects )
+  > summary
+    TODO: Add description.
+
+FUN void : setNode( DzNode node )
+  > summary
+    TODO: Add description.
+
+FUN void : setPresetConfigurationFile( String filename )
+  > summary
+    TODO: Add description.
+
+FUN void : setUsePresetConfiguration( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : usePresetConfiguration()
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : morphAdded( DzMorphLoader morph )
+  > summary
+    TODO: Add description.
+
+SIG void : morphListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : morphMoved( Number srcIdx, Number destIdx )
+  > summary
+    TODO: Add description.
+
+SIG void : morphRemoved( DzMorphLoader morph, Number formerIndex )
+  > summary
+    TODO: Add description.

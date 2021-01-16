@@ -1,0 +1,39 @@
+CLS DzCompatibilityBaseAssetContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/compatibilitybaseassetcontainer_dz
+  > summary
+    A container type for assets that are compatible with a particular compatibility base.
+
+### description
+  > summary
+    The “Compatibility Base” container type serves to provide a means of working with assets that are defined to be compatible with a particular Compatibility Base.
+  > seealso
+    DzAssetMgr::getCompatibilityBases()
+
+### properties
+
+PRP Boolean : isFilter
+  > summary
+    Holds whether or not this compatibility base is a filter. (Read Only)
+  > since
+    4.11.0.93
+
+PRP Boolean : isVendor
+  > summary
+    Holds whether this compatibility base is owned by a vendor or by the user. (Read Only)
+  > since
+    4.11.0.93
+
+### methods
+
+FUN String : getPath()
+  > returns
+    The full path of the compatibility base that this container represents.
+  > since
+    4.11.0.93
+
+FUN Boolean : updateChildren()
+  > summary
+    Attempts to update the child containers of this container.
+  > returns
+    true if the update was successful, otherwise false.

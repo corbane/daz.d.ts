@@ -1,0 +1,69 @@
+CLS DzNodeSelectionComboBox : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/nodeselectioncombobox_dz
+  > summary
+    DAZScript combobox widget with a custom popup designed for choosing a DzNode.
+
+### description
+  > summary
+    Provides a DzComboBox like widget with a custom popup designed for choosing a DzNode.
+
+### constructors
+
+CTR DzNodeSelectionComboBox( DzWidget parent, String nodeType=“DzNode”, Boolean allowNone=false )
+  > summary
+    Creates a node selection combobox as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the combobox.
+    + nodeType - The name of the DzNode [sub]class that root nodes must inherit to be shown in the list
+    + allowNode - Whether or not to provide a “None” option in the list
+
+### methods
+
+FUN void : clearNodeSelection()
+  > summary
+    Clears the selection of any node(s).
+  > since
+    4.10.0.27
+
+FUN Array : getNodes()
+  > summary
+    Gets the nodes to be shown in the popup.
+
+FUN DzNode : getSelectedNode()
+  > returns
+    The node selected in the popup.
+
+FUN void : hidePopup()
+  > summary
+    Hide the popup.
+
+FUN void : setNode( DzNode node )
+  > summary
+    Sets the node from the scene to be shown in the popup.
+  > parameters
+    + node - The DzNode to show.
+  > seealso
+    setNodes()
+
+FUN void : setNodes( Array nodes )
+  > summary
+    Sets the nodes from the scene to be shown in the popup.
+  > parameters
+    + nodes - A list of the DzNode objects to show.
+
+FUN void : setSelectedNode( DzNode node )
+  > summary
+    Sets the node from the scene to be selected.
+  > parameters
+    + node - The DzNode to select.
+
+FUN void : showPopup()
+  > summary
+    Display the popup.
+
+### signals
+
+SIG void : nodeSelectionChanged()
+  > summary
+    Emitted when the selected DzNode changes.

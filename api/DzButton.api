@@ -1,0 +1,115 @@
+CLS DzButton : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/button_dz
+  > summary
+    DAZScript abstract base class for button widgets.
+
+### description
+  > summary
+    DzButton implements an abstract button base. Subclasses specify how to respond to user interaction, and how to present the button to the user. If you want to create a button, create a DzPushButton.
+    DzPushButton provides both push and toggle buttons. The DzRadioButton and DzCheckBox classes provide only toggle buttons.
+    The difference between down and on is, when a user clicks a [toggle] button to toggle it on, the button is first pressed and then released into the On state (on is true, down is false). When the user clicks it again (to toggle it off), the button is first pressed and then released to the Off state (on and down are false).
+
+### properties
+
+PRP Boolean : autoRepeat
+  > summary
+    Whether autoRepeat is enabled. false by default. If enabled, the clicked() signal is emitted at regular intervals if down is true. This property has no effect on toggle buttons.
+
+PRP Number : autoRepeatDelay
+  > summary
+    The initial delay, in milliseconds, before auto-repetition begins
+
+PRP Number : autoRepeatInterval
+  > summary
+    The length of the auto-repetition interval, in milliseconds
+
+PRP Boolean : checkable
+  > summary
+    Whether or not the button is checkable. false by default.
+
+PRP Boolean : checked
+  > summary
+    Whether or not the button is checked. Only applies to checkable buttons.
+
+PRP Boolean : down
+  > summary
+    Whether the button is pressed. true if the button is pressed down. false by default. The signals pressed() and clicked() are not emitted when this property set to true.
+
+PRP Pixmap : pixmap
+  > summary
+    The Pixmap shown on the button. If the Pixmap is monochrome (e.g. its depth is 1) and it does not have a mask, the Pixmap will be its own mask. This allows transparent bitmaps to be drawn, which are important for toggle buttons. 0 if no pixmap is set.
+
+PRP String : text
+  > summary
+    The text displayed on the button. undefined by default. An ampersand (&) in the String automatically creates an accelerator for it using the character that follows the ampersand, as the accelerator key. Any previous accelerator will be overwritten, or cleared if no accelerator is defined by the text.
+
+PRP Boolean : toggleButton
+  > summary
+    Whether the button is a toggle (Read Only). false by default.
+
+### methods
+
+FUN void : toggle()
+  > summary
+    Toggles the state of a toggle button.
+
+### signals
+
+SIG void : clicked()
+  > summary
+    Emitted when the button is pressed and then released.
+  > example
+    function handleButtonClicked(){
+    	print( "Button clicked." );
+    }
+     
+    //... build a DzDialog
+     
+    var wButton = new DzPushButton( wDlg );
+    wButton.clicked.connect( handleButtonClicked );
+
+SIG void : pressed()
+  > summary
+    Emitted when the button is pressed.
+  > example
+    function handleButtonPressed(){
+    	print( "Button pressed." );
+    }
+     
+    //... build a DzDialog
+     
+    var wButton = new DzPushButton( myDialog );
+    wButton.pressed.connect( handleButtonPressed );
+
+SIG void : released()
+  > summary
+    Emitted when the button is released.
+  > example
+    function handleButtonReleased(){
+    	print( "Button released." );
+    }
+     
+    //... build a DzDialog
+     
+    var wButton = new DzPushButton( wDlg );
+    wButton.released.connect( handleButtonReleased );
+
+SIG void : stateChanged( Number state )
+  > summary
+    Emitted when toggleState on this button has changed.
+
+SIG void : toggled( Boolean onOff )
+  > summary
+    Emitted when the button is toggled.
+  > parameters
+    + onOff - true if the button is on, false if the button is off.
+  > example
+    function handleButtonToggled( bArg ){
+    	print( String( "Button toggled: %1" ).arg( bArg ) );
+    }
+     
+    //... build a DzDialog
+     
+    var wButton = new DzPushButton( wDlg );
+    wButton.toggled.connect( handleButtonToggled );

@@ -1,0 +1,27 @@
+CLS DzInteractiveInstructionObject : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/interactiveinstructionobject_dz
+  > summary
+    Encapsulates an Interactive Lesson Instruction object.
+
+### description
+  > since
+    4.6.4.24
+
+### methods
+
+FUN Object : getMember( String name )
+  > returns
+    An Object, Array, Boolean, Number or String if the instruction has a member named name, otherwise null
+
+FUN Boolean : hasMember( String name )
+  > returns
+    true if the object has a member named name, otherwise false
+
+FUN void : removeMember( String name )
+  > summary
+    Removes the member/value named name from the instruction.
+
+FUN void : setMember( String name, Object value )
+  > summary
+    Sets the member name of the instruction to value. A valid value depends on the type of instruction and can be one of Boolean, Number, String or Array.

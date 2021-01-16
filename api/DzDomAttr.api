@@ -1,0 +1,35 @@
+CLS DzDomAttr : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domattr_dz
+  > summary
+    DAZ Script DOM attribute node.
+
+### description
+  > summary
+    Represents an attribute node in a DOM document.
+
+### properties
+
+PRP String : name
+  > summary
+    [Read Only] The name of the attribute.
+
+PRP String : value
+  > summary
+    The value of the attribute.
+
+### constructors
+
+CTR DzDomAttr()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomElement::setAttribute() or DzDomDocument::createAttribute() to create a new attribute node as a member of an existing element or document.
+
+### methods
+
+FUN DzDomNode : ownerElement()
+  > returns
+    The element that this attribute belongs to.
+
+FUN Boolean : specified()
+  > returns
+    true if the attribute has a value, false if no value was sepcified for the attribute.

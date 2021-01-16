@@ -1,0 +1,69 @@
+CLS DzDialog : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dialog_dz
+  > summary
+    DAZScript DzDialog box.
+
+### description
+  > summary
+    This is the basic building block for DAZScript interfaces. DzDialog provides an independent window widget that in turn can act as the parent for other DAZScript widgets. Most custom DAZScript interfaces will be built starting with a DzDialog customized with Layout and DzWidget components.
+
+### properties
+
+PRP String : caption
+  > summary
+    Holds the title of the dialog.
+    DzWidget::Orientation : orientation
+    Holds the orientation of the dialog extension.
+
+PRP Boolean : sizeGripEnabled
+  > summary
+    Holds whether or not the size grip is enabled.
+
+### constructors
+
+CTR DzDialog( QWidget parent=undefined )
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN Boolean : close()
+  > summary
+    Closes the dialog.
+  > returns
+    true if the dialog was closed, otherwise false.
+
+FUN Boolean : exec()
+  > summary
+    Displays the dialog to the user.
+  > returns
+    true if the box was accepted, otherwise false.
+
+FUN DzWidget : extension()
+  > returns
+    The current extension widget (if any) for the dialog.
+
+FUN void : hideExtension()
+  > summary
+    Causes the extension widget for the dialog to be hidden.
+
+FUN void : setAcceptButton( DzButton btn )
+  > summary
+    Sets the button that will cause the dialog to close and return true.
+
+FUN void : setExtension( DzWidget extension )
+  > summary
+    Sets the extension widget for the dialog.
+
+FUN void : setRejectButton( DzButton btn )
+  > summary
+    Sets the button that will cause the dialog to close and return false.
+
+FUN void : showExtension( Boolean onOff )
+  > summary
+    Sets the extension widget visibility to onOff.
+
+FUN void : showExtension()
+  > summary
+    Causes the extension widget for the dialog to be shown.

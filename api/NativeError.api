@@ -1,0 +1,9 @@
+CLS NativeError : Error
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/nativeerror
+  > summary
+    ECMAScript NativeError prototype object.
+
+### description
+  > summary
+    When the interpreter detects a runtime error, it throws an instance of one of the NativeError objects. The native error objects differ only in their type and in the implementation-defined value of the message property of the prototype object. See the ECMA script specification for more information.

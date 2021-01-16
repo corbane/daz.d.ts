@@ -1,0 +1,55 @@
+CLS DzUIPopUpWgt : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uipopupwgt_dz
+  > summary
+    A popup widget constructed from a QtDesigner *.ui file.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzUIPopUpWgt( QWidget parent )
+  > summary
+    Default Constructor. Creates a new ui popup widget.
+  > parameters
+    + parent - The parent widget for the popup
+
+### methods
+
+FUN String : getFileName()
+  > returns
+    The filename that was used to load the ui file
+
+FUN QWidget : getUIWidget()
+  > returns
+    The current main QWidget.
+
+FUN String : getWorkingDirectory()
+  > returns
+    The current working directory for the ui file.
+
+FUN void : loadUI( String filename )
+  > summary
+    Sets the main widget for this popup from the ui file.
+  > parameters
+    + filename - The path to the ui file to show in the widget.
+
+FUN void : movePopUp( Point newPos )
+  > summary
+    Moves the popup to the point defined.
+  > parameters
+    + newPos - The position to move the popup widget to
+
+FUN void : setWidget( QWidget widget )
+  > summary
+    Sets the widget for the ui popup widget.
+  > parameters
+    + widget - The widget for the popup
+
+FUN void : setWorkingDirectory( String str )
+  > parameters
+    + str - the working directory for the ui loader.
+      Note:
+      This has no effect if set after DzUIPopUpWgt::loadUI() is called.

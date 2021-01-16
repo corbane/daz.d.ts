@@ -1,0 +1,133 @@
+CLS DzTextureComponent : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/texturecomponent_dz
+  > summary
+    NEEDS BRIEF.
+
+### description
+  > summary
+    NEEDS DESCRIPTION
+
+### enumerations
+
+ENU Rotation
+  > summary
+    TODO: Add description.
+  + RotNone - TODO: Add description.
+  + Rot90 - TODO: Add description.
+  + Rot180 - TODO: Add description.
+  + Rot270 - TODO: Add description.
+
+### properties
+
+PRP Color : color
+  > summary
+    TODO: Add description.
+
+PRP Boolean : enabled
+  > summary
+    Whether the component is enabled.
+
+PRP Boolean : flippedHorizontal
+  > summary
+    TODO: Add description.
+
+PRP Boolean : flippedVertical
+  > summary
+    TODO: Add description.
+
+PRP String : imageFile
+  > summary
+    TODO: Add description.
+
+PRP Boolean : invert
+  > summary
+    TODO: Add description.
+
+PRP Point : offset
+  > summary
+    TODO: Add description.
+
+PRP Number : opacity
+  > summary
+    TODO: Add description.
+
+PRP DzTextureComponent.Rotation : rotation
+  > summary
+    TODO: Add description.
+
+PRP Number : xOffset
+  > summary
+    TODO: Add description.
+
+PRP Number : xScale
+  > summary
+    TODO: Add description.
+
+PRP Number : yOffset
+  > summary
+    TODO: Add description.
+
+PRP Number : yScale
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN void : flip( Boolean horizontal, Boolean vertical )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : loadImageData( Image image )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : colorChanged( Color color )
+  > summary
+    TODO: Add description.
+
+SIG void : dataChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : enabledChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : flippedHorizontalChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : flippedVerticalChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : imageChanged( String filename )
+  > summary
+    TODO: Add description.
+
+SIG void : invertedChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : labelChanged( String label )
+  > summary
+    TODO: Add description.
+
+SIG void : offsetChanged( Point offset )
+  > summary
+    TODO: Add description.
+
+SIG void : opacityChanged( Number opacity )
+  > summary
+    TODO: Add description.
+
+SIG void : rotationChanged( DzTextureComponent.Rotation rotation )
+  > summary
+    TODO: Add description.
+
+SIG void : scaleChanged( Number x, Number y )
+  > summary
+    TODO: Add description.

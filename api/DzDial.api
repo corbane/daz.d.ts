@@ -1,0 +1,77 @@
+CLS DzDial : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dial_dz
+  > summary
+    DAZScript wrapper for QDial.
+
+### description
+  > summary
+    A DzDial provides a rounded range control like a speedometer.
+
+### properties
+
+PRP Number : lineStep
+  > summary
+    The current line step
+
+PRP Number : max
+  > summary
+    Holds the maximum value for the widget.
+
+PRP Number : min
+  > summary
+    Holds the minimum value for the widget.
+
+PRP Boolean : notchesVisible
+  > summary
+    Holds whether or not to show notches.
+
+PRP Number : notchSize
+  > summary
+    Holds the current notch size. (Read Only)
+
+PRP Number : notchTarget
+  > summary
+    Holds the target number of pixels between notches.
+
+PRP Number : pageStep
+  > summary
+    The current page step
+
+PRP Boolean : tracking
+  > summary
+    Holds whether or not to track the cursor, true by default.
+
+PRP Number : value
+  > summary
+    Holds the value represented by the widget.
+
+PRP Boolean : wrapping
+  > summary
+    Holds whether or not the arrow can be rotated 360?, or if some space is left at the bottom.
+
+### constructors
+
+CTR DzDial( DzWidget parent )
+  > summary
+    Creates a dial widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the dial.
+
+### signals
+
+SIG void : dialMoved( Number value )
+  > summary
+    Emitted when dial moves, passes the new value of the dial.
+
+SIG void : dialPressed()
+  > summary
+    Emitted when the dial is pressed by the user.
+
+SIG void : dialReleased()
+  > summary
+    Emitted when the dial is released by the user.
+
+SIG void : valueChanged( Number value )
+  > summary
+    Emitted when the value of the dial changes, passes the new value.

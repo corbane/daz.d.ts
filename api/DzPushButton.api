@@ -1,0 +1,201 @@
+CLS DzPushButton : DzButton
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pushbutton_dz
+  > summary
+    DAZScript wrapper for QPushButton.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU ButtonStyle
+  > summary
+    The styles that the button can be drawn in.
+  > since
+    4.6.4.76
+  + Off - Deprecated
+  + NoChange - Deprecated
+  + On - Deprecated
+  + SingleShot - Deprecated
+  + Toggle - Deprecated
+  + Tristate - Deprecated
+  + BCommand - TODO: Add description.
+  + BTool - The button is drawn as a typical Push Button.
+  + BDefault - The button is drawn as a typical Tool Button.
+  + BBasic - The button is drawn as a Default Push Button.
+  + BNoFrame - The button is drawn with the style's Button Bevel.
+  + BCustom - The button is drawn without a frame. The button is drawn with a custom style.
+
+### properties
+
+PRP Boolean : autoDefault
+  > summary
+    Holds whether or not the button has the auto-default feature and responds to the [Enter] key when it has the focus; true by default for buttons that have a DzDialog parent, otherwise false.
+
+PRP DzPushButton.ButtonStyle : buttonStyle
+  > summary
+    Holds whether or not the border is disabled; false by default.
+
+PRP Number : buttonTextFormat
+  > summary
+    Holds the style that the button is drawn in.
+  > since
+    4.6.4.76
+
+PRP Boolean : default
+  > summary
+    TODO: Add description.
+
+PRP Boolean : displayDownArrow
+  > summary
+    Holds the elide mode to be used for the text on this button.
+  > since
+    4.6.4.76
+
+PRP String : downArrowMetric
+  > summary
+    Holds the name of the pixel metric used to define the size of the icon on this button (if any).
+  > since
+    4.6.4.76
+
+PRP String : downArrowPrimitive
+  > summary
+    Holds the name of the primitive element used to draw this button.
+  > since
+    4.6.4.76
+    DzWidget::TextElideMode : elideMode
+    Holds the name of the text style used to draw the label on this button.
+  > since
+    4.6.4.76
+
+PRP Boolean : flat
+  > summary
+    Holds whether or not the button is the default button; false by default.
+
+PRP String : iconMetric
+  > summary
+    Holds whether or not to display the arrow for this button.
+  > since
+    4.6.4.76
+
+PRP String : primitive
+  > summary
+    Holds the format that the button text is drawn in; DzWidget::AlignmentFlags and DzWidget::TextFlags OR'd together for the button label.
+  > since
+    4.6.4.76
+
+PRP Boolean : sizedFromIcon
+  > summary
+    Holds the name of the pixel metric used to define the size of the arrow on this button (if any).
+  > since
+    4.6.4.76
+
+PRP String : textStyle
+  > summary
+    Holds the name of the primitive element used to draw the arrow on this button (if any).
+  > since
+    4.6.4.76
+
+### constructors
+
+CTR DzPushButton( DzWidget parent )
+  > summary
+    Holds whether or not the button will be sized based on the size of its icon (if any). If true, this overrides iconMetric.
+  > since
+    4.11.0.38
+    Creates a push button as a child of the given parent widget
+
+### methods
+
+FUN void : setCheckable( Boolean yesNo )
+  > summary
+    Sets whether or not the button is a toggle button.
+
+FUN void : setToggleButton( Boolean yesNo )
+  > summary
+    Deprecated
+    Use setCheckable() instead.
+
+### signals
+
+SIG void : buttonStyleChanged( DzPushButton.ButtonStyle style )
+  > summary
+    Emitted when buttonStyle on this button has changed.
+  > parameters
+    + style - The new button style.
+  > since
+    4.6.4.76
+
+SIG void : buttonTextFormatChanged( Number format )
+  > summary
+    Emitted when buttonTextFormat on this button has changed.
+  > parameters
+    + format - The new text format.
+  > since
+    4.6.4.76
+
+SIG void : displayDownArrowChanged( Boolean displayArrow )
+  > summary
+    Emitted when displayDownArrow on this button has changed.
+  > parameters
+    + displayArrow - The new state.
+  > since
+    4.6.4.76
+
+SIG void : downArrowMetricChanged( String name )
+  > summary
+    Emitted when downArrowMetric on this button has changed.
+  > parameters
+    + name - The name of the new down arrow metric.
+  > since
+    4.6.4.76
+
+SIG void : downArrowPrimitiveChanged( String name )
+  > summary
+    Emitted when downArrowPrimitive on this button has changed.
+  > parameters
+    + name - The name of the new primitive.
+  > since
+    4.6.4.76
+
+SIG void : elideModeChanged( DzWidget.TextElideMode mode )
+  > summary
+    Emitted when elideMode on this button has changed.
+  > parameters
+    + mode - The new elide mode.
+  > since
+    4.6.4.76
+
+SIG void : iconMetricChanged( String name )
+  > summary
+    Emitted when iconMetric on this button has changed.
+  > parameters
+    + name - The name of the new icon metric.
+  > since
+    4.6.4.76
+
+SIG void : primitiveChanged( String name )
+  > summary
+    Emitted when primitive on this button has changed.
+  > parameters
+    + name - The name of the new primitive.
+  > since
+    4.6.4.76
+
+SIG void : sizedFromIconChanged( Boolean onOff )
+  > summary
+    Emitted when sizedFromIcon on this button has changed.
+  > parameters
+    + name - The new state.
+  > since
+    4.11.0.38
+
+SIG void : textStyleChanged( String name )
+  > summary
+    Emitted when textStyle on this button has changed.
+  > parameters
+    + name - The name of the new text style.
+  > since
+    4.6.4.76

@@ -1,0 +1,47 @@
+CLS DzBone : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/bone_dz
+  > summary
+    Base class for all skeleton bone types.
+
+### description
+  > summary
+    This specialized DzNode subclass adds follow bone, and mesh-binding functionality to a node. All bones are assumed to be in the hierarchy of a DzSkeleton, and will not function properly if their parent is not a skeleton or another bone.
+    The concept of a follow bone allows the bones of one skeleton (figure) to follow another skeleton (figure). This following does not reproduce transforms from one bone to another, but tries to align center (origin) and end points so that the following bone points in the same direction as the bone it is following. Typically, this is controlled at the skeleton level.
+
+### constructors
+
+CTR DzBone()
+  > summary
+    Default Constructor. Creates a new Bone node.
+
+### methods
+
+FUN DzMatrix3 : getBoneLocalScale( DzTime tm )
+  > parameters
+    + tm - The time to get the local scale for.
+  > returns
+    The local scale of the bone at the given time.
+
+FUN DzBone : getFollowBone()
+  > summary
+    Get the node that this node is following.
+  > returns
+    The bone this bone is following, or NULL if this bone is not following another bone.
+  > seealso
+    DzSkeleton::getFollowTarget()
+
+FUN Number : getFollowMode()
+  > returns
+    The mode that this node is following by.
+  > seealso
+    DzSkeleton::getFollowMode()
+  > since
+    4.8.0.23
+
+### signals
+
+SIG void : followBoneChanged( DzBone newFollowBone )
+  > null
+  > summary
+    Emitted when the follow bone has changed.

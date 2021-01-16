@@ -1,0 +1,50 @@
+CLS DzAuthor : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/author_dz
+  > summary
+    Encapsulates authorship information.
+
+### description
+  > summary
+    DzAuthor is used to access authorship data for native files, and the current instance of the application.
+  > seealso
+    DzApp::getCurrentAuthor(), DzScript::getAuthor(), DzScriptContext::getScriptAuthor(), Global::getScriptAuthor()
+
+### properties
+
+PRP String : email
+  > summary
+    Deprecated
+    Exists only to keep old code working.
+
+PRP String : name
+  > summary
+    The author's name. (Read Only)
+
+PRP String : url
+  > summary
+    The author's url. (Read Only)
+
+PRP String : valid
+  > summary
+    true if name contains valid information, otherwise false. (Read Only)
+
+### constructors
+
+CTR DzAuthor()
+  > summary
+    Default constructor. Creates an empty author.
+
+CTR DzAuthor( DzAuthor author )
+  > summary
+    Copy Constructor.
+  > parameters
+    + author - The author information to copy.
+
+CTR DzAuthor( String name, String email, String url=“” )
+  > summary
+    Create a DzAuthor with the given name, email, and url.
+  > parameters
+    + name - The name of the author
+    + email - The author's email address
+    + url - The author's home page URL

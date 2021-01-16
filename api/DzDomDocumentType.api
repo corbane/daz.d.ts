@@ -1,0 +1,33 @@
+CLS DzDomDocumentType : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domdocumenttype_dz
+  > summary
+    DAZ Script DOM document type node.
+
+### description
+  > summary
+    Represents a document type node in a DOM document. You usually will not construct these, but will get them from an existing document by calling DzDomDocument::doctype().
+
+### properties
+
+PRP String : internalSubset
+  > summary
+    [Read Only] The internal subset of the document type
+
+PRP String : name
+  > summary
+    [Read Only] The name of the node
+
+PRP String : publicId
+  > summary
+    [Read Only] The public identifier of the external DTD subset
+
+PRP String : systemId
+  > summary
+    [Read Only] The system identifier of the external DTD subset
+
+### constructors
+
+CTR DzDomDocumentType()
+  > summary
+    Default constructor

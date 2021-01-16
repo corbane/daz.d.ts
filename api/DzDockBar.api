@@ -1,0 +1,47 @@
+CLS DzDockBar
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dockbar_dz
+  > summary
+    Class that encapsulates a custom QToolBar that can be docked with a DzToolBar.
+
+### description
+  > summary
+    This class provides access to a custom bar in the interface that can be docked with a DzToolBar. This class is not intended to be constructed directly, rather it serves as a base class for other custom dockable bars.
+  > seealso
+    DzPaneMgr::findDockBar(), DzPaneMgr::findDockBarByName() and DzPaneMgr::getDockBar()
+
+### enumerations
+
+ENU DockArea
+  > summary
+    The areas of a DzActivityLayout where the bar can be docked.
+  + ToolBarTop - The dock area at the top of a DzActivityLayout.
+  + ToolBarBottom - The dock area at the bottom of a DzActivityLayout.
+  + ToolBarLeft - The dock area on the left side of a DzActivityLayout.
+  + ToolBarRight - The dock area on the right side of a DzActivityLayout.
+  + NoToolBarArea - No dock area. The bar cannot be docked.
+
+### methods
+
+FUN void : dock( DzDockBar.DockArea area, String beforeBar=“” )
+  > summary
+    Docks the bar in the specified area on the DzActivityLayout, and shows the bar if it is hidden.
+  > parameters
+    + area - The DockArea to dock the bar to.
+    + beforeBar - The name of the bar in the area to dock before
+
+FUN DzDockBar.DockArea : dockedArea()
+  > returns
+    The dock area that the bar is docked in.
+
+FUN Boolean : isClosed()
+  > returns
+    true if the bar is closed (not displayed), false if the bar is open (displayed).
+
+FUN void : setClosed( Boolean onOff )
+  > summary
+    Sets whether the bar is closed (not displayed), or open (displayed).
+
+FUN void : undock( Point pos )
+  > summary
+    Undocks the bar, moves it to the given global coordinates, and shows the bar if it is hidden.

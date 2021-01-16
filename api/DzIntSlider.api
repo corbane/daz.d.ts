@@ -1,0 +1,81 @@
+CLS DzIntSlider : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/intslider_dz
+  > summary
+    DAZScript integer (whole number) slider widget.
+
+### description
+  > summary
+    A DzIntSlider provides a control that allows a user to adjust a bounded integer value.
+
+### properties
+
+PRP Boolean : clamped
+  > summary
+    Holds whether or not the slider obeys its limits. false by default.
+
+PRP Boolean : displayAsPercent
+  > summary
+    Holds whether or not the slider text is displayed as a percentage value. false by default.
+
+PRP Boolean : indeterminate
+  > summary
+    If true, the slider is considered to have an 'indeterminate' or '<?>' value. false by default.
+
+PRP String : label
+  > summary
+    Holds the label text for the slider.
+
+PRP Boolean : labelVisible
+  > summary
+    Holds whether or not the slider's label is visible.
+
+PRP Number : max
+  > summary
+    Holds the maximum value of the slider. Any attempt to set this to a value that is less than the current min will fail.
+
+PRP Number : min
+  > summary
+    Holds the minimum value of the slider. Any attempt to set this to a value that is greater than the current max will fail.
+
+PRP Number : sensitivity
+  > summary
+    Holds the sensitivity of the slider.
+
+PRP String : text
+  > summary
+    Holds the text of the slider. (Read Only)
+
+PRP Boolean : textEditable
+  > summary
+    Holds whether or not the slider text is editable by the user. false by default.
+
+PRP Boolean : textVisible
+  > summary
+    Holds whether or not the slider text is visible to the user. true by default.
+
+PRP Number : value
+  > summary
+    Holds the current value of the slider.
+
+### constructors
+
+CTR DzIntSlider( DzWidget parent )
+  > summary
+    Creates a slider as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the slider.
+
+### signals
+
+SIG void : editEnd()
+  > summary
+    Emitted when the user releases the slider.
+
+SIG void : editStart()
+  > summary
+    Emitted when the user starts dragging the slider.
+
+SIG void : valueChanged( Number value )
+  > summary
+    Emitted when the value of the slider changes, passes the new value.

@@ -1,0 +1,191 @@
+CLS DzAction : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/action_dz
+  > summary
+    Class that implements a user action.
+
+### description
+  > summary
+    This class represents an action that the user can perform in the interface via pressing a hot key or clicking on a menu/toolbar item.
+    All action items are added to a list of interface actions which the user can customize. The user can specify their own keyboard shortcut or 'Hot Key' for the action, and any action item can be moved into a custom toolbar, as well as appear in the DAZ Studio main menu.
+  > seealso
+    DzActionMgr::getAction()
+    DzActionMgr::findAction()
+
+### properties
+
+PRP String : actionGroup
+  > summary
+    The action group that this action belongs to (Read Only)
+
+PRP Boolean : autoRepeat
+  > summary
+    TODO: Add description.
+
+PRP Boolean : checkable
+  > summary
+    TODO: Add description.
+
+PRP Boolean : checked
+  > summary
+    TODO: Add description.
+
+PRP String : defaultMenu
+  > summary
+    The primary menu that this action is added to by default, if the user has not chosen a custom location (Read Only)
+
+PRP Array<String> : defaultMenus
+  > summary
+    The menus that this action is added to by default, if the user has not chosen a custom location (Read Only).
+  > since
+    4.6.2.62
+
+PRP String : defaultShortcut
+  > summary
+    The default keyboard shortcut (hotkey) that is associated with this action (Read Only before 4.6.4.48)
+
+PRP String : defaultToolBar
+  > summary
+    The primary toolBar that this action is added to by default, if the user has not chosen a custom location (Read Only)
+
+PRP Array<String> : defaultToolBars
+  > summary
+    The toolBars that this action is added to by default, if the user has not chosen a custom location (Read Only).
+  > since
+    4.6.2.62
+
+PRP String : description
+  > summary
+    The user-readable description of the action.
+
+PRP Boolean : enabled
+  > summary
+    Emitted when an action is enabled or disabled. onOff is true if the action was enabled, false if it was disabled.
+
+PRP String : iconFile
+  > summary
+    The image file that is used as the icon for this action (if any).
+
+PRP String : iconText
+  > summary
+    TODO: Add description.
+
+PRP Boolean : iconVisibleInMenu
+  > summary
+    TODO: Add description.
+
+PRP String : shortcut
+  > summary
+    TODO: Add description.
+
+PRP String : statusTip
+  > summary
+    TODO: Add description.
+
+PRP Number : styleIcon
+  > summary
+    The standard pixmap that is used as the icon for this action (if any).
+  > since
+    4.11.0.43
+
+PRP String : text
+  > summary
+    TODO: Add description.
+
+PRP String : toolTip
+  > summary
+    TODO: Add description.
+
+PRP Boolean : visible
+  > summary
+    TODO: Add description.
+
+PRP String : whatsThis
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN void : hover()
+  > summary
+    Activates the action in the 'Hover' state programatically.
+  > seealso
+    trigger()
+
+FUN void : setChecked( Boolean onOff )
+  > summary
+    Sets the action's toggle state.
+  > parameters
+    + onOff - If true, the action's toggle state is set on, otherwise, its toggle state is set off.
+  > seealso
+    setOff()
+
+FUN void : setDisabled( Boolean onOff )
+  > summary
+    Disables/Enables the action in the interface.
+  > parameters
+    + onOff - If true, the action will be 'grayed out' in menus, and the user will be unable to activate it. If false, the action will be enabled.
+  > seealso
+    setEnabled()
+
+FUN void : setEnabled( Boolean onOff )
+  > summary
+    Enables/Disables the action in the interface.
+  > parameters
+    + onOff - If true, the action will be displayed normally in menus, and the user will be able to activate it. If false, the action will be disabled.
+  > seealso
+    setDisabled()
+
+FUN void : setOff( Boolean onOff )
+  > summary
+    The same as calling setChecked( !onOff ). This method is provided for convenience when connecting this slot to a signal that emits a value that is the inverse of the desired onOff state.
+  > parameters
+    + onOff - If true, the action's toggle state is set off, otherwise, its toggle state is set on.
+  > seealso
+    setChecked()
+
+FUN void : setVisible( Boolean onOff )
+  > summary
+    Sets whether the action is visible in the interface.
+  > parameters
+    + onOff - If true, the action will be displayed in menus and toolbars that it has been added to. If false, the action will not be displayed in any menus or toolbars.
+
+FUN void : toggle()
+  > summary
+    Toggles the action programatically.
+  > seealso
+    trigger()
+
+FUN void : trigger()
+  > summary
+    Activates the action programatically.
+  > seealso
+    toggle()
+
+### signals
+
+SIG void : changed()
+  > summary
+    Emitted when an action has changed.
+
+SIG void : enabled( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : hovered()
+  > summary
+    Emitted when an action is highlighted by the user; for example, when the user pauses with the cursor over a menu option, toolbar button, or presses an action's shortcut key combination.
+
+SIG void : preExecute()
+  > summary
+    Emitted immediately before executeAction() is called.
+  > since
+    4.6.3.32
+
+SIG void : toggled( Boolean checked )
+  > summary
+    Emitted when a toggle action changes state. checked is the new action state, true for on, false for off.
+
+SIG void : triggered( Boolean checked )
+  > summary
+    Emitted when an action is activated by the user; for example, when the user clicks a menu option, toolbar button, or presses an action's shortcut key combination, or when trigger() was called. Notably, it is not emitted when setChecked() or toggle() is called. checked is true if the action is checked, or false if the action is unchecked.

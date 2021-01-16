@@ -1,0 +1,129 @@
+CLS DzLabel : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/label_dz
+  > summary
+    DAZScript wrapper for QLabel.
+
+### description
+  > summary
+    This class provides text or image display.
+
+### enumerations
+
+ENU TextFormat
+  > summary
+    Enumerated values that describe how the text string is interpreted.
+  > since
+    4.9.3.93
+  + PlainText - The text string is interpreted as a plain text.
+  + RichText - The text string is interpreted as a rich text.
+  + AutoText - The text is interpreted as automatically.
+
+### properties
+
+PRP DzWidget.AlignmentFlags : alignment
+  > summary
+    Holds the alignment of the text displayed in the label.
+
+PRP DzWidget.TextElideMode : elideMode
+  > summary
+    Holds the name of the text style used to draw the label on this label.
+  > since
+    4.10.0.22
+
+PRP Boolean : hasSelectedText
+  > summary
+    Holds whether or not text is selected. (Read Only)
+
+PRP Number : indent
+  > summary
+    Holds the label's indent in pixels from its current alignment.
+
+PRP Boolean : openExternalLinks
+  > summary
+    Holds whether or not external links will be opened when clicked.
+
+PRP Pixmap : pixmap
+  > summary
+    The pixmap shown on the label. If the pixmap is monochrome (e.g. its depth is 1) and it does not have a mask, the pixmap will be its own mask. This allows transparent bitmaps to be drawn, which are important for toggle buttons. undefined if no pixmap is set.
+
+PRP String : primitive
+  > summary
+    TODO: Add description.
+
+PRP Boolean : scaledContents
+  > summary
+    Holds whether or not the contents of the label are scaled to fill the available space.
+
+PRP String : selectedText
+  > summary
+    Holds the text that is currently selected. (Read Only)
+
+PRP String : text
+  > summary
+    Holds the text displayed in the label.
+
+PRP DzLabel.TextFormat : textFormat
+  > summary
+    Holds the value that is used to determine if the text string should be interpreted as plain, rich or log text.
+    DzWidget::TextInteractionFlags : textInteractionFlags
+    Holds the value that is used to determine how the label reacts to user input.
+
+PRP String : textStyle
+  > summary
+    Holds the name of the primitive element used to draw this label.
+  > since
+    4.10.0.22
+
+PRP Boolean : wordWrap
+  > summary
+    Holds whether or not the text is wrapped where necessary; i.e., word-breaks.
+
+### constructors
+
+CTR DzLabel( DzWidget parent )
+  > summary
+    Holds the elide mode to be used for the text on this label.
+  > since
+    4.10.0.22
+    Creates a label as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the label.
+
+### methods
+
+FUN DzWidget : buddy()
+  > returns
+    The buddy widget for the label, undefined if none.
+
+FUN void : clear()
+  > summary
+    Clears the text displayed in the label.
+
+FUN void : setBuddy( DzWidget buddy )
+  > summary
+    Sets the buddy widget for this label.
+  > parameters
+    + buddy - The widget to set.
+
+### signals
+
+SIG void : elideModeChanged( DzWidget.TextElideMode mode )
+  > since
+    4.10.0.22
+
+SIG void : primitiveChanged( String name )
+  > since
+    4.10.0.22
+
+SIG void : textFormatChanged( DzLabel.TextFormat format )
+  > summary
+    TODO: Add description.
+
+SIG void : textInteractionFlagsChanged( DzWidget.TextInteractionFlags flags )
+  > since
+    4.10.0.22
+
+SIG void : textStyleChanged( String name )
+  > since
+    4.10.0.22

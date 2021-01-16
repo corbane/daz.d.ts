@@ -1,0 +1,31 @@
+NOT Boolean : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boolean
+  > summary
+    ECMAScript Boolean prototype object.
+
+### description
+  > summary
+    ECMAScript provides a Boolean data type that can have one of two primitive values, true or false. In general, creating objects of this type is not recommended since the behavior will probably not be what you would expect. Instead, assign the literal value true or false as required.
+    Any expression can be evaluated in a boolean context (e.g. in logical operations, such as conditionals). If the expression's value is 0, null, false, NaN, undefined or an empty String, the expression is false; otherwise the expression is true.
+  > example
+    Creating boolean values using the true/false constants
+    var bOn = true;
+    var bOff = false;
+  > example
+    Creating a boolean values using the evaluation of expressions
+    var nVal1 = 5;
+    var nVal2 = 6;
+    var bEqual = (nVal1 == nVal2);
+    var bLessThan = (nVal1 < nVal2);
+    var bGreaterThan = (nVal1 > nVal2);
+
+### methods
+
+FUN String : toString()
+  > returns
+    The value of the Boolean object as a String; i.e. “true” or “false”.
+
+FUN Number : valueOf()
+  > returns
+    The primitive value of the Boolean object; i.e. true or false.

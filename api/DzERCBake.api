@@ -1,0 +1,52 @@
+CLS DzERCBake : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/ercbake_dz
+  > summary
+    Implements the logic of 'baking' a numeric property to the numeric properties it controls.
+
+### description
+  > summary
+    This utility class implements the logic of 'baking' (unlinking) the current state of a controller property on a node to the numeric properties it controls, such that the controlled properties remain at the respective values they were at in that moment of time. The DzERCLink between the 'baked' properties and the controller is removed.
+    The controller property (the DzNumericProperty that does the controlling) must be set before calling doBake(); see setControllerProperty().
+  > seealso
+    Sample: ERC Bake
+  > attention
+    This object is provided by the Property Hierarchy plugin. It is only available when the Property Hierarchy plugin is activated and enabled.
+  > since
+    4.9.3.101
+
+### constructors
+
+CTR DzERCBake()
+  > summary
+    Default constructor.
+
+### methods
+
+FUN Boolean : doBake()
+  > summary
+    Performs the ERC bake based on the current settings.
+  > returns
+    true if the bake operation was successful, otherwise false.
+
+FUN Boolean : doBakeKeyed( Boolean warn )
+  > summary
+    Performs the ERC bake based on the current settings.
+  > returns
+    true if the bake operation was successful, otherwise false.
+
+FUN DzNumericProperty : getControllerProperty()
+  > returns
+    The property (if any) that controls the properties that will be baked when doBake() is called.
+
+FUN void : setControllerProperty( DzNumericProperty prop )
+  > summary
+    Sets the property that controls the properties that will be baked when doBake() is called.
+  > parameters
+    + prop - The property to set as the controller to bake.
+
+### signals
+
+SIG void : ERCChanged()
+  > summary
+    TODO: Add description.

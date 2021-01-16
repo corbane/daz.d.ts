@@ -1,0 +1,15 @@
+CLS DzDomEntityReference : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domentityreference_dz
+  > summary
+    DAZ Script DOM entity node.
+
+### description
+  > summary
+    Represents an entity node in a DOM document.
+
+### constructors
+
+CTR DzDomEntityReference()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomDocument::createEntityReference() to create a new entity reference node as a member of a document.

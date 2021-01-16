@@ -1,0 +1,29 @@
+CLS DzShaderParameter : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shaderparameter_dz
+  > summary
+    Describes a single parameter for a RenderMan shader.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU DzShaderParamType
+  > summary
+    Enumerated types of shader parameters.
+  + UnknownType - Unknown Parameter type.
+  + PointType - Point type parameter.
+  + NormalType - Normal type parameter.
+  + VectorType - Vector type parameter.
+  + ColorType - Color type parameter.
+  + ScalarType - Scalar type parameter.
+  + StringType - String type parameter.
+  + MatrixType - Matrix type parameter.
+
+### properties
+
+PRP DzShaderParameter.DzShaderParamType : type
+  > summary
+    The type of the parameter

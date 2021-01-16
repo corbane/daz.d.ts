@@ -1,0 +1,83 @@
+CLS DzButtonGroup : DzGroupBox
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/buttongroup_dz
+  > summary
+    DAZScript wrapper for QButtonGroup.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : count
+  > summary
+    The number of buttons in the group (Read Only)
+
+PRP Boolean : exclusive
+  > summary
+    Whether the group is exclusive for all toggle buttons (the default is false)
+
+PRP Boolean : radioButtonExclusive
+  > summary
+    Whether the group is exclusive for radio buttons (the default is true)
+
+PRP Number : selected
+  > summary
+    The checked button in an exclusive group
+
+### constructors
+
+CTR DzButtonGroup( DzWidget parent )
+  > summary
+    Creates a button group as a child of the given parent widget
+
+### methods
+
+FUN void : addButton( DzButton button )
+  > summary
+    Add the button to the group. This is only necessary if the button was not created as a child of the group.
+
+FUN void : addButton( DzButton button, Number id )
+  > summary
+    Add the button to the group. This is only necessary if the button was not created as a child of the group.
+
+FUN DzButton : button( Number id )
+  > summary
+    TODO: Add description.
+
+FUN Array : buttons()
+  > summary
+    TODO: Add description.
+
+FUN DzButton : checkedButton()
+  > summary
+    TODO: Add description.
+
+FUN Number : id( DzButton button )
+  > returns
+    The index of button in the group. -1 if button is not a member of the group.
+
+FUN Number : insert( DzButton button, Number id=-1 )
+  > summary
+    Add the button to the group. This is only necessary if the button was not created as a child of the group.
+  > returns
+    The index of button in the group.
+
+FUN void : removeButton( DzButton button )
+  > summary
+    Remove button from the group
+
+### signals
+
+SIG void : clicked( Number id )
+  > summary
+    Emitted when a button in the group is pressed and released
+
+SIG void : pressed( Number id )
+  > summary
+    Emitted when a button in the group is pressed
+
+SIG void : released( Number id )
+  > summary
+    Emitted when a button in the group is released

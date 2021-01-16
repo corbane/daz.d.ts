@@ -1,0 +1,83 @@
+CLS DzAssetIOFilter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/assetiofilter_dz
+  > summary
+    Base class for all classes that save DSON-based scene settings.
+
+### description
+  > summary
+    Save filter classes save out a subset of scene settings in a DSON format such as poses, light sets, camera sets, etc.
+
+### methods
+
+FUN DzError : doSave( String filename, String startingDir )
+  > summary
+    Saves to a file.
+  > parameters
+    + filePath - The full path of the file to save to.
+    + startingDir - The initial directory to start the save dialog in.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN DzError : doSave( DzFileIOSettings options, String filename, String startingDir )
+  > summary
+    Saves to a file.
+  > parameters
+    + options - The options for the save.
+    + filePath - The path of the file to export to.
+    + startingDir - The initial directory to start the file browse.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+  > example
+    Export a DUF based Pose Preset.
+    var oAssetIOMgr = App.getAssetIOMgr();
+    var nAssetIOFilter = oAssetIOMgr.findFilter( "DzPoseAssetFilter" );
+    var oAssetIOFilter = oAssetIOMgr.getFilter( nAssetIOFilter );
+    if( oAssetIOFilter ){
+    	var oSettings = new DzFileIOSettings();
+    	//oAssetIOFilter.getDefaultOptions( oSettings );
+    	oAssetIOFilter.getOptions( oSettings, false, "c:/test" );
+    	oAssetIOFilter.doSave( oSettings, "test", "c:/" );
+    }
+
+FUN DzUri : getAssetDefinitionUri( DzBase base )
+  > returns
+    The URI to use when referring to the given asset from a definition.
+
+FUN DzUri : getAssetInstanceUri( DzBase base )
+  > returns
+    The URI to use when referring to the given asset from an instance.
+
+FUN String : getCompatiblityBase()
+  > returns
+    The compatibility base of the saved file.
+
+FUN String : getContentType()
+  > returns
+    The content type of the saved file.
+
+FUN String : getDescription()
+  > returns
+    The name of the filter.
+
+FUN String : getDoSavePath()
+  > returns
+    The path of the saved file.
+
+FUN String : getLoadSavePath()
+  > returns
+    The last path used to load/save files with the filter.
+
+FUN String : getStandardSaveRelativePath()
+  > returns
+    The default relative path for saving files with this filter.
+
+FUN Boolean : isSupportAssetFilter()
+  > returns
+    true if this filter saves support files, otherwise false.
+
+FUN void : setLoadSavePath( String path )
+  > summary
+    Sets the path to use for loading/saving files with this filter.
+  > parameters
+    + path - The path to set.

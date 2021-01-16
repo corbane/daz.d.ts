@@ -1,0 +1,3 @@
+CLS DzSkinBinding : DzModifier DzSceneAsset
+  > see
+    file://../sdk/dzskinbinding.h

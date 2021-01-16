@@ -1,0 +1,16 @@
+CLS DzGroupNode : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/groupnode_dz
+  > summary
+    Node for grouping multiple nodes in the scene.
+
+### description
+  > summary
+    This specialized DzNode is intended for grouping multiple nodes in the scene under one parent node. This allows easy transformation, visibility and/or selectability of the whole group.
+    The bounding box of the group is calculated by getting the world space bounding box of the immediate children of the group node. This allows better use of framing the group to see the whole of the contents of the group.
+
+### constructors
+
+CTR DzGroupNode()
+  > summary
+    TODO: Add description.

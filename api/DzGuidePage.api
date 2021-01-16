@@ -1,0 +1,61 @@
+CLS DzGuidePage : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/guidepage_dz
+  > summary
+    Provides a script defined widget that participates in a widget stack.
+
+### description
+  > summary
+    Guide Pages are intended as a dynamic means of providing users with instructions on how to use a portion of the User Interface (UI), and/or provide widgets that simplify the process of getting started where an otherwise non-descript area of the UI would be displayed.
+    These pages are typically found within a DzPane via instances of filecontenttab_dz or productcontenttab_dz, or within an embedded instance of productassetsview_dz or associatedassetsview_dz.
+
+### methods
+
+FUN String : defaultScriptPath()
+  > returns
+    The default path to the script to execute in order to create the UI in this page, sans extension.
+  > seealso
+    setUiscript()
+  > since
+    4.10.0.41
+
+FUN Boolean : isCurrentPage()
+  > returns
+    true if the page is the current widget in the stack, otherwise false.
+
+FUN void : makeCurrentPage( Boolean onOff )
+  > summary
+    Sets whether the guide page is the current widget in the stack.
+  > parameters
+    + onOff - If true, the guide page is set as the current widget, otherwise the other widget in the stack is raised.
+
+FUN DzError : reload()
+  > summary
+    Loads the contents of the page by calling the current script. A special script context is provided to this script which exposes a global “getWidget()” function that returns a DzWidget wrapper. This DzWidget can be used by the script to create, populate, and connect the UI components inside the widget.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an appropriate error code.
+  > seealso
+    scriptFilename()
+    setUiScript()
+  > since
+    4.10.0.41
+
+FUN String : scriptFilename()
+  > returns
+    The full path to the script to execute in order to create the UI in this page.
+  > seealso
+    setUiScript()
+  > since
+    4.10.0.41
+
+FUN DzError : setUiScript( String scriptPath )
+  > summary
+    Loads the contents of the page by calling the script at scriptPath. A special script context is provided to this script which exposes a global “getWidget()” function that returns a DzWidget wrapper. This DzWidget can be used by the script to create, populate, and connect the UI components inside the widget.
+  > parameters
+    + scriptPath - The path to the script to execute in order to create the UI in this page. The path can be absolute, relative to the resources folder in the application data path, or relative to the application resources path. If the path does not include an extension, an attempt is made to locate a script with one of the possible extensions (in dsa, dsb, dse, ds order) at the specified path until one is found.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an appropriate error code.
+  > seealso
+    DzApp.getAppDataPath()
+    DzApp.getResourcesPath()
+    Sample: Guide Pages

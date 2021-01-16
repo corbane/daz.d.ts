@@ -1,0 +1,83 @@
+CLS DzEnumSlider : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/enumslider_dz
+  > summary
+    DAZScript integer slider that displays a set of string values in place of numeric values.
+
+### description
+  > summary
+    A DzEnumSlider provides a control that allows a user to adjust a bounded, enumerated, integer value. The slider is clamped by default, and automatically sets its min and max range according to the number of string values it contains.
+
+### properties
+
+PRP Number : count
+  > summary
+    Holds the number of items on the slider. (Read Only)
+
+PRP String : text
+  > summary
+    Holds the text of the slider. (Read Only)
+
+PRP Number : value
+  > summary
+    Holds the current value of the slider.
+
+### constructors
+
+CTR DzEnumSlider( DzWidget parent )
+  > summary
+    Creates a new enumerated slider widget.
+  > parameters
+    + parent - The widget parent for the slider.
+
+### methods
+
+FUN Number : addItem( String label )
+  > summary
+    Adds a string to the list of items, and adjusts the maximum value for the slider.
+  > parameters
+    + label - The string value to add to the list of items in the slider.
+  > returns
+    The index of the item - this is the numeric value of the slider that corresponds to the string value.
+
+FUN void : clear()
+  > summary
+    Clears the list of string values for this slider.
+
+FUN String : getItem( Number which )
+  > returns
+    The String representing the which item.
+
+FUN void : moveItem( Number which, Number idx )
+  > summary
+    Moves the item at index which to idx.
+  > parameters
+    + which - The index of the item to move. If out of range, this method has no effect.
+    + idx - The index to move which to. If out of range, which becomes the last item.
+
+FUN void : removeItem( Number which )
+  > summary
+    Removes the item at which from the list.
+  > parameters
+    + which - The index of the item. If out of range, this method has no effect.
+
+FUN void : renameItem( Number which, String label )
+  > summary
+    Renames the item at index which.
+  > parameters
+    + which - The index of the item to rename. If out of range, this method has no effect.
+    + label - The new value of the item at index which.
+
+### signals
+
+SIG void : editEnd()
+  > summary
+    Emitted when the user releases the slider.
+
+SIG void : editStart()
+  > summary
+    Emitted when the user starts dragging the slider.
+
+SIG void : valueChanged( Number value )
+  > summary
+    Emitted when the value of the slider changes, passes the new value.

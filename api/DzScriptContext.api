@@ -1,0 +1,251 @@
+CLS DzScriptContext : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scriptcontext_dz
+  > summary
+    Encapsulates a DAZ Script script context.
+
+### description
+  > summary
+    All DzScripts are executed in the context of a DzScriptContext instance - therefore, all the properties and methods on DzScriptContext are accessible to a script as global functions and variables. It will usually not be necessary for a script to create or use this class directly.
+
+### methods
+
+FUN void : acceptUndo( String caption )
+  > summary
+    Accept and finish a hold on the undo stack started by calling beginUndo().
+  > seealso
+    Global::acceptUndo()
+
+FUN Boolean : backgroundProgressIsActive()
+  > returns
+    true if there is an active background progress operation in the application, otherwise false.
+  > seealso
+    Global::backgroundProgressIsActive()
+
+FUN Boolean : backgroundProgressIsCancelled()
+  > returns
+    true if the user canceled the current background progress operation in the application, otherwise false.
+  > seealso
+    Global::backgroundProgressIsCancelled()
+
+FUN void : beginNodeSelectionHold()
+  > summary
+    Captures a view of scene seletion.
+  > seealso
+    Global::beginNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : beginUndo()
+  > summary
+    Starts a hold on the undo stack.
+  > seealso
+    Global::beginUndo()
+
+FUN void : cancelUndo()
+  > summary
+    Cancel a hold on the undo stack started by calling beginUndo().
+  > seealso
+    Global::cancelUndo()
+
+FUN void : clearBusyCursor()
+  > summary
+    Clears the application-standard busy cursor and returns the mouse cursor to the previous cursor. Match every call to setBusyCursor() with a call to this function.
+  > seealso
+    Global::clearBusyCursor()
+
+FUN void : clearNodeSelectionHolds()
+  > summary
+    Clears all selection holds without restoring the selection.
+  > seealso
+    Global::clearNodeSelectionHolds()
+  > since
+    4.9.4.109
+
+FUN void : clearOverrideCursor()
+  > summary
+    Clears the override cursor stack.
+  > seealso
+    Global::clearOverrideCursor()
+  > since
+    4.6.4.30
+
+FUN void : clearUndoStack()
+  > summary
+    Clears the undo stack.
+  > seealso
+    Global::clearUndoStack(), DzUndoStack::clearAll()
+
+FUN Boolean : ctrlPressed()
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use DzApp::modifierKeyState() instead.
+  > seealso
+    Global::ctrlPressed()
+
+FUN void : dropNodeSelectionHold()
+  > summary
+    Removes a scene node selection hold on scene selection without restoring the selection.
+  > seealso
+    Global::dropNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : dropUndo()
+  > summary
+    Drops a hold on the undo stack started by calling beginUndo().
+  > seealso
+    Global::dropUndo()
+
+FUN void : finishBackgroundProgress()
+  > summary
+    Ends the current background progress operation in the application from script.
+  > seealso
+    Global::finishBackgroundProgress()
+
+FUN void : finishProgress()
+  > summary
+    Ends the current progress operation in the application from script.
+  > seealso
+    Global::finishProgress()
+
+FUN Array : getArguments()
+  > returns
+    The list of arguments for the current script execution.
+  > seealso
+    Global::getArguments()
+
+FUN QDesktopWidget : getDesktop()
+  > summary
+    This function provides access to the desktop widget.
+  > returns
+    The desktop widget.
+  > seealso
+    Global::getDesktop()
+
+FUN String : getErrorMessage( Number errCode )
+  > summary
+    This function converts an error code into a string message.
+  > returns
+    A user-readable message that describes the error represented by the error code.
+  > seealso
+    Global::getErrorMessage()
+
+FUN QObject : getObjectParent( QObject obj )
+  > returns
+    The QObject parent of obj.
+
+FUN DzAuthor : getScriptAuthor()
+  > returns
+    The author of the current script (if any), otheriwse and empty string.
+  > seealso
+    Global::getScriptAuthor()
+
+FUN String : getScriptFileName()
+  > returns
+    The file name of the current script (if any), otherwise an empty string.
+  > seealso
+    Global::getScriptFileName()
+
+FUN String : getScriptType()
+  > returns
+    The file type that this script was saved out as.
+  > seealso
+    Global::getScriptType()
+
+FUN String : getScriptVersionString()
+  > returns
+    The version of the current script (if any).
+  > seealso
+    Global::getScriptVersionString()
+
+FUN Boolean : pointersAreEqual( QObject ptr1, QObject ptr2 )
+  > summary
+    This function allows a script to test if two QObject-derived variables point to the same instance.
+  > returns
+    true if the pointers point to the same object, otherwise false.
+  > seealso
+    Global::pointersAreEqual()
+
+FUN void : processEvents()
+  > summary
+    Pauses execution of the script and allows the GUI thread time to process events.
+  > seealso
+    Global::processEvents()
+
+FUN Boolean : progressIsActive()
+  > returns
+    true if there is an active progress operation in the application, otherwise false.
+  > seealso
+    Global::progressIsActive()
+
+FUN Boolean : progressIsCancelled()
+  > returns
+    true if the user cancelled the current progress operation in the application, otherwise false.
+  > seealso
+    Global::progressIsCancelled()
+
+FUN void : restoreNodeSelectionHold()
+  > summary
+    Restores the scene selection to the view at last call to beginNodeSelectionHold().
+  > seealso
+    Global::restoreNodeSelectionHold()
+  > since
+    4.9.4.109
+
+FUN void : setBusyCursor()
+  > summary
+    Sets the application-standard busy cursor. Match every call to this function with a call to clearBusyCursor() to restore the previous cursor.
+  > seealso
+    Global::setBusyCursor()
+
+FUN Boolean : shiftPressed()
+  > summary
+    Deprecated
+    Provided for backward compatibility only. Use DzApp::modifierKeyState() instead.
+  > seealso
+    Global::shiftPressed()
+
+FUN void : sleep( Number milliseconds )
+  > summary
+    Pauses the script for the specified number of milliseconds without blocking the application event loop.
+  > seealso
+    Global::sleep()
+  > since
+    4.8.0.45
+
+FUN void : startBackgroundProgress( String info, Number totalSteps=0, Boolean isCancellable=false )
+  > summary
+    Starts a background progress operation in the application from script.
+  > seealso
+    Global::startBackgroundProgress()
+
+FUN void : startProgress( String info, Number totalSteps=0, Boolean isCancellable=false, Boolean showTimeElapsed=false )
+  > summary
+    Starts a progress operation in the application from script.
+  > seealso
+    Global::startProgress()
+
+FUN void : stepBackgroundProgress( Number numSteps=1 )
+  > summary
+    Steps the current background progress operation in the application from script.
+  > seealso
+    Global::stepBackgroundProgress()
+
+FUN void : stepProgress( Number numSteps=1 )
+  > summary
+    Steps the current progress operation in the application from script.
+  > seealso
+    Global::stepProgress()
+
+FUN void : updateBackgroundProgress( Number position )
+  > summary
+    Updates the background current progress operation in the application from script.
+  > seealso
+    Global::updateBackgroundProgress()
+
+FUN void : updateProgress( Number position )
+  > summary
+    Updates the current progress operation in the application from script.
+  > seealso
+    Global::updateProgress()

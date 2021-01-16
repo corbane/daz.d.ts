@@ -1,0 +1,119 @@
+CLS DzPropertySelectionComboBox : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/propertyselectioncombobox_dz
+  > summary
+    DAZScript combobox widget with a custom popup designed for choosing a DzProperty.
+
+### description
+  > summary
+    Provides a DzComboBox like widget with a custom popup designed for choosing a DzProperty.
+
+### constructors
+
+CTR DzPropertySelectionComboBox( DzWidget parent )
+  > summary
+    Creates a property selection combobox as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the combobox.
+
+### methods
+
+FUN void : clearPropertySelection()
+  > summary
+    Clears the selection of any properties.
+  > since
+    4.10.0.27
+
+FUN Array : getExcludeList()
+  > summary
+    Gets the properties to be excluded in the popup.
+
+FUN Array : getNodes()
+  > summary
+    Gets the nodes to be shown in the popup.
+
+FUN DzProperty : getSelectedProperty()
+  > returns
+    The selected property.
+
+FUN void : hidePopup()
+  > summary
+    Hide the popup.
+
+FUN void : setEditMode( Boolean onOff )
+  > summary
+    Sets whether or not the popup should display rigging properties, regardless of their existence in the exclude list.
+
+FUN void : setExcludeList( Array properties )
+  > summary
+    Sets the properties to be excluded in the popup.
+
+FUN void : setMorphOnly( Boolean onOff )
+  > summary
+    Sets whether or not the popup should filter non-morph properties from the list.
+
+FUN void : setNode( DzNode node )
+  > summary
+    Sets the node from the scene to be shown in the popup.
+  > parameters
+    + node - The DzNode to show properties for.
+  > seealso
+    setNodes()
+
+FUN void : setNodes( Array nodes )
+  > summary
+    Sets the nodes from the scene to be shown in the popup.
+  > parameters
+    + nodes - A list of the DzNode objects to show properties for.
+  > seealso
+    setNode()
+
+FUN void : setNumericOnly( Boolean onOff )
+  > summary
+    Sets whether or not the popup should filter non-numeric properties from the list.
+
+FUN void : setPopUpHeight( Number height )
+  > summary
+    Sets the height of the popup to height.
+
+FUN void : setPopUpMinWidth( Number width )
+  > summary
+    Sets the minimum width of the popup to width.
+
+FUN void : setPrivateOnly( Boolean onOff )
+  > summary
+    Sets whether or not the popup should filter non-private properties from the list.
+  > since
+    4.10.0.23
+
+FUN void : setPublicOnly( Boolean onOff )
+  > summary
+    Sets whether or not the popup should filter non-public properties from the list.
+  > since
+    4.10.0.23
+
+FUN void : setSelectedProperty( DzProperty prop )
+  > summary
+    Sets the property to be selected.
+  > parameters
+    + The - property to select.
+
+FUN void : setShowHidden( Boolean onOff )
+  > summary
+    Sets whether or not the popup should display hidden properties.
+
+FUN void : setTransformOnly( Boolean onOff )
+  > summary
+    Sets whether or not the popup should filter non-transform properties from the list.
+  > since
+    4.10.0.23
+
+FUN void : showPopup()
+  > summary
+    Display the popup.
+
+### signals
+
+SIG void : propertySelectionChanged()
+  > summary
+    Emitted when the selected DzProperty changes.

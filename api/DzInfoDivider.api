@@ -1,0 +1,71 @@
+CLS DzInfoDivider : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/infodivider_dz
+  > summary
+    Provides a divider bar with an information panel as the second widget.
+
+### description
+  > summary
+    DzInfoDivider places a divider bar between your widget and a tab bar of info tabs. This class is very similar (but not exactly like) DzDynamicDividerWgt. For situations where you want to control both sides of the divider bar it is recommended to use DzDynamicDividerWgt.
+
+### methods
+
+FUN Number : getActualDividerPercent()
+  > returns
+    The current divider position, or -1 if minimized.
+
+FUN DzInfoTabs : getInfoTabs()
+  > returns
+    The info tabs for this divider bar. The info divider allows you to display tips, metadata, and other info relating to your product.
+
+FUN Number : getPreferredDividerPercent()
+  > returns
+    The preffered relative position of the divider.
+
+FUN Number : getToggleState()
+  > returns
+    The minimized (toggled) state as a Number. * 0 = NotMinimized
+    1 = HalfMinimized
+    2 = FullMinimized
+
+FUN Boolean : isMinimized()
+  > returns
+    true if the divider bar is in a minimized state, othewise false.
+    This method is the same as DzInfoDivider::isToggled()
+
+FUN Boolean : isToggled()
+  > returns
+    true if the divider bar is in a minimized state, otherwise false.
+    This method is the same as DzInfoDivider::isMinimized()
+
+FUN void : moveDivider( Number distance )
+  > summary
+    Moves the divider distance pixels from the current location.
+  > parameters
+    + distance - The distance in pixels from the current location. If the new location will cause the divider to be displayed in an invalid location, it will be displayed in the closest location to where it was dragged
+
+FUN void : setPreferredDividerPercent( Number distance )
+  > summary
+    Sets the location of the divider bar.
+  > parameters
+    + position - The preffered relative position of the divider. If the new location will cause the divider to be displayed in an invalid location, it will be displayed in the closest location possible.
+
+FUN void : setToggleState( Number state )
+  > summary
+    Sets the toggled state of this divider bar.
+  > parameters
+    + state - The new state of this divider bar: * 0 = Not Minimized
+      - 1 = Half Minimized
+      - 2 = Full Minimized
+
+FUN void : toggleClosed()
+  > summary
+    Toggles the second widget between fully closed and fully open.
+
+FUN Boolean : toggleEnabled()
+  > returns
+    true if this divider bar can be toggled, otherwise false.
+
+FUN void : toggleMinimized()
+  > summary
+    Toggles the minimized state of the second widget. If toggling is disabled, this method has no effect. If either the first or second widget is null, toggling this method will also have no effect.

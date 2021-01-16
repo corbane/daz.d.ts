@@ -1,0 +1,47 @@
+CLS DzModifier : DzElement
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/modifier_dz
+  > summary
+    Base class of all local space modifiers.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Number : getAssignedModifierStackSectionID()
+  > returns
+    The section that this modifier was assigned to in the DzObject modifier stack (list).
+  > since
+    4.11.0.44
+
+FUN Number : getPreferredModifierStackSectionID()
+  > returns
+    The section that this modifier should be a part of in the DzObject modifier stack (list).
+  > since
+    4.11.0.44
+
+FUN Number : getUnknownModifierStackSectionID()
+  > returns
+    The value used to mark a modifier as not having a section ID.
+  > since
+    4.11.0.44
+
+### signals
+
+SIG void : aboutToBeRemoved()
+  > summary
+    Emitted immediately before the modifier is removed from its owner.
+
+SIG void : added()
+  > summary
+    Emitted when the modifier has been added to its owner.
+
+SIG void : currentValueChanged()
+  > summary
+    Emitted when the modifier has changed and needs to be reapplied.
+
+SIG void : removed()
+  > summary
+    Emitted when the modifier has been removed from its owner.

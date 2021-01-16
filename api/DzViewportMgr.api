@@ -1,0 +1,451 @@
+CLS DzViewportMgr : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/viewportmgr_dz
+  > summary
+    Manager class for all visible and non-visible 3D view ports.
+
+### description
+  > summary
+    There is only one of these widgets in the application. This widget is created and owned by DzMainWindow, and can be accessed by requesting a pointer to it from DzMainWindow via DzMainWindow::getViewportMgr().
+
+### enumerations
+
+ENU Layout
+  > summary
+    The possible layout styles.
+  + NO_PANES - No visible view ports
+  + SINGLE_PANE - A single visible viewport
+  + LEFT_RIGHT - 2 visible view ports split the view area into right and left
+  + TOP_BOTTOM - 2 visible view ports split the view area into top and bottom
+  + LEFT2_RIGHT - 3 visible view ports 2 on the left side and 1 on the right
+  + LEFT3_RIGHT - 4 visible view ports 3 on the left side and 1 on the right
+  + LEFT_RIGHT2 - 3 visible view ports 2 on the right side and 1 on the left
+  + LEFT_RIGHT3 - 4 visible view ports 3 on the right side and 1 on the left
+  + TOP2_BOTTOM - 3 visible view ports 2 on the top side and 1 on the bottom
+  + TOP3_BOTTOM - 4 visible view ports 3 on the top side and 1 on the bottom
+  + TOP_BOTTOM2 - 3 visible view ports 2 on the bottom side and 1 on the top
+  + TOP_BOTTOM3 - 4 visible view ports 3 on the bottom side and 1 on the top
+  + FOUR_PANE - 4 visible view ports one in each corner
+  + NUM_LAYOUTS - Total number of layouts
+
+ENU NodeClickMode
+  > summary
+    TODO: Add description.
+  + Node - TODO: Add description.
+  + SkeletonThenNode - TODO: Add description.
+  + Skeleton - TODO: Add description.
+
+ENU QDMode
+  > summary
+    The possible Quick Draw modes
+  + QDOff - No Quick draw enabled.
+  + QDWire - Wireframe Quick draw enabled.
+  + QDSmooth - Smooth-Shade Quick draw enabled.
+
+ENU RegionClickMode
+  > summary
+    TODO: Add description.
+  + Nested - TODO: Add description.
+  + Flat - TODO: Add description.
+
+ENU ViewMouseBtnAccelerator
+  > summary
+    TODO: Add description.
+  + NoAccel - TODO: Add description.
+  + LeftClick - TODO: Add description.
+  + RightClick - TODO: Add description.
+  + MidClick - TODO: Add description.
+  + AltLeftClick - TODO: Add description.
+  + AltRightClick - TODO: Add description.
+  + AltMidClick - TODO: Add description.
+  + CtrlLeftClick - TODO: Add description.
+  + CtrlRightClick - TODO: Add description.
+  + CtrlMidClick - TODO: Add description.
+  + ShiftLeftClick - TODO: Add description.
+  + ShiftRightClick - TODO: Add description.
+  + ShiftMidClick - TODO: Add description.
+  + CtrlAltLeftClick - TODO: Add description.
+  + CtrlAltRightClick - TODO: Add description.
+  + CtrlAltMidClick - TODO: Add description.
+  + CtrlShiftLeftClick - TODO: Add description.
+  + CtrlShiftRightClick - TODO: Add description.
+  + CtrlShiftMidClick - TODO: Add description.
+  + AltShiftLeftClick - TODO: Add description.
+  + AltShiftRightClick - TODO: Add description.
+  + AltShiftMidClick - TODO: Add description.
+  + CtrlAltShiftLeftClick - TODO: Add description.
+  + CtrlAltShiftRightClick - TODO: Add description.
+  + CtrlAltShiftMidClick - TODO: Add description.
+
+ENU ViewMouseModifier
+  > summary
+    TODO: Add description.
+  + NoModifier - TODO: Add description.
+  + Alt - TODO: Add description.
+  + Shift - TODO: Add description.
+  + Ctrl - TODO: Add description.
+  + CtrlAlt - TODO: Add description.
+  + CtrlShift - TODO: Add description.
+  + CtrlAltShift - TODO: Add description.
+  + ShiftAlt - TODO: Add description.
+
+ENU ViewOperation
+  > summary
+    TODO: Add description.
+  + NoOperation - TODO: Add description.
+  + OrbitCamera - TODO: Add description.
+  + RotateCamera - TODO: Add description.
+  + PanCamera - TODO: Add description.
+  + DollyCamera - TODO: Add description.
+  + BankCamera - TODO: Add description.
+  + ZoomDCamera - TODO: Add description.
+  + ZoomFCamera - TODO: Add description.
+
+### methods
+
+FUN void : activateNextTool()
+  > summary
+    Sets the next tool in the list after the currently active tool to be the currently active tool.
+
+FUN void : activatePrevTool()
+  > summary
+    Sets the tool in the list before the currently active tool to be the currently active tool.
+
+FUN void : applyStyleColors()
+  > summary
+    Causes the color of each viewport to be set to their respective values, if the color is defined in the current style.
+
+FUN DzViewTool : findTool( String className )
+  > returns
+    The tool with the given class name - NULL if none exists.
+
+FUN DzUserDrawStyle : findUserDrawStyle( String name )
+  > returns
+    A new instance of the draw style with the given description, otherwise null
+
+FUN DzViewTool : getActiveTool()
+  > returns
+    The active view tool.
+
+FUN DzViewport : getActiveViewport()
+  > returns
+    The currently active viewport
+
+FUN DzViewport : getCustomViewport( Number which )
+  > returns
+    The custom viewport at the given index.
+  > since
+    4.7.1.104
+
+FUN DzViewport : getDefaultViewport( Number which )
+  > returns
+    The default viewport at the given index.
+  > since
+    4.7.1.104
+
+FUN Boolean : getInvertMouseWheel()
+  > returns
+    true if mouse wheel response in the view ports is currently inverted.
+
+FUN DzViewportMgr.Layout : getLayout()
+  > returns
+    Current view layout.
+
+FUN DzViewportMgr.ViewMouseBtnAccelerator : getMouseBtnAccelerator( DzViewportMgr.ViewOperation operation )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseBtnAccelerator : getMouseBtnAccelerator( String str )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseBtnAccelerator : getMouseBtnAccelerator( Qt.MouseButton button, Qt.KeyboardModifiers modifiers )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseBtnAccelerator : getMouseBtnAccelerator( Number mouseBtn, Boolean ctrl, Boolean alt, Boolean shift )
+  > summary
+    TODO: Add description.
+
+FUN String : getMouseBtnAcceleratorString( DzViewportMgr.ViewMouseBtnAccelerator accel )
+  > summary
+    TODO: Add description.
+
+FUN String : getMouseBtnAcceleratorString( DzViewportMgr.ViewOperation operation )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseModifier : getMouseModifier( String str )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseModifier : getMouseModifier( Qt.KeyboardModifiers modifiers )
+  > summary
+    TODO: Add description.
+
+FUN DzViewportMgr.ViewMouseModifier : getMouseModifier( Boolean ctrl, Boolean alt, Boolean shift )
+  > summary
+    TODO: Add description.
+
+FUN String : getMouseModifierString( DzViewportMgr.ViewMouseModifier accel )
+  > summary
+    TODO: Add description.
+
+FUN Number : getNodeClickMode()
+  > returns
+    the node click mode for pick tools
+
+FUN Number : getNumCustomViewports()
+  > returns
+    The number of custom viewports.
+  > since
+    4.7.1.104
+
+FUN Number : getNumDefaultViewports()
+  > returns
+    The number of default (non-custom) viewports.
+  > since
+    4.7.1.104
+
+FUN Number : getNumTools()
+  > returns
+    Number of view tools.
+
+FUN Number : getNumUserDrawStyles()
+  > returns
+    The number of user selectable draw styles
+
+FUN Number : getNumViewCameras()
+  > returns
+    Number of view cameras
+
+FUN Number : getNumViewports()
+  > returns
+    The number of view ports in the application. Currently, this will always be 4, but it is safest to call this function to get the number of available view ports.
+  > returns
+    The total number of viewports.
+
+FUN Number : getNumViews()
+  > returns
+    The number of available view classes
+
+FUN Number : getNumVisibleCustomViewports()
+  > returns
+    The number of custom viewports currently showing.
+  > since
+    4.7.1.104
+
+FUN Number : getNumVisibleDefaultViewports()
+  > returns
+    The number of default viewports currently showing.
+  > since
+    4.7.1.104
+
+FUN Number : getNumVisibleViewports()
+  > returns
+    The total number of viewports currently showing.
+
+FUN DzViewportMgr.ViewOperation : getOperation( DzViewportMgr.ViewMouseBtnAccelerator accel )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getPropagateBackgroundColor()
+  > returns
+    Whether or not to propagate a background color change to all viewports.
+
+FUN Number : getRegionClickMode()
+  > returns
+    the region click mode for pick tools
+
+FUN DzViewTool : getTool( Number i )
+  > returns
+    The view tool at the given index.
+
+FUN Boolean : getUsePerPixelLighting()
+  > summary
+    TODO: Add description.
+
+FUN DzUserDrawStyle : getUserDrawStyle( Number which )
+  > returns
+    A new instance of the draw style at the given index
+
+FUN DzView : getView( Number which )
+  > returns
+    A new instance of the view class at the given index.
+
+FUN DzCamera : getViewCamera( DzCamera.CameraType type )
+  > returns
+    The View (non-animatable) camera of the given type.
+
+FUN DzCamera : getViewCamera( Number which )
+  > returns
+    The View (non-animatable) camera at the given index.
+
+FUN DzViewport : getViewport( Number which )
+  > returns
+    The viewport at the given index.
+    Note:
+    An index outside the default range [0,3] will overflow to getCustomViewport().
+
+FUN void : repaintActive3DViewport()
+  > summary
+    A convenience method that forces a repaint of the currently active 3D viewport.
+
+FUN void : resetViewCameras()
+  > summary
+    Resets all the view cameras to their defaults.
+
+FUN void : setActiveTool( Number which )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+FUN void : setActiveTool( DzViewTool tool )
+  > summary
+    Sets the currently active 3D tool.
+
+FUN void : setActiveViewport( DzViewport activeView )
+  > summary
+    Set the active DzViewport. The given DzViewport must already be attached as an interface to this Scene.
+
+FUN void : setInvertMouseWheel( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+FUN void : setLayout( DzViewportMgr.Layout val )
+  > summary
+    Set the current layout. If we are in single pane mode, the new layout will take effect after single pane mode is switched off.
+
+FUN void : setMouseBtnAccelerator( DzViewportMgr.ViewOperation operation, DzViewportMgr.ViewMouseBtnAccelerator accel )
+  > summary
+    TODO: Add description.
+
+FUN void : setNodeClickMode( Number mode )
+  > summary
+    Set the click mode for node selection tools
+
+FUN void : setPropagateBackgroundColor( Boolean onOff )
+  > summary
+    Set whether or not a background color change of a single viewport should be propagated to the other viewports.
+
+FUN void : setRegionClickMode( Number mode )
+  > summary
+    Set the click mode for region selection tools
+
+FUN void : setUsePerPixelLighting( Boolean yesNo )
+  > summary
+    TODO: Add description.
+
+FUN void : setViewRatios( Number hSingle, Number h1, Number h2, Number vSingle, Number v1, Number v2 )
+  > summary
+    Sets the ratios that are used to layout the view ports inside the view area. Each value is a percentage of the available area that will be allocated to the given view port(s). The values passed in are clamped to valid ranges before applying them. The values should be specified in decimal notation - i.e. 0.0 is 0%, 0.5 is 50%, and 1.0 is 100%. The minimum percentage of the area allocated to any viewport on any axis is 20% (0.2). Therefore, any values that are below this value will be increased to this value, and any values that would result in a remainder less than this value will be decreased.
+    For example, when the view ports are laid out one right, and on left, there is one vertical division, so the vSingle value will be used. If the value of vSingle is 0.6 and the width of the view area is 1000 pixels, then the left view will be (0.6 * 1000) = 600 pixels wide, and the right view will be the remainder (1000 - 600) = 400 pixels wide.
+    In a more complex example, the viewports are laid out three on top, and one on bottom. There is one horizontal division, so the hSingle value is used, and two vertical divisions, so the v1 and v2 values are used. The value of hSingle is 0.35, the value of v1 is 0.3, the value of v2 is 0.5, and the view area is 1000 x 1000 pixels. Then, the top views will be (0.35 * 1000) = 350 pixels high, and the bottom view will be (1000 - 350) = 650 pixels high. The top-left view will be (0.3 * 1000) = 300 pixels wide, the top-center view will be (0.5 * 1000) = 500 pixels wide, and the top-right view will be (1000 - 300 - 500) = 200 pixels wide.
+  > parameters
+    + hSingle - The percentage of the height taken by the top view port(s) when the area has a single horizontal division
+    + h1 - The percentage of the height taken by the top view port when the area has two horizontal divisions
+    + h2 - The percentage of the height taken by the center view port when the area has two horizontal divisions
+    + vSingle - The percentage of the width taken by the left view port(s) when the area has a single vertical division
+    + v1 - The percentage of the width taken by the left view port when the area has two vertical divisions
+    + v2 - The percentage of the width taken by the center view port when the area has two vertical divisions
+
+FUN Boolean : validateMouseBtnAccelerator( DzViewportMgr.ViewMouseBtnAccelerator accel )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : validateMouseWheelAccelerator( DzViewportMgr.ViewMouseModifier accel )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : accelChanged( DzViewportMgr.ViewOperation operation, DzViewportMgr.ViewMouseBtnAccelerator accel )
+  > summary
+    TODO: Add description.
+
+SIG void : acceleratorsChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : acitve3DViewCurrentDimensionsChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : activeToolDrawnDataChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : activeToolSwitched()
+  > summary
+    Emitted when the active tool changes
+
+SIG void : activeViewResized()
+  > summary
+    Emitted when the active view changes size
+
+SIG void : activeViewSwitched()
+  > summary
+    Emitted when the active view changes
+
+SIG void : contextMenuAboutToShow( DzMenu menu, Dz3DViewport view, Point pos )
+  > summary
+    Emitted when the active viewport is about to display a context menu. Other objects can connect to this signal to add custom items to the menu that is displayed to the user.
+
+SIG void : drawElementsListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : graftDrawingChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : invertMouseWheelChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : manipFinished()
+  > summary
+    Emitted when a quick draw operation is finished
+
+SIG void : manipStarted()
+  > summary
+    Emitted when a quick draw operation is started
+
+SIG void : manipulationBindingChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : nodeClickModeChanged( Number mode )
+  > summary
+    TODO: Add description.
+
+SIG void : propagateBackgroundColorChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : quickDrawModeChanged( DzViewportMgr.QDMode mode )
+  > summary
+    Emitted when the quick draw mode changes
+
+SIG void : redrawsLocked( Boolean onOff )
+  > summary
+    Emitted when the redraw lock state changes
+
+SIG void : regionClickModeChanged( Number mode )
+  > summary
+    TODO: Add description.
+
+SIG void : subDManipulationChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : toolListChanged()
+  > summary
+    Emitted when the tool list changes
+
+SIG void : viewLayoutChanged()
+  > summary
+    Emitted when the layout of the view ports changes
+
+SIG void : viewportCameraListChanged()
+  > summary
+    Emitted when the global list of available cameras changes

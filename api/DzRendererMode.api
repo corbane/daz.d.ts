@@ -1,0 +1,47 @@
+CLS DzRendererMode : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/renderermode_dz
+  > summary
+    A base class for defining the set of features that a given mode of a given render engine provides; feature sets.
+
+### description
+  > summary
+    Many render engines provide a single mode of operation; i.e. the engine is either biased or it is physically based. However, as the development of a render engine evolves, it may provide more than one mode of operation, and each mode may provide a different set of features.
+
+### methods
+
+FUN Boolean : hasFeatures()
+  > returns
+    true if any features are enabled for the mode; otherwise false.
+
+FUN Boolean : isBiased()
+  > returns
+    true if the mode for the renderer is biased; otherwise false.
+
+FUN Boolean : isPhysicallyBased()
+  > returns
+    true if the mode for the renderer is physically based; otherwise false.
+
+FUN Boolean : isRenderManCompliant()
+  > returns
+    true if the mode for the renderer is RenderMan compliant; otherwise false.
+
+FUN Array : supportedLaunguages()
+  > returns
+    A list of the languages supported by the mode of the renderer.
+
+FUN Boolean : supportsAdvancedCamera()
+  > returns
+    true if the render supports advance camera options
+  > since
+    4.9.3.121
+
+FUN Boolean : supportsCameraBlades()
+  > returns
+    true if the mode for the renderer supports camera aperture blades
+  > since
+    4.9.3.121
+
+FUN Boolean : usesCatmarkLimitSurface()
+  > returns
+    true if the mode for the renderer supports the Catmark subdivision limit surface; otherwise false.

@@ -1,0 +1,346 @@
+CLS DzProductAssetContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/productassetcontainer_dz
+  > summary
+    A container for a collection of assets presented as a single entity.
+
+### description
+  > summary
+    The “Product” container type represents a collection of assets (and supporting files/metadata) that are presented as a single entity to the end-user. Each product is assigned a Globally Unique Idendtifier (GUID) that is used to identify that entity within the content ecosystem. Once a GUID has been assigned to a product (at creation), it does not (and should not) change.
+    While nearly all of the information that defines a product can be replicated into another, for logistical reasons a GUID can only be associated with one “Store” (source) at any single moment in its lifetime. This means that if more than one content package containing metadata that defines a given GUID is installed by an end-user, the last package installed will define the product in the database.
+    By default, all newly created assets are assigned to a “LOCAL USER” product. This product is represented by a GUID consisting entirely of zeros; i.e., “00000000-0000-0000-0000-000000000000”
+    The “LOCAL USER” product is associated with the “LOCAL USER” store (source); this cannot be modified.
+  > seealso
+    DzAssetMgr.findProductByGuid()
+    DzAssetMgr.findProductByStoreToken()
+    DzAssetMgr.createProduct()
+    DzAssetMgr.createProductFromContainer()
+    DzAssetMgr.createProductFromAssets()
+    DzAssetMgr.createStore()
+    DzAsset
+
+### enumerations
+
+ENU ProductMetadataType
+  > summary
+    The different types of metadata for the product.
+  + User - Metadata that is created, owned and maintained by the user.
+  + Vendor - Metadata that is created, owned and maintained by the vendor (originating source).
+  + UserAndVendor - Metadata that is created, owned and maintained by the vendor (originating source) and/or the user.
+
+### properties
+
+PRP Array : artistNames
+  > summary
+    Holds the list of artist names associated with this product.
+  > since
+    4.9.0.2
+
+PRP Date : dateInstalled
+  > summary
+    Holds the date this product was installed. Can be set (since 4.11.0.193) if isLocalUserStore is true (except where isLocalUser is true).
+  > since
+    4.9.0.2
+
+PRP Date : dateLastUpdated
+  > summary
+    Holds the date this product was last updated. Can be set (since 4.11.0.193) if isLocalUserStore is true (except where isLocalUser is true).
+  > since
+    4.9.0.2
+
+PRP Date : datePurchased
+  > summary
+    Holds the date this product was purchased. Can be set (since 4.11.0.193) if isLocalUserStore is true (except where isLocalUser is true).
+  > since
+    4.9.0.2
+
+PRP Date : dateReleased
+  > summary
+    Holds the date this product was released. Can be set (since 4.11.0.193) if isLocalUserStore is true (except where isLocalUser is true).
+  > since
+    4.9.0.2
+
+PRP String : description
+  > summary
+    Holds the vendor description of this product.
+
+PRP Number : groupId
+  > summary
+    Holds the group identifier for the product. 0 = default, < 0 = app defined, > 0 = user defined.
+  > since
+    4.9.0.11
+
+PRP String : guid
+  > summary
+    Holds the Globally Unique Identifier (GUID) associated with this product. (Read Only)
+  > since
+    4.8.1.95
+
+PRP Boolean : hasCloudMetadata
+  > summary
+    Holds whether this product has metadata provided by the cloud. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : hidden
+  > summary
+    Holds whether this product should be hidden in product views.
+  > since
+    4.9.0.2
+
+PRP String : iconPath
+  > summary
+    Holds the path of the icon for this product. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isCloudInstallable
+  > summary
+    Holds whether this product can be installed from the cloud. (Read Only)
+  > since
+    4.9.0.10
+
+PRP Boolean : isCloudInstalled
+  > summary
+    Holds whether this product is installed from the cloud. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : isCloudOperationInProgress
+  > summary
+    Holds whether a cloud operation is currently occurring for this product. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : isCloudOwned
+  > summary
+    Holds whether this product is managed by the cloud. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : isDownloadingFromCloud
+  > summary
+    Holds whether this product is currently downloading from the cloud. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : isInstalled
+  > summary
+    Holds whether this product is installed. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : isLocalUser
+  > summary
+    Holds whether this product is the special product that holds locally created assets. (Read Only)
+  > since
+    4.9.0.18
+
+PRP Boolean : isLocalUserStore
+  > summary
+    Holds whether this product's store is the special store for locally created products. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isMetadataValid
+  > summary
+    Holds whether the metadata for this product is valid. (Read Only)
+  > since
+    4.9.0.2
+  > returns
+    true if the metadata is valid, otherwise false.
+  > since
+    4.9.0.2
+
+PRP Boolean : isVendor
+  > summary
+    Holds whether this product is owned by a vendor or by the user. (Read Only)
+
+PRP Boolean : needsCloudInstall
+  > summary
+    Holds whether this product needs to be installed from the cloud. (Read Only)
+  > since
+    4.9.0.10
+
+PRP Boolean : needsCloudUpdate
+  > summary
+    Holds whether this product needs to be updated from the cloud. (Read Only)
+  > since
+    4.9.0.2
+
+PRP String : store
+  > summary
+    Holds the name of the store for this product. (Read Only)
+  > since
+    4.9.0.2
+
+PRP String : title
+  > summary
+    Holds the title/name of this product.
+  > since
+    4.9.0.2
+
+PRP String : token
+  > summary
+    Holds the token (i.e. SKU) for this product. (Read Only)
+  > since
+    4.9.0.2
+
+### statics
+
+STA Size : getDefaultStoreIconSize()
+  > returns
+    The default store icon size.
+  > since
+    4.9.3.110
+
+### methods
+
+FUN void : cancelFromCloud()
+  > summary
+    Cancels any pending cloud operation on the product, if any.
+  > since
+    4.9.0.21
+
+FUN void : clearGroup()
+  > summary
+    Sets the product as belonging to the default group identifier; 0.
+  > since
+    4.9.0.11
+
+FUN Array : getCategories( DzProductAssetContainer.ProductMetadataType metaType=DzProductAssetContainer.UserAndVendor, Boolean installedAssets=true )
+  > parameters
+    + metaType - The type of categories to get.
+    + installedAssets - If true, only the categories of installed assets are included in the list, otherwise the categories of all assets regardless of installed state are included.
+  > returns
+    A list of the category paths associated with this product.
+  > since
+    4.9.0.54
+
+FUN Size : getIconSize()
+  > returns
+    The current icon size.
+
+FUN Image : getImage()
+  > returns
+    The image that is used to draw the icon for this product.
+  > since
+    4.11.0.193
+
+FUN String : getMetadataXML( DzProductAssetContainer.ProductMetadataType metaType=DzProductAssetContainer.UserAndVendor )
+  > parameters
+    + metaType - The type of metadata to get.
+  > returns
+    The metadata for this product, in an XML string.
+  > since
+    4.9.0.11
+
+FUN String : getMetadataXMLPath( Boolean userData=false )
+  > parameters
+    + userData - If true, the basename of the file will reflect the user rather than the store.
+  > returns
+    The relative file path of the XML metadata file for this product.
+  > since
+    4.9.0.2
+
+FUN String : getRealtiveInstallPath()
+  > returns
+    The relative path that this product installs too.
+  > since
+    4.9.0.46
+
+FUN Array : getSupportFiles( Boolean forceRefresh=false )
+  > parameters
+    + forceRefresh - If true, ignores any previously cached list of support files and causes the database to be queried explicitly.
+  > returns
+    The list of files in this product that are not user facing.
+  > since
+    4.9.0.2
+
+FUN String : getURL()
+  > returns
+    The URL associated with this product.
+
+FUN void : installFromCloud()
+  > summary
+    Installs a product from the cloud if it is not currently installed. The user will be prompted to authenticate if necessary.
+  > since
+    4.9.0.2
+
+FUN Boolean : isGroup( Number group )
+  > returns
+    true if the product is belongs to group, otherwise false.
+  > attention
+    0 = default, < 0 = app defined, > 0 = user defined
+  > since
+    4.9.0.11
+
+FUN Boolean : loadDefaultIcon()
+  > summary
+    Loads the default icon for this product.
+  > returns
+    true if the icon was loaded, otherwise false.
+
+FUN Boolean : loadProductImage()
+  > summary
+    Causes the product image to be loaded.
+  > returns
+    true if the product image is loaded, otherwise false.
+
+FUN Boolean : pushMetadata()
+  > summary
+    Pushes the metadata information into the database.
+  > returns
+    true if the metadata was successfully pushed to the database, otherwise false.
+  > attention
+    This method retrieves data from the database immediately prior to updating the title, artist names, and description using locally set values and pushing the data back into the database.
+  > since
+    4.9.0.2
+
+FUN void : setIconSize( Size size )
+  > summary
+    Sets the icon size for this product container.
+  > parameters
+    + size - The new icon size.
+
+FUN void : setImage( Image img )
+  > summary
+    Sets the image that will be used to draw the icon for this product.
+  > parameters
+    + img - The new image for this product.
+  > seealso
+    getDefaultStoreIconSize()
+  > since
+    4.11.0.193
+
+FUN void : setURL( String url )
+  > summary
+    Sets the URL for this asset container
+  > parameters
+    + url - The URL to use for this container
+
+FUN void : uninstall()
+  > summary
+    Uninstalls the product if it is currently installed.
+  > since
+    4.9.0.2
+
+FUN void : uninstallFromCloud()
+  > summary
+    Uninstalls the product if it is currently installed.
+  > since
+    4.9.0.2
+
+FUN void : updateFromCloud()
+  > summary
+    Updates the product if no other operations are currently being performed on it. The user will be prompted to authenticate if necessary.
+  > since
+    4.9.0.2
+
+FUN void : updateMetaDataFromCloud( Boolean force=false )
+  > summary
+    Updates the metadata for this product. The user will be prompted to authenticate if necessary.
+  > parameters
+    + force - If true, any cached data will be discarded and force a connection to be made.
+  > since
+    4.9.0.32

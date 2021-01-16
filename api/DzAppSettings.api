@@ -1,0 +1,178 @@
+CLS DzAppSettings : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/appsettings_dz
+  > summary
+    Provides cross-platform support for persistent application settings.
+
+### description
+  > summary
+    Application Settings are used to store and retrieve settings that persist from one execution of the appliction to the next. On Windows, the settings are saved in the registry. On Mac, these settings are saved via Mac preference plist files.
+    You can create an instance of this class any time you need to read or write persistent settings. This class is a replacement for DzAppSettingsMgr as it is easier and safer to use. Since each instance is separate, the current path of one instance will not affect the rest of the application. It is also not necessary to call popPath() to put this class back into its previous state.
+
+### constructors
+
+CTR DzAppSettings()
+  > summary
+    Default Constructor - creates a new settings object that starts out at the default application path.
+
+CTR DzAppSettings( String startPath )
+  > parameters
+    + Constructor - creates a new settings object that pushes the given path onto the default application path. This is the same as using the default constructor and then calling pushPath() with the given path.
+
+### methods
+
+FUN Boolean : containsValue( String key )
+  > parameters
+    + key - The name of the value to check.
+  > returns
+    true if this settings contains the named value, otherwise false.
+
+FUN Boolean : getBoolValue( String key, Boolean def=false )
+  > summary
+    Read a boolean value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setBoolValue()
+
+FUN Color : getColorValue( String key, Color def=Color )
+  > summary
+    Read a color value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setColorValue()
+
+FUN DzFloatColor : getFloatColorValue( String key, DzFloatColor def=DzFloatColor )
+  > summary
+    Read a float color value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setColorValue()
+
+FUN Number : getFloatValue( String key, Number def=0.0 )
+  > summary
+    Read a floating point value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setFloatValue()
+
+FUN Number : getIntValue( String key, Number def=0 )
+  > summary
+    Read a integer value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setIntValue()
+
+FUN String : getStringValue( String key, String def=“” )
+  > summary
+    Read a string value from the given key.
+  > parameters
+    + key - The name of the value to read.
+    + def - Default value - this value is returned if the named value fails to be read.
+  > returns
+    The value of the requested key.
+  > seealso
+    setStringValue()
+
+FUN void : popPath()
+  > summary
+    Pops a temporary key path off the top of the stack.
+
+FUN void : pushPath( String path )
+  > summary
+    Sets the current key path temporarily to the given path; popPath() can be called to remove this path.
+  > parameters
+    + path - The sub-path to add to the current key path.
+
+FUN Boolean : removeValue( String key )
+  > summary
+    Removes a setting by name.
+  > parameters
+    + key - The name of the key to remove.
+  > returns
+    true if the key/value existed and was successfully removed, otherwise false.
+
+FUN Boolean : setBoolValue( String key, Boolean setting )
+  > summary
+    Sets a key with a boolean value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getBoolValue()
+
+FUN Boolean : setColorValue( String key, Color setting )
+  > summary
+    Sets a key with a color value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getColorValue()
+
+FUN Boolean : setFloatColorValue( String key, DzFloatColor setting )
+  > summary
+    Sets a key with a float color value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getFloatColorValue()
+
+FUN Boolean : setFloatValue( String key, Number setting )
+  > summary
+    Sets a key with a floating point value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getFloatValue()
+
+FUN Boolean : setIntValue( String key, Number setting )
+  > summary
+    Sets a key with a integer value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getIntValue()
+
+FUN Boolean : setStringValue( String key, String setting )
+  > summary
+    Sets a key with a string value.
+  > parameters
+    + key - The name of the key to write.
+    + setting - The value to set.
+  > returns
+    true if the key/value was successfully set, otherwise false.
+  > seealso
+    getStringValue()

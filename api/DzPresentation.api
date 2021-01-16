@@ -1,0 +1,53 @@
+CLS DzPresentation : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/presentation_dz
+  > summary
+    Represents the presentation for an asset.
+
+### description
+  > seealso
+    DzProperty
+
+### properties
+
+PRP String : autoFitBase
+  > summary
+    The auto fit base that this asset is.
+
+PRP Color : colorA
+  > summary
+    A color hint to be used in conjunction with colorB to define a 2 color linear gradient used by UI elements displayed to the user.
+
+PRP Color : colorB
+  > summary
+    A color hint to be used in conjunction with colorA to define a 2 color linear gradient used by UI elements displayed to the user.
+
+PRP String : description
+  > summary
+    A human readable, end-user facing, description of the item that the presentation is attached to.
+
+PRP String : iconLarge
+  > summary
+    The relative path (uri) corresponding to a large image. For a DzFloatProperty that applies a DzMorph, this image is used for display as a “Card” (vertical slider). If iconSmall is not defined, the path defined here is also used (scaled) for the horizontal slider.
+
+PRP String : iconSmall
+  > summary
+    The relative path (uri) corresponding to a small image. For a DzFloatProperty that applies a DzMorph, this image is used for display in a horizontal slider. If this is not defined and a value is defined for iconLarge, its value will be used and the image will be scaled down.
+
+PRP String : label
+  > summary
+    A human readable label for the presentation.
+
+PRP String : preferredBase
+  > summary
+    The preferred base this item tries to follow. If this is does not match the autoFitBase of the conform target, auto-fit will try to convert the content.
+
+PRP String : type
+  > summary
+    A hint to the intended purpose of what the presentation is attached to. For a DzFloatProperty that applies a DzMorph intended to adjust the shape of the underlying structure of an object (e.g. “Nose Height” or “Eye Width”), this would be “Modifier/Shape”. For a DzFloatProperty intended to be used for posing a DzBone of a figure, or to adjust a DzMorph that makes non-structural this would be “Modifier/Pose”.
+
+### constructors
+
+CTR DzPresentation()
+  > summary
+    Default Constructor.

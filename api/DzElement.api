@@ -1,0 +1,503 @@
+CLS DzElement : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/element_dz
+  > summary
+    Base class for objects that have animatable/storable properties.
+
+### description
+  > summary
+    Classes derived from DzElement may have any number of properties (objects derived from DzProperty). Those properties may be added and removed at runtime and may be specified as animatable or not. There are several types of properties that have been supplied with the Studio SDK. Property names must be unique within an element. A variety of methods are provided to allow easy traversal and/or searching of the properties list for an object.
+    Methods are provided to clear animation data on all properties of an object either over a range or over all time.
+    DzElement takes ownership of all properties added via addProperty(). Subclasses should not attempt to delete properties that have been added to the element.
+    DzElement also handles saving and loading of all properties. When DzElement loads a property from a file, it will delete any existing property of the same name and replace it with the new property read in - subclasses are responsible for updating any local references to properties whenever a file is loaded. The easiest and most reliable way to do this is for the subclass to write out and read back in any local pointers it maintains to properties. Another approach would be for the subclass to reimplement the postLoadFile() function and update its references by calling findProperty() to lookup the properties by name.
+
+### properties
+
+PRP Number : elementID
+  > summary
+    Holds the number used to uniquely identify this element in the scene. (Read Only)
+  > since
+    4.6.4.13
+
+### methods
+
+FUN DzError : addDataItem( DzElementData item )
+  > summary
+    Hang a new custom data item off of this element. Data items will be deleted when this element is deleted, so ownership of the data item is transferred to the element after this call. Do not attempt to delete the data item yourself unless you call removeDataItem() first.
+  > parameters
+    + item - The data item to attach to this element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    removeDataItem()
+
+FUN DzError : addPrivateProperty( DzProperty prop )
+  > summary
+    Add a new private property that will be available for connections or direct editing.
+  > parameters
+    + prop - The property to add to the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    removeProperty()
+
+FUN DzError : addProperty( DzProperty prop )
+  > summary
+    Add a new property. Adds a new property that will be available for connections or direct editing.
+  > parameters
+    + prop - The property to add to the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    removeProperty()
+
+FUN void : beginEdit()
+  > summary
+    Begins an editing operation for this element - DzProperty::beginEdit() will be called for all properties belonging to this element.
+
+FUN void : cancelEdit()
+  > summary
+    Cancels an editing operation for this element - DzProperty::cancelEdit() will be called for all properties belonging to this element.
+
+FUN void : clearAllAnimData()
+  > summary
+    Removes all animation keys on this object.
+
+FUN void : clearAnimData( DzTimeRange range )
+  > summary
+    Clear animation keys in the currently active animation layer. Removes animation data on all animatible properties owned by this element over the given range.
+  > parameters
+    + range - The range of time over which keys will be removed.
+
+FUN void : copyFrom( DzElement source )
+  > summary
+    Matches the properties on this element to properties on the given element by name, and then copies the values of matching properties on source to the properties on this element.
+  > parameters
+    + source - The element that this element should copy property values from.
+
+FUN elementclipboard_dz : copyToClipboard( Array contentTypes=[] )
+  > summary
+    Copies the property values of the element to a 'clipboard' so that they may be saved and applied (copied) to another element - or to the same element.
+  > parameters
+    + contentTypes - A list of the contentTypes that should be included in the copy. An empty list will copy all property values.
+  > returns
+    The 'clipboard' which holds a copy of the current element's property values. These values are a snapshot of the current state of the element, and will remain unchanged even if the element is changed or deleted. The caller is responsible for deleting this object.
+
+FUN DzError : deleteDataItem( DzElementData item )
+  > summary
+    Remove the the data item from this element and deletes it. Pointer is invalid after this call if DZ_NO_ERROR is returned.
+  > parameters
+    + item - The data item to remove.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addDataItem()
+
+FUN DzElementData : findDataItem( String dataName )
+  > summary
+    Retrieve the user data item with the given ID, if one with that ID is attached to this element.
+  > parameters
+    + dataName - Unique ID to use in looking up the user data item.
+  > returns
+    The corresponding item if found, NULL if no match.
+
+FUN Number : findDataItemIndex( DzElementData item )
+  > summary
+    Searches for the first data item index.
+  > parameters
+    + item - The data item to find.
+  > returns
+    The index of the data item.
+
+FUN DzProperty : findMatchingProperty( DzProperty srcProp )
+  > summary
+    Locate a matching property.
+  > parameters
+    + srcProp - The property to search for a match.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPrivateProperty( String name )
+  > summary
+    Locate a property by name.
+  > parameters
+    + name - The name of the property to search for.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPrivateProperty( String name, Boolean caseSensitive )
+  > summary
+    Locate a property by name.
+  > parameters
+    + name - The name of the property to search for.
+    + caseSensitive - Whether or not the search should be case sensitive.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPrivatePropertyByLabel( String label )
+  > summary
+    Locate a property by label.
+  > parameters
+    + label - The label of the property to search for.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPrivatePropertyByLabel( String label, Boolean caseSensitive )
+  > summary
+    Locate a property by label.
+  > parameters
+    + label - The label of the property to search for.
+    + caseSensitive - Whether or not the search should be case sensitive.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findProperty( String name )
+  > summary
+    Locate a property by name.
+  > parameters
+    + name - The name of the property to search for.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findProperty( String name, Boolean caseSensitive )
+  > summary
+    Locate a property by name.
+  > parameters
+    + name - The name of the property to search for.
+    + caseSensitive - Whether or not the search should be case sensitive.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPropertyByLabel( String label )
+  > summary
+    Locate a property by label.
+  > parameters
+    + label - The label of the property to search for.
+  > returns
+    The property, or NULL if not found.
+
+FUN DzProperty : findPropertyByLabel( String label, Boolean caseSensitive )
+  > summary
+    Locate a property by label.
+  > parameters
+    + label - The label of the property to search for.
+    + caseSensitive - Whether or not the search should be case sensitive.
+  > returns
+    The property, or NULL if not found.
+
+FUN void : finishEdit()
+  > summary
+    finishes an editing operation for this element - DzProperty::finishEdit() will be called for all properties belonging to this element.
+
+FUN void : getAttributes( DzSettings settings )
+  > summary
+    Populates the given settings object with the attributes of this element. If this settings object is not empty the save filters will save out this settings information in the preset.
+  > parameters
+    + settings - The settings object to put the information in.
+  > seealso
+    setAttributes()
+
+FUN DzElementData : getDataItem( Number index )
+  > parameters
+    + index - The index of the data item to return.
+  > returns
+    The data item for this element at the given index.
+
+FUN Array : getDataItemList()
+  > returns
+    A list of the data items attached to this element.
+
+FUN DzElement : getElementChild( Number which )
+  > parameters
+    + which - The index of the child element to return.
+  > returns
+    The child of this element at the given index.
+
+FUN DzElement : getElementParent()
+  > returns
+    The element that is the parent of this element. Null if the element has no parent.
+
+FUN String : getLabel()
+  > returns
+    The user-defined interface label for this element.
+
+FUN DzScript : getLoadScript()
+  > returns
+    The script that is executed when this element is loaded from a file.
+
+FUN Number : getNumDataItems()
+  > returns
+    The number of user data items attached to this element.
+
+FUN Number : getNumElementChildren()
+  > returns
+    The number of children this element has.
+
+FUN Number : getNumPrivateProperties()
+  > returns
+    The number of private properties currently owned by this element.
+
+FUN Number : getNumProperties()
+  > returns
+    The number of properties currently owned by this element.
+
+FUN DzProperty : getPrivateProperty( Number index )
+  > summary
+    Get a property from this element's property list.
+  > parameters
+    + i - The index of the property to get.
+  > returns
+    The property at the given index.
+
+FUN DzPropertyGroupTree : getPrivatePropertyGroups()
+  > returns
+    The property group tree for private properties owned by this element. If this element does not manage its own property grouping, the tree that is returned will be the tree of the element that manages the property groups for this element.
+
+FUN Array : getPrivatePropertyList()
+  > returns
+    A list of all the private properties on this element.
+
+FUN DzProperty : getProperty( Number index )
+  > summary
+    Get a property from this element's property list.
+  > parameters
+    + i - The index of the property to get.
+  > returns
+    The property at the given index.
+
+FUN DzPropertyGroupTree : getPropertyGroups()
+  > returns
+    The property group tree for properties owned by this element. If this element does not manage its own property grouping, the tree that is returned will be the tree of the element that manages the property groups for this element.
+
+FUN Array : getPropertyList()
+  > returns
+    A list of all the properties on this element.
+
+FUN String : getUniqueDataItemName( String dataName )
+  > parameters
+    + dataName - The name of the data item to make unique.
+  > returns
+    The original value if dataName is already unique, otherwise a unique name.
+  > since
+    4.9.3.117
+
+FUN String : getUniquePrivatePropertyName( String name )
+  > parameters
+    + name - The private property name to make unique.
+  > returns
+    The original value if name is already unique, otherwise a unique private property name.
+  > since
+    4.9.3.117
+
+FUN String : getUniquePropertyName( String name )
+  > parameters
+    + name - The property name to make unique.
+  > returns
+    The original value if name is already unique, otherwise a unique property name.
+  > since
+    4.9.3.117
+
+FUN Boolean : inEdit()
+  > returns
+    true if the element is in an editing operation, otherwise false.
+  > seealso
+    beginEdit(), finishEdit(), cancelEdit()
+
+FUN DzError : insertPrivateProperty( Number index, DzProperty prop )
+  > summary
+    Adds a new property that will be available for connections or direct editing.
+  > parameters
+    + index - The location in the list to insert the new property.
+    + prop - The property to add to the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    removeProperty()
+
+FUN DzError : insertProperty( Number index, DzProperty prop )
+  > summary
+    Add a new property. Adds a new property that will be available for connections or direct editing.
+  > parameters
+    + index - The index in the properties list to insert the property.
+    + prop - The property to insert in the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty(), removeProperty()
+
+FUN DzError : moveDataItemToIndex( DzElementData item, Number index )
+  > summary
+    Moves a data item to a new index.
+  > parameters
+    + item - The data item to move.
+    + newIndex - The new index of the item.
+  > returns
+    An error code.
+
+FUN DzError : movePrivateProperty( DzProperty prop, DzElement element )
+  > summary
+    Moves the given property from this element to newElement, if it can be removed. Properties can be specified as non-removable (e.g. the rotation channels of the DzNode class). Doing so makes it impossible to move that property to another element.
+  > parameters
+    + prop - The property to remove from the element. If prop is not a user property, it returns DZ_ILLEGAL_ARGUMENT_ERROR. Note: This is also the return code for a null pointer. Passing a null pointer generates a log message, whereas passing a non-user property does not.
+    + newElement - The element that prop should be moved to.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzError : moveProperty( DzProperty prop, DzElement element )
+  > summary
+    Moves the given property from this element to newElement, if it can be removed. Properties can be specified as non-removable (e.g. the rotation channels of the DzNode class). Doing so makes it impossible to move that property to another element.
+  > parameters
+    + prop - The property to remove from the element. If prop is not a user property, it returns DZ_ILLEGAL_ARGUMENT_ERROR. Note: This is also the return code for a null pointer. Passing a null pointer generates a log message, whereas passing a non-user property does not.
+    + newElement - The element that prop should be moved to.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzError : removeDataItem( DzElementData item )
+  > summary
+    Remove the data item from this element.
+  > parameters
+    + item - The data item to remove.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addDataItem()
+
+FUN DzError : removePrivateProperty( DzProperty prop )
+  > summary
+    Removes the given property, if it can be removed. Properties can be specified as non-removable (e.g. the rotation channels of the DzNode class). Doing so makes it impossible to remove that property from the object.
+  > parameters
+    + prop - The property to remove from the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzError : removePrivateProperty( String name )
+  > summary
+    Attempts to remove the named property. Fails if the property could not be found or could not be removed.
+  > parameters
+    + name - The name of the property to search for and remove if it is found.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzError : removeProperty( DzProperty prop )
+  > summary
+    Removes the given property, if it can be removed. Properties can be specified as non-removable (e.g. the rotation channels of the DzNode class). Doing so makes it impossible to remove that property from the object.
+  > parameters
+    + prop - The property to remove from the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzError : removeProperty( String name )
+  > summary
+    Attempts to remove the named property. Fails if the property could not be found or could not be removed.
+  > parameters
+    + name - The name of the property to search for and remove if it is found.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+  > seealso
+    addProperty()
+
+FUN DzElement : setAttributes( DzSettings settings )
+  > summary
+    Sets attributes in the handed in settings and returns a pointer to an element set by these settings. The element returned may not be a new element or null if the settings are not correct. Default implementation returns this with no changes.
+  > parameters
+    + settings - The settings object containing the information.
+  > returns
+    A new element, or this element if no changes were made. The caller is responsible for cleaning up the memory of the return element if it is not this.
+
+FUN DzError : setLabel( String name )
+  > summary
+    Set the user-defined label that is displayed in the interface for this object.
+  > parameters
+    + name - The new label for the element.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : setLoadScript( DzScript script )
+  > summary
+    Sets the script that will be executed when this element is loaded from a file.
+  > parameters
+    + script - The script that will be saved with this element and executed when it is loaded from file. The element takes ownership.
+
+FUN void : setName( String name )
+  > summary
+    Set the internal name of this object.
+  > parameters
+    + name - The name to assign to this element.
+
+FUN Boolean : shouldSortOnLoad()
+  > returns
+    true if this element should have its property groups and properties sorted after being created on load, otherwise false.
+
+FUN void : update()
+  > summary
+    Called to update any cached or display data for this object.
+
+### signals
+
+SIG void : labelChanged( String newLabel )
+  > summary
+    Emitted when this object's label is changed.
+  > parameters
+    + newLabel - The new label of the element.
+
+SIG void : parentChanged()
+  > summary
+    Emitted when this element's parent is changed.
+
+SIG void : privatePropertyAdded( DzProperty prop )
+  > summary
+    Emitted when a private property is added to this element.
+  > parameters
+    + prop - The property just added.
+
+SIG void : privatePropertyListChanged()
+  > summary
+    Emitted when a private property is added to or removed from this element.
+
+SIG void : privatePropertyListInTreeChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : privatePropertyRemoved( DzProperty prop )
+  > summary
+    Emitted when a private property is removed from this element.
+  > parameters
+    + prop - The property just removed.
+
+SIG void : privatePropertyTreeChanged()
+  > summary
+    Emitted when the private property tree has changed.
+
+SIG void : propertyAdded( DzProperty prop )
+  > summary
+    Emitted when a property is added to this element.
+  > parameters
+    + prop - The property just added.
+
+SIG void : propertyListChanged()
+  > summary
+    Emitted when a property is added to or removed from this element.
+
+SIG void : propertyListInTreeChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : propertyRemoved( DzProperty prop )
+  > summary
+    Emitted when a property is removed from this element.
+  > parameters
+    + prop - The property just removed.
+
+SIG void : propertyTreeChanged()
+  > summary
+    Emitted when the property tree has changed.

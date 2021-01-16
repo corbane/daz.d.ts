@@ -1,0 +1,35 @@
+CLS DzToolBarItem : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/toolbaritem_dz
+  > summary
+    Class that encapsulates an item in a DzToolBar.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU Type
+  > summary
+    The types of action menu items
+  + Separator - A toolbar separator (i.e. divider)
+  + Action - An action item - a toolbar item that activates a DzAction
+  + CustomAction - A toolbar item that activates a custom DzAction. See Also: DzActionMgr for more about custom actions.
+  + CustomWidget - A toolbar item that provides a non-standard widget.
+  + ViewportLeftAlignSpacer - A toolbar item that adjusts itself so that any items after it are left aligned over the application viewport.
+  + ViewportCenterAlignSpacer - A toolbar item that adjusts itself so that any items after it are centered over the application viewport.
+
+### properties
+
+PRP String : action
+  > summary
+    The class name of the action
+
+PRP DzToolBarItem.Type : type
+  > summary
+    The type of the menu item. (Read Only)
+
+PRP String : uiScript
+  > summary
+    If the menu item type is CustomWidget, the name of the script that defines the UI for this menu item, or if the type of the item is not CustomWidget, an empty string is returned.

@@ -1,0 +1,44 @@
+CLS DzCategoryAssetContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/categoryassetcontainer_dz
+  > summary
+    A container type for assets that are assigned a particular classification.
+
+### description
+  > summary
+    The “Category” container type serves to provide a means of working with assets that share qualities or characteristics without moving the actual files on disk; moving or renaming files on disk breaks the correlation between the file and the asset that represents it.
+  > seealso
+    DzAssetMgr::getCategories()
+    DzAsset
+
+### properties
+
+PRP Boolean : isVendor
+  > summary
+    Holds whether this category is owned by a vendor or by the user. (Read Only)
+  > since
+    4.9.3.110
+
+### methods
+
+FUN Array : getAssetsInCategory( Boolean userFacing=true, Boolean installed=true )
+  > parameters
+    + userFacing - Whether or not to limit the list to user-facing assets.
+    + installed - Whether or not to limit the list to installed assets.
+  > returns
+    A list of assets associated with the path of this container, matching the criteria specified.
+  > seealso
+    getPath()
+    DzAssetMgr::searchForAssetsInCategory()
+  > since
+    4.9.3.56
+
+FUN String : getPath()
+  > returns
+    The full path of the category that this container represents.
+  > since
+    4.9.2.48
+
+FUN void : updateRow()
+  > summary
+    Updates the container using the data that is currently stored in the database.

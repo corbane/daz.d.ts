@@ -1,0 +1,45 @@
+RAW 
+interface RegExp
+{
+    /**
+     * Provides an array of all the captured strings from the previous match. undefined if there was no match. (Read Only)
+     */
+    capturedTexts: Array<unknown>
+    /**
+     * true if the expression is empty, otherwise false. (Read Only)
+     */
+    empty: boolean
+    /**
+     * Holds the length of the last matched string. -1 if there was no match. (Read Only)
+     */
+    matchedLength: number
+    /**
+     * true if the expression is syntactically valid, otherwise false. (Read Only)
+     */
+    valid: boolean
+    /**
+     * @returns The capture at the given index of the pattern in the previously matched text.
+     * @param which - The index of the capture to return.
+     */
+    cap (which: number): string;
+    /**
+     * @returns true if text exactly matches this expression's pattern, otherwise false.
+     * @param text - The String to search with the expression pattern.
+     */
+    exactMatch (text: string): boolean;
+    /**
+     * @returns The position of the capture at the given index of the pattern in the previously matched text.
+     * @param which - The index of the capture to return.
+     */
+    pos (which: number): number;
+    /**
+     * @returns The [zero-based] index of the first occurrence of this expression's pattern in text, starting at the beginning of text. If no match is made -1 is returned.
+     * @param text - The String to search with the expression pattern.
+     */
+    search (text: string): number;
+    /**
+     * @returns The [zero-based] index of the first occurrence of this expression's pattern in text, starting at the end of text. If no match is made -1 is returned.
+     * @param text - The String to search with the expression pattern.
+     */
+    searchRev (text: string): number;
+}

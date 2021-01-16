@@ -1,0 +1,95 @@
+CLS DzDForm : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dform_dz
+  > summary
+    Base class for dforms.
+
+### description
+  > summary
+    The DForm is the primary component of a DForm deformer. The others are the DzDFormBase, DzDFormZone and dformmodifier_dz.
+
+### constructors
+
+CTR DzDForm()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : applyToNode( DzNode node )
+  > summary
+    Adds the effect of this DForm to the given node
+  > parameters
+    + node - A pointer to the node to apply this D-Form's affect to.
+
+FUN Number : getAvatarScale()
+  > returns
+    The avatar scale factor for the representation of the DFormer
+
+FUN DzDFormBase : getBase()
+  > returns
+    The DForm Base.
+
+FUN Color : getGradientMax()
+  > returns
+    The color used in the gradient for weights at the maximum end of the scale.
+
+FUN Color : getGradientMin()
+  > returns
+    The color used in the gradient for weights at the minimum end of the scale.
+
+FUN dformmodifier_dz : getModifier( Number index )
+  > summary
+    Gets the ith Modifier of the DForm. The index is zero based. Can be used with getNumTargets to iterate over all the DForm Modifiers.
+  > parameters
+    + i - The index of the modifier to return.
+  > returns
+    The target Modifier at the requested index
+
+FUN Number : getNumModifiers()
+  > returns
+    The number of DForm modifiers that are driven by this DForm.
+
+FUN Number : getOpacity()
+  > returns
+    The opacity for the representation of the DFormer
+
+FUN DzDFormZone : getZone()
+  > returns
+    The DForm Zone.
+
+FUN void : setAvatarScale( Number val )
+  > summary
+    Sets the avatar scale factor of the DForm representation
+  > parameters
+    + val - The new avatar scale factor for the DForm - 1.0 maintains 100% scale.
+
+FUN void : setBase( DzDFormBase base )
+  > summary
+    Sets the Base for this DForm.
+  > parameters
+    + base - The DForm Base.
+
+FUN void : setGradientMax( Color color )
+  > summary
+    Sets the Color used in the gradient for weights at the maximum end of the scale
+  > parameters
+    + color - The color to use for representing maximum weights
+
+FUN void : setGradientMin( Color color )
+  > summary
+    Sets the Color used in the gradient for weights at the minimum end of the scale
+  > parameters
+    + color - The color to use for representing minimum weights
+
+FUN void : setOpacity( Number val )
+  > summary
+    Sets the opacity of the DForm representation
+  > parameters
+    + val - The new opacity for the DForm - 0.0 is completely transparent, 1.0 is completely opaque.
+
+FUN void : setZone( DzDFormZone zone )
+  > summary
+    Sets the Zone for this DForm.
+  > parameters
+    + zone - The DForm Zone.

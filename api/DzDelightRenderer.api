@@ -1,0 +1,21 @@
+CLS DzDelightRenderer : DzRenderer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/delightrenderer_dz
+  > summary
+    The 3Delight renderer.
+
+### description
+  > summary
+    Implements a RenderMan interface for the scene to render itself through the 3Delight renderer.
+
+### constructors
+
+CTR DzDelightRenderer()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : resetIPRHandler()
+  > summary
+    TODO: Add description.

@@ -1,0 +1,90 @@
+CLS DzMenu : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/menu_dz
+  > summary
+    Basic Menu construction class.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Number : addAction( DzAction action, Number menu=0 )
+  > summary
+    Adds the DzAction to the given menu.
+  > parameters
+    + action - A pointer to the action item to add to the menu.
+    + menu - The menu id of the menu to add the action to. If zero, the action will be added to the root menu.
+  > returns
+    The item id of the action in the menu.
+
+FUN Number : addItem( String item, Number menu=0 )
+  > summary
+    Adds an entry to the given menu.
+  > parameters
+    + item - The label that will appear in the menu for the user to activate the item.
+    + menu - The menu id of the menu to add the item to. If zero, the item will be added to the root menu.
+  > returns
+    The item id of the new menu item.
+
+FUN Number : addItem( String item, QObject receiver, String member, Number menu=0 )
+  > summary
+    Adds an entry to the given menu and connects it to a slot.
+  > parameters
+    + item - The label that will appear in the menu for the user to activate the item.
+    + receiver - The QObject to connect the activate signal to.
+    + member - The slot/signal that will be connect to the activate signal.
+    + menu - The menu id of the menu to add the item to. If zero, the item will be added to the root menu.
+  > returns
+    The item id of the new menu item.
+
+FUN void : addSeparator( Number menu=0 )
+  > summary
+    Adds a separator bar to the given menu.
+  > parameters
+    + menu - The menu id of the menu to add the separator to. If zero, the separator will be added to the root menu.
+
+FUN Number : addSubMenu( String label, Number menu=0 )
+  > summary
+    Creates a submenu with the given label, and adds it to the given menu.
+  > parameters
+    + label - The text that will appear in the parent menu for the user to activate the submenu.
+    + menu - The menu id of the parent menu to add the submenu to. If zero, the submenu will be added to the root menu.
+  > returns
+    The menu id of the new submenu.
+
+FUN Number : exec( Point pos )
+  > summary
+    Shows the menu to the user.
+  > parameters
+    + pos - The global position that the menu will be displayed at.
+  > returns
+    The item id of the item selected by the user, or -1 if the menu was closed without the user selecting an item.
+
+FUN Number : exec()
+  > summary
+    Shows the menu to the user.
+  > returns
+    The item id of the item selected by the user, or -1 if the menu was closed without the user selecting an item.
+
+FUN Number : findSubMenu( String label, Number menu=0 )
+  > summary
+    Finds a submenu with the given label, and returns its menu id.
+  > parameters
+    + label - The text that appears in the parent menu for the user to activate the submenu.
+    + menu - The menu id of the parent menu to search for the submenu in. If zero, the root menu will be searched.
+  > returns
+    The menu id of the new submenu, -1 if submenu is not found.
+
+FUN Boolean : isEmpty()
+  > returns
+    true if no items or actions have been added to the menu.
+
+### signals
+
+SIG void : activated( Number id )
+  > summary
+    Emitted when the user selects an item in the menu, or one of its submenus.
+  > parameters
+    + id - The item id of the item the user selected.

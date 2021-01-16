@@ -1,0 +1,21 @@
+CLS DzFileIOSettings : DzSettings
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fileiosettings_dz
+  > summary
+    Base class for all file I/O options. File I/O classes should use this to pass the options supported by the class.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzFileIOSettings()
+  > summary
+    Default Constructor - creates an empty set of options
+
+CTR DzFileIOSettings( DzFileIOSettings settings )
+  > summary
+    Copy constructor.
+  > parameters
+    + settings - The settings object to copy data from.

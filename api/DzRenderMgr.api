@@ -1,0 +1,253 @@
+CLS DzRenderMgr : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rendermgr_dz
+  > summary
+    Render manager.
+
+### description
+  > summary
+    The manager that is responsible for rendering.
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Do not create an instance of this class, rather request the instance from DzApp via DzApp::getRenderMgr().
+
+### enumerations
+
+ENU RenderPriority
+  > summary
+    Possible render priorities that are used to order various operations when rendering. Most notably, DzNodes and DzMaterials are processed according to their priority when rendering.
+  + RENDER_PRIORITY_LOWEST - The lowest priority.
+  + RENDER_PRIORITY_LOW - A low priority.
+  + RENDER_PRIORITY_BELOW_NORMAL - A below normal priority.
+  + RENDER_PRIORITY_NORMAL - The normal priority.
+  + RENDER_PRIORITY_ABOVE_NORMAL - An above normal priority.
+  + RENDER_PRIORITY_HIGH - A high priority.
+  + RENDER_PRIORITY_HIGHEST - The highest priority.
+
+### statics
+
+STA String : getIconSuffix()
+  > returns
+    The suffix used for files generated as icons for renders to help improve performance and responsiveness.
+
+STA String : getMetaXmlFileName( String imageName, Boolean basenameOnly )
+  > parameters
+    + imageName - The path of the rendered file to get the metadata file for.
+    + shortname - If true, only the shortname of the file is returned, otherwise the full path of the file is returned.
+  > returns
+    The name of the XML file that holds metadata for imageName.
+
+STA String : getRenderBaseFileName( String imageName, Boolean basenameOnly )
+  > parameters
+    + imageName - The path of the rendered file to get a base filename for.
+    + basename - If true, only the basename of the file is returned, otherwise the basename is preceded by the path.
+  > returns
+    The base filename of the file for imageName.
+
+STA String : getRenderIconFileName( String imageName, Boolean basenameOnly )
+  > parameters
+    + imageName - The path of the rendered file to get the icon file for.
+    + shortname - If true, only the shortname of the file is returned, otherwise the full path of the file is returned.
+  > returns
+    The name of the icon file for imageName.
+
+### methods
+
+FUN void : addRenderDirectory( String directory, Boolean saveSetting=true )
+  > summary
+    Adds a directory to the list of known render directories.
+  > parameters
+    + directory - The path of the directory to add.
+    + saveSetting - If true, saves the setting immediately. If false, waits until the application exits to save the setting.
+
+FUN Boolean : doIPRRender( DzCamera camera, DzRenderHandler renderHandler, DzRenderOptions opt=null )
+  > summary
+    Interactively and progressively renders the scene with the given render settings, using the given handler from the given camera.
+  > parameters
+    + opt - The render settings to use for the render. If NULL, the current user render settings are used.
+    + renderHandler - The render handler to use for the render.
+    + camera - The camera to use for the render.
+  > returns
+    true if the render was performed successfully, otherwise false.
+
+FUN Boolean : doRender( DzRenderOptions opt=null )
+  > summary
+    Renders the scene with the given render settings. If no render settings are specified, then the current application render settings are used.
+  > parameters
+    + opt - The render settings to use for the render. If NULL, the current user render settings are used.
+
+FUN DzRenderer : findRenderer( String className )
+  > returns
+    The renderer with the given class name (if any), otherwise null.
+
+FUN DzRenderer : getActiveRenderer()
+  > returns
+    The active renderer for the application. This will be NULL if no renderers are available.
+
+FUN Array : getBaseAndRelativePath( String absPath )
+  > parameters
+    + absPath - The absolute path to split into its base and relative parts.
+  > returns
+    A list where the first item is the base path and any additional items represent the relative portion of the path.
+
+FUN String : getLastSavedRenderPath()
+  > returns
+    The path to the last successfully saved render, otherwise an empty string.
+
+FUN Number : getNumRenderDirectories()
+  > returns
+    The number of render directories.
+
+FUN Number : getNumRenderers()
+  > returns
+    The number of renderers available in the application.
+
+FUN DzElement : getOptionHelper()
+  > summary
+    TODO: Add description.
+
+FUN String : getRenderDirectoryPath( Number which )
+  > parameters
+    + which - The index of the render directory to be returned.
+  > returns
+    The given render directory.
+
+FUN Array : getRenderElementObjects()
+  > summary
+    TODO: Add description.
+
+FUN DzRenderer : getRenderer( Number which )
+  > returns
+    If which is within the range [0, getNumRenderers() - 1], the renderer at the given index, otherwise null.
+
+FUN Array : getRendererList()
+  > returns
+    A list of renderers available in the application.
+
+FUN DzRenderOptions : getRenderOptions()
+  > returns
+    The default render options object. This object stores the user's currently selected rendering options.
+
+FUN Boolean : hasRender()
+  > returns
+    true if there is a render that can be saved, otherwise false.
+
+FUN Boolean : isRendering()
+  > returns
+    true if the application is currently rendering, otherwise false.
+
+FUN void : rebuildRenderElements()
+  > summary
+    TODO: Add description.
+
+FUN void : removeAllRenderDirectories()
+  > summary
+    Removes all render directories.
+
+FUN Boolean : removeRenderDirectory( String directory )
+  > summary
+    Removes a directory from the list of known render directories.
+  > parameters
+    + directory - The name of the render directory to remove.
+  > returns
+    true if the directory was found in the list, otherwise false.
+
+FUN void : restoreDefaultRenderOptions()
+  > summary
+    TODO: Add description.
+
+FUN String : saveLastRender()
+  > summary
+    Displays a dialog for saving the last render, and saves the image(s)/movie if the user does not cancel.
+  > returns
+    The path to the file selected and successfully saved, otherwise an empty string.
+
+FUN void : setActiveRenderer( DzRenderer renderer )
+  > summary
+    Sets the active renderer for the application.
+  > parameters
+    + renderer - The renderer to make active.
+
+FUN void : showRenderDialog()
+  > summary
+    Displays the render options dialog to the user. This only works if the application is being run with the interface on, if the interface is off, this function does nothing.
+
+FUN void : shutdown()
+  > summary
+    TODO: Add description.
+
+FUN void : stopIPRRender()
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : activeRendererChanged( DzRenderer renderer )
+  > summary
+    Emitted when the active render engine has changed.
+  > parameters
+    + renderer - The new active render engine.
+
+SIG void : activeRendererIPRRenderHandlerChanged( DzRenderer renderer, iprrenderhandler_dz handler )
+  > summary
+    TODO: Add description.
+
+SIG void : doIPRRenderStop()
+  > summary
+    TODO: Add description.
+
+SIG void : hasRenderChanged( Boolean state )
+  > summary
+    Emitted when the value returned by DzRenderMgr::hasRender() has changed, signaling a new render operation. This signifies whether or not a call to saveLastRender() will be valid.
+
+SIG void : IPRRenderStarted()
+  > summary
+    TODO: Add description.
+
+SIG void : IPRRenderStopped()
+  > summary
+    TODO: Add description.
+
+SIG void : renderDirectoryListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : renderElementsListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : rendererAdded( DzRenderer renderer )
+  > summary
+    Emitted when a new render engine is added to the manager. This only occurs at startup as plug-ins are being loaded.
+  > parameters
+    + renderer - The new render engine that was added to the manager.
+
+SIG void : rendererIPRRenderHandlerChanged( DzRenderer renderer, iprrenderhandler_dz handler )
+  > summary
+    TODO: Add description.
+
+SIG void : rendererModeChanged( DzRenderer renderer )
+  > summary
+    TODO: Add description.
+
+SIG void : renderFinished( Boolean succeeded )
+  > summary
+    Emitted just after a rendering operation is finished. This is only emitted when a render operation is performed by calling DzRenderMgr::doRender() - this includes all rendering operations that are started by the user from the interface. This may not include rendering operations performed by plug-ins, scripts, etc which do not call doRender().
+  > parameters
+    + succeeded - true if the render was successful, false if the render failed or was cancelled by the user.
+  > seealso
+    DzRenderMgr::renderStarting()
+    DzScene::renderFinished()
+
+SIG void : renderFolderChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : renderOptionDefaultsRestored()
+  > summary
+    TODO: Add description.
+
+SIG void : renderStarting()
+  > summary
+    Emitted just before a rendering operation begins. This is only emitted when a render operation is performed by calling DzRenderMgr::doRender() - this includes all rendering operations that are started by the user from the interface. This may not include rendering operations performed by plug-ins, scripts, etc which do not call doRender().
+  > seealso
+    DzRenderMgr::renderFinished()
+    DzScene::aboutToRender()

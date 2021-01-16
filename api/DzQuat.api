@@ -1,0 +1,168 @@
+CLS DzQuat : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/quat_dz
+  > summary
+    A quaternion rotation class.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : w
+  > summary
+    Holds the w value of this quaternion.
+
+PRP Number : x
+  > summary
+    Holds the x value of this quaternion.
+
+PRP Number : y
+  > summary
+    Holds the y value of this quaternion.
+
+PRP Number : z
+  > summary
+    Holds the z value of this quaternion.
+
+### constructors
+
+CTR DzQuat()
+  > summary
+    Default Constructor. Creates an identity quaternion.
+
+CTR DzQuat( DzQuat quat )
+  > summary
+    Copy Constructor.
+
+CTR DzQuat( DzMatrix3 mtx )
+  > summary
+    Initialize with a rotation matrix.
+
+CTR DzQuat( DzMatrix4 mtx )
+  > summary
+    Initialize with a rotation matrix.
+
+CTR DzQuat( DzRotationOrder order, DzVec3 angles )
+  > summary
+    Initialize with an Euler angle rotation.
+
+CTR DzQuat( DzVec3 axis, Number radians )
+  > summary
+    Initialize with a rotation around an axis of the given angle (in radians).
+
+CTR DzQuat( Number x, Number y, Number z, Number w, Boolean normalize=true )
+  > summary
+    Initialize with 4-component quaternion.
+
+### methods
+
+FUN Boolean : equals( DzQuat quat, Number tolerance=1e-05 )
+  > parameters
+    + quat - The quaternion to be compared.
+    + tolerance - The maximum allowable deviation.
+  > returns
+    true if this quaternion is considered equal to quat, otherwise false.
+  > since
+    4.9.3.121
+
+FUN Number : getAngleOfRotation()
+  > returns
+    * The angle of rotation for this quaternion (in radians).
+  > since
+    4.10.0.110
+
+FUN DzVec3 : getAxisOfRotation()
+  > returns
+    The axis of rotation for this quaternion.
+  > since
+    4.10.0.110
+
+FUN DzVec3 : getValue( Number axis1, Number axis2, Number axis3 )
+  > returns
+    The Euler angles representing this rotation given the rotation order (axis0, axis1, axis2).
+
+FUN DzVec3 : getXAxis()
+  > returns
+    The X axis that corresponds to the local coordinate frame of this rotation (the rotated coordinate axes).
+
+FUN DzVec3 : getYAxis()
+  > returns
+    The Y axis that corresponds to the local coordinate frame of this rotation (the rotated coordinate axes).
+
+FUN DzVec3 : getZAxis()
+  > returns
+    The Z axis that corresponds to the local coordinate frame of this rotation (the rotated coordinate axes).
+
+FUN DzQuat : inverse()
+  > returns
+    The inverse of the rotation.
+
+FUN void : invert()
+  > summary
+    Changes a rotation to be its inverse.
+
+FUN Boolean : isIdentity()
+  > returns
+    true if the quaternion is an identity rotation.
+
+FUN void : makeClosest( DzQuat quat )
+  > summary
+    Makes sure that this rotation lies on the same side of the hypersphere as the one given. If not, it is altered to do so.
+
+FUN void : makeIdentity()
+  > summary
+    Sets the quaternion to the identity quaternion. Zero this rotation.
+
+FUN DzQuat : multiply( DzQuat quat )
+  > returns
+    The result of post-multiplying this quaternion by the given quaternion.
+
+FUN DzVec3 : multVec( DzVec3 vec )
+  > summary
+    Multiplies the given vector by the matrix of this rotation. Vector is forced to unit length.
+  > returns
+    The result of multiplying the given vector through the rotation, as a unit vector.
+
+FUN void : normalize()
+  > summary
+    Normalizes a rotation quaternion to unit 4D length
+
+FUN void : scaleAngle( Number val )
+  > summary
+    Keep the axis the same. Multiply the angle of rotation by the amount 'scaleFactor'
+
+FUN void : setValue( Number axis, Number radians )
+  > summary
+    Sets the value to a rotation of radians around one of the primary axes (axis == 0:x, 1:y, 2:z)
+
+FUN void : setValue( Number axis1, Number axis2, Number axis3, DzVec3 angles )
+  > summary
+    Sets the quaternion to an Euler rotation of angles around each axis given the rotation order (axis1, axis2, axis3) where axis == 1:x, 2:y, 3:z.
+
+FUN void : setValue( DzVec3 axis, Number radians )
+  > summary
+    Sets the value based on the angle and axis of rotation.
+
+FUN void : setValue( Number x, Number y, Number z, Number w, Boolean normalize=true )
+  > summary
+    Sets the values of this quaternion.
+  > parameters
+    + x - The x component.
+    + y - The y component.
+    + z - The z component.
+    + w - The w component.
+    + doNormalize - If true, normalizes the set values.(since 4.9.3.121)
+
+FUN DzQuat : slerp( DzQuat rot0, DzQuat rot1, Number t )
+  > summary
+    Preforms spherical linear interpolation between two quaternions.
+  > parameters
+    + rot0 - The from rotation.
+    + rot1 - The to rotation.
+    + t - The value to interpolate.
+  > returns
+    As t goes from 0 to 1, the value goes from rot0 to rot1.
+  > since
+    4.9.3.121

@@ -1,0 +1,21 @@
+CLS DzDockArea : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dockarea_dz
+  > summary
+    Widget that holds docked DzDockWindow widgets.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN DzDockAreaColumn : getColumn( Number which )
+  > parameters
+    + which - The index of the column to return.
+  > returns
+    The column at the given index
+
+FUN Number : getNumColumns()
+  > returns
+    The number of columns of docked windows currently being displayed in this dock area.

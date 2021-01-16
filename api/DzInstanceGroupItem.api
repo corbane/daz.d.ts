@@ -1,0 +1,210 @@
+CLS DzInstanceGroupItem : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/instancegroupitem_dz
+  > summary
+    A class for creating a single instance of another node in a group of like nodes.
+
+### description
+  > summary
+    This class can be used to create a single instance of another DzNode (subclass) that also has a DzOobject for inclusion in a group of like nodes. These instances are drawn the same as the target node except for transforms.
+
+### constructors
+
+CTR DzInstanceGroupItem()
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN void : copyTransformFromNode( DzNode node )
+  > summary
+    Copies the transform values of the given nodes transform properties. Also copies rotation order.
+  > parameters
+    + node - The node to copy transform values from.
+
+FUN void : copyTransformToNode( DzNode node )
+  > summary
+    Copies the transform values to the given nodes transform properties. Also copies rotation order
+  > parameters
+    + node - The node to copy transform values from.
+
+FUN DzVec3 : getEndPointValues()
+  > returns
+    The endpoint values of this item.
+
+FUN Number : getGeneralScaleValue()
+  > returns
+    The general scale value of this item.
+
+FUN String : getLabel()
+  > returns
+    The label of this item.
+
+FUN DzVec3 : getLocalPos()
+  > returns
+    The local-space position of the item at the current time.
+
+FUN DzQuat : getLocalRot()
+  > returns
+    The local-space rotation of the item at the current time.
+
+FUN DzMatrix3 : getLocalScale()
+  > returns
+    The local-space scale of the item at the time.
+
+FUN DzMatrix3 : getLocalTransform()
+  > returns
+    A matrix representing the composed local transform for this item at the current time.
+
+FUN DzQuat : getOrientation()
+  > returns
+    The orientation of the item.
+
+FUN DzVec3 : getOrientationValues()
+  > returns
+    The orientation values of this item, in degrees.
+
+FUN DzVec3 : getOriginValues()
+  > returns
+    The origin (centerpoint) values of this item.
+
+FUN DzVec3 : getPositionValues()
+  > returns
+    The potion values of this item.
+
+FUN DzRotationOrder : getRotationOrder()
+  > returns
+    The rotation order of this item.
+
+FUN DzVec3 : getRotationValues()
+  > returns
+    The rotation values of this item, in degrees.
+
+FUN DzVec3 : getWSPos( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space position of the item.
+
+FUN DzVec3 : getWSPos()
+  > returns
+    The world-space position of the item at the current time.
+
+FUN DzQuat : getWSRot( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space rotation of the item.
+
+FUN DzQuat : getWSRot()
+  > returns
+    The world-space rotation of the item at the current time.
+
+FUN DzMatrix3 : getWSScale( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    The world-space scale of the item.
+
+FUN DzMatrix3 : getWSScale()
+  > returns
+    The world-space scale of the item at the current time.
+
+FUN DzMatrix3 : getWSTransform()
+  > returns
+    A matrix representing the composed world-space transform for this item at the current time.
+
+FUN DzMatrix3 : getWSTransform( DzTime tm, Boolean defaultVal=false )
+  > parameters
+    + tm - The scene time at which to get the the transform.
+    + defaultVal - Use the default version of the origin, end point, and orientation instead of the current position.
+  > returns
+    A matrix representing the composed world-space transform for this item.
+
+FUN DzVec3 : getXYZScaleValues()
+  > returns
+    The xyz scale values of this item.
+
+FUN Boolean : inheritsScale()
+  > returns
+    true if this node inherits scale from its parent, otherwise false.
+
+FUN void : setEndPoint( Number x, Number y, Number z )
+  > summary
+    Sets the endpoint for this item.
+  > parameters
+    + x - The x position.
+    + y - The y position.
+    + z - The z position.
+
+FUN void : setInheritScale( Boolean onOff )
+  > summary
+    Sets whether or not this node inherits the scale of its parent.
+  > parameters
+    + onOff - If true, scaling the parent of this node will scale this node also.
+
+FUN void : setLabel( String label )
+  > summary
+    Sets the label for this item.
+  > parameters
+    + label - The label to set.
+
+FUN void : setOrientation( Number x, Number y, Number z )
+  > summary
+    Sets the orientation for this item.
+  > parameters
+    + x - The rotation, in degrees, on the x axis.
+    + y - The rotation, in degrees, on the y axis.
+    + z - The rotation, in degrees, on the z axis.
+
+FUN void : setOrigin( Number x, Number y, Number z )
+  > summary
+    Sets the origin for this item.
+  > parameters
+    + x - The x position.
+    + y - The y position.
+    + z - The z position.
+
+FUN void : setPosition( Number x, Number y, Number z )
+  > summary
+    Sets the position for this item.
+  > parameters
+    + x - The x position.
+    + y - The y position.
+    + z - The z position.
+
+FUN void : setRotation( Number x, Number y, Number z )
+  > summary
+    Sets the rotation for this item.
+  > parameters
+    + x - The rotation, in degrees, on the x axis.
+    + y - The rotation, in degrees, on the y axis.
+    + z - The rotation, in degrees, on the z axis.
+
+FUN void : setRotationOrder( DzRotationOrder order )
+  > summary
+    Sets the rotation order for this item.
+  > parameters
+    + order - The rotation order to set.
+
+FUN void : setScale( Number x, Number y, Number z, Number genScale )
+  > summary
+    Sets the scale for this item.
+  > parameters
+    + x - The scale on the x axis.
+    + y - The scale on the y axis.
+    + z - The scale on the z axis.
+    + genScale - The general scale.
+
+### signals
+
+SIG void : localTransformChanged()
+  > summary
+    Emitted when the local transform for this item has changed.
+
+SIG void : transformChanged()
+  > summary
+    Emitted when the transform for this item has changed.

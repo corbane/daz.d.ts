@@ -1,0 +1,65 @@
+CLS DzFileProperty : DzStringProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fileproperty_dz
+  > summary
+    A static (non-animatable) string property that holds a file path. Attempts to save and restore as relative path when possible.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU FileType
+  > summary
+    The type of file dialog that will used when the user browses for the file.
+  + FileSave - The user will be prompted with a 'Save As' type dialog when browsing for a file.
+  + FileOpen - The user will be prompted with an 'Open' type dialog when browsing for a file.
+  + Dir - The user will be prompted with a 'Select Folder' type dialog when browsing for a directory.
+
+### constructors
+
+CTR DzFileProperty()
+  > summary
+    Default Constructor. Creates a non-user property.
+
+CTR DzFileProperty( String name, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN String : getAbsolutePath( String path )
+  > parameters
+    + path - The (relative) path of the file.
+  > returns
+    The absolute path of the file specified by the given path
+
+FUN String : getFilter()
+  > summary
+    Gets the filter value.
+
+FUN DzFileProperty.FileType : getType()
+  > summary
+    Gets the file type.
+
+FUN void : setFilter( String filter )
+  > summary
+    Sets the value to use as a file extension filter.
+  > parameters
+    + filter - The filter to set. This should be in the form “FilterName (*.ext1 *.ext2 *.ext3)”.
+  > attention
+    If this property is of the type SaveFile, and if the save file is not given an extension by the user, then the first extension listed will be added to the filename. The filter is not checked if setValue() is used.
+
+FUN void : setType( DzFileProperty.FileType type )
+  > summary
+    Sets the file type for the property.
+  > parameters
+    + type - The file type to set.
+
+### signals
+
+SIG void : filterChanged()
+  > summary
+    Emitted when the filter for the property changes.

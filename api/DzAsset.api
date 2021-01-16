@@ -1,0 +1,443 @@
+CLS DzAsset : QObject DzRefCountedItem
+  > summary
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/asset_dz
+    An abstraction between the presentation of a content file and the file on disk.
+
+### description
+  > summary
+    An “Asset” serves as an abstraction between the presentation of a content file and the actual file that resides on disk; it is a “container” for information about a content file.
+    At a minimum, an asset contains a reference to the relative path and filename of a file.
+    Metadata
+    When the Content Management System (CMS) is active, an asset provides an interface to its metadata within the content database. This metadata includes information such as what type of asset it is, what it is used for, what it is compatible with, which category(ies) it is presented to the user in, etc.
+    Conceptually, each asset belongs to exactly one “Product”. By default, and until/unless modified, all newly created assets are assigned to the “LOCAL USER” product. An asset is uniquely identified within a product by the combination of its relative path and filename. While any number of products can reference a file with the same relative path and filename combination, each product's concept of that combination is unique (even if their metadata is identical).
+    The metadata for a given asset is divided into 2 distinct types; that which is owned and/or maintained by the vendor (the originating source), and that which is owned and/or maintained by the end-user. Unless the metadata component (e.g., userKeywords, userNotes, etc), the product (e.g., “LOCAL USER”), or the store (e.g., “LOCAL USER”) indicate “user” in their name, any assumption (if there is to be one) about which type the data is should be that which is owned and/or maintained by the vendor.
+    The metadata for an asset that is “installed” and which belongs to a product associated with a “Store” (source) other than the “LOCAL USER” store is owned by the vendor. Conversely, the metadata for an asset that is created by the user and/or belongs to a product associated with the “LOCAL USER” store is owned by the user. The exceptions to this are those attributes which integrate “user” into their name; which in fact always belong to the user.
+    The significance of the distinction between the 2 types of metadata comes down to how the data is handled during an update and whether or not an effort is made to preserve it. Metadata that is owned and/or maintained by the vendor can be summarily purged during an update. This provides a vendor with the means to clean up all potential prior versions of the metadata witout being faced with complex bookkeeping tasks.
+  > seealso
+    DzAssetMgr
+    DzProductAssetContainer
+    DzContentMgr
+
+### properties
+
+PRP Object : assetID
+  > summary
+    Holds the asset identifier for this asset. (Read Only)
+
+PRP String : assetName
+  > summary
+    Holds the name for this asset. (Read Only)
+
+PRP Number : audience
+  > summary
+    Holds the vendor intended audience for this asset.
+  > since
+    4.8.1.97
+
+PRP Array : categories
+  > summary
+    Holds a list of all categories that this asset is in. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : companionIsScript
+  > summary
+    Holds whether the companion file (if any) is a DAZ Script. (Read Only)
+
+PRP String : companionPath
+  > summary
+    Holds the full path to the folder the companion file is in. (Read Only)
+
+PRP Array : compatibilities
+  > summary
+    Holds a list of all compatibility bases that this asset is compatible with. (Read Only)
+  > since
+    4.9.0.2
+
+PRP String : compatibilityBase
+  > summary
+    Holds the [vendor] compatibility base for this asset.
+  > since
+    4.8.1.97
+
+PRP String : contentType
+  > summary
+    Holds the [vendor] content type for this asset.
+  > since
+    4.8.1.97
+
+PRP Date : dateCreated
+  > summary
+    Holds the date this asset was created. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Date : dateLastModified
+  > summary
+    Holds the date this asset was last modified. (Read Only)
+  > since
+    4.9.0.2
+
+PRP String : description
+  > summary
+    Holds the vendor description for this asset.
+  > since
+    4.8.1.97
+
+PRP String : displayName
+  > summary
+    Holds the name displayed to the user for this asset. (Read Only)
+  > since
+    4.9.0.20
+
+PRP Number : groupId
+  > summary
+    Holds the group identifier for the asset. 0 = default, < 0 = app defined, > 0 = user defined.
+  > since
+    4.9.0.11
+
+PRP Boolean : hasCloudMetadata
+  > summary
+    Holds whether this asset has metadata provided by the cloud. (Read Only)
+  > since
+    4.9.0.2
+  > returns
+    true if metadata for the asset came from the cloud, otherwise false.
+  > since
+    4.9.0.2
+
+PRP Boolean : hasCompanion
+  > summary
+    Holds whether this asset is a non-native file and a DAZ Script or native file with the same basename exists in the same directory. (Read Only)
+
+PRP Boolean : hasCompanionScript
+  > summary
+    Holds whether this asset is a non-native file and a DAZ Script with the same basename exists in the same directory. (Read Only)
+
+PRP Boolean : hidden
+  > summary
+    Holds whether this asset should be hidden in asset views.
+  > since
+    4.9.0.2
+
+PRP Pixmap : icon
+  > summary
+    Holds the icon path for this asset. (Read Only)
+
+PRP Boolean : isCloudInstallable
+  > summary
+    Holds whether this asset can be installed from the cloud. (Read Only)
+  > since
+    4.9.0.20
+
+PRP Boolean : isCloudInstalled
+  > summary
+    Holds whether this asset is installed from the cloud. (Read Only)
+  > since
+    4.9.0.20
+
+PRP Boolean : isCloudOwned
+  > summary
+    Holds whether this asset is managed by the cloud. (Read Only)
+  > since
+    4.9.0.2
+  > returns
+    true if this asset is installed by the cloud, otherwise false.
+  > since
+    4.9.0.2
+
+PRP Boolean : isInstalled
+  > summary
+    Holds whether this asset is installed in the database. (Read Only)
+  > since
+    4.9.0.20
+
+PRP Boolean : isMetadataValid
+  > summary
+    Holds whether the metadata for this asset is valid. (Read Only)
+  > since
+    4.9.0.2
+  > returns
+    true if the metadata is valid, otherwise false.
+  > since
+    4.8.1.97
+
+PRP Boolean : isNative
+  > summary
+    Holds whether this asset is a native DAZ Studio file. (Read Only)
+
+PRP Boolean : isScript
+  > summary
+    Holds whether this asset is a native DAZ Studio script file. (Read Only)
+
+PRP Boolean : isSymLink
+  > summary
+    Holds whether this asset is a symbolic link. (Read Only)
+  > returns
+    true if the asset is a symbolic link, otherwisefalse.
+
+PRP Boolean : isVendor
+  > summary
+    Holds whether this asset is owned by a vendor or by the user. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Boolean : needsCloudInstall
+  > summary
+    Holds whether this asset needs to be installed from the cloud. (Read Only)
+  > since
+    4.9.0.20
+
+PRP Boolean : needsCloudUpdate
+  > summary
+    Holds whether this asset needs to be updated from the cloud. (Read Only)
+  > since
+    4.9.0.2
+  > returns
+    true if the asset has an update available from the cloud, otherwise false.
+  > since
+    4.9.0.2
+
+PRP String : orginalFilename
+  > summary
+    Holds the original filename for this asset. (Read Only)
+  > since
+    4.8.1.97
+
+PRP String : orginalPath
+  > summary
+    Holds the original path for this asset. (Read Only)
+  > since
+    4.8.1.97
+
+PRP String : productGUID
+  > summary
+    Holds the Globally Unique Identifier (GUID) for the product this asset belongs to. (Read Only)
+  > since
+    4.11.0.193
+
+PRP String : productID
+  > summary
+    Holds the product identifier for the product that this asset belongs to. (Read Only)
+  > since
+    4.9.0.55
+
+PRP String : productName
+  > summary
+    Holds the name of the product this asset belongs to. (Read Only)
+  > since
+    4.9.0.55
+
+PRP String : productPath
+  > summary
+    Holds the base of the product path in the cloud folder for cloud assets. (Read Only)
+  > since
+    4.9.3.83
+
+PRP Pixmap : smallIcon
+  > summary
+    Holds the icon path for this asset. (Read Only)
+
+PRP String : storeID
+  > summary
+    Holds the store identifier for the product that this asset belongs to. (Read Only)
+  > since
+    4.11.0.193
+
+PRP String : symLinkPath
+  > summary
+    Holds the path that the symbolic link is referencing (if any).
+
+PRP String : url
+  > summary
+    Holds the URL for this asset. (Read Only)
+
+PRP String : urlEncoded
+  > summary
+    Holds the encoded URL for this asset. (Read Only)
+
+PRP Array : userCategories
+  > summary
+    Holds a list of user owned categories that this asset is in. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Array : userCompatibilities
+  > summary
+    Holds a list of user owned compatibility bases that this asset is compatible with. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Array : userKeywords
+  > summary
+    Holds the user keywords for this asset.
+  > since
+    4.9.0.2
+
+PRP Array : vendorCategories
+  > summary
+    Holds a list of vendor owned categories that this asset is in. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Array : vendorCompatibilities
+  > summary
+    Holds a list of vendor owned compatibility bases that this asset is compatible with. (Read Only)
+  > since
+    4.9.0.2
+
+PRP Array : vendorKeywords
+  > summary
+    Holds the vendor keywords for this asset.
+  > since
+    4.9.0.2
+
+### methods
+
+FUN void : addCompatibilities( Array bases, Boolean create=false )
+  > summary
+    Sets the compatibility bases that this asset is compatible with.
+  > parameters
+    + bases - The list of compatibility bases this asset is compatible with.
+    + create - If true, creates compatibility bases that do not exist. If false, compatibility will only be established for compatibility bases that already exist.
+  > since
+    4.9.0.2
+
+FUN void : addToCategories( Array categories, Boolean create=false )
+  > summary
+    Sets the categories for this asset.
+  > parameters
+    + categories - The list of categories to add this asset to.
+    + create - If true, creates categories that do not exist. If false, only categories that already exist will be assigned.
+  > since
+    4.9.0.2
+
+FUN void : clearGroup()
+  > summary
+    Sets the asset as belonging to the default group identifier; 0.
+  > since
+    4.9.0.11
+
+FUN void : forceImageReload()
+  > summary
+    Forces the icon to reload.
+
+FUN String : getAsLocalFile()
+  > returns
+    The url of this asset as a local file path.
+
+FUN String : getBaseExtension()
+  > returns
+    The base file extension for the asset; without any encryption extension.
+
+FUN String : getDSLinkExtension()
+  > returns
+    The extension to use for DAZ Studio file link
+  > since
+    4.9.0.30
+
+FUN String : getDSLinkText()
+  > returns
+    The text that is placed inside a DAZ Studio file link.
+  > since
+    4.9.0.30
+
+FUN DzAbstractAssetContainer : getOwner()
+  > returns
+    The asset container that owns this asset.
+
+FUN DzProductAssetContainer : getProduct()
+  > returns
+    The product that this asset belongs to.
+  > since
+    4.9.0.2
+
+FUN String : getRelativeFilePath()
+  > returns
+    The relative file path for the asset.
+
+FUN Boolean : isGroup( Number id )
+  > returns
+    true if the asset is a member of group, otherwise false.
+    Attention:
+    0 = default, < 0 = app defined, > 0 = user defined
+  > since
+    4.9.0.11
+
+FUN Boolean : loadDefaultIcon( Boolean delayLoad )
+  > summary
+    Loads the default icon for the asset.
+  > parameters
+    + delayLoad - If true, loading of the icon is delayed.
+  > returns
+    true on success, otherwise false.
+
+FUN Object : readLinkData( String linkPath )
+  > parameters
+    + linkPath - The path of the file to read from.
+  > returns
+    A map of the key value pairs in a DAZ Studio link file.
+  > since
+    4.9.0.30
+
+FUN void : removeCompatibilities( Array bases, Boolean isVender=false )
+  > summary
+    Removes the compatibility bases that this asset is compatible with.
+  > parameters
+    + bases - The list of compatibilities to remove from this asset.
+    + isVender - If true, the compatibilities being looked up are owned by the vendor.
+  > since
+    4.9.2.53
+
+FUN void : removeFromCategories( Array categories, Boolean isVender=false )
+  > summary
+    Removes the asset from the categories.
+  > parameters
+    + categories - The list of categories to remove this asset from.
+    + isVender - If true, the categories being looked up are owned by the vendor.
+  > since
+    4.9.2.53
+
+FUN Boolean : rename( String name )
+  > summary
+    Changes the name of this asset.
+  > parameters
+    + name - The new name for the asset.
+  > returns
+    true if the operation is successful, otherwise false.
+
+FUN Boolean : saveDSLink( String linkSavePath )
+  > parameters
+    + linkSavePath - The path of the file to save to.
+  > returns
+    true if a DAZ Studio file link to this asset is saved, otherwise false.
+    Attention:
+    Will overwrite and add correct extension if possible.
+  > since
+    4.9.0.30
+
+FUN void : setIgnoreExists( Boolean onOff )
+  > summary
+    Sets whether existence of the asset should be ignored.
+
+FUN DzUri : toUri()
+  > returns
+    This asset expressed as a DzUri.
+  > since
+    4.9.0.40
+
+FUN Boolean : updateFromMetadata( String guid=“” )
+  > parameters
+    + guid - The Globally Unique Identifier (GUID) for the product to update from. Leave empty to update using the current product if an association is already made.
+  > returns
+    true if the asset is updated, otherwise false.
+  > since
+    4.9.2.69
+
+### signals
+
+SIG void : assetImageChanged( DzAsset asset )
+  > summary
+    Emitted when the image for the asset has changed.
+  > parameters
+    + asset - The asset that the image changed on.

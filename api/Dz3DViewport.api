@@ -1,0 +1,376 @@
+CLS Dz3DViewport : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/3dviewport_dz
+  > summary
+    Viewport for displaying and manipulating three dimensional objects.
+
+### description
+  > seealso
+    DzViewport.get3DViewport()
+
+### enumerations
+
+ENU FloorStyle
+  > summary
+    The styles of the floor that is drawn in the viewport.
+  + NoFloor - No floor is drawn.
+  + WireFloor - A grid floor is drawn.
+  + SolidFloor - A solid floor is drawn. (not currently implemented)
+
+ENU ShadeStyle
+  > summary
+    A list of shading styles for rendering scene objects in OpenGL. These coincide with the ShadeStyle types in DzDrawStyle, and are provided here for scriptability.
+  + WireBox - Draws unlit wire-frame bounding boxes.
+  + SolidBox - Draws smooth-shaded bounding boxes.
+  + Wireframe - Draws unlit wire-frames.
+  + LitWireframe - Draws lit wire-frames.
+  + HiddenLine - Draws unlit wire-frames, front geometry facing only.
+  + WireShaded - Draws lit smooth shaded objects with wireframes imposed.
+  + SmoothShaded - Draws lit smooth shaded objects.
+  + WireTextured - Draws lit smooth shaded objects with any texture/transparency maps applied and wireframes imposed.
+  + Textured - Draws lit smooth shaded objects with any texture/transparency maps applied.
+
+ENU ToolBarMode
+  > summary
+    The different toolbar modes for the interface.
+  + DockedToolBar - A mode that docks the toolbar along the top edge of the viewport.
+  + CameraCubeHUD - A mode that uses a Camera Cube HUD in the top right corner of the viewport.
+
+### properties
+
+PRP Boolean : aspectOn
+  > summary
+    Holds whether or not the aspect frame is drawn in the viewport.
+
+PRP Boolean : axesOn
+  > summary
+    Holds whether or not the origin axes are drawn in the viewport.
+
+PRP Color : background
+  > summary
+    Holds the background color of the viewport
+
+PRP Dz3DViewport.FloorStyle : floorStyle
+  > summary
+    Holds the style of the floor that is drawn in the viewport.
+
+PRP Dz3DViewport.ShadeStyle : shadeStyle
+  > summary
+    Holds the shading style of the viewport.
+
+PRP Boolean : showPoseTool
+  > summary
+    Holds whether or not the Pose Tool is shown.
+
+PRP Boolean : thirdsGuideOn
+  > summary
+    Holds whether or not the thirds guide is drawn in the viewport.
+  > since
+    4.6.3.12
+
+PRP Dz3DViewport.ToolBarMode : toolBarMode
+  > summary
+    Holds the mode for the viewport display of toolbars/camera cube
+
+### methods
+
+FUN void : aimCamera()
+  > summary
+    Aim the viewport's camera at the selected nodes in the scene. If the scene does not have any select nodes, all nodes in the scene are aimed. Note that the viewport's camera is excluded, as are any nodes that are parented to the viewport's camera.
+  > seealso
+    Sample: Aim Camera
+
+FUN void : aimCameraAtBox( DzBox3 box )
+  > summary
+    Aim the viewport's camera at the given box. If the box is invalid this function does nothing.
+  > parameters
+    + box - the box to aim the viewport's camera at.
+
+FUN void : aimCameraAtPrimaryNode()
+  > summary
+    Aim the viewport's camera at the selected nodes in the scene. If the scene does not have any select nodes, all nodes in the scene are aimed. Note that the viewport's camera is excluded, as are any nodes that are parented to the viewport's camera.
+
+FUN Image : captureImage()
+  > summary
+    Captures the current contents from the OpenGL frame buffer as an image.
+  > returns
+    A snap shot of the OpenGL frame buffer.
+  > example
+    // Get the image manager
+    var oImgMgr = App.getImageMgr();
+     
+    // If there is a main window
+    if( MainWindow ){
+    	// Get the active viewport
+    	var oViewportMgr = MainWindow.getViewportMgr();
+    	var oViewport = oViewportMgr.getActiveViewport().get3DViewport();
+     
+    	// Capture the contents of the active viewport
+    	var oImg = oViewport.captureImage();
+     
+    	// Save the image to a file
+    	oImgMgr.saveImage( String( "%1/viewport.png" ).arg( App.getDocumentsPath()) , oImg );
+    }
+
+FUN DzInt2 : currentDimensions()
+  > returns
+    The current dimensions of the viewport.
+  > since
+    4.6.4.100
+
+FUN void : frameCamera()
+  > summary
+    Frame the viewport's camera at the selected nodes in the scene. If the scene does not have any select nodes, all nodes in the scene are framed. Note that the viewport's camera is excluded, as are any nodes that are parented to the viewport's camera.
+  > seealso
+    Sample: Frame Camera
+
+FUN void : frameCameraOnBox( DzBox3 box )
+  > summary
+    Frame the viewport's camera at the given box. If the box is invalid this function does nothing.
+  > parameters
+    + box - the box to frame the viewport's camera on.
+
+FUN void : frameCameraOnSelectedNodes()
+  > summary
+    Frame the viewport's camera at the selected nodes in the scene. If the scene does not have any select nodes, all nodes in the scene are framed. Note that the viewport's camera is excluded, as are any nodes that are parented to the viewport's camera.
+
+FUN Rect : getAspectFrameRect()
+  > returns
+    A rect describing the aspect frame for this viewport.
+
+FUN DzCamera : getCamera()
+  > returns
+    The currently active camera for this viewport.
+  > example
+    // Get the active viewport
+    var oViewportMgr = MainWindow.getViewportMgr();
+    var oViewport = oViewportMgr.getActiveViewport().get3DViewport();
+     
+    // Get the active camera
+    var oCamera = oViewport.getCamera();
+    // Reset the camera
+    oCamera.reset();
+  > seealso
+    Sample: Aim Camera
+    Sample: Frame Camera
+    setCamera()
+
+FUN cameracube_dz : getCameraCube()
+  > returns
+    The persistent Camera Cube view tool for this viewport; displayed when the toolBarMode is set to CameraCubeHUD.
+  > since
+    4.9.3.107
+
+FUN String : getUserDrawStyle()
+  > returns
+    If the current DrawStyle is a DzUserDrawStyle, the description of the DrawStyle, otherwise an empty string.
+  > since
+    4.9.2.22
+
+FUN DzViewport : getViewport()
+  > returns
+    This 3D view's parent viewport
+
+FUN Boolean : hardwareRender( DzRenderHandler handler )
+  > summary
+    Performs a hardware assisted OpenGL render in this viewport with the given settings.
+  > parameters
+    + handler - The render handler for the rendering operation.
+  > returns
+    true if the scene was rendered successfully, otherwise false.
+
+FUN Boolean : hardwareRenderWithOptions( DzRenderHandler handler, DzRenderOptions options, DzCamera camera=null, DzDrawStyle style=null )
+  > summary
+    Performs a hardware assisted OpenGL render in this viewport with the given settings.
+  > parameters
+    + handler - The render handler for the rendering operation.
+    + options - The render options to use. (since 4.9.3.61)
+    + camera - The camera to render through, set to null to render from current view. (since 4.9.3.61)
+    + style - The draw style to use, null to use standard render draw style. (since 4.9.3.61)
+  > returns
+    true if the scene was rendered successfully, otherwise false.
+  > since
+    4.9.3.57
+
+FUN Boolean : isHardwareRenderable()
+  > returns
+    true if this viewport supports rendering via OpenGL, otherwise false.
+
+FUN Boolean : mouseIsDown()
+  > returns
+    true if a mouse button is pressed, otherwise false.
+  > since
+    4.6.4.20
+
+FUN Number : pickOnFacet( Point pnt )
+  > summary
+    Performs a facet picking operation on the scene through this viewport.
+  > parameters
+    + pnt - The pixel coordinates of the point in the viewport to pick on.
+  > returns
+    The index of the facet that was hit (if any), otherwise -1.
+
+FUN Number : pickOnGizmo( Point pnt )
+  > summary
+    Performs a gizmo picking operation through this viewport. View tools (see DzViewTool) can draw a 'gizmo' in the viewport for the user to interact with. The tool can assign different parts of the gizmo to specific indices, so as to tell what part of the gizmo was clicked by the user.
+  > parameters
+    + pnt - The point in the viewport to pick on.
+  > returns
+    The gizmo index that was hit (if any), otherwise 0.
+
+FUN DzMaterial : pickOnMaterial( Point pnt )
+  > summary
+    Performs a material picking operation on the scene through this viewport. This example shows the mousePress() implementation from a view tool (see DzViewTool) that sets the color of any material that the user clicks in the viewport.
+  > parameters
+    + pnt - The pixel coordinates of the point in the viewport to pick on.
+  > returns
+    The material that was hit, if any.
+
+FUN DzNode : pickOnNode( Point pnt, Boolean useSelectionMaps=true )
+  > summary
+    Performs a node picking operation on the scene through this viewport. View tools (see DzViewTool) will commonly use this function to determine what node (if any) that the user clicks on. This example shows the mousePress() implementation from a view tool that selects the node that the user clicks in the viewport.
+  > parameters
+    + pnt - The pixel coordinates of the point in the viewport to pick on.
+  > returns
+    The node that was hit, if any.
+
+FUN Boolean : renderThumbnail( DzRenderHandler handler )
+  > summary
+    Performs a quick render of the scene suitable for a thumbnail image.
+  > parameters
+    + handler - The render handler for the rendering operation.
+  > returns
+    true if the scene was successfully rendered, otherwise false.
+
+FUN void : resetCamera()
+  > summary
+    Reset the viewport's camera to its default state.
+
+FUN void : setCamera( String cam )
+  > summary
+    Set the camera for the view. If a matching camera is not found, this function does nothing.
+  > parameters
+    + cam - The name (not label) of a view camera, or a scene camera.
+
+FUN void : setCamera( DzCamera cam )
+  > summary
+    Set the camera for the view. The pointer passed in must be a camera in the scene, or one of the view cameras from DzViewportMgr.
+  > parameters
+    + cam - The camera to use for viewing in the viewport.
+  > example
+    // Get the active viewport
+    var oViewportMgr = MainWindow.getViewportMgr();
+    var oViewport = oViewportMgr.getActiveViewport().get3DViewport();
+     
+    // Create a new camera
+    var oCam = new DzBasicCamera( oCam.GENERAL_CAMERA );
+    oCam.setName( "Test Camera" );
+     
+    // Add the camera to the scene
+    Scene.addNode( oCam );
+     
+    // Set the active viewport to view through the new camera
+    oViewport.setCamera( oCam );
+  > seealso
+    getCamera()
+
+FUN void : setDrawStyle( DzDrawStyle style )
+  > summary
+    Set the draw style for the viewport. DzDrawStyle objects are ref counted, so the viewport refs the style when it is set, and unrefs it when it is no longer using the style. The draw style will then delete itself when its ref count reaches zero.
+  > parameters
+    + style - The new draw style for the viewport.
+  > seealso
+    Sample: Active Viewport DrawStyle
+
+FUN Boolean : setUserDrawStyle( String description )
+  > summary
+    Attempts to set the DrawStyle for the viewport.
+  > parameters
+    + description - The description of the DzUserDrawStyle to set.
+  > returns
+    true if a DzUserDrawStyle that matches the description could be found, otherwise false.
+  > since
+    4.9.2.22
+
+### signals
+
+SIG void : activeCameraChanged( DzCamera cam )
+  > summary
+    Emitted when a new active camera has been changed for this viewport.
+  > parameters
+    + cam - The new camera for this viewport.
+
+SIG void : activeCameraProjectionChanged()
+  > summary
+    Emitted when the projection of the active camera of this viewport has changed.
+
+SIG void : activeCameraTransformChanged()
+  > summary
+    Emitted when the transform of the active camera of this viewport has changed.
+
+SIG void : aspectOnChanged( Boolean onOff )
+  > summary
+    Emitted when the draw state for the aspect frame changes.
+  > parameters
+    + onOff - true if the aspect frame is displayed, otherwise false.
+
+SIG void : axesOnChanged( Boolean onOff )
+  > summary
+    Emitted when the draw state for the origin axes changes.
+  > parameters
+    + onOff - true if the origin axis is displayed, otherwise false.
+
+SIG void : backgroundColorChanged( Color color )
+  > summary
+    Emitted when the background color of the viewport changes.
+  > parameters
+    + color - The new background color.
+
+SIG void : contextMenuAboutToShow( DzMenu menu, Point pos )
+  > summary
+    Emitted when the viewport is about to display a context menu. Other objects can connect to this signal to add custom items to the menu that is displayed to the user. Only connect to this signal if you only want to affect this particular viewport - otherwise connect to DzViewportMgr::contextMenuAboutToShow().
+  > parameters
+    + menu - The menu that will be displayed.
+    + pos - The position in the viewport where the context menu was triggered.
+
+SIG void : currentDimensionsChanged()
+  > summary
+    Emitted when the current dimensions of this viewport has changed.
+
+SIG void : dimensionsChanged()
+  > summary
+    Emitted when the dimensions of this viewport has changed.
+
+SIG void : drawStyleChanged( DzDrawStyle style )
+  > summary
+    Emitted when the draw style of the viewport has changed.
+  > parameters
+    + style - The new draw style of the viewport.
+
+SIG void : floorStyleChanged( Dz3DViewport.FloorStyle style )
+  > summary
+    Emitted when the floor style of the viewport changes.
+  > parameters
+    + style - The new floor style for the viewport.
+
+SIG void : thirdsGuideOnChanged( Boolean onOff )
+  > summary
+    Emitted when the draw state for the thirds guide changes.
+  > parameters
+    + onOff - true if the thirds guide is displayed, otherwise false.
+
+SIG void : toolBarDocked( Boolean onOff )
+  > summary
+    Emitted when the view tool bar is docked or undocked.
+  > parameters
+    + onOff - true if the view tool bar is docked, otherwise false.
+
+SIG void : toolModeChanged( Dz3DViewport.ToolBarMode mode )
+  > summary
+    Emitted when the toolbar mode has been changed for this viewport.
+  > parameters
+    + mode - The new toolbar mode for this viewport.
+
+SIG void : viewChanged()
+  > summary
+    Emitted when the area this viewport displays has changed.

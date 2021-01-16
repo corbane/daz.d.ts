@@ -1,0 +1,40 @@
+CLS DzExporter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/exporter_dz
+  > summary
+    Base class for all scene file exporters.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    A description of the exporter that can be placed in a file type selection combobox (e.g. “Acclaim Skeleton”)
+
+FUN String : getExtension()
+  > returns
+    The extension that this exporter will force filenames to (excluding the preceeding '.').
+
+FUN Boolean : isFileExporter()
+  > returns
+    true if this exporter writes to a 'real' file, otherwise false.
+
+FUN DzError : writeFile( String filename )
+  > summary
+    Exports to a file.
+  > parameters
+    + filename - Name of the file to export to.
+  > returns
+    DZ_NO_ERROR on success, or an error code if the export failed.
+
+FUN DzError : writeFile( String filename, DzFileIOSettings options )
+  > summary
+    Exports to a file.
+  > parameters
+    + filename - The full path of the file to export to.
+    + options - The options to use while exporting the file.
+  > returns
+    DZ_NO_ERROR on success, or an error code if the export failed.

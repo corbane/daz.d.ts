@@ -1,0 +1,31 @@
+CLS DzLayout : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/layout_dz
+  > summary
+    DAZScript wrapper for QLayout.
+
+### description
+  > summary
+    This is an abstract base class that provides general functionality for DAZ Script interface layout components.
+
+### properties
+
+PRP Boolean : autoAdd
+  > summary
+    Whether the parent widget's children are automatically added to the layout or not.
+
+PRP Number : margin
+  > summary
+    The margin between the widgets in the layout and the parent widget's edge
+
+PRP Number : spacing
+  > summary
+    The spacing between the widgets in the layout
+
+### methods
+
+FUN void : addWidget( DzWidget item )
+  > summary
+    Adds the given widget to the items managed by this layout
+  > parameters
+    + item - The widget to add

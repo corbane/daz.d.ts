@@ -1,0 +1,25 @@
+CLS DzIrayRenderer : DzRenderer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/irayrenderer_dz
+  > summary
+    The NVIDIA Iray renderer.
+
+### description
+  > summary
+    Implements a Physically Based Rendering (PBR) interface for the scene to render itself through the NVIDIA Iray renderer.
+
+### constructors
+
+CTR DzIrayRenderer()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzElement : getPropertyHolder()
+  > returns
+    The element that holds the properties for this renderer.
+
+FUN Boolean : isIPRRendering()
+  > returns
+    true if this renderer is currently performing an interactive progressive render, otherwise false.

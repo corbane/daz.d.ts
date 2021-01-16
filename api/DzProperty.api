@@ -1,0 +1,817 @@
+CLS DzProperty : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/property_dz
+  > summary
+    Base class for all property types.
+
+### description
+  > summary
+    This is the base class for all properties that are owned or controlled by Elements. Properties can be keyable or not.
+  > seealso
+    DzElement
+
+### enumerations
+
+ENU PropertyValueSettingsFlag
+  > summary
+    TODO: Add description.
+  + Standard - Best for saving/loading; includes raw value; sets without adjusting.
+  + IncludeDefault - Include the default value.
+  + CurrentValue - Includes the value instead of the raw value.
+  + AdjustValue - Best for setting.
+  + SkipImages - Excludes images.
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    Holds the author of the file for this property. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    Holds the revision version of the asset file for this property. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    Holds the asset id for this property.
+  > since
+    4.8.1.18
+
+PRP Date : assetModifiedDate
+  > summary
+    Holds the modified date of the asset file for this property. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    Holds the URI of the asset source for this property; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    Holds the asset URI for this property. (Read Only)
+  > since
+    4.8.1.18
+
+PRP Boolean : emitValueChangedOnSceneClear
+  > summary
+    Holds whether or not the current value changed emits on scene clear.
+
+### methods
+
+FUN void : addValueToSettings( DzTime tm, DzSettings settings, DzProperty.PropertyValueSettingsFlag flags=Standard )
+  > summary
+    Adds a value to a settings.
+  > parameters
+    + tm - The scene time to add the value for.
+    + settings - The settings to add the data to.
+    + flags - The flags for controlling the operation.
+  > since
+    4.7.1.72
+
+FUN void : addValueToSettings( DzSettings settings, DzProperty.PropertyValueSettingsFlag flags=Standard )
+  > summary
+    Adds a value to a settings.
+  > parameters
+    + settings - The settings to add the data to.
+    + flags - The flags for controlling the operation.
+  > since
+    4.7.1.72
+
+FUN void : beginEdit()
+  > summary
+    Creates an undo item for the property.
+
+FUN DzUri : buildNameUriToRoot( DzNode rootNode=undefined )
+  > parameters
+    + rootNode - The node the path should be relative too. If null (default) the skeleton will be used when parented to a skeleton, otherwise the property's own node will be used if it is not part of a skeleton hierarchy.
+  > returns
+    A name path URI repersenting this property, relative to the root node.
+  > since
+    4.9.2.20
+
+FUN Boolean : canAnimate()
+  > returns
+    true if it is legal to animate this property, otherwise false.
+
+FUN Boolean : canAutoFollow()
+  > returns
+    true if the property can automatically follow a property on a following figure, otherwise false.
+
+FUN void : cancelEdit()
+  > summary
+    Finish the edit operation but cancel any changes.
+
+FUN void : clearRegion( Boolean preservePath=true )
+  > summary
+    Clears the region associated with this property.
+  > parameters
+    + preservePath - If true (default), this property's path will not be affected, otherwise the region's path will be removed from this property's path.
+
+FUN void : copyFrom( DzProperty prop )
+  > summary
+    Copies the value(s) of the given property into this property.
+
+FUN propertyclipboard_dz : copyToClipboard()
+  > summary
+    Copies the value(s) of the property to a 'clipboard' so that they may be saved and applied (pasted) to another property; or to the same property.
+  > returns
+    The 'clipboard' which holds a copy of the current property's value(s). These values are a snapshot of the current state of the property, and will remain unchanged even if the property is changed or deleted.
+  > attention
+    The caller is responsible for deleting this object.
+
+FUN DzProperty : createAlias()
+  > summary
+    Creates a new property that forwards all edits of its values to the property it is an alias of.
+  > returns
+    The created property alias.
+
+FUN Boolean : currentValueIsDefaultValue()
+  > returns
+    true if the current value of the property is the same as the default value, otherwise false.
+  > seealso
+    currentValueIsDefinitionValue()
+
+FUN Boolean : currentValueIsDefinitionValue()
+  > returns
+    true if the current value of the property is the same as the value in the file definition, otherwise false.
+  > seealso
+    currentValueIsDefaultValue()
+
+FUN void : deleteAllKeys()
+  > summary
+    Deletes all keys on this property.
+
+FUN Number : deleteKeys( DzTimeRange interval )
+  > summary
+    Clears key values within the given range, including the endpoints.
+  > returns
+    The number of keys actually deleted.
+
+FUN Number : deleteKeys( Number start, Number end )
+  > summary
+    Deletes all keys within a specified range.
+  > parameters
+    + start - The key index to start from.
+    + end - The key index to end at.
+  > returns
+    The number of keys deleted.
+  > attention
+    You are responsible to ensure the key indices are within the valid range.
+
+FUN Number : deleteSelectedKeys()
+  > summary
+    Deletes all selected keys.
+  > returns
+    The number of keys actually removed.
+
+FUN DzProperty : findMatchingProperty( DzNode node )
+  > summary
+    Searches node for a property that matches the name of this property.
+  > parameters
+    + node - The node to search.
+  > seealso
+    DzNumericProperty::findMatchingProperty()
+
+FUN void : finishEdit()
+  > summary
+    Finalizes the undo item and pushes it on to the undo stack.
+
+FUN DzProperty : getAlias( Number index )
+  > parameters
+    + index - The index of the alias to this property to get.
+  > returns
+    The alias to this property at index (if valid), otherwise NULL.
+
+FUN DzProperty : getAliasTarget()
+  > returns
+    The property that this property is an alias of, or NULL if none (default).
+
+FUN void : getAttributes( DzPropertySettings settings )
+  > summary
+    Populates the given settings object with the attributes of this property.
+
+FUN DzUri : getAutoFollowTargetUri()
+  > returns
+    The auto-follow target URI for this property.
+  > seealso
+    setAutoFollowTargetUri()
+  > since
+    4.9.2.19
+
+FUN DzController : getController( Number idx )
+  > parameters
+    + idx - The index of the controller on this property to get.
+  > returns
+    The i'th controller on this property.
+
+FUN Array : getControllerList()
+  > returns
+    A list of the controllers on this property.
+
+FUN DzPropertyGroup : getGroup()
+  > returns
+    The property group that this property belongs to (if any), otherwise NULL.
+
+FUN Number : getIndexOfSlaveControllers( DzController cntrl )
+  > returns
+    The index of controllers that are slaved to this property (if any), otherwise -1.
+
+FUN DzTimeRange : getKeyRange()
+  > returns
+    The total range of keys on this property.
+
+FUN DzTime : getKeyTime( Number i )
+  > parameters
+    + i - The index of the key time within the current key range.
+  > returns
+    The time of the i'th key within the current key range.
+
+FUN String : getLabel()
+  > returns
+    The user-defined label for this property.
+
+FUN Number : getNumAliases()
+  > returns
+    The number of aliases to this property that exist.
+
+FUN Number : getNumControllers()
+  > returns
+    The number of controllers for this property
+
+FUN Number : getNumKeys()
+  > returns
+    The total number of keys on this property.
+
+FUN Number : getNumKeys( DzTimeRange range )
+  > parameters
+    + range - The range to get the number of keys in.
+  > returns
+    The number of keys that exist within the given range, including endpoints.
+
+FUN Number : getNumSelectedKeys()
+  > returns
+    The number of currently selected keys on this property.
+
+FUN Number : getNumSlaveControllers()
+  > returns
+    The number of controllers that are slaved to this property.
+
+FUN DzElement : getOwner()
+  > returns
+    The current owner of this property.
+
+FUN String : getPath()
+  > returns
+    The slash ('/') delimited hierarchical path of the group this property is assigned to.
+
+FUN DzPresentation : getPresentation()
+  > returns
+    The presentation for this property (if any), otherwise NULL.
+
+FUN geometryregion_dz : getRegion()
+  > returns
+    The geometry region for this property (if any), otherwise NULL.
+
+FUN DzTimeRange : getSelectedKeyRange()
+  > returns
+    A range that encompasses all currently selected keys on this property.
+
+FUN DzController : getSlaveController( Number idx )
+  > returns
+    The i'th controller that is slaved to this property.
+
+FUN Array : getSlaveControllerList()
+  > returns
+    A list of the controllers that are slaved to this property.
+
+FUN String : getWidgetClass( Boolean styled=true )
+  > parameters
+    + styled - If true, the returned classname should be the styled version (i.e., DS 4 vs DS 3). If false, the returned classname should be the base version.
+  > returns
+    The classname of the widget to use for displaying this property to the user.
+
+FUN String : getWidgetClassOverride( Boolean styled=true )
+  > parameters
+    + styled - If true, the return value will be the name of the styled widget class.
+  > returns
+    The name of the styled widget class, otherwise the name of the standard widget class; this will be an empty string if the corresponding value has not been set.
+  > seealso
+    hasWidgetClassOverride()
+    setWidgetClassOverride()
+  > since
+    4.6.4.88
+
+FUN Boolean : hasControllers()
+  > returns
+    true if this property has controllers, otherwise false.
+
+FUN Boolean : hasKeys()
+  > returns
+    true if this property has key data, otherwise false.
+
+FUN Boolean : hasSlaveControllers()
+  > returns
+    true if this property has controllers that are slaved to it, otherwise false.
+
+FUN Boolean : hasWidgetClassOverride( Boolean styled=true )
+  > parameters
+    + styled - If true, the return value will be based on whether or not an override for the styled widget class has been specified.
+  > returns
+    true if an override for the widget class has been specified, otherwise false.
+  > seealso
+    setWidgetClassOverride()
+  > since
+    4.6.4.88
+
+FUN Boolean : isAlias()
+  > returns
+    true if this property is an alias to another property, otherwise false (default).
+
+FUN Boolean : isCombinable( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    true if this property and prop can be combined in the UI, otherwise false.
+
+FUN Boolean : isDynamicallyAutoFollow()
+  > returns
+    true if this property should [temporarily] auto-follow, otherwise false.
+  > seealso
+    canAutoFollow()
+    setCanAutoFollow()
+    DzSkeleton::getFollowModeControl() and DzSkeleton::fmAutoFollow
+  > since
+    4.8.0.23
+
+FUN Boolean : isDynamicallyHidden()
+  > returns
+    true if this property should [temporarily] not be shown in the interface, otherwise false.
+
+FUN Boolean : isEditing()
+  > returns
+    true if the property is being edited, otherwise false.
+
+FUN Boolean : isFavorite()
+  > returns
+    true if the property is a favorite, otherwise false.
+
+FUN Boolean : isGlobalFavorite()
+  > returns
+    true if the property is a global favorite, otherwise false.
+
+FUN Boolean : isHidden()
+  > returns
+    true if this property should not be shown in the interface, otherwise false.
+
+FUN Boolean : isKeySelected( Number i )
+  > parameters
+    + i - The index of the key in question.
+  > returns
+    true if the key at the given index is selected, otherwise false.
+
+FUN Boolean : isLocked()
+  > returns
+    true if this property is locked, otherwise false.
+
+FUN Boolean : isManipulator()
+  > returns
+    true if the property will cause manipulation updates of the object in the viewport (default), otherwise false.
+
+FUN Boolean : isNew()
+  > returns
+    true if the property is new, otherwise false.
+
+FUN Boolean : isNumeric()
+  > returns
+    true if this property can be retrieved/set as a scalar numeric value, otherwise false.
+
+FUN Boolean : isOverridingControllers()
+  > returns
+    true if the property is currently overriding its controllers, otherwise false.
+
+FUN Boolean : isPrivateProperty()
+  > returns
+    true if this property is private, otherwise false.
+
+FUN Boolean : isRigProperty()
+  > returns
+    true if this property is for rigging, otherwise false.
+
+FUN Boolean : isSelected()
+  > returns
+    true if the property is selected, otherwise false.
+
+FUN Boolean : isUserProperty()
+  > returns
+    true if this property can be deleted by the user, otherwise false.
+
+FUN void : lock( Boolean onOff )
+  > summary
+    Locks/Unlocks this property. When locked, a property will not accept new key values or changes to current key values.
+  > parameters
+    + onOff - If true, the property will be locked. If false, the property will be unlocked.
+
+FUN Boolean : modifyAsset( DzUri newUri )
+  > summary
+    Marks the asset as being modified.
+  > parameters
+    + newUri - The URI for the asset.
+  > returns
+    true if the asset was successfully marked as being modified, otherwise false.
+
+FUN Boolean : modifyAsset()
+  > summary
+    Marks the asset as being modified.
+  > returns
+    true if the asset was successfully marked as being modified, otherwise false.
+
+FUN Boolean : moveControllerToIndex( Number curIdx, Number newIdx )
+  > summary
+    Moves the controller at curIdx to newIdx
+  > parameters
+    + curIdx - The index of the controller to move. If < 0 or >= DzProperty::getNumControllers() this method will return false.
+    + newIdx - The index to move the controller to. If < 0 the controller will be moved to the beginning of the list. If >= DzProperty::getNumControllers(), the controller will be moved to the end of the list.
+  > returns
+    true if the move was successful, otherwise false.
+
+FUN Boolean : moveControllerToIndex( DzController ctrl, Number newIdx )
+  > summary
+    Moves the controller ctrl to location newIdx
+  > parameters
+    + ctrl - The controller to remove.
+    + newIdx - The index to move the controller to. If < 0 the controller will be moved to the beginning of the list. If >= DzProperty::getNumControllers(), the controller will be moved to the end of the list.
+  > returns
+    true if the move was successful, otherwise false.
+
+FUN DzProperty : propertyDuplicate()
+  > summary
+    Creates a copy of this property. The property will not have controllers, an owner, be in a region, or be linked.
+  > returns
+    A duplicate of this property (if successful), otherwise null.
+
+FUN Boolean : rawValueIsDefinitionValue()
+  > returns
+    true if the raw value of the property is the same as the value in the file definition, otherwise false.
+  > seealso
+    currentValueIsDefinitionValue()
+  > since
+    4.9.2.1
+
+FUN void : removeAllControllers()
+  > summary
+    Removes all controllers from this property.
+
+FUN void : removeController( DzController ctrl )
+  > summary
+    Removes the given controller from this property.
+  > parameters
+    + ctrl - The controller to remove.
+
+FUN void : removeController( Number idx )
+  > summary
+    Removes the controller at the given index from this property.
+  > parameters
+    + idx - The index of the controller to remove.
+
+FUN void : removeController( DzProperty prop )
+  > summary
+    Removes the controller that references the given property.
+  > parameters
+    + prop - The property to remove the controller for.
+
+FUN Number : selectAllKeys( Boolean onOff=true )
+  > summary
+    Select or deselect all keys.
+  > parameters
+    + onOff - If true, the keys will be selected. If false, the keys will be deselected.
+  > returns
+    The number of keys whose state was changed.
+
+FUN void : selectKey( Number i, Boolean onOff=true )
+  > summary
+    Selects/deselects the i'th key.
+  > parameters
+    + i - The index of the key to select/deselect.
+    + onOff - If true, the key will be selected. If false, the key will be deselected.
+
+FUN Number : selectKeys( DzTimeRange range, Boolean onOff )
+  > summary
+    Sets the selection state of any keys in the given range.
+  > parameters
+    + range - The range of keys to select/deselect.
+    + onOff - If true, the keys will be selected. If false, the keys will be deselected.
+  > returns
+    The number of keys whose selection state changed.
+
+FUN void : setAttributes( DzPropertySettings settings )
+  > summary
+    Sets attributes for this property. “UserProperty” and “RigProperty” attributes are not copied from the settings unless a bool setting of “ForceSetUser” and/or “ForceSetRig” is set on the property settings object respectively.
+  > parameters
+    + settings - The settings to use to set attributes.
+
+FUN void : setAutoFollowTargetUri( DzUri path )
+  > summary
+    Sets a path to locate the property on the follow target to follow.
+  > parameters
+    + path - The URI for the property to automatically follow. The node path is assumed to be relative to the target skeleton.
+  > seealso
+    canAutoFollow()
+    setCanAutoFollow()
+  > since
+    4.9.2.19
+
+FUN void : setCanAnimate( Boolean yesNo )
+  > summary
+    Sets whether this property is animatable.
+  > parameters
+    + yesNo - If true, the property is set to be animatable.
+  > attention
+    This method should only called to set initial values on a property that has been created using the default constructor.
+
+FUN void : setCanAutoFollow( Boolean onOff )
+  > summary
+    Sets whether or not the property can automatically follow properties on a following figure.
+  > parameters
+    + onOff - If true, the property will be considered during auto-follow.
+  > attention
+    When associated with a figure that is a follow target, this value determines whether or not this property will be projected onto the follower (if this property is the control for an auto-follow modifier, e.g., DzMorph). When associated with a figure that is a follower, this value determines whether or not the name of this property (or the name of a modifier that owns this property) will be used to find a match in the follow target and if found add the found property's value (minus its default value) to this property's value (as possible depending on any constrains/controllers).
+
+FUN void : setDynamicallyAutoFollow( Boolean yesNo )
+  > summary
+    Sets whether or not this property should [temporarily] auto-follow.
+  > parameters
+    + yesNo - If true, the property dynamically auto-follows.
+  > attention
+    The dynamically auto-follow state is not saved.
+  > since
+    4.8.0.23
+
+FUN void : setDynamicallyHidden( Boolean yesNo )
+  > summary
+    Sets whether or not this property should be [temporarily] hidden in the interfacee.
+  > parameters
+    + yesNo - If true, the property is dynamically hidden.
+  > attention
+    The dynamically hidden state is not saved.
+  > since
+    4.8.0.23
+
+FUN void : setHidden( Boolean yesNo )
+  > summary
+    Sets whether or not this property is hidden in the interface.
+  > parameters
+    + yesNo - If true, the property is hidden.
+
+FUN void : setIsFavorite( Boolean onOff )
+  > summary
+    Sets whether or not the property is a favorite.
+  > parameters
+    + onOff - If true, the property will be set as a favorite.
+
+FUN void : setIsGlobalFavorite( Boolean onOff )
+  > summary
+    Sets whether or not the property is a global favorite.
+  > parameters
+    + onOff - If true, the property will be set as a global favorite.
+
+FUN void : setIsManipulator( Boolean onOff )
+  > summary
+    Sets whether or not the property is one that will cause manipulation updates of the object in the viewport.
+  > parameters
+    + onOff - If true, the property will be set as a manipulator.
+
+FUN void : setIsRigProperty( Boolean yesNo )
+  > summary
+    Sets whether this property is a rigging property.
+  > parameters
+    + yesNo - If true, the property is set to be a rigging-property.
+  > attention
+    This method should only be called to set initial values on a property that has been created using the default constructor.
+
+FUN void : setIsUserProperty( Boolean yesNo )
+  > summary
+    Sets whether this property is a user property (i.e., can be deleted by the user).
+  > parameters
+    + yesNo - If true, the property is set to be a user-property.
+  > attention
+    This method should only be called to set initial values on a property that has been created using the default constructor.
+
+FUN void : setLabel( String label )
+  > summary
+    Sets the label that the user sees in the interface for this property.
+  > parameters
+    + path - The label to set; should be unique among all the other properties of this property's owner.
+
+FUN void : setNew( Boolean onOff )
+  > summary
+    Sets whether or not the property is marked new.
+  > parameters
+    + onOff - If true, this property will be marked new.
+
+FUN void : setOverrideControllers( Boolean onOff )
+  > summary
+    Sets whether or not this property will override its controllers.
+  > parameters
+    + onOff - If true, this property will override its controllers.
+
+FUN void : setPath( String path )
+  > summary
+    Sets the group that this property belongs to.
+  > parameters
+    + path - The slash ('/') delimited hierarchical path of the group to assign this property to.
+
+FUN void : setPresentation( DzPresentation pres )
+  > parameters
+    + pres - The presentation to set on this property.
+
+FUN void : setRegion( geometryregion_dz reg )
+  > parameters
+    + reg - The geoemtry region to set.
+
+FUN void : setSelected( Boolean onOff )
+  > summary
+    Sets whether or not the property is selected.
+  > parameters
+    + onOff - If true, the property will be set as selected.
+
+FUN void : setValueFromSettings( DzSettings settings, DzProperty.PropertyValueSettingsFlag flags=Standard )
+  > summary
+    Sets the value using settings.
+  > parameters
+    + settings - The settings with the data to set.
+    + flags - The flags for controlling the operation.
+  > since
+    4.7.1.72
+
+FUN void : setValueFromSettings( DzTime tm, DzSettings settings, DzProperty.PropertyValueSettingsFlag flags=Standard )
+  > summary
+    Sets the value using settings.
+  > parameters
+    + tm - The scene time to set the value at.
+    + settings - The settings with the data to set.
+    + flags - The flags for controlling the operation.
+  > since
+    4.7.1.72
+
+FUN DzError : setWidgetClassOverride( String styledWgtClassName, String wgtClassName )
+  > summary
+    Sets the name of the widget class to override the default widget class for this property.
+  > parameters
+    + styledWgtClassName - The name of the styled widget class.
+    + wgtClassName - The name of the standard widget class.
+  > returns
+    DZ_NO_ERROR if no error occurs, otherwise an appropriate error code.
+  > seealso
+    getWidgetClassOverride()
+    hasWidgetClassOverride()
+  > since
+    4.6.4.88
+
+### signals
+
+SIG void : aliasListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : assetModified()
+  > summary
+    TODO: Add description.
+
+SIG void : assetWasSaved()
+  > summary
+    TODO: Add description.
+
+SIG void : autoFollowTargetUriChanged( DzUri path )
+  > summary
+    TODO: Add description.
+
+SIG void : canAnimateChanged( Boolean enabled )
+  > summary
+    Emitted when animation for this property is enabled or disabled.
+  > parameters
+    + enabled - If true, animation was enabled for the property, otherwise animation was disabled.
+
+SIG void : canAutoFollowChanged( Boolean canAutoFollow )
+  > summary
+    TODO: Add description.
+
+SIG void : controllerListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : currentValueChanged()
+  > summary
+    Emitted when the value of this property at the current time has changed. If the current time changes and this property has animation data, this signal is emitted as appropriate. Subclasses of DzProperty should call emitCurrentValueChanged() when the value has changed.
+
+SIG void : dynamicallyAutoFollowChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : dynamicallyHiddenChanged( Boolean hidden )
+  > summary
+    TODO: Add description.
+
+SIG void : editFinished()
+  > summary
+    TODO: Add description.
+
+SIG void : groupChanged( DzPropertyGroup group )
+  > summary
+    Emitted when the group this property is in changed.
+  > parameters
+    + newGroup - The group this property was added to.
+
+SIG void : hiddenChanged( Boolean hidden )
+  > summary
+    Emitted when the hidden state of this property is changed.
+  > parameters
+    + hidden - true if the property is currently hidden in the interface, otherwise false.
+
+SIG void : isFavoriteChanged( Boolean onOff )
+  > summary
+    Emitted when this property is set or unset as a favorite.
+  > parameters
+    + onOff - If true, the property is now a favorite, otherwise the property is no longer a favorite.
+
+SIG void : isGlobalFavoriteChanged( Boolean onOff )
+  > summary
+    Emitted when this property is set or unset as a global favorite.
+  > parameters
+    + onOff - If true, the property is now a global favorite, otherwise the property is no longer a global favorite.
+
+SIG void : isManipulatorChanged( Boolean isManip )
+  > summary
+    Emitted when this property is set or unset as a manipulator.
+  > parameters
+    + isManip - If true, the property is now a manipulator, otherwise the property is no longer a manipulator.
+
+SIG void : isUserPropertyChanged( Boolean isUserProp )
+  > summary
+    Emitted when this property is set or unset as a user property.
+  > parameters
+    + isUserProp - If true, the property is now a user property, otherwise the property is no longer a user property.
+
+SIG void : keySelectionChanged( DzTimeRange range )
+  > summary
+    Emitted when the selection state of this property's keys has changed.
+  > parameters
+    + range - The range in which selection changed.
+
+SIG void : labelChanged( String newLabel )
+  > summary
+    Emitted when the label of this property is changed.
+  > parameters
+    + newLabel - The new label of this property.
+
+SIG void : lockStateChanged()
+  > summary
+    Emitted when the lock state of this property has changed.
+
+SIG void : newStateChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : overridingControllersChanged( Boolean overriding )
+  > summary
+    Emitted when the state for whether this property overrides its controllers changed.
+  > parameters
+    + hidden - true if the property is currently overriding controllers, otherwise false.
+
+SIG void : presentationIconChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : propertyDeleted( DzProperty prop )
+  > summary
+    Emitted when this property is destroyed.
+  > parameters
+    + thisProperty - The deleted property; this property.
+
+SIG void : regionChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : removed()
+  > summary
+    Emitted when this property is removed.
+
+SIG void : selectionStateChanged()
+  > summary
+    Emitted when this property is selected or deselected.
+
+SIG void : slaveControllerListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : valueChanged( DzTimeRange range )
+  > summary
+    Emitted when the value of this property is changed.
+  > parameters
+    + range - The range over which the property has changed.

@@ -1,0 +1,133 @@
+CLS DzUndoStack : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/undostack_dz
+  > summary
+    The application undo stack.
+
+### description
+  > summary
+    There is only one undo stack in the application, which is created and owned by DzApp. This object is directly available using the Global::UndoStack variable.
+
+### methods
+
+FUN void : accept( String caption )
+  > summary
+    It is recommended that you use Global::acceptUndo() instead of calling this function directly to avoid leaving the undo stack open.
+    Finishes the hold and pushes the undo list onto the stack. If the stack is already at maximum depth, it pushes the oldest item off of the list.
+  > parameters
+    + caption - A descriptive string to display for the undo list.
+
+FUN void : beginHold()
+  > summary
+    It is recommended that you use Global::beginUndo() instead of calling this function directly to avoid leaving the undo stack open.
+    Begins a hold, collecting all undo items into one undo entry. Every call to begin hold must be matched by a call to accept() or cancel().
+
+FUN void : cancel()
+  > summary
+    It is recommended that you use Global::cancelUndo() instead of calling this function directly to avoid leaving the undo stack open.
+    Finishes the hold but immediately calls undo to restore the state of the list to what it was before the matching beginHold() call.
+
+FUN Boolean : canPushItems()
+  > returns
+    true if undo items can be pushed onto the stack, otherwise false.
+
+FUN Boolean : canRedo()
+  > returns
+    true if redo() can be called, otherwise false.
+
+FUN Boolean : canUndo()
+  > returns
+    true if undo() can be called, otherwise false.
+
+FUN void : clearAll()
+  > summary
+    Clears the undo stack. This must be called at least whenever the list changes.
+  > seealso
+    Global::clearUndoStack()
+
+FUN void : drop()
+  > summary
+    It is recommended that you use Global::dropUndo() instead of calling this function directly to avoid leaving the undo stack open.
+    Accepts the actions performed and closes the undo stack hold without adding the items to the undo stack - the memory associated with the items is freed.
+
+FUN String : getCaption( Number offset=0 )
+  > parameters
+    + offset - The number of positions from the current position.
+  > returns
+    If getCurrentIndex() + offset is within the [0, getNumItems() - 1] range, the caption assigned to the item at the index, otherwise an empty string.
+  > since
+    4.9.3.61
+
+FUN Number : getCurrentIndex()
+  > returns
+    The index of the current position in the stack.
+  > attention
+    Each time an item is added or removed from the stack, each time undo() or redo() is called, each time accept() or clearAll() is called, the current index is changed.
+  > since
+    4.9.3.61
+
+FUN Number : getNumItems()
+  > returns
+    The total number of items in the undo stack.
+
+FUN Number : getNumRedoItems()
+  > returns
+    The total number of list items on the redo stack.
+
+FUN Number : getNumUndoItems()
+  > returns
+    The total number of list items on the undo stack.
+
+FUN String : getRedoCaption()
+  > returns
+    The caption assigned to the redo item at the top of the stack.
+
+FUN String : getUndoCaption()
+  > returns
+    The caption assigned to the undo item at the top of the stack.
+
+FUN Boolean : hasItems()
+  > returns
+    true if there are items on the undo stack, otherwise false.
+
+FUN Boolean : isInUndoRedo()
+  > returns
+    true if the undo stack is currently engaged in an undo/redo operation. This is useful for items that need to perform certain operations if the undo stack is not the one effecting data changes.
+
+FUN void : lock()
+  > summary
+    Disables items from being pushed onto the stack. This will be toggled by items to prevent undo operations from creating new undo items during an undo. Every call to lock() must be matched by a call to unlock().
+
+FUN Boolean : redo()
+  > summary
+    Calls redo on the item at the top of the stack, then moves the pointer to the next item in the stack.
+  > returns
+    true on success, false on error or if the stack is empty.
+
+FUN Boolean : undo()
+  > summary
+    Calls undo on the item at the top of the stack, then moves the pointer to the previous item in the stack.
+  > returns
+    true if successful, false on error or if the stack is empty.
+
+FUN void : unlock()
+  > summary
+    Enables items to be pushed onto the stack after a lock() call.
+
+### signals
+
+SIG void : redoAvailable( Boolean yesNo )
+  > summary
+    Emitted when the availability of the redo stack changes.
+
+SIG void : redoCaptionChanged( String caption )
+  > summary
+    Emitted when the caption of the redo stack changes.
+
+SIG void : undoAvailable( Boolean yesNo )
+  > summary
+    Emitted when the availability of the undo stack changes.
+
+SIG void : undoCaptionChanged( String caption )
+  > summary
+    Emitted when the caption of the undo stack changes.

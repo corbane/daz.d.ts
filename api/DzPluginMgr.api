@@ -1,0 +1,52 @@
+CLS DzPluginMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pluginmgr_dz
+  > summary
+    The manager for plugins.
+
+### description
+  > summary
+    There is only one instance of the plugin manager object in DAZ Studio. You can get the plugin manager by calling DzApp::getPluginMgr().
+
+### methods
+
+FUN void : doAboutPluginsDlg()
+  > summary
+    Shows the “About Installed Plugins” dialog.
+
+FUN DzPlugin : findPlugin( String pluginName )
+  > parameters
+    + pluginName - The name of the desired plugin.
+  > returns
+    The plug-in of the given type (if any), otherwise NULL.
+
+FUN Number : getNumPlugins()
+  > returns
+    The number of plug-ins currently loaded by DAZ Studio.
+
+FUN DzPlugin : getPlugin( Number which )
+  > parameters
+    + which - The index of the plug-in to get.
+  > returns
+    The plug-in at the given index in the list (if valid), otherwise NULL.
+
+FUN Boolean : saveConfiguration()
+  > returns
+    true if the configuration file was saved, otherwise false.
+  > since
+    4.11.0.35
+
+FUN void : setPluginLoadOnStartup( DzPlugin plugin, Boolean onOff )
+  > summary
+    Sets whether or not the plug-in should load when the application starts.
+  > parameters
+    + plugin - The plugin to set whether or not to load on startup.
+    + onOff - If true, the plugin should load on startup. If false, the plugin should not load on startup.
+  > since
+    4.11.0.35
+
+### signals
+
+SIG void : pluginAdded( DzPlugin plugin )
+  > summary
+    TODO: Add description.

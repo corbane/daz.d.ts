@@ -1,0 +1,150 @@
+CLS DzFloatColorProperty : DzColorProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/floatcolorproperty_dz
+  > summary
+    An animatable color property.
+
+### description
+  > summary
+    This class provides an animatable color property that is stored and can be accessed as an integer property. The integer value represents a color as a 32 bit rgba value with each byte representing a component with the range [0, 255].
+
+### constructors
+
+CTR DzFloatColorProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzFloatColorProperty( String name, Boolean canAnimate, Boolean isUserProperty, Color initVal )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + initVal - Sets the default value of this property.
+
+CTR DzFloatColorProperty( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN DzFloatColor : adjustFloatColorValue( DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : adjustFloatColorValue( DzTime tm, DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getDefaultFloatColorValue()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getFloatColorFollowValue()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getFloatColorFollowValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getFloatColorValue()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getFloatColorValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN Number : getFloatMax()
+  > summary
+    TODO: Add description.
+
+FUN Number : getFloatMin()
+  > summary
+    TODO: Add description.
+
+FUN Number : getFloatSensitivity()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getKeyFloatColorValue( Number i )
+  > summary
+    TODO: Add description.
+
+FUN Array : getKeyInterpolationTypeValues( Number i )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getLocalFloatColorValue()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getLocalFloatColorValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getRawFloatColorValue()
+  > summary
+    TODO: Add description.
+
+FUN DzFloatColor : getRawFloatColorValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN void : setDefaultFloatColorValue( DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatColorValue( DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatColorValue( DzTime tm, DzFloatColor val, DzFloatProperty.InterpolationType interp )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatColorValue( DzTime tm, DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatColorValue( DzTime tm, DzFloatColor val, DzFloatProperty.InterpolationType interp, Number param0, Number param1, Number param2 )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatMax( Number max )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatMin( Number min )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatMinMax( Number min, Number max )
+  > summary
+    TODO: Add description.
+
+FUN void : setFloatSensitivity( Number sens )
+  > summary
+    TODO: Add description.
+
+FUN void : setKeyFloatColorValue( Number i, DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN void : setKeyInterpolation( Number i, DzFloatProperty.InterpolationType interp, Number param0, Number param1, Number param2 )
+  > summary
+    TODO: Add description.
+
+FUN void : setKeyInterpolation( Number i, DzFloatProperty.InterpolationType interp )
+  > summary
+    TODO: Add description.
+
+FUN void : setRawFloatColorValue( DzFloatColor val )
+  > summary
+    TODO: Add description.
+
+FUN void : setRawFloatColorValue( DzTime tm, DzFloatColor val )
+  > summary
+    TODO: Add description.

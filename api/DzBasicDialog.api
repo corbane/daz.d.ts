@@ -1,0 +1,140 @@
+CLS DzBasicDialog : DzDialog
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/basicdialog_dz
+  > summary
+    A basic dialog that provides typical buttons found on most DAZ Studio dialogs.
+
+### description
+  > summary
+    The buttons provided by the dialog are: 'What's This', 'Apply', 'Accept', and 'Cancel'. Custom buttons can also be added to the set of default buttons by calling addButton(). All buttons but the 'Accept' button can be hidden or shown. By default, the 'Apply' button is the only hidden button. The text on the default buttons can be customized.
+    The dialog has a vertical box layout above the horizontal set of buttons. Widgets and sub-layouts can be added to this layout using addWidget() and addLayout().
+  > seealso
+    Sample: Simple Input Dialog
+    Sample: Simple Image Dialog
+    Sample: Action Accelerators
+    Sample: Version Conversion
+
+### constructors
+
+CTR DzBasicDialog()
+  > summary
+    Default Constructor. Creates a typical DAZ Studio dialog with 'What's This', 'Apply', 'Accept', and 'Cancel' buttons. By default, the 'Apply' button is hidden, call showApplyButton() to make it visible.
+
+### methods
+
+FUN void : addButton( DzButton btn, Number index=1 )
+  > summary
+    Adds a button into the horizontal layout of the dialog's button bar.
+  > parameters
+    + btn - The button to add to the dialog's button layout.
+    + index - The position in the button bar to insert the button.
+
+FUN void : addLayout( DzLayout layout, Number stretch=0 )
+  > summary
+    Adds a layout into the main vertical layout of the dialog.
+  > parameters
+    + child - The layout to add as a child of the dialog's main layout.
+    + stretch - The stretch factor for the child layout.
+
+FUN void : addSpacing( Number spacing )
+  > summary
+    Adds spacing into the main vertical layout of the dialog.
+  > parameters
+    + spacing - The amount of spacing to add.
+
+FUN void : addStretch( Number stretch=0 )
+  > summary
+    Adds stretch into the main vertical layout of the dialog.
+  > parameters
+    + stretch - The stretch factor for the added stretchable space.
+
+FUN void : addWidget( DzWidget child, Number stretch=0, DzWidget.AlignmentFlags alignment=0 )
+  > summary
+    Adds a widget into the main vertical layout of the dialog.
+  > parameters
+    + child - The widget to add to the dialog's main layout.
+    + stretch - The stretch factor for the child widget.
+    + alignment - The alignment for the child widget.(since 4.9.3.93)
+
+FUN void : insertWidget( Number index, DzWidget child, Number stretch=0, DzWidget.AlignmentFlags alignment=0 )
+  > summary
+    Inserts a widget into the main vertical layout of the dialog.
+  > parameters
+    + index - The index to insert the widget at.
+    + child - The widget to add to the dialog's main layout.
+    + stretch - The stretch factor for the child widget.
+    + alignment - The alignment for the child widget.
+  > since
+    4.9.3.93
+
+FUN void : setAcceptButtonEnabled( Boolean onOff )
+  > summary
+    Enables or disables the Accept button. By default, the button is enabled.
+  > parameters
+    + onOff - If true, the 'Accept' button will be available to the user. If false, the button will not be shown.
+
+FUN void : setAcceptButtonText( String text )
+  > summary
+    Sets the text for the dialog's accept button. By default, the button is labelled 'Accept'.
+  > parameters
+    + text - The new label for the accept button.
+
+FUN void : setApplyButtonEnabled( Boolean onOff )
+  > summary
+    Enables or disables the Apply button. By default, the button is disabled.
+  > parameters
+    + onOff - If true, the 'Apply' button will be available to the user. If false, the button will not be shown.
+
+FUN void : setApplyButtonText( String text )
+  > summary
+    Sets the text for the dialog's apply button. By default, the button is labelled 'Apply'.
+  > parameters
+    + text - The new label for the apply button.
+
+FUN void : setCancelButtonEnabled( Boolean onOff )
+  > summary
+    Enables or disables the Cancel button. By default, the button is enabled.
+  > parameters
+    + onOff - If true, the 'Cancel' button will be available to the user. If false, the button will not be shown.
+
+FUN void : setCancelButtonText( String text )
+  > summary
+    Sets the text for the dialog's cancel button. By default, the button is labelled 'Cancel'.
+  > parameters
+    + text - The new label for the cancel button.
+
+FUN void : setHelpButtonEnabled( Boolean onOff )
+  > summary
+    Enables or disables the Help button. By default, the button is enabled.
+  > parameters
+    + onOff - If true, the 'Help' button will be available to the user. If false, the button will not be shown.
+
+FUN void : showAcceptButton( Boolean onOff )
+  > summary
+    Shows or hides the 'Accept' button. By default, the button is shown.
+  > parameters
+    + onOff - If true, the 'Accept' button will be available to the user. If false, the button will not be shown.
+
+FUN void : showApplyButton( Boolean onOff )
+  > summary
+    Shows or hides the 'Apply' button. By default, the button is hidden.
+  > parameters
+    + onOff - If true, the 'Apply' button will be available to the user. If false, the button will not be shown.
+
+FUN void : showCancelButton( Boolean onOff )
+  > summary
+    Shows or hides the 'Cancel' button. By default, the button is shown.
+  > parameters
+    + onOff - If true, the 'Cancel' button will be available to the user. If false, the button will not be shown.
+
+FUN void : showHelpButton( Boolean onOff )
+  > summary
+    Shows or hides the 'What's This' button. By default, the button is shown.
+  > parameters
+    + onOff - If true, the 'What's This' button will be available to the user. If false, the button will not be shown.
+
+### signals
+
+SIG void : applyClicked()
+  > summary
+    Emitted when the 'Apply' button is clicked by the user.

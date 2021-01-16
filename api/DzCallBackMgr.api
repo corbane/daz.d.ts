@@ -1,0 +1,120 @@
+CLS DzCallBackMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/callbackmgr_dz
+  > summary
+    Manager that handles DzCallBack objects.
+
+### description
+  > summary
+    This class manages objects that are used to execute a scripts when a signal that the object is connected to is emitted. There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getCallBackMgr().
+  > example
+    Dynamically load a script.
+    var sScript = "support/CallBackExample/HelloWorld.dsa";
+    var oCallBackMgr = App.getCallBackMgr();
+    var oCallBack = oCallBackMgr.createCallBack( "Hello World", sScript, false );
+     
+    oCallBack.setConnection( Scene, "nodeAdded(DzNode*)" );
+  > example
+    Embed a script.
+    var sPath = String( "%1/support/CallBackExample/HelloWorld.dsa" ).arg( App.getScriptsPath() );
+    var oScript = new DzScript;
+    oScript.loadFromFile( sPath );
+    var sScript = oScript.getCode();
+     
+    var oCallBackMgr = App.getCallBackMgr();
+    var oCallBack = oCallBackMgr.createCallBack( "Hello World", sScript, true );
+     
+    oCallBack.setConnection( Scene, "nodeAdded(DzNode*)" );
+  > example
+    CallBack script (./support/CallBackExample/HelloWorld.dsa).
+    “CallBack” is a global transient variable referring to the DzCallBack that executes the script.
+    var oSender = CallBack.getSender();
+    var sMessage = String( "Sender Class: %1\n" +
+    		"Sender Name: %2\n\n" +
+    		"CallBack Args: %3" )
+    		.arg( oSender.className() )
+    		.arg( oSender.name )
+    		.arg( CallBack.getArgCount() );
+     
+    var nArgs = CallBack.getArgCount();
+    if( nArgs > 0 ){
+    	for( var i = 0; i < nArgs; i += 1 ){
+    		sMessage += String( "\nArg %1 : %2" ).arg( i ).arg( CallBack.getArg( i ) );
+    	}
+    }
+     
+    MessageBox.information( sMessage, CallBack.className(), "&OK" );
+  > seealso
+    DzApp::getCallBackMgr()
+
+### methods
+
+FUN void : clearAllCallBacks()
+  > summary
+    Deletes all callbacks.
+
+FUN DzCallBack : createCallBack( String name, String script, Boolean evaluate )
+  > summary
+    Creates a DzCallBack object.
+  > parameters
+    + name - The name for the callback.
+    + script - The filename or code of the script to execute.
+    + evaluate - If script is the actual code and it should be embedded, set this to true, otherwise it is assumed that script is the path of a script file to execute.
+
+FUN DzCallBack : createCallBack( String name )
+  > summary
+    Creates a DzCallBack object.
+  > parameters
+    + name - The name for the callback.
+
+FUN void : deleteCallBack( Number index )
+  > summary
+    Deletes the callback at the given index.
+  > parameters
+    + index - The index of the callback to delete.
+
+FUN void : deleteCallBack( String name )
+  > summary
+    Deletes all callbacks with the given name.
+  > parameters
+    + name - The name of the callback to delete.
+
+FUN void : deleteCallBack( DzCallBack callBack )
+  > summary
+    Deletes the specified callback.
+  > parameters
+    + callBack - The callback to delete.
+
+FUN void : deleteCallBackGroup( String name )
+  > summary
+    Deletes all callbacks in a given group.
+  > parameters
+    + name - The name of the group with callbacks to delete.
+
+FUN DzCallBack : getCallBack( Number index )
+  > returns
+    The callback at index if at least one callback exists and index is within the range [0, getNumCallBacks() - 1], otherwise null.
+
+FUN DzCallBack : getCallBack( String name )
+  > returns
+    The first DzCallBack object with the given name.
+
+FUN Number : getCallBackIndex( String name )
+  > returns
+    The index of the first callback named name.
+
+FUN Array : getCallBackList()
+  > returns
+    The list of all callbacks.
+
+FUN Array : getGroup( String name )
+  > returns
+    The list of callbacks in the group named name.
+
+FUN Number : getNumCallBacks()
+  > returns
+    The number of callbacks.
+
+FUN Array : getSignalSignature( QObject obj, String signalName=“” )
+  > returns
+    A list of strings that represent the signature(s) of the signal with the specified name.

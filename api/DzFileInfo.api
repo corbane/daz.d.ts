@@ -1,0 +1,282 @@
+CLS DzFileInfo : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fileinfo_dz
+  > summary
+    DAZ Script file information class.
+
+### description
+  > summary
+    Provides access to getting information about files. It also serves as the base class for the other DAZ Script File I/O types.
+
+### enumerations
+
+ENU Permission
+  > summary
+    Enumerated values used by permission() and permissions() to set/report the permissions and/or ownership of a file. The values may be OR-ed together to set/test multiple permissions and ownership values.
+  + ReadOwner - The file is readable by the owner of the file.
+  + WriteOwner - The file is writable by the owner of the file.
+  + ExeOwner - The file is executable by the owner of the file.
+  + ReadUser - The file is readable by the user.
+  + WriteUser - The file is writable by the user.
+  + ExeUser - The file is executable by the user.
+  + ReadGroup - The file is readable by the group.
+  + WriteGroup - The file is writable by the group.
+  + ExeGroup - The file is executable by the group.
+  + ReadOther - The file is readable by anyone.
+  + WriteOther - The file is writable by anyone.
+  + ExeOther - The file is executable by anyone.
+
+### constructors
+
+CTR DzFileInfo( String file )
+  > summary
+    Creates a file info object to retrieve information about the given file.
+  > parameters
+    + file - The path of the file.
+
+### methods
+
+FUN String : absFileName()
+  > summary
+    Deprecated
+    Use absoluteFilePath() instead.
+  > returns
+    The absolute path of the file, including the file name.
+  > since
+    4.9.3.29
+
+FUN DzDir : absoluteDir()
+  > returns
+    The file's absolute path as a DzDir object.
+  > since
+    4.9.3.35
+
+FUN String : absoluteFilePath()
+  > summary
+    TODO: Add description.
+
+FUN String : absolutePath()
+  > returns
+    The absolute path of the file, excluding the file name.
+  > since
+    4.9.3.29
+
+FUN String : baseName()
+  > summary
+    Deprecated
+    Use completeBaseName() instead.
+
+FUN String : bundleName()
+  > returns
+    On Mac OS X, the proper localized name for a bundle if the path isBundle(). On all other platforms an empty string.
+  > since
+    4.9.3.29
+
+FUN Boolean : caching()
+  > returns
+    true if caching is enabled, otherwise false.
+  > since
+    4.9.3.29
+
+FUN String : canonicalFilePath()
+  > returns
+    The canonical path including the file name, i.e. an absolute path without symbolic links or redundant “.” or “..” elements. If the file does not exist, returns an empty string.
+  > since
+    4.9.3.29
+
+FUN String : canonicalPath()
+  > returns
+    The canonical path excluding the file name, i.e. an absolute path without symbolic links or redundant “.” or “..” elements. If the file does not exist, returns an empty string.
+  > since
+    4.9.3.29
+
+FUN String : completeBaseName()
+  > returns
+    The file name excluding the last '.' and extension.
+  > since
+    4.9.3.29
+
+FUN String : completeSuffix()
+  > returns
+    All characters in the file name after (but not including) the first “.”.
+  > since
+    4.9.3.29
+
+FUN Date : created()
+  > returns
+    The date and time the file was created.
+
+FUN DzDir : dir()
+  > returns
+    The path of the object's parent directory as a DzDir object.
+  > since
+    4.9.3.35
+
+FUN Boolean : exists()
+  > returns
+    true if the file exists on the disk.
+
+FUN String : extension()
+  > summary
+    Deprecated
+    Use suffix() instead.
+
+FUN String : fileName()
+  > returns
+    The name of the file, excluding the path.
+
+FUN String : filePath()
+  > returns
+    The file name, including the path (which may be absolute or relative).
+  > since
+    4.9.3.29
+
+FUN Boolean : isAbsolute()
+  > returns
+    true if the file path is absolute, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isBundle()
+  > returns
+    true if this object points to a bundle or to a symbolic link to a bundle on Mac OS X, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isDir()
+  > returns
+    true if this object points to a directory or to a symbolic link to a directory, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isExecutable()
+  > returns
+    true if this object points to file that is executable, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isFile()
+  > returns
+    true if this object points to a file or to a symbolic link to a file, otherwise false (e.g., a directory).
+  > since
+    4.9.3.29
+
+FUN Boolean : isHidden()
+  > returns
+    true if the file is 'hidden', otherwise false.
+
+FUN Boolean : isReadable()
+  > returns
+    true if the file is readable by the user, otherwise false.
+
+FUN Boolean : isRelative()
+  > returns
+    true if the file path is relative, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isRoot()
+  > returns
+    true if the object points to a directory or to a symbolic link to a directory, and that directory is the root directory, otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isSymLink()
+  > returns
+    true if this object points to a symbolic link (shortcut on Windows), otherwise false.
+  > since
+    4.9.3.29
+
+FUN Boolean : isWritable()
+  > returns
+    true if the file is writable by the user, otherwise false.
+
+FUN Date : lastModified()
+  > returns
+    The date and time the file was last modified.
+
+FUN Date : lastRead()
+  > returns
+    The date and time the file was last accessed.
+
+FUN Boolean : makeAbsolute()
+  > summary
+    Converts the file's path to an absolute path if it is not already in that form.
+  > returns
+    true if the path was converted, otherwise false.
+  > since
+    4.9.3.29
+
+FUN String : path()
+  > returns
+    The absolute path of the file.
+  > seealso
+    absolutePath()
+
+FUN Boolean : permission( Permissions permissions )
+  > summary
+    TODO: Add description.
+
+FUN Permissions : permissions()
+  > returns
+    The complete OR-ed together combination of Permissions for the file.
+  > since
+    4.9.3.29
+
+FUN void : refresh()
+  > summary
+    Refreshes information about the file, i.e. reads in information from the file system the next time a cached property is fetched.
+  > since
+    4.9.3.29
+
+FUN Boolean : remove()
+  > summary
+    Delete the file from the disk.
+  > returns
+    true if successful, otherwise false.
+
+FUN void : setCaching( Boolean enable )
+  > summary
+    Sets whether or not caching of file information caching is enabled. When caching is enabled, file information is read from the file system the first time it's needed, but generally not later.
+  > since
+    4.9.3.29
+
+FUN void : setFile( DzDir dir, String file )
+  > summary
+    Sets the file to provide information about to file in dir.
+  > since
+    4.9.3.29
+
+FUN void : setFile( DzFile file )
+  > summary
+    Sets the file to provide information about to file.
+  > since
+    4.9.3.29
+
+FUN void : setFile( String file )
+  > summary
+    Sets the file to provide information about to file.
+  > since
+    4.9.3.29
+
+FUN Number : size()
+  > returns
+    The file size in bytes. If the file does not exist or cannot be fetched, 0 is returned.
+
+FUN String : sizeStr()
+  > returns
+    The file size in bytes, formatted in an easy-to-read manner.
+  > seealso
+    DzApp::byteSizeToString()
+
+FUN String : suffix()
+  > returns
+    All characters in the file after, but not including, the last '.'.
+  > since
+    4.9.3.29
+
+FUN String : symLinkTarget()
+  > returns
+    The absolute path that the file or directory a symbolic link (shortcut on Windows) points to, or a an empty string if the object is not a symbolic link.
+  > since
+    4.9.3.29

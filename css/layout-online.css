@@ -1,0 +1,155 @@
+
+
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* #region Generic rules */
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.vbox {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.hbox {
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.hbox-left {
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+  justify-content: flex-start;
+}
+.vbox > * { flex: 1 100%; }
+.hbox > * { flex: 1 100%; }
+.hbox-left > * {
+  height: 100%;
+  margin-left: 5px;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250);
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+}
+
+.right {
+  float: right;
+}
+
+.info { background-color: #c0ffc0; }
+.error { background-color: orange; }
+.progress { background-color: #ffff80; }
+
+/* #endregion */
+/* #region Left bar */
+
+#api-list-header {
+  padding: 2px;
+  height: 25px;
+}
+#api-list-header > * {
+  width: 100%;
+  height: 100%;
+}
+
+#api-list {
+  overflow: scroll;
+  padding: 0;
+  width: 100%;
+  height: calc(100% - 25px);
+}
+#api-list > li {
+  white-space: nowrap;
+  list-style: none;
+  padding: 5px;
+}
+#api-list > li:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+}
+#api-list > li.selected {
+  font-weight: bold;
+}
+#api-list > li.modified {
+  text-decoration-style: dashed;
+  text-decoration-line: underline;
+}
+
+/* #endregion */
+/* #region Middle bar */
+
+#api-pane-header {
+  padding: 2px;
+  height: 25px;
+}
+#api-pane-header > * {
+  padding: 0 5px;
+  height: 100%;
+}
+
+#api-pane-main {
+  height: calc(100% - 25px);
+}
+
+#api-message {
+  width: 100%;
+  height: 100%;
+}
+
+/* monaco editor */
+
+.glyph-only-api {
+	background: red;
+}
+.myContentClass {
+	background: lightblue;
+}
+
+/* #endregion */
+/* #region Right bar */
+
+#out-pane-header {
+  padding: 2px;
+  height: 25px;
+}
+
+#out-pane-main {
+  height: calc(100% - 25px);
+}
+
+#out-message {
+  width: 100%;
+  height: 100%;
+}
+
+/* #endregion */
+

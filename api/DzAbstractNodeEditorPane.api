@@ -1,0 +1,73 @@
+CLS DzAbstractNodeEditorPane : DzPane
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/abstractnodeeditorpane_dz
+  > summary
+    An intermediate pane class to provide common functionality to several panes.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Boolean : displaySeparate()
+  > returns
+    true if each selected node is displayed separately in the navigation list, otherwise false.
+
+FUN contenttab_dz : getContentTab()
+  > returns
+    The Presets page widget for this pane.
+
+FUN DzGuidePage : getEditorGuidePage()
+  > returns
+    The guide page displayed for the editor page when no property group or property is selected.
+
+FUN DzInfoDivider : getInfoDivider()
+  > returns
+    The information divider for this pane.
+
+FUN propertysidenavhierarchy_dz : getNodeEditor()
+  > returns
+    The Editor page widget for this pane.
+
+FUN DzGuidePage : getPresetGuidePage()
+  > returns
+    The guide page displayed for the presets page when no category is selected.
+
+FUN void : setCurrentTab( Number which )
+  > summary
+    Sets the current page to the index specified by which; 0 based.
+
+FUN void : showHidden( Boolean onOff )
+  > summary
+    Sets whether or not hidden properties are displayed in the pane.
+  > parameters
+    + onOff - If true, hidden properties will be visible in the parameters list, otherwise hidden properties will not be displayed in the parameters list.
+
+FUN Boolean : showingHidden()
+  > returns
+    true if hidden properties are shown in the parameters list, false if hidden parameters are not being displayed in the parameters list.
+
+FUN void : toggleDisplaySeparate()
+  > summary
+    Toggle between whether each selected node is displayed separately in the navigation list or not.
+
+FUN void : toggleShowHidden()
+  > summary
+    Toggle between whether hidden properties are shown in the list or not.
+
+### signals
+
+SIG void : assetHoverChanged( DzAsset asset )
+  > summary
+    Emitted when the user hovers the cursor over an asset on the Presets page
+  > since
+    4.6.4.112
+
+SIG void : currentTabChanged( Number which )
+  > summary
+    Emitted when the current page changes
+
+SIG void : showingHiddenChanged( Boolean onOff )
+  > summary
+    Emitted when the option to show hidden properties changes

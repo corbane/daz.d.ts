@@ -1,0 +1,313 @@
+CLS DzAbstractAssetContainer : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/abstractassetcontainer_dz
+  > summary
+    interface: DzRefCountedItem ??
+    Base class for all asset containers.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Boolean : canCopyContainers
+  > summary
+    Holds whether or not sub-containers can be copied. (Read Only)
+
+PRP Boolean : canDeleteContainer
+  > summary
+    Holds whether or not this container can be deleted. (Read Only)
+
+PRP Boolean : canInsertSubContainer
+  > summary
+    Holds whether or not sub-containers can be added to this container. (Read Only)
+
+PRP Boolean : canModifyAssets
+  > summary
+    Holds whether or not the assets in this container can be modified. (Read Only)
+
+PRP Boolean : canRenameContainer
+  > summary
+    Holds whether or not this container can be renamed. (Read Only)
+
+PRP Object : id
+  > summary
+    Holds the id for this container. (Read Only)
+
+PRP Boolean : removeAssetCausesDelete
+  > summary
+    Holds whether or not removing an asset from this container will result in that asset's file being deleted. (Read Only)
+  > since
+    4.11.0.193
+
+PRP String : tooltip
+  > summary
+    Holds the tooltip for this container. (Read Only)
+
+PRP Number : useCount
+  > summary
+    Holds the use count for this container.
+
+### methods
+
+FUN Boolean : clearRebuildableAssets()
+  > summary
+    Attempts to clear out the assets that can be rebuilt.
+  > returns
+    The current implementation does nothing and always returns false
+
+FUN Boolean : createNewChildContainer( String containerName )
+  > summary
+    Attempts to create a new child container.
+  > parameters
+    + containerName - The name of the new child container.
+  > returns
+    true if the container was successfully created, otherwise false.
+
+FUN DzAsset : getAsset( Number index )
+  > parameters
+    + index - The index of the asset to be returned.
+  > returns
+    The asset at the specified index (if valid), otherwise null.
+
+FUN Array<DzAsset> : getAssets()
+  > returns
+    A list of assets for this container.
+
+FUN DzAbstractAssetContainer : getChildContainer( Number index )
+  > parameters
+    + index - The index of the child container to get.
+  > returns
+    The child container at the given index (if valid), otherwise null.
+
+FUN Array<DzAbstractAssetContainer> : getChildContainers()
+  > returns
+    A list of child containers for this container.
+
+FUN Size : getChildIconSize()
+  > returns
+    The size of the icon associated with child containers.
+
+FUN String : getContainerName()
+  > returns
+    The name of this container.
+
+FUN Array : getIDPath()
+  > returns
+    The ID path for this container.
+
+FUN Number : getNumAssets()
+  > returns
+    The number of assets associated with this container.
+
+FUN Number : getNumChildContainers()
+  > returns
+    The number of child containers this container has.
+
+FUN DzAbstractAssetContainer : getOwner()
+  > returns
+    The owner of this container.
+
+FUN Size : getSmallChildIconSize()
+  > returns
+    The small icon size of the icon associated with child containers.
+
+FUN String : getSupportFile()
+  > returns
+    The support file for this asset container. Base implementation returns an empty string.
+
+FUN Boolean : hasAsset( DzAsset asset )
+  > parameters
+    + asset - The asset to check for.
+  > returns
+    true if this container has the given asset, otherwise false.
+
+FUN Boolean : hasChildContainers()
+  > returns
+    true if thic container has child containers, otherwise false.
+
+FUN Boolean : ignoreAssetConflicts()
+  > summary
+    Boolean DzAbstractAssetContainer::ingoreAssetConflicts()
+  > returns
+    true if asset conflicts in this container will be ignored, otherwise false.
+
+FUN Boolean : initChildren()
+  > summary
+    Initializes this containers child containers.
+  > returns
+    true if the containers were successfully initialized, otherwise false.
+
+FUN Boolean : insertAsset( DzAsset asset )
+  > summary
+    Attempts to insert the given asset into this container.
+  > parameters
+    + asset - The asset to add to this container.
+  > returns
+    true if the asset was successfully inserted, otherwise false.
+
+FUN Boolean : insertChildContainer( DzAbstractAssetContainer container )
+  > summary
+    Attempts to insert container as a child of this container.
+  > parameters
+    + container - The container to insert.
+  > returns
+    true if the container was successfully inserted, otherwise false.
+
+FUN Boolean : isFileSystemBased()
+  > returns
+    true if this container is based on a filesystem, otherwise false.
+
+FUN Boolean : moveFromParent( DzAbstractAssetContainer child )
+  > summary
+    Attempts to move the given container from its parent.
+  > parameters
+    + child - The container to move from its parent.
+  > returns
+    true if the container was successfully moved, otherwise false.
+
+FUN Boolean : removeAsset( DzAsset asset )
+  > summary
+    Attempts to remove the given asset from this container.
+  > parameters
+    + asset - The asset to remove.
+  > returns
+    true if the asset was successfully removed, otherwise false.
+
+FUN Boolean : removeAssetOnCut( DzAbstractAssetContainer toContainer )
+  > parameters
+    + toContainer - The container to check.
+  > returns
+    true if assets moved to toContainer should be removed from this container, otherwise false.
+
+FUN Boolean : removeChildContainer( DzAbstractAssetContainer container )
+  > summary
+    Attempts to remove the given container.
+  > parameters
+    + container - The container to remove.
+  > returns
+    true if the container was successfully removed, otherwise false.
+
+FUN Boolean : rename( String name )
+  > summary
+    Attempts to rename this container.
+  > parameters
+    + name - The new name for this container.
+  > returns
+    true if the rename was successful, otherwise false.
+
+FUN Boolean : renameAsset( DzAsset asset, String newAssetName )
+  > summary
+    Attempts to rename the given asset.
+  > parameters
+    + asset - The asset to rename.
+    + newAssetName - The new name for the asset.
+  > returns
+    true if the asset was successfully renamed, otherwise false.
+
+FUN Boolean : renameChildContainer( DzAbstractAssetContainer container, String name )
+  > summary
+    Attempts to rename the given child container.
+  > parameters
+    + container - The container to rename.
+    + name - The new name for the container.
+  > returns
+    true if the container was successfully renamed, otherwise false.
+
+FUN void : setContainerName( String name )
+  > summary
+    Sets the name for this container.
+  > parameters
+    + name - The new name for this container.
+
+FUN Boolean : update()
+  > summary
+    Attemps to update this container.
+  > returns
+    true if the update was successful, otherwise false.
+
+FUN Boolean : updateAssets()
+  > summary
+    Attempts to update the assets associated with this container.
+  > returns
+    true if the update was successful, otherwise false.
+
+### signals
+
+SIG void : assetIconChanged( DzAsset asset )
+  > summary
+    Emitted the icon for an asset has changed.
+  > parameters
+    + asset - The asset that the icon changed for.
+
+SIG void : assetRenamed( DzAsset asset, Number index )
+  > summary
+    Emitted when an asset has been renamed.
+  > parameters
+    + asset - The asset that was renamed.
+    + index - The index of the asset that was renamed.
+
+SIG void : beginAssetAdd( Number start, Number end )
+  > summary
+    Emitted before assets are added.
+  > parameters
+    + start - …
+    + end - …
+
+SIG void : beginAssetRemove( Number start, Number end )
+  > summary
+    Emitted before assets are removed.
+  > parameters
+    + start - …
+    + end - …
+
+SIG void : beginChildContainerAdd( DzAbstractAssetContainer container, Number start, Number end )
+  > summary
+    Emitted before a child container is added.
+  > parameters
+    + container - The container being added.
+    + start - …
+    + end - …
+
+SIG void : beginChildContainerRemove( DzAbstractAssetContainer container, Number start, Number end )
+  > summary
+    Emitted before a child container is removed.
+  > parameters
+    + container - The container being removed.
+    + start - …
+    + end - …
+
+SIG void : childContainerAboutToBeRemoved( DzAbstractAssetContainer childContainer )
+  > summary
+    Emitted just before a child container is removed.
+  > parameters
+    + container - The child container that will be removed.
+
+SIG void : childContainerRemoved( DzAbstractAssetContainer childContainer )
+  > summary
+    Emitted after a child container has been removed.
+  > parameters
+    + childContainer - The child container that was removed.
+
+SIG void : endAssetAdd()
+  > summary
+    Emitted after assets have been added.
+
+SIG void : endAssetRemove()
+  > summary
+    Emitted after assets have been removed.
+
+SIG void : endChildContainerAdd()
+  > summary
+    Emitted after a child container has been added.
+
+SIG void : endChildContainerRemove()
+  > summary
+    Emitted after a child container has been removed.
+
+SIG void : iconChanged( DzAbstractAssetContainer container )
+  > summary
+    Emitted after the icon for the container has changed.
+  > parameters
+    + container - The container with the icon that changed.

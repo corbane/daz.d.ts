@@ -1,0 +1,18 @@
+CLS DzPZ3Importer : DzImporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pz3importer_dz
+  > summary
+    Class for importing Poser Files.
+
+### description
+  > summary
+    Class for importing files in Poser formats; .pz3, *.pz2, *.cr2, *.lt2, *.cm2, *.pp2, *.fc2, *.hd2, *.hr2, *.mc6, .pzz, *.p2z, *.crz, *.ltz, *.cmz, *.ppz, *.fcz, *.hdz, *.hrz, *.mcz
+  > seealso
+    DzImportMgr::findImporterByClassName()
+    DzImportMgr::findImporter()
+
+### constructors
+
+CTR DzPZ3Importer()
+  > summary
+    Default Constructor.

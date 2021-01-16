@@ -1,0 +1,15 @@
+CLS DzHButtonGroup : DzButtonGroup
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/hbuttongroup_dz
+  > summary
+    DAZScript wrapper for Q3HButtonGroup.
+
+### description
+  > summary
+    DzButtonGroup with a horizontal layout.
+
+### constructors
+
+CTR DzHButtonGroup( DzWidget parent )
+  > summary
+    Creates a button group as a child of the given parent widget

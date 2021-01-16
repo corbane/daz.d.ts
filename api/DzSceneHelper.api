@@ -1,0 +1,345 @@
+CLS DzSceneHelper : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scenehelper_dz
+  > summary
+    Convenience object to make working with DzNode and DzProperty objects easier.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzSceneHelper()
+  > summary
+    Default Constructor
+
+### methods
+
+FUN Array : collectNodes( Boolean selectedOnly, Boolean boneTopSelected, Boolean boneSkeleton )
+  > parameters
+    + selectedOnly - Whether or not to limit the nodes to only those that are selected.
+    + boneTopSelected - Whether or not to climb the lineage of any DzBone encountered, and instead collect the top-most selected.
+    + boneSkeleton - Whether or not to collect the DzSkeleton when a DzBone is encountered; overrides boneTopSelected.
+  > returns
+    An list of the collected unique nodes.
+
+FUN DzERCLink : createLink( DzNode bone, String propertyName, DzNode controlBone, String controllerName, Number type, Number scalar, Number addend )
+  > parameters
+    + node - The DzNode with the DzNumericProperty to be controlled.
+    + propertyName - The name of the DzNumericProperty to be controlled.
+    + controlNode - The DzNode with the DzNumericProperty used to control.
+    + controllerName - The name of the DzNumericProperty used to control.
+    + type - The type of calculation this link performs.
+    + scalar - The value of the multiplier for the link.
+    + addend - The value of the additive offset for the link.
+  > returns
+    The ERC link created, or NULL.
+  > seealso
+    findControlProperty()
+    DzERCLink::setType()
+
+FUN DzMorph : createMorph( DzNode bone, String name, Array deltas, Boolean overwrite )
+  > parameters
+    + node - The DzNode with the DzObject to create the DzMorph on.
+    + name - The name of the DzMorph to create.
+    + deltas - A two dimensional Array, an array of 4 element arrays, where the first element of each array is the index of the vertex to set delta values for, the second element is the X-axis value for the delta, the third element is the Y-axis value for the delta, and the fourth element is the Z-axis value for the delta.
+    + overwrite - Whether or not to replace a DzMorph named name.
+  > returns
+    The morph created, or NULL if the morph could not be created.
+  > seealso
+    morphdeltas_dz::addDelta()
+
+FUN DzProperty : findControlProperty( String propertyName, DzNode node, Boolean recurse, Boolean nameLabelMatch=false )
+  > parameters
+    + propertyName - The name of the property to find the control property for.
+    + node - The node to find propertyName on.
+    + recurse - If node is a DzSkeleton and propertyName cannot be found using findPropertyInGroup(), determines whether to attempt locating propertyName on one of the DzBone owned by the skeleton.
+    + nameLabelMatch - Whether the name and label of the property must match propertyName.
+  > returns
+    The first control property of the property with the given internal name, or NULL.
+  > seealso
+    findPropertyInGroup()
+
+FUN DzProperty : findPropertyInGroup( String propertyName, DzPropertyGroup group, Boolean traverse, Boolean recurse, Boolean nameLabelMatch=false )
+  > parameters
+    + propertyName - The name of the property to find.
+    + group - The DzPropertyGroup to find propertyName in.
+    + traverse - If propertyName cannot be found in group, determines whether to attempt locating propertyName in the DzPropertyGroup siblings of group.
+    + recurse - If propertyName cannot be found in group, determines whether to attempt locating propertyName in the DzPropertyGroup children of group.
+    + nameLabelMatch - Whether the name and label of the property must match propertyName.
+  > returns
+    The first property with the given internal name, or NULL.
+
+FUN DzProperty : findPropertyOnNode( String propName, DzNode node )
+  > parameters
+    + propName - The name of the property to find.
+    + node - The node to search.
+  > returns
+    The first property with the given internal name, or NULL.
+
+FUN DzProperty : findPropertyOnNodeByInternalName( String internalName, DzNode node )
+  > parameters
+    + internalName - The internal name of the property to find.
+    + node - The node to search.
+  > returns
+    The first property with the given internal name, or NULL.
+
+FUN DzProperty : findPropertyOnNodeByLabel( String label, DzNode node )
+  > parameters
+    + propName - The label of the property to find.
+    + node - The node to search.
+  > returns
+    The first property with the given label, or NULL.
+
+FUN DzNode : getDisplayNode( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The DzNode associated with the display of prop.
+  > since
+    4.6.3.45
+
+FUN DzERCLink : getErcController( DzProperty controlledProp, DzProperty controllingProp )
+  > parameters
+    + controlledProp - The property whose controller will be returned.
+    + controllingProp - The property to determine which controller is returned.
+  > returns
+    The ERC controller for controlledProp that has the same property as controllingProp. If either parameter is null, or controlledProp does not have a controller that has the same property as controllingProp, NULL.
+
+FUN String : getInternalName( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The internal name of prop (or its alias target), or “Unknown”.
+
+FUN String : getLabel( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The label of prop, or an empty string.
+
+FUN Number : getMax( DzProperty prop )
+  > summary
+    Gets the maximum value for prop.
+  > parameters
+    + prop - The property to get the max value for.
+  > returns
+    If prop is non-null and inherits either DzFloatProperty or DzIntProperty, the max value of prop.
+
+FUN Number : getMin( DzProperty prop )
+  > summary
+    Gets the minimum value for prop.
+  > parameters
+    + prop - The property to get the min value for.
+  > returns
+    If prop is non-null and inherits either DzFloatProperty or DzIntProperty, the min value of prop.
+
+FUN DzNode : getNode( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The DzNode associated with prop.
+
+FUN String : getNodeName( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The name of the DzNode associated with prop, or “Unknown” if it has no associated DzNode.
+
+FUN String : getNodeType( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    A string representation of the property type of prop; “Transform”, “General”, “Morph”, “DFormer”, “Poser Joint” or “Unknown”.
+
+FUN Array : getPrivatePropertiesOnNode( DzProperty prop )
+  > parameters
+    + prop - The property to get the DzNode from.
+  > returns
+    All private properties associated with the DzNode that prop is associated with.
+  > since
+    4.6.3.45
+
+FUN Array : getPrivatePropertiesOnNode( DzNode node )
+  > parameters
+    + node - The node to get the properties from.
+  > returns
+    All private properties associated with node.
+  > since
+    4.6.3.45
+
+FUN Array : getPropertiesOnElement( DzElement elem )
+  > parameters
+    + elem - The DzElement to get the list of properties from.
+  > returns
+    The properties that are on elem.
+  > since
+    4.6.3.45
+
+FUN Array : getPropertiesOnNode( DzNode node, Boolean includeModifiers=true )
+  > parameters
+    + node - The node to get the properties from.
+    + includeModifiers - Whether or not to include the properties of DzModifiers.
+  > returns
+    All properties associated with the node.
+  > since
+    4.6.3.45
+
+FUN Array : getPropertiesOnNode( DzProperty prop, Boolean includeModifiers=true )
+  > parameters
+    + prop - The property to get the DzNode from.
+    + includeModifiers - Whether or not to include the properties of DzModifiers.
+  > returns
+    All properties associated with the DzNode that prop is associated with.
+  > since
+    4.6.3.45
+
+FUN Array : getRegionPropertiesOnNode( DzNode node )
+  > parameters
+    + node - The node to get the properties from.
+  > returns
+    All region properties associated with node.
+  > since
+    4.6.3.45
+
+FUN Array : getRegionPropertiesRecurse( geometryregion_dz region )
+  > parameters
+    + node - The geometryregion_dz to get the properties from.
+  > returns
+    All region properties associated with region.
+  > since
+    4.6.3.45
+
+FUN String : getUniqueMorphName( DzNode node, String name )
+  > parameters
+    + node - The DzNode with the DzObject that has the DzMorph.
+    + name - The name to make unique.
+  > returns
+    The unique name for the morph.
+
+FUN Boolean : helperCanRemove( DzProperty prop )
+  > parameters
+    + prop - The property to check whether the helper can remove.
+  > returns
+    true if the the helper can remove prop, otherwise false.
+  > since
+    4.6.3.45
+
+FUN Boolean : helperRemoveProperty( DzProperty prop )
+  > parameters
+    + prop - The property to remove.
+  > returns
+    true if the helper successfully removed the property, otherwise false.
+  > since
+    4.6.3.45
+
+FUN Boolean : isAtDefaultValue( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    true if prop inherits DzNumericProperty and its raw and default values are the same, otherwise false.
+
+FUN Boolean : isControlledByTransform( DzProperty prop, Boolean recurse=true )
+  > parameters
+    + prop - The property in question.
+    + recurse - If true (default), the controller hierarchy is recursed.
+  > returns
+    true if prop is controlled by a transform property, otherwise false.
+  > since
+    4.9.4.86
+
+FUN DzProperty : isDFormModProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it's owner is a dformmodifier_dz, otherwise NULL.
+
+FUN DzProperty : isLegacyJointProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it's owner is a legacyjoint_dz, otherwise NULL.
+
+FUN Boolean : isLegacyProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    true if the given property (or its alias target) is a legacy property (internal name begins with PBMCC or PBMDC), otherwise false.
+
+FUN DzProperty : isModifierProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it's owner is a DzModifier, otherwise NULL.
+
+FUN DzProperty : isMorphProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it's owner is a DzMorph, otherwise NULL.
+
+FUN DzProperty : isNodeProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it's owner is a DzNode, otherwise NULL.
+
+FUN Boolean : isTransform( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    true if the given property is a transform property, otherwise false.
+  > since
+    4.9.4.86
+
+FUN DzProperty : isTransformProperty( DzProperty prop )
+  > parameters
+    + prop - The property in question.
+  > returns
+    The given property (or its alias target) if it is a transform property, otherwise NULL.
+
+FUN Boolean : setInternalName( DzProperty prop, String name )
+  > summary
+    Attempts to rename prop to name. If the property is a morph property or a DForm modifier property then the modifier is renamed to name. If any other property associated with the node that this property is associated with has the same internal name as name, this method returns false.
+  > parameters
+    + prop - The property to change.
+    + name - The new internal name for the property.
+  > returns
+    true if the rename was successful, otherwise false.
+
+FUN void : setMax( DzProperty prop, Number max )
+  > summary
+    Sets the maximum value for prop. This method only applies if prop is non-null and inherits either DzFloatProperty or DzIntProperty. Otherwise this method has no effect.
+  > parameters
+    + prop - The property whose maximum value is to be set.
+    + max - The value to set. If prop inherits DzIntProperty, max is truncated (not rounded).
+
+FUN void : setMin( DzProperty prop, Number min )
+  > summary
+    Sets the minimum value for prop. This method only applies if prop is non-null and inherits either DzFloatProperty or DzIntProperty. Otherwise this method has no effect.
+  > parameters
+    + prop - The property whose minimum value is to be set.
+    + min - The value to set. If prop inherits DzIntProperty, min is truncated (not rounded).
+
+FUN void : setMinMax( DzProperty prop, Number min, Number max )
+  > summary
+    Essentially behaves the same as calling both DzSceneHelper::setMin() and DzSceneHelper::setMax().
+  > parameters
+    + prop - The property to set min and max values for.
+    + min - The new min value for the given property.
+    + max - The new max value for the given property.
+
+FUN void : setPropertyPath( DzProperty prop, String inPath )
+  > summary
+    Sets the DzPropertyGoup path (and appropriate DzGeoemtryRegion) for the given property.
+  > parameters
+    + prop - The property to change the path of.
+    + inPath - The new path for the given property.
+
+FUN void : setUniqueName( DzNode node, String name )
+  > summary
+    Sets the name of node to a unique version of name.
+  > parameters
+    + node - The node to set the unique name of.
+    + name - The name to make unique.

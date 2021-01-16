@@ -1,0 +1,17 @@
+CLS DzUVSupportAssetFilter : DzAssetFileOutFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uvsupportassetfilter_dz
+  > summary
+    Class for saving a DSON-based UV Set Definition Support Asset.
+
+### description
+  > summary
+    An asset save filter for saving a UV Set Definition Support Asset in the DSON format.
+  > seealso
+    Sample: Save a UV Set Definition Support Asset
+
+### constructors
+
+CTR DzUVSupportAssetFilter()
+  > summary
+    TODO: Add description.

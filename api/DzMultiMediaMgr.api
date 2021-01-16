@@ -1,0 +1,86 @@
+CLS DzMultiMediaMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/multimediamgr_dz
+  > summary
+    Manager of multimedia (video and audio) export/import classes.
+
+### description
+  > summary
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getMultiMediaMgr().
+
+### statics
+
+STA DzAudioImporter : findAudioImporter( String filename )
+  > summary
+    Uses the filename extension to find an appropriate audio importer.
+  > returns
+    An appropriate importer for the given file name, or NULL if none is found. The caller takes ownership of this object and is responsible for deleting it.
+
+STA DzVideoExporter : findVideoExporter( String filename )
+  > summary
+    Uses the filename extension to find an appropriate video exporter.
+  > returns
+    An appropriate exporter for the given file name, or NULL if none is found. The caller takes ownership of this object and is responsible for deleting it.
+
+STA DzAudioImporter : getAudioImporter( Number i )
+  > returns
+    A new instance of the i'th audio importer in the list. The caller takes ownership of this object and is responsible for deleting it.
+
+STA Number : getNumAudioImporters()
+  > returns
+    The number of audio importers currently supported.
+
+STA Number : getNumVideoExporters()
+  > returns
+    The number of video exporters currently supported.
+
+STA DzVideoExporter : getVideoExporter( Number i )
+  > parameters
+    + i - The index of the exporter to create.
+  > returns
+    A new instance of the i'th video exporter in the list. The caller takes ownership of this object and is responsible for deleting it.
+
+STA void : makeAudioImportFileFilter( DzFileFilter filter, String defaultFilter=“”, Boolean makeAllFilesEntry=true )
+  > summary
+    Populates the given filter with all the audio types recognized by the multimedia manager.
+  > parameters
+    + filter - The filter to populate
+    + defaultFilter - The filter to set as the default
+    + makeAllFilesEntry - If true, and additional filter is created for all recognized file extensions.
+
+STA void : makeVideoExportFileFilter( DzFileFilter filter, String defaultFilter=“” )
+  > summary
+    Populates the given filter with all the video types recognized by the multimedia manager.
+  > parameters
+    + filter - The filter to populate
+    + defaultFilter - The filter to set as the default
+
+### methods
+
+FUN DzError : exportVideoClip( String fileName, DzVideoClip clip, Number exporterIndex=-1 )
+  > summary
+    Export the clip to a video file.
+  > parameters
+    + filename - The name of the file to export to.
+    + clip - An instance of DzVideoClip containing the data to save.
+    + exporterIndex - The index of the exporter class to use. If this is less than 0, then the extension of fileName is used to attempt to find an appropriate exporter.
+  > returns
+    DZ_NO_ERROR if the file export was successful.
+
+FUN String : getAudioClipLoadPath()
+  > returns
+    Last directory that audio files were imported from.
+
+FUN String : getVideoClipSavePath()
+  > returns
+    Last directory that video files were exported to.
+
+FUN DzError : importAudioClip( String fileName, DzAudioClip clip, Number importerIndex=-1 )
+  > summary
+    Import an audio clip from a file.
+  > parameters
+    + filename - The name of the file to import from.
+    + clip - A pointer to a DzAudioClip instance to import the data into.
+    + importerIndex - The index of the importer class to use. If this is less than 0, then the extension of fileName is used to attempt to find an appropriate exporter.
+  > returns
+    DZ_NO_ERROR if the file import was successful.

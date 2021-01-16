@@ -1,0 +1,195 @@
+CLS DzListBox : DzScrollView
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/listbox_dz
+  > summary
+    DAZ Script list box widget.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU LayoutMode
+  > summary
+    The possible layout modes for the columns and rows of the list box
+  + FixedNumber - There is a fixed number of rows or columns
+  + FitToWidth - There are as many columns as will fit
+  + FitToHeight - There are as many rows as will fit
+  + Variable - There are as many rows as required by the column mode and vice-versa
+
+ENU SelectionMode
+  > summary
+    The possible selection modes for the list box
+  + Single - Single selection - only one item in the box can be selected at a time
+  + Multi - Multi selection - when the user clicks on an item, its selection state is toggled, all other items remain the same
+  + Extended - Extended selection - when the user clicks on an item, the current selection is replaced with that item. The ctrl and shift keys can be used to select multiple items.
+  + NoSelection - Items can not be selected
+
+### properties
+
+PRP DzListBox.LayoutMode : columnMode
+  > summary
+    The layout mode for the columns of the list box
+
+PRP Number : count
+  > summary
+    The number of items in the list box (read-only)
+
+PRP Number : currentItem
+  > summary
+    The index of the currently highlighted item in the list box
+
+PRP String : currentText
+  > summary
+    The text of the currently highlighted item in the list box
+
+PRP Number : numColumns
+  > summary
+    The number of columns in the list box (read-only)
+
+PRP Number : numItemsVisible
+  > summary
+    The number of items visible in the list box (read-only)
+
+PRP Number : numRows
+  > summary
+    The number of rows in the list box (read-only)
+
+PRP DzListBox.LayoutMode : rowMode
+  > summary
+    The layout mode for the rows of the list box
+
+PRP Number : selected
+  > summary
+    The index of the currently selected item in the list box (in single selection mode only)
+
+PRP DzListBox.SelectionMode : selectionMode
+  > summary
+    The selection mode of the list box
+
+PRP Number : topItem
+  > summary
+    The index of the item at the top of the list box
+
+PRP Boolean : variableHeight
+  > summary
+    Whether or not the list box has variable height rows
+
+PRP Boolean : variableWidth
+  > summary
+    Whether or not the list box has variable width columns
+
+### constructors
+
+CTR DzListBox( DzWidget parent )
+  > summary
+    Creates a list box with the given parent widget
+
+### methods
+
+FUN void : clear()
+  > summary
+    Clears all items in the list box
+
+FUN void : insertItem( String text )
+  > summary
+    Inserts the given item into the list box
+
+FUN Boolean : isSelected( Number index )
+  > returns
+    true if the item at the given index is selected
+
+FUN void : removeItem( Number index )
+  > summary
+    Removes the given item from the list box
+
+FUN void : setSelected( Number index, Boolean selected )
+  > summary
+    Sets whether the item at the given index is selected
+
+FUN String : text( Number index )
+  > returns
+    The text of the item at the given index
+
+### signals
+
+SIG void : clicked( Number index )
+  > summary
+    Emitted when an item is clicked (mouse button pressed and released).
+
+SIG void : clicked( Number index, Point pnt )
+  > summary
+    Emitted when an item is clicked (mouse button pressed and released).
+
+SIG void : contextMenuRequested( Number index, Point pos )
+  > summary
+    Emitted when the user right clicks the list box for a context menu.
+
+SIG void : currentChanged( Number index )
+  > summary
+    Emitted when the current item changes.
+
+SIG void : doubleClicked( Number index )
+  > summary
+    Emitted when an item is double clicked.
+
+SIG void : highlighted( Number index )
+  > summary
+    Emitted when the highlighted item changes.
+
+SIG void : highlighted( String str )
+  > summary
+    Emitted when the highlighted item changes.
+
+SIG void : mouseButtonClicked( Number button, Number index, Point pos )
+  > summary
+    Emitted when an item is clicked with the a mouse button (mouse button pressed and released).
+
+SIG void : mouseButtonPressed( Number button, Number index, Point pos )
+  > summary
+    Emitted when an item is pressed with the a mouse button (mouse button pressed).
+
+SIG void : onItem( Number index )
+  > summary
+    Emitted mouse cursor moves onto an item.
+
+SIG void : onViewport()
+  > summary
+    Emitted mouse cursor moves from an item to an empty part of the list box.
+
+SIG void : pressed( Number index, Point pnt )
+  > summary
+    Emitted when an item is pressed (mouse button pressed).
+
+SIG void : pressed( Number index )
+  > summary
+    Emitted when an item is pressed (mouse button pressed).
+
+SIG void : returnPressed( Number index )
+  > summary
+    Emitted when return is pressed on the current item.
+
+SIG void : rightButtonClicked( Number index, Point pnt )
+  > summary
+    Emitted when an item is clicked with the right button (mouse button pressed and released).
+
+SIG void : rightButtonPressed( Number index, Point pnt )
+  > summary
+    Emitted when an item is pressed with the right button (mouse button pressed).
+
+SIG void : selected( String str )
+  > summary
+    Emitted when the selected item changes.
+
+SIG void : selected( Number index )
+  > summary
+    Emitted when the selected item changes.
+
+SIG void : selectionChanged()
+  > summary
+    Emitted when the selection in the box changes.
+
+SIG void : selectionChanged( Number index )
+  > summary
+    Emitted when a new item is selected in single selection mode.

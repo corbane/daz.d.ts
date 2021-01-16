@@ -1,0 +1,157 @@
+CLS DzERCFreeze : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/ercfreeze_dz
+  > summary
+    Implements the logic of 'freezing' the numeric properties to a controller property.
+
+### description
+  > summary
+    This utility class implements the logic of 'freezing' (linking) the current state of numeric properties on a node (or multiple nodes) to a controller property, such that adjusting the controller property adjusts the linked properties in kind. The DzERCLink between the 'frozen' properties and the controller are created such that when the controller is set to the value it is at when the 'freeze' operation is performed, the 'frozen' properties will be at the respective values they were at in that moment of time.
+    The controller node (the DzNode that the controlling property is located on) and the controller property (the DzNumericProperty that ultimately does the controlling) must be set before calling doFreeze(); see setControllerNode() and setControllerProperty().
+    An additional property can be set and used to attentuate the effect of the controller property on the 'frozen' properties, or have its value attenuated as the controller property is applied, depending on the AttenuateMode set.
+    The addPropertiesToFreeze() method is used to inspect the current state of the numeric properties on a a given node that are not currently set to their respective raw values and add them to the list of those properties to be linked to the controller property. This list of properties can be inspected and/or modified using the getPropertiesToFreeze() and setPropertiesToFreeze() methods.
+  > seealso
+    Sample: ERC Freeze
+  > attention
+    This object is provided by the Property Hierarchy plugin. It is only available when the Property Hierarchy plugin is activated and enabled.
+  > since
+    4.9.3.95
+
+### enumerations
+
+ENU AttenuateMode
+  > summary
+    TODO: Add description.
+  + SubComponents - TODO: Add description.
+  + Controller - TODO: Add description.
+
+### constructors
+
+CTR DzERCFreeze()
+  > summary
+    Default constructor.
+
+### methods
+
+FUN Boolean : addPropertiesToFreeze( DzNode node )
+  > summary
+    Adds all numeric properties on node whose values differ from their raw values to the list of properties to 'freeze' (link) to the controller property.
+  > parameters
+    + node - The node to add the numeric properties from.
+  > returns
+    true if node, getControllerNode(), and getControllerProperty() are defined and it succeeds, otherwise false.
+  > seealso
+    setPropertiesToFreeze()
+    getPropertiesToFreeze()
+
+FUN Boolean : doFreeze()
+  > summary
+    Performs the ERC freeze based on the current settings.
+  > returns
+    true if the freeze operation was successful, otherwise false.
+
+FUN Boolean : getApplyController()
+  > returns
+    true if the controller property will be set to the value that causes the 'frozen' properties to be at their current value once the 'freeze' operation is complete, otherwise false.
+
+FUN DzERCFreeze.AttenuateMode : getAttenuateMode()
+  > returns
+    The mode that determines how the attenuate property will be used.
+
+FUN DzNumericProperty : getAttenuateProperty()
+  > returns
+    If set, the property that will be used to attenuate either the controller property, or the affect of the controller property on the properties returned by getPropertiesToFreeze(), depending on the AttenuateMode set.
+
+FUN DzNode : getControllerNode()
+  > returns
+    The node that the controller property is on.
+  > attention
+    This is used to determine the root node that the “Restore Fgure” and the “Restore Rigging” options are applied to if getRestoreFigure() and/or getRestoreRigging() return true.
+
+FUN DzNumericProperty : getControllerProperty()
+  > returns
+    The property that the properties returned by getPropertiesToFreeze() will be linked to when doFreeze() is called.
+
+FUN Boolean : getKeyed()
+  > returns
+    true if the DzERCLink created between the controller property and the 'frozen' properties will be a DzERCLink::ERCKeyed, otherwise false.
+
+FUN Array : getPropertiesToFreeze()
+  > returns
+    The list of properties that will be linked to the property returned by getControllerProperty() when doFreeze() is called.
+
+FUN Boolean : getRestoreFigure()
+  > returns
+    true if the Restore Figure action will be executed once the 'freeze' operation is complete, otherwise false.
+
+FUN Boolean : getRestoreRigging()
+  > returns
+    true if the Restore Figure Rigging action will be executed once the 'freeze' operation is complete, otherwise false.
+
+FUN void : setApplyController( Boolean yesNo )
+  > summary
+    Sets whether or not the controller property will be set to the value that causes the 'frozen' properties to be at their current value once the 'freeze' operation is complete.
+  > parameters
+    + yesNo - If true, the controller property will be applied.
+
+FUN void : setAttenuateMode( DzERCFreeze.AttenuateMode mode )
+  > summary
+    Sets the mode that determines how the attenuate property will be used.
+  > parameters
+    + mode - The attenuate mode to set.
+
+FUN void : setAttenuateProperty( DzNumericProperty prop )
+  > summary
+    Sets the property that will be used to attenuate either the controller property, or the affect of the controller property on the properties returned by getPropertiesToFreeze(), depending on the AttenuateMode set.
+  > parameters
+    + prop - The property to set.
+
+FUN void : setControllerNode( DzNode node )
+  > summary
+    Sets the node that the controller property is on.
+  > parameters
+    + node - The node to set.
+  > attention
+    This is used to determine the root node that the “Restore Fgure” and the “Restore Rigging” options are applied to if getRestoreFigure() and/or getRestoreRigging() return true.
+
+FUN void : setControllerProperty( DzNumericProperty prop )
+  > summary
+    Sets the property that the properties returned by getPropertiesToFreeze() will be linked to when doFreeze() is called.
+  > parameters
+    + prop - The property to set as the controller.
+  > seealso
+    addPropertiesToFreeze()
+    setPropertiesToFreeze()
+    getPropertiesToFreeze()
+
+FUN void : setKeyed( Boolean yesNo )
+  > summary
+    Sets whether or not the DzERCLink created between the controller property and the 'frozen' properties will be a DzERCLink::ERCKeyed (using the keys in timeline) or a DzERCLink::ERCDeltaAdd.
+  > parameters
+    + yesNo - If true, the DzERCLink will be a DzERCLink::ERCKeyed.
+
+FUN void : setPropertiesToFreeze( Array propList )
+  > summary
+    Sets the list of properties that will be linked to the property returned by getControllerProperty() when doFreeze() is called.
+  > parameters
+    + prop - The property to set as the controller.
+  > seealso
+    addPropertiesToFreeze()
+
+FUN void : setRestoreFigure( Boolean yesNo )
+  > summary
+    Sets whether or not the Restore Figure action will be executed once the 'freeze' operation is complete.
+  > parameters
+    + yesNo - If true, the Restore Figure action will be executed.
+
+FUN void : setRestoreRigging( Boolean yesNo )
+  > summary
+    Sets whether or not the Restore Figure Rigging action will be executed once the 'freeze' operation is complete.
+  > parameters
+    + yesNo - If true, the Restore Figure Rigging action will be executed.
+
+### signals
+
+SIG void : ERCChanged()
+  > summary
+    TODO: Add description.

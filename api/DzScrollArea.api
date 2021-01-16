@@ -1,0 +1,73 @@
+CLS DzScrollArea : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scrollarea_dz
+  > summary
+    DAZScript wrapper for QScrollArea.
+
+### description
+  > summary
+    A DzScrollArea provides a scrolling view of another widget.
+
+### properties
+  > summary
+    DzWidget::AlignmentFlags : alignment
+    Holds the alignment of the widget.
+
+PRP Size : maximumViewportSize
+  > summary
+    Holds the size of the viewport as if the scroll bars had no valid scrolling range. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Boolean : widgetResizable
+  > summary
+    Holds whether the scroll area should resize the view widget.
+
+### constructors
+
+CTR DzScrollArea( DzWidget parent )
+  > summary
+    Creates a scroll area as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the scroll area.
+
+### methods
+
+FUN void : ensureVisible( Number x, Number y, Number xmargin=50, Number ymargin=50 )
+  > summary
+    Scrolls the contents of the scroll area so that childWidget is visible inside the viewport with margins specified in pixels by xmargin and ymargin. If the specified point cannot be reached, the contents are scrolled to the nearest valid position.
+  > parameters
+    + x - The x coordinate.
+    + y - The y coordinate.
+    + xmargin - The margin in the horizontal direction.
+    + ymargin - The margin in the vertical direction.
+
+FUN void : ensureWidgetVisible( DzWidget childWidget, Number xmargin=50, Number ymargin=50 )
+  > summary
+    Scrolls the contents of the scroll area so that childWidget is visible inside the viewport with margins specified in pixels by xmargin and ymargin. If the specified point cannot be reached, the contents are scrolled to the nearest valid position.
+  > parameters
+    + childWidget - The child to scroll to.
+    + xmargin - The margin in the horizontal direction.
+    + ymargin - The margin in the vertical direction.
+
+FUN void : hideFrame()
+  > summary
+    Hides the frame around the scroll area.
+
+FUN void : setHorizontalScrollbarDisplay( Boolean onOff )
+  > summary
+    Sets whether or not to display the horizontal scrollbar.
+  > parameters
+    + onOff - If true, the horizontal scrollbar is always displayed. If false, the horizontal scrollbar is never displayed.
+
+FUN void : setVerticalScrollbarDisplay( Boolean onOff )
+  > summary
+    Sets whether or not to display the vertical scrollbar.
+  > parameters
+    + onOff - If true, the vertical scrollbar is always displayed. If false, the vertical scrollbar is never displayed.
+
+FUN void : setWidget( DzWidget widget )
+  > summary
+    Sets the contents of the scroll area to a widget.
+  > parameters
+    + widget - The widget to set as a child of the scroll area; this widget will be destroyed when the scroll area is deleted or when a new widget is set.

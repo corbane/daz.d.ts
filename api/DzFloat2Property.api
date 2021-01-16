@@ -1,0 +1,150 @@
+CLS DzFloat2Property : DzFloatProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/float2property_dz
+  > summary
+    An animatable floating-point property with 2 values.
+
+### description
+  > summary
+    This class provides an animatable floating-point property with 2 values that is stored and can be accessed as a DzVec2.
+
+### constructors
+
+CTR DzFloat2Property()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzFloat2Property( String name, Boolean canAnimate, Boolean isUserProperty, DzVec2 initVal )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + initVal - Sets the default value of this property.
+
+CTR DzFloat2Property( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN DzVec2 : adjustFloat2Value( DzVec2 val )
+  > summary
+    Adjust the value of the property based on the contribution of property controllers.
+  > parameters
+    + val - The 'final' value desired for the property.
+  > returns
+    A 'raw' value for the property that will result in the property having the given value with the current controllers.
+
+FUN DzVec2 : adjustFloat2Value( DzTime tm, DzVec2 val )
+  > summary
+    Adjust the value of the property at the given time based on the contribution of property controllers.
+  > parameters
+    + tm - The scene time at which to adjust the value.
+    + val - The 'final' value desired for the property.
+  > returns
+    A 'raw' value for the property that will result in the property having the given value with the current controllers.
+
+FUN DzVec2 : getDefaultFloat2Value()
+  > returns
+    The default value of the property.
+
+FUN DzVec2 : getFloat2FollowValue()
+  > summary
+    TODO: Add description.
+
+FUN DzVec2 : getFloat2FollowValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN DzVec2 : getFloat2Value()
+  > returns
+    The value of the property at the current time.
+
+FUN DzVec2 : getFloat2Value( DzTime tm )
+  > parameters
+    + tm - The scene time to get the value for.
+  > returns
+    The value of the property at the given time.
+
+FUN DzVec2 : getKeyFloat2Value( Number i )
+  > parameters
+    + index - The index of the key to get the value for.
+  > returns
+    The value of the i'th key in the property.
+
+FUN DzVec2 : getLocalFloat2Value()
+  > summary
+    This function is provided for the special case of ERC link redirection; sometimes called 'cross-talk'. For example, if Figure A (a piece of clothing, for example) is 'Fit To' Figure B, the ERC links on Figure A are redirected to follow channels on Figure B; this is how morphs on an item of clothing will follow morphs on the figure, etc. This function will provide the value of the property ignoring any redirection of ERC links. So, for a figure that is not 'Fit To' another figure, this will return the same value as getValue(). For a figure that is 'Fit To' another figure, this will return the value that the property would have if the ERC link had not been redirected.
+  > returns
+    The value of the property at the current time without any ERC link redirection.
+
+FUN DzVec2 : getLocalFloat2Value( DzTime tm )
+  > summary
+    This function is provided for the special case of ERC link redirection; sometimes called 'cross-talk'. For example, if Figure A (a piece of clothing, for example) is 'Fit To' Figure B, the ERC links on Figure A are redirected to follow channels on Figure B; this is how morphs on an item of clothing will follow morphs on the figure, etc. This function will provide the value of the property ignoring any redirection of ERC links. So, for a figure that is not 'Fit To' another figure, this will return the same value as getValue(). For a figure that is 'Fit To' another figure, this will return the value that the property would have if the ERC link had not been redirected.
+  > parameters
+    + tm - The scene time to get the local value for.
+  > returns
+    The value of the property at the given time without any ERC link redirection.
+
+FUN DzVec2 : getRawFloat2Value( DzTime tm )
+  > summary
+    This function is provided to make it easy to get the 'keyed' value of the property without any modifications. When the value of a property is evaluated, first the value based on key interpolation is calculated, that value is then passed to each of the controllers on the property (ERC links for example) which can modify that value. This modified value is then returned as the value of the property by getFloat2Value(). This function returns the value of the property before the application of the controllers; strictly the result of key interpolation.
+  > parameters
+    + tm - The scene time to get the raw value for.
+  > returns
+    The 'raw' value of the property at the given time - this is the actual value of the property without the contribution of property links, etc.
+
+FUN DzVec2 : getRawFloat2Value()
+  > summary
+    This function is provided to make it easy to get the 'keyed' value of the property without any modifications. When the value of a property is evaluated, first the value based on key interpolation is calculated, that value is then passed to each of the controllers on the property (ERC links for example) which can modify that value. This modified value is then returned as the value of the property by getFloat2Value(). This function returns the value of the property before the application of the controllers; strictly the result of key interpolation.
+  > returns
+    The 'raw' value of the property at the current time; this is the actual value of the property without the contribution of property links, etc.
+
+FUN void : setDefaultFloat2Value( DzVec2 val )
+  > summary
+    Sets the default value for this property.
+  > parameters
+    + val - The value to set the property to.
+
+FUN void : setFloat2Value( DzTime tm, DzVec2 val )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time to set the value at.
+    + val - The value to set the property to.
+
+FUN void : setFloat2Value( DzVec2 val )
+  > summary
+    Sets the value for this property at the current time; or the default value if this property is not animatable.
+  > parameters
+    + val - The value to set the property to.
+
+FUN void : setFloat2Value( DzTime tm, DzVec2 val, DzFloatProperty.InterpolationType interp )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time to set the value at.
+    + val - The value to set the property to.
+    + interp - The type of interpolation to perform between this keyframe and the next. Parameters for interpolation are set to defaults.
+
+FUN void : setFloat2Value( DzTime tm, DzVec2 val, DzFloatProperty.InterpolationType interp, Number param0, Number param1, Number param2 )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time to set the value at.
+    + valIn - The value to set the property to.
+    + interp - The type of interpolation to perform between this keyframe and the next.
+    + param0 - The parameter 0 for key interpolation: T value for TCB interpolation, starting slope value for Hermite interpolation.
+    + param1 - The parameter 1 for key interpolation: C value for TCB interpolation, ending slope value for Hermite interpolation.
+    + param2 - The parameter 2 for key interpolation: B value for TCB interpolation
+
+FUN void : setKeyFloat2Value( Number i, DzVec2 val )
+  > summary
+    Sets the value of the i'th key.
+  > parameters
+    + i - The index of the key to change.
+    + val - The new value for the key.
+  > Attention
+    You are responsible to ensure the key indices are within the valid range.

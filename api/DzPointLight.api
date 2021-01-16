@@ -1,0 +1,105 @@
+CLS DzPointLight : DzDistantLight
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pointlight_dz
+  > summary
+    A light that emits in all directions from a single point.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzPointLight()
+  > summary
+    Default Constructor. Creates a new point light.
+
+### methods
+
+FUN Number : getDecay()
+  > returns
+    The amount of decay.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getDecayControl()
+  > returns
+    The property that controls the decay.
+
+FUN Boolean : getDisplayPersistence()
+  > returns
+    true if the sphere will be displayed when the node is not selected, otherwise false.
+  > since
+    4.9.3.145
+
+FUN DzBoolProperty : getDisplayPersistenceControl()
+  > returns
+    The property that controls the display persistence.
+  > since
+    4.9.3.145
+
+FUN Number : getFalloffDistance( Number lightPercent )
+  > returns
+    The distance at which the illumination from this light falls off.
+  > since
+    4.8.0.9
+
+FUN String : getLightProfile()
+  > returns
+    The path to the IES Light Profile (if any), or an empty string.
+  > since
+    4.8.0.18
+
+FUN DzFileProperty : getLightProfileControl()
+  > returns
+    The property that controls the IES profile of the light.
+  > since
+    4.8.0.18
+
+FUN Boolean : getLightVisibility()
+  > returns
+    true if the light contributes to the scene, otherwise false.
+
+FUN Number : getSphereOpacity()
+  > returns
+    The opacity of the display sphere.
+  > since
+    4.9.3.145
+
+FUN DzFloatProperty : getSphereOpacityControl()
+  > returns
+    The property that controls the opacity of the sphere.
+  > since
+    4.9.3.145
+
+FUN void : setDecay( Number decay )
+  > summary
+    Sets the amount of decay.
+  > parameters
+    + decay - The amount of decay to set.
+  > since
+    4.9.3.145
+
+FUN void : setDisplayPersistence( Boolean persistence )
+  > summary
+    Sets the persistance of the display sphere.
+  > parameters
+    + persistence - If true, the sphere will be displayed when the node is not selected. If false, the sphere will not be displayed when the node is not selected.
+  > since
+    4.9.3.145
+
+FUN void : setLightProfile( String profilePath )
+  > summary
+    Sets the path of the IES light profile.
+  > parameters
+    + profilePath - The path of the IES profile to set.
+  > since
+    4.9.3.145
+
+FUN void : setSphereOpacity( Number opacity )
+  > summary
+    Sets the opacity of the display sphere.
+  > parameters
+    + opacity - The opacity to set.
+  > since
+    4.9.3.145

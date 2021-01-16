@@ -1,0 +1,103 @@
+CLS DzSelectionMap : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/selectionmap_dz
+  > summary
+    Provides a mapping between face groups and nodes associated with a mesh.
+
+### description
+  > summary
+    This class provides a mapping between the names of the facegroup_dz objects associated with a facetmesh_dz and the DzNode objects that are likewise associated with that mesh. This mapping plays a part in the mechanism that allows a user to click on different areas of the mesh in the viewport and have that translate to the selection of a node.
+
+### constructors
+
+CTR DzSelectionMap()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzError : addPair( String faceGroupName, DzNode node, Boolean replaceIfExists=false )
+  > summary
+    Adds a new face group/node mapping to the selection map.
+  > parameters
+    + faceGroupName - The name of the face group that will map to the given node.
+    + node - The node that will be selected when the face group is clicked on in the viewport.
+    + replaceIfExists - If true, checks to see if the face group is already mapped, and replaces the mapped node with the given node. If false, the operation will fail if the face group is already mapped.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : clearAll()
+  > summary
+    Clears all pairs in the map.
+
+FUN void : clearMissingGroups( facetmesh_dz mesh )
+  > summary
+    Clears the missing groups based on the face groups on mesh.
+  > parameters
+    + mesh - The reference mesh.
+
+FUN String : findGroupForNode( DzNode node )
+  > summary
+    Searches for the first group for a node.
+  > parameters
+    + node - The node to find the group for.
+  > returns
+    The name of the group for node.
+
+FUN DzNode : findNodeForGroup( String groupName )
+  > summary
+    Searches for the first node for a group.
+  > parameters
+    + groupName - The name of the group to find.
+  > returns
+    null if it fails, else the found node for group.
+
+FUN Number : findPair( DzNode node )
+  > summary
+    Searches for the first pair.
+  > parameters
+    + node - The node to find the mapping for.
+  > returns
+    The list of indices mapping to the node, empty list if no mapping for the node exists.
+
+FUN Number : findPair( String groupName )
+  > summary
+    Searches for the first pair.
+  > parameters
+    + groupName - The name of the face group to find the mapping for.
+  > returns
+    The index of the mapping for the face group, or -1 if no mapping for the face group exists.
+
+FUN Number : getNumPairs()
+  > returns
+    The number of face group/node mappings in the selection map.
+
+FUN String : getPairGroup( Number index )
+  > parameters
+    + index - The index of the face group/node mapping to look up.
+  > returns
+    The name of the face group for the mapping.
+
+FUN DzNode : getPairNode( Number index )
+  > parameters
+    + index - The index of the face group/node mapping to look up.
+  > returns
+    The node for the mapping.
+
+FUN DzError : removePair( Number index )
+  > summary
+    Removes a face group/node mapping from the selection map.
+  > parameters
+    + index - The index of the mapping to remove.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+### signals
+
+SIG void : mapModified()
+  > summary
+    Emitted when the map changes.
+
+SIG void : visibilityChanged()
+  > summary
+    Emitted when the visibility of the node in a given pair changes.

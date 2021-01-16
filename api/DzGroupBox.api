@@ -1,0 +1,68 @@
+CLS DzGroupBox : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/groupbox_dz
+  > summary
+    DAZScript wrapper for Q3GroupBox.
+
+### description
+  > summary
+    A DzGroupBox provides a group box frame, with an optional title and an ability to be checked like a DzCheckBox.
+
+### properties
+  > summary
+    DzWidget::AlignmentFlags : alignment
+    Holds the alignment of the group box title.
+
+PRP Boolean : checkable
+  > summary
+    Holds whether or not the group box is checkable.
+
+PRP Boolean : checked
+  > summary
+    Holds whether or not the group box is checked.
+
+PRP Number : columns
+  > summary
+    Holds the number of columns in the group box.
+
+PRP Boolean : flat
+  > summary
+    Holds whether or not the group box is painted flat (without a frame).
+
+PRP Number : insideMargin
+  > summary
+    Holds the margin between items inside the group box and the frame.
+
+PRP Number : insideSpacing
+  > summary
+    Holds the spacing between items inside the group box.
+    DzWidget::Orientation : orientation
+    Holds the orientation of the group box.
+
+PRP String : title
+  > summary
+    Holds the title of the group box.
+
+### constructors
+
+CTR DzGroupBox( DzWidget parent )
+  > summary
+    Creates a group box as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the group box.
+
+### methods
+
+FUN void : addSpace( Number space )
+  > summary
+    Adds an empty cell at the next free position. If space is greater than 0, the empty cell uses space as its fixed width (if Orientation is Horizontal) or height (if Orientation is Vertical).
+
+### signals
+
+SIG void : clicked( Boolean checked=false )
+  > summary
+    Emitted when the DzGroupBox's check box is clicked. Passes the new state of the check box.
+
+SIG void : toggled( Boolean onOff )
+  > summary
+    Emitted when the DzGroupBox's check box is toggled. Passes the new state of the check box.

@@ -1,0 +1,121 @@
+CLS Color : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/color
+  > summary
+    DAZScript wrapper for QColor.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QColor type used in the DAZ Studio SDK.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Number : alpha
+  > summary
+    The alpha component of the color. In the range 0 to 255.
+
+PRP Number : blue
+  > summary
+    The blue component of the color. In the range 0 to 255.
+
+PRP Number : green
+  > summary
+    The green component of the color. In the range 0 to 255.
+
+PRP Number : hue
+  > summary
+    The hue of the color as defined in the HSV color model.
+
+PRP String : name
+  > summary
+    The name of the color if it matches a named color, otherwise an empty string.
+
+PRP Number : red
+  > summary
+    The red component of the color. In the range 0 to 255.
+
+PRP Number : rgb
+  > summary
+    The color code of the color.
+
+PRP Number : saturation
+  > summary
+    The saturation of the color as defined in the HSV color model.
+
+PRP Number : value
+  > summary
+    The value of the color as defined in the HSV color model.
+
+### constructors
+
+CTR Color()
+  > summary
+    Default Constructor.
+
+CTR Color( String colorName )
+  > summary
+    Sets the RGB value from colorName, which may be in one of these formats (each of R, G and B is a single hex digit):
+    #RGB
+    #RRGGBB
+    #RRRGGGBBB
+    #RRRRGGGGBBBB
+    A name from the color database
+    The color is invalid if name cannot be parsed.
+  > parameters
+    + colorName - The named color to set the value of this color to.
+
+CTR Color( Number r, Number g, Number b, Number a=255 )
+  > summary
+    Component-wise constructor. Each value (i.e., r, g, b, a ) should be in the [0, 255] range.
+  > parameters
+    + r - The red value for the color.
+    + g - The green value for the color.
+    + b - The blue value for the color.
+    + a - The alpha value for the color (since 4.9.4.4).
+
+CTR Color( Color color )
+  > summary
+    Copy Constructor.
+  > parameters
+    + color - The Color to copy.
+
+### methods
+
+FUN Color : dark()
+  > returns
+    A darker version of this color.
+
+FUN Boolean : isValid()
+  > returns
+    true if the color is valid, otherwise false.
+  > since
+    4.8.1.93
+
+FUN Color : light()
+  > returns
+    A lighter version of this color.
+
+FUN void : setRgb( Number r, Number g, Number b, Number a )
+  > summary
+    Sets the red, green, blue and alpha values of this color to r, g, b and a, respectively.
+  > parameters
+    + r - The new red value for the color.
+    + g - The new green value for the color.
+    + b - The new blue value for the color.
+    + b - The new alpha value for the color.
+
+FUN void : setRgb( Number r, Number g, Number b )
+  > summary
+    Sets the red, green and blue values of this color to r, g and b, respectively.
+  > parameters
+    + r - The new red value for the color.
+    + g - The new green value for the color.
+    + b - The new blue value for the color.
+
+FUN void : setRgb( Number colorCode )
+  > summary
+    Sets the color code of the color. The value is a bitmask on the form 0xRRGGBB, where RR=red, GG=green, and BB=blue, all as hexadecimal digits.
+  > parameters
+    + colorCode - The encoded value for the color.

@@ -1,0 +1,19 @@
+CLS DzView : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/view_dz
+  > summary
+    A widget that can be displayed in one of the interactive viewports.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    A user-readable description of the view.
+
+FUN Pixmap : getIcon()
+  > returns
+    A pixmap icon to represent the view.

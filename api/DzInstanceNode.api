@@ -1,0 +1,35 @@
+CLS DzInstanceNode : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/instancenode_dz
+  > summary
+    A class for creating a single instance of another node.
+
+### description
+  > summary
+    This class can be used to create a single instance of another DzNode (subclass) that also has a DzOobject. The instance is drawn the same as the target node except for transforms.
+
+### constructors
+
+CTR DzInstanceNode()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzEnumProperty : getCopyModeControl()
+  > returns
+    The property controlling how the node is instanced (i.e., just the target or the target and its children).
+
+FUN DzNode : getTarget()
+  > returns
+    The current node being instanced by this node (if any), otherwise NULL.
+
+FUN DzNodeProperty : getTargetControl()
+  > returns
+    The property pointing at the target node.
+
+### signals
+
+SIG void : targetChanged()
+  > summary
+    Emitted when the target for this instance has changed.

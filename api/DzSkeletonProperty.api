@@ -1,0 +1,33 @@
+CLS DzSkeletonProperty : DzNodeProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/skeletonproperty_dz
+  > summary
+    A non-animatable skeleton property.
+
+### description
+  > summary
+    A specialized subclass of DzNodeProperty which will only allow the user to select nodes that are skeletons from the scene. This is currently used by skeletons for the 'Fit To' property.
+
+### constructors
+
+CTR DzSkeletonProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzSkeletonProperty( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, create an animatable property. If false, a non-animatable property is created.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN DzSkeleton : getSkeletonValue()
+  > returns
+    The value of the property, NULL if no skeleton is selected.
+
+### signals
+
+SIG void : aboutToChange()
+  > summary
+    Emitted immediately before the value of the property changes.

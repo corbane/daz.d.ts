@@ -1,0 +1,70 @@
+CLS DzSettingsHelper : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/settingshelper_dz
+  > summary
+    Convenience object to make working with DzAppSettings even easier.
+
+### description
+  > summary
+    Choosing the appropriate key type and pushing/popping keys (paths) is handled by the object.
+
+### constructors
+
+CTR DzSettingsHelper()
+  > summary
+    Default Constructor
+
+### methods
+
+FUN Object : get( String path, String name, Object value )
+  > summary
+    Retrieves a value from the subkey at the given key.
+  > parameters
+    + path - The path of the key to retrieve the named value from; similar to a folder in the file system
+    + name - The name of the value to retrieve; the “key” in a key/value pair
+    + value - The default value to return if the name is not found; the “value” in a key/value pair
+  > returns
+    The object that represents the value at the specified path/name
+  > example
+    var oSettingsHelper = new DzSettingsHelper();
+    var bResult = oSettingsHelper.get( "MyCompany/MyToolName", "MyKey", false );
+    print( bResult );
+
+FUN Boolean : hasValue( String path, String name )
+  > summary
+    Retrieves whether a value exists at the given key.
+  > parameters
+    + path - The path of the key to check for its existence; similar to a folder in the file system
+    + name - The name of the value to check for its existence; the “key” in a key/value pair
+  > returns
+    true if path/key exists, otherwise false.
+  > example
+    var oSettingsHelper = new DzSettingsHelper();
+    var bResult = oSettingsHelper.hasValue( "MyCompany/MyToolName", "MyKey" );
+    print( bResult );
+
+FUN Boolean : removeValue( String path, String name )
+  > summary
+    Removes a named value at the given path.
+  > parameters
+    + path - The path of the key to remove; similar to a folder in the file system
+    + name - The name of the value to remove; the “key” in a key/value pair
+  > returns
+    true if path/key exists, otherwise false.
+  > example
+    var oSettingsHelper = new DzSettingsHelper();
+    var bResult = oSettingsHelper.removeValue( "MyCompany/MyToolName", "MyKey" );
+    print( bResult );
+  > since
+    4.9.0.38
+
+FUN void : set( String path, String name, Object value )
+  > summary
+    Records a named value to the path specified.
+  > parameters
+    + path - The path of the key to place the named value at; similar to a folder in the file system
+    + name - The name of the value to record; the “key” in a key/value pair
+    + value - The value to record; i.e. a Number, String, Boolean or Color; the “value” in a key/value pair
+  > example
+    var oSettingsHelper = new DzSettingsHelper();
+    oSettingsHelper.set( "MyCompany/MyToolName", "MyKey", true );

@@ -1,0 +1,21 @@
+CLS DzGeometryShellNode : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/geometryshellnode_dz
+  > summary
+    Node class for geometry shells.
+
+### description
+  > summary
+    A geometry shell is a heavy instance of another scene node. It is a deep copy of the world space geometry with its own unique materials.
+
+### constructors
+
+CTR DzGeometryShellNode()
+  > summary
+    Default Constructor. Creates a shell with DzObject, pushmodifier_dz, and DzGeometryShellShape. This is the preferred way to create a shell node.
+
+### methods
+
+FUN DzNodeProperty : getShellNodeControl()
+  > summary
+    TODO: Add description.

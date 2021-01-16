@@ -1,0 +1,143 @@
+CLS DzImportMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/importmgr_dz
+  > summary
+    Manager of all scene file importer classes.
+
+### description
+  > summary
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getImportMgr().
+  > seealso
+    Importer Settings
+
+### methods
+
+FUN Boolean : canImport( String filename )
+  > summary
+    Calls recognize() on each of the importers and attempts to match an importer with the filename.
+  > parameters
+    + filename - The name of the file to try to find an importer for.
+  > returns
+    true if an importer was found that can read the given file.
+
+FUN DzImporter : findImporter( String filename )
+  > summary
+    Calls recognize() on each of the importers and attempts to match an importer with the filename.
+  > parameters
+    + filename - The name of the file to try to find an importer for.
+  > returns
+    A new instance of the matching importer, or NULL if none was found. The caller takes ownership of this pointer and is responsible for deleting it.
+
+FUN DzImporter : findImporterByClassName( String className )
+  > summary
+    Attempts to locate an importer class type by name.
+  > parameters
+    + className - The class name of the importer to find.
+  > returns
+    A new instance of the matching importer, or NULL if none was found. The caller takes ownership of this pointer and is responsible for deleting it.
+
+FUN Number : findImporterIndex( String filename )
+  > summary
+    Calls recognize() on each of the importers and attempts to match an importer with the filename.
+  > parameters
+    + filename - The name of the file to try to find an importer for.
+  > returns
+    The index of a matching importer, or -1 if none was found.
+
+FUN String : getImportFileName()
+  > summary
+    Gets the full import file name.
+  > returns
+    The full import file name.
+
+FUN String : getImportPath()
+  > summary
+    Gets the default import directory - this is typically the last directory that the user imported a file from, and will be the directory that user will be taken to next time the file import dialog is displayed.
+  > returns
+    The default import directory.
+
+FUN Number : getNumImporters()
+  > returns
+    The number of importers currently supported.
+
+FUN Boolean : isImporting()
+  > returns
+    True if there is currently a file being imported, false otherwise.
+
+FUN void : makeGeometryFileFilter( DzFileFilter filter, String defaultFilter=“”, Boolean makeAllFilesEntry=true )
+  > summary
+    Populates the given filter with all the geometry types recognized by the import manager.
+  > parameters
+    + filter - The filter to populate
+    + defaultFilter - The filter to set as the default
+    + makeAllFilesEntry - If true, an extra filter is appended to the list that matches all the valid extensions.
+
+FUN void : makeImportFileFilter( DzFileFilter filter, String defaultFilter=“”, Boolean makeAllFilesEntry=true )
+  > summary
+    Populates the given filter with all the types recognized by the import manager.
+  > parameters
+    + filter - The filter to populate
+    + defaultFilter - The filter to set as the default
+    + makeAllFilesEntry - If true, an extra filter is appended to the list that matches all the valid extensions.
+
+FUN DzError : readFile( String filename, Number importerIdx=-1 )
+  > summary
+    Import the contents of a file into the scene.
+  > parameters
+    + filename - The name of the file to import. This must be the full filename including the path to the file.
+    + importerIdx - The index of the importer class to use. If this is less than 0, then the recognize function of the importer classes will be called with the fileName to attempt to find an appropiate importer.
+    + filer - The fileload filter for this type of import defaults to NULL
+  > returns
+    DZ_NO_ERROR if the file import was successfull.
+
+FUN DzError : readFile( String filename, Number importerIdx, DzFileIOSettings options )
+  > summary
+    Import the contents of a file into the scene.
+  > parameters
+    + filename - The name of the file to import. This must be the full filename including the path to the file.
+    + importerIdx - The index of the importer class to use. If this is less than 0, then the recognize function of the importer classes will be called with the fileName to attempt to find an appropiate importer.
+    + filer - The fileload filter for this type of import defaults to NULL
+  > returns
+    DZ_NO_ERROR if the file import was successfull.
+
+FUN shape_dz : readGeometry( String filename, Number importerIdx, DzFileIOSettings options )
+  > summary
+    Reads the geometry file into a new shape.
+  > parameters
+    + filename - The full path of the file to import.
+    + importerIdx - The index of the importer to use, if invalid (<0) the file's extension will be used to select an appropriate importer.
+  > returns
+    The new shape that the geometry was read into, NULL on failure.
+
+FUN shape_dz : readGeometry( String filename, Number importerIdx=-1 )
+  > summary
+    Reads the geometry file into a new shape.
+  > parameters
+    + filename - The full path of the file to import.
+    + importerIdx - The index of the importer to use, if invalid (<0) the file's extension will be used to select an appropriate importer.
+  > returns
+    The new shape that the geometry was read into, NULL on failure.
+
+FUN void : setImportFileName( String fileName )
+  > summary
+    Sets the import file name - this is the full file name that file was import
+  > parameters
+    + path - The full file name .
+
+FUN void : setImportPath( String path )
+  > summary
+    Sets the default import directory - this is the directory that user will be taken to next time the file import dialog is displayed.
+  > parameters
+    + path - The new default import directory.
+
+### signals
+
+SIG void : fileImported()
+  > summary
+    Emitted after importing a file. This may not always be emitted after every fileImportStarting() signal if there were errors during file loading.
+    TODO: Add description.
+
+SIG void : fileImportStarting()
+  > summary
+    Emitted just before importing a file.
+    TODO: Add description.

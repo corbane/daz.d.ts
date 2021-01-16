@@ -1,0 +1,68 @@
+CLS Dz3DViewRenderHandler : DzImageRenderHandler
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/3dviewrenderhandler_dz
+  > summary
+    A render handler that renders into a viewport.
+
+### description
+  > summary
+    This render handler is a DzImageRenderHandler that is the size of the aspect frame for the given viewport, and paints all data passed to it over the current view.
+
+### constructors
+
+CTR Dz3DViewRenderHandler( DzViewport view, DzTime startTime, String filename )
+  > summary
+    Constructor. Creates a render handler that will render to the given viewport.
+  > parameters
+    + view - The viewport to render in.
+    + startTime - The starting scene time for the render.
+    + filename - The name of the file to save the render to.
+  > example
+    // Get the active viewport and camera
+    var oActiveView = MainWindow.getViewportMgr().getActiveViewport();
+    var oCamera = oActiveView.get3DViewport().getCamera();
+     
+    // Create a handler
+    var oHandler = new Dz3DViewRenderHandler( oActiveView, 0, App.getTempPath() + "/test.png" );
+     
+    // If we have a valid handler
+
+    if( oHandler ){
+    	// Set the background color
+    	oHandler.setBackColor( oActiveView.get3DViewport().background );
+     
+    	// Get the render options
+    	var oRenderOptions = App.getRenderOptions();
+     
+    	// Get the renderer
+    	var oRenderer = oRenderOptions.getActiveRenderer();
+     
+    	// Render, using our handler and options
+    	oRenderer.render( oHandler, oCamera, oRenderOptions );
+    }
+
+### methods
+
+FUN Number : getLeftOffset()
+  > returns
+    The offset for this handler, from the left of the view
+  > since
+    4.6.4.18
+
+FUN Number : getTopOffset()
+  > returns
+    The offset for this handler, from the top of the view
+  > since
+    4.6.4.18
+
+FUN renderview_dz : getView()
+  > returns
+    The render view for this handler
+  > since
+    4.6.4.18
+
+FUN DzViewport : getViewport()
+  > returns
+    The viewport for this handler
+  > since
+    4.6.4.18

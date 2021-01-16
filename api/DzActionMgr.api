@@ -1,0 +1,346 @@
+CLS DzActionMgr : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/actionmgr_dz
+  > summary
+    Manager that handles actions.
+
+### description
+  > summary
+    This class manages actions that the user can perform in the interface by pressing the key combination specified by its shortcut or by clicking on a menu/toolbar item. There is only one instance of this manager in an application. This instance is created and owned by DzMainWindow. Don't create an instance of this class, rather request a pointer to it from DzMainWindow via DzMainWindow::getActionMgr().
+  > seealso
+    DzAction
+
+### methods
+
+FUN String : legalizeName( String name )
+  > summary
+    Uses the regular expression “([A-z]+[A-z0-9]*)” to strip characters/symbols/etc from a string in order to 'legalize' it.
+  > parameters
+    + name - The name to 'legalize.'
+  > returns
+    A 'legalized' version of name.
+  > since
+    4.6.2.102
+
+FUN String : addCustomAction( String text, String desc, String script, Boolean isFile=true, String shortcut=“”, String iconFile=“” )
+  > summary
+    Adds a custom action to the action manager.
+  > parameters
+    + text - The text of the action. This is displayed in menus the action is added to unless a different menu text is specified.
+    + desc - The description of the action.
+    + script - The filename of the script to execute, or the actual text of the script to execute.
+    + isFile - If true, then script is assumed to contain a filename, otherwise script is assumed to be the actual script.
+    + shortcut - The default keyboard shortcut for the action.
+    + iconFile - The path of an image file that will be the icon for the action.
+  > returns
+    The globally unique identifier for the newly created custom action.
+
+FUN void : clearActiveMenu()
+  > summary
+    Clears the active menu.
+
+FUN DzAction : findAction( String className )
+  > parameters
+    + className - The class name of the action to find.
+  > returns
+    A pointer to the action object of the given class type.
+  > example
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Find the 'New File' action and print its accelerator to the log file
+    var oAction = oMgr.findAction( "DzNewAction" );
+    if( oAction ){
+    	print( oAction.text, ": ", oAction.shortcut );
+    }
+
+FUN Number : findCustomAction( String guid )
+  > parameters
+    + guid - The globally unique identifier (name) of the custom action to find.
+  > returns
+    The index of the custom action with the given identifier (if any), otherwise -1.
+
+FUN DzAction : findPaneAction( String className )
+  > parameters
+    + className - The class name of the DzPane to find the action for.
+  > returns
+    The action that toggles visibility of the given DzPane class (if any), otherwise NULL.
+  > example
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Find the action for the 'Smart Content' pane and print its accelerator to the log file
+    var oAction = oMgr.findPaneAction( "DzSmartContentPane" );
+    if( oAction ){
+    	print( oAction.text, ": ", oAction.shortcut );
+    }
+  > since
+    4.8.1.18
+
+FUN DzPersistentMenu : findPersistentMenu( String className )
+  > parameters
+    + className - The class name of the persistent menu to find.
+  > returns
+    The persistent menu of the given class type (if any), otherwise NULL.
+
+FUN DzAction : findViewToolAction( String className )
+  > parameters
+    + className - The class name of the DzViewTool to find the action for.
+  > returns
+    The action that activates the given DzViewTool subclass (if any), otherwise NULL.
+  > example
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Find the action for the 'Universal' tool and print its accelerator to the log file
+    var oAction = oMgr.findViewToolAction( "DzUniversalTool" );
+    if( oAction ){
+    	print( oAction.text, ": ", oAction.shortcut );
+    }
+  > since
+    4.8.1.18
+
+FUN DzAction : getAction( Number which )
+  > parameters
+    + which - The index of the action to return.
+  > returns
+    The action at the given index (if any), otherwise NULL.
+  > example
+    var oAction;
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Go through the list of actions and print their accelerators to the log file
+    var nActions = oMgr.getNumActions();
+    for( var i = 0; i < nActions; i++ ){
+    	oAction = oMgr.getAction( i );
+    	print( oAction.text, ": ", oAction.shortcut );
+    }
+
+FUN DzActionMenu : getActiveMenu()
+  > returns
+    The currently set active menu (if any), otherwise NULL.
+
+FUN Number : getCustomAction( String guid )
+  > parameters
+    + guid - The globally unique identifier (name) of the custom action to get.
+  > returns
+    The index of the custom action with the given GUID; creates a custom action if one does not already exist.
+
+FUN String : getCustomActionDesc( Number which )
+  > parameters
+    + which - The index of the custom action to get the description of.
+  > returns
+    The description for the custom action at the given index (if any), otherwise an empty string.
+
+FUN String : getCustomActionFile( Number which )
+  > parameters
+    + which - The index of the custom action to get the filename for.
+  > returns
+    The path to the file for the custom action at the given index (if any) if the custom action refers a file, otherwise an empty string.
+
+FUN String : getCustomActionIcon( Number which )
+  > parameters
+    + which - The index of the custom action to get the icon file for.
+  > returns
+    The icon file for the custom action at the given index.
+
+FUN String : getCustomActionName( Number which )
+  > parameters
+    + which - The index of the custom action to get the name of.
+  > returns
+    The globally unique identifier for the custom action at the given index (if any), otherwise an empty string.
+
+FUN String : getCustomActionScript( Number which )
+  > parameters
+    + which - The index of the custom action to get information for.
+  > returns
+    The script code executed by the custom action or an empty string if the custom action refers to a file (if any), otherwise an empty string.
+
+FUN String : getCustomActionShortcut( Number which )
+  > parameters
+    + which - The index of the custom action to return the shortcut for.
+  > returns
+    The keyboard shortcut for the custom action at the given index (if any), otherwise an empty string.
+
+FUN String : getCustomActionText( Number which )
+  > parameters
+    + which - The index of the custom action to get the text for.
+  > returns
+    The text for the custom action at the given index (if any), otherwise an empty string.
+
+FUN DzActionMenu : getMenu()
+  > returns
+    The Main Menu for the application.
+
+FUN Number : getNumActions()
+  > returns
+    The number of action items in the application.
+
+FUN Number : getNumCustomActions()
+  > returns
+    The number of custom actions in the action manager.
+
+FUN Number : getNumPersistentMenus()
+  > returns
+    The number of persistent menus in the application.
+
+FUN DzPersistentMenu : getPersistentMenu( Number which )
+  > parameters
+    + which - The index of the persistent menu to return.
+  > returns
+    The persistent menu at the specified index (if any), otherwise NULL.
+
+FUN Boolean : loadInterfaceFile( String filename, Boolean overrideDefaults )
+  > summary
+    Builds the main menu, pane menus and tool bars from the given file.
+  > parameters
+    + filename - The name of the interface file to load.
+    + overrideDefaults - Whether or not default triggers (i.e. version numbers on menus) cause certain items to be rebuilt using their defaults.
+  > returns
+    true if the file was successfully loaded, otherwise false.
+  > since
+    4.6.0.78
+
+FUN Boolean : loadInterfaceFile( String filename )
+  > summary
+    Deprecated
+    Exists only to keep old code from crashing. Do not use in new code. Use the overload that takes two arguments instead.
+
+FUN void : removeAllCustomActions()
+  > summary
+    Removes all custom actions from the application.
+
+FUN void : removeCustomAction( Number which )
+  > summary
+    Removes the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to remove.
+
+FUN Boolean : saveActionsFile( String filename )
+  > summary
+    Saves the actions to the given file.
+  > parameters
+    + filename - The name of the file to save the interface settings to.
+  > returns
+    true if the file was saved successfully, otherwise false.
+
+FUN Boolean : saveCustomActionsFile( String filename )
+  > summary
+    Saves the actions to the given file.
+  > parameters
+    + filename - The name of the file to save the interface settings to.
+  > returns
+    true if the file was saved successfully, otherwise false.
+
+FUN Boolean : saveInterfaceFiles()
+  > summary
+    Saves the actions, menus and toolbars to their respective files in the default location.
+  > returns
+    true if the files were saved successfully, otherwise false.
+  > seealso
+    saveActionsFile()
+    saveMenusFile()
+    saveToolBarsFile()
+    saveInterfaceFiles()
+
+FUN Boolean : saveMenusFile( String filename )
+  > summary
+    Saves the main menu, pane menus to the given file.
+  > parameters
+    + filename - The name of the file to save the interface settings to.
+  > returns
+    true if the file was saved successfully, otherwise false.
+
+FUN Boolean : saveToolBarsFile( String filename )
+  > summary
+    Saves the tool bars to the given file.
+  > parameters
+    + filename - The name of the file to save the interface settings to.
+  > returns
+    true if the file was saved successfully, otherwise false.
+
+FUN void : setAccel( String className, String key )
+  > parameters
+    + className - The name of the action class to set the accelerator for.
+    + key - The string representation of the accelerator.
+  > example
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Set the accelerator for the 'New File' action to be the 'Ctrl' key and the 'N' key
+    oMgr.setAccel( "DzNewAction", "Ctrl+N" );
+
+FUN void : setActiveMenu( DzActionMenu menu )
+  > summary
+    Sets the active menu, so that actions relying on the active menu can get it. This may be called before the menu exec() call to allow context for script actions.
+  > parameters
+    + menu - The menu to set as the active menu.
+
+FUN void : setCustomActionAccel( Number which, String shortcut )
+  > summary
+    Deprecated
+    Exists only to keep old code from crashing. Do not use in new code. Use setCustomActionShortcut() instead.
+
+FUN void : setCustomActionDesc( Number which, String desc )
+  > summary
+    Sets the description for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set the description for.
+    + desc - The description of the custom action.
+
+FUN void : setCustomActionIcon( Number which, String iconFile )
+  > summary
+    Sets the icon for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set the icon file for.
+    + iconFile - The path of the image file that will be loaded for the action's icon. The path can be absolute, or relative to DzApp::getResourcesPath().
+
+FUN void : setCustomActionScript( Number which, String script, Boolean isFile=true )
+  > summary
+    Sets the script for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set the script for.
+    + script - The script to set as the Custom action's script.
+    + isFile - If true, script contains the name of a script file that should be loaded. If false, script contains the code for the action's script.
+
+FUN void : setCustomActionShortcut( Number which, String shortcut )
+  > summary
+    Sets the keyboard shortcut for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set the shortcut for.
+    + shortcut - The string representation of the shortcut.
+  > since
+    4.9.4.102
+
+FUN void : setCustomActionShowTextWithIcon( Number which, Boolean onOff )
+  > summary
+    Sets whether or not the text of the action is displayed with the icon for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set.
+    + onOff - If true, the text of the action is always displayed with the icon (e.g., in toolbars).
+
+FUN void : setCustomActionText( Number which, String text )
+  > summary
+    Sets the text for the custom action at the given index.
+  > parameters
+    + which - The index of the custom action to set the text for.
+    + text - The new text for the action.
+
+FUN void : unsetAccel( String key )
+  > parameters
+    + key - The accelerator to remove from actions in the app.
+  > example
+    var oMgr = MainWindow.getActionMgr();
+     
+    // Unset the accelerator for the action using 'Control + N'
+    oMgr.unsetAccel( "Ctrl+N" );
+
+### signals
+
+SIG void : customActionAdded( String name )
+  > summary
+    Emitted when a custom action is added to the action manager.
+
+SIG void : customActionListChanged()
+  > summary
+    Emitted when custom actions are added to or removed from the action manager.
+
+SIG void : customActionRemoved( String name )
+  > summary
+    Emitted when a custom action is removed from the action manager.

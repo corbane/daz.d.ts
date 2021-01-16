@@ -1,0 +1,49 @@
+CLS DzWeld : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/weld_dz
+  > summary
+    Represents a welding operation between bone geometries.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzWeld()
+  > summary
+    Creates a new weld operation.
+
+CTR DzWeld( DzBone weldBone, DzBone targetBone )
+  > summary
+    Creates a new weld operation that welds the given bones.
+
+### methods
+
+FUN DzBone : getTargetBone()
+  > returns
+    The bone whose geometry is not modified by the weld operation.
+
+FUN DzBone : getWeldBone()
+  > returns
+    The bone whose geometry is modified by the weld operation.
+
+FUN void : setTargetBone( DzBone targetBone )
+  > summary
+    Sets the bone that will be welded to - the welding operation will not modify this bone's geometry, only the normals on the border.
+
+FUN void : setWeldBone( DzBone weldBone )
+  > summary
+    Sets the bone that will be welded - the welding operation will move boundary points in this bone's geometry, and recalculate the affected normals.
+
+### signals
+
+SIG void : targetBoneChanged()
+  > null
+  > summary
+    Emitted when the target bone has changed.
+
+SIG void : weldBoneChanged()
+  > null
+  > summary
+    Emitted when the weld bone has changed.

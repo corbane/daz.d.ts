@@ -1,0 +1,9 @@
+CLS DzAssetFileOutFilter : DzAssetIOFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/assetfileoutfilter_dz
+  > summary
+    Base class for saving DSON-based files.
+
+### description
+  > summary
+    An asset save filter for saving a file in the DSON format.

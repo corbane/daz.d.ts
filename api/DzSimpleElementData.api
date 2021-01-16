@@ -1,0 +1,24 @@
+CLS DzSimpleElementData : DzElementData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/simpleelementdata_dz
+  > summary
+    DzCustomData implementation that can be associated with an individual DzElement instance.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzSimpleElementData( String name, Boolean persistent=false )
+  > summary
+    Default constructor.
+  > parameters
+    + name - The name for the data item. This must be unique for all data items on a given element - i.e. an element can not have two data items with the same name.
+    + persistent - If true, the data item will be saved with the element to the native file format.
+
+### methods
+
+FUN DzSettings : getSettings()
+  > returns
+    The settings owned by this element data item.

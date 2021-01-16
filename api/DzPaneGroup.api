@@ -1,0 +1,78 @@
+CLS DzPaneGroup : DzDockWindow
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/panegroup_dz
+  > summary
+    A dockable collection of interface panes.
+
+### description
+  > summary
+    The dockable tabbed pane that is used to organize panes in the DAZ Studio interface.
+
+### methods
+
+FUN DzPane : getCurrentPane()
+  > returns
+    The currently showing pane.
+
+FUN Point : getDragOffset()
+  > returns
+    The offset, in pixels, from the point where a drag started to the top left corner (including extra for frame, titlebar, etc.)
+
+FUN Number : getNumPanes()
+  > returns
+    The number of panes in this group.
+
+FUN Number : getNumShownPanes()
+  > returns
+    The number of panes shown in this group.
+
+FUN DzPane : getPane( Number i )
+  > parameters
+    + i - The index of the pane to get.
+  > returns
+    The pane in this group at the given index (if any), otherwise NULL.
+
+FUN void : hideAllPanes()
+  > summary
+    Hides all panes without changing their group ownership.
+
+FUN void : hidePane( DzPane pane )
+  > summary
+    Hides the given pane without changing its group ownership.
+  > parameters
+    + pane - The pane to be hidden.
+
+FUN void : hideTabBar( Boolean hide )
+  > summary
+    Sets whether this pane group's tab bar is hidden or not. Emits DzPane::tabBarHiddenChanged(). When the tab bar is hidden, the options menu for the current pane is not visible. If desired, DzPane instances should connect to it's DzPane::tabBarHiddenChanged() signal to be able to provide an alternate options menu when the tab bar is hidden.
+  > parameters
+    + hide - If true, hides the tab bar.
+
+FUN Boolean : isUndockable()
+  > returns
+    true if the group is undockable (is a child of a panegroupdlg_dz), otherwise false.
+  > since
+    4.10.0.46
+
+FUN void : setPaneEnabled( DzPane pane, Boolean enabled )
+  > summary
+    Enable or disabled the given pane in the interface, if it is a member of this group.
+  > parameters
+    + pane - The pane to be enabled or disabled.
+    + enabled - If true, the pane will be enabled, otherwise the pane will be disabled.
+
+FUN void : showPane( DzPane pane )
+  > summary
+    Makes sure the given pane is showing (if it is a member of this group).
+  > parameters
+    + pane - The pane to be shown.
+
+FUN Boolean : tabBarHidden()
+  > returns
+    true if this pane group's tab bar is hidden, otherwise false.
+
+### signals
+
+SIG void : emptyGroup()
+  > summary
+    TODO: Add description.

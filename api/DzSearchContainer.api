@@ -1,0 +1,9 @@
+CLS DzSearchContainer : DzTopLevelAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/searchcontainer_dz
+  > summary
+    A top level asset container for holding search results…
+
+### description
+  > summary
+    TODO: Add detailed description.

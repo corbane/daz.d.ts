@@ -1,0 +1,38 @@
+CLS DzScaleManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scalemanip_dz
+  > summary
+    A manipulator that scales an image layer horizontally and/or vertically.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : heightScale
+  > summary
+    Holds the scaling of the image across its width.
+
+PRP Number : widthScale
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzScaleManip( Number w=1.0, Number h=1.0 )
+  > summary
+    Holds the scaling of the image across its height.
+    Default Constructor
+  > parameters
+    + w - The scaling of the image across its width. 1.0 is equivalent to 100%.
+    + h - The scaling of the image across its height. 1.0 is equivalent to 100%.
+
+### methods
+
+FUN void : setScale( Number w, Number h )
+  > summary
+    Sets the scale for the image.
+  > parameters
+    + w - The scaling of the image across its width. 1.0 is equivalent to 100%.
+    + h - The scaling of the image across its height. 1.0 is equivalent to 100%.

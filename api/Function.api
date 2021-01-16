@@ -1,0 +1,80 @@
+NOT Function : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/function
+  > summary
+    ECMASCript Function prototype object.
+
+### description
+  > summary
+    Todo
+    Descriptions
+  > example
+    var oMyFunction = function()
+    {
+    }
+
+### properties
+
+PRP Array : arguments
+  > summary
+    An array of the arguments passed to the function. (Read Only)
+  > example
+    function sum(){
+    	var nTotal = 0;
+    	for( var i = 0; i < arguments.length; i++ ){
+    		nTotal += arguments[ i ];
+    	}
+    	return nTotal;
+    }
+    var nSum = sum( 2, 3, 4, 5 );
+    // nSum: 14
+
+PRP Number : length
+  > summary
+    Holds the “typical” number of arguments expected by the function.
+
+### constructors
+
+CTR Function( String p1, String p2, …, String pn, String body )
+  > summary
+    Default Constructor. Creates a new function. All arguments are optional - zero or more argument names may be specified, the last argument, if any, is always used as the body of the function.
+  > parameters
+    + p1 - The name of the first parameter.
+    + p2 - The name of the second parameter.
+    + pn - The name of the last parameter.
+    + body - The text of the executable code of the function.
+
+### methods
+
+FUN Object : apply( Object thisArg, Array argArray )
+  > summary
+    Performs a function call with a given this value and argArray arguments.
+    Note:
+    The syntax of this function is almost identical to that of call(). A fundamental difference, however, is that call() accepts optional arguments to the Function itself, while this function accepts an array of arguments.
+  > parameters
+    + thisArg - The object that serves as the this value for the function call. If undefined, or not provided, the global object is used.
+    + argArray - An optional array of arguments for the function; if not provided, the function is called without any arguments.
+  > returns
+    The return value of the function.
+
+FUN void : bind( Object thisArg, … )
+  > summary
+    Creates a new function that, when called, has its this keyword set to thisArg, with the given sequence of arguments preceding any provided when the new function is called.
+  > parameters
+    + thisArg - The object that serves as the this value for the function call. If undefined, or not provided, the global object is used.
+    + … - Optional argument(s) to prepend to arguments provided to the bound function when invoking the function being bound.
+
+FUN Object : call( Object thisArg, … )
+  > summary
+    Performs a function call with a given this value and optional arguments.
+    Note:
+    The syntax of this function is almost identical to that of apply(). A fundamental difference, however, is that apply() accepts an array of arguments, while this function accepts optional arguments to the function itself.
+  > parameters
+    + thisArg - The Object that serves as the this value for the function call. If undefined, or not provided, the global object is used.
+    + … - Optional argument(s) for the function.
+  > returns
+    The return value of the function.
+
+FUN String : toString()
+  > returns
+    A string representation of the function.

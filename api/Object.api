@@ -1,0 +1,151 @@
+NOT Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/object
+  > summary
+    ECMASCript Object prototype object.
+
+### description
+  > summary
+    Todo
+    NEEDS DESCRIPTION
+  > example
+    var oObject = new Object();
+    oObject.nMyProperty = 100;
+
+### properties
+
+PRP Function : constructor
+  > summary
+    Initializes an object.
+  > example
+    var oObject = new Object();
+
+PRP Object : prototype
+  > summary
+    The prototype of an object.
+  > example
+    var oObject = new Object();
+    print( oObject.__proto__ === Object.prototype ); // this evaluates to true
+
+PRP Object : __proto__
+  > summary
+    The undeleteable prototype of an object.
+  > example
+    var oObject = new Object();
+    print( oObject.__proto__ === Object.prototype ); //true
+
+### statics
+
+STA Object : create( Object obj, Object properties=undefined )
+  > summary
+    Creates a new Object with the specified prototype obj and properties defined on properties.
+
+STA Object : defineProperties( Object obj, Object properties )
+  > summary
+    Adds the named properties described by the given descriptors to an object.
+  > parameters
+    + obj - The object to define the property on.
+    + properties - An object whose own enumerable properties serve as descriptors for the properties being defined.
+
+STA Object : defineProperty( Object obj, String property, Object descriptor )
+  > summary
+    Defines a property directly on an object and returns the object.
+  > parameters
+    + obj - The object to define the property on.
+    + property - The name of the property to define.
+    + descriptor - The descriptor for the property being defined.
+
+STA Object : getOwnPropertyDescriptor( Object obj, String property )
+  > parameters
+    + obj - The object to retrieve the property descriptor from.
+    + property - The name of the property to define.
+  > returns
+    A property descriptor of property if it exists on obj, otherwise undefined
+
+STA Array : getOwnPropertyNames( Object obj )
+  > parameters
+    + obj - The object to retrieve the property names from.
+  > returns
+    An array of string elements corresponding to the properties found directly on obj.
+
+STA Object : getPrototypeOf( Object obj )
+  > summary
+    A standard read only implementation of proto.
+  > parameters
+    + obj - The object instance to retrieve the prototype of.
+  > returns
+    The prototype of an object.
+
+STA Array : keys( Object obj )
+  > parameters
+    + obj - The object to retrieve the property names from.
+  > returns
+    An array of names representing all of the given object's own enumerable properties.
+
+### constructors
+
+CTR Object()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN Boolean : hasOwnProperty( String property )
+  > returns
+    true if the object defines property, otherwise false.
+
+FUN Boolean : isPrototypeOf( Object obj )
+  > parameters
+    + obj - The object to check against the prototype chain.
+  > returns
+    true if the object is in the prototype chain of obj, otherwise false.
+
+FUN Boolean : propertyIsEnumerable( String property )
+  > parameters
+    + property - The name of the property to check.
+  > returns
+    true if property exists and is enumerable, otherwise false.
+
+FUN String : toLocaleString()
+  > returns
+    A locale-specific string representation of the object.
+
+FUN String : toString()
+  > returns
+    A string representation of the object.
+
+FUN Object : valueOf()
+  > returns
+    The primitive value of the specified object.
+
+FUN void : __defineGetter__( String propertyName, Function getter )
+  > summary
+    Installs a getter function for a named property of an object. When the function is invoked, the this object will be the object whose property is accessed.
+  > parameters
+    + propertyName - The name of the property.
+    + getter - The function to call to get the value of the property.
+  > example
+    var oObject = new Object();
+    oObject.__defineGetter__("x", function() { return this._x; });
+     
+    print( oObject.x ); // 123
+
+FUN void : __defineSetter__( String propertyName, Function setter )
+  > summary
+    Installs a setter function for a named property of an object. When the function is invoked, the this object will be the object whose property is accessed.
+  > parameters
+    + propertyName - The name of the property.
+    + getter - The function to call to set the value of the property.
+  > example
+    var oObject = new Object();
+    oObject.__defineSetter__("x", function(v) { print("setting x to:", v); this._x = v; });
+     
+    oObject.x = 123; // will print "setting x to: 123"
+
+FUN void : connect()
+  > summary
+    Connects a signal to a slot.
+
+FUN void : disconnect()
+  > summary
+    Disconnects a signal from a slot.

@@ -1,0 +1,21 @@
+CLS DzPropertySettings : DzSettings
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/propertysettings_dz
+  > summary
+    Base class for all property options. Property classes should use this to pass the options supported by the class.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzPropertySettings()
+  > summary
+    Default Constructor - creates an empty set of options
+
+CTR DzPropertySettings( DzSettings settings )
+  > summary
+    Copy constructor.
+  > parameters
+    + settings - The settings object to copy data from.

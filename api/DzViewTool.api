@@ -1,0 +1,35 @@
+CLS DzViewTool : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/viewtool_dz
+  > summary
+    Base class for all tools that function in the 3D viewports.
+
+### description
+  > summary
+    View Tools are registered with the DzViewportMgr singleton and are available to access and modifiy via DAZScript.
+
+### methods
+
+FUN DzActionMenu : getOptionsMenu()
+  > summary
+    Derived classes can return a popup menu that will be displayed when the user selects the options menu for the Tool pane.
+  > returns
+    The DzActionMenu for the tool.
+
+### signals
+
+SIG void : activated()
+  > summary
+    Emitted when the viewtool becomes the active tool in the viewport.
+
+SIG void : deactivated()
+  > summary
+    Emitted when the viewtool stops being the active tool in the viewport.
+
+SIG void : drawnDataChanged()
+  > summary
+    Emitted when the viewtool needs to be redrawn in the viewport.
+
+SIG void : rebuildMenu()
+  > summary
+    TODO: Add description.

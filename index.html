@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Vrecq Jean-marie">
+    <meta name="copyright" content="Copyright &copy; 2021 Vrecq Jean-marie">
+    <meta name="keywords" content="DAZ, 3D, API, TypeScript">
+    <meta name="description" content="Utility for convert HTML daz api to Typescript definition">
+    <title>Daz3d TSD</title>
+    <link rel="stylesheet" href="./css/layout-online.css">
+    <link rel="stylesheet" type="text/css" href="./css/stack.css">
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="./node_modules/monaco-editor/min/vs/editor/editor.main.css"/>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container resizable-stack horizontal">
+
+        <div class="cell" data-min-size="150" data-size="300">
+            <header id="api-list-header">
+                <input type="text" id="api-list-filter">
+            </header>
+            <ul id="api-list" class="ul small hoverable"></ul>
+        </div>
+        
+        <div class="resizable-stack vertical" data-min-size="150">
+
+            <div class="cell" data-min-size="300">
+                <header id="api-pane-header">
+                    <button id="bt-api-format">Format Api</button>
+                    <button id="bt-api-save">Download</button>
+                    <button id="bt-api-fold" class="right">Fold all</button>
+                </header>
+                <main id="api-pane-main">
+                    <div id="input" style="height:100%;"></div>
+                </main>
+            </div>
+
+            <footer class="cell" data-min-size="30" data-size="30">
+                <footer id="api-message">Loading...</footer>
+            </footer>
+
+        </div>
+
+        <div class="resizable-stack vertical" data-min-size="150">
+
+            <div class="cell" data-min-size="300">
+                <header id="out-pane-header">
+                    <input type="radio" name="out-type" id="ot-ast" data-out-type="ast"><label for="ot-ast">Ast</label>
+                    <input type="radio" name="out-type" id="ot-sdk" data-out-type="sdk"><label for="ot-sdk">Sdk</label>
+                    <input type="radio" name="out-type" id="ot-tsd" data-out-type="tsd" checked><label for="ot-tsd">Tsd</label>
+                    <input type="radio" name="out-type" id="ot-all" data-out-type="all"><label for="ot-all">All Tsd</label>
+                    <input type="radio" name="out-type" id="ot-doc" data-out-type="doc"><label for="ot-doc">Doc</label>
+                    <button id="bt-out-fold" class="right">Fold all</button>
+                </header>
+                <main id="out-pane-main">
+                    <div id="output" style="height:100%;"></div>
+                </main>
+            </div>
+
+            <footer class="cell" data-min-size="30" data-size="30">
+                <footer id="out-message">Loading...</footer>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <script src="./lib/FileSaver.min.js"></script>
+    <script src="./lib/peg.js"></script>
+    <script>
+        var require = { paths: { vs: './node_modules/monaco-editor/min/vs' } };
+    </script>
+    <script src="./node_modules/monaco-editor/min/vs/loader.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/basic-languages/typescript/typescript.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/basic-languages/cpp/cpp.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/basic-languages/markdown/markdown.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/language/json/jsonMode.js"></script>
+    <script src="./node_modules/monaco-editor/min/vs/language/typescript/tsMode.js"></script>
+
+
+    <script type="module">
+        import { DomStack } from "./lib/dom-stack.js"
+        import * as Ui from "./js/ui.js"
+
+        for (var c of document.querySelectorAll (".resizable-stack")) {
+            if (c instanceof HTMLElement) new DomStack (c)
+        }
+
+        document.addEventListener ("DOMContentLoaded", () => Ui.init ())
+
+    </script>
+</body>
+
+</html>

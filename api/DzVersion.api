@@ -1,0 +1,140 @@
+CLS DzVersion : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/version_dz
+  > summary
+    Class representing a 8-byte (64-bit) version number.
+
+### description
+  > summary
+    This class was added to DAZ Studio 4.x to make it easier to work with 64-bit version numbers and to facilitate compatibility with the old 32-bit version numbers.
+    Version numbers are typically displayed to the user as short version strings, e.g. 4.0, or long version strings, e.g. 4.0.0.0.
+    The version number consists of 4 components: The Major version number, the Minor version number, the Revision number, and the Build number. This is displayed in the following order: Major.Minor.Revision.Build.
+    In DAZ Studio, version numbers are typically stored as 64-bit unsigned integers with 16 bits for each number. This means that each number has a valid range of 0-65535. The most significant 16 bits are the Major version number, the next most significant 16 bits are the Minor version number, the next most significant 16 bits are the Revision number and the least significant 16 bits are the Build number. So, a packed version number in hexadecimal notation might look like: 0x1111222233334444 where 1111 is the Major version number, 2222 is the Minor version number 3333 is the Revision number and 4444 is the build number.
+    It is recommended that this class be used when possible to reduce confusion when dealing with version numbers in code.
+    This class provides methods for all of the numerical comparison operators (<, >, <=, >=, ==, !=) to make it easy to compare version numbers without directly using the packed value, or the individual components.
+  > since
+    4.8.1.20
+
+### statics
+
+STA DzVersion : fromString( String versionStr )
+  > summary
+    Parses a version string into a version number.
+  > parameters
+    + versionStr - A string representation of the version number in the form “N.N.N.N”
+  > returns
+    The version number that was created from the string.
+
+### constructors
+
+CTR DzVersion()
+  > summary
+    Default constructor. Creates an empty version number - i.e. 0.0.0.0
+
+CTR DzVersion( String version )
+  > summary
+    TODO: Add description.
+
+CTR DzVersion( Number major, Number minor, Number revision, Number build )
+  > summary
+    Creates a version number from the 4 16-bit components.
+  > parameters
+    + major - The major version number.
+    + minor - The minor version number.
+    + revision - The revision number.
+    + build - The build number.
+
+CTR DzVersion( Number version )
+  > summary
+    Compatibility constructor. Creates a 64-bit version number from an old 32-bit version number.
+  > parameters
+    + version - The 32-bit version number to convert.
+      Creates a version number from a 64-bit packed representation.
+      version - The 64-bit version number.
+
+CTR DzVersion( DzVersion version )
+  > summary
+    Copy constructor. Creates a version that is a copy of the given number.
+  > parameters
+    + version - The version number to create a copy of.
+
+### methods
+
+FUN Boolean : equal( DzVersion version )
+  > returns
+    true if the version numbers are the same, otherwise false.
+
+FUN Number : getBuildNumber()
+  > returns
+    The Build number.
+
+FUN String : getLongVersionString()
+  > returns
+    A string containing all four version numbers separated with a dot, e.g. “4.0.0.0”
+
+FUN Number : getMajorVersion()
+  > returns
+    The Major version number.
+
+FUN Number : getMinorVersion()
+  > returns
+    The Minor version number.
+
+FUN Number : getRevisionNumber()
+  > returns
+    The Revision number.
+
+FUN Number : getVersionNumber()
+  > returns
+    The 64-bit packed representation of the version number.
+
+FUN Number : getVersionNumber32()
+  > returns
+    A 32-bit packed representation of the version number.
+  > attention
+    For backwards compatibility with old 32-bit version numbers - this function should only be used if absolutely necessary. It is highly recommended that all functionality be ported to the new 64-bit version number system. Using this function will result in inaccurate version numbering if one of the version numbers is greater than 255.
+
+FUN String : getVersionString()
+  > returns
+    A string containing the Major and Minor version numbers separated with a dot, e.g. “4.0”
+
+FUN Boolean : greaterThan( DzVersion version )
+  > returns
+    true if the version number is greater than (newer than) this version number, otherwise false.
+
+FUN Boolean : greaterThanOrEqual( DzVersion version )
+  > returns
+    true if the version number is greater than or equal (newer than or the same as) this version number, otherwise false.
+
+FUN Boolean : isValid()
+  > returns
+    true if the version number has been initialized, otherwise false.
+
+FUN Boolean : lessThan( DzVersion version )
+  > returns
+    true if the version number is less than (older than) this version number, otherwise false.
+
+FUN Boolean : lessThanOrEqual( DzVersion version )
+  > returns
+    true if the version number is less than or equal (older than or the same as) this version number, otherwise false.
+
+FUN Boolean : notEqual( DzVersion version )
+  > returns
+    true if the version numbers are different, otherwise false.
+
+FUN void : setVersionNumber( Number version )
+  > summary
+    Sets the 64-bit version number from an old 32-bit version number.
+  > parameters
+    + version - The old 32-bit version number.
+      Sets the version number from a 64-bit packed version number.
+      Or the version number as a packed 64-bit value.
+
+FUN void : setVersionNumber( Number major, Number minor, Number revision, Number build )
+  > summary
+    Sets the version number from the 4 16-bit components.
+  > parameters
+    + major - The major version number.
+    + minor - The minor version number.
+    + revision - The revision number.
+    + build - The build number.

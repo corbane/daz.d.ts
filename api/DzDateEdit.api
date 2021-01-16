@@ -1,0 +1,37 @@
+CLS DzDateEdit : DzDateTimeEdit
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dateedit_dz
+  > summary
+    DAZScript wrapper for QDateEdit.
+
+### description
+  > summary
+    A DzDateEdit provides a date editor.
+
+### properties
+
+PRP Date : max
+  > summary
+    Holds the maximum value for the widget.
+
+PRP Date : min
+  > summary
+    Holds the minimum value for the widget.
+
+PRP String : separator
+  > summary
+    Holds the separator used by the widget.
+
+### constructors
+
+CTR DzDateEdit( DzWidget parent )
+  > summary
+    Creates a date edit widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the date edit.
+
+### signals
+
+SIG void : valueChanged( Date date )
+  > summary
+    Emitted when the date in the widget has changed, passes the new date.

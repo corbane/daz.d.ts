@@ -1,0 +1,137 @@
+CLS DzPane : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pane_dz
+  > summary
+    A base class for all non-modal sets of related widgets that persist in the interface.
+
+### description
+  > summary
+    A “Pane” is the application's implementation of a persistent non-modal set of closely related widgets that can be stacked, ordered, docked, undocked, minimized, restored, shown, hidden, positioned and/or resized by the end-user.
+    Each pane has a label that is attached to the outer perimeter of the pane; whether the label appears as a tab/button/etc. to the user depends on the “style” that they currently has applied. A pane's label should briefly describe the concept (product, service, etc.) presented to the user within the pane.
+    Actions performed by the user that are closely related to the concept of a given pane, but do not warrant a persitent widget within the pane itself, or are more advanced in nature, should be considered for placement with the pane's option menu.
+    A pane is only ever displayed to the user within a DzPaneGroup; this is what gives the pane its ability to be stacked, ordered, docked, undocked, minimized, restored, shown, hidden, positioned and/or resized. A pane can only ever exist within one DzPaneGroup at a time.
+    Panes are singletons; there is only one instance of a given DzPane subclass. Panes are registered with DzPaneMgr and are available to access and modifiy via script. Use DzPaneMgr::findPane() to obtain a pointer to the single instance of the subclass, using its classname.
+
+### methods
+
+FUN void : buildOptionsMenu( DzActionMenu menu )
+  > summary
+    Sub classes must reimplement this function to generate a default options menu if they have one. This function is called when the pane is loaded for the first time or the interface is reset. Otherwise, the option menus are loaded from the user's interface settings file.
+  > parameters
+    + menu - The menu to add to.
+
+FUN String : getLabel()
+  > returns
+    The label of this pane.
+
+FUN DzActionMenu : getOptionsMenu()
+  > returns
+    The DzActionMenu for the pane.
+  > attention
+    This function should not be used for adding a DzAction to a pane's option menu. Doing so defeats the user's ability to customize their interface settings. Instead, adding an action should be accomplished by reimplementing DzAction::getDefaultMenuPath().
+
+FUN Number : getOptionsMenuVersion()
+  > summary
+    Sub classes must reimplement this function to provide the interface manager with the ability to update the user's settings file when the pane's default menu has changed. This function should return a value of 1 or greater if the pane provides a menu. Each time the default menu changes, this number should be incremented.
+
+FUN DzPaneGroup : getPaneGroup()
+  > returns
+    The DzPaneGroup parent that this pane belongs to.
+
+FUN void : hidePane()
+  > summary
+    Hides this pane in the interface.
+
+FUN void : makeGroupDockable()
+  > summary
+    Moves the DzPaneGroup that this pane is in, out of an undockable dialog.
+  > since
+    4.10.0.46
+
+FUN void : makeGroupUndockable()
+  > summary
+    Moves the DzPaneGroup that this pane resides in to a dialog.
+
+FUN void : makeUndockable( Size minSize=Size )
+  > summary
+    Creates a DzPaneGroup in a dialog, and moves this pane into it.
+  > parameters
+    + minSize - The minimum size for the dialog (if any). This will be expanded to at least the minimum size of the pane.
+
+FUN void : moveToGroup( DzPaneGroup group )
+  > summary
+    Moves this pane from its current pane group into the given pane group.
+  > parameters
+    + group - The group to move this pane to.
+
+FUN void : refresh()
+  > summary
+    Called to refresh internal pane data when scene contents, etc have changed.
+
+FUN void : restoreSettings( DzPaneSettings settings )
+  > summary
+    Sub classes must reimplement this function to restore their saved settings.
+  > parameters
+    + settings - The settings to restore.
+
+FUN void : saveSettings( DzPaneSettings settings )
+  > summary
+    Sub classes must reimplement this function to save their current settings.
+  > parameters
+    + settings - The settings that will be saved.
+
+FUN void : setLabel( String label )
+  > summary
+    Sets the label for this pane.
+  > parameters
+    + label - The new label for this pane.
+
+FUN void : showPane()
+  > summary
+    Shows this pane in the interface.
+
+FUN void : undock( Point pos=Point, Size size=Size )
+  > summary
+    Creates an undocked DzPaneGroup and moves this pane into it.
+  > parameters
+    + pos - The position for the undocked pane group (if any).
+    + size - The size for the undocked pane group (if any). This will be expanded to at least the minimum size of the pane.
+  > since
+    4.10.0.47
+
+FUN void : undockGroup( Point pos=Point, Size size=Size )
+  > summary
+    Undocks the DzPaneGroup that this pane resides in.
+  > parameters
+    + pos - The position for the undocked pane group (if any).
+    + size - The size for the undocked pane group (if any). This will be expanded to at least the minimum size of the pane.
+  > since
+    4.10.0.47
+
+### signals
+
+SIG void : labelChanged( String newLabel )
+  > summary
+    Emitted when the pane's label has changed.
+  > parameters
+    + newLabel - The new label for the pane.
+
+SIG void : menuChanged()
+  > summary
+    Emitted when the options menu for the pane has changed.
+
+SIG void : paneGroupChanged( DzPaneGroup oldGroup, DzPaneGroup newGroup )
+  > summary
+    TODO: Add description.
+
+SIG void : tabBarHiddenChanged( Boolean hidden )
+  > summary
+    Emitted when the visibility of the pane's tab bar is changed. When the tab bar is hidden, it's options menu is not visible. If desired, pane instances can listen to this signal to know when the menu is hidden in order to provide an alternate method of accessing the menu options.
+  > parameters
+    + hidden - If true, the tab bar is hidden.
+
+SIG void : visibilityChanged( Boolean onOff )
+  > summary
+    Emitted when the pane is shown or hidden.
+  > parameters
+    + onOff - If true, the pane is visible.

@@ -1,0 +1,147 @@
+CLS DzBox3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/box3_dz
+  > summary
+    Describes a parametrically defined box in three dimensional space.
+
+### description
+  > summary
+    Represents a three dimensional box by storing two three dimensional floating point vectors; an upper and lower corner for the box.
+
+### properties
+
+PRP DzVec3 : max
+  > summary
+    Holds the maximum corner of the box.
+
+PRP Number : maxX
+  > summary
+    Holds the maximum value of the box on the x axis.
+
+PRP Number : maxY
+  > summary
+    Holds the maximum value of the box on the y axis.
+
+PRP Number : maxZ
+  > summary
+    Holds the maximum value of the box on the z axis.
+
+PRP DzVec3 : min
+  > summary
+    Holds the minimum corner of the box.
+
+PRP Number : minX
+  > summary
+    Holds the minimum value of the box on the x axis.
+
+PRP Number : minY
+  > summary
+    Holds the minimum value of the box on the y axis.
+
+PRP Number : minZ
+  > summary
+    Holds the minimum value of the box on the z axis.
+
+### constructors
+
+CTR DzBox3()
+  > summary
+    Creates an uninitialized box - the first point included in an uninitialized box will become the min and max for the box.
+
+CTR DzBox3( Number xMin, Number yMin, Number zMin, Number xMax, Number yMax, Number zMax )
+  > summary
+    Creates an initialized box with the given min and max values.
+  > parameters
+    + xmin - The minimum value for the box on the x axis.
+    + ymin - The minimum value for the box on the y axis.
+    + zmin - The minimum value for the box on the z axis.
+    + xmax - The maximum value for the box on the x axis.
+    + ymax - The maximum value for the box on the y axis.
+    + zmax - The maximum value for the box on the z axis.
+
+CTR DzBox3( DzVec3 min, DzVec3 max )
+  > summary
+    Creates an initialized box with the given min and max values.
+  > parameters
+    + min - The minimum corner of the box.
+    + max - The maximum corner of the box.
+
+CTR DzBox3( DzBox3 box )
+  > summary
+    Copy Constructor.
+  > parameters
+    + box - The box to copy.
+
+### methods
+
+FUN DzVec3 : closestPoint( DzVec3 point )
+  > parameters
+    + point - The point to find the closest point in the box to.
+  > returns
+    The closest point in the box to point. Returns point if point is already in the box.
+  > since
+    4.9.3.33
+
+FUN Boolean : containsPoint( DzVec3 point )
+  > parameters
+    + point - The point to check whether or not the box contains it.
+  > returns
+    true if point is inside the box, otherwise false.
+  > since
+    4.9.3.48
+
+FUN DzVec3 : getCenter()
+  > returns
+    The center point of the box.
+
+FUN Boolean : getIntersection( DzLine3 ray, DzVec3 firstIntersection, DzVec3 lastIntersection )
+  > summary
+    Tests the box for intersection with the ray, and determines the two points on the box intersected by the line.
+  > parameters
+    + ray - The line to test for intersection with the box.
+    + firstIntersection - The variable that will be set to the first intersection of the ray with the box.
+    + lastIntersection - The variable that will be set to the second intersection of the ray with the box.
+  > returns
+    true if the given ray intersects the box. Sets firstIntersection and secondIntersection to the points where the ray intersects the box.
+  > since
+    4.9.3.33
+
+FUN Number : getSize()
+  > returns
+    The corner to corner distance of this box.
+
+FUN DzBox3 : getTransformedBox( DzMatrix3 matrix )
+  > summary
+    Creates a new box by transforming the corners of this box through the given matrix and then including them.
+  > returns
+    A copy of this box that has been transformed by the matrix.
+
+FUN void : include( DzVec3 vec )
+  > parameters
+    + vec - The point to include in the box.
+
+FUN void : include( DzBox3 box )
+  > summary
+    Grows the box, if necessary, to include the given box.
+  > parameters
+    + box - The box to include in the box.
+
+FUN Boolean : isValid()
+  > returns
+    true if the box is valid, false if it is uninitialized.
+  > since
+    4.9.3.33
+
+FUN Boolean : testIntersection( DzLine3 ray, Number tolerance )
+  > summary
+    Provides a fast intersection test without returning the intersection locations. This function is much faster than getIntersection().
+  > parameters
+    + ray - The line to test for intersection with the box.
+  > returns
+    true if the ray intersects the box, otherwise false.
+  > since
+    4.9.3.33
+
+FUN void : translate( DzVec3 vec )
+  > summary
+    Translates the corners of the box by adding the given vector.

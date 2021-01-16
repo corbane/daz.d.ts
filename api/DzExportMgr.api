@@ -1,0 +1,102 @@
+CLS DzExportMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/exportmgr_dz
+  > summary
+    Manager of all scene file exporter classes.
+
+### description
+  > summary
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getExportMgr().
+  > seealso
+    Exporter Settings
+
+### methods
+
+FUN Boolean : canExport( String filename )
+  > summary
+    Uses the extension from each of the exporters and attempts to match an exporter with the extension of the filename.
+  > parameters
+    + filename - The name of the file to try to find an exporter for.
+  > returns
+    true if an exporter was found that can write the given file.
+
+FUN DzError : exportFile( String fileName, Number exporterIndex, DzFileIOSettings options )
+  > summary
+    Export the scene contents to a file.
+  > parameters
+    + filename - The name of the file to export to.
+    + exporterIndex - The index of the exporter class to use. If this is less than 0, then the extension of fileName is used to attempt to find an appropriate exporter.
+  > returns
+    DZ_NO_ERROR if the file export was successful.
+
+FUN DzError : exportFile( String fileName, Number exporterIndex )
+  > summary
+    Export the scene contents to a file.
+  > parameters
+    + filename - The name of the file to export to.
+    + exporterIndex - The index of the exporter class to use. If this is less than 0, then the extension of fileName is used to attempt to find an appropriate exporter.
+  > returns
+    DZ_NO_ERROR if the file export was successful.
+
+FUN DzExporter : findExporter( String filename )
+  > summary
+    Uses the extension from each of the exporters and attempts to match an exporter with the extension of the filename.
+  > parameters
+    + filename - The name of the file to try to find an exporter for.
+  > returns
+    A new instance of the matching exporter, or NULL if none was found. The caller takes ownership of this pointer and is responsible for deleting it.
+
+FUN DzExporter : findExporterByClassName( String className )
+  > summary
+    Uses the class name of each of the exporters and attempts to find an exporter with the given class name.
+  > parameters
+    + className - The name of the exporter class to find.
+  > returns
+    A new instance of the matching exporter, or NULL if none was found. The caller takes ownership of this pointer and is responsible for deleting it.
+
+FUN Number : findExporterIndex( String filename )
+  > summary
+    Uses the extension from each of the exporters and attempts to match an exporter with the extension of the filename.
+  > parameters
+    + filename - The name of the file to try to find an exporter for.
+  > returns
+    The index of a matching exporter, or -1 if none was found.
+
+FUN DzExporter : getExporter( Number i )
+  > parameters
+    + i - The index of the exporter to get an instance of.
+  > returns
+    A new instance of the i'th exporter in the list. The caller takes ownership of this pointer and is responsible for deleting it when finished.
+
+FUN String : getExportPath()
+  > returns
+    The current default directory that files are exported to.
+
+FUN Number : getNumExporters()
+  > returns
+    The number of exporters currently supported.
+
+FUN void : makeExportFileFilter( DzFileFilter filter, String defaultFilter=“” )
+  > summary
+    Populates the given filter with all the types recognized by the export manager.
+  > parameters
+    + filter - The filter to populate
+    + defaultFilter - The filter to set as the default
+
+FUN void : setExportPath( String path )
+  > summary
+    Sets the default directory that files are exported to.
+  > parameters
+    + path - The new default path for exporting files.
+
+### signals
+
+SIG void : fileExported()
+  > summary
+    Emitted when a file export operation is finished
+    TODO: Add description.
+
+SIG void : fileExportStarting()
+  > summary
+    Emitted when a file export operation is started
+    TODO: Add description.

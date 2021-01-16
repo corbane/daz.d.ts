@@ -1,0 +1,63 @@
+CLS DzShapeRiggingAdjuster : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shaperiggingadjuster_dz
+  > summary
+    Implements the logic of adjusting bone positions and orientations of the selected figure, based on the current shape.
+
+### description
+  > seealso
+    Sample: Adjust Rigging to Shape
+  > attention
+    This object is provided by the Joint Editor Tool plugin. It is only available when the Joint Editor Tool plugin is activated and enabled.
+  > since
+    4.9.3.93
+
+### constructors
+
+CTR DzShapeRiggingAdjuster()
+  > summary
+    Default Constructor. Creates a shape rigging adjuster that can be used to adjust bone positions and orientations of the selected figure, based on the current shape.
+
+### methods
+
+FUN Boolean : doAdjustments()
+  > summary
+    Performs the rigging adjustment based on the current shape.
+  > returns
+    true if the adjustment was successful, false if the adjustment could not be completed.
+
+FUN void : setAdjustCenterPoints( Boolean yesNo )
+  > summary
+    Sets whether or not center points of bones being ajusted are allowed to be modified.
+  > parameters
+    + yesNo - If true (default), the center points of bones are permitted to be modified.
+
+FUN void : setAdjustEndPoints( Boolean yesNo )
+  > summary
+    Sets whether or not end points of bones being ajusted are allowed to be modified.
+  > parameters
+    + yesNo - If true (default), the end points of bones are permitted to be modified.
+
+FUN void : setAdjustOrientation( Boolean yesNo )
+  > summary
+    Sets whether or not the orientations of bones being ajusted are allowed to be modified.
+  > parameters
+    + yesNo - If true, the orientations of bones are permitted to be modified.
+
+FUN void : setExcludedBones( Array boneNames )
+  > summary
+    Sets the list of bones to exclude when adjusting.
+  > parameters
+    + boneNames - The list of bone names to exclude.
+
+FUN void : setExcludedFacetGroups( Array groupNames )
+  > summary
+    Sets the list of facet groups to exclude when calculating adjustments to make.
+  > parameters
+    + groupNames - The list of facet group names to exclude.
+
+FUN void : setFigure( figure_dz figure )
+  > summary
+    Sets the target asset to be the geometry contained by the given node.
+  > parameters
+    + figure - The figure to adjust the rigging on.

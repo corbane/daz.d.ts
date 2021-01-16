@@ -1,0 +1,41 @@
+CLS DzCircle3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/circle3_dz
+  > summary
+    Describes a parametrically defined circle in three dimensional space.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP DzVec3 : center
+  > summary
+    Holds the center of the circle in three dimensional space.
+
+PRP DzVec3 : normal
+  > summary
+    Holds the normal of the plane that the circle lies on.
+
+PRP Number : radius
+  > summary
+    Holds the radius of the circle.
+
+### constructors
+
+CTR DzCircle3()
+  > summary
+    Default Constructor.
+
+CTR DzCircle3( DzCircle3 circle )
+  > summary
+    Copy Constructor.
+  > parameters
+    + circle - The circle to copy.
+
+CTR DzCircle3( DzVec3 center, DzVec3 normal, Number radius )
+  > parameters
+    + center - The center point of the circle.
+    + normal - The normal of the circle (i.e. a vector perpendicular to the plane of the circle).
+    + radius - The radius of the circle.

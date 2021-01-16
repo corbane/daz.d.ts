@@ -1,0 +1,35 @@
+CLS DzElementPostLoadFileData : DzElementData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/elementpostloadfiledata_dz
+  > summary
+    DzCustomData implementation that can be associated with an individual DzElement instance.
+
+### description
+  > summary
+    If the file to post-load is a script:
+    A global transient variable named DataItem, which refers to the DzElementPostLoadFileData that invoked the execution of the script, is provided to the script in the global context at runtime. Attempts to use this global variable outside of the associated script will result in a ReferenceError.
+    A global transient variable named FileIOSettings, which refers to the DzFileIOSettings that was used when the element that owns the data item was loaded, is provided to the script in the global context at runtime. Attempts to use this global variable outside of the associated script will result in a ReferenceError. (since 4.9.4.109)
+  > attention
+    The differences between this implementation and DzSimpleElementScriptData are that this implementation can reference the file path of a file that is not a script and it does not have an associated DzSettings that can be used to configure said script.
+    If the file to post-load is not a script, the path is stored but the file is not loaded.
+
+### constructors
+
+CTR DzElementPostLoadFileData( String name, Boolean persistent=true )
+  > summary
+    Default constructor.
+  > parameters
+    + name - The name for the data item. This must be unique for all data items on a given element - i.e. an element can not have two data items with the same name.
+    + persistent - If true, the data item will be saved with the element to the native file format.
+
+### methods
+
+FUN String : getPostLoadFilePath()
+  > returns
+    The file path of the file for this data item (if any), otherwise an empty string.
+
+FUN void : setPostLoadFilePath( String script )
+  > summary
+    Sets the file path of the file for this data item.
+  > parameters
+    + file - The file path of the file.

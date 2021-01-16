@@ -1,0 +1,17 @@
+{
+  "name": "daz-tsd",
+  "version": "1.0.0",
+  "author": "Vrecq jean-marie",
+  "main": "./main.js",
+  "devDependencies": {
+    "@types/file-saver": "^2.0.1",
+    "@types/node": "^14.14.20",
+    "@types/pegjs": "^0.10.2"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.21.2"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}

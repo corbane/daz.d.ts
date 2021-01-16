@@ -1,0 +1,27 @@
+CLS DzDFormBase : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dformbase_dz
+  > summary
+    Base class for DForms.
+
+### description
+  > summary
+    The Base is one component of a DForm deformer. The others are the DzDForm, DzDFormZone and dformmodifier_dz.
+    The DForm Base functions as the origin for the DForm deformation effect, as detailed in the DForm class.
+    The DForm Base and Zone can be created separately from the DForm and then joined together with the addDForm(), addZone(), etc functions.
+    The DForm Base is a skeleton and the DForm itself is a bone of the Base. This prevents the two components from being reparented away from each other and retains the parent-child relationship for the relative transform calculations.
+    The DForm Base draws itself in the scene using the DForm_base_ColorMax and DForm_base_ColorMin embedded geometry. The DForm_base_ColorMax is drawn with the maximum color of the vertex weight color gradient and the DForm_base_ColorMin is drawn with the minimum color.
+
+### constructors
+
+CTR DzDFormBase()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzDForm : getDForm()
+  > summary
+    Returns the Bases's DForm
+  > returns
+    The DForm for this Base.

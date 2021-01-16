@@ -1,0 +1,111 @@
+CLS DzShaderMaterial : DzMaterial DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shadermaterial_dz
+  > summary
+    Custom scriptable class for materials using RenderMan Shader Language (RSL) Shaders.
+
+### description
+  > summary
+    This class provides a DzMaterial derived object with creator-defined properties that will be passed to the RSL Shader at render-time. By default, the material only has two properties - Diffuse Color (Cs) and Opacity Strength (Os) - which are not passed as tokens to the shader, rather they are attributes sent directly to the renderer, via RiColor() and RiOpacity() respectively. These properties are not mappable by default, but can be made so by using DzRSLShader::addMapProperty(). All other properties for the material must be added using DzRSLShader::addShaderProperty() and DzRSLShader::addMappableProperty() in order to be used to pass values as arguments to the shader. Properties for the material that will be used by the render-time scripts to set attributes must be added via DzElement::addProperty().
+    Samples:
+    rispec_constant_shader_preset - A [heavily commented] Shader Preset that applies a material definition script (below) for the standard RenderMan Constant Surface Shader.
+  > seealso
+    - rispec_constant_shader_definition - The definition file for the standard RenderMan Constant Surface Shader, that builds the properties displayed to users in the Surfaces tab (Advanced sub tab).
+    - rispec_constant_material_definition - The definition file for the above, that builds the shader objects used by the render for the current material.
+    - rispec_constant_surface_shader - The RSL source for the standard RenderMan Constant Surface Shader.
+    - s_standard_render_time_script - The render-time script that sets various RiAttributes dependant on the values of properties provided to the user.
+
+### constructors
+
+CTR DzShaderMaterial()
+  > summary
+    Default Constructor.
+
+CTR DzShaderMaterial( DzShaderMaterial mat, Boolean duplicateMissingProps=true )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+  > parameters
+    + mat - The DzShaderMaterial to copy
+    + duplicateMissingProps - Whether or not to duplicate missing properties
+  > seealso
+
+CTR setDefinitionFile()
+
+CTR DzShaderMaterial( String definitionFile )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+  > parameters
+    + definitionFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this material's property list.
+  > seealso
+
+CTR setDefinitionFile()
+
+### methods
+
+FUN Boolean : addShader( DzRSLShader shader )
+  > summary
+    Adds shader to this material's internal list of shaders and sets shader 's owner to this material.
+  > returns
+    true if shader is successfully added to the list (e.g. does not already exist), otherwise false.
+
+FUN String : getDefinitionFile()
+  > returns
+    The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this material's property list.
+
+FUN DzColorProperty : getDiffuseProperty()
+  > returns
+    The Diffuse Color property of this material
+
+FUN Number : getNumShaders()
+  > returns
+    The number of DzRSLShaders on this material
+
+FUN DzFloatProperty : getOpacityProperty()
+  > returns
+    The Opacity property of this material
+
+FUN DzRSLShader : getShader( Number index )
+  > returns
+    The DzRSLShader at index or NULL if no shader exists at that index.
+
+FUN Boolean : removeShader( DzRSLShader shader )
+  > summary
+    Removes shader from this material's internal list of shaders.
+  > returns
+    true if shader is successfully removed from the list, otherwise false.
+
+FUN void : setDefinitionFile( String definitionFile, Boolean doOverride=false, Boolean runScript=true )
+  > summary
+    Sets the relative path of the [DAZ Script] file that defines this material.
+  > parameters
+    + definitionFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that defines this material
+    + doOverride - Whether or not to override the setting of the definition file if it has already been set
+    + runScript - Whether or not to run the definition script upon setting it
+  > example
+    In a nested folder [./scripts/support/DAZ/shaderDefinitions/surface]
+    // Set the definition file for the DzShaderMaterial (relative to the scripts folder)
+    oMaterial.setDefinitionFile( "support/DAZ/shaderDefinitions/surface/dzglossy.dsb" );
+  > attention
+    definitionFile is executed the moment the call to this method is made. A global transient variable named Material - refering to the current DzShaderMaterial being rendered, exists for the duration of definitionFile. Referencing this variable from outside definitionFile will result in an error.
+
+FUN void : setMaterialName( String name )
+  > summary
+    Sets the name of the material type that will be returned by getMaterialName(). By default, this is “Custom”
+  > parameters
+    + name - The name to assign to this material
+  > example
+    // Set the name of the material
+    // (the label displayed to the user in the Surfaces pane when the surface is selected)
+    Material.setMaterialName( "DAZ Studio Glossy Plastic" );
+
+FUN void : setNeedsTangentSpaceParams( Boolean onoff )
+  > summary
+    Sets whether this material needs the Tangent Space Params: varying vector dPds and varying float dPdsM. dPds is the tangent vector along the surface. dPdsM is the handedness of the bitangent vector on the surface. The bitangent can be reconstructed using:
+    vector B = normalize (((normalize(N) ^ normalize(dPds))*dPdsM);
+    This should be turned off/on in the script handed to DzRSLShader::setRenderTimeFile(). It is not persistent between sessions. It is false by default.
+  > parameters
+    + onoff - Whether or not this material needs the Tangent Space Params
+  > example
+    // Turn on the TangentSpaeParams, from within in a surface DzRSLShader's rendertime file:
+    var Material = Shader.getOwner();
+    Material.setNeedsTangentSpaceParams( true );

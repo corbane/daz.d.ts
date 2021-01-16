@@ -1,0 +1,74 @@
+CLS DzCheckListItem : DzListViewItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/checklistitem_dz
+  > summary
+    DAZScript wrapper for Q3CheckListItem.
+
+### description
+  > summary
+    This class is not a widget, but a helper class for working with DzListView. Each DzCheckListItem represents a single item in a list view - add items to a list view by creating a new DzCheckListItem that is a child of the list view, or a child of another list view item in the list view.
+
+### enumerations
+
+ENU ToggleState
+  > summary
+    Specifies the checklist item's toggle state
+  + Off - The item is off
+  + NoChange - The item has not changed - i.e. it is in the third state and the user has not clicked it.
+  + On - The item is on
+
+ENU Type
+  > summary
+    Specifies the checklist item's type
+  + RadioButton - Radio Button item. Must be the child of a RadioButtonController
+  + CheckBox - Check Box item.
+  + RadioButtonController - Radio Button parent item.
+  + CheckBoxController - Check Box parent item.
+
+### properties
+
+PRP Number : height
+  > summary
+    Holds the height of the item.
+
+PRP Boolean : on
+  > summary
+    Holds whether the item toggled on.
+
+PRP DzCheckListItem.ToggleState : state
+  > summary
+    Holds the state of the item.
+
+PRP Boolean : triState
+  > summary
+    Holds whether the item is tristate.
+
+PRP DzCheckListItem.Type : type
+  > summary
+    Holds the type of the item. (Read Only)
+
+### constructors
+
+CTR DzCheckListItem( DzListView parent, DzCheckListItem.Type type=DzCheckListItem.Type.RadioButtonController, Number id=-1 )
+  > summary
+    Creates a checklist item at the root level of the given list view
+  > parameters
+    + parent - The listview to create this item as a child of
+    + type - The Type of item to create
+    + id - The identifier for this item
+
+CTR DzCheckListItem( DzCheckListItem parent, DzCheckListItem.Type type=DzCheckListItem.Type.RadioButtonController, Number id=-1 )
+  > summary
+    Creates a checklist item as a child of the given list item
+  > parameters
+    + parent - The item to create this item as a child of
+    + type - The Type of item to create
+    + id - The identifier for this item
+
+CTR DzCheckListItem( DzListViewItem parent, DzCheckListItem.Type type=DzCheckListItem.Type.RadioButtonController, Number id=-1 )
+  > summary
+    Creates a checklist item as a child of the given list item
+  > parameters
+    + parent - The item to create this item as a child of
+    + type - The Type of item to create
+    + id - The identifier for this item

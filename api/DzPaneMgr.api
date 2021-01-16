@@ -1,0 +1,532 @@
+CLS DzPaneMgr : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/panemgr_dz
+  > summary
+    The manager for interface panes.
+
+### description
+  > summary
+    There is only one instance of the pane manager object in DAZ Studio. You can get the pane manager by calling DzMainWindow::getPaneMgr().
+
+### enumerations
+
+ENU DockSide
+  > summary
+    TODO: Add description.
+  + NO_DOCKING - Not docked.
+  + DOCK_LEFT - Docked on the left side.
+  + DOCK_TOP - Docked on the top.
+  + DOCK_RIGHT - Docked on the right side.
+  + DOCK_BOTTOM - Docked on the bottom.
+
+### methods
+
+FUN void : addActivityLayout( DzActivityLayout layout )
+  > summary
+    Adds the activity layout to the list of layouts.
+  > parameters
+    + layout - The layout to be added.
+
+FUN void : addPaneGroupDlg( panegroupdlg_dz dlg )
+  > summary
+    Adds the given pane group dialog to the list of dialogs.
+  > parameters
+    + dlg - The pane group dialog to add.
+
+FUN void : clearAllGroups()
+  > summary
+    Removes all panes from all groups.
+
+FUN void : closeAllPaneGroupDlgs()
+  > summary
+    Closes all pane group dialogs.
+
+FUN DzActivityLayout : createActivityLayout( String name, String description )
+  > summary
+    Creates a new activity layout and adds it to the list.
+  > parameters
+    + name - The name of the activity layout.
+    + description - The description of the activity layout.
+  > returns
+    The created activity layout.
+
+FUN DzPaneGroup : createEmptyPaneGroup()
+  > returns
+    A new pane group without any panes.
+
+FUN DzToolBar : createToolBar( String name )
+  > parameters
+    + name - The name of the toolbar to get.
+  > returns
+    The tool bar with the given name (if any), otherwise creates a tool bar with the given name.
+
+FUN void : enableActivityBar( Boolean onOff )
+  > summary
+    Sets whether or not the activity bar is visible in the interface.
+  > parameters
+    + onOff - If true, enables the activity bar.
+
+FUN DzActivityLayout : findActivityLayout( String name )
+  > parameters
+    + name - The name of the layout to find.
+  > returns
+    The activity layout with the given name (if any), otherwise NULL.
+
+FUN DzDockBar : findDockBar( String className )
+  > parameters
+    + className - The class name of the dock bar to find.
+  > returns
+    The dock bar with the given name, otherwise NULL.
+
+FUN DzDockBar : findDockBarByName( String name )
+  > parameters
+    + name - The name of the dock bar to find.
+  > returns
+    The dock bar with the given name (if any), otherwise NULL.
+
+FUN DzPane : findPane( String className )
+  > parameters
+    + className - The class name of the pane to find.
+  > returns
+    The pane with the given class name (if any), otherwise NULL.
+
+FUN DzToolBar : findToolBar( String name )
+  > parameters
+    + name - The name of the tool bar to find.
+  > returns
+    The tool bar with the given name (if any), otherwise NULL.
+
+FUN DzActivityLayout : getActiveActivityLayout()
+  > returns
+    The active activity layout.
+
+FUN Number : getActiveActivityLayoutIndex()
+  > returns
+    The index of the active activity layout.
+
+FUN String : getActivityBarImage()
+  > returns
+    The name of the current activity bar image.
+
+FUN Array : getActivityBarImageList()
+  > returns
+    A list of possible activity bar images.
+
+FUN DzActivityLayout : getActivityLayout( Number which )
+  > parameters
+    + which - The index of the desired activity layout.
+  > returns
+    The activity layout at the given index (if valid), otherwise NULL.
+
+FUN String : getAdvancedLayout()
+  > returns
+    The path to the file that is the advanced layout for the application.
+
+FUN String : getBasicLayout()
+  > returns
+    The path to the file that is the basic layout for the application.
+
+FUN String : getDefaultLayout()
+  > returns
+    The path to the file that is the default layout for the application.
+
+FUN Array : getDefaultLayoutNames()
+  > returns
+    A list of default layout names included with the application.
+
+FUN DzDockBar : getDockBar( Number i )
+  > parameters
+    + i - The index of the dock bar to return.
+  > returns
+    The i'th dock bar in the application (if valid), otherwise NULL.
+
+FUN Number : getNumActivityLayouts()
+  > returns
+    The number of activity layouts currently available.
+
+FUN Number : getNumDockBars()
+  > returns
+    The number of dock bars in the application.
+
+FUN Number : getNumPaneGroupDlgs()
+  > returns
+    The number of pane group dialogs.
+
+FUN Number : getNumPaneGroups()
+  > returns
+    The number of pane groups currently available in the interface; includes pane groups that are not currently showing.
+
+FUN Number : getNumPanes()
+  > returns
+    The number of panes currently available in the interface; this includes panes that are not currently showing.
+
+FUN Number : getNumToolBars()
+  > returns
+    The number of tool bars in the application.
+
+FUN Boolean : getOrientTabsAlongTop()
+  > returns
+    true if the tabs for selecting a pane are oriented along the top of pane groups, otherwise false.
+
+FUN DzPaneGroup : getPaneGroup( Number which )
+  > parameters
+    + which - The index of the desired pane group.
+  > returns
+    The pane group at the given index (if valid), otherwise NULL.
+
+FUN panegroupdlg_dz : getPaneGroupDlg( Number which )
+  > parameters
+    + which - The index of the desired pane group dialog.
+  > returns
+    The pane group dialog at the given index (if valid), otherwise NULL.
+
+FUN Array : getPaneGroupList()
+  > returns
+    A list of all DzPaneGroup objects.
+
+FUN Array : getPaneList()
+  > returns
+    A list of all DzPane objects.
+
+FUN String : getProLayout()
+  > returns
+    The path to the file that is the pro layout for the application.
+  > since
+    4.7.0.3
+
+FUN String : getSessionLayout()
+  > returns
+    The path to the file that is the layout for this session of the application.
+
+FUN Boolean : getShowLessonStrip()
+  > returns
+    true if the Lesson Strip is showing, otherwise false.
+
+FUN String : getSimpleLayout()
+  > returns
+    The path to the file that is the simple layout for the application.
+
+FUN String : getStandardLayout()
+  > returns
+    The path to the file that is the standard layout for the application.
+
+FUN DzToolBar : getToolBar( Number i )
+  > parameters
+    + i - The index of the tool bar to return.
+  > returns
+    The i'th tool bar in the application (if valid), otherwise NULL.
+
+FUN Boolean : getUseWorkflowAssistance()
+  > returns
+    true if workflow assistance is enabled, otherwise false.
+
+FUN void : hideAllPanes()
+  > summary
+    Hide all panes from view in the interface.
+
+FUN void : hideAllToolBars()
+  > summary
+    Hides all the tool bars in the application.
+
+FUN DzError : hidePane( DzPane pane )
+  > summary
+    Hide the given pane from view in the interface.
+
+FUN DzError : hidePane( String className )
+  > summary
+    Hide the given pane from view in the interface.
+  > parameters
+    + className - The name of the class to be hidden.
+
+FUN DzError : hidePaneGroup( Number which )
+  > summary
+    Hide a pane group in the interface.
+  > parameters
+    + which - The index of the pane group to hide.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of hiding the pane group.
+
+FUN DzError : hidePaneGroup( DzPaneGroup group )
+  > summary
+    Hide a pane group in the interface.
+  > parameters
+    + group - The pane group to hide.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of hiding the pane group.
+
+FUN Boolean : isActivityBarEnabled()
+  > returns
+    true if the activity bar appears in the interface, otherwise false.
+
+FUN void : loadNextActivityBarImage()
+  > summary
+    Loads the next image from the directory and sets it for the activity bar.
+
+FUN DzError : movePaneGroup( DzPaneGroup group, DzPaneMgr.DockSide dock=NO_DOCKING )
+  > summary
+    Moves a group to a new dock location.
+  > parameters
+    + group - The group to move.
+    + dock - The dock location to move the group to.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of moving the pane group.
+
+FUN DzError : movePaneGroup( DzPaneGroup group, DzPaneMgr.DockSide dock, Number index, Boolean newLine=false )
+  > summary
+    Moves a group to a new dock location.
+    Note:
+    This method currently does nothing and returns DZ_NO_ERROR.
+
+FUN Boolean : removeActivityLayout( String name )
+  > summary
+    Removes the given layout.
+  > parameters
+    + name - The name of the activity layout to be removed.
+  > returns
+    true if the layout existed and was removed, otherwise false.
+
+FUN Boolean : removeActivityLayout( Number which )
+  > summary
+    Removes the given layout.
+  > parameters
+    + which - The index of the layout to remove.
+  > returns
+    true if the layout existed and was removed, otherwise false.
+
+FUN void : removeAllActivityLayouts()
+  > summary
+    Removes all the current layouts.
+
+FUN void : removeAllToolBars()
+  > summary
+    Removes all tool bars from the application.
+
+FUN void : removePaneGroup( DzPaneGroup group )
+  > summary
+    Removes the given pane group.
+  > parameters
+    + group - The group to be removed.
+
+FUN void : removePaneGroupDlg( panegroupdlg_dz dlg )
+  > summary
+    Removes the given pane group dialog from the list of dialogs.
+  > parameters
+    + dlg - The pane group dialog to remove.
+
+FUN void : removeToolBar( String name )
+  > summary
+    Removes a tool bar from the application.
+  > parameters
+    + name - The name of the tool bar to remove.
+
+FUN DzError : restoreLayout( String filename, Boolean executeScript )
+  > summary
+    Restores the activity layout from the given file.
+  > parameters
+    + filename - The name of the file to be read.
+    + executeScript - Whether or not the companion layout script should be executed.
+
+FUN DzError : restoreLayout( String filename )
+  > summary
+    Deprecated
+    Use DzPaneMgr::restoreLayout( String, Boolean ) instead.
+
+FUN DzError : saveLayout( String filename, String description=“” )
+  > summary
+    Saves the current activity layout to the given file.
+  > parameters
+    + filename - The name of the file to be saved.
+    + description - The description for this layout.
+
+FUN Boolean : selectLesson( String path )
+  > summary
+    Selects the lesson at the given path.
+  > returns
+    true if the lesson is found and selected, otherwise false.
+
+FUN void : setActiveActivityLayout( Number which )
+  > summary
+    Sets the active activity layout.
+  > parameters
+    + which - The index of the activity to make active.
+
+FUN void : setActiveActivityLayout( DzActivityLayout layout )
+  > summary
+    Sets the active layout.
+  > parameters
+    + layout - The layout to make active.
+
+FUN void : setActivityBarImage( String img )
+  > summary
+    Sets the image for the activity bar.
+  > parameters
+    + img - The name of the image to use in the activity bar; this should be one of the strings returned by getActivityImageList().
+
+FUN void : setOrientTabsAlongTop( Boolean onOff )
+  > summary
+    Sets whether or not the position of tabs for selecting a pane are oriented along the top of the pane groups.
+  > parameters
+    + onOff - If true, the tabs will be displayed along the top of pane groups. If fasle, the tabs will be displayed along the sides of pane groups.
+
+FUN DzError : setPaneEnabled( DzPane pane, Boolean enabled )
+  > summary
+    Enables or disables a given pane in the interface.
+  > parameters
+    + pane - The pane to be enabled or disabled.
+    + enabled - If true, the pane will be enabled.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of enabling or disabling the pane.
+
+FUN DzError : setPaneEnabled( String className, Boolean enabled )
+  > summary
+    Enables or disables a given pane in the interface.
+  > parameters
+    + className - The pane class to be enabled or disabled.
+    + enabled - If true, the pane will be enabled.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of enabling or disabling the pane.
+
+FUN DzError : setSessionLayout( String filename )
+  > summary
+    Sets the file that will be loaded and saved as the user's layout for the session.
+  > parameters
+    + filename - The name of the file to be saved.
+
+FUN void : setShowLessonStrip( Boolean onOff )
+  > summary
+    Sets the visibility of the Lesson Strip.
+  > parameters
+    + onOff - If true, the lesson strip is shown.
+
+FUN void : setUseWorkflowAssistance( Boolean onOff )
+  > summary
+    Sets whether or not workflow assistance will be enabled.
+  > parameters
+    + onOff - If true, workflow assitance will be enabled.
+
+FUN void : showAllPanes()
+  > summary
+    Make all panes visible in the interface.
+
+FUN DzError : showPane( DzPane pane )
+  > summary
+    Make the given pane visible in the interface.
+  > parameters
+    + pane - The pane to be shown.
+
+FUN DzError : showPane( String className )
+  > summary
+    Make the given pane visible in the interface.
+  > parameters
+    + className - The name of the pane class to show.
+
+FUN DzError : showPaneGroup( DzPaneGroup group )
+  > summary
+    Show a pane group in the interface.
+  > parameters
+    + group - The pane group to show.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of showing the pane group.
+
+FUN DzError : showPaneGroup( Number which )
+  > summary
+    Show a pane group in the interface.
+  > parameters
+    + which - The index of the pane group to show.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of showing the pane group.
+
+FUN DzError : tearOffPane( String className, Number x=0, Number y=0 )
+  > summary
+    Put the pane in its own pane group, if it's not already, and moves the pane group out of any dock area.
+  > parameters
+    + className - The name of the pane to remove.
+    + x - The x position to move to.
+    + y - The y position to move to.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of tearing off the pane.
+
+FUN DzError : tearOffPane( Number index, Number x=0, Number y=0 )
+  > summary
+    Put the pane in its own pane group, if it's not already, and moves the pane group out of any dock area.
+  > parameters
+    + index - The index of the pane to remove.
+    + x - The x position to move to.
+    + y - The y position to move to.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of tearing off the pane.
+
+FUN DzError : tearOffPane( DzPane pane, Number x=0, Number y=0 )
+  > summary
+    Put the pane in its own pane group, if it's not already, and moves the pane group out of any dock area.
+  > parameters
+    + pane - The pane to be removed.
+    + x - The x position to move to.
+    + y - The y position to move to.
+  > returns
+    DZ_NO_ERROR if no error is encountered, otherwise an error code indicating the status of tearing off the pane.
+
+FUN DzError : togglePane( Number index )
+  > summary
+    Toggle the given pane's visibility in the interface.
+  > parameters
+    + index - The index of the pane to be toggled.
+
+FUN DzError : togglePane( String className )
+  > summary
+    Toggle the given pane's visibility in the interface.
+
+FUN DzError : togglePane( DzPane pane )
+  > summary
+    Toggle the given pane's visibility in the interface.
+  > parameters
+    + pane - The pane whose visibility needs to be toggled.
+
+### signals
+
+SIG void : activeLayoutAboutToChange( Number newLayoutIdx )
+  > summary
+    Called when the active layout is about to change.
+  > parameters
+    + newLayoutIdx - The index of the new layout.
+
+SIG void : activeLayoutChanged( Number which )
+  > summary
+    Called when the active layout changes.
+    Emitted when the active layout has changed.
+  > parameters
+    + which - The index of the new active layout.
+
+SIG void : activityBarEnabled( Boolean onOff )
+  > summary
+    Called when the activity bar enabled status changes.
+    Emitted when the activity bar is enabled or disabled.
+  > parameters
+    + onOff - If true the activity bar is enabled.
+
+SIG void : layoutListChanged()
+  > summary
+    Emitted when the list of available layouts has changed.
+
+SIG void : layoutRestored( String filename )
+  > summary
+    Called when a layout has been restored.
+    Emitted when the layout is restored from a file.
+  > parameters
+    + filename - The name of the file to be restored. Enumerations
+
+SIG void : orientTabsAlongTopChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : toolbarListChanged()
+  > summary
+    Emitted when the list of available toolbars has changed.
+
+SIG void : workflowAssistanceEnableStateChanged( Boolean onOff )
+  > summary
+    TODO: Add description.
+
+SIG void : workflowAssistanceModeChanged()
+  > summary
+    TODO: Add description.

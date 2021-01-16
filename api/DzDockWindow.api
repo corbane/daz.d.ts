@@ -1,0 +1,149 @@
+CLS DzDockWindow
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dockwindow_dz
+  > summary
+    Base class of windows that can be docked in a DzDockArea.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN void : dock()
+  > summary
+    Re-Docks this window in the last area it was docked in.
+
+FUN void : dock( DzDockArea area, Boolean newColumn=false )
+  > summary
+    Docks this window in the given area.
+
+FUN void : dock( DzDockArea area, Number columnNum )
+  > summary
+    Docks this window in the given area in the given column number.
+
+FUN DzDockArea : getArea()
+  > returns
+    The area that the window is currently docked in, or the last area it was docked in if it is undocked.
+
+FUN Number : getColumnDimension()
+  > returns
+    The last width (or height) of the column (or row) that the window is docked in.
+
+FUN Number : getColumnNum()
+  > returns
+    The column of the dock area that this window was last docked in.
+
+FUN Size : getLastSize()
+  > returns
+    The last undocked size of this window (if any).
+
+FUN Number : getLength()
+  > returns
+    The actual length for this window while docked.
+
+FUN Number : getMinimumLength()
+  > returns
+    The minimum length for this window (if it is not minimized) while docked.
+
+FUN Number : getPreferredLength()
+  > returns
+    The preferred length for this window while docked.
+
+FUN Boolean : isDocked()
+  > returns
+    true if the this window is currently docked, otherwise false.
+
+FUN Boolean : isLengthFixed()
+  > returns
+    true if the value returned by length() is the only valid length for this window currently, otherwise false.
+
+FUN Boolean : isMinimized()
+  > returns
+    true if the this window is currently minimized, otherwise false.
+
+FUN void : minimize()
+  > summary
+    Sets this window to a minimized state.
+
+FUN void : restore()
+  > summary
+    Returns this window to its former length if it is minimized.
+
+FUN void : setColumnDimension( Number dimension )
+  > summary
+    Store the width (or height) of the column (or row) that the window is docked in.
+  > parameters
+    + dimension - The width (or height) to set.
+
+FUN void : setColumnNum( Number columnNum )
+  > summary
+    Sets the column of the dock area that this window was last docked in.
+  > parameters
+    + columnNum - The column number to set.
+
+FUN void : setLength( Number length )
+  > summary
+    Sets the length for this window while docked.
+  > parameters
+    + length - The new length for the window.
+
+FUN void : setPreferredLength( Number length )
+  > summary
+    Sets the preferred length for this window while docked.
+  > parameters
+    + length - The new preferred length for the window.
+
+FUN void : setResizeHandlesVisible( Boolean yesNo )
+  > summary
+    Sets the visibility of the resizing handles.
+
+FUN void : setTitleBarVisible( Boolean yesNo )
+  > summary
+    Sets the visibility of the title bar.
+
+FUN void : toggleDock()
+  > summary
+    Toggles this window between its docked and undocked state. Calls dock() if this window is undocked, or undock() if it is docked.
+
+FUN void : toggleMinimized()
+  > summary
+    Toggles this window between the minimized and restored state.
+
+FUN void : undock()
+  > summary
+    Undocks this window.
+
+### signals
+
+SIG void : docked()
+  > summary
+    Emitted when this window is docked.
+
+SIG void : lengthChanged()
+  > summary
+    Emitted when the value returned by length() has changed.
+
+SIG void : minimized( DzDockWindow window )
+  > summary
+    Emitted when this window becomes minimized.
+  > parameters
+    + window - This window.
+
+SIG void : outlineDrawFinished()
+  > summary
+    TODO: Add description.
+
+SIG void : outlineDrawStarting()
+  > summary
+    TODO: Add description.
+
+SIG void : restored( DzDockWindow window )
+  > summary
+    Emitted when this window is restored.
+  > parameters
+    + window - This window.
+
+SIG void : undocked()
+  > summary
+    Emitted when this window is undocked.

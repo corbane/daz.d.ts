@@ -1,0 +1,53 @@
+CLS DzRotationOrder : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rotationorder_dz
+  > summary
+    A class representing a rotation order.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : firstAxis
+  > summary
+    The index of the first axis of rotation. ( x = 0, y = 1, z = 2 )
+
+PRP Number : order
+  > summary
+    The enumerated representation of the order of rotation; XYZ = 0, XZY, YXZ, YZX, ZXY, ZYX.
+
+PRP Number : secondAxis
+  > summary
+    The index of the second axis of rotation. ( x = 0, y = 1, z = 2 )
+
+PRP Number : thirdAxis
+  > summary
+    The index of the third axis of rotation. ( x = 0, y = 1, z = 2 )
+
+### constructors
+
+CTR DzRotationOrder()
+  > summary
+    Default Constructor. Creates a new rotation order and sets it to XYZ by default.
+
+CTR DzRotationOrder( DzRotationOrder order )
+  > summary
+    Copy Constructor.
+
+CTR DzRotationOrder( Number firstAxis, Number secondAxis, Number thirdAxis )
+  > summary
+    Creates a new rotation order with the given axis order
+
+CTR DzRotationOrder( Number order )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Creates a new rotation order with the given enumerated representation.
+  > since
+    4.6.4.98
+
+### methods
+
+FUN void : setOrder( Number firstAxis, Number secondAxis, Number thirdAxis )
+  > summary
+    Sets the order of rotation by the given axes.

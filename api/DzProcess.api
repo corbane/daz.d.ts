@@ -1,0 +1,158 @@
+CLS DzProcess : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/process_dz
+  > summary
+    A class for starting/communicating with external programs.
+
+### description
+  > summary
+    See the render to rib sample (line #440+), to see this class in action.
+
+### enumerations
+
+PRP Communication : Stdin
+  > summary
+    Defines the communication channels connected to the process.
+
+PRP Communication : Stdout
+  > summary
+    Defines the communication channels connected to the process.
+
+PRP Communication : Stderr
+  > summary
+    Defines the communication channels connected to the process.
+
+PRP Communication : DupStderr
+  > summary
+    Defines the communication channels connected to the process.
+
+### properties
+
+PRP Array : arguments
+  > summary
+    Holds an Array of strings. The first being the program to execute, the rest being the command line arguments.
+
+PRP Communication : communication
+  > summary
+    Holds the communication for the process.
+
+PRP Number : exitStatus
+  > summary
+    Holds the exit status of the program when it has finished. 0 if the process is still running. (Read Only)
+
+PRP Boolean : normalExit
+  > summary
+    Holds whether or not the process has exited normally. (Read Only)
+
+PRP Boolean : running
+  > summary
+    Holds whether or not the process is currently running. (Read Only)
+
+PRP String : workingDirectory
+  > summary
+    Holds the working directory for the process.
+
+### constructors
+
+CTR DzProcess()
+  > summary
+    Default Constructor.
+    Creates a DzProcess object without specifying the program or arguments. This does NOT start start the process.
+
+CTR DzProcess( Array args )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+    Creates a DzProcess object specifying the program and any arguments. The first element of args is the program to execute, the rest are the command line arguments. This does NOT start start the process.
+
+CTR DzProcess( String arg0 )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+    Creates a DzProcess object specifying only the program, without any arguments. This does NOT start start the process.
+
+### methods
+
+FUN Boolean : canReadLineStderr()
+  > returns
+    true if it is possible to read an entire line of text from standard error, otherwise false.
+
+FUN Boolean : canReadLineStdout()
+  > returns
+    true if it is possible to read an entire line of text from standard output, otherwise false.
+
+FUN void : closeStdin()
+  > summary
+    Closes the process' standard input and deletes any pending data that hasn't been written to standard input.
+
+FUN void : kill()
+  > summary
+    Terminates the process.
+  > attention
+    This is not a safe way to end a process, as the process will not be able to perform any cleanup. tryTerminate() is safer, but process' can ignore it.
+
+FUN Boolean : launch( String buffer, Array env=0 )
+  > summary
+    Attempts to run the process, writing buffer to the process' standard input. Standard input is closed if all of the data in buffer is written to it. If envis specified, the values in the Array [of strings] are interpreted as environment settings in the form VARIABLE=VALUE, and the process is started with these environment settings. If envis not specifiied, the process is started with the same environment settings as the starting process.
+  > returns
+    true if the process was able to start, otherwise false.
+
+FUN String : readLineStderr()
+  > returns
+    A line of text from standard error, minus any trailing newline or carriage return characters if canReadLineStderr() is true, otherwise an empty string.
+
+FUN String : readLineStdout()
+  > returns
+    A line of text from standard output, minus any trailing newline or carriage return characters if canReadLineStdout() is true, otherwise an empty string.
+
+FUN String : readStderr()
+  > summary
+    Reads the data that the process has written to standard error. When new data is written, the readyReadStderr() signal is emitted.
+  > returns
+    The data written to standard error, or an empty string if there is no such data.
+  > attention
+    This method does not wait for there to be something to read.
+
+FUN String : readStdout()
+  > summary
+    Reads the data that the process has written to standard output. When new data is written, the readyReadStdout() signal is emitted.
+  > returns
+    The data written to standard output, or an empty string if there is no such data.
+  > attention
+    This method does not wait for there to be something to read.
+
+FUN Boolean : start( Array env=0 )
+  > summary
+    Attempts to run the process for the program and arguments specified with the arguments property or as specified in the constructor. If envis specified, the values in the Array [of strings] are interpreted as environment settings in the form VARIABLE=VALUE, and the process is started with these environment settings. If envis not specifiied, the process is started with the same environment settings as the starting process.
+  > returns
+    true if the process was able to start, otherwise false.
+
+FUN void : tryTerminate()
+  > summary
+    Attempts to terminate the process.
+  > attention
+    Process' can ignore this, if they choose to. If you want to be certain that the process is terminated, use kill() instead.
+
+FUN void : writeToStdin( String buffer )
+  > summary
+    Writes buffer to standard input. The process may, or may not, read the data. The wroteToStdin() signal is emitted once all data in buffer has been written to the process.
+
+### signals
+
+SIG void : launchFinished()
+  > summary
+    Emitted when the process is started with launch(). If starting the process is successful, this signal is emitted after the data passed in has been written to standard input. If starting the process fails, this signal is emitted immediately.
+
+SIG void : processExited()
+  > summary
+    Emitted when the process has exited.
+
+SIG void : readyReadStderr()
+  > summary
+    Emitted when the process has written data to standard error.
+
+SIG void : readyReadStdout()
+  > summary
+    Emitted when the process has written data to standard output.
+
+SIG void : wroteToStdin()
+  > summary
+    Emitted if the data sent to standard input (via writeToStdin()) was actually written to the process.

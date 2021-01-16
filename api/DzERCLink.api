@@ -1,0 +1,277 @@
+CLS DzERCLink : DzNumericController
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/erclink_dz
+  > summary
+    DAZ Studio implementation of property links (aka ERC).
+
+### description
+  > summary
+    This numeric controller implements an algorithm that is based on the value of another property. There are six formulas which correspond to the ERCType of the object - the default ERCType is ERCDeltaAdd. The formulas are:
+    ERCDeltaAdd: f(v) = v + (c * m) + a
+    ERCDivideInto: f(v) = (c / v) + a
+    ERCDivideBy: f(v) = (v / c) + a
+    ERCMultiply: f(v) = (c * v) + a
+    ERCSubtract: f(v) = v - c + a
+    ERCAdd: f(v) = v + c + a
+    ERCKeyed: f(v) = v + P©
+    Where:
+    v is the current (keyed) value of the property with the link
+    c is the current (final) value of the property that the link is driven by
+    m is an optional scalar multiplier
+    a is an optional offset (additive) value.
+    As an example of ERC in action, lets say that there are 3 properties A, B, and C. B is linked to A with a 'ERCDeltaAdd' DzERCLink with a multiplier of 1.0 and an additive value of 0.0. C is linked to B with a 'ERCDeltaAdd' DzERCLink with a multiplier of 2.0 and an additive value of 1.0. So, if the keyed value of A is 10.0, B is 0.0, and C is 0.0, the final values of the properties would be calculated as:
+    A = 10.0 B = 0.0 + (10.0 * 1.0) + 0.0 = 10.0 C = 0.0 + (10.0 * 2.0) + 1.0 = 21.0
+    If B and C have keyed values - for example B is 5.0 and C is 2.0 - the final property values would be calculated as:
+    A = 10.0 B = 5.0 + (10.0 * 1.0) + 0.0 = 15.0 C = 2.0 + (15.0 * 2.0) + 1.0 = 33.0
+
+### enumerations
+
+ENU ERCKeyInterpolation
+  > summary
+    The types of key interpolation that can be represented by a DzERCLink of the 'ERCKeyed' type.
+  + LINEAR_INTERP - Linear interpolation between key values.
+  + CONSTANT_INTERP - Constant interpolation between key values.
+  + TCB_INTERP - TCB (Kochanek-Bartels) Spline interpolation between key values.
+
+ENU ERCType
+  > summary
+    The types of ERC that can be represented by this class.
+  + ERCDeltaAdd - This type of ERC is the most common, and implements the formula f(v) = v + (c * m) + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    m is the scalar of this link
+    a is the addend of this link
+  + ERCDivideInto - This type of ERC implements the formula f(v) = (c / v) + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    a is the addend of this link
+  + ERCDivideBy - This type of ERC implements the formula f(v) = (v / c) + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    a is the addend of this link
+  + ERCMultiply - This type of implements the formula f(v) = (c * v) + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    a is the addend of this link
+  + ERCSubtract - This type of ERC implements the formula f(v) = v - c + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    a is the addend of this link
+  + ERCAdd - This type of ERC implements the formula f(v) = v + c + a where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    a is the addend of this link
+  + ERCKeyed - This type of ERC is used to define value by a parametric function f(v) = v + P(c) where:
+    v is the current value of the property this link resides on.
+    c is the current value of the control property that drives this link
+    P is a parametric curve defined by the KeyValues array.
+
+### properties
+
+PRP Boolean : active
+  > summary
+    Holds whether or not the controller is evaluated and applied.
+
+PRP Number : addend
+  > summary
+    Holds the addend value for the link.
+
+PRP Boolean : autoOverride
+  > summary
+    Holds whether or not the link will be automatically redirected when its owner is 'Fit To' another figure.
+
+PRP Boolean : isUserLink
+  > summary
+    Holds whether or not the link is a user-link.
+
+PRP DzERCLink.ERCKeyInterpolation : keyInterpolation
+  > summary
+    Holds the interpolation mode for links of the ERCKeyed type.
+
+PRP Boolean : saveWithOutput
+  > summary
+    Holds whether the controller will be saved with the output property (the property that owns the link), or the input property (the linked property).
+
+PRP Number : scalar
+  > summary
+    Holds the scalar (multiplier) value for links of the ERCDeltaAdd type.
+
+PRP DzERCLink.ERCType : type
+  > summary
+    Holds the type of operation the link will perform when evaluated and applied.
+
+### constructors
+
+CTR DzERCLink()
+  > summary
+    Default constructor.
+
+CTR DzERCLink( DzERCLink copyFrom, DzNumericProperty property=undefined )
+  > summary
+    TODO: Add description.
+
+CTR DzERCLink( DzERCLink.ERCType type, DzNumericProperty property, Number scalar=1.0, Number addend=0.0 )
+  > summary
+    Creates a controller that is driven by property.
+  > parameters
+    + type - The type of this link.
+    + prop - The property that drives this link.
+    + scalar - The multiplier of the value.
+    + addend - The addend to the value.
+
+CTR DzERCLink( DzNumericProperty property, Number scalar=1.0, Number addend=0.0 )
+  > summary
+    Creates a controller that is driven by property.
+  > parameters
+    + prop - The property that drives this link.
+    + scalar - The multiplier of the value.
+    + addend - The addend to the value.
+
+### methods
+
+FUN Number : addKeyValue( Number key, Number value )
+  > summary
+    Adds a keyed value to the link if the type is ERCKeyed and the interpolation mode is LINEAR_INTERP or CONSTANT_INTERP.
+  > parameters
+    + key - The value of the property that drives this link to add a keyed value for.
+    + value - The value of the property this link resides on to add a keyed value for.
+  > returns
+    If the keyed value was sucessfully added, the index that it was added at, otherwise 0.
+
+FUN Number : addKeyValue( Number key, Number value, Number t, Number c, Number b )
+  > summary
+    Adds a keyed value to the link if the type is ERCKeyed and the interpolation mode is TCB_INTERP.
+  > parameters
+    + key - The value of the property that drives this link to add a keyed value for.
+    + value - The value of the property this link resides on to add a keyed value for.
+    + t - The tenstion value to set for the keyed value.
+    + c - The continuity value to set for the keyed value.
+    + b - The bias value to set for the keyed value.
+  > returns
+    If the keyed value was sucessfully added, the index that it was added at, otherwise 0.
+
+FUN void : clearKeys()
+  > summary
+    Clears all keyed values for links of the ERCKeyed type.
+
+FUN DzERCLink : duplicate( DzNumericProperty newProperty=undefined )
+  > summary
+    Makes a deep copy of this link.
+  > parameters
+    + newProperty - The property to drive the duplicated link with.
+  > returns
+    A deep copy of this link, driven by the specified property.
+
+FUN Number : findKeyIndex( Number key )
+  > parameters
+    + key - The value of the property that drives this link to find the index of.
+  > returns
+    If the type of the link is ERCKeyed, the index of key, otherwise -1.
+
+FUN DzNumericProperty : getCurrentProperty()
+  > returns
+    The property that is currently driving this link. Typically, this will return the same value as getProperty(), however, if autoOverride is enabled, and the property's owner is 'Fit To' another node, this will return the property on the node that this link has been redirected to.
+
+FUN Number : getKey( Number which )
+  > parameters
+    + which - The index of the keyed value to get the key for.
+  > returns
+    If the type of link is ERCKeyed and which is within the range of keyed values, the key at which, otherwise 0.
+
+FUN Number : getKeyOpValue( Number val )
+  > parameters
+    + tm - The time of the interpolated value to get.
+  > returns
+    If the link is the ERCKeyed type, the interpolated value of the operation at tm, otherwise 0.
+
+FUN Number : getKeyParamB( Number which )
+  > parameters
+    + which - The index of the keyed value to get the bias value for.
+  > returns
+    If the type of link is ERCKeyed, which is within the range of keyed values, and the interpolation mode is TCB_INTERP, the bias value at which, otherwise 0.
+
+FUN Number : getKeyParamC( Number which )
+  > parameters
+    + which - The index of the keyed value to get the continuity value for.
+  > returns
+    If the type of link is ERCKeyed, which is within the range of keyed values, and the interpolation mode is TCB_INTERP, the continuity value at which, otherwise 0.
+
+FUN Number : getKeyParamT( Number which )
+  > parameters
+    + which - The index of the keyed value to get the tension value for.
+  > returns
+    If the type of link is ERCKeyed, which is within the range of keyed values, and the interpolation mode is TCB_INTERP, the tension value at which, otherwise 0.
+
+FUN Number : getKeyValue( Number which )
+  > parameters
+    + which - The index of the keyed value to get the value for.
+  > returns
+    If the type of link is ERCKeyed and which is within the range of keyed values, the value at which, otherwise 0.
+
+FUN Number : getNumKeyValues()
+  > returns
+    The number of keyed values for a link of the ERCKeyed type.
+
+FUN DzNumericProperty : getProperty()
+  > returns
+    The property that drives this link.
+
+FUN void : presizeKeys( Number count )
+  > summary
+    Presizes the array of keyed values in order to improve the performance of adding keyed values.
+  > parameters
+    + count - The number of keyed values to be added.
+
+FUN Boolean : removeKeyValue( Number which )
+  > summary
+    Removes a keyed value from the link if the link type is ERCKeyed.
+  > parameters
+    + which - The keyed value (of the property that drives this link) to remove.
+  > returns
+    true if which is within the range of keyed values, otherwise false.
+
+FUN void : setProperty( DzNumericProperty prop )
+  > summary
+    Sets the property that drives this link.
+  > parameters
+    + prop - The property to drive this link with.
+
+### signals
+
+SIG void : ercSourcePropertyRemoved( DzProperty prop )
+  > summary
+    TODO: Add description.
+
+SIG void : keyChanged( Number which )
+  > summary
+    TODO: Add description.
+
+SIG void : keyInterpolationChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : keysListChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : propertyDeleted( DzProperty prop )
+  > summary
+    Emitted when the source property or current property is deleted.
+  > parameters
+    + prop - The property that was deleted.
+
+SIG void : saveWithOutputChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : scalarChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : stageChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : typeChanged()
+  > summary
+    TODO: Add description.

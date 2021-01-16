@@ -1,0 +1,17 @@
+CLS DzFbxImporter : DzImporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fbximporter_dz
+  > summary
+    Class for importing files in the Autodesk FBX (*.fbx) format.
+
+### description
+  > seealso
+    DzImportMgr::findImporterByClassName()
+    DzImportMgr::findImporter()
+    Silent FBX Import
+
+### constructors
+
+CTR DzFbxImporter()
+  > summary
+    Default Constructor.

@@ -1,0 +1,51 @@
+CLS DzAudioClip : DzBase DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/audioclip_dz
+  > summary
+    Class that encapsulates audio playback.
+
+### description
+  > summary
+    This class is implemented by platform specific audioclip classes, winaudioclip_dz and macaudioclip_dz.
+  > seealso
+    DzScene::getAudio(), DzScene::setAudio(), DzAudioImporter, DzMultiMediaMgr::importAudioClip()
+
+### properties
+
+PRP DzTime : currentPosition
+  > summary
+    The current position of the audio clip from the start.
+
+PRP String : filename
+  > summary
+    The name of the file the audio clip was loaded from (Read Only)
+
+PRP DzTime : length
+  > summary
+    The length of the audio clip (Read Only)
+
+PRP Number : rate
+  > summary
+    The current rate multiplier for the audio clip
+
+### methods
+
+FUN DzError : openFile( String filename )
+  > summary
+    Opens the file specified by filename and sets up the audio clip.
+  > parameters
+    + filename - The name of the audio file to load.
+  > returns
+    true if the file was successfully opened, false otherwise;
+
+FUN void : pause()
+  > summary
+    Pauses the audio clip without resetting current position.
+
+FUN void : play()
+  > summary
+    Plays the audio clip from current position.
+
+FUN void : reset()
+  > summary
+    Resets the current position of the audio clip to the beginning.

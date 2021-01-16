@@ -1,0 +1,17 @@
+CLS DzCameraAssetFilter : DzAssetFileOutFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/cameraassetfilter_dz
+  > summary
+    Class for saving DSON-based Camera(s) Presets.
+
+### description
+  > summary
+    An asset save filter for saving a Camera(s) Preset in the DSON format.
+  > seealso
+    Sample: Save a Camera(s) Preset
+
+### constructors
+
+CTR DzCameraAssetFilter()
+  > summary
+    TODO: Add description.

@@ -1,0 +1,12 @@
+CLS DzUiWidget : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/uiwidget_dz
+  > summary
+    A DzWidget created by DzUiLoader.
+
+### description
+  > summary
+    Encapsulates a widget loaded from a QtDesigner (*.ui) file. Do not create an instance of this class, request an instance via DzUiLoader.
+  > seealso
+    DzUiLoader.createWidget()
+    DzUiLoader.load()

@@ -1,0 +1,34 @@
+CLS DzInvertManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/invertmanip_dz
+  > summary
+    A manipulator that inverts the color channels of an image layer.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Boolean : on
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzInvertManip( Boolean onOff=false )
+  > summary
+    Holds whether or not the manipulater is active
+    Default Constructor
+
+### methods
+
+FUN Boolean : isOn()
+  > returns
+    true if the image's colors will be inverted, otherwise false.
+
+FUN void : setOn( Boolean onOff )
+  > summary
+    Sets whether or not the invert manipulator is applied.
+  > parameters
+    + onOff - If true, the manipulator is applied, if false, the image's colors are not inverted.

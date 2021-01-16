@@ -1,0 +1,246 @@
+CLS DzCamera : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/camera_dz
+  > summary
+    Base class for all camera objects.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU CameraDimension
+  > summary
+    The dimensions of a camera.
+  > since
+    4.6.4.70
+  + LOCAL_PIXEL_WIDTH - The width in pixels. Since: 4.6.4.70
+  + LOCAL_PIXEL_HEIGHT - The height in pixels. Since: 4.6.4.70
+  + LOCAL_ASPECT_WIDTH - The relative width of the aspect frame. Since: 4.6.4.70
+  + LOCAL_ASPECT_HEIGHT - The relative height of the aspect frame. Since: 4.6.4.70
+
+ENU CameraType
+  > summary
+    The different types of camera. Each has its own default parameters which it resets to and are either orthogonal or perspective by definition.
+  + FRONT_CAMERA - Orthogonal camera positioned to view the front of a figure
+  + BACK_CAMERA - Orthogonal camera positioned to view the back of a figure
+  + LEFT_CAMERA - Orthogonal camera positioned to view the left side of a figure.
+  + RIGHT_CAMERA - Orthogonal camera positioned to view the right side of a figure.
+  + TOP_CAMERA - Orthogonal camera positioned to view a figure from the top.
+  + BOTTOM_CAMERA - Orthogonal camera positioned to view a figure from the bottom.
+  + PERSPECTIVE_CAMERA - Default perspective camera - defaults to a front view of a figure.
+  + ORTHO_CAMERA - General Orthogonal camera.
+  + GENERAL_CAMERA - General Perspective camera.
+
+ENU HeadlightMode
+  > summary
+    The modes of the headlight for the camera.
+  > since
+    4.7.1.94
+  + hmAuto - The headlight is automatically on or off depending on whether or not lights are in the scene. Since: 4.7.1.94
+  + hmOn - The headlight is on. Since: 4.7.1.94
+  + hmOff - The headlight is off. Since: 4.7.1.94
+
+### properties
+
+PRP Number : aspectHeight
+  > summary
+    The aspect height of the camera.
+  > since
+    4.6.4.67
+
+PRP Number : aspectRatio
+  > summary
+    The aspect ratio of the camera (w / h).
+  > since
+    4.6.4.67
+  > seealso
+    DzRenderOptions::aspect
+
+PRP Number : aspectWidth
+  > summary
+    The aspect width of the camera.
+  > since
+    4.6.4.67
+
+PRP Number : farClippingPlane
+  > summary
+    The distance of the far clipping plane from the camera. (Read Only)
+
+PRP Number : focalDistance
+  > summary
+    The focal distance of the camera.
+
+PRP Number : focalLength
+  > summary
+    The focal length of the camera.
+
+PRP Number : frameWidth
+  > summary
+    The width of the frame (film/sensor) of the camera (in mm). (Read Only)
+  > since
+    4.6.4.67
+
+PRP DzCamera.HeadlightMode : headlightMode
+  > summary
+    The mode of the headlight.
+  > since
+    4.7.1.94
+
+PRP DzVec3 : headlightOffset
+  > summary
+    The relative offset of the headlight from the camera.
+  > since
+    4.7.1.94
+
+PRP Number : nearClippingPlane
+  > summary
+    The distance of the near clipping plane from the camera. (Read Only)
+
+PRP Number : pixelsHeight
+  > summary
+    The pixels height of the camera.
+  > since
+    4.6.4.67
+
+PRP Number : pixelsWidth
+  > summary
+    The pixels width of the camera.
+  > since
+    4.6.4.67
+
+PRP Boolean : proportionsConstrained
+  > summary
+    Whether or not the proportions of the camera is constrained.
+  > since
+    4.6.4.70
+
+PRP Number : type
+  > summary
+    The type of the camera. (Read Only)
+
+PRP Boolean : useLocalDimensions
+  > summary
+    Whether or not to use the local dimensions of the camera.
+  > since
+    4.6.4.67
+
+### methods
+
+FUN void : aimAt( DzVec3 pos )
+  > summary
+    Rotates the camera and adjusts its focal distance so that its focal point is at the given point.
+  > parameters
+    + pos - The point to aim the camera at.
+
+FUN void : frame( DzBox3 box, Number aspect )
+  > summary
+    Translates the camera so that its view frames the given box, and sets the camera's focal point to the center of the box, given the aspect ratio of the current view (w / h)
+  > parameters
+    + box - The bounding box to frame in the camera's view
+    + aspect - The aspect ratio of the current view.
+
+FUN Number : getFieldOfView()
+  > returns
+    The angle, in radians, of the horizontal field of view (FOV) for the camera (rectilinear lens).
+  > attention
+    The following formula is used to calculate the horizontal FOV:
+    angle = 2 * (arctan(frameWidth)/(2 * focalLength)))
+    The aspect of the frame can be manipulated by the user. Therefore, calculating the vertical and/or diagonal FOV is accomplished using the aspect ratio.
+  > seealso
+    aspectRatio
+
+FUN DzVec3 : getFocalPoint()
+  > returns
+    The focal point of the camera.
+
+FUN DzLight : getHeadlight()
+  > returns
+    A light that lights the scene in front of the camera. Used for rendering by OpenGL and offline renderers when no lights exist in the scene. This headlight is created on demand - i.e. no headlight for this camera exists until this function is called the first time.
+
+FUN Boolean : isViewCamera()
+  > returns
+    true if this is a non-animatable view camera, otherwise false.
+
+FUN void : reset()
+  > summary
+    Resets the camera viewing parameters to defaults.
+
+FUN Boolean : shouldDoHeadLight( Boolean hasLights, Boolean isRender )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : shouldSortOnLoad()
+  > returns
+    true if this element should have its property groups and properties sorted after being created on load, otherwise false.
+
+FUN void : updateDimensions( DzCamera.CameraDimension anchor )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : aspectHeightChanged( Number height )
+  > summary
+    Emitted when the aspect height dimension of the camera changes.
+
+SIG void : aspectRatioChanged()
+  > summary
+    Emitted when the camera's aspect ratio changes.
+
+SIG void : aspectWidthChanged( Number width )
+  > summary
+    Emitted when the aspect width dimension of the camera changes.
+
+SIG void : dimensionsChanged()
+  > summary
+    Emitted when any of the local dimensions of the camera change.
+
+SIG void : focalDistanceChanged( DzTimeRange range )
+  > summary
+    Emitted when the focal distance channel changes.
+  > parameters
+    + range - The time range over which the channel changed.
+
+SIG void : focalLengthChanged( DzTimeRange range )
+  > summary
+    Emitted when the focal length channel changes.
+  > parameters
+    + range - The time range over which the channel changed.
+
+SIG void : frameWidthChanged( Number size )
+  > summary
+    Emitted when the frame width of the camera changes.
+
+SIG void : headlightModeChanged()
+  > summary
+    Emitted when headlight mode of the camera changes.
+
+SIG void : headlightOffsetChanged()
+  > summary
+    Emitted when headlight offset of the camera changes.
+
+SIG void : pixelDimensionsChanged()
+  > summary
+    Emitted when the local pixel dimensions of the camera change.
+
+SIG void : pixelsHeightChanged( Number height )
+  > summary
+    Emitted when the pixel height dimension of the camera changes.
+
+SIG void : pixelsWidthChanged( Number width )
+  > summary
+    Emitted when the pixel width dimension of the camera changes.
+
+SIG void : projectionChanged()
+  > summary
+    Emitted when projection of the camera changes and its view must be redrawn.
+
+SIG void : proportionsConstrainedChanged( Boolean yesNo )
+  > summary
+    Emitted when the option for whether or not to constrain proportions of the local dimensions of the camera changes.
+
+SIG void : useLocalDimensionsChanged( Boolean yesNo )
+  > summary
+    Emitted when the option for whether or not to use the local dimensions of the camera changes.

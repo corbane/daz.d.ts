@@ -1,0 +1,15 @@
+CLS DzDomComment : DzDomCharacterData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domcomment_dz
+  > summary
+    DAZ Script DOM comment node.
+
+### description
+  > summary
+    Represents a comment node in a DOM document.
+
+### constructors
+
+CTR DzDomComment()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomDocument::createComment() to create a new comment node as a member of a document.

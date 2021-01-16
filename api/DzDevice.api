@@ -1,0 +1,33 @@
+CLS DzDevice : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/device_dz
+  > summary
+    Base Class for Device objects.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN void : getDefaultSettings( DzSettings settings )
+  > parameters
+    + settings - This will be set to the default settings for the device.
+
+FUN String : getDescription()
+  > returns
+    A user-readable description of the device.
+
+FUN String : getDeviceName()
+  > returns
+    The name of the device.
+
+FUN void : getSettings( DzSettings settings )
+  > parameters
+    + settings - This will be set to the current settings for the device.
+
+FUN void : setSettings( DzSettings settings )
+  > summary
+    Changes the current settings for the device.
+  > parameters
+    + settings - The new settings for the device.

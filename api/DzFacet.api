@@ -1,0 +1,161 @@
+CLS DzFacet : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/facet_dz
+  > summary
+    Represents a polygonal face within a polygon mesh.
+
+### description
+  > summary
+    A 3 or 4 sided polygonal face within a polygon mesh.
+  > seealso
+    facetmesh_dz
+
+### properties
+
+PRP Number : cageIndex
+  > summary
+    The index of this face in the cage mesh
+
+PRP Number : edgeIdx1
+  > summary
+    The index of the first edge, otherwise -1
+
+PRP Number : edgeIdx2
+  > summary
+    The index of the second edge, otherwise -1
+
+PRP Number : edgeIdx3
+  > summary
+    The index of the third edge, otherwise -1
+
+PRP Number : edgeIdx4
+  > summary
+    The index of the fourth edge normal (if any), otherwise -1
+
+PRP Number : faceGroupIndex
+  > summary
+    The index of the face group this face belongs to
+
+PRP Number : materialIndex
+  > summary
+    The index of the material group this face belongs to
+
+PRP Number : normIdx1
+  > summary
+    The index of the first vertex normal
+
+PRP Number : normIdx2
+  > summary
+    The index of the second vertex normal
+
+PRP Number : normIdx3
+  > summary
+    The index of the third vertex normal
+
+PRP Number : normIdx4
+  > summary
+    The index of the fourth vertex normal (if any), otherwise -1
+
+PRP Number : uvwIdx1
+  > summary
+    The index of the first texture vertex
+
+PRP Number : uvwIdx2
+  > summary
+    The index of the second texture vertex
+
+PRP Number : uvwIdx3
+  > summary
+    The index of the third texture vertex
+
+PRP Number : uvwIdx4
+  > summary
+    The index of the fourth texture vertex (if any), otherwise -1
+
+PRP Number : vertIdx1
+  > summary
+    The index of the first vertex
+
+PRP Number : vertIdx2
+  > summary
+    The index of the second vertex
+
+PRP Number : vertIdx3
+  > summary
+    The index of the third vertex
+
+PRP Number : vertIdx4
+  > summary
+    The index of the fourth vertex (if any), otherwise -1
+
+### constructors
+
+CTR DzFacet()
+  > summary
+    Default Constructor.
+
+CTR DzFacet( DzFacet facet )
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN void : clear()
+  > summary
+    Set the facet to a default state.
+
+FUN void : clearTriFanCount()
+  > summary
+    TODO: Add description.
+
+FUN void : clearTriFanRoot()
+  > summary
+    TODO: Add description.
+
+FUN Number : getTriFanCount()
+  > summary
+    TODO: Add description.
+
+FUN Number : getTriFanEdgeCount()
+  > summary
+    TODO: Add description.
+
+FUN Number : getTriFanMaxEdgeIdx()
+  > summary
+    TODO: Add description.
+
+FUN Number : getTriFanOffset()
+  > summary
+    TODO: Add description.
+
+FUN Number : getTriFanRoot()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isQuad()
+  > summary
+    return true if this is a 4 sided polygon, otherwise false
+
+FUN Boolean : isTri()
+  > summary
+    return true if this is a 3 sided polygon, otherwise false
+
+FUN Boolean : isTriFan()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isTriFanChild()
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isTriFanRoot()
+  > summary
+    TODO: Add description.
+
+FUN void : setTriFanCount( Number count )
+  > summary
+    TODO: Add description.
+
+FUN void : setTriFanRoot( Number rootIdx )
+  > summary
+    TODO: Add description.

@@ -1,0 +1,295 @@
+CLS DzScript : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/script_dz
+  > summary
+    Encapsulates a DAZ Script script.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU ScriptFileMode
+  > summary
+    Save mode for saving the script to file.
+  + UseExtension - If the file extension is .dsb, the file is saved as DAZScriptFile, otherwise as TextScriptFile
+  + TextScriptFile - Plain text file - no Unicode support
+  + DAZScriptFile - Binary DAZ file format - supports Unicode characters
+  + EncDAZScriptFile - Encrypted Binary DAZ file format - supports Unicode characters
+
+ENU ScriptLanguage
+  > summary
+    Script language of the file.
+  + Unknown - Unknown language.
+  + DAZScript1 - DAZ Script 1 (QSA) language.
+  + DAZScript2 - DAZ Script 2 (QtScript) language.
+
+### statics
+
+STA void : addScriptBinaryExtensionsAsMultipleFilters( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the binary extensions to
+
+STA void : addScriptBinaryExtensionsToFilter( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the binary extensions to
+
+STA void : addScriptOpenExtensionsAsMultipleFilters( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the open extensions to
+
+STA void : addScriptOpenExtensionsToFilter( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the open extensions to
+
+STA void : addScriptSaveExtensionsAsMultipleFilters( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the save extensions to
+
+STA void : addScriptSaveExtensionsToFilter( DzFileFilter filter )
+  > parameters
+    + filter - The filter to add the save extensions to
+
+STA void : addScriptTextExtensionsAsMultipleFilters( DzFileFilter filter, Boolean includeDeprecated=false )
+  > parameters
+    + filter - The filter to add the plain text extensions to
+    + includeDeprecated - Whether or not to include the deprecated extension(s)
+
+STA void : addScriptTextExtensionsToFilter( DzFileFilter filter, Boolean includeDeprecated=false )
+  > parameters
+    + filter - The filter to add the plain text extensions to
+    + includeDeprecated - Whether or not to include the deprecated extension(s)
+
+STA Object : evaluate( String code, QObject context=undefined )
+  > summary
+    This function is provided as a quick method of evaluating DAZ Script statements without needing to create a DAZ Script object.
+  > parameters
+    + code - The text string to evaluate as a script
+    + context - The QObject instance (if any) that will provide the script's context.
+  > returns
+    The value returned from the script's execution.
+
+STA Array : getScriptExtensions()
+  > returns
+    A list of the script file extensions supported by the application.
+
+STA String : getScriptFile( String filenameWithoutExtension )
+  > parameters
+    + filenameWithoutExtension - The path to the file, minus the '.' and the extension
+  > returns
+    The path of the file, with extension, of the script found. Otherwise, an empty String.
+
+STA Boolean : isScriptBinaryExtension( String ext )
+  > returns
+    true if extension is a supported binary script extension
+
+STA Boolean : isScriptBinaryFile( String filename )
+  > returns
+    true if filename ends with a supported binary script extension
+
+STA Boolean : isScriptExtension( String ext )
+  > returns
+    true if extension is a supported script extension
+
+STA Boolean : isScriptFile( String filename )
+  > returns
+    true if filename ends with a supported script extension
+
+STA Boolean : isScriptTextExtension( String ext )
+  > returns
+    true if extension is a supported [ascii] plain text script extension
+
+STA Boolean : isScriptTextFile( String filename )
+  > returns
+    true if filename ends with a supported [ascii] plain text script extension
+
+STA String : legalizeName( String str )
+  > summary
+    Takes a string that may contain special characters and returns a converted version that would be legal as a variable name in script. If the string contains no special characters, the result will be identical to the input.
+
+### constructors
+
+CTR DzScript( String name=“” )
+  > summary
+    Constructor.
+  > parameters
+    + name - The name of the script
+
+CTR DzScript( DzScript script )
+  > summary
+    Copy Constructor
+  > parameters
+    + script - The script to copy.
+
+### methods
+
+FUN void : addCode( String code )
+  > summary
+    Appends the given code to the end of the current script.
+  > parameters
+    + code - The text to append to the current script.
+
+FUN void : addLine( String line, Number indentLevel=0 )
+  > summary
+    Appends the given string and a newline character to the script.
+  > parameters
+    + line - The text to add to the script.
+    + indentLevel - The number of tab characters to insert in front of the line.
+
+FUN void : addLines( String code, Number indentLevel=0 )
+  > summary
+    Appends the given code to the end of the current script.
+  > parameters
+    + code - The text to append to the current script.
+    + indentLevel - The number of tab characters to insert in front of each line.
+
+FUN Boolean : call( String func, Array args )
+  > summary
+    Calls a function in the script.
+  > parameters
+    + func - The name of the function to call.
+    + args - A list of arguments to pass to the function.
+  > returns
+    true if the function was called successfully, false if there was an error.
+  > attention
+    The entire script is evaluated before the function call is made.
+
+FUN Boolean : checkSyntax()
+  > summary
+    Checks the syntax of the script for errors using the current interpreter.
+  > returns
+    true if the syntax is valid, otherwise false.
+
+FUN void : clear()
+  > summary
+    Clears any code in the current script, and clears the encryption state if the script was read from an encrypted file.
+
+FUN Boolean : convertToDAZScript2()
+  > summary
+    Converts the script to DAZ Script 2 syntax.
+
+FUN Number : errorLine()
+  > returns
+    The line number that the last error occurred on.
+
+FUN String : errorMessage()
+  > returns
+    The last error message gathered from a call to execute(). An empty string if no error has been encountered for this script.
+
+FUN Boolean : execute()
+  > summary
+    Execute the script.
+  > attention
+    This can be called from a thread outside of the GUI thread, however the script will not be executed until the GUI thread processes events. It returns when execution is complete.
+  > returns
+    true if the script was executed successfully, false if there was an error.
+
+FUN Boolean : execute( Array args )
+  > summary
+    Execute the script with an argument list.
+  > attention
+    This can be called from a thread outside of the GUI thread, however the script will not be executed until the GUI thread processes events. It returns when execution is complete.
+  > parameters
+    + args - The list of arguments to pass to the script.
+  > returns
+    true if the script was executed successfully, false if there was an error.
+
+FUN DzAuthor : getAuthor()
+  > returns
+    The author of this script if it was loaded from a file that provides authorship information.
+
+FUN String : getCode()
+  > returns
+    The code of the current script.
+
+FUN String : getFilename()
+  > returns
+    The name and path of the file associated with this script. An empty string is returned if this script is not associated with a file.
+
+FUN Boolean : getLastStatus()
+  > returns
+    true if the last execution was successful, otherwise false.
+
+FUN DzScript.ScriptLanguage : getScriptLanguage()
+  > returns
+    An enumerated value indicating the scripting language of the script.
+
+FUN String : getScriptType()
+  > returns
+    A string describing the kind of script that this script is
+
+FUN DzVersion : getScriptVersion()
+  > returns
+    The version of DAZ Studio that this script was saved from. The current version if the script was not loaded from a file.
+
+FUN Boolean : getShouldReuseInterpreter()
+  > returns
+    true if the same context is used between uses of call(); otherwise false (default).
+  > seealso
+    DzScriptContext
+
+FUN Boolean : isEmpty()
+  > returns
+    true if the script is empty; otherwise false.
+
+FUN Boolean : isEncrypted()
+  > returns
+    true if the contents of the script are encrypted (i.e. read from an encrypted file); otherwise false.
+  > attention
+    If the script is encrypted, getCode() returns '[Content Encrypted]', addLine(), addCode(), and setCode() have no effect, saveToFile() saves nothing and will return false. Calling clear() will clear the encryption state and the code from the script.
+
+FUN Boolean : loadFromFile( String filename, Boolean convert=true )
+  > summary
+    Loads the script from a file.
+  > parameters
+    + filename - The path to the script file to load.
+    + convert - Whether to convert the file to DAZ Script 2.
+  > returns
+    true if the script was successfully loaded, otherwise false.
+
+FUN void : makeEncrypted()
+  > summary
+    Sets the script to be encrypted.
+  > attention
+    This process is not reversible!!! Once a script has been encrypted its original text cannot be extracted. Encrypted scripts can not be edited or modified.
+
+FUN Object : result()
+  > returns
+    The result of the last script execution.
+
+FUN DzError : saveToFile( String filename, DzScript.ScriptFileMode mode=DzScript.ScriptFileMode.UseExtension, String filetype="DAZ Script" )
+  > summary
+    Save the script to a file.
+  > parameters
+    + filename - The filename of the file to save to
+    + mode - The type of file to save.
+    + filetype - The filetype that is saved as part of the file information.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN void : setCode( String code )
+  > summary
+    Replaces the existing code of the script with code.
+  > parameters
+    + code - The new text for the script.
+
+FUN void : setReuseInterpreter( Boolean onoff )
+  > summary
+    Sets whether the same context is used between uses of call().
+  > parameters
+    + onOff - If true, the same context is used between calls. If false a new context is used for each call.
+  > attention
+    Use of this function clears the context, regardless of whether onOff is set to true or false.
+  > seealso
+    DzScriptContext
+
+FUN Array : stackTrace()
+  > returns
+    The stack trace for the last time an error was reported during a call to execute(). An empty list if no error has been encountered.
+
+FUN Boolean : wasConverted( DzScript.ScriptLanguage language=DzScript.DAZScript1 )
+  > summary
+    Access to whether or not the script was converted from the enumerated value specified.
+  > returns
+    true if the script was converted

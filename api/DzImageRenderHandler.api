@@ -1,0 +1,121 @@
+CLS DzImageRenderHandler : DzRenderHandler
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagerenderhandler_dz
+  > summary
+    A render handler that renders into an image (or images).
+
+### description
+  > summary
+    Has an array of QImage objects for capturing data from a renderer - one image will be created for each frame rendered.
+
+### properties
+
+PRP Boolean : writeToFile
+  > summary
+    Holds whether each frame is written to file when finishFrame is called. The internal images is reset on each new frame.
+  > since
+    4.9.3.57
+
+### constructors
+
+CTR DzImageRenderHandler( Size size, DzTime renderTime, String filename )
+  > summary
+    Create a new image render handler for rendering a single frame.
+  > parameters
+    + size - The width & height of the rendered image.
+    + renderTime - The time to render the frame at.
+    + filename - The filename to save the image to.
+  > example
+    // Get the active viewport and camera
+    var oActiveView = MainWindow.getViewportMgr().getActiveViewport();
+    var oCamera = oActiveView.get3DViewport().getCamera();
+     
+    // Get the render options
+    var oRenderOptions = App.getRenderOptions();
+     
+    // Create a handler
+    var oHandler = new DzImageRenderHandler( oRenderOptions.getImageSize(), 0, App.getTempPath() + "/test.jpg" );
+     
+    // If we have a valid handler
+
+    if( oHandler ){
+    	// Set the background color
+    	oHandler.setBackColor( oActiveView.get3DViewport().background );
+     
+    	// Get the renderer
+    	var oRenderer = oRenderOptions.getActiveRenderer();
+     
+    	// Render, using our handler and options
+    	oRenderer.render( oHandler, oCamera, oRenderOptions );
+    }
+
+CTR DzImageRenderHandler( Size size, DzTime startingTime, Number numFrames, String filename, Boolean isMovie )
+  > summary
+    Create a new image render handler for rendering a multiple frames.
+  > parameters
+    + size - The width & height of the rendered images.
+    + startingTime - The time to start the render at.
+    + numFrames - The number of frames to render.
+    + filename - The name of the movie file or the base file name for the series.
+    + isMovie - If true, the filename is expected to be a valid filename for saving a movie file, if false, it is expected to be a valid image name.
+  > example
+    // Get the active viewport and camera
+    var oActiveView = MainWindow.getViewportMgr().getActiveViewport();
+    var oCamera = oActiveView.get3DViewport().getCamera();
+     
+    // Get the render options
+    var oRenderOptions = App.getRenderOptions();
+     
+    // Create a handler
+    var oHandler = new DzImageRenderHandler( oRenderOptions.getImageSize(), 0, 1, App.getTempPath() + "/test.jpg", false );
+     
+    // Render if we have a handler
+
+    if( oHandler ){
+    	var oRenderer = oRenderOptions.getActiveRenderer();
+    	oRenderer.render( oHandler, oCamera, oRenderOptions );
+    }
+
+### methods
+
+FUN void : beginFrame( Number frame )
+  > summary
+    Begins rendering the given frame
+
+FUN void : beginRender()
+  > summary
+    Starts a render
+
+FUN void : finishFrame()
+  > summary
+    Finishes rendering the current frame
+
+FUN void : finishRender()
+  > summary
+    Finishes the render and saves it out to file
+
+FUN Boolean : getCreateThumbnail()
+  > returns
+    true if a thumbnail is created, false otherwise
+
+FUN Image : getCurrentFrameImage()
+  > returns
+    The current frame's image. This image is reset at every call to beginFrame.
+
+FUN Number : getNumFrames()
+  > returns
+    The number of frames in the render
+
+FUN Size : getSize()
+  > returns
+    the size of the rendered image
+
+FUN DzTime : getStartingTime()
+  > returns
+    The starting time of the render
+
+FUN void : setCreateThumbnail( Boolean createThumb )
+  > summary
+    Sets whether a thumbnail is created
+  > parameters
+    + createThumb - If true, a thumbnail is created

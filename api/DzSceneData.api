@@ -1,0 +1,14 @@
+CLS DzSceneData : DzCustomData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scenedata_dz
+  > summary
+    DzCustomData implementation that can be associated with the DzScene object.
+
+### description
+  > seealso
+    DzScene.addDataItem()
+    DzScene.removeDataItem()
+    DzScene.findDataItem()
+    DzScene.getNumDataItems()
+    DzScene.getDataItem()
+    DzScene.getDataItemList()

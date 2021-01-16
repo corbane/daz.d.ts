@@ -1,0 +1,66 @@
+CLS QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/object_q
+  > summary
+    The prototype object of all DAZ Studio API objects.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP String : objectName
+  > summary
+    Holds the name of the object.
+
+PRP String : name
+  > summary
+    Holds the name of the object.
+
+### methods
+
+FUN void : deleteLater()
+  > summary
+    Schedules this object for deletion.
+
+FUN Object : findChild( String name=“” )
+  > parameters
+    + name - The name of the child object to find.
+  > returns
+    The child of this object that is named name, or undefined if name cannot be found. If name is empty, it is equivalent to all names. The search is performed recursively.
+    Attention:
+    If more than one child matches name, the most direct ancestor is returned. If several direct ancestors are named name, it is undefined which one will be returned. In that case, use findChildren() instead.
+
+FUN Array : findChildren( String name=“” )
+  > parameters
+    + name - The name of the children objects to find.
+  > returns
+    All children of this object that are named name, or an empty list if name cannot be found. If name is empty, it is equivalent to all names. The search is performed recursively.
+
+FUN String : toString()
+  > returns
+    The string representation of the object.
+
+FUN String : className()
+  > returns
+    A string representation of the object classname.
+
+FUN Boolean : inherits( String classname )
+  > parameters
+    + classname - The name of the class to test for inheritance.
+  > returns
+    true if the object inherits classname, otherwise false.
+
+FUN Boolean : isA( String classname )
+  > parameters
+    + classname - The name of the class to test.
+  > returns
+    true if the object is an instance of classname, otherwise false.
+
+### signals
+
+SIG void : destroyed( QObject obj=null )
+  > null
+  > summary
+    Emitted immediately before the object is destroyed.

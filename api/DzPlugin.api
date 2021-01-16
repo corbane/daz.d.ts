@@ -1,0 +1,91 @@
+CLS DzPlugin : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/plugin_dz
+  > summary
+    Class that defines a DAZ Studio plug-in.
+
+### description
+  > summary
+    This class provides startup and shutdown functionality for DAZ Studio plug-ins and maintains the list of class types exported by the plug-in.
+
+### enumerations
+
+ENU Status
+  > summary
+    TODO: Add description.
+  + Loaded - TODO: Add description.
+  + RequiresRestart - TODO: Add description.
+  + ManuallyDisabled - TODO: Add description.
+  + EvaluationInvalid - TODO: Add description.
+  + Failed - TODO: Add description.
+
+### methods
+
+FUN String : getAuthor()
+  > returns
+    The author of the plug-in.
+
+FUN String : getDescription()
+  > returns
+    The author's description of the plug-in.
+
+FUN String : getEvaluationInformation()
+  > returns
+    The evaluation information of the plug-in in string form.
+
+FUN String : getFilename()
+  > returns
+    The absolute file path to the plug-in; set by DzApp when the plug-in is loaded.
+
+FUN Boolean : getLoadOnStart()
+  > returns
+    true if the plug-in should load on application start, otherwise false.
+
+FUN String : getName()
+  > returns
+    The name of the plug-in.
+
+FUN Array : getPrefixes()
+  > returns
+    A list of prefixes that can be used to serialize this plugin (if any), otherwise an empty list.
+  > since
+    4.11.0.35
+
+FUN DzPlugin.Status : getStatus()
+  > returns
+    The load state of the plug-in.
+
+FUN String : getStatusInformation()
+  > returns
+    Additional information about the plug-in load state.
+
+FUN String : getStatusString()
+  > returns
+    The string representation of the plug-in load state.
+
+FUN DzVersion : getVersion()
+  > returns
+    The version number of the plug-in.
+
+FUN String : getVersionString()
+  > returns
+    The version number of the plug-in in string form.
+
+FUN Boolean : isActivated()
+  > returns
+    true if the plug-in is activated, otherwise false. A plug-in is considered activated if it has either been registered or it is within an evaluation period.
+  > seealso
+    isRegistered()
+
+FUN Boolean : isRegistered()
+  > returns
+    true if the plug-in has been registered, othwerwise false. A plug-in is considered registered if a valid serial number for the plug-in has been applied, or if the plug-in does not use serial number registration. A plug-in that is within an evaluation period is not considered registered.
+  > seealso
+    isActivated()
+
+FUN Boolean : validateSerialNumber( String serialNumber, Boolean saveIfValid )
+  > parameters
+    + serialNumber - The serial number to validate.
+    + saveIfValid - If true, the serial number will be saved if it is found to be valid.
+  > returns
+    true if the serial number is valid for the plug-in, otherwise false.

@@ -1,0 +1,163 @@
+CLS DzBrickMaterial : DzMaterial DzRefCountedItem defaultbrickuser_dz
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/brickmaterial_dz
+  > summary
+    Material that uses Shader Bricks to generate its shader.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### statics
+
+STA DzBrickMaterial : convertDefaultMaterial( DzDefaultMaterial mat )
+  > summary
+    Converts the given default material to a brick material.
+  > parameters
+    + mat - The material to be converted.
+
+STA DzBrickMaterial : convertUberIrayMaterial( DzMaterial mat )
+  > summary
+    Converts the given Uber Iray material to a brick material.
+  > parameters
+    + mat - The material to be converted.
+
+### constructors
+
+CTR DzBrickMaterial()
+  > summary
+    Creates a new brick material.
+
+### methods
+
+FUN Number : addBrick( shaderbrick_dz brick )
+  > summary
+    Adds the given brick to this brick material.
+  > parameters
+    + brick - The brick to add.
+  > returns
+    The id of the added brick.
+
+FUN Boolean : allowsAutoBake()
+  > returns
+    true if this brick material allows auto-baking, otherwise false.
+
+FUN void : applyToScene()
+  > summary
+    Apply a copy of this material to all selected materials in the scene.
+
+FUN void : deleteAllBricks()
+  > summary
+    Deletes all bricks in this material.
+
+FUN void : deleteBrick( Number id )
+  > summary
+    Deletes the brick with the given id from the material.
+  > parameters
+    + id - The id of the brick to delete.
+
+FUN void : deleteBrick( shaderbrick_dz brick )
+  > summary
+    Deletes the given brick from the material.
+  > parameters
+    + brick - The brick to delete.
+
+FUN void : endEditMode()
+  > summary
+    Takes this brick material out of edit mode.
+
+FUN shaderbrick_dz : getBrick( Number id )
+  > parameters
+    + id - The id of the desired brick.
+  > returns
+    The brick at the given id.
+
+FUN Array : getBrickIDs()
+  > returns
+    A list of the ids for the bricks associated with this brick material.
+
+FUN brickset_dz : getBrickSet( Number i )
+  > parameters
+    + i - The index of the desired brick set.
+  > returns
+    The brick set at the specified location.
+
+FUN String : getBrickUserName()
+  > returns
+    The user name of this brick material.
+
+FUN String : getExtension()
+  > returns
+    The extension for this brick material.
+
+FUN Number : getNumBrickSets()
+  > returns
+    The number of brick sets in this brick material.
+
+FUN void : invalidateSets()
+  > summary
+    Invalidates the brick sets, causing them to be rebuilt.
+
+FUN Boolean : isInEditMode()
+  > returns
+    true if this brick material is currently in edit mode, otherwise false.
+
+FUN void : setBrickUserName( String name )
+  > summary
+    Sets the user name of this brick material.
+  > parameters
+    + name - The new name for this brick material.
+
+FUN void : setMaterialName( String name )
+  > summary
+    Sets the name for this brick material.
+  > parameters
+    + name - The new name to be used.
+
+FUN void : setNeedsPtexParams( Boolean onoff )
+  > summary
+    Sets whether or not this brick material needs Ptex parameters.
+  > parameters
+    + onoff - If true, this brick material needs Ptex parameters.
+
+FUN void : setNeedsTangentSpaceParams( Boolean onoff )
+  > summary
+    Sets whether this brick material needs tangent space parameters.
+  > parameters
+    + onoff - If true, this brick material will need tangent space parameters.
+
+FUN void : startEditMode()
+  > summary
+    Puts this brick material in edit mode.
+
+FUN void : updateIdentifierOnSetInvalidate( Boolean onOff )
+  > summary
+    Sets whether the identifier is updated when this brick material is invalidated.
+  > parameters
+    + onOff - If true, the identifier will be updated when this brick material is invalidated.
+
+FUN Boolean : usesLocalShaderSpace()
+  > returns
+    true if this brick material uses local shader space.
+
+### signals
+
+SIG void : brickAdded( shaderbrick_dz brick )
+  > summary
+    Emitted when a brick is added to this brick material.
+  > parameters
+    + brick - The brick that was added.
+
+SIG void : brickRemoved( shaderbrick_dz brick )
+  > summary
+    Emitted when a brick is removed from this brick material.
+  > parameters
+    + brick - The brick that was removed.
+
+SIG void : generateFilesFinished()
+  > summary
+    Emitted when file generation is finished.
+
+SIG void : generateFilesStarted()
+  > summary
+    Emitted when file generation is started.

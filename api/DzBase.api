@@ -1,0 +1,24 @@
+CLS DzBase : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/base_dz
+  > summary
+    Base class for a considerable portion of the Daz Studio API.
+
+### description
+  > summary
+    Derived from QObject, this base class allows for the use of the signals-slots architecture provided by the Qt framework, within the Daz Studio API. A considerable portion of classes in the Daz Studio API derive from this class.
+
+### methods
+
+FUN void : makePersistent()
+  > summary
+    Provides scripts a way to make objects persistent; i.e., so that Qt will not delete them when they are no longer referenced by the script. This allows object instances to be created in script, then passed into the core and remain after the script has finished execution.
+
+### signals
+
+SIG void : nameChanged( String name )
+  > null
+  > summary
+    Emitted when the internal name of the object has changed.
+  > parameters
+    + name - The new name of the object.

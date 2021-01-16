@@ -1,0 +1,67 @@
+CLS DzImageTexture : DzTexture DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagetexture_dz
+  > summary
+    Class that handles sharing of data for image maps.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP DzAuthor : assetAuthor
+  > summary
+    The author of the file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzVersion : assetFileRevision
+  > summary
+    The revision version of the asset file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP String : assetId
+  > summary
+    The asset id for this texture.
+  > since
+    4.8.1.18
+
+PRP Date : assetModifiedDate
+  > summary
+    The modified date of the asset file for this texture. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetSource
+  > summary
+    The URI of the asset source for this texture; only valid when the asset is in an embedded state - i.e. modified. (Read Only)
+  > since
+    4.8.1.21
+
+PRP DzUri : assetUri
+  > summary
+    The asset URI for this texture. (Read Only)
+  > since
+    4.8.1.18
+
+### constructors
+
+CTR DzImageTexture( String filename, Number gamma )
+  > summary
+    TODO: Add description.
+
+CTR DzImageTexture( String filename, Number gamma, Number textureType )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : assetModified()
+  > summary
+    TODO: Add description.
+
+SIG void : assetWasSaved()
+  > summary
+    TODO: Add description.

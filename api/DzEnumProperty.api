@@ -1,0 +1,136 @@
+CLS DzEnumProperty : DzIntProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/enumproperty_dz
+  > summary
+    An animatable enum property.
+
+### description
+  > summary
+    This class provides an animatable enumerated property that is stored and can be accessed as an integer property. It maintains a list of strings that correspond to the integer value of the property.
+
+### constructors
+
+CTR DzEnumProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzEnumProperty( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN Number : addItem( String item, Number index=-1 )
+  > summary
+    Adds a string to the available choices for this property. Duplicates are not allowed.
+  > parameters
+    + item - The string to add to the list of items.
+    + index - The index to insert the item at. If invalid, the item is appended to the list.
+  > returns
+    The index of the newly added item is returned, or -1 on error.
+
+FUN Number : findItemString( String str )
+  > summary
+    Searches the property for an item that matches the given string.
+  > parameters
+    + str - The string to find.
+  > returns
+    The index of the item that matches the given string (if any), otherwise -1.
+
+FUN String : getDefaultStringValue()
+  > returns
+    The string representation of the default value.
+
+FUN String : getItem( Number i )
+  > parameters
+    + i - The index of the item to return.
+  > returns
+    The string representation of the i'th item (if valid), otherwise an empty string.
+
+FUN String : getKeyStringValue( Number i )
+  > parameters
+    + i - The index of the key to return the value of.
+  > returns
+    The string representation of the i'th key value (if valid), otherwise an empty string.
+
+FUN Number : getNumItems()
+  > returns
+    The number of enumerated items.
+
+FUN String : getRawStringValue()
+  > returns
+    The string representation of the raw value (if valid), otherwise the default string.
+
+FUN String : getRawStringValue( DzTime tm )
+  > parameters
+    + tm - The scene time at which to get the raw value of the property.
+  > returns
+    The string representation of the raw value at the given time (if valid), otherwise the default string.
+
+FUN String : getStringValue( DzTime tm )
+  > parameters
+    + tm - The scene time at which to get the value.
+  > returns
+    The string representation of the value at the given time.
+
+FUN String : getStringValue()
+  > returns
+    The string representation of the current value.
+
+FUN String : getUniqueItemString( String item )
+  > returns
+    An item string that is guaranteed to be unique. If item is not already in the list, it is returned. Otherwise, a number will be appended to item to make it unique.
+
+FUN void : removeAllItems()
+  > summary
+    Removes all items and makes this property essentially invalid.
+
+FUN Boolean : removeItem( Number index )
+  > summary
+    Removes the item at the given index.
+  > parameters
+    + idx - The index of the item to remove.
+  > returns
+    true if the item was successfully removed, otherwise false.
+
+FUN Boolean : replaceItem( Number index, String item )
+  > summary
+    Replaces the item at the given index with the given string.
+  > parameters
+    + index - The index of the item to replace.
+    + item - The new item to place into the list.
+  > returns
+    false if the index is out of range or the string is invalid (empty), otherwise true.
+
+FUN void : setItems( Array items )
+  > summary
+    Sets the items for this property.
+  > parameters
+    + items - The list of items to set.
+  > since
+    4.5.2.20
+
+FUN Boolean : setValueFromString( String str )
+  > summary
+    Sets the current value of the property to the index of the item that matches the given string.
+  > parameters
+    + str - The string to match.
+  > returns
+    true on success, false if the given string does not match an item in this property.
+
+FUN Boolean : setValueFromString( DzTime tm, String str )
+  > summary
+    Sets the value of the property at the given time to the index of the item that matches the given string.
+  > parameters
+    + tm - The scene time to set the value of the property at.
+    + str - The string to match.
+  > returns
+    true on success, false if the given string does not match an item in this property.
+
+### signals
+
+SIG void : itemListChanged()
+  > summary
+    Emitted when the item list (list of legal values for this property) changes.

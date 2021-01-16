@@ -1,0 +1,152 @@
+CLS DzComboBox : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/combobox_dz
+  > summary
+    DAZScript wrapper for QComboBox.
+
+### description
+  > summary
+    DzComboBox provides a means of presenting a list of options to the user in a way that takes up the minimum amount of screen space.
+
+### enumerations
+
+ENU InsertPolicy
+  > summary
+    TODO: Add description.
+  + NoInsert - TODO: Add description.
+  + InsertAtTop - TODO: Add description.
+  + InsertAtCurrent - TODO: Add description.
+  + InsertAtBottom - TODO: Add description.
+  + InsertAfterCurrent - TODO: Add description.
+  + InsertBeforeCurrent - TODO: Add description.
+  + InsertAlphabetically - TODO: Add description.
+
+ENU SizeAdjustPolicy
+  > summary
+    TODO: Add description.
+  + AdjustToContents - TODO: Add description.
+  + AdjustToContentsOnFirstShow - TODO: Add description.
+  + AdjustToMinimumContentsLength - TODO: Add description.
+  + AdjustToMinimumContentsLengthWithIcon - TODO: Add description.
+
+### properties
+
+PRP Number : count
+  > summary
+    Holds the number of items in the combobox. (Read Only)
+
+PRP Number : currentItem
+  > summary
+    Holds the index of the currently selected item in the combobox.
+
+PRP String : currentText
+  > summary
+    Holds the text of the currently selected item in the combobox.
+
+PRP DzComboBox.InsertPolicy : insertPolicy
+  > summary
+    Holds the policy used to determine where user-inserted items should appear in the combobox.
+
+PRP Number : maxVisibleItems
+  > summary
+    Holds the maximum number of items allowed on screen; 10 by default.
+
+PRP Number : minimumContentsLength
+  > summary
+    Holds the minimum number of characters that should fit in the combobox.
+
+PRP DzComboBox.SizeAdjustPolicy : sizeAdjustPolicy
+  > summary
+    Holds the policy describing how the size of the combobox changes when the content changes.
+
+### constructors
+
+CTR DzComboBox( DzWidget parent )
+  > summary
+    Creates a combobox as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the combobox.
+
+### methods
+
+FUN void : addItem( String text, String userData=“” )
+  > summary
+    Adds text to the list of items in the combobox.
+
+FUN void : addItems( Array texts )
+  > summary
+    Adds each of the strings in texts to the combobox
+
+FUN void : clear()
+  > summary
+    Removes all items from the combobox.
+
+FUN Number : findData( String data )
+  > returns
+    The index of the item containing data; otherwise returns -1.
+
+FUN Number : findText( String text )
+  > returns
+    The index of the item containing text; otherwise returns -1.
+
+FUN void : insertItem( Number index, String text, String userData=“” )
+  > summary
+    Inserts the text and userData into the combobox at index. If index is equal to or higher than the total number of items, the new item is appended to the list of existing items. If index is zero or negative, the new item is prepended to the list of existing items.
+
+FUN void : insertItems( Number index, Array list )
+  > summary
+    Inserts the strings in list into the combobox as separate items, starting at index.
+
+FUN void : insertSeparator( Number index )
+  > summary
+    Inserts a separator into the combobox at index.
+
+FUN String : itemData( Number index )
+  > returns
+    The data of the item at index.
+
+FUN String : itemText( Number index )
+  > returns
+    The text of the item at index.
+
+FUN void : removeItem( Number index )
+  > summary
+    Removes the item at index from the list of items.
+
+FUN void : setItemData( Number index, String value )
+  > summary
+    Sets the data for the item at index.
+
+FUN void : setItemText( Number index, String text )
+  > summary
+    Sets the text for the item at index.
+
+### signals
+
+SIG void : activated( Number index )
+  > summary
+    Emitted when an item is selected, passes the index of the item that was activated.
+
+SIG void : activated( String text )
+  > summary
+    Emitted when an item is selected, passes the text of the item that was activated.
+
+SIG void : currentIndexChanged( String text )
+  > summary
+    Emitted when the current index changes, passes the text of the item that changed.
+
+SIG void : currentIndexChanged( Number index )
+  > summary
+    Emitted when the current index changes, passes the index of the item that changed.
+
+SIG void : highlighted( String text )
+  > summary
+    Emitted when the highlighted item changes, passes the text of the item that is highlighted.
+
+SIG void : highlighted( Number index )
+  > summary
+    Emitted when the highlighted item changes, passes the index of the item that is highlighted.
+
+SIG void : textChanged( String text )
+  > summary
+    Emitted when the text of the box changes, passes the new text of the box.

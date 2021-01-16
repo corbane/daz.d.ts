@@ -1,0 +1,41 @@
+CLS DzSystem : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/system_dz
+  > summary
+    DAZScript's global static object for system services.
+
+### description
+  > summary
+    The DzSystem object provides functions to access and manipulate environment variables. It is accessible via the Global::System variable.
+
+### methods
+
+FUN String : getenv( String environmentVariable )
+  > parameters
+    + environmentVariable - The name of the environment variable to retrieve. The 'environment' only exists within the context of the script process, for the duration of said process.
+  > returns
+    The String stored in environmentVariable.
+  > example
+    var sEnv = System.getenv( "DAZSTUDIO" );
+    print( sEnv ); //C:/Program Files/DAZ/Studio
+
+FUN void : print( String expression )
+  > summary
+    Deprecated
+    Use Global::print() instead.
+
+FUN void : println( String expression )
+  > summary
+    Deprecated
+    Use Global::print() instead.
+
+FUN void : setenv( String environmentVariable, String value )
+  > summary
+    Sets the value of an environment variable. If the environment variable does not exist, it is created. The environment is only changed within the context of the script process, for the duration of said process.
+  > parameters
+    + environmentVariable - The environment variable to set the value of
+    + value - The new value of the environment variable.
+  > example
+    System.setenv( "DAZSTUDIO", App.getHomePath() );
+    var sEnv = System.getenv( "DAZSTUDIO" );
+    print( sEnv ); // C:/Program Files/DAZ/Studio

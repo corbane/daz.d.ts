@@ -1,0 +1,38 @@
+CLS DzError
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/error_dz
+  > summary
+    DAZScript error code type.
+
+### description
+  > summary
+    - 0x00000000 = DZ_NO_ERROR
+    - 0x00000050 = DZ_ALREADY_EXISTS_ERROR
+    - 0x00000051 = DZ_DOES_NOT_EXIST_ERROR
+    - 0x00000052 = DZ_NON_UNIQUE_NAME_ERROR
+    - 0x00000053 = DZ_ILLEGAL_HIERARCHY_ERROR
+    - 0x00000060 = DZ_ILLEGAL_ARGUMENT_ERROR
+    - 0x00000061 = DZ_ILLEGAL_OPERATION_ERROR
+    - 0x00000062 = DZ_OPERATION_FAILED_ERROR
+    - 0x00000063 = DZ_NO_MATCH_ERROR
+    - 0x00000064 = DZ_USER_CANCELLED_OPERATION
+    - 0x00000065 = DZ_UNHANDLED_EXCEPTION_ERROR
+    - 0x00000070 = DZ_TYPE_MISMATCH_ERROR
+    - 0x00000080 = DZ_SCRIPT_PARSE_ERROR
+    - 0x00000090 = DZ_MEMORY_ALLOCATION_ERROR
+    - 0x00000100 = DZ_PROFILE_NOT_SUPPORTED_ERROR
+    - 0x00000101 = DZ_ALREADY_BOUND_ERROR
+    - 0x00000102 = DZ_NOT_BOUND_ERROR
+    - 0x00000200 = DZ_UNABLE_TO_OPEN_FILE_ERROR
+    - 0x00000201 = DZ_SECTION_NOT_OPEN_ERROR
+    - 0x00000202 = DZ_SECTION_LENGTH_EXCEEDED_ERROR
+    - 0x00000203 = DZ_FORMAT_NOT_SUPPORTED_ERROR
+    - 0x00000204 = DZ_FILE_FORMAT_ERROR
+    Note:
+    You can use Global.getErrorMessage() to convert an error code into a user-readable string.
+
+### methods
+
+FUN Number : valueOf()
+  > returns
+    The value of the DzError as a Number.

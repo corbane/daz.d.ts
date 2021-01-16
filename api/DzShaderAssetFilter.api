@@ -1,0 +1,11 @@
+CLS DzShaderAssetFilter : DzAssetFileOutFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shaderassetfilter_dz
+  > summary
+    Class for saving DSON-based Shader Presets.
+
+### description
+  > summary
+    An asset save filter for saving a Shader Preset in the DSON format.
+  > seealso
+    Sample: Save a Shader Preset

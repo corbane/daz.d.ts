@@ -1,0 +1,65 @@
+CLS DzInstanceGroupNode : DzInstanceNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/instancegroupnode_dz
+  > summary
+    A class for creating multiple instances of another node.
+
+### description
+  > summary
+    This class can be used to create a multiple instances of another DzNode (subclass) that also has a DzOobject. These instances are drawn the same as the target node except for transforms.
+
+### constructors
+
+CTR DzInstanceGroupNode()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : beginItemEdit()
+  > summary
+    Begin edit of this node.
+  > attention
+    If adding or removing many items from this node it is more efficient to call beginItemEdit() do edits and call finishItemEdit() when done.
+  > seealso
+    finishItemEdit()
+
+FUN void : clearItems()
+  > returns
+    Removes all items from this node.
+
+FUN DzInstanceGroupItem : createItem()
+  > returns
+    A new instance group item.
+
+FUN Number : findIndexForItem( DzInstanceGroupItem item )
+  > parameters
+    + item - The item to get the index for.
+  > returns
+    The index for the given item or -1 if it does not belong to this node.
+
+FUN void : finishItemEdit()
+  > summary
+    Finish edit of this node.
+  > seealso
+    beginItemEdit()
+
+FUN DzInstanceGroupItem : getGroupItem( Number index )
+  > parameters
+    + index - The index of the item to get the group of.
+  > returns
+    The group item at the given index or null if it does not exist.
+
+FUN Number : getNumberOfGroupItems()
+  > returns
+    The number of group items.
+
+FUN Boolean : isEditingItems()
+  > returns
+    true if in beginItemEdit/finishItemEdit session
+
+FUN void : removeItem( Number index )
+  > parameters
+    + index - The index of the item to remove.
+  > returns
+    Removes and deletes the item at the given index.

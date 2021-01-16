@@ -1,0 +1,181 @@
+CLS DzPropertyGroup : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/propertygroup_dz
+  > summary
+    Represents a grouping of properties.
+
+### description
+  > summary
+    DzPropertyGroup objects are all owned and managed by DzElement objects. Do not create property groups yourself - they are automatically created as needed when you assign individual properties to a group. To iterate through the property groups for an element, use DzElement::getPropertyGroups() to get the property group tree that the element's properties are grouped in.
+    // Create a new property
+    oProperty = new DzFloatProperty( "MyDeformer Control", true, false );
+     
+    // Set the path of the property - this moves the property to the group corresponding
+    // to the given path, creating groups if necessary.
+    oProperty.setPath( "/Defomers/MyDeformerGroup" );
+  > seealso
+    DzPropertyGroupTree
+
+### statics
+
+STA String : getDefaultGroupName()
+  > returns
+    The name of the default group.
+  > since
+    4.7.1.66
+
+### methods
+
+FUN DzPropertyGroup : findChild( String name )
+  > parameters
+    + name - The name of the property group to look for.
+  > returns
+    The child with the given name (if any), otherwise NULL.
+
+FUN DzProperty : findProperty( String propName, Boolean traverse=false, Boolean recurse=false )
+  > parameters
+    + propName - The name of the property to find.
+    + traverse - If true, the siblings of this group will be checked.
+    + recurse - If true, the children of this group will be checked.
+  > returns
+    The property in this group with the given name (if any), otherwise null.
+  > since
+    4.7.1.34
+
+FUN DzProperty : findPropertyByLabel( String propLabel, Boolean traverse=false, Boolean recurse=false )
+  > parameters
+    + propLabel - The label of the property to find.
+    + traverse - If true, the siblings of this group will be checked.
+    + recurse - If true, the children of this group will be checked.
+  > returns
+    The property in this group with the given label (if any), otherwise null.
+  > since
+    4.9.3.11
+
+FUN DzPropertyGroup : findSibling( String name )
+  > parameters
+    + name - The name of the sibling to look for.
+  > returns
+    The sibling with the given name (if any), otherwise NULL.
+
+FUN Array : getAllPaths()
+  > summary
+    Provided for convenience and DAZ Script access.
+  > returns
+    A list of all property group paths begining with this group.
+
+FUN Array : getAllProperties()
+  > returns
+    A list of all properties in this group.
+  > since
+    4.9.4.101
+
+FUN Boolean : getCollapsed()
+  > returns
+    true if the group is collapsed, otherwise false.
+
+FUN DzPropertyGroup : getFirstChild()
+  > returns
+    The first child group, if any.
+
+FUN DzPropertyGroup : getNextSibling()
+  > returns
+    The next sibling to this group (if any), otherwise NULL.
+
+FUN Number : getNumProperties()
+  > returns
+    The number of properties in this group.
+
+FUN DzPropertyGroup : getParent()
+  > returns
+    The current parent of this group.
+
+FUN String : getPath()
+  > returns
+    The path of this group.
+
+FUN DzPropertyGroup : getPreviousSibling()
+  > returns
+    The previous sibling (if any), otherwise NULL.
+  > since
+    4.7.1.66
+
+FUN DzProperty : getProperty( Number i )
+  > parameters
+    + i - The index of the property to return.
+  > returns
+    The i'th property in this group.
+
+FUN geometryregion_dz : getRegion()
+  > returns
+    The region associated with this property group (if any), otherwise NULL.
+
+FUN DzPropertyGroupTree : getTree()
+  > returns
+    The property group tree that this group belongs to.
+
+FUN Number : indexOfProperty( DzProperty prop )
+  > returns
+    The index of prop in the group, or -1 if prop is not in the group
+
+FUN Boolean : isRegion()
+  > returns
+    true if this group is associated with a geometryregion_dz, otherwise false.
+
+FUN Boolean : movePropertyToIndex( DzProperty prop, Number newIndex )
+  > summary
+    Moves prop to a new location within the group.
+  > parameters
+    + prop - The property to move. This property must be in this group to be successful.
+    + newIndex - The location to move prop to. If newIndex is not a valid index, prop is moved to the end of the list.
+  > returns
+    true if the move was successful, otherwise false.
+
+FUN void : setCollapsed( Boolean onOff )
+  > summary
+    Sets whether or not the group is displayed as collapsed in the interface.
+  > parameters
+    + onOff - If true, the group is collapsed. If false, the group is expanded.
+
+FUN void : setUniquePropertyLabel( DzProperty prop )
+  > summary
+    Sets the label of prop to a unique version of itself.
+
+FUN void : sort()
+  > summary
+    Alpha-numerically sorts the property groups, and the properties in them.
+
+### signals
+
+SIG void : addedChild( DzPropertyGroup newChild )
+  > summary
+    Emitted when a child has been added to the group.
+  > parameters
+    + newChild - The newly added group.
+
+SIG void : childListChanged()
+  > summary
+    Emitted when the child list of the group has changed.
+
+SIG void : parentChanged( DzPropertyGroup newParent )
+  > summary
+    Emitted when the parent of the group has changed.
+  > parameters
+    + newParent - The new parent of the group.
+
+SIG void : propertyVisiblityChanged( DzPropertyGroup grp, DzProperty prop )
+  > summary
+    Emitted when the visibility of a property in the group has changed.
+  > parameters
+    + grp - The group containing the property.
+    + prop - The property that changed.
+
+SIG void : removedChild( DzPropertyGroup child )
+  > summary
+    Emitted when a child has been removed from the group.
+  > parameters
+    + child - The group that has been removed.
+
+SIG void : treeChanged()
+  > summary
+    Emitted when the tree has changed.

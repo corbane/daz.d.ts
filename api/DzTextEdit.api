@@ -1,0 +1,526 @@
+CLS DzTextEdit : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/textedit_dz
+  > summary
+    DAZScript wrapper for QTextEdit.
+
+### description
+  > summary
+    A DzTextEdit provides a powerful single-page rich text editor widget.
+
+### enumerations
+
+ENU AutoFormattingFlag
+  > summary
+    Enumerated values for auto formatting.
+  > since
+    4.9.3.93
+  + AutoNone - Do not perform any automatic formatting.
+  + AutoBulletList - Only automatically format bulletted lists.
+  + AutoAll - Apply all available autoformatting.
+
+ENU LineWrapMode
+  > summary
+    Enumerated values for how lines should wrap.
+  > since
+    4.9.3.93
+  + NoLineWrap - Do not wrap the text.
+  + WidgetWidth - Wrap the text at the current width of the widget.
+  + FixedPixelWidth - Wrap the text at a fixed number of pixels from the widget's left side.
+  + FixedColumnWidth - Wrap the text at a fixed number of character columns from the widget's left side.
+
+ENU WrapMode
+  > summary
+    Enumerated values for how characters in a word should wrap.
+  > since
+    4.9.3.93
+  + NoWrap - Do not wrap the text at all.
+  + WordWrap - Wrap the text at word boundaries.
+  + ManualWrap - Same as NoWrap.
+  + WrapAnywhere - Wrap the text at any point on a line, even if it occurs in the middle of a word.
+  + WrapAtWordBoundaryOrAnywhere - If possible, WordWrap, otherwise WrapAnywhere.
+
+### properties
+
+PRP Boolean : acceptRichText
+  > summary
+    Holds whether or not the text edit accepts rich text insertions by the user.
+  > since
+    4.9.3.93
+
+PRP DzTextEdit.AutoFormattingFlag : autoFormatting
+  > summary
+    Holds the enabled set of auto formatting features.
+  > since
+    4.9.3.93
+
+PRP Number : blockCount
+  > summary
+    Holds the number of text blocks (e.g., paragraphs) in the document. (Read-Only)
+
+PRP Boolean : bold
+  > summary
+    Holds whether or not the font of the current format is bold.
+
+PRP Number : characterCount
+  > summary
+    Holds the number of characters in the text. (Read-Only)
+  > since
+    4.9.3.93
+
+PRP Number : cursorWidth
+  > summary
+    Holds the width of the cursor in pixels.
+  > since
+    4.9.3.93
+
+PRP String : documentTitle
+  > summary
+    Holds the title of the document.
+
+PRP String : family
+  > summary
+    Holds the font family of the current format.
+  > since
+    4.9.3.93
+
+PRP Font : font
+  > summary
+    Holds the font of the current format.
+  > since
+    4.9.3.93
+
+PRP String : html
+  > summary
+    Holds the editor's contents as HTML.
+  > since
+    4.9.3.93
+
+PRP Boolean : italic
+  > summary
+    Holds whether or not the font of the current format is italic.
+
+PRP Number : lineCount
+  > summary
+    Holds the number of lines in the text. (Read-Only)
+  > since
+    4.9.3.93
+
+PRP Number : lineWrapColumnOrWidth
+  > summary
+    Holds the position (in pixels or columns depending on the lineWrapMode) where text will be wrapped.
+  > since
+    4.9.3.93
+
+PRP DzTextEdit.LineWrapMode : lineWrapMode
+  > summary
+    Holds the mode the editor will use when wrapping text within words.
+  > since
+    4.9.3.93
+
+PRP Boolean : modified
+  > summary
+    Holds whether or not the text in the editor has been modified.
+  > since
+    4.9.3.93
+
+PRP Boolean : overwriteMode
+  > summary
+    Holds whether or not text entered by the user will overwrite existing text.
+  > since
+    4.9.3.93
+
+PRP String : plainText
+  > summary
+    Holds the editor's contents as plain text.
+  > since
+    4.9.3.93
+
+PRP Number : pointSize
+  > summary
+    Holds the point size of the font of the current format.
+
+PRP Boolean : readOnly
+  > summary
+    Holds whether or not the text in the editor can be edited by the user.
+  > since
+    4.9.3.93
+
+PRP Boolean : redoAvailable
+  > summary
+    Holds whether or not a redo operation is available. (Read Only)
+  > since
+    4.9.3.93
+
+PRP String : selectedText
+  > summary
+    Holds the selected text (if any) of the editor.
+  > since
+    4.9.3.93
+
+PRP Boolean : tabChangesFocus
+  > summary
+    Holds whether pressing the Tab key changes focus or is accepted as input.
+  > since
+    4.9.3.93
+
+PRP Number : tabStopWidth
+  > summary
+    Holds the tab stop width in pixels; default is 80.
+  > since
+    4.9.3.93
+
+PRP String : text
+  > summary
+    Holds the text of the editor.
+
+PRP Color : textBackgroundColor
+  > summary
+    Holds the text background color of the current format.
+  > since
+    4.9.3.93
+
+PRP Color : textColor
+  > summary
+    Holds the text color of the current format.
+  > since
+    4.9.3.93
+    DzWidget::TextInteractionFlags : textInteractionFlags
+    Holds the value that is used to determine how the label reacts to user input.
+  > since
+    4.9.3.93
+
+PRP Boolean : underline
+  > summary
+    Holds whether or not the font of the current format is underlined.
+
+PRP Boolean : undoAvailable
+  > summary
+    Holds whether or not an undo operation is available. (Read Only)
+  > since
+    4.9.3.93
+
+PRP Boolean : undoRedoEnabled
+  > summary
+    Holds holds whether or not undo and redo are enabled.
+  > since
+    4.9.3.93
+
+PRP Number : weight
+  > summary
+    Holds the font weight of the current format. 25 = Light, 50 = Normal, 63 = DemiBold, 75 = Bold, 87 = Black.
+  > since
+    4.9.3.93
+
+PRP DzTextEdit.WrapMode : wordWrapMode
+  > summary
+    Holds the mode the editor will use when wrapping text by words.
+  > since
+    4.9.3.93
+
+### constructors
+
+CTR DzTextEdit( DzWidget parent )
+  > summary
+    Creates a text edit widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the text edit.
+
+### methods
+
+FUN String : anchorAt( Point pos )
+  > parameters
+    + pos - The position to get the anchor at.
+  > returns
+    The name of the anchor at position pos, or an empty string if no anchor exists at that point.
+  > since
+    4.9.3.93
+
+FUN void : append( String text )
+  > summary
+    Adds text as a new paragraph to the end of the editor.
+  > parameters
+    + text - The text to add.
+  > since
+    4.9.3.93
+
+FUN void : backspace()
+  > summary
+    If text is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no text is selected, the cursor will be moved one character to the left and the character will be deleted.
+  > since
+    4.9.3.93
+
+FUN void : backspaceWord()
+  > summary
+    If a word is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no word is selected, the cursor will be moved one word to the left and the word will be deleted.
+  > since
+    4.9.3.93
+
+FUN void : clear()
+  > summary
+    Removes all text from the editor.
+  > since
+    4.9.3.93
+
+FUN void : copy()
+  > summary
+    Copies the selected text into the clipboard.
+  > since
+    4.9.3.93
+
+FUN void : cursorBackward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor backward the given number of characters.
+  > parameters
+    + mark - If true, each character that is stepped over will be added to the current selection.
+    + steps - The number of characters to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : cursorForward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor forward the given number of characters.
+  > parameters
+    + mark - If true, each character that is stepped over will be added to the current selection.
+    + steps - The number of characters to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : cursorWordBackward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor backward one word.
+  > parameters
+    + mark - If true, the word will be added to the current selection.
+    + steps - The number of words to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : cursorWordForward( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor forward one word.
+  > parameters
+    + mark - If true, the word will be added to the current selection.
+    + steps - The number of words to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : cut()
+  > summary
+    Copies the selected text into the clipboard, and removes it from the editor.
+  > since
+    4.9.3.93
+
+FUN void : del()
+  > summary
+    If text is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no text is selected, the character to the right of the cursor will be deleted.
+  > since
+    4.9.3.93
+
+FUN void : deleteWord()
+  > summary
+    If a word is currently selected, it will be deleted and the cursor moved to the beginning of the selection. If no word is selected, the word to the right of the cursor will be deleted.
+  > since
+    4.9.3.93
+
+FUN void : down( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor to the line below the current line.
+  > parameters
+    + mark - If true, the text from the position of the cursor in the line below the current line to the cursor's previous position will be added to the current selection.
+    + steps - The number of lines to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : end( Boolean mark=false )
+  > summary
+    Moves the cursor to the end of the document.
+  > parameters
+    + mark - If true, the text from the cursor's previous position to the end of the document will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : ensureCursorVisible()
+  > summary
+    Ensures that the cursor is visible by scrolling the editor if necessary.
+  > since
+    4.9.3.93
+
+FUN Boolean : find( String expression, Boolean caseSensitive=false, Boolean wholeWord=false, Boolean backward=false )
+  > summary
+    Finds the next occurrence of expression using the given options and changes the cursor to select the match.
+  > parameters
+    + expression - The expression to find.
+    + caseSensitive - If true, the search is case sensitive.
+    + wholeWord - If true, the search looks for whole words.
+    + backward - If true, the search is performed in the reverse direction.
+  > returns
+    true if expression was found, otherwise false.
+  > since
+    4.9.3.93
+
+FUN Boolean : hasSelectedText()
+  > returns
+    true if text is selected, otherwise false.
+
+FUN void : home( Boolean mark=false )
+  > summary
+    Moves the cursor to the beginning of the document.
+  > parameters
+    + mark - If true, the text from the beginning of the document to the cursor's previous position will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : insertBlock()
+  > summary
+    Splits the block (paragraph) at the cursor position.
+  > since
+    4.9.3.93
+
+FUN void : insertHtml( String text )
+  > summary
+    Inserts text, which is assumed to be HTML formatted, at the current cursor position.
+  > parameters
+    + text - The HTML formatted text to insert.
+  > since
+    4.9.3.93
+
+FUN void : insertPlainText( String text )
+  > summary
+    Inserts text at the current cursor position.
+  > parameters
+    + text - The text to insert.
+  > since
+    4.9.3.93
+
+FUN void : lineEnd( Boolean mark=false )
+  > summary
+    Moves the cursor to the end of the line.
+  > parameters
+    + mark - If true, the text from the cursor's previous position to the end of the line will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : lineStart( Boolean mark=false )
+  > summary
+    Moves the cursor to the beginning of the line.
+  > parameters
+    + mark - If true, the text from the beginning of the line to the cursor's previous position will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : pageDown( Boolean mark=false )
+  > summary
+    Moves the cursor a page down in the document.
+  > parameters
+    + mark - If true, the text from the cursor's previous position to a page down in the document will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : pageUp( Boolean mark=false )
+  > summary
+    Moves the cursor a page up in the document.
+  > parameters
+    + mark - If true, the text from a page up in the document to the cursor's previous position will be added to the current selection.
+  > since
+    4.9.3.93
+
+FUN void : paste()
+  > summary
+    Inserts any text on the clipboard into the line at the cursor's current position.
+  > since
+    4.9.3.93
+
+FUN void : redo()
+  > summary
+    If redoAvailable is true, redoes the next operation in the editor.
+  > since
+    4.9.3.93
+
+FUN void : scrollToAnchor( String name )
+  > summary
+    Scrolls the editor to make the text at the anchor name visible, if it can be found in the document. If the anchor isn't found no scrolling will occur. An anchor is defined using the HTML anchor tag, e.g., <a name=“target”>.
+  > parameters
+    + name - The name of the anchor to scroll to.
+  > since
+    4.9.3.93
+
+FUN void : selectAll()
+  > summary
+    Selects all the text in the editor.
+  > since
+    4.9.3.93
+
+FUN String : selectedText()
+  > returns
+    The selected text (if any), or an empty string.
+
+FUN Number : selectionEnd()
+  > returns
+    The character position at which the current selection ends.
+
+FUN Number : selectionStart()
+  > returns
+    The character position at which the current selection begins.
+
+FUN String : text( Number blockIdx )
+  > parameters
+    + blockIdx - The index of the block to get the text of.
+  > returns
+    If blockIdx is in range, the text of the block at blockIdx, otherwise an empty string.
+
+FUN void : undo()
+  > summary
+    If undoAvailable is true, undoes the last operation in the editor.
+  > since
+    4.9.3.93
+
+FUN void : up( Boolean mark=false, Number steps=1 )
+  > summary
+    Moves the cursor to the line above the current line.
+  > parameters
+    + mark - If true, the text from the position of the cursor in the line above the current line to the cursor's previous position will be added to the current selection.
+    + steps - The number of lines to move the cursor.
+  > since
+    4.9.3.93
+
+FUN void : zoomIn( Number range=1 )
+  > summary
+    Zooms in on the text by making the base font size range points larger and recalculating all font sizes to be the new size.
+  > parameters
+    + range - The number of points to increase the fonts sizes by.
+  > since
+    4.9.3.93
+
+FUN void : zoomOut( Number range=1 )
+  > summary
+    Zooms out on the text by making the base font size range points smaller and recalculating all font sizes to be the new size.
+  > parameters
+    + range - The number of points to decrease the fonts sizes by.
+  > since
+    4.9.3.93
+
+### signals
+
+SIG void : copyAvailable( Boolean yesNo )
+  > summary
+    Emitted when text is selected or de-selected in the editor.
+
+SIG void : cursorPositionChanged()
+  > summary
+    Emitted when the position of the cursor has changed.
+
+SIG void : redoAvailable( Boolean yesNo )
+  > summary
+    Emitted when the availability of redo changes. If yesNo is true, redo() will work until redoAvailable(false) is next emitted.
+
+SIG void : selectionChanged()
+  > summary
+    Emitted when the selection changes.
+
+SIG void : textChanged()
+  > summary
+    Emitted when the text in the editor changes.
+
+SIG void : undoAvailable( Boolean yesNo )
+  > summary
+    Emitted when the availability of undo changes. If yesNo is true, undo() will work until undoAvailable(false) is next emitted.

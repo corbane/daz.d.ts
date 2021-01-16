@@ -1,0 +1,194 @@
+CLS DzBackdrop : DzElement
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/backdrop_dz
+  > summary
+    Backdrop that gets drawn behind viewport scenes.
+
+### description
+  > summary
+    This class encapsulates a 2D image and the parameters for drawing the image as a backdrop for the scene. An instance of this class only contributes to the scene if it is set as the current backdrop for the scene.
+  > seealso
+    DzScene::setBackdrop(), DzScene::getBackdrop()
+
+### enumerations
+
+ENU Rotation
+  > summary
+    Enumerated image rotation types
+  + NO_ROTATION - No rotation
+  + ROTATE_LEFT_90 - 90 degree rotation Counter-Clockwise
+  + ROTATE_RIGHT_90 - 90 degree rotation Clockwise
+  + ROTATE_180 - 180 degree rotation
+
+### properties
+
+PRP Color : backgroundColor
+  > summary
+    This property holds the background color of the backdrop
+  > since
+    4.6.4.30
+
+PRP Boolean : flipHorizontal
+  > summary
+    This property holds whether or not the backdrop is flipped horizontally
+
+PRP Boolean : flipVertical
+  > summary
+    This property holds whether or not the backdrop is flipped vertically
+
+PRP DzBackdrop.Rotation : rotation
+  > summary
+    This property holds the rotation applied to the backdrop
+
+PRP Boolean : visible
+  > summary
+    This property holds whether or not the backdrop is visible in the viewport
+  > since
+    4.6.4.30
+
+PRP Boolean : visibleInRender
+  > summary
+    This property holds whether or not the backdrop is visible in a render
+  > since
+    4.6.4.32
+
+### constructors
+
+CTR DzBackdrop()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : adjustRenderAspectRatioToMatchTexture()
+  > summary
+    Changes the render aspect ratio to match the backdrop image, and the image dimensions
+  > since
+    4.6.4.33
+
+FUN void : adjustRenderDimensionsToMatchTexture()
+  > summary
+    Changes the render image dimensions and aspect ratio to match the backdrop image
+  > since
+    4.6.4.33
+
+FUN void : clear()
+  > summary
+    Clears the current back drop image, and resets all parameters.
+  > example
+    // Get the backdrop for the scene
+    var oBackdrop = Scene.getBackdrop();
+     
+    // Clear the backdrop
+    oBackdrop.clear();
+
+FUN DzColorProperty : getBackgroundColorControl()
+  > returns
+    The property that controls the backdrop color or tinting
+  > since
+    4.6.4.35
+
+FUN DzBoolProperty : getHorizontalFlipControl()
+  > returns
+    The property that controls whether the backdrop is flipped horizontally
+
+FUN DzMaterial : getMaterial()
+  > returns
+    An editable instance of the material used to shade the backdrop.
+  > example
+    // Get the backdrop for the scene
+    var oBackdrop = Scene.getBackdrop();
+    // Get the material for the backdrop
+    var oMaterial = oBackdrop.getMaterial();
+     
+    // Set the color of the backdrop to red
+    oMaterial.setDiffuseColor( new Color( 255, 0, 0 ) );
+
+FUN DzEnumProperty : getRotationControl()
+  > returns
+    The property that controls rotation of the backdrop
+
+FUN DzTexture : getTexture()
+  > returns
+    The current backdrop image.
+  > example
+    // Get the backdrop for the scene
+    var oBackdrop = Scene.getBackdrop();
+    // Get the texture for the backdrop
+    var oTexture = oBackdrop.getTexture();
+     
+    // Log the file name of the current backdrop image
+    if( oTexture ){
+    	print( String("Current Backdrop: %1").arg( oTexture.getFilename() ) );
+    } else {
+    	print( "No Current Backdrop Image" );
+    }
+  > seealso
+    setTexture()
+
+FUN DzBoolProperty : getVerticalFlipControl()
+  > returns
+    The property that controls whether the backdrop is flipped vertically
+
+FUN DzBoolProperty : getVisibleControl()
+  > returns
+    The property that controls whether the backdrop is visible
+  > since
+    4.6.4.32
+
+FUN DzBoolProperty : getVisibleInRenderControl()
+  > returns
+    The property that controls whether the backdrop is visible in a render
+  > since
+    4.6.4.32
+
+FUN void : setTexture( DzTexture img )
+  > summary
+    Sets the backdrop image.
+  > parameters
+    + img - The backdrop image.
+  > example
+    // Get the backdrop for the scene
+    var oBackdrop = Scene.getBackdrop();
+    // Get the image manager
+    var oImageMgr = App.getImageMgr();
+     
+    // Get an image
+    var sImage = String("%1/../Pictures/Sample Pictures/Desert.jpg").arg( App.getCommonUserDocumentPath() );
+    var oImage = oImageMgr.getImage( sImage );
+     
+    // Set the backdrop image
+    oBackdrop.setTexture( oImage );
+    // Make the backdrop visible
+    oBackdrop.visible = true;
+  > seealso
+    getTexture()
+
+FUN void : showOptions( QWidget parent=undefined )
+  > summary
+    Deprecated
+    Shows the options dialog for this backdrop.
+  > example
+    // Get the backdrop for the scene
+    var oBackdrop = Scene.getBackdrop();
+     
+    // Display options for the backdrop to the user
+    oBackdrop.showOptions( MainWindow );
+
+### signals
+
+SIG void : backgroundColorChanged()
+  > summary
+    Emitted when the background color of this backdrop changes.
+  > since
+    4.6.4.30
+
+SIG void : drawnDataChanged()
+  > summary
+    Emitted when the information in this backdrop changes.
+
+SIG void : visiblityChanged()
+  > summary
+    Emitted when the visibility of this backdrop changes.
+  > since
+    4.6.4.32

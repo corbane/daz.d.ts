@@ -1,0 +1,177 @@
+CLS DzListViewItem : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/listviewitem_dz
+  > summary
+    DAZScript wrapper for Q3ListViewItem.
+
+### description
+  > summary
+    This class is not a widget, but a helper class for working with DzListView. Each DzListViewItem represents a single item in a list view - add items to a list view by creating a new DzListViewItem that is a child of the list view, or a child of another list view item in the list view.
+
+### properties
+
+PRP Boolean : dragEnabled
+  > summary
+    Holds whether the item can be dragged
+
+PRP Boolean : dropEnabled
+  > summary
+    Holds whether the item can have other items dropped on it
+
+PRP Boolean : enabled
+  > summary
+    Holds whether the item can be enabled
+
+PRP Boolean : expandable
+  > summary
+    Holds whether the item can be expanded (opened)
+
+PRP Number : height
+  > summary
+    Holds the height of the item.
+
+PRP Number : id
+  > summary
+    Holds the identifier for this item. (Read Only)
+
+PRP Boolean : multiLinesEnabled
+  > summary
+    Holds whether the item can be displayed on multiple lines
+
+PRP Boolean : open
+  > summary
+    Holds whether the item is expanded (open) or collapsed (closed)
+
+PRP Boolean : selectable
+  > summary
+    Holds whether the item can be selected
+
+PRP Boolean : selected
+  > summary
+    Holds whether the item is selected
+
+PRP Boolean : visible
+  > summary
+    Holds whether the item is visible
+
+### constructors
+
+CTR DzListViewItem( DzListView parent, Number id=-1 )
+  > summary
+    Creates a list view item at the root level of the given list view
+  > parameters
+    + parent - The listview to create this item as a child of
+    + id - The identifier for this item
+
+CTR DzListViewItem( DzListViewItem parent, Number id=-1 )
+  > summary
+    Creates a list view item as a child of the given list view item
+  > parameters
+    + parent - The item to create this item as a child of
+    + id - The identifier for this item
+
+### methods
+
+FUN void : addDataItem( String key, Object val )
+  > summary
+    Adds an arbitrary data item to be stored with the item
+
+FUN Number : childCount()
+  > returns
+    The number of children in this item.
+
+FUN Number : compare( DzListViewItem item, Number column, Boolean ascending )
+  > summary
+    Compares the given listview item with this item
+
+FUN void : deleteItem( DzListViewItem item )
+  > summary
+    Deletes given item from the list view item's list of children items.
+
+FUN Number : depth()
+  > returns
+    The depth of this item
+
+FUN DzListViewItem : firstChild()
+  > returns
+    The first child of this list view item
+
+FUN Object : getDataItem( String key )
+  > returns
+    The value of an arbitrary data item
+
+FUN Number : getNumDataItems()
+  > returns
+    The number of data items on the item
+
+FUN void : insertItem( DzListViewItem newChild )
+  > summary
+    Insert the item as a child of this item
+
+FUN DzListViewItem : itemAbove()
+  > returns
+    The item above this list view item
+
+FUN DzListViewItem : itemBelow()
+  > returns
+    The item below this list view item
+
+FUN String : key( Number column, Boolean ascending )
+  > summary
+    Sets the column and order that determines how the list is sorted
+
+FUN DzListView : listView()
+  > returns
+    The list view that this item resides in
+
+FUN void : moveItem( DzListViewItem item )
+  > summary
+    Moves this item to be after the given item, which must be one of its siblings
+
+FUN DzListViewItem : nextSibling()
+  > returns
+    The next sibling of this list view item
+
+FUN DzListViewItem : parent()
+  > returns
+    The parent of this list view item
+
+FUN Pixmap : pixmap( Number column )
+  > returns
+    The pixmap for this item in the given column
+
+FUN void : removeItem( DzListViewItem item )
+  > summary
+    Remove the item from the children of this item
+
+FUN Boolean : renameEnabled( Number column )
+  > returns
+    Whether or not the text in the given column can be changed by the user.
+
+FUN void : setPixmap( Number column, Pixmap pm )
+  > summary
+    Sets the pixmap for this item in the given column
+
+FUN void : setRenameEnabled( Number column, Boolean yesNo )
+  > summary
+    Sets whether or not the text in the given column can be changed by the user.
+
+FUN void : setText( Number column, String text )
+  > summary
+    Set the text for this list view item in the given column
+
+FUN void : sort()
+  > summary
+    Sorts the children of this item according to the current sorting column and order.
+
+FUN void : sortChildItems( Number column, Boolean ascending )
+  > summary
+    Sorts the children items of this item by the given column in the given order.
+
+FUN void : startRename( Number column )
+  > summary
+    Starts a rename operation.
+
+FUN String : text( Number column )
+  > returns
+    The text for this list view item in the given column

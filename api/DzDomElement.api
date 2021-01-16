@@ -1,0 +1,85 @@
+CLS DzDomElement : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domelement_dz
+  > summary
+    DAZ Script DOM element node.
+
+### description
+  > summary
+    Represents an element node in a DOM document.
+
+### properties
+
+PRP String : tagName
+  > summary
+    The tag name of the element.
+
+### constructors
+
+CTR DzDomElement()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomDocument::createElement() to create a new element node as a member of a document.
+
+### methods
+
+FUN String : attribute( String name )
+  > returns
+    The value of the attribute with the given name, or an empty string if the attribute does not exist.
+
+FUN String : attribute( String name, String defValue )
+  > returns
+    The value of the attribute with the given name, or defValue if the attribute does not exist.
+
+FUN DzDomNode : attributeNode( String name )
+  > returns
+    The node that represents the attribute called name. If the attribute does not exist, an invalid (Null) node is returned
+
+FUN DzDomNode : attributeNodeNS( String nsURI, String localName )
+  > returns
+    The node that represents the attribute called name in the nsURI namespace. If the attribute does not exist, an invalid (Null) node is returned.
+
+FUN String : attributeNS( String nsURI, String localName, String defValue )
+  > returns
+    The attribute called localName with the namespace nsURI. If the attribute does not exist, defValue is returned.
+
+FUN Boolean : hasAttribute( String name )
+  > returns
+    true if the element has an attribute with the given name, otherwise, returns false
+
+FUN Boolean : hasAttributeNS( String nsURI, String localName )
+  > returns
+    true if the element has an attribute with the given name and namespace, otherwise, returns false
+
+FUN void : removeAttribute( String name )
+  > summary
+    Removes the attribute called name.
+
+FUN DzDomNode : removeAttributeNode( DzDomNode oldAttr )
+  > summary
+    Removes oldAttr from the element.
+  > returns
+    The attribute that was removed.
+
+FUN void : removeAttributeNS( String nsURI, String localName )
+  > summary
+    Removes the attribute called name in the namespace.
+
+FUN void : setAttribute( String name, String value )
+  > summary
+    Adds an attribute called name with value. If an attribute with the given name already exists, it value is set to value.
+
+FUN DzDomNode : setAttributeNode( DzDomNode newAttr )
+  > summary
+    Adds newAttr to this element. If an attribute with the same name already exists, it is replaced with the new one.
+  > returns
+    The attribute that was replaced by newAttr. If no attribute was replaced, an invalid (Null) node is returned.
+
+FUN DzDomNode : setAttributeNodeNS( DzDomNode newAttr )
+  > summary
+    Adds newAttr to this element. If an attribute with the same name already exists, it is replaced with the new one.
+  > returns
+    The attribute that was replaced by newAttr. If no attribute was replaced, an invalid (Null) node is returned.
+
+FUN void : setAttributeNS( String nsURI, String qName, String value )
+  > summary
+    Adds an attribute called qName in the nsURI namespace with value. If an attribute with the given name already exists, it value is set to value.

@@ -1,0 +1,50 @@
+CLS DzCheckBox : DzButton
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/checkbox_dz
+  > summary
+    DAZScript wrapper for QCheckBox.
+
+### description
+  > summary
+    DzRadioButton and DzCheckBox are both option buttons (e.g. they can be checked or unchecked). They differ in how the available choices are restricted. A DzCheckBox is used to define several choices that can all co-exist at the same time (e.g. “many of many”). While a DzRadioButton is used to provide several choices, where only one can be ultimately chosen (e.g. “one of many”).
+  > example
+    // Create a new dialog
+    var wDlg = new DzDialog;
+    wDlg.caption = "DzCheckBox Example";
+     
+    // Create a layout for the dialog
+    var wLyt = new DzVBoxLayout( wDlg );
+    wLyt.autoAdd = true;
+     
+    // Create a group box for the options
+    var wOptGB = new DzVGroupBox( wDlg );
+    wOptGB.columns = 1;
+     
+    // Create the options
+    var wOpt1Btn = new DzCheckBox( wOptGB );
+    wOpt1Btn.text = "Option 1";
+    wOpt1Btn.checked = true;
+    var wOpt2Btn = new DzCheckBox( wOptGB );
+    wOpt2Btn.text = "Option 2";
+    var wOpt3Btn = new DzCheckBox( wOptGB );
+    wOpt3Btn.text = "Option 3";
+    wOpt3Btn.checked = true;
+     
+    // Launch the dialog
+    wDlg.exec();
+
+### properties
+
+PRP Boolean : checked
+  > summary
+    Whether the button is checked. true if the button is checked. false by default.
+
+PRP Boolean : tristate
+  > summary
+    Whether the the checkbox is a tri-state checkbox. The default is two-state (e.g. tri-state is false).
+
+### constructors
+
+CTR DzCheckBox( DzWidget parent )
+  > summary
+    Creates a check box as a child of the given parent widget

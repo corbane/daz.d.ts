@@ -1,0 +1,113 @@
+CLS Pixmap : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pixmap
+  > summary
+    DAZScript wrapper for QPixmap.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QPixmap type used in the DAZ Studio SDK.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Number : depth
+  > summary
+    The color depth of the pixmap (Read-Only)
+
+PRP Number : height
+  > summary
+    The height of the pixmap in pixels (Read-Only)
+
+PRP Rect : rect
+  > summary
+    The enclosing rectangle of the pixmap in pixels (Read-Only)
+
+PRP Size : size
+  > summary
+    The size of the pixmap (Read-Only)
+
+PRP Number : width
+  > summary
+    The width of the pixmap in pixels (Read-Only)
+
+### constructors
+
+CTR Pixmap()
+  > summary
+    Default Constructor.
+
+CTR Pixmap( Pixmap pixmap )
+  > summary
+    Copy Constructor.
+  > parameters
+    + pixmap - The Pixmap to copy.
+
+CTR Pixmap( String filename )
+  > parameters
+    + filename - The name of the file to load the pixmap's data from.
+
+### methods
+
+FUN void : fill( Color color )
+  > summary
+    Fills the pixmap with color.
+  > parameters
+    + color - The color to set all the pixels in the pixmap.
+
+FUN void : fromImage( Image image )
+  > parameters
+    + image - The image to convert.
+  > seealso
+    toImage()
+  > since
+    4.9.3.105
+
+FUN Boolean : isNull()
+  > summary
+    Gets whether or not the pixmap is Null.
+  > returns
+    true if this is a Null (empty) pixmap, false if the pixmap has data.
+
+FUN void : load( String filename )
+  > summary
+    Loads data into the pixmap from a file.
+  > parameters
+    + filename - The name of the file to load into the pixmap.
+
+FUN Boolean : loadFromData( ByteArray data, String format=“” )
+  > summary
+    Loads data into the pixmap from a byte array using the specified format.
+  > parameters
+    + data - The binary data to load into the pixmap.
+    + format - The file format of the bytes in data; i.e. “PNG”.
+  > returns
+    true if the data was loaded, otherwise false. (since 4.10.0.88)
+
+FUN void : resize( Number width, Number height )
+  > summary
+    Resizes the pixmap.
+  > parameters
+    + width - The new width for the pixmap.
+    + height - The new height for the pixmap.
+
+FUN void : resize( Size size )
+  > summary
+    Resizes the pixmap.
+  > parameters
+    + size - The new size for the pixmap.
+
+FUN void : save( String filename )
+  > summary
+    Saves the pixmap to a file.
+  > parameters
+    + filename - The name of the file to save the pixmap to.
+
+FUN Image : toImage()
+  > returns
+    The pixmap converted to an image, or null if the conversion fails.
+  > seealso
+    fromImage()
+  > since
+    4.9.3.105

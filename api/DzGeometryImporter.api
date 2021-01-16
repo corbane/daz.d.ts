@@ -1,0 +1,9 @@
+CLS DzGeometryImporter : DzImporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/geometryimporter_dz
+  > summary
+    Base class for all geometry importers.
+
+### description
+  > summary
+    TODO: Add detailed description.

@@ -1,0 +1,41 @@
+CLS DzVideoExporter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/videoexporter_dz
+  > summary
+    Base class for all image exporters.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    A description of the exporter that can be placed in a file type selection combo box (e.g. “AVI Format”)
+
+FUN String : getExtension()
+  > returns
+    The extension that this exporter will force filenames to (excluding the preceeding '.').
+
+FUN Boolean : isFileExporter()
+  > returns
+    true if this exporter writes to a 'real' file. Derived classes should override this to indicate whether or not they are writing out to a real file. Exporters can, if they want to, write to entities other than files (e.g. sockets, pipes, etc.)
+
+FUN DzError : saveClip( String filename, DzVideoClip clip )
+  > summary
+    Writes the file.
+  > parameters
+    + filename - The name of the file to save the video to.
+    + clip - Video clip to save to file.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN DzError : saveClip( String filename, DzVideoClip clip, DzFileIOSettings options )
+  > summary
+    Writes the file.
+  > parameters
+    + filename - The name of the file to save the video to.
+    + clip - Video clip to save to file.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.

@@ -1,0 +1,131 @@
+CLS DzComboEdit : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/comboedit_dz
+  > summary
+    DAZScript wrapper for a compound QLineEdit, QPushButton and QMenu widget.
+
+### description
+  > summary
+    A DzComboEdit provides a compound widget comprised of a line edit and a button that, when clicked, causes a menu to be displayed. Selecting one of the items in the popup menu causes the value of the editor to update with the text of the selected item by default. A separator can be created in a menu by using a single hyphen (“-”) character. Sub-menus can be created by using two consecutive greater than (“»”) characters as a delimiter between the entries of a given hierarchy.
+  > example
+    var oNode = Scene.getPrimarySelection();
+    if( oNode ){
+    	if( oNode.inherits( "DzBone" ) ){
+    		oNode = oNode.getSkeleton();
+    	}
+     
+    	var aNodes = oNode.getAllBones();
+    	aNodes.unshift( oNode );
+     
+    	var oDlg = new DzBasicDialog();
+    	var sHelpTitle = qsTr("Select a Node");
+    	var sHelpBody = qsTr("This is a basic dialog for requesting user input.");
+    	oDlg.caption = sHelpTitle;
+    	oDlg.toolTip = sHelpBody;
+    	oDlg.whatsThis = String("<b>%1</b><br/><br/>%2").arg( sHelpTitle ).arg( sHelpBody );
+     
+    	var sEmpty = qsTr("None");
+     
+    	var oNodeCmbEdt = new DzComboEdit( oDlg );
+    	oNodeCmbEdt.text = sEmpty;
+    	oNodeCmbEdt.readOnly = true;
+    	oNodeCmbEdt.addItems( [sEmpty, "-"] );
+    	for( var i = 0; i < aNodes.length; i += 1 ){
+    			oNodeCmbEdt.addItem( aNodes[i].getLabel() );
+    	}
+    	sHelpTitle = qsTr("Node Selector");
+    	sHelpBody = qsTr("Click the arrow for options. Right click the field for additional options.");
+    	oNodeCmbEdt.toolTip = sHelpBody;
+    	oNodeCmbEdt.whatsThis = String("<b>%1</b><br/><br/>%2").arg( sHelpTitle ).arg( sHelpBody );
+    	oDlg.addWidget( oNodeCmbEdt );
+     
+    	var oWidget = oDlg.getWidget();
+    	oWidget.objectName = "DzComboEditExampleDlg";
+     
+    	var sizeHint = oWidget.minimumSizeHint;
+    	var nHeight = sizeHint.height;
+     
+    	oDlg.setFixedHeight( nHeight );
+     
+    	if( oDlg.exec() ){
+    		print( qsTr("Dialog accted.") );
+    		if( oNodeCmbEdt.text == sEmpty ){
+    			print( qsTr("None selected.") );
+    		} else {
+    			print( qsTr("Node selected:"), oNodeCmbEdt.text );
+    		}
+    	} else {
+    		print( qsTr("Dialog rejected.") );
+    	}
+    }
+
+### properties
+
+PRP String : placeholderText
+  > summary
+    TODO: Add description.
+
+PRP Boolean : readOnly
+  > summary
+    TODO: Add description.
+
+PRP String : text
+  > summary
+    TODO: Add description.
+
+PRP Boolean : usePathPopUp
+  > summary
+    TODO: Add description.
+
+### constructors
+
+CTR DzComboEdit( DzWidget parent, Boolean updateOnSelect=true )
+  > summary
+    Creates a combo edit as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the combo edit.
+    + updateOnSelect - Whether the editor should automatically update when an item is selected.
+
+### methods
+
+FUN void : addItem( String item )
+  > summary
+    TODO: Add description.
+
+FUN void : addItems( Array items )
+  > summary
+    TODO: Add description.
+
+FUN void : clear()
+  > summary
+    TODO: Add description.
+
+FUN Number : findItem( String text )
+  > summary
+    TODO: Add description.
+
+FUN void : insertItem( Number index, String item )
+  > summary
+    TODO: Add description.
+
+FUN void : insertItems( Number index, Array items )
+  > summary
+    TODO: Add description.
+
+FUN Array : items()
+  > summary
+    TODO: Add description.
+
+FUN void : removeItem( String item )
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : itemChanged( String item )
+  > summary
+    TODO: Add description.
+
+SIG void : textChanged( String text )
+  > summary
+    TODO: Add description.

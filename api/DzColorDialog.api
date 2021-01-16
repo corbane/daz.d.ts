@@ -1,0 +1,40 @@
+CLS DzColorDialog : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/colordialog_dz
+  > summary
+    DAZScript wrapper for QColorDialog.
+
+### description
+  > summary
+    The DzColorDialog class is available in DAZScript via Global::ColorDialog.
+    It provides a function to display an OS native color picker to the user - simply call the function as shown in the following example:
+  > example
+    // Have the user select a color :
+    var color = ColorDialog.getColor();
+    Other functions are provided for getting and setting the pre-set colors listed in the picker - see the rest of the documentation for details.
+
+### methods
+
+FUN Color : customColor( Number i )
+  > returns
+    The i'th custom color in the color picker.
+
+FUN Number : customCount()
+  > returns
+    The number of custom colors in the color picker.
+
+FUN Color : getColor( Color initial=Color )
+  > summary
+    Shows a color picker dialog to the user.
+  > parameters
+    + initial - The color that the dialog will start with.
+  > returns
+    The color selected by the user.
+
+FUN void : setCustomColor( Number i, Color c )
+  > summary
+    Set the i'th custom color in the color picker.
+
+FUN void : setStandardColor( Number i, Color c )
+  > summary
+    Set the i'th standard color in the color picker.

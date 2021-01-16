@@ -1,0 +1,52 @@
+CLS DzActivityLayout : QObject DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/activitylayout_dz
+  > summary
+    Defines the layout of an Activity of the interface.
+
+### description
+  > summary
+    Defines the layout of Toolbars, Pane Groups, Panes, Viewports and the active View Tool within an Activity of the interface.
+  > seealso
+    DzPaneMgr, DzPaneGroup, DzPane, DzToolBar, DzDockBar, DzActionMgr and DzViewportMgr
+
+### properties
+
+PRP String : description
+  > summary
+    The description of the activity
+
+PRP String : label
+  > summary
+    The label of the activity
+
+### constructors
+
+CTR DzActivityLayout( String label, String desc )
+  > summary
+    Default Constructor. Creates a new activity layout with the given name and description.
+  > parameters
+    + label - The label that the user will see for this layout in the activity tabs
+    + description - The description of the layout.
+
+### methods
+
+FUN void : clearMemorizedState()
+  > summary
+    Clears the memorized state of the activity.
+
+FUN Boolean : isToolBarEnabled( String toolbar )
+  > returns
+    Whether or not the toolbar with the given name is enabled for this activity layout.
+
+FUN void : setToolbarEnabled( String toolbar, Boolean onOff )
+  > summary
+    Sets whether or not the toolbar with the given name is enabled.
+
+### signals
+
+SIG void : labelChanged( String label )
+  > summary
+    Emitted when the layout's label has changed.
+  > parameters
+    + label - The new label for the layout.

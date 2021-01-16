@@ -1,0 +1,5 @@
+CLS figure_dz : DzSkeleton
+  > see
+    file://../sdk/dzfigure.h
+
+FUN DzSkinBinding : getSkinBinding()

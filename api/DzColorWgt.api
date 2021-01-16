@@ -1,0 +1,43 @@
+CLS DzColorWgt : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/colorwgt_dz
+  > summary
+    DAZScript color widget.
+
+### description
+  > summary
+    A DzColorWgt provides a control for displaying/selecting a color.
+
+### properties
+
+PRP Boolean : indeterminate
+  > summary
+    If true, the widget is considered to have an 'indeterminate' or 'Multiple' value. False by default.
+
+PRP Color : value
+  > summary
+    Holds the current value of the widget.
+
+### constructors
+
+CTR DzColorWgt( DzWidget parent )
+  > summary
+    Creates a color widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the color widget.
+
+### signals
+
+SIG void : colorChanged( Color color )
+  > summary
+    Emitted when the color is changed.
+  > parameters
+    + color - The new color value of the control.
+
+SIG void : editEnd()
+  > summary
+    Emitted when an editing operation on the slider ends - e.g. the user finishes spinning a color field.
+
+SIG void : editStart()
+  > summary
+    Emitted when an editing operation on the widget begins - e.g. the user starts spinning a color field.

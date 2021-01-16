@@ -1,0 +1,172 @@
+CLS DzPopupMenu : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/popupmenu_dz
+  > summary
+    DAZScript wrapper for a popup QMenu.
+
+### description
+  > summary
+    A DzPopupMenu provides a popup menu.
+
+### properties
+
+PRP Boolean : checkable
+  > summary
+    This property holds whether the display of check marks on menu items is enabled. When true, the display of check marks on menu items is enabled. Checking is always enabled when in Windows-style.
+
+PRP Boolean : tearOff
+  > summary
+    This property holds whether the menu supports being torn off. When true, the menu contains a special tear-off item (often shown as a dashed line at the top of the menu) that creates a copy of the menu when it is triggered.
+    This “torn-off” copy lives in a separate window. It contains the same menu items as the original menu, with the exception of the tear-off handle.
+
+### constructors
+
+CTR DzPopupMenu( DzWidget parent )
+  > summary
+    Creates a popup menu as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the popup menu.
+
+### methods
+
+FUN void : changeItem( Number id, String text )
+  > summary
+    Changes the text of the menu item id to text. If the item has an icon, the icon remains unchanged.
+
+FUN void : changeItem( Number id, Pixmap pixmap )
+  > summary
+    TODO: Add description.
+
+FUN void : clear()
+  > summary
+    Removes all menu items.
+
+FUN Boolean : connectItem( Number id, Object receiver, String member )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : disconnectItem( Number id, Object receiver, String member )
+  > summary
+    TODO: Add description.
+
+FUN Number : exec()
+  > summary
+    Executes this popup synchronously. In most situations you'll want to specify the position yourself, for example at the current mouse position.
+
+FUN Number : exec( Point pos, Number indexAtPoint )
+  > summary
+    Executes this popup synchronously. Opens the popup menu so that the item number indexAtPoint will be at the specified global position pos.
+
+FUN Number : idAt( Number index )
+  > returns
+    The identifier of the menu item at position index in the internal list, or -1 if index is out of range.
+
+FUN Number : idAt( Point pos )
+  > returns
+    The the id of the item at pos, or -1 if there is no item there or if it is a separator.
+
+FUN Number : insertItem( String text, DzPopupMenu popup, Number id=-1, Number index=-1 )
+  > summary
+    Inserts submenu popup, labeled text, with an optional id, and an optional index position.
+
+FUN Number : insertItem( Pixmap pixmap, Number id=-1, Number index=-1 )
+  > summary
+    Inserts a menu item with the Pixmap pixmap, with an optional id, and an optional index position.
+
+FUN Number : insertItem( Pixmap pixmap, DzPopupMenu popup, Number id=-1, Number index=-1 )
+  > summary
+    Inserts submenu popup with the Pixmap pixmap, with an optional id, and an optional index position.
+
+FUN Number : insertItem( String text, Number id=-1, Number index=-1 )
+  > summary
+    Inserts a menu item labeled text, with an optional id, and an optional index position.
+
+FUN Number : insertSeparator( Number index=-1 )
+  > summary
+    Inserts a separator at position index, and returns the menu identifier number allocated to it. The separator becomes the last menu item if index is negative.
+
+FUN Boolean : isItemChecked( Number id )
+  > returns
+    true if the menu item with the id id has been checked, otherwise false.
+
+FUN Boolean : isItemEnabled( Number id )
+  > returns
+    true if the item with identifier id is enabled, otherwise false.
+
+FUN Boolean : isItemVisible( Number id )
+  > returns
+    true if the menu item with the id id is visible, otherwise false.
+
+FUN Number : itemParameter( Number id )
+  > returns
+    The parameter of the activation signal of item id.
+
+FUN Pixmap : pixmap( Number id )
+  > returns
+    The pixmap that has been set for menu item id, or null if no pixmap has been set.
+
+FUN void : popup( Point pos, Number indexAtPoint )
+  > summary
+    Displays the popup menu so that the item number indexAtPoint will be at the specified global position pos.
+
+FUN void : removeItem( Number id )
+  > summary
+    Removes the menu item that has the identifier id.
+
+FUN void : removeItemAt( Number index )
+  > summary
+    Removes the menu item at position index.
+
+FUN void : setActiveItem( Number id )
+  > summary
+    Sets the currently active item to id and repaints as necessary.
+
+FUN void : setItemChecked( Number id, Boolean check )
+  > summary
+    If check is true, checks the menu item with id id, otherwise unchecks the menu item with id id. Calls DzPopupMenu::setCheckable( true ) if necessary.
+
+FUN void : setItemEnabled( Number id, Boolean enable )
+  > summary
+    If enable is true, enables the menu item with identifier id, otherwise disables the menu item with identifier id.
+
+FUN Boolean : setItemParameter( Number id, Number param )
+  > summary
+    Sets the parameter of the activation signal of item id to param.
+
+FUN void : setItemVisible( Number id, Boolean visible )
+  > summary
+    If visible is true, shows the menu item with id id, otherwise hides the menu item with id id.
+
+FUN void : setWhatsThis( Number id, String text )
+  > summary
+    Sets text as What's This help for the menu item with identifier id.
+
+FUN String : text( Number id )
+  > returns
+    The text that has been set for menu item id, or an empty string if no text has been set.
+
+FUN String : whatsThis( Number id )
+  > returns
+    The What's This help text for the item with identifier id or an empty string if no text has yet been defined.
+
+### signals
+
+SIG void : aboutToHide()
+  > summary
+    This signal is emitted just before the popup menu is hidden after it has been displayed.
+
+SIG void : aboutToShow()
+  > summary
+    This signal is emitted just before the popup menu is displayed. You can connect it to any slot that sets up the menu contents (e.g. to ensure that the right items are enabled).
+
+SIG void : activated( Number id )
+  > summary
+    This signal is emitted when a menu item is selected.
+  > parameters
+    + id - The id of the selected item.
+
+SIG void : highlighted( Number id )
+  > summary
+    Emitted when a menu item is highlighted.
+  > parameters
+    + id - The id of the highlighted item.

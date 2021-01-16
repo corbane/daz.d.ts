@@ -1,0 +1,27 @@
+RAW 
+interface Error
+{
+    /**
+     * The name of the script file the error occurred in, if available.
+     */
+    fileName: string
+    /**
+     * The line number that the error occurred on.
+     */
+    lineNumber: string
+    /**
+     * An array of stack trace objects. Each object in the array has the following properties:
+     * - functionName - The name of the function, if available.
+     * - filename - The name of the file, if available.
+     * - lineNumber - The line number, if available.
+     */
+    stack: Array<{
+        functionName: string,
+        filename: string,
+        lineNumber: number
+    }>
+    /**
+     * @returns An array of strings that contain a human-readable backtrace for the error.
+     */
+    backtrace (): Array<string>;
+}

@@ -1,0 +1,75 @@
+CLS DzSplitter : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/splitter_dz
+  > summary
+    DAZScript wrapper for QSplitter.
+
+### description
+  > summary
+    A DzSplitter provides the user with the ability to control the size of child widgets by dragging the boundary between the children.
+
+### properties
+
+PRP Boolean : childrenCollapsible
+  > summary
+    Holds whether or not the children widgets of the splitter are collapsible.
+
+PRP Number : handleWidth
+  > summary
+    Holds the width of the splitter handle.
+
+PRP Boolean : opaqueResize
+  > summary
+    Holds whether or not resizing is opaque.
+    DzWidget::Orientation : orientation
+    Holds the orientation of the splitter.
+
+### constructors
+
+CTR DzSplitter( DzWidget parent )
+  > summary
+    Creates a splitter widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the splitter.
+
+### methods
+
+FUN void : addWidget( DzWidget widget )
+  > summary
+    TODO: Add description.
+
+FUN Number : count()
+  > summary
+    TODO: Add description.
+
+FUN Number : indexOf( DzWidget widget )
+  > summary
+    TODO: Add description.
+
+FUN void : insertWidget( Number index, DzWidget widget )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : isCollapsible( Number index )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : restoreState( ByteArray state )
+  > summary
+    TODO: Add description.
+
+FUN ByteArray : saveState()
+  > summary
+    TODO: Add description.
+
+FUN void : setCollapsible( Number index, Boolean collapse )
+  > summary
+    TODO: Add description.
+
+FUN void : setStretchFactor( Number index, Number stretch )
+  > summary
+    TODO: Add description.
+
+FUN DzWidget : widget( Number index )
+  > summary
+    TODO: Add description.

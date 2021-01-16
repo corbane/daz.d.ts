@@ -1,0 +1,531 @@
+CLS Image : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/image
+  > summary
+    DAZScript wrapper for QImage.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QImage type used in the DAZ Studio SDK.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### enumerations
+
+ENU Format
+  > summary
+    Supported image formats.
+  > since
+    4.9.4.4
+  + Format_Invalid - The image is invalid.
+  + Format_Mono - The image is stored using 1-bit per pixel. Bytes are packed with the most significant bit (MSB) first.
+  + Format_MonoLSB - The image is stored using 1-bit per pixel. Bytes are packed with the less significant bit (LSB) first.
+  + Format_Indexed8 - The image is stored using 8-bit indexes into a colormap.
+  + Format_RGB32 - The image is stored using a 32-bit RGB format (0xffRRGGBB).
+  + Format_ARGB32 - The image is stored using a 32-bit ARGB format (0xAARRGGBB).
+  + Format_ARGB32_Premultiplied - The image is stored using a premultiplied 32-bit ARGB format (0xAARRGGBB), i.e. the red, green, and blue channels are multiplied by the alpha component divided by 255. (If RR, GG, or BB has a higher value than the alpha channel, the results are undefined.) Certain operations (such as image composition using alpha blending) are faster using premultiplied ARGB32 than with plain ARGB32.
+  + Format_RGB16 - The image is stored using a 16-bit RGB format (5-6-5).
+  + Format_ARGB8565_Premultiplied - The image is stored using a premultiplied 24-bit ARGB format (8-5-6-5).
+  + Format_RGB666 - The image is stored using a 24-bit RGB format (6-6-6). The unused most significant bits is always zero.
+  + Format_ARGB6666_Premultiplied - The image is stored using a premultiplied 24-bit ARGB format (6-6-6-6).
+  + Format_RGB555 - The image is stored using a 16-bit RGB format (5-5-5). The unused most significant bit is always zero.
+  + Format_ARGB8555_Premultiplied - The image is stored using a premultiplied 24-bit ARGB format (8-5-5-5).
+  + Format_RGB888 - The image is stored using a 24-bit RGB format (8-8-8).
+  + Format_RGB444 - The image is stored using a 16-bit RGB format (4-4-4). The unused bits are always zero.
+  + Format_ARGB4444_Premultiplied - The image is stored using a premultiplied 16-bit ARGB format (4-4-4-4).
+
+### properties
+
+PRP Boolean : alphaBuffer
+  > summary
+    Holds whether or not the image has an alpha channel.
+
+PRP Number : depth
+  > summary
+    Holds the color depth of the image. (Read-Only)
+
+PRP Number : dotsPerMeterX
+  > summary
+    Holds the X resolution of the image.
+
+PRP Number : dotsPerMeterY
+  > summary
+    Holds the Y resolution of the image.
+
+PRP Image.Format : format
+  > summary
+    Holds the format of the image.
+  > since
+    4.9.4.4
+
+PRP Number : height
+  > summary
+    Holds the height of the image. (Read-Only)
+
+PRP Number : numColors
+  > summary
+    Holds the number of colors in the image.
+
+PRP Point : offset
+  > summary
+    Holds the number of pixels to offset the image when positioning it.
+
+PRP Size : size
+  > summary
+    Holds the number of pixels to offset the image when positioning it.
+
+PRP Number : width
+  > summary
+    Holds the width of the image. (Read-Only)
+
+### constructors
+
+CTR Image()
+  > summary
+    Default Constructor.
+
+CTR Image( Number width, Number height, Image.Format format )
+  > parameters
+    + width - The width of the image.
+    + height - The height of the image.
+    + format - The format of the image.
+  > since
+    4.9.4.4
+
+CTR Image( Image image )
+  > summary
+    Copy Constructor.
+  > parameters
+    + image - The image to copy.
+
+CTR Image( String filename )
+  > parameters
+    + filename - The name of the file to load the image's data from.
+
+### methods
+
+FUN Color : color( Number index )
+  > summary
+    Gets a color value from the color table for the image only valid for.
+  > parameters
+    + index - The index of the color to look up in the table.
+  > returns
+    The RGB value of the color at the given index.
+
+FUN Image : compositeAtop( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    A copy of this image, where the pixels of this image are blended on top of other and the alpha of this image is reduced by the alpha of other.
+  > since
+    4.10.0.120
+
+FUN Image : compositeColorBurn( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the other color is darkened to reflect the color of this image. White in this image leaves the other color unchanged.
+  > since
+    4.10.0.120
+
+FUN Image : compositeColorDodge( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the other color is brightened to reflect the color of this image. Black in this image leaves the other color unchanged.
+  > since
+    4.10.0.120
+
+FUN Image : compositeDarken( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the darker color of this image and other is selected.
+  > since
+    4.10.0.120
+
+FUN Image : compositeDifference( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the darker of this image and other is subtracted from the lighter. White in this image inverts the color in other, whereas black leaves the color of other unchanged.
+  > since
+    4.10.0.120
+
+FUN Image : compositeExclusion( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the darker of this image and other is subtracted from the lighter. White in this image inverts the color in other, whereas black leaves the color of other unchanged.
+  > since
+    4.10.0.120
+
+FUN Image : compositeHardLight( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the color of this image and other are multiplied or screened depending on the color of this image. A light color in this image will lighten the other color, whereas a dark color in this image will darken the other color.
+  > since
+    4.10.0.120
+
+FUN Image : compositeIn( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    A copy of this image, where the alpha of this image is reduced by the alpha of other.
+  > since
+    4.10.0.120
+
+FUN Image : compositeLighten( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the lighter color of this image and other is selected.
+  > since
+    4.10.0.120
+
+FUN Image : compositeMultiply( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the color of this image and other are multiplied together.
+  > attention
+    Multiplying a color with white (1) leaves the color unchanged, while multiplying a color with black (0) produces black.
+  > since
+    4.10.0.120
+
+FUN Image : compositeOut( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    A copy of this image, where the alpha of this image is reduced by the inverse of the alpha of other.
+  > since
+    4.10.0.120
+
+FUN Image : compositeOver( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    A copy of this image, where the alpha of this image is used to blend it on top of other.
+  > since
+    4.10.0.120
+
+FUN Image : compositeOverlay( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the color of this image and other are multiplied or screened depending on other color. The other color is mixed with this color to reflect the lightness or darkness of other.
+  > since
+    4.10.0.120
+
+FUN Image : compositePlus( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the alpha/color of this image and other are added together.
+  > since
+    4.10.0.120
+
+FUN Image : compositeScreen( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the inverse color of this image and other are multiplied together.
+  > attention
+    Screening a color with white (1) produces white, while screening a with black (0) leaves the color unchanged.
+  > since
+    4.10.0.120
+
+FUN Image : compositeSoftLight( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    An image where the color of this image and other are darkened or lightened depending on the color of this image.
+  > since
+    4.10.0.120
+
+FUN Image : compositeXor( Image other, Number x=0, Number y=0 )
+  > parameters
+    + other - The image to composite this image with.
+    + x - The offset, in the horizontal direction, from the top left corner of other.
+    + y - The offset, in the vertical direction, from the top left corner of other.
+  > returns
+    A copy of this image, where the alpha is reduced by the inverse of the alpha of other, is merged with other, and whose alpha is reduced by the inverse of this image alpha.
+  > since
+    4.10.0.120
+
+FUN Image : convertDepth( Number depth )
+  > summary
+    Creates a copy of the image with the given color depth.
+  > parameters
+    + depth - The color depth to convert the image to.
+  > returns
+    The image converted to the new color depth.
+
+FUN Image : copy( Number x, Number y, Number w, Number h )
+  > summary
+    Creates a copy of a portion of the image.
+  > parameters
+    + x - The x position of the area to copy.
+    + y - The y position of the area to copy.
+    + w - The width of the area to copy.
+    + h - The height of the area to copy.
+  > returns
+    A new copy of the specified area of the image.
+
+FUN Image : copy()
+  > summary
+    Creates a copy of the image.
+  > returns
+    A new copy of the image.
+
+FUN Image : copy( Rect rect )
+  > summary
+    Creates a copy of a portion of the image.
+  > parameters
+    + rect - The area to copy.
+  > returns
+    A new copy of the specified area of the image.
+
+FUN void : create( Size size, Number depth, Number numColors=0 )
+  > summary
+    Clears the image data and creates a new image with the given settings.
+  > parameters
+    + size - The new size for the image.
+    + depth - The new color depth for the image.
+    + numColors - The number of colors for the new image.
+
+FUN void : create( Number w, Number h, Number depth, Number numColors=0 )
+  > summary
+    Clears the image data and creates a new image with the given settings.
+  > parameters
+    + w - The new width for the image.
+    + h - The new height for the image.
+    + depth - The new color depth for the image.
+    + numColors - The number of colors for the new image.
+
+FUN Rect : drawText( Number x, Number y, String text, Font font, Color color, Number flags=0 )
+  > parameters
+    + x - The offset, in the horizontal direction, from the top left corner of the image to start drawing the (left of the) text.
+    + y - The offset, in the vertical direction, from the top left corner of the image to start drawing the (top of the) text.
+    + text - The text to draw.
+    + font - The font to use when drawing the text.
+    + color - The color to use when drawing the text.
+    + flags - A bitwise OR of the following flags:
+      - DzWidget.AlignLeft
+      - DzWidget.AlignRight
+      - DzWidget.AlignHCenter
+      - DzWidget.AlignJustify
+      - DzWidget.AlignTop
+      - DzWidget.AlignBottom
+      - DzWidget.AlignVCenter
+      - DzWidget.AlignCenter
+      - DzWidget.TextSingleLine
+      - DzWidget.TextExpandTabs
+      - DzWidget.TextShowMnemonic
+      - DzWidget.TextWordWrap
+  > returns
+    A bounding rectangle that encloses the drawn text.
+  > since
+    4.10.0.121
+
+FUN void : fill( Color color )
+  > summary
+    Fills the image with color.
+  > parameters
+    + color - The color to set the pixels of the image.
+
+FUN Image : getColorMask( Color maskColor, Boolean invert=false, Number tolerance=0 )
+  > parameters
+    + maskColor - The color to mask from this image.
+    + invert - If true, the mask is inverted.
+    + tolerance - The allowable amount of variation from the value of maskColor to consider as maskColor.
+  > returns
+    An image mask for the specified color.
+  > since
+    4.10.0.120
+
+FUN void : invertPixels( Boolean invertAlpha=true )
+  > summary
+    Inverts all pixels in the image.
+  > parameters
+    + invertAlpha - If the image has a 32 bit depth, and this is true, the alpha channel will also be inverted, otherwise the alpha channel is unaffected.
+
+FUN Boolean : isNull()
+  > summary
+    Gets whether or not the image is Null.
+  > returns
+    true if the image is Null (empty), otherwise .
+
+FUN void : load( String filename )
+  > summary
+    Loads data for the image from a file.
+  > parameters
+    + filename - The name of the file to load into the image.
+
+FUN Boolean : loadFromData( ByteArray data, String format=“” )
+  > summary
+    Loads data into the image from a byte array using the specified format.
+  > parameters
+    + data - The binary data to load into the image.
+    + format - The file format of the bytes in data; i.e. “PNG”.
+  > returns
+    true if the data was loaded, otherwise false.
+  > since
+    4.10.0.88
+
+FUN Image : mirror()
+  > summary
+    Creates a copy of this image that has been mirrored vertically.
+  > returns
+    The mirrored copy of the image.
+
+FUN Image : mirror( Boolean horizontal, Boolean vertical )
+  > summary
+    Creates a copy of this image that has been mirrored.
+  > parameters
+    + horizontal - If true, the image will be mirrored horizontally.
+    + vertical - If true, the image will be mirrored vertically.
+  > returns
+    The mirrored copy of the image.
+
+FUN Color : pixel( Number x, Number y )
+  > summary
+    Gets the color value of an individual pixel.
+  > parameters
+    + x - The x position of the pixel.
+    + y - The y position of the pixel.
+  > returns
+    The value of the pixel at the given location.
+
+FUN void : save( String filename )
+  > summary
+    Saves the image to a file.
+  > parameters
+    + filename - The name of the file to save the image to.
+
+FUN Image : scale( Number width, Number height )
+  > summary
+    Creates a new image that is a scaled version of this image.
+  > parameters
+    + width - The width of the new image.
+    + height - The height of the new image.
+  > returns
+    The new scaled image.
+
+FUN Image : scale( Size size )
+  > summary
+    Creates a new image that is a scaled version of this image.
+  > parameters
+    + size - The size of the new image.
+  > returns
+    The new scaled image.
+
+FUN Boolean : setAlphaFromImage( Image img )
+  > parameters
+    + img - The image to set the alpha of this image from.
+  > returns
+    false if img is null, otherwise true.
+  > since
+    4.10.0.120
+
+FUN void : setColor( Number index, Color color )
+  > summary
+    Sets the color value of a color in the color table.
+  > parameters
+    + index - The index of the color in the color table to change.
+    + color - The new value for the color.
+
+FUN void : setPixel( Number x, Number y, Color color )
+  > summary
+    Sets the color value of the given pixel.
+  > parameters
+    + x - The x position of the pixel to change.
+    + y - The y position of the pixel to change.
+    + color - The new value for the pixel.
+
+FUN void : setText( String key, String text )
+  > summary
+    Sets the image text to text and associates it with key.
+    If you want to store a single text block (i.e., a “comment” or description), you can either pass an empty key, or use a generic key like “Description”.
+    The image text is embedded into the image data when you call save(). Not all image formats support embedded text.
+  > parameters
+    + key - The name of the key to associate the embedded text with.
+    + text - The text to embedd and associate with the key.
+  > seealso
+    textKeys(), text()
+  > since
+    4.9.3.78
+
+FUN Image : smoothScale( Size size )
+  > summary
+    Creates a new image that is a scaled version of this image.
+  > parameters
+    + size - The size of the new image.
+  > returns
+    The new scaled image.
+
+FUN Image : smoothScale( Number width, Number height )
+  > summary
+    Creates a new image that is a scaled version of this image.
+  > parameters
+    + width - The width of the new image.
+    + height - The height of the new image.
+  > returns
+    The new scaled image.
+
+FUN Image : swapRGB()
+  > summary
+    Creates a copy of the image in which the Red and Blue values have been swapped.
+  > returns
+    A BGR version of the image.
+
+FUN void : text( String key=“” )
+  > parameters
+    + key - The name of the key to get the associated text of.
+  > returns
+    The embedded text associated with key. If key is an empty string, the whole embedded text is returned, with each key-text pair separated by a newline.
+  > seealso
+    textKeys(), setText()
+  > since
+    4.9.3.78
+
+FUN Array : textKeys()
+  > returns
+    The text keys for this image.
+  > seealso
+    text()
+  > since
+    4.9.3.78

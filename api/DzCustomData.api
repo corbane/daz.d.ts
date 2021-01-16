@@ -1,0 +1,15 @@
+CLS DzCustomData : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/customdata_dz
+  > summary
+    Represents a data class that can be plug-in defined, associated with scene objects, and saved to the native file.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Boolean : isPersistent()
+  > returns
+    true if the data item should be saved to the native file format, otherwise false.

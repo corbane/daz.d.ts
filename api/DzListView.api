@@ -1,0 +1,383 @@
+CLS DzListView : DzScrollView
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/listview_dz
+  > summary
+    DAZScript wrapper for Q3ListView.
+
+### description
+  > summary
+    Todo
+    The findItem() method takes a ComparisonFlags enum. ComparisonFlags is either not exposed or not documented.
+
+### enumerations
+
+ENU ComparisonFlags
+  > summary
+    This typedef is used in Q3ListView's API for values that are OR'd combinations of StringComparisonMode values.
+    https://doc.qt.io/archives/qt-4.8/q3listview.html#ComparisonFlags-typedef
+  + CaseSensitive - The strings must match case sensitively.
+  + ExactMatch - The target and search strings must match exactly.
+  + BeginsWith - The target string begins with the search string.
+  + EndsWith - The target string ends with the search string.
+  + Contains - The target string contains the search string.
+
+ENU ItemsMode
+  > summary
+    The item mode types
+  + Selected - The selected items
+  + Unselected - The unselected items
+  + Checked - The items that are checked
+  + NotChecked - The items that are not checked
+  + All - All the items in the view
+
+ENU RenameAction
+  > summary
+    The rename action types
+  + Accept - The item is renamed if return is pressed or if the user clicks away from the entry field (it loses focus)
+  + Reject - The item is renamed only if the user presses return in the entry field. If the entry field loses focus, the rename operation is discarded.
+
+ENU ResizeMode
+  > summary
+    The resize modes of list views
+  + NoColumn - The columns do not get resized
+  + AllColumns - All columns get resized equally
+  + LastColumn - The last column is resized to fit the width of the view
+
+ENU SelectionMode
+  > summary
+    The selection mode types for list views
+  + Single - Only one item in the list view can be selected
+  + Multi - Multiple items in the list view can be selected. When the user clicks on an item, its selection state is toggled on/off.
+  + Extended - Multiple items in the list view can be selected. When the user clicks on an item, the current selection is cleared, and that item becomes selected. Multiple items are selected by clicking with the CTRL key, or SHIFT key pressed, or by clicking and dragging.
+  + NoSelection - No items in the list view can be selected
+
+ENU SortOrder
+    > summary
+      https://doc.qt.io/qt-5/qt.html#SortOrder-enum
+    + AscendingOrder  - The items are sorted ascending e.g. starts with 'AAA' ends with 'ZZZ' in Latin-1 locales
+    + DescendingOrder - he items are sorted descending e.g. starts with 'ZZZ' ends with 'AAA' in Latin-1 locales
+
+ENU WidthMode
+  > summary
+    The width modes types
+  + Manual - The column width does not change automatically
+  + Maximum - The column width grows automatically according to the maximum width of all items in the column.
+
+### properties
+
+PRP Boolean : allColumnsShowFocus
+  > summary
+    Whether or not all columns show keyboard focus.
+
+PRP Number : childCount
+  > summary
+    Read-Only: The number root level children in the list view
+
+PRP Number : columns
+  > summary
+    Read-Only: The number of items in the list box
+
+PRP DzListView.RenameAction : defaultRenameAction
+  > summary
+    The default action that is taken when the user attempts to rename an item.
+
+PRP Number : itemMargin
+  > summary
+    The advisory margin for list view items
+
+PRP DzListView.ResizeMode : resizeMode
+  > summary
+    The resize mode for the list view
+
+PRP Boolean : rootIsDecorated
+  > summary
+    Whether or not the root level items show expand/collapse boxes.
+
+PRP DzListView.SelectionMode : selectionMode
+  > summary
+    The selection mode for the list view
+
+PRP Boolean : showSortIndicator
+  > summary
+    Whether or not the sort indicator should be displayed.
+
+PRP Boolean : showToolTips
+  > summary
+    Whether or not tool tips should be displayed.
+
+PRP Number : sortColumn
+  > summary
+    The column that the list is sorted by
+
+PRP DzListView.SortOrder : sortOrder
+  > summary
+    The sort order of the list view.
+
+PRP Number : treeStepSize
+  > summary
+    The number of pixels that a child item is offset from its parent
+
+### constructors
+
+CTR DzListView( DzWidget parent )
+  > summary
+    Creates a list view widget with the given parent widget
+
+### methods
+
+FUN Number : addColumn( String label )
+  > summary
+    Add a column to the list view with the given label
+
+FUN void : clear()
+  > summary
+    Clears all the items from the list view.
+
+FUN void : clearSelection()
+  > summary
+    Clears the current selection in the view.
+
+FUN Number : columnAlignment( Number column )
+  > returns
+    The alignment of the given column.
+
+FUN String : columnText( Number index )
+  > returns
+    The label of the column at the given index
+
+FUN Number : columnWidth( Number column )
+  > returns
+    The width of the given column.
+
+FUN DzListView.WidthMode : columnWidthMode( Number column )
+  > returns
+    The width mode of the given column.
+
+FUN DzListViewItem : currentItem()
+  > returns
+    The currently highlighted item
+
+FUN void : deleteItem( DzListViewItem item )
+  > summary
+    Deletes given item from the list view.
+
+FUN void : ensureItemVisible( DzListViewItem item )
+  > summary
+    Ensures the the given item is visible in the view.
+
+FUN DzListViewItem : findItem( String text, Number column, DzListView.ComparisonFlags compare=DzListView.ComparisonFlags.ExactMatch|DzListView.ComparisonFlags.CaseSensitive )
+  > returns
+    The list view item with the given text for the given column, matched according to the given flags.
+  > parameters
+    + compare - ExactMatch|CaseSensitive
+
+FUN DzListViewItem : firstChild()
+  > returns
+    The first child in the list view.
+
+FUN Array : getItems( DzListView.ItemsMode mode )
+  > summary
+    Return an array of DzListViewItems that match the supplied ItemsMode Flag.
+  > parameters
+    + mode - The ItemsMode which will be used to fill the array.
+  > returns
+    Array of DzListViewItems which match the supplied flag.
+
+FUN void : hideColumn( Number column )
+  > summary
+    Hide the given column
+
+FUN Boolean : isOpen( DzListViewItem item )
+  > returns
+    true if the given item is expanded (open), or false if it is collapsed (closed)
+
+FUN Boolean : isRenaming()
+  > returns
+    true if the view is currently in a renaming operation.
+
+FUN Boolean : isSelected( DzListViewItem item )
+  > returns
+    true if the given item is selected
+
+FUN DzListViewItem : lastItem()
+  > returns
+    The last item in the list view.
+
+FUN void : removeColumn( Number index )
+  > summary
+    Remove the column at index from the list view
+
+FUN void : setColumnAlignment( Number column, Number align )
+  > summary
+    Sets the alignment of the given column.
+
+FUN void : setColumnText( Number index, String label )
+  > summary
+    Change the label of the column at the given index
+
+FUN void : setColumnWidth( Number column, Number width )
+  > summary
+    Sets the width of the given column.
+
+FUN void : setColumnWidthMode( Number column, DzListView.WidthMode mode )
+  > summary
+    Sets the width mode of the given column.
+
+FUN void : setCurrentItem( DzListViewItem item )
+  > summary
+    Set the currently highlighted item
+
+FUN void : setOpen( DzListViewItem item, Boolean open )
+  > summary
+    Sets whether the given item is expanded (open) or collapsed (closed)
+
+FUN void : setSelected( DzListViewItem item, Boolean selected )
+  > summary
+    Sets whether the given item is selected
+
+FUN void : setSelectionAnchor( DzListViewItem item )
+  > summary
+    Sets the selection anchor of the view to item.
+
+FUN void : setSorting( Number column, Boolean ascending=TRUE )
+  > summary
+    Sets the sorting column and order for the view.
+
+FUN void : sort()
+  > summary
+    Sort the view
+
+### signals
+
+SIG void : clicked( DzListViewItem item )
+  > summary
+    Emitted when an item is clicked (mouse button pressed and released)
+  > parameters
+    + item - The item clicked (or 0 if no item was clicked)
+
+SIG void : clicked( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is clicked (mouse button pressed and released)
+  > parameters
+    + item - The item clicked (or 0 if no item was clicked)
+    + pos - The position, in global coordinates, where the user clicked
+    + col - The column in which the click occurred (undefined if item is 0)
+
+SIG void : collapsed( DzListViewItem item )
+  > summary
+    Emitted when an item is collapsed (when item 's children are hidden)
+  > parameters
+    + item - The item collapsed
+
+SIG void : contextMenuRequested( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when the user right clicks the list view, or uses a special system key, for a context menu
+  > parameters
+    + item - The item under the cursor if pressed (or 0 if no item is under the cursor), the current item if the system key is used
+    + pos - The position, in global coordinates, where the user pressed
+    + col - The column in which the press occurred (-1 if no item is pressed)
+
+SIG void : currentChanged( DzListViewItem item )
+  > summary
+    Emitted when the current item changes
+  > parameters
+    + item - The newly currentItem()
+
+SIG void : doubleClicked( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is double clicked (on the second button press, not release)
+  > parameters
+    + item - The item double clicked (or 0 if no item was double clicked)
+    + pos - The position, in global coordinates, where the user double clicked
+    + col - The column in which the double click occurred (-1 if outside the list view)
+
+SIG void : expanded( DzListViewItem item )
+  > summary
+    Emitted when an item is expanded (when item 's children are shown)
+  > parameters
+    + item - The item expanded
+
+SIG void : itemRenamed( DzListViewItem item, Number col, String text )
+  > summary
+    Emitted when an item is renamed
+  > parameters
+    + item - The item renamed
+    + col - The column in which the renaming occurred
+    + text - The the new text for item
+
+SIG void : itemRenamed( DzListViewItem item, Number col )
+  > summary
+    Emitted when an item is renamed
+  > parameters
+    + item - The item renamed
+    + col - The column in which the renaming occurred
+
+SIG void : mouseButtonClicked( Number button, DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is clicked with the a mouse button (mouse button pressed and released)
+  > parameters
+    + button - The mouse button clicked
+    + item - The item clicked (or 0 if no item was clicked)
+    + pos - The position, in global coordinates, where the user clicked
+    + col - The column in which the click occurred (undefined if item is 0)
+
+SIG void : mouseButtonPressed( Number button, DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is pressed with the a mouse button (mouse button pressed)
+  > parameters
+    + button - The mouse button pressed
+    + item - The item pressed (or 0 if no item was pressed)
+    + pos - The position, in global coordinates, where the user pressed
+    + col - The column in which the press occurred (undefined if item is 0)
+
+SIG void : pressed( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is pressed (mouse button pressed)
+  > parameters
+    + item - The item pressed (or 0 if no item was pressed)
+    + pos - The position, in global coordinates, where the user pressed
+    + col - The column in which the press occurred (undefined if item is 0)
+
+SIG void : pressed( DzListViewItem item )
+  > summary
+    Emitted when an item is pressed (mouse button pressed)
+  > parameters
+    + item - The item pressed (or 0 if no item was pressed)
+
+SIG void : returnPressed( DzListViewItem item )
+  > summary
+    Emitted when return is pressed on the current item
+  > parameters
+    + item - The current item
+
+SIG void : rightButtonClicked( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is clicked with the right button (mouse button pressed and released)
+  > parameters
+    + item - The item clicked (or 0 if no item was clicked)
+    + pos - The position, in global coordinates, where the user clicked
+    + col - The column in which the click occurred (-1 if outside the list view)
+
+SIG void : rightButtonPressed( DzListViewItem item, Point pos, Number col )
+  > summary
+    Emitted when an item is pressed with the right button (mouse button pressed)
+  > parameters
+    + item - The item pressed (or 0 if no item was pressed)
+    + pos - The position, in global coordinates, where the user pressed
+    + col - The column in which the press occurred (-1 if outside the list view)
+
+SIG void : selectionChanged()
+  > summary
+    Emitted when the selected item changes.
+
+SIG void : selectionChanged( DzListViewItem item )
+  > summary
+    Emitted when the selected item changes
+  > parameters
+    + item - The newly selected item
+
+SIG void : spacePressed( DzListViewItem item )
+  > summary
+    Emitted when the spacebar is pressed on the current item
+  > parameters
+    + item - The current item

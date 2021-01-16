@@ -1,0 +1,65 @@
+CLS DzAuthenticationMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/authenticationmgr_dz
+  > summary
+    A class that manages authentication of a Daz 3D user account.
+
+### description
+  > summary
+    This class does not provide access to any Daz 3D user account information which could be considered an invasion of the user's the privacy. This class does provide plugins and scripts with an ability to check if a user has authenticated (logged in to) a Daz 3D account, to prompt a user to authenticate (login to) their Daz 3D account, to obtain a token that uniquely and anonymously identifies the current/last account authenticated, and to logout of an account that is currently logged in.
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Do not create an instance of this class, rather request the instance from DzApp via DzApp::getAuthenticationMgr().
+  > seealso
+    Sample: Retrieve User Token
+
+### methods
+
+FUN Boolean : authenticateUser()
+  > summary
+    This function will attempt to authenticate a Daz 3D user account. If no account information has been entered by the user, a dialog will be displayed to securely acquire the username and password to be authenticated.
+  > returns
+    true if the user was authenticated, otherwise false.
+
+FUN String : getUserToken()
+  > returns
+    If the user has (not necessarily is) logged in to a Daz 3D user account and the application has a valid connection to the database, a token that represents the account that the user last logged into is returned. If the user has not logged into a Daz 3D user account or the application does not have a valid connection to the database, an empty string is returned.
+  > attention
+    This function existed prior to 4.9.3.66 but it was deprecated as part of a much older implementation and it would only return an empty string. As of 4.9.3.66 the function has been revived and the function operates as described above.
+  > seealso
+    DzAssetMgr::haveDatabase()
+    Sample: Retrieve User Token
+
+FUN Boolean : isAuthenticated()
+  > returns
+    true if the user is authenticated (currently logged in), otherwise false.
+
+FUN Boolean : isLoggingIn()
+  > returns
+    true if in process of logging in, otherwise false. The event queue must execute to finish login.
+  > since
+    4.9.3.71
+
+FUN void : logout()
+  > summary
+    Invalidates any existing authentication.
+
+### signals
+
+SIG void : beginLogin()
+  > summary
+    Emitted when the user begins to login to a Daz 3D account.
+
+SIG void : beginLogout()
+  > summary
+    Emitted when the user begins to log out of a Daz 3D account.
+
+SIG void : currentAccountChanged()
+  > summary
+    Emitted when the current Daz 3D account in use changes.
+
+SIG void : loggedIn()
+  > summary
+    Emitted after the user has successfully logged in to a Daz 3D account.
+
+SIG void : loggedOut()
+  > summary
+    Emitted after the user has successfully logged out of a Daz 3D account.

@@ -1,0 +1,727 @@
+CLS DzApp : QObject
+  > summary
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/app_dz
+    The main application object.
+
+### description
+  > summary
+    Derived from QApplication, this class embodies the main event loop, and owns application-wide settings and objects not directly related to the user interface.
+    Can be directly accessed using the global variable App.
+
+### enumerations
+
+ENU GraphicsMode
+  > summary
+    The current graphical systems available in the application.
+  + NoInterface - No interface or graphical subsystem is initialized.
+  + NoInterfaceWithOpenGL - The OpenGL subsystem is initialized without a user interface.
+  + FullInterface - The user interface and all graphical subsystems are initialized.
+
+ENU OperatingSystem
+  > summary
+    The operating system.
+  + Unknown - An unknown operating system.
+  + WindowsUnknown - An unknown version of Windows.
+  + Windows95 - The Windows 95 operating system.
+  + Windows98 - The Windows 98 operating system.
+  + WindowsMe - The Windows Me operating system.
+  + Windows2000 - The Windows 2000 operating system.
+  + WindowsXP - The Windows XP operating system.
+  + Windows2003 - The Windows 2003 operating system.
+  + WindowsVista - The Windows Vista operating system.
+  + Windows7 - The Windows 7 operating system.
+  + Windows8 - The Windows 8 operating system.
+  + Windows8_1 - The Windows 8.1 operating system.
+  + Windows10 - The Windows 10 operating system.
+  + MacUnknown - An unknown version of the Macintosh operating system.
+  + Mac10_0 - The OS X 10.0 (Cheetah) operating system.
+  + Mac10_1 - The OS X 10.1 (Puma) operating system.
+  + Mac10_2 - The OS X 10.2 (Jaguar) operating system.
+  + Mac10_3 - The OS X 10.3 (Panther) operating system.
+  + Mac10_4 - The OS X 10.4 (Tiger) operating system.
+  + Mac10_5 - The OS X 10.5 (Leopard) operating system.
+  + Mac10_6 - The OS X 10.6 (Snow Leopard) operating system.
+  + Mac10_7 - The OS X 10.7 (Lion) operating system.
+  + Mac10_8 - The OS X 10.8 (Mountain Lion) operating system.
+  + Mac10_9 - The OS X 10.9 (Mavericks) operating system.
+  + Mac10_10 - The OS X 10.10 (Yosemite) operating system.
+  + Mac10_11 - The OSX 10.11 (El Capitan) operating system.
+  + Mac10_12 - The OSX 10.12 (Sierra) operating system.
+
+ENU Platform
+  > summary
+    The platforms the application can run on.
+  + Windows - Supported Microsoft Windows Operating Systems.
+  + MacOSX - Supported Apple Macintosh OS X Operating Systems.
+
+ENU ReleaseCycle
+  > summary
+    TODO: Add description.
+  + GeneralRelease - TODO: Add description.
+  + PublicBuild - TODO: Add description.
+  + PublishingBuild - TODO: Add description.
+  + PrivateBuild - TODO: Add description.
+  + DevBuild - TODO: Add description.
+
+ENU ReleaseEdition
+  > summary
+    The available editions of the application.
+  + Free - The free edition of the application.
+  + Standard - The standard edition of the application.
+  + Advanced - The advanced edition of the application.
+  + Pro - The pro edition of the application.
+  + Alpha - The alpha edition of the application.
+  + Beta - The beta edition of the application.
+
+### properties
+
+PRP String : appName
+  > summary
+    Holds the name of the application; i.e., “DAZ Studio”. (Read Only)
+
+PRP String : cloudName
+  > summary
+    Holds the name of the cloud service; i.e., “Daz Connect”. (Read Only)
+  > since
+    4.9.0.26
+
+PRP Number : exitCode
+  > summary
+    Holds the exit code returned by the application. (Read Only)
+  > since
+    4.9.3.51
+
+PRP Number : logSize
+  > summary
+    Holds the size, in bytes, of the log file.
+  > since
+    4.9.4.70
+
+PRP String : longVersionString
+  > summary
+    Holds a string representation of the full product version number; i.e., major.minor.revision.build. (Read Only)
+
+PRP String : orgName
+  > summary
+    Holds the name of the organization; i.e., “DAZ 3D”. (Read Only)
+
+PRP Array<String> : scriptArgs
+  > summary
+    Holds the arguments passed to the application on launch. (Read Only)
+  > since
+    4.9.3.39
+
+PRP Number : version
+  > summary
+    Holds the full product version number as an encoded 32-bit integer. (Read Only) Deprecated
+    Use version64 instead.
+
+PRP Number : version64
+  > summary
+    Holds the full product version number as an encoded 64-bit integer. (Read Only)
+
+PRP String : versionString
+  > summary
+    Holds a string representation of the product version number; i.e., major.minor. (Read Only)
+
+### methods
+
+FUN void : addSessionFileLoad( String name )
+  > summary
+    TODO: Add description.
+
+FUN Number : bitArchitecture()
+  > returns
+    A numeric representation of the bit architecture the application was compiled for.
+
+FUN String : bitArchitectureString()
+  > returns
+    A user-friendly string representation of the bit architecture the application was compiled for.
+
+FUN String : byteSizeToString( Number bytes )
+  > parameters
+    + bytes - The numeric value to convert into a string.
+  > returns
+    A string representation of the byte size.
+  > example
+    // The message will be written to the log file
+    print( App.byteSizeToString( 1073741824 ) ); //1.0 GB
+
+FUN Boolean : canShowSceneBuilder( Object definition=undefined )
+  > parameters
+    + definition - If empty, the default SceneBuilder.json file (if any) in getResourcesPath() will be checked. If a string, the full path of a Scene Builder configuration file to check is expected. If an object, a map of Scene Builder configuration data is expected. (since 4.6.4.62)
+  > returns
+    true if the Scene Builder dialog would be displayed, otherwise false.
+  > since
+    4.6.2.69
+
+FUN void : clearDelayedDeleteStack( Boolean doProgress )
+  > summary
+    Forces a deletion of all objects currently waiting to be deleted to free up more memory. If you are using this to clear memory you will generally want to clear the Undo Stack first.
+  > seealso
+    DzUndoStack::clearAll()
+  > parameters
+    + doProgress - If true, a progress dialog will be shown to the user while the operation is taking place.
+
+FUN String : createDigest( Array tokens )
+  > returns
+    A string representing a message digest. The string is formatted as five hexadecimal fields separated by '-', i.e. “xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx” where 'x' is a hexidecimal digit.
+
+FUN String : createDigest( ByteArray data )
+  > returns
+    A string representing a message digest. The string is formatted as five hexadecimal fields separated by a hyphen ('-'), i.e. “xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx” where 'x' is a hexidecimal digit.
+
+FUN String : createUuid()
+  > returns
+    A string representing a randomly generated Universally Unique IDentifier (UUID). The string is formatted as five hexadecimal fields separated by '-' and enclosed in curly braces, i.e. “{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}” where 'x' is a hexidecimal digit.
+
+FUN void : debug( String msg )
+  > summary
+    Write a debug message to the application log file.
+  > parameters
+    + msg - The debug message to write to the log.
+  > seealso
+    log(), warning()
+
+FUN void : delayedExit( Number exitCode=0 )
+  > summary
+    Posts an event that causes the application to exit.
+  > parameters
+    + exitCode - The exit code to set. (since 4.9.3.51)
+  > since
+    4.6.2.55
+
+FUN void : enableMultiThreading( Boolean onOff )
+  > parameters
+    + onOff - If true, multi-threaded features are enabled, otherwise multi-threaded features are disabled.
+
+FUN Boolean : flushLogBuffer()
+  > summary
+    Writes any currently buffered log messages to the log file. This is automatically called whenever the log buffer has more than 512 characters of data, but can be called at any time to force all messages to be written out.
+
+FUN String : getAbsoluteScriptPath( String scriptName )
+  > summary
+    Searches in default locations for a script file of the given name.
+  > parameters
+    + scriptName - The name/path of a script file to find. This can be a file name, a relative file path, or an absoulte file path.
+  > returns
+    The absolute path of the found script file (if any), otherwise an empty string.
+  > seealso
+    getGeneratedScriptsPath()
+    getScriptsPath()
+
+FUN String : getAppDataPath()
+  > returns
+    The absolute path of the application data directory for the current machine user, the current major version of the application and the current release cycle of the application.
+    Attention:
+    This path is dynamically constructed using calls to the underlying operating system. If the call to the OS fails, getHomePath() is used as a fallback.
+  > seealso
+    getDAZDataPath()
+    getApplicationBaseName()
+    versionString
+    releaseCycleSuffix()
+
+FUN String : getApplicationBaseName()
+  > returns
+    The base name of the application; e.g., “Studio”.
+  > since
+    4.9.2.33
+
+FUN DzAppSettingsMgr : getAppSettingsMgr()
+  > summary
+    Deprecated
+    Use the DzAppSettings class now instead.
+  > returns
+    The application-wide persistent Settings Manager - used to set and retrieve application settings.
+
+FUN DzAssetIOMgr : getAssetIOMgr()
+  > returns
+    The application-wide Asset I/O Manager in charge of native format assets.
+
+FUN DzAssetMgr : getAssetMgr()
+  > returns
+    The application-wide Asset Manager.
+
+FUN DzAuthenticationMgr : getAuthenticationMgr()
+  > returns
+    The application-wide Authentication Manager - responsible for tracking user authentication.
+
+FUN DzCallBackMgr : getCallBackMgr()
+  > returns
+    The application-wide Call Back Manager - responsible for tracking call back objects.
+
+FUN String : getCommonUserDocumentPath()
+  > returns
+    The absolute path of the public/shared user documents folder.
+    Attention:
+    This path is dynamically constructed using calls to the underlying operating system. If the call to the OS fails, getHomePath() is used as a fallback.
+
+FUN DzContentMgr : getContentMgr()
+  > returns
+    The application-wide Content Manager.
+
+FUN DzAuthor : getCurrentAuthor()
+  > returns
+    The current author (user that is currently running the app).
+
+FUN String : getDataFolderName()
+  > returns
+    The name of the data folder under the content directory.
+
+FUN String : getDataFolderPath()
+  > returns
+    The full path for the location where data is stored.
+
+FUN String : getDataFolderPathBase()
+  > returns
+    The base path for the location where data is stored.
+
+FUN String : getDAZDataPath()
+  > returns
+    The absolute path of the data directory for DAZ 3D.
+    Attention:
+    This path is dynamically constructed using calls to the underlying operating system. If the call to the OS fails, getHomePath() is used as a fallback.
+  > seealso
+    orgName
+
+FUN DzDeviceMgr : getDeviceMgr()
+  > returns
+    The application-wide Device Manager - responsible for devices supported by the application.
+
+FUN QWidget : getDialogParent()
+  > returns
+    The active modal widget or the application main window if one exists.
+
+FUN String : getDocumentationPath()
+  > returns
+    The absolute path of the directory where application documentation files are stored.
+  > seealso
+    getHomePath()
+
+FUN String : getDocumentsPath()
+  > returns
+    The absolute path of the user documents folder for the application.
+    Attention:
+    This path is dynamically constructed using calls to the underlying operating system. If the call to the OS fails, getHomePath() is used as a fallback.
+
+FUN DzExportMgr : getExportMgr()
+  > returns
+    The application-wide Export Manager in charge of file exporters.
+
+FUN DzFileIOPresetMgr : getFileIOPresetMgr()
+  > returns
+    The application-wide File I/O Preset Manager.
+
+FUN String : getGeneratedScriptsPath()
+  > returns
+    The absolute path of the directory where support script files that are automatically generated are stored.
+  > seealso
+    getAppDataPath()
+
+FUN String : getGeneratedShadersPath()
+  > returns
+    The absolute path of the application data directory for automatically generated shaders.
+  > seealso
+    getAppDataPath()
+
+FUN DzApp.GraphicsMode : getGraphicsMode()
+  > returns
+    An enumerated value representing the current graphics mode.
+
+FUN DzHelpMgr : getHelpMgr()
+  > returns
+    The application-wide Help Manager.
+
+FUN String : getHomePath()
+  > returns
+    The absolute path of the directory that contains the application executable.
+
+FUN DzImageMgr : getImageMgr()
+  > returns
+    The application-wide Image Manager - responsible for image I/O and tracking of currently loaded images.
+
+FUN DzImportMgr : getImportMgr()
+  > returns
+    The application-wide Import Manager in charge of file importers.
+
+FUN DzMainWindow : getInterface()
+  > returns
+    The main interface widget if the application is running with an interface, otherwise NULL.
+  > seealso
+    Global::MainWindow
+
+FUN String : getLoadSavePath()
+  > summary
+    Last directory that files were loaded or saved to/from.
+  > seealso
+    setLoadSavePath()
+
+FUN DzMultiMediaMgr : getMultiMediaMgr()
+  > returns
+    The application-wide Video and Audio Manager - responsible for video and audio I/O.
+
+FUN DzPluginMgr : getPluginMgr()
+  > returns
+    The application-wide Plug-in Manager - responsible for tracking plug-ins.
+
+FUN String : getPluginsPath()
+  > returns
+    The absolute path of the base directory where plug-ins are loaded from.
+  > seealso
+    getHomePath()
+
+FUN String : getProgramDataPath()
+  > returns
+    The absolute path of the machine's global program data directory for the organization.
+    Attention:
+    This path is dynamically constructed using calls to the underlying operating system. If the call to the OS fails, getHomePath() is used as a fallback.
+  > seealso
+    orgName
+
+FUN DzRenderMgr : getRenderMgr()
+  > returns
+    The application-wide Render Manager.
+
+FUN String : getResourcesPath()
+  > returns
+    The absolute path of the directory where application resource files are stored.
+  > seealso
+    getHomePath()
+
+FUN DzSaveFilterMgr : getSaveFilterMgr()
+  > returns
+    The application-wide Save Filter Manager in charge of save filters.
+
+FUN String : getScriptsPath()
+  > returns
+    The absolute path of the directory where support script files are stored.
+  > seealso
+    getHomePath()
+
+FUN String : getShadersPath()
+  > returns
+    The absolute path of the base directory for all shaders.
+  > seealso
+    getHomePath()
+
+FUN DzStyle : getStyle()
+  > summary
+    Get the application wide style.
+  > returns
+    The application-wide style object. This pointer is subject to becoming invalid if the application style changes.
+
+FUN String : getStyleDefinition()
+  > returns
+    The name of the style definition currently in use.
+
+FUN Array<String> : getStyleDefinitionList()
+  > returns
+    A list of the available style definitions.
+
+FUN String : getTempFilename()
+  > summary
+    Get a filename for temporary storage.
+  > returns
+    A unique filename (with no extension) whose path will be in the current temporary working folder. (All files in this folder will be deleted when shutdown() is called)
+
+FUN String : getTempPath()
+  > returns
+    The absolute path of the directory where temporary files are stored.
+  > seealso
+    getAppDataPath()
+    setTempPath()
+    restoreDefaultTempPath()
+
+FUN String : getTempRenderFilename()
+  > summary
+    Get a filename for temporary storage of rendered images.
+  > returns
+    A filename (with no extension) whose path will be in the current temporary working folder. (All files in this folder will be deleted when shutdown() is called)
+
+FUN String : getUtilitiesPath()
+  > returns
+    The absolute path of the base directory for all binary utilities.
+  > seealso
+    getHomePath()
+
+FUN Boolean : isClosing()
+  > returns
+    true if the application is in the process of shutting down, otherwise false.
+
+FUN Boolean : isKeyDown( Number key )
+  > parameters
+    + key - The Qt::Key value for the key to check.
+  > returns
+    true if key is currently pressed, otherwise false.
+
+FUN Boolean : isKeySequenceDown( String sequence )
+  > parameters
+    + sequence - A string consistent with {QKeySequence, fromString}, in the PortableText format.
+  > returns
+    true if sequence is currently pressed, otherwise false.
+
+FUN Boolean : isMultiThreadingEnabled()
+  > returns
+    true if the user has chosen to enable multi-threaded features, otherwise false.
+
+FUN Boolean : isRegistered()
+  > returns
+    true if a valid serial number has been provided, otherwise false.
+
+FUN Boolean : isRunning()
+  > returns
+    true if the main event loop is running and events that are posted can be expected to be delivered, otherwise false.
+
+FUN Boolean : isSlave()
+  > returns
+    true if the application is running as a slave to another application, otherwise false.
+
+FUN Boolean : isStarting()
+  > returns
+    true if the application is in the process of starting up, otherwise false.
+
+FUN void : log( String buffer )
+  > summary
+    Write a message to the application log file.
+  > parameters
+    + buffer - The string to write to the log file.
+  > example
+    //The message will be written to the log file
+    App.log( "Hello World!" );
+  > seealso
+    statusLine()
+
+FUN Number : modifierKeyState()
+  > summary
+    SHIFT		   = 0x02000000
+    CTRL			= 0x04000000
+    ALT			 = 0x08000000
+    META			= 0x10000000
+     
+    META + SHIFT	= 0x12000000
+    META + CTRL	 = 0x14000000
+    META + ALT	  = 0x18000000
+    SHIFT + CTRL	= 0x06000000
+    SHIFT + ALT	 = 0x0A000000
+    CTRL + ALT	  = 0x0C000000
+  > returns
+    The current modifier key state - this value is a bitwise or of the Qt::Modifier flags for the active keys, if any.
+  > example
+    var shftKey = App.modifierKeyState() & 0x02000000;
+    var ctrlKey = App.modifierKeyState() & 0x04000000;
+    var altKey = App.modifierKeyState() & 0x08000000;
+    var metaKey = App.modifierKeyState() & 0x10000000;
+     
+    if( shftKey ){
+    	print( "Shift pressed." );
+    }
+     
+    if( ctrlKey ){
+    	print("Control pressed.");
+    }
+     
+    if( altKey ){
+    	print("Alt pressed.");
+    }
+     
+    if( metaKey ){
+    	print("Meta pressed.");
+    }
+
+FUN DzApp.OperatingSystem : operatingSystem()
+  > returns
+    The enumerated value associated with the OperatingSystem that the application is running under.
+
+FUN String : operatingSystemString()
+  > returns
+    A user-readable string that describes the current Operating System.
+
+FUN DzApp.Platform : platform()
+  > summary
+    The application is intended to be as platform independent as possible, but there are cases where something needs to be done differently on one platform or another. This function provides a simple way to check which platform the application is running under.
+  > returns
+    The enumerated value associated with the Platform that the application is running under.
+  > example
+    var nPlatform = App.platform();
+    if( nPlatform == App.Windows ){
+    	//doWinSomething();
+    } else if( nPlatform == App.MacOSX ){
+    	//doMacSomething();
+    }
+
+FUN void : postScriptEvent( Boolean evaluate, String script, Array<String> args=[] )
+  > summary
+    Posts an event that causes execution of a script as it is encountered in the event stack.
+  > parameters
+    + evaluate - If script is actual code, set this to true, otherwise set this to false.
+    + script - This can be a file name, a relative file path, an absoulte file path or code. If passed a file name or path, getAbsoluteScriptPath() is used to resolve it. If passed actual code, evaluate must also be set to true.
+    + args - The list of arguments to pass to the script.
+  > since
+    4.10.0.101
+
+FUN DzApp.ReleaseCycle : releaseCycle()
+  > returns
+    The enumerated value associated with the ReleaseCycle of the application.
+
+FUN String : releaseCycleString()
+  > returns
+    A user-friendly string describing the release cycle of the application.
+
+FUN DzApp.ReleaseEdition : releaseEdition()
+  > returns
+    The enumerated value associated with the ReleaseEdition of the application.
+
+FUN String : releaseEditionString()
+  > returns
+    A user-friendly string describing the release edition of the application.
+
+FUN void : restoreDefaultTempPath()
+  > summary
+    Restores the temporary files directory to the default location.
+  > seealso
+    setTempPath()
+    getTempPath()
+
+FUN void : setLoadSavePath( String dir )
+  > summary
+    Set the default directory for loading or saving files.
+  > parameters
+    + dir - The default directory for loading/saving files.
+  > example
+    //Set the load/save path to our favorite folder
+    App.setLoadSavePath( "c:/MyScenes" );
+  > seealso
+    getLoadSavePath()
+
+FUN Boolean : setStyleDefinition( String name )
+  > summary
+    Sets the current style for the application.
+  > parameters
+    + name - The name of the style definition to use.
+  > returns
+    true if the application switched to the given style, otherwise false.
+
+FUN Boolean : setTempPath( String tempPath )
+  > summary
+    Sets the directory path where temporary files are stored. The path provided needs to be an absolute path. A directory will be created at the new location if it does not already exist.
+  > parameters
+    + tempPath - The path of the new temporary files directory.
+  > returns
+    true if the path provided is valid and changing the temporary path succeeded. false if any errors occurred.
+  > seealso
+    getTempPath()
+    restoreDefaultTempPath()
+
+FUN Boolean : showInNativeBrowser( String absFilePath )
+  > summary
+    A convenience method for opening a showing a file/directory in the OS file browser.
+  > parameters
+    + absFilePath - The absolute file path to a file or folder to show.
+  > returns
+    true if the file exists and the OS file browser could be launched, otherwise false.
+
+FUN Boolean : showPrompts()
+  > returns
+    true if the application should prompt the user for input, otherwise false.
+
+FUN Array : showSceneBuilder( Object definition=undefined, Boolean asEvent=false )
+  > summary
+    Displays the Scene Builder dialog.
+  > parameters
+    + definition - If empty, the default SceneBuilder.json file (if any) in getResourcesPath() will be used. If a string, the full path of a Scene Builder configuration file to check is expected. If an object, a map of Scene Builder configuration data is expected. (since 4.6.4.62)
+    + asEvent - If false (default), the Scene Builder configuration data is processed immediately. If false, the the Scene Builder configuration data is posted to an event and processed as it is encountered in the event stack. (since 4.6.4.62)
+  > returns
+    If asEvent is false, a list of the selections made by the user in the Scene Builder dialog, otherwise an empty list. (since 4.6.4.62)
+  > seealso
+    sceneBuilderRejected(), sceneBuilderAccepted()
+  > since
+    4.6.2.69
+
+FUN void : showURL( String url )
+  > summary
+    A convenience method for browsing to a given URL.
+  > parameters
+    + url - The url to open in the system's default browser. Be sure to specify the scheme of the url (e.g., 'http:' or 'file:').
+  > example
+
+FUN void : statusLine( String msg, Boolean writeToLog=true )
+  > summary
+    Display a message in the current status interface.
+  > parameters
+    + msg - The string to be displayed (and logged if logging is enabled)
+    + writeToLog - If true, the message will also be written the the log file.
+  > example
+    //The message will be displayed in status bar and written to the log file
+    App.statusLine( "Hello World!" );
+  > seealso
+    log()
+
+FUN Boolean : usingInterface()
+  > returns
+    true if the application is using a user interface.
+
+FUN void : warning( String msg )
+  > summary
+    Write a warning message to the application log file.
+  > parameters
+    + msg - The message to write to the log as a warning.
+  > seealso
+    log(), debug()
+
+FUN Boolean : writeConfigScript( String configScriptFilename=“” )
+  > summary
+    Saves out a user configuration script to the given filename. If no filename is given, the script is saved to the same file read from in startup(). The run() function calls this at the end of each execution.
+  > parameters
+    + filename - The name of the file to save a configuration script to.
+  > returns
+    true if the file was written successfully.
+
+### signals
+
+SIG void : closing()
+  > summary
+    Emitted immediately after the main event loop exits.
+
+SIG void : debugMsg( String msg )
+  > summary
+    Emitted when a debug message is sent to the application.
+
+SIG void : eventLoopStarted()
+  > summary
+    Emitted when the event loop is started on the application.
+
+SIG void : mouseEvent()
+  > summary
+    Emitted when a MouseButtonDblClick or MouseButtonRelease event occurs on the application.
+
+SIG void : multiThreadingChanged( Boolean onOff )
+  > summary
+    Emitted when multi-threading has changed on the application.
+
+SIG void : sceneBuilderAccepted( Array selections )
+  > summary
+    Emitted when the Scene Builder dialog has been rejected by the user, or when none of the files specified in the Scene Builder definition can be found.
+  > since
+    4.6.4.62
+
+SIG void : sceneBuilderRejected()
+  > summary
+    Emitted when the Scene Builder dialog has been rejected by the user, or when none of the files specified in the Scene Builder definition can be found.
+  > since
+    4.6.4.62
+
+SIG void : starting()
+  > summary
+    Emitted after the application has finished its startup just before the main event loop begins.
+
+SIG void : styleAboutToChange()
+  > summary
+    Emitted when a the style is about to change on the application.
+
+SIG void : styleChanged( DzStyle newStyle )
+  > summary
+    Emitted when the application wide style has changed.
+
+SIG void : warningMsg( String msg )
+  > summary
+    Emitted when a warning message is sent to the application.

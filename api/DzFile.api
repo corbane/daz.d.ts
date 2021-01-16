@@ -1,0 +1,259 @@
+CLS DzFile : DzFileInfo
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/file_dz
+  > summary
+    DAZ Script file I/O class.
+
+### description
+  > summary
+    Provides access for reading and writing files.
+
+### enumerations
+
+ENU FileError
+  > summary
+    TODO: Add description.
+  + NoError - No error occurred.
+  + ReadError - An error occurred when reading from the file.
+  + WriteError - An error occurred when writing to the file.
+  + FatalError - A fatal error occurred.
+  + ResourceError - TODO: Add description.
+  + OpenError - The file could not be opened.
+  + AbortError - The operation was aborted.
+  + TimeOutError - A timeout occurred.
+  + UnspecifiedError - An unspecified error occurred.
+  + RemoveError - The file could not be removed.
+  + RenameError - The file could not be renamed.
+  + PositionError - The position in the file could not be changed.
+  + ResizeError - The file could not be resized.
+  + PermissionsError - The file could not be accessed.
+  + CopyError - The file could not be copied.
+
+ENU OpenMode
+  > summary
+    Enumerated values used with open() to describe the mode in which a file is opened.
+  + NotOpen - The file is not open.
+  + ReadOnly - The file is open the for reading.
+  + WriteOnly - The file is open the for writing.
+  + ReadWrite - The file is open the for reading and writing.
+  + Append - The file is opened in append mode, so that all data is written to the end of the file.
+  + Truncate - If possible, the file is truncated before it is opened. All earlier contents of the file are lost.
+  + Text - When reading, the end-of-line terminators are translated to '
+    '. When writing, the end-of-line terminators are translated to the local encoding.
+  + Translate - Alias for Text.
+
+### constructors
+
+CTR DzFile( String file )
+  > summary
+    Creates a file object with the given file name.
+  > parameters
+    + file - The path of the file.
+
+### methods
+
+FUN void : close()
+  > summary
+    Closes the file, sets its openMode() to NotOpen, and resets the error string.
+
+FUN Boolean : copy( String newName )
+  > parameters
+    + newName - The path to copy this file to.
+  > returns
+    true if copying the file is successful, otherwise false.
+  > attention
+    If newName already exists it will not be overwritten.
+
+FUN Boolean : eof()
+  > returns
+    true if the current position is at the end of the file, otherwise false.
+
+FUN DzFile.FileError : error()
+  > returns
+    The file error status.
+  > attention
+    For example, if open() returns false, or a read/write operation returns -1, this function can be called to find out the reason why the operation failed.
+  > since
+    4.9.3.35
+
+FUN String : errorString()
+  > returns
+    A human-readable description of the last error that occurred.
+  > since
+    4.9.3.35
+
+FUN Boolean : isOpen()
+  > returns
+    true if the file is open, otherwise false.
+  > since
+    4.9.3.35
+
+FUN Boolean : isTextModeEnabled()
+  > returns
+    true if the Text OpenModeFlag is enabled, otherwise false.
+  > since
+    4.9.3.35
+
+FUN Boolean : link( String linkName )
+  > summary
+    Creates a link named linkName that points to the file currently specified by fileName(). What a link is depends on the underlying filesystem (be it a shortcut on Windows or a symbolic link on Mac OS X).
+  > returns
+    true if successful, otherwise false.
+  > attention
+    This will not overwrite an already existing entity in the file system; in this case, link() will return false and set error() to return RenameError.
+  > since
+    4.9.3.35
+    Renames the file currently specified by fileName() to newName.
+  > returns
+    true if successful, otherwise false (for example, if a file with the name newName already exists).
+  > attention
+    The file is closed before it is renamed.
+  > since
+    4.9.3.35
+
+FUN Boolean : open( DzFile.OpenMode mode )
+  > summary
+    Opens the file and sets its openMode() to mode.
+  > returns
+    true if the file was opened successfully, otherwise false.
+
+FUN DzFile.OpenMode : openMode()
+  > returns
+    The mode in which the device has been opened.
+  > since
+    4.9.3.35
+
+FUN ByteArray : peek( Number maxSize )
+  > summary
+    Peeks at most maxSize bytes from the file, without side effects (i.e., if you read after you peek, you will get the same data).
+  > returns
+    The data peeked.
+  > since
+    4.9.3.35
+
+FUN Number : pos()
+  > returns
+    The position that data is written to or read from.
+  > since
+    4.9.3.35
+
+FUN String : read()
+  > summary
+    Read the entire file.
+  > returns
+    The file contents as a string.
+
+FUN ByteArray : read( Number maxSize )
+  > summary
+    Reads at most maxSize bytes from the file.
+  > returns
+    The data read.
+  > since
+    4.9.3.35
+
+FUN ByteArray : readAll()
+  > summary
+    Read the entire file.
+  > returns
+    All bytes of the file.
+  > attention
+    This function has no way of reporting errors; returning an empty ByteArray can mean either that no data was currently available for reading, or that an error occurred.
+
+FUN Number : readByte()
+  > summary
+    Read one character from the file.
+  > returns
+    The character read from the file.
+
+FUN ByteArray : readByteLine( Number maxSize=0 )
+  > summary
+    Reads a line from the file, but no more than maxSize characters.
+  > parameters
+    + maxSize - The maximum nuber of characters to read. Since 4.9.3.35.
+  > returns
+    The bytes read.
+  > attention
+    This function has no way of reporting errors; returning an empty ByteArray can mean either that no data was currently available for reading, or that an error occurred.
+
+FUN String : readLine()
+  > summary
+    Read a line of text from the file.
+  > returns
+    The file line as a string.
+
+FUN Array : readLines()
+  > summary
+    Read the entire file and split it into lines of text.
+  > returns
+    All lines from the file.
+
+FUN Boolean : rename( String newName )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : reset()
+  > summary
+    Seeks to the start of input.
+  > returns
+    true on success, otherwise false (for example, if the file is not open).
+  > since
+    4.9.3.35
+
+FUN Boolean : seek( Number pos )
+  > summary
+    Sets the current position to pos.
+  > returns
+    true on success, otherwise false.
+  > since
+    4.9.3.35
+
+FUN void : setFileName( String name )
+  > summary
+    Sets the name of the file to name. The name can have no path, a relative path, or an absolute path.
+  > attention
+    Do not call this function if the file has already been opened. If the file name has no path or a relative path, the path used will be the application's current directory path at the time of the open() call.
+  > since
+    4.9.3.35
+
+FUN Boolean : setPermissions( Permissions permissions )
+  > summary
+    Sets the permissions for the file to permissions.
+  > returns
+    true if successful, otherwise false (for example, if the permissions cannot be modified).
+  > since
+    4.9.3.35
+
+FUN void : setTextModeEnabled( Boolean enabled )
+  > summary
+    If enabled is true, sets the Text flag on the file, otherwise the Text flag is removed.
+  > since
+    4.9.3.35
+
+FUN Number : write( String data, Number maxSize=-1 )
+  > summary
+    Write a string to the file.
+  > parameters
+    + data - The string to write to the file.
+    + maxSize - The maximum number of characters to write to the file. If this is less than 1 (default), the whole string is written.
+  > returns
+    The number of bytes that were actually written, or -1 if an error occurred. (since 4.9.3.35)
+
+FUN Number : write( ByteArray byteArray )
+  > summary
+    Writes the content of byteArray to the file.
+  > returns
+    The number of bytes that were actually written, or -1 if an error occurred.
+  > since
+    4.9.3.35
+
+FUN void : writeByte( Number byte )
+  > summary
+    Write a single byte (character) to the file.
+  > parameters
+    + byte - The character to write to the file.
+
+FUN void : writeLine( String data )
+  > summary
+    Write a line to the file.
+  > parameters
+    + data - The string to write to the file - a new line character will be written immediately following the string contents.

@@ -1,0 +1,15 @@
+CLS DzAlphaBlend : DzImageBlend
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/alphablend_dz
+  > summary
+    A blending operation that uses the alpha channel of the source image to blend it into the destination.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzAlphaBlend()
+  > summary
+    Default Constructor

@@ -1,0 +1,25 @@
+CLS DzDomNotation : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domnotation_dz
+  > summary
+    DAZ Script DOM notation node.
+
+### description
+  > summary
+    Represents a notation node in a DOM document.
+
+### properties
+
+PRP String : publicId
+  > summary
+    [Read Only] The public identifier of the notation.
+
+PRP String : systemId
+  > summary
+    [Read Only] The system identifier of the notation.
+
+### constructors
+
+CTR DzDomNotation()
+  > summary
+    Default constructor.

@@ -1,0 +1,143 @@
+CLS DzActionMenu : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/actionmenu_dz
+  > summary
+    Class that encapsulates a popup menu that contains DzActionMenuItems.
+
+### description
+  > seealso
+    DzActionMgr::getMenu(), DzPane::getOptionsMenu(), DzViewTool::getOptionsMenu(), DzPersistentMenu::getActionMenu()
+
+### enumerations
+
+ENU MenuType
+  > summary
+    TODO: Add description.
+  + CustomMenu - A menu where each DzActionMenuItem is explicitly defined
+  + PaneMenu - A menu where each DzActionMenuItem is implicitly defined; built dynamically from paneaction_dz subclasses
+  + ViewToolMenu - A menu where each DzActionMenuItem is implicitly defined; built dynamically from viewtoolaction_dz subclasses
+  + SaveAsMenu - A menu where each DzActionMenuItem is implicitly defined; built dynamically from assetiofilteraction_dz and savefilteraction_dz subclasses
+  + OpenRecentMenu - A menu where each DzActionMenuItem is implicitly defined; built dynamically from the return value of DzContentMgr::getRecentFileList() Since: 4.6.0.44
+
+### properties
+
+PRP Number : menuType
+  > summary
+    The type of the menu (Read Only until 4.6.0.74)
+
+### methods
+
+FUN void : clear()
+  > summary
+    Removes all items from the menu.
+
+FUN void : exec()
+  > summary
+    Displays the menu to the user
+
+FUN void : exec( Point pos )
+  > summary
+    Displays the menu to the user at the given position.
+  > parameters
+    + pos - The global window coordinates at which to display the popup menu.
+
+FUN DzActionMenu : findSubMenu( String label )
+  > parameters
+    + label - The label of the submenu to find.
+  > returns
+    A pointer to the submenu with the given label, NULL if no submenu with the label is found.
+
+FUN DzActionMenuItem : getItem( Number which )
+  > parameters
+    + which - The index of the item to return.
+  > returns
+    A pointer to the menu item at the given index, NULL if the index is invalid
+
+FUN Array<DzActionMenuItem> : getItemList()
+  > returns
+    An Array of DzActionMenuItem in this menu.
+
+FUN Number : getNumItems()
+  > returns
+    The number of items in the menu
+
+FUN DzActionMenu : getSubMenu( String label )
+  > parameters
+    + label - The label of the submenu to get.
+  > returns
+    A pointer to a submenu with the given label - if one does not already exist, it is created, and added to the end of the menu.
+
+FUN Boolean : hasItems()
+  > returns
+    true if there are items in this menu, false if the menu is empty.
+
+FUN void : insertAction( String className, Number at=-1 )
+  > summary
+    Inserts the given action into the menu at the given location.
+  > parameters
+    + className - The class name of the DzAction to insert into the menu
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertCustomAction( String guid, Number at=-1 )
+  > summary
+    Inserts the given custom action into the menu at the given location.
+  > parameters
+    + guid - The globally unique identifier for the custom action to insert into the menu
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertFileMergeAction( String fileName, String label=“”, Number at=-1 )
+  > summary
+    Inserts the given file merge action into the menu at the given location.
+  > parameters
+    + fileName - The path of the file to insert into the menu
+    + label - The label to display within the interface; defaults to fileName if not specified
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+  > since
+    4.6.0.76
+
+FUN void : insertFileOpenAction( String fileName, String label=“”, Number at=-1 )
+  > summary
+    Inserts the given file open action into the menu at the given location.
+  > parameters
+    + fileName - The path of the file to insert into the menu
+    + label - The label to display within the interface; defaults to fileName if not specified
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+  > since
+    4.6.0.76
+
+FUN void : insertItem( DzActionMenuItem item, Number at=-1 )
+  > summary
+    Inserts the given item into the menu at the given location.
+  > parameters
+    + item - The item to insert into the menu
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertMenu( String label, DzActionMenu menu, Number at=-1 )
+  > summary
+    Inserts the given menu into the menu at the given location as a submenu.
+  > parameters
+    + label - The label to display in this menu for the submenu item
+    + menu - The submenu to insert into this menu; if null, a new menu is created at the given index.
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : insertSeparator( Number where=-1 )
+  > summary
+    Inserts a separator into the menu at the given location.
+  > parameters
+    + at - The index at which to insert the item, if the index is invalid (the default) the item is appended to the end of the menu.
+
+FUN void : removeItem( DzActionMenuItem item )
+  > summary
+    Remove the given item from the menu.
+  > parameters
+    + item - The item to remove from the menu
+
+FUN void : simplifySeparators()
+  > summary
+    Removes any duplicate separators from the menu by replacing two or more adjacent separators with a single separator.
+
+### signals
+
+SIG void : itemListChanged()
+  > summary
+    Emitted when items are added to or removed from this menu

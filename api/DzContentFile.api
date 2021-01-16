@@ -1,0 +1,93 @@
+CLS DzContentFile : QObject DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/contentfile_dz
+  > summary
+    Represents a file in the content library.
+
+### description
+  > summary
+    Represents a file in the content library that can be loaded/imported. Also provides functionality for moving the file to a new location, renaming the file, and deleting the file from the library.
+  > seealso
+    DzContentFolder
+
+### properties
+
+PRP Boolean : canDelete
+  > summary
+    Holds whether or not the file can be deleted. (Read Only)
+
+PRP Boolean : canRename
+  > summary
+    Holds whether or not the file can be renamed. (Read Only)
+
+PRP Boolean : companionIsScript
+  > summary
+    Holds whether or not a companion file is a script file. (Read Only)
+
+PRP String : companionPath
+  > summary
+    Holds the path of the companion script for non-native files. (Read Only)
+
+PRP String : fullPath
+  > summary
+    Holds the full path of the file. (Read Only)
+
+PRP Boolean : hasCompanion
+  > summary
+    Holds whether or not a non-native file has a native companion file. (Read Only)
+
+PRP Boolean : hasCompanionScript
+  > summary
+    Holds whether or not a non-native file has a companion script file. (Read Only)
+
+PRP Pixmap : icon
+  > summary
+    Holds the icon for the file. (Read Only)
+
+PRP Boolean : isNative
+  > summary
+    Holds whether or not the file is a native content file . (Read Only)
+
+PRP Boolean : isScript
+  > summary
+    Holds whether or not the file is a script file . (Read Only)
+
+PRP String : label
+  > summary
+    Holds the label of the file, as displayed to the user. (Read Only)
+
+PRP String : name
+  > summary
+    Holds the name of the file. (Read Only)
+
+PRP Pixmap : smallIcon
+  > summary
+    Holds the small icon for the file. (Read Only)
+
+### methods
+
+FUN Boolean : deleteFile()
+  > summary
+    Removes this file from its content folder. The default implementation of this function deletes the content file and any associated thumbnail image from the disk, so use with care!
+  > returns
+    true if the file was removed successfully, otherwise false.
+
+FUN DzContentFolder : getFolder()
+  > returns
+    The current parent folder of this file.
+
+FUN DzContentFile : getNext()
+  > returns
+    The next sibling of this file.
+
+FUN void : reloadIcon()
+  > summary
+    Force the file to reload its icon.
+
+FUN Boolean : rename( String newName )
+  > summary
+    Rename the file to the given name.
+  > parameters
+    + name - The new name for the file.
+  > returns
+    true if the file was successfully renamed, otherwise false.

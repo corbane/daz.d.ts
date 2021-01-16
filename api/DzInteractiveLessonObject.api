@@ -1,0 +1,35 @@
+CLS DzInteractiveLessonObject : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/interactivelessonobject_dz
+  > summary
+    Encapsulates an Interactive Lesson object.
+
+### description
+  > since
+    4.6.4.24
+
+### methods
+
+FUN DzInteractiveInstructionObject : appendInstruction()
+  > returns
+    A new DzInteractiveInstructionObject appended to the end of the interactive lesson.
+
+FUN Number : count()
+  > returns
+    The number of instructions in the interactive lesson.
+
+FUN Number : currentIndex()
+  > returns
+    The index of the current instruction in the interactive lesson.
+
+FUN DzInteractiveInstructionObject : insertInstruction( Number index )
+  > returns
+    A new DzInteractiveInstructionObject inserted into the interactive lesson at index position.
+
+FUN DzInteractiveInstructionObject : instructionAt( Number index )
+  > returns
+    The instruction at index in the interactive lesson.
+
+FUN DzInteractiveInstructionObject : nextInstruction()
+  > returns
+    The next instruction in the interactive lesson, or NULL if the last instruction.

@@ -1,0 +1,45 @@
+CLS DzImageLayer : DzImageComponent
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagelayer_dz
+  > summary
+    A single layer in a multi-layer texture image.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN DzImageBlend : getBlendMode()
+  > returns
+    The blend mode for this image layer. The layer owns this object.
+
+FUN String : getDescription()
+  > returns
+    A user-readable description of the layer.
+
+FUN DzImageMask : getMask()
+  > returns
+    The mask for this image layer, NULL if the layer is not masked. The layer owns this object.
+
+FUN void : setBlendMode( DzImageBlend mode )
+  > summary
+    Sets the blending mode for this image layer.
+  > parameters
+    + mode - The new blending mode for the image layer. The layer takes ownership of this object and deletes it when it is no longer used.
+
+FUN void : setMask( DzImageMask mask )
+  > summary
+    Sets the mask for this image layer.
+  > parameters
+    + mask - A pointer to the new mask for the image layer. The layer takes ownership of this object and deletes it when it is no longer used. To clear the current mask, pass in a NULL pointer.
+
+### signals
+
+SIG void : blendModeChanged( DzImageBlend mode )
+  > summary
+    TODO: Add description.
+
+SIG void : maskChanged( DzImageMask mask )
+  > summary
+    TODO: Add description.

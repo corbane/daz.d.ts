@@ -1,0 +1,149 @@
+CLS DzTabWidget : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/tabwidget_dz
+  > summary
+    DAZScript wrapper for QTabWidget.
+
+### description
+  > summary
+    A DzTabWidget provides a stack of tabbed widgets.
+
+### enumerations
+
+ENU TabPosition
+  > summary
+    Enumerated value for describing where the tab is drawn.
+  + North - The top of the widget.
+  + South - The bottom of the widget.
+  + West - The left of the widget.
+  + East - The right of the widget.
+
+### properties
+
+PRP Number : count
+  > summary
+    The number of tabs in the tab stack. (Read-Only)
+
+PRP Number : currentIndex
+  > summary
+    The index position of the current tab page.
+
+PRP Boolean : documentMode
+  > summary
+    Whether or not the widget is rendered in a mode suitable for document pages, without a frame.
+
+PRP Boolean : movable
+  > summary
+    Whether or not the tabs can be reordered.
+
+PRP DzTabWidget.TabPosition : tabPosition
+  > summary
+    Holds which side of the widget the tab row is drawn on.
+
+PRP Boolean : tabsClosable
+  > summary
+    Whether or not close buttons are automatically added to each tab.
+  > seealso
+    tabCloseRequested()
+
+PRP Boolean : usesScrollButtons
+  > summary
+    Whether or not a tab bar should use buttons to scroll tabs when it has many tabs.
+
+### constructors
+
+CTR DzTabWidget( DzWidget parent )
+  > summary
+    Creates a tab widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the tab widget.
+
+### methods
+
+FUN Number : addTab( DzWidget page, String label )
+  > summary
+    Adds page as a new tab with the given label.
+  > returns
+    The index of the added tab
+
+FUN void : clear()
+  > summary
+    Removes all the pages, but does not delete them.
+
+FUN DzWidget : cornerWidget()
+  > returns
+    The widget shown in the corner of the tab widget or null.
+
+FUN DzWidget : currentWidget()
+  > returns
+    The widget for the page currently being displayed.
+
+FUN Number : indexOf( DzWidget page )
+  > returns
+    The index position of the page occupied by widget, or -1 if widget cannot be found.
+
+FUN Number : insertTab( Number index, DzWidget page, String label )
+  > summary
+    Inserts page as a new tab with the label label at position index.
+  > returns
+    The index of the inserted tab.
+
+FUN Boolean : isTabEnabled( Number index )
+  > returns
+    true if the page at position index is enabled, otherwise false.
+
+FUN void : removeTab( Number index )
+  > summary
+    Removes the page at index from the tab widget.
+  > attention
+    The widget itself is not deleted.
+
+FUN void : setCornerWidget( DzWidget widget )
+  > summary
+    Sets widget to be shown in the corner of the tab widget.
+
+FUN void : setCurrentWidget( DzWidget page )
+  > summary
+    Makes widget the current page.
+
+FUN void : setTabEnabled( Number index, Boolean enable )
+  > summary
+    Sets the enabled state of the page at position index.
+
+FUN void : setTabText( Number index, String label )
+  > summary
+    Sets the label of the page at position index.
+
+FUN void : setTabToolTip( Number index, String tip )
+  > summary
+    Sets the tool tip text for the page at position index.
+
+FUN void : setTabWhatsThis( Number index, String text )
+  > summary
+    Sets the what's this text for the page at position index.
+
+FUN String : tabText( Number index )
+  > returns
+    The label of the page at position index.
+
+FUN String : tabToolTip( Number index )
+  > returns
+    The tool tip for the page at position index.
+
+FUN String : tabWhatsThis( Number index )
+  > returns
+    The whats this text for the page at position index.
+
+FUN DzWidget : widget( Number index )
+  > returns
+    The widget for the page at position index.
+
+### signals
+
+SIG void : currentChanged( Number index )
+  > summary
+    Emitted whenever the current page index changes.
+
+SIG void : tabCloseRequested( Number index )
+  > summary
+    Emitted when the close button on a tab is clicked.

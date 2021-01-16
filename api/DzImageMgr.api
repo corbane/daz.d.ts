@@ -1,0 +1,179 @@
+CLS DzImageMgr : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagemgr_dz
+  > summary
+    Manager class for all loaded images.
+
+### description
+  > summary
+    There is only one instance of this manager in an application. This instance is created and owned by DzApp. Don't create an instance of this class, but rather request a pointer to it from DzApp via DzApp::getImageMgr().
+
+### statics
+
+STA Size : getImageSize( String imagePath )
+  > parameters
+    + imagePath - The full path of an image file to get the size of.
+  > returns
+    The size of the image, without actually reading the image contents. If the image format does not support this feature, this function returns an invalid size.
+  > since
+    4.9.3.82
+
+### methods
+
+FUN void : beginEditingImage()
+  > summary
+    Called prior to editing an image; pauses image preparation.
+
+FUN DzLayeredTexture : createLayeredTexture( String name )
+  > parameters
+    + name - The name of the layered texture to create.
+  > returns
+    A sharable object that stores information for a layered texture (image map) that is used in OpenGL.
+
+FUN void : deleteUnusedTextureObjects()
+  > summary
+    This method is called from the 3D viewports to clear out any texture objects that are no longer being used. It has to be called only when a Studio OGL context is current.
+
+FUN DzTexture : findImage( String fullPath )
+  > parameters
+    + path - The full path of the image file to find a DzTexture instance for.
+  > returns
+    A currently loaded image object whose source matches the given image filename (if any), otherwise NULL.
+
+FUN DzTexture : findImageByName( String name )
+  > parameters
+    + name - The name of the image to find.
+  > returns
+    The image with the given name (if any), otherwise NULL.
+
+FUN DzLayeredTexture : findLayeredTexture( DzUri uri )
+  > parameters
+    + uri - The URI of the layered texture to find.
+  > returns
+    The found layered texture (if any), otherwise null.
+
+FUN DzTexture : findTexture( DzUri uri )
+  > parameters
+    + uri - The URI of the texture to find.
+  > returns
+    The found texture (if any), otherwise null.
+
+FUN void : finishedEditingImage( DzTexture img )
+  > summary
+    Called after editing an image; restarts image preparation.
+  > parameters
+    + img - The image to add to the preparation list.
+
+FUN DzTexture : getImage( Number which )
+  > parameters
+    + which - The index of the image to return.
+  > returns
+    The image at the given index (if valid), otherwise NULL.
+
+FUN DzTexture : getImage( String fullPath, Number creationGamma )
+  > parameters
+    + fullPath - The full path of the image file to get a DzTexture instance for.
+    + creationGamma - The gamma to set on this DzTexture instance if this function creates it.
+  > returns
+    A currently loaded image object whose source matches the given image filename. If the image is not already loaded, it is loaded and the new image is returned.
+
+FUN DzTexture : getImage( String fullPath )
+  > parameters
+    + fullPath - The full path of the image file to get a DzTexture instance for.
+  > returns
+    A currently loaded image object whose source matches the given image filename. If the image is not already loaded, it is loaded and the new image is returned.
+
+FUN DzTexture : getImage( String fullPath, Number creationGamma, Number creationType )
+  > parameters
+    + fullPath - The full path of the image file to get a DzTexture instance for.
+    + creationGamma - The gamma to set on this DzTexture instance if this function creates it.
+    + creationType - The texture type to set on this DzTexture instance if this function creates it.
+  > returns
+    A currently loaded image object whose source matches the given image filename. If the image is not already loaded, it is loaded and the new image is returned.
+
+FUN String : getImageOpenPath()
+  > returns
+    The path of the last directory that images were loaded from.
+
+FUN String : getImageSavePath()
+  > returns
+    The path of the last directory that images were saved to.
+
+FUN Number : getNumImages()
+  > returns
+    The number of currently available images.
+
+FUN String : getUniqueImageName( String name )
+  > summary
+    Creates a modified version of the given name if necessary to make it unique.
+  > parameters
+    + name - The image name to make unique.
+  > returns
+    The given name if it is already unique, otherwise a modified copy of the name that is unique.
+
+FUN void : imagePrepared( DzTexture img, String tempName )
+  > summary
+    Called by the framework to notify the manager that the image has been prepared for the off-line renderer.
+  > parameters
+    + img - The image that has been prepared.
+    + tempName - The new temporary name for the image.
+
+FUN Image : loadImage( String filename )
+  > summary
+    Reads an image from a file.
+  > parameters
+    + filename - The name of the image file to load.
+  > returns
+    The loaded image.
+
+FUN DzError : loadImage( String filename, Image img, Number importerIdx=-1 )
+  > summary
+    Reads an image from a file.
+  > parameters
+    + filename - The name of the image file to load.
+    + img - The image that the file will be loaded into.
+    + importerIdx - The index of the importer to use to load the image. If less than zero, the manager will attempt to find an importer that can load the file.
+  > returns
+    DZ_NO_ERROR if the file was loaded successfully, otherwise an appropriate error code.
+
+FUN void : prepareAllImages( DzRenderer r )
+  > summary
+    Forces a flush of the background image processing buffer.
+  > parameters
+    + r - The renderer that is about to render the scene.
+
+FUN void : refresh()
+  > summary
+    Reloads any images whose source files have changed.
+
+FUN DzError : saveImage( String filename, Image image, Number exporterIdx=-1 )
+  > summary
+    Writes an image to a file.
+  > parameters
+    + filename - The name of the image file to save.
+    + image - The image to save.
+    + exporterIdx - The index of the exporter to use to save the image. If less than zero, the manager will attempt to find an appropriate exporter based on the filename extension.
+  > returns
+    DZ_NO_ERROR if the file was saved successfully, otherwise an appropriate error code.
+
+FUN void : setImageOpenPath( String path )
+  > summary
+    Sets the file path that a file open dialog will point to for images.
+  > parameters
+    + path - The folder path that the open image dialogs will default to.
+
+FUN void : setImageSavePath( String path )
+  > summary
+    Sets the file path that a file save dialog will point to for images.
+  > parameters
+    + path - The folder path that the save image dialogs will default to.
+
+### signals
+
+SIG void : autoRefreshChanged( Boolean onOff )
+  > summary
+    Emitted when the auto refresh state changes.
+
+SIG void : imageListChanged()
+  > summary
+    Emitted when an image is added to or removed from the list.

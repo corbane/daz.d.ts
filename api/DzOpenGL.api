@@ -1,0 +1,243 @@
+CLS DzOpenGL : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/opengl_dz
+  > summary
+    Provides management of OpenGL extensions and basic state.
+
+### description
+  > summary
+    You can access the global instance of DzOpenGL via the Global::OpenGL variable.
+
+### enumerations
+
+ENU OGLTexQuality
+  > summary
+    Defines the possible values for the application-wide texture quality settings.
+  + OGLLow - Lowest quality / Best performance. Texture sizes are clamped to a small size or the maximum size supported by the hardware, whichever is less.
+  + OGLMed - Medium quality / Better performance. Texture sizes are clamped to a medium size or the maximum size supported by the hardware, whichever is less.
+  + OGLHigh - High quality / Good performance. Texture sizes are clamped to a large size or the maximum size supported by the hardware, whichever is less.
+  + OGLBest - Best quality / Low performance. Texture sizes are clamped to the maximum size supported by the hardware.
+
+### constructors
+
+FUN Boolean : isOGLInitialized()
+  > returns
+    true if the OpenGL, and the DAZ-supported OpenGL extensions have been initialized. The other OpenGL support funtions will not return the correct result until initialization has occurred.
+
+### methods
+
+FUN Number : getBoundingBoxActiveOpacity()
+  > returns
+    the opacity value of the bounding box for active ( highlighted ) nodes.
+
+FUN Number : getBoundingBoxEdgeLength()
+  > returns
+    the length of the edges of the bounding boxes.
+
+FUN Number : getBoundingBoxInactiveOpacity()
+  > returns
+    the opacity value of the bounding box for inactive nodes that are selected.
+
+FUN Number : getDepthBufferBits()
+  > returns
+    The number of bit depth of the client depth buffer.
+
+FUN Boolean : getDrawNodeHighlight()
+  > returns
+    true if nodes should be drawn with a highlight
+
+FUN Number : getMajorVersion()
+  > returns
+    The major version number of OpenGL supported on the current hardware.
+
+FUN Number : getMaxTextureSize()
+  > returns
+    The maximim texture size supported by the client.
+
+FUN Number : getMaxTextureUnits()
+  > returns
+    The maximim number of textures supported by the client.
+
+FUN Number : getMinorVersion()
+  > returns
+    The minor version number of OpenGL supported on the current hardware.
+
+FUN Number : getNumAuxBuffers()
+  > returns
+    The number auxiliary buffers supported by the client.
+
+FUN Number : getNumLights()
+  > returns
+    The maximim number of lights supported by the client.
+
+FUN Number : getNumOGLExtensions()
+  > returns
+    The number of supported OpenGL extensions
+
+FUN Number : getOpenGLVersion()
+  > returns
+    The OpenGL major and minor version numbers supported on the current hardware.
+
+FUN pbuffer_dz : getPBuffer()
+  > returns
+    A pointer to the application-wide global PBuffer object
+
+FUN Number : getReleaseNumber()
+  > returns
+    The release number of OpenGL supported on the current hardware.
+
+FUN Number : getSubDivisionWireOpacity()
+  > returns
+    the opacity value of the wireframe for the generated edges of a subdivided mesh.
+
+FUN DzOpenGL.OGLTexQuality : getTextureQuality()
+  > returns
+    The current quality setting for loading OpenGL textures
+
+FUN Number : getTextureQualityMaxSize()
+  > returns
+    The maximum dimension for a texture map based on the current OpenGL texture quality setting.
+
+FUN Number : getTriDivisionWireOpacity()
+  > returns
+    the opacity value of the wireframe for drawn triangulation of quads.
+  > since
+    4.9.3.142
+
+FUN Number : getWireframeOpacity()
+  > returns
+    the opacity value of the wireframe for the edges of a mesh.
+
+FUN Boolean : isDisplayOptimizationEnabled()
+  > returns
+    true if the user has enabled display optimization and if its supported.
+
+FUN Boolean : isMultisampleEnabled()
+  > returns
+    true if the user has enabled hardware antialiasing.
+
+FUN Boolean : isMultisampleSupported()
+  > returns
+    true if the client supports hardware antialiasing.
+
+FUN Boolean : isOGLExtensionSupported( String extension )
+  > parameters
+    + extension - The extension to check
+  > returns
+    true if the given OpenGL extension is supported
+
+FUN Boolean : isOGLShaderLanguageSupported()
+  > summary
+    Checks for support of the four following extensions: GL_ARB_shader_objects, GL_ARB_fragment_shader, GL_ARB_vertex_shader, GL_ARB_shading_language_100. All four extensions must exist for this function to return true.
+  > returns
+    true if OpenGL Shader Language is supported
+
+FUN Boolean : isShadowingSupported()
+  > returns
+    true if the client supports hardware shadow mapping.
+
+FUN Boolean : isVBOSupported()
+  > returns
+    true if the client supports Vertex Buffer Objects.
+
+FUN void : setBoundingBoxActiveOpacity( Number opacity )
+  > summary
+    Sets the opacity of the bounding box for active ( highlighted ) nodes.
+  > parameters
+    + opacity - The opacity value to be used
+
+FUN void : setBoundingBoxEdgeLength( Number length )
+  > summary
+    Sets the length of the edges of the bounding boxes.
+  > parameters
+    + length - The edge length to be used
+
+FUN void : setBoundingBoxInactiveOpacity( Number opacity )
+  > summary
+    Sets the opacity of the bounding box for inactive nodes that are selected.
+  > parameters
+    + opacity - The opacity value to be used
+
+FUN void : setDisplayOptimizationEnabled( Boolean onOff )
+  > summary
+    Sets whether or not display optimization is enabled in the OpenGL viewports
+  > parameters
+    + onOff - If true, display optimizations will be enabled
+      Deprecated
+      use setPrimitiveDrawMode instead
+
+FUN void : setDrawNodeHighlight( Boolean onOff )
+  > parameters
+    + onOff - If true, nodes will be drawn with a highlight
+
+FUN void : setMultisampleEnabled( Boolean onOff )
+  > summary
+    Sets whether or not multisampling is enabled in the OpenGL viewports
+  > parameters
+    + onOff - if true, multisampling is enabled
+
+FUN void : setSubDivisionWireOpacity( Number opacity )
+  > summary
+    Sets the opacity of the wireframe for the generated edges of a subdivided mesh.
+  > parameters
+    + opacity - The opacity value
+
+FUN void : setTextureQuality( DzOpenGL.OGLTexQuality quality )
+  > summary
+    Sets the quality setting for loading OpenGL textures
+  > parameters
+    + quality - The quality of the texture
+
+FUN void : setTriDivisionWireOpacity( Number opacity )
+  > summary
+    Sets the opacity of the wireframe for the generated edges of a subdivided mesh.
+  > parameters
+    + opacity - The opacity value
+  > since
+    4.9.3.142
+
+FUN void : setWireframeOpacity( Number opacity )
+  > summary
+    Sets the opacity of the wireframe for the edges of a mesh.
+  > parameters
+    + opacity - The opacity value
+
+### signals
+
+SIG void : boundingBoxActiveOpacityChanged( Number value )
+  > summary
+    TODO: Add description.
+
+SIG void : boundingBoxEdgeLengthChanged( Number value )
+  > summary
+    TODO: Add description.
+
+SIG void : boundingBoxInactiveOpacityChanged( Number value )
+  > summary
+    TODO: Add description.
+
+SIG void : displayOptimizationEnabled( Boolean onOff )
+  > summary
+    Emitted when display optimization is disabled or enabled.
+  > parameters
+    + onOff - If true, display optimization was enabled. If false, display optimization was disabled.
+
+SIG void : multisampleEnabled( Boolean onOff )
+  > summary
+    Emitted when multisample is disabled or enabled.
+  > parameters
+    + onOff - If true, multipsample was enabled. If false, multisample was disabled.
+
+SIG void : subDivisionWireOpacityChanged( Number value )
+  > summary
+    TODO: Add description.
+
+SIG void : subWireframeOpacityChanged( Number value )
+  > summary
+    TODO: Add description.
+
+SIG void : textureQualityChanged( DzOpenGL.OGLTexQuality quality )
+  > summary
+    Emitted when the texture quality setting has changed.
+  > parameters
+    + quality - The new texture quality setting.

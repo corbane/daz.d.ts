@@ -1,0 +1,133 @@
+CLS DzShaderCamera : DzBasicCamera
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/shadercamera_dz
+  > summary
+    Custom scriptable class for cameras using RenderMan Shader Language (RSL) Shaders.
+
+### description
+  > summary
+    This class provides a DzBasicCamera derived object with creator-defined properties that will be passed to the RSL Shader at render-time. Properties intended to be used to pass values as arguments to a shader attached to the camera must be added using DzRSLShader. Properties for the camera that will be used by the render-time scripts to set attributes must be added via DzElement::addProperty().
+
+### constructors
+
+CTR DzShaderCamera()
+  > summary
+    Default Constructor.
+
+CTR DzShaderCamera( String definitionFile, String renderTimeFile )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+  > parameters
+    + definitionFile - The relative [to DzApp::getScriptsPath()] path to the script file that creates this camera's property list.
+    + renderTimeFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that executes at render time.
+  > seealso
+
+CTR setDefinitionFile()
+
+CTR DzShaderCamera( String definitionFile )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+  > parameters
+    + definitionFile - The relative [to DzApp::getScriptsPath()] path to the script file that creates this camera's property list.
+  > seealso
+
+CTR setDefinitionFile()
+
+### methods
+
+FUN Boolean : addShader( DzRSLShader shader )
+  > summary
+    Adds shader to this camera's internal list of shaders and sets shader 's owner to this camera.
+  > returns
+    true if shader is successfully added to the list (e.g. does not already exist), otherwise false.
+
+FUN String : getCameraName()
+  > returns
+    The internal name of the camera. This is not the same as the QObject::name property.
+
+FUN String : getDefinitionFile()
+  > returns
+    The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this camera's property list.
+
+FUN Number : getNumShaders()
+  > returns
+    The number of DzRSLShaders on this camera.
+
+FUN String : getRenderTimeFile()
+  > returns
+    The relative path [from DzApp::getScriptsPath()] to the DAZ Script that is executed at render-time.
+
+FUN DzRSLShader : getShader( Number index )
+  > returns
+    The DzRSLShader at index or NULL if no shader exists at that index.
+
+FUN Boolean : removeShader( DzRSLShader shader )
+  > summary
+    Removes shader from this camera's internal list of shaders.
+  > returns
+    true if shader is successfully removed from the list, otherwise false.
+
+FUN void : setCameraName( String name )
+  > summary
+    Sets the internal name of the camera; this is not the same as the QObject::name property. By default, this is “Custom”.
+
+FUN void : setDefinitionFile( String definitionFile, Boolean doOverride=false, Boolean runScript=true )
+  > summary
+    Sets the relative path of the [DAZ Script] file that builds this camera's property list.
+  > parameters
+    + definitionFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that creates this camera's property list
+  > attention
+    definitionFile is executed the moment the call to this method is made. A global transient variable named Camera - referring to the current DzShaderCamera, exists for the duration of definitionFile. Referencing this variable from outside definitionFile will result in an error.
+
+FUN Boolean : setRenderTimeFile( String renderTimeFile )
+  > summary
+    Sets the relative path of the [DAZ Script] file that will be executed at render-time. This script can declare variables, set displays, hiders, and/or options as well as shader parameters for the element, and implement custom logic for special effects.
+  > parameters
+    + renderTimeFile - The relative path [from DzApp::getScriptsPath()] to the DAZ Script that executes at render time.
+  > returns
+    true if renderTimeFile is valid, otherwise false.
+  > attention
+    When renderTimeFile is executed, a global variable named Camera - referring to the current DzShaderCamera - exists for the duration of renderTimeFile. Referencing this variable from outside filename will result in an error. See the Render Time Functions for a list of special functions only available to this script.
+
+FUN void : declare( Array tokens, Array types )
+  > summary
+    Sets the global graphic state by adding a series of RiDeclare calls before RiWorldBegin.
+  > parameters
+    + tokens - An Array of the String] token names to set
+    + types - An Array of the corresponding String] type to set for each token
+  > example
+    var aTokens = [ "Nn", "Pp", "Cc", "Ff" ];
+    var aParams = [ "varying normal", "varying point", "varying color", "varying float" ];
+    Camera.declare( aTokens, aParams );
+
+FUN void : setDisplay( String name, String type, String mode, Array tokens, Array params )
+  > summary
+    Sets the global graphic state by adding a RiDisplayV call before RiWorldBegin.
+  > parameters
+    + name - The name of the file or framebuffer to set, depending on type
+    + type - The type of display to set; i.e. file, tiff, etc
+    + mode - The mode to set; i.e. rgb, rgba, etc
+    + tokens - An Array of the String] tokens to set
+    + params - An Array of the corresponding basic type to set for each token
+  > example
+    NEED EXAMPLE
+
+FUN void : setHider( String type, Array tokens, Array params )
+  > summary
+    Sets the global graphic state by adding a RiHiderV call before RiWorldBegin.
+  > parameters
+    + type - The type of hider to set; i.e. hidden, raytrace, photonmap, etc
+    + tokens - An Array of the String] tokens to set
+    + params - An Array of the corresponding basic type to set for each token
+  > example
+    NEED EXAMPLE
+
+FUN void : setOption( String option, Array tokens, Array params )
+  > summary
+    Sets the global graphic state by adding a RiOptionV call before RiWorldBegin.
+  > parameters
+    + option - The name of the option to set
+    + tokens - An Array of the String] tokens to set
+    + params - An Array of the corresponding basic type to set for each token
+  > example
+    NEED EXAMPLE

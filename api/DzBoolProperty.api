@@ -1,0 +1,46 @@
+CLS DzBoolProperty : DzIntProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boolproperty_dz
+  > summary
+    An animatable boolean property.
+
+### description
+  > summary
+    This class provides an animatable boolean property that is stored and can be accessed as an integer property. The integer value 0 is false, any other integer value is true.
+
+### constructors
+
+CTR DzBoolProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzBoolProperty( String name, Boolean canAnimate, Boolean isUserProperty, Boolean initVal=true )
+  > summary
+    Overloaded constructor.
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + initVal - Sets the default value of the property.
+
+### methods
+
+FUN Boolean : getBoolValue()
+  > returns
+    The boolean value of the property at the current time.
+
+FUN Boolean : getDefaultBoolValue()
+  > returns
+    The default boolean value of the property.
+
+FUN void : setBoolValue( Boolean value )
+  > summary
+    Sets the boolean value for this property at the current time - or the default value if this property is not animatable.
+  > parameters
+    + val - The new value for the property.
+
+FUN void : setDefaultBoolValue( Boolean val )
+  > summary
+    Sets the default boolean value for this property.
+  > parameters
+    + val - The new default value for the property.

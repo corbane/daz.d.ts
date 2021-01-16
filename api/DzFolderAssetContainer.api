@@ -1,0 +1,96 @@
+CLS DzFolderAssetContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/folderassetcontainer_dz
+  > summary
+    A container type that presents assets as content files reside on disk.
+
+### description
+  > summary
+    The “Folder” container type serves to present assets as the files they represent exist in the folder structure on disk.
+  > seealso
+    DzAssetMgr::getContentDirs()
+    DzAssetMgr::getPoserDirs()
+    DzAssetMgr::getImportDirs()
+    DzAsset
+
+### properties
+
+PRP Array : excludeFolders
+  > summary
+    Holds the list of folder names to exclude as children of this container.
+
+PRP Array : fileFilters
+  > summary
+    Holds the list of file filters for this container.
+
+PRP Boolean : isImport
+  > summary
+    Holds whether or not this container represents an Import folder. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isImportTopLevel
+  > summary
+    Holds whether or not this container is at the top level of the Import folder hierarchy. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isNative
+  > summary
+    Holds whether or not this container represents a native folder. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isNativeTopLevel
+  > summary
+    Holds whether or not this container is at the top level of the native folder hierarchy. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isPoser
+  > summary
+    Holds whether or not this container represents a Poser folder. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Boolean : isPoserIntermediate
+  > summary
+    Holds whether or not this container is an immediate child of the top level folder in a Poser folder hierarchy. (Read Only)
+  > since
+    4.11.0.214
+
+PRP Boolean : isPoserTopLevel
+  > summary
+    Holds whether or not this container is at the top level of the Poser folder hierarchy. (Read Only)
+  > since
+    4.11.0.193
+
+PRP Array : onlyIncludeFolders
+  > summary
+    Holds the list of folder names to allow as children of this container.
+
+### methods
+
+FUN Boolean : fileMatchesFilter( String shortFileName )
+  > returns
+    true if shortFileName matches the filter for this container, otherwise false.
+
+FUN String : getFullPath()
+  > returns
+    The full path of the folder that this container represents.
+
+FUN Boolean : hasDirectoryChildren()
+  > returns
+    true if this container has child containers that are directories, otherwise false.
+
+FUN Boolean : insertsAsLink( DzAsset asset )
+  > returns
+    true if asset conflicts will create a link when called, otherwise false.
+  > since
+    4.9.0.47
+
+FUN Boolean : updateChildren()
+  > summary
+    Attempts to update the child containers of this container.
+  > returns
+    true if the update was successful, otherwise false.

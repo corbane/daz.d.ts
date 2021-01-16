@@ -1,0 +1,40 @@
+CLS DzAudioImporter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/audioimporter_dz
+  > summary
+    Base class for all audio clip importers.
+
+### description
+  > seealso
+    DzMultiMediaMgr
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    A description of the importer that can be placed in a file type selection combo box (e.g. “WAV Format”).
+
+FUN String : getExtension()
+  > returns
+    The file extension (excluding the preceding dot) supported by this importer.
+
+FUN DzError : loadAudio( String filename, DzAudioClip clip, DzFileIOSettings options )
+  > summary
+    TODO: Add description.
+
+FUN DzError : loadAudio( String filename, DzAudioClip clip )
+  > summary
+    Reads the file.
+  > parameters
+    + filename - Name of the file to be read.
+    + clip - Audio clip to read data into.
+  > returns
+    DZ_NO_ERROR on success, otherwise an error code.
+
+FUN Boolean : recognize( String filename )
+  > summary
+    Test the given filename and file contents to see if this importer can read it.
+  > parameters
+    + filename - The name of the file to test.
+  > returns
+    true if the importer can import the file, otherwise false.

@@ -1,0 +1,74 @@
+CLS DzVideoClip : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/videoclip_dz
+  > summary
+    Class that encapsulates a simple video clip with per frame images.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzVideoClip()
+  > summary
+    Default Constructor.
+
+CTR DzVideoClip( Number width, Number height, Number rate )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+
+### methods
+
+FUN void : appendFrame( Image img )
+  > summary
+    Adds a frame to the end of the clip
+  > parameters
+    + img - Image to add as a frame.
+
+FUN void : appendFrameFile( String imgFilename )
+  > summary
+    Adds a frame to the end of the clip
+  > parameters
+    + filename - Image file to add as a frame.
+
+FUN DzAudioClip : getAudio()
+  > returns
+    The audio (if any) that is associated with the video.
+
+FUN DzTime : getAudioStartTime()
+  > returns
+    The time offset from the beginning of the video that the audio clip begins. This can be negative (the beginning of the video starts part way into the audio clip).
+
+FUN Image : getFrame( Number i )
+  > returns
+    The i'th frame in still image form
+
+FUN Number : getFrameRate()
+  > returns
+    The number of frames per second for the clip
+
+FUN Number : getHeight()
+  > returns
+    The height of the video clip.
+
+FUN Number : getNumFrames()
+  > returns
+    The number of frames in the video clip.
+
+FUN Number : getWidth()
+  > returns
+    The width of the video clip.
+
+FUN void : setAudio( DzAudioClip audio, DzTime audioStartTime )
+  > summary
+    Set the audio that accompanies the video clip
+  > parameters
+    + audio - The audio clip for the video.
+    + audioStartTime - The time offset from the beginning of the video that the audio clip begins. This can be negative (the beginning of the video starts part way into the audio clip).
+
+FUN void : setFrameRate( Number rate )
+  > summary
+    Set the frame rate of the clip
+  > parameters
+    + rate - The number of frames per second for the clip

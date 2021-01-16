@@ -1,0 +1,27 @@
+CLS DzImageManip : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imagemanip_dz
+  > summary
+    The base class for image manipulators.
+
+### description
+  > summary
+    Image manipulators are applied to an image layer before it is blended into the final image.
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    The description of the manipulator that will be displayed to the user.
+
+FUN void : manipulate( Image img )
+  > summary
+    Applies the manipulator to img.
+  > parameters
+    + img - The image to apply the manipulation to.
+
+### signals
+
+SIG void : manipulationChanged()
+  > summary
+    Emitted when the value of the manipulator has changed and it needs to be reapplied.

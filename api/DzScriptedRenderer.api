@@ -1,0 +1,838 @@
+CLS DzScriptedRenderer : DzRenderer
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/scriptedrenderer_dz
+  > summary
+    Custom scriptable 3Delight renderer.
+
+### description
+  > summary
+    Implements a scriptable RenderMan interface for the scene to render itself through the 3Delight renderer.
+  > seealso
+    DzRenderMgr::findRenderer()
+    DzDelightRenderer
+    Sample: Rendering : Scripted Renderer Settings
+    Sample: Rendering : Scripted Renderer Save Preset
+    Sample: Rendering : Scripted Renderer Load
+    Sample: Rendering : Scripted Renderer Pass
+  > attention
+    This class is only available as a component of DAZ Studio Advanced Edition.
+
+### constructors
+
+CTR DzScriptedRenderer()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN void : buildEnvironmentSpaceTransform()
+  > summary
+    Builds an environment space transform that can be used by shaders to account for differences between the application and the 3Delight render engine.
+  > since
+    4.10.0.55
+
+FUN void : cameraProject( DzCamera camera, Number width, Number height )
+  > summary
+    Sets up the camera for the pass.
+  > parameters
+    + camera - The camera to use.
+    + width - The width of the render.
+    + height - The height of the render.
+
+FUN Boolean : continueAfterPreProcess()
+  > returns
+    true if the renderer should use the call to RiSurface, RiDisplace, RiLight, or RiAreaLight, otherwise false.
+
+FUN void : createLight( DzLight light, String shadowMap )
+  > summary
+    Creates a light in the stream.
+  > parameters
+    + light - The light to create.
+    + shadowMap - The shadow map for the light.
+
+FUN void : deleteFiles( Array files )
+  > summary
+    Deletes a list of files.
+  > parameters
+    + files - A list of the file paths to delete.
+
+FUN void : doDefaultDisplay()
+  > summary
+    Causes the renderer to call the same display as the standard 3Delight renderer.
+
+FUN Array : doDefaultShadowPass( DzRenderOptions options, DzCamera camera, String dir, Boolean reuse )
+  > parameters
+    + options - The render options for the shadow maps.
+    + camera - The camera to generate the shadow map for.
+    + dir - The directory to generate the shadow maps in.
+    + reuse - If true and a shadow map exists by the the same label of a light exists, the shadow map is reused instead of being generated.
+  > returns
+    The list of names for the generated shadow maps.
+
+FUN String : doDefaultShadowPass( DzRenderOptions options, DzCamera camera, DzLight light, String dir, Boolean reuse )
+  > parameters
+    + options - The render options for the shadow maps.
+    + camera - The camera to use for the shadow pass.
+    + light - The light to generate shadow map for.
+    + dir - The directory to generate the shadow map in.
+    + reuse - If true and a shadow map already exists, it is reused.
+  > returns
+    The name of the generated shadow map.
+
+FUN void : doDefaultShadowPassEnd( DzRenderOptions options, DzCamera camera, DzLight light )
+  > summary
+    Cleans up after doDefaultShadowPassPrep().
+  > parameters
+    + options - The render options for the pass.
+    + camera - The camera for the shadow pass.
+    + light - The light the shadow map was generated for.
+  > attention
+    This call must be proceeded by a call to doDefaultShadowPassPrep().
+
+FUN String : doDefaultShadowPassPrep( DzRenderOptions options, DzCamera camera, DzLight light, String dir, Boolean reuse )
+  > parameters
+    + options - The render options for the pass.
+    + camera - The camera for the shadow pass.
+    + light - The light to generate shadow map for.
+    + dir - The directory to put the shadow map in.
+    + reuse - If true and the map already exists, it is reused.
+  > returns
+    The name of the shadow map for the light.
+  > attention
+    This call must be followed by a call to doDefaultShadowPassEnd().
+
+FUN void : doShutter( DzRenderOptions opts )
+  > summary
+    Script implementation of the RiSpec RiShutter() function.
+  > parameters
+    + options - The render options for the shutter; whether or not motion blur is enabled and the amount of blur if enabled.
+
+FUN void : fullSceneCameraProject( DzCamera camera, Number width, Number height )
+  > summary
+    Sets up the camera for the pass, ensuring all render-able objects are in view.
+  > parameters
+    + camera - The camera to use.
+    + width - The width of the render.
+    + height - The height of the render.
+
+FUN String : getDefaultShaderSearchPath()
+  > returns
+    The default search path for shaders and DSO shadeops, as a string in the format expected by 3Delight (which is mostly a list of paths separated by semicolons). The getShaderSearchPaths() method is called to get the list of paths to use.
+
+FUN String : getDefinitionFile()
+  > returns
+    The path to the script that is run in order to define the renderer.
+
+FUN String : getDisplacementPreProcessScript()
+  > returns
+    The path to the script that is run in the Displacement pre-process step.
+
+FUN DzRenderHandler : getHandler()
+  > returns
+    The current render handler (if any), otherwise NULL.
+  > attention
+    This call is only valid during a render.
+
+FUN DzLight : getLight( Number index )
+  > parameters
+    + index - The index of the light to get.
+  > returns
+    The light in the render list at index (if valid), otherwise NULL.
+
+FUN Number : getLightCount()
+  > returns
+    The number of lights to render.
+
+FUN String : getLightPreProcessScript()
+  > returns
+    The path to the script that is run in the Light pre-process step.
+
+FUN Array : getLightsToRender()
+  > returns
+    The list of lights to render.
+
+FUN DzNode : getNode( Number index )
+  > parameters
+    + index - The index of the node to get.
+  > returns
+    The node in the render list at index (if valid), otherwise NULL.
+
+FUN Number : getNodeCount()
+  > returns
+    The number of nodes to render.
+
+FUN Array : getNodesToRender()
+  > returns
+    The list of nodes to render.
+
+FUN Number : getNumIlluminateHandels()
+  > returns
+    The number of light handles.
+  > attention
+    These handles are used in the riIlluminate() call to turn lights on/off.
+
+FUN DzElement : getPropertyHolder()
+  > returns
+    The element that holds the properties for this scripted render pass.
+  > attention
+    When applying a new pass to the renderer, the properties on this element should be cleared and the properties to use during the render pass should be added.
+
+FUN String : getRenderScript()
+  > returns
+    The path of the script that controls the rendering process.
+
+FUN String : getSurfacePreProcessScript()
+  > returns
+    The path to the script that is run in the Surface pre-process step.
+
+FUN void : prepareMotionSamples()
+  > summary
+    Prepares motion samples for all nodes to render.
+
+FUN void : prepareMotionSamples( Array nodes )
+  > summary
+    Prepares motion samples for a list of nodes.
+  > parameters
+    + nodes - The list of nodes to prepare motion samples for.
+
+FUN void : prepareNodeMotionSamples( DzNode node )
+  > summary
+    Prepares motion samples for node.
+  > parameters
+    + node - The node to prepare motion samples for.
+
+FUN void : removeLight( Number index )
+  > summary
+    Removes a light from the render list.
+  > parameters
+    + index - The index of the light to remove.
+
+FUN void : removeNode( Number index )
+  > summary
+    Removes a node from the render list.
+  > parameters
+    + index - The index of the node to remove.
+
+FUN void : renderBackDrop( DzBackdrop backdrop, Number width, Number height )
+  > summary
+    Renders the backdrop for the scene.
+  > parameters
+    + backdrop - The backdrop for the scene.
+    + width - The width of the render.
+    + height - The height of the render.
+
+FUN void : renderNode( DzNode node )
+  > summary
+    Adds a node to the list of nodes to be rendered.
+  > parameters
+    + node - The node to render.
+
+FUN void : renderNodes( Array nodes )
+  > summary
+    Adds a node to the list of nodes to be rendered.
+  > parameters
+    + nodes - The list of nodes to render.
+
+FUN Number : riAreaLightSource( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiAreaLightSource() function.
+  > parameters
+    + name - The name of the light shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+  > returns
+    The light handle index for this light source
+
+FUN void : riAtmosphere( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiAtmosphere() function.
+  > parameters
+    + name - The name of the volume shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riAttribute( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiAttribute() function.
+  > parameters
+    + name - TODO
+    + tokens - TODO
+    + params - TODO
+
+FUN void : riAttributeBegin()
+  > summary
+    Script implementation of the RiSpec RiAttributeBegin() function.
+
+FUN void : riAttributeEnd()
+  > summary
+    Script implementation of the RiSpec RiAttributeEnd() function.
+
+FUN void : riBegin( String ribPath )
+  > summary
+    Script implementation of the RiSpec RiBegin() function.
+  > parameters
+    + ribPath - TODO
+
+FUN void : riCamera( String camera, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiCamera() function.
+  > parameters
+    + camera - The name of the camera.
+    + tokens - A list of token names passed to the camera.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riClipping( Number hither, Number yon )
+  > summary
+    Script implementation of the RiSpec RiClipping() function.
+  > parameters
+    + hither - TODO
+    + yon - TODO
+
+FUN void : riClippingPlane( Number x, Number y, Number z, Number nx, Number ny, Number nz )
+  > summary
+    Script implementation of the RiSpec RiClipping() function.
+  > parameters
+    + x - TODO
+    + y - TODO
+    + z - TODO
+    + nx - TODO
+    + ny - TODO
+    + nz - TODO
+
+FUN void : riColor( Color Cs )
+  > summary
+    Script implementation of the RiSpec RiColor() function.
+  > parameters
+    + Cs - The color to set.
+
+FUN void : riConcatTransform( DzMatrix4 transform )
+  > summary
+    Script implementation of the RiSpec RiConcatTransform() function.
+  > parameters
+    + transform - The transform to concatenate.
+
+FUN void : riCoordinateSystem( String space )
+  > summary
+    Script implementation of the RiSpec RiCoordinateSystem() function.
+  > parameters
+    + space - The name for the coordinate system.
+
+FUN void : riCoordSysTransform( String space )
+  > summary
+    Script implementation of the RiSpec RiCoordSysTransform() function.
+  > parameters
+    + space - The name for the coordinate system.
+
+FUN void : riCropWindow( Number xmin, Number xmax, Number ymin, Number ymax )
+  > summary
+    Script implementation of the RiSpec RiCropWindow() function.
+  > parameters
+    + xmin - TODO
+    + xmax - TODO
+    + ymin - TODO
+    + ymax - TODO
+
+FUN void : riDeclare( String name, String declaration )
+  > summary
+    Script implementation of the RiSpec RiDeclare() function.
+  > parameters
+    + name - TODO
+    + declaration - TODO
+
+FUN void : riDepthOfField( Number fstop, Number focallength, Number focaldistance )
+  > summary
+    Script implementation of the RiSpec RiDepthOfField() function.
+  > parameters
+    + fstop - TODO
+    + focallength - TODO
+    + focaldistance - TODO
+
+FUN void : riDetailRange( Number minvis, Number lowtran, Number uptran, Number maxvis )
+  > summary
+    Script implementation of the RiSpec RiDetailRange() function.
+  > parameters
+    + minvis - TODO
+    + lowtran - TODO
+    + uptran - TODO
+    + maxvis - TODO
+
+FUN void : riDisplacement( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiDisplacement() function.
+  > parameters
+    + name - The name of the displacement shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riDisplay( String name, String type, String mode, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiDisplay() function.
+  > parameters
+    + name - The name of the display.
+    + type - The type of the display.
+    + mode - The mode of the display.
+    + tokens - A list of token names passed to the display.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riDisplayChannel( String channel, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiDisplayChannel() function.
+  > parameters
+    + name - The name of the channel.
+    + tokens - A list of token names passed to the channel.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riElse()
+  > summary
+    Script implementation of the RiSpec RiElse() function.
+
+FUN void : riElseIf( String expression, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiElseIf() function.
+  > parameters
+    + expression - The expression for the condition.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riEndWorld( String message )
+  > summary
+    Attempts to finish the render.
+  > parameters
+    + message - The message to display in the progress dialog.
+
+FUN void : riExposure( Number gain, Number gamma )
+  > summary
+    Script implementation of the RiSpec RiExposure() function.
+  > parameters
+    + gain - The gain value to set.
+    + gamma - The gamma value to set.
+
+FUN void : riExterior( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiExterior() function.
+  > parameters
+    + name - The name of the volume shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riFormat( Number xres, Number yres, Number aspect )
+  > summary
+    Script implementation of the RiSpec RiFormat() function.
+  > parameters
+    + xres - The horizontal resolution of the image.
+    + yres - The vertical resolution of the image.
+    + aspect - The ratio of the width to the height of a single pixel.
+
+FUN void : riFrameAspectRatio( Number aspect )
+  > summary
+    Script implementation of the RiSpec RiFrameAspectRatio() function.
+  > parameters
+    + aspect - The ratio of the width to the height of the desired image.
+
+FUN void : riGeometricApproximation( String type, Number value )
+  > summary
+    Script implementation of the RiSpec RiGeometricApproximation() function.
+  > parameters
+    + type - TODO
+    + value - TODO
+
+FUN void : riHider( String type, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiHider() function.
+  > parameters
+    + type - The type of the hider.
+    + tokens - A list of token names passed to the hider.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riIdentity()
+  > summary
+    Script implementation of the RiSpec RiIdentity() function.
+
+FUN void : riIfBegin( String expression, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiIfBegin() function.
+  > parameters
+    + expression - The expression for the condition.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riIfEnd()
+  > summary
+    Script implementation of the RiSpec RiIfEnd() function.
+
+FUN void : riIlluminate( Number light, Boolean onOff )
+  > summary
+    Script implementation of the RiSpec RiIlluminate() function.
+  > parameters
+    + light - The index of the light in the list.
+    + onOff - If true, adds the light to the list. If false, removes the light from the list.
+
+FUN void : riImager( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiImager() function.
+  > parameters
+    + name - The name of the imager shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riInterior( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiInterior() function.
+  > parameters
+    + name - The name of the volume shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN Number : riLightSource( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiLightSource() function.
+  > parameters
+    + name - The name of the light shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+  > returns
+    The light handle index for this light source
+
+FUN void : riMakeBump( String pic, String tex, String swrap, String twrap, Number filterType, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiMakeBump() function.
+  > parameters
+    + pic - TODO
+    + tex - TODO
+    + swrap - TODO
+    + twrap - TODO
+    + filterType - TODO
+    + swidth - TODO
+    + twidth - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riMakeCubeFaceEnvironment( String px, String nx, String py, String ny, String pz, String nz, String tex, Number fov, Number filterType, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiMakeCubeFaceEnvironment() function.
+  > parameters
+    + px - TODO
+    + nx - TODO
+    + py - TODO
+    + ny - TODO
+    + pz - TODO
+    + nz - TODO
+    + tex - TODO
+    + fov - TODO
+    + filterType - TODO
+    + swidth - TODO
+    + twidth - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riMakeLatLongEnvironment( String pic, String tex, Number filterType, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiMakeLatLongEnvironment() function.
+  > parameters
+    + pic - TODO
+    + tex - TODO
+    + filterType - TODO
+    + swidth - TODO
+    + twidth - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riMakeShadow( String pic, String tex, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiMakeShadow() function.
+  > parameters
+    + pic - TODO
+    + tex - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riMakeTexture( String pic, String tex, String swrap, String twrap, Number filterType, Number swidth, Number twidth, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiMakeTexture() function.
+  > parameters
+    + pic - TODO
+    + tex - TODO
+    + swrap - TODO
+    + twrap - TODO
+    + filterType - TODO
+    + swidth - TODO
+    + twidth - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riMatte( Boolean onoff )
+  > summary
+    Script implementation of the RiSpec RiMatte() function.
+  > parameters
+    + onoff - TODO
+
+FUN void : riMultiplyShadingRate( Number ratemultiplier )
+  > summary
+    Script implementation of the RiSpec RiMultiplyShadingRate() function.
+  > parameters
+    + ratemultiplier - TODO
+
+FUN void : riOpacity( Color Os )
+  > summary
+    Script implementation of the RiSpec RiOpacity() function.
+  > parameters
+    + Os - TODO
+
+FUN void : riOption( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiOption() function.
+  > parameters
+    + type - The name of the option.
+    + tokens - A list of token names passed to the option.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riOrientation( String orientation )
+  > summary
+    Script implementation of the RiSpec RiOrientation() function.
+  > parameters
+    + orientation - TODO
+
+FUN void : riPerspective( Number fov )
+  > summary
+    Script implementation of the RiSpec RiPerspective() function.
+  > parameters
+    + fov - The full horizontal field of view angle.
+
+FUN void : riPixelFilter( Number filterType, Number xwidth, Number ywidth )
+  > summary
+    Script implementation of the RiSpec RiPixelFilter() function.
+  > parameters
+    + filterType - TODO
+    + xwidth - TODO
+    + ywidth - TODO
+
+FUN void : riPixelSamples( Number xsamples, Number ysamples )
+  > summary
+    Script implementation of the RiSpec RiPixelSamples() function.
+  > parameters
+    + xsamples - TODO
+    + ysamples - TODO
+
+FUN void : riPixelVariance( Number variation )
+  > summary
+    Script implementation of the RiSpec RiPixelVariance() function.
+  > parameters
+    + variation - TODO
+
+FUN void : riProjection( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiProjection() function.
+  > parameters
+    + name - The name of the projection.
+    + tokens - A list of token names passed to the projection.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riQuantize( String type, Number one, Number qmin, Number qmax, Number ampl )
+  > summary
+    Script implementation of the RiSpec RiWQuantize() function.
+  > parameters
+    + type - TODO
+    + one - TODO
+    + qmin - TODO
+    + qmax - TODO
+    + ampl - TODO
+
+FUN void : riRelativeDetail( Number relativedetail )
+  > summary
+    Script implementation of the RiSpec RiRelativeDetail() function.
+  > parameters
+    + relativedetail - TODO
+
+FUN void : riReverseOrientation()
+  > summary
+    Script implementation of the RiSpec RiReverseOrientation() function.
+
+FUN void : riRotate( Number angle, Number dx, Number dy, Number dz )
+  > summary
+    Script implementation of the RiSpec RiRotate() function.
+  > parameters
+    + angle - TODO
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+
+FUN void : riScale( Number dx, Number dy, Number dz )
+  > summary
+    Script implementation of the RiSpec RiScale() function.
+  > parameters
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+
+FUN void : riScopedCoordinateSystem( String space )
+  > summary
+    Script implementation of the RiSpec DDiScopedCoordinateSystem() function.
+  > parameters
+    + space - The name for the coordinate system.
+
+FUN void : riScreenWindow( Number left, Number right, Number bot, Number top )
+  > summary
+    Script implementation of the RiSpec RiScreenWindow() function.
+  > parameters
+    + left - TODO
+    + right - TODO
+    + bot - TODO
+    + top - TODO
+
+FUN void : riShader( String name, String handle, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiShader() function.
+  > parameters
+    + name - The name of the shader.
+    + handle - TODO
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riShadingInterpolation( String type )
+  > summary
+    Script implementation of the RiSpec RiShadingInterpolation() function.
+  > parameters
+    + type - TODO
+
+FUN void : riShadingRate( Number size )
+  > summary
+    Script implementation of the RiSpec RiShadingRate() function.
+  > parameters
+    + size - TODO
+
+FUN void : riShutter( Number smin, Number smax )
+  > summary
+    Script implementation of the RiSpec RiShutter() function.
+  > parameters
+    + smin - TODO
+    + smax - TODO
+
+FUN void : riSides( Number nsides )
+  > summary
+    Script implementation of the RiSpec RiSides() function.
+  > parameters
+    + nsides - TODO
+
+FUN void : riSkew( Number angle, Number dx1, Number dy1, Number dz1, Number dx2, Number dy2, Number dz2 )
+  > summary
+    Script implementation of the RiSpec RiSkew() function.
+  > parameters
+    + angle - TODO
+    + dx1 - TODO
+    + dy1 - TODO
+    + dz1 - TODO
+    + dx2 - TODO
+    + dy2 - TODO
+    + dz2 - TODO
+
+FUN void : riSurface( String name, Array tokens, Array params )
+  > summary
+    Script implementation of the RiSpec RiSurface() function.
+  > parameters
+    + name - The name of the surface shader.
+    + tokens - A list of token names passed to the shader.
+    + params - A list of corresponding values for tokens.
+
+FUN void : riTransform( DzMatrix4 transform )
+  > summary
+    Script implementation of the RiSpec RiTransform() function.
+  > parameters
+    + transform - The transform to set.
+
+FUN void : riTransformBegin()
+  > summary
+    Script implementation of the RiSpec RiTransformBegin() function.
+
+FUN void : riTransformEnd()
+  > summary
+    Script implementation of the RiSpec RiTransformEnd() function.
+
+FUN void : riTranslate( Number dx, Number dy, Number dz )
+  > summary
+    Script implementation of the RiSpec RiTranslate() function.
+  > parameters
+    + dx - TODO
+    + dy - TODO
+    + dz - TODO
+
+FUN void : riWorldBegin()
+  > summary
+    Script implementation of the RiSpec RiWorldBegin() function.
+
+FUN void : setBackgroundColor( Color color )
+  > summary
+    Sets the background color.
+  > parameters
+    + color - The color to set.
+
+FUN void : setCleanUpScript( String filename )
+  > summary
+    Sets the path of the script to be run when the script definition is called.
+  > parameters
+    + filename - The path of the script.
+  > attention
+    Global transient variables named Renderer that refers to the current DzRenderer, SurfaceName that refers to the name of the current surface, and Material that refers to the current DzMaterial, exist for the duration of filename. Referencing these variables from outside filename will result in an error.
+
+FUN void : setContinueAfterPreProcess( Boolean shouldContinue )
+  > summary
+    Sets whether or not the Ri call that launches a pre-process script should execute.
+  > parameters
+    + shouldContinue - If true, the ri* call will be executed. If false, the ri* call will not be executed.
+
+FUN void : setCropWindow( DzRenderHandler handler )
+  > summary
+    Sets the crop window from the handler for the render.
+  > parameters
+    + handler - The render handler to set.
+
+FUN void : setDefinitionFile( String definitionFile )
+  > summary
+    Sets the path of the script to run in order to define the renderer. Causes the renderer to be cleared, the cleanup script (if any) to be run and then the render script, clean up script, surface pre-process script, light pre-process script and displacement pre-process script to be cleared.
+  > parameters
+    + definitionFile - The path of the script to run.
+  > attention
+    filename is executed the moment the call to this method is made. A global transient variable named Renderer that referrs to the current DzRenderer, exists for the duration of filename. Referencing this variable from outside filename will result in an error.
+
+FUN void : setDisplacementPreProcessScript( String filename )
+  > summary
+    Sets the path of the script to be run before a material displacement is processed.
+  > parameters
+    + filename - The path of the script.
+  > attention
+    Global transient variables named Renderer that refers to the current DzRenderer, DisplacementName that refers to the name of the current displacement, and Material that refers to the current DzMaterial, exist for the duration of filename. Referencing these variables from outside filename will result in an error.
+
+FUN void : setIsShadowPass( Boolean onOff )
+  > summary
+    Set whether or not this is a shadow pass.
+  > parameters
+    + onOff - If true, this pass will be marked as a shadow pass.
+
+FUN void : setLightPreProcessScript( String filename )
+  > summary
+    Sets the path of the script to be run before riLightSource() and riAreaLightSource() are processed.
+  > parameters
+    + filename - The path of the script.
+  > attention
+    Global transient variables named Renderer that refers to the current DzRenderer, and LightName that refers to the name of the current DzLight, exist for the duration of filename. Referencing these variables from outside filename will result in an error.
+
+FUN void : setRenderScript( String filename )
+  > summary
+    Sets the path of the script that controls the rendering process.
+  > parameters
+    + filename - The path of the script.
+  > attention
+    filename is executed the moment the call to this method is made. Global transient variables named Renderer that refers to the current DzRenderer, Camera that refers to the current DzCamera, BackDrop that refers to the current DzBackDrop, and RenderOptions that refers to the current DzRenderOptions, exist for the duration of filename. Referencing these variables from outside filename will result in an error.
+
+FUN void : setSurfacePreProcessScript( String filename )
+  > summary
+    Sets the path of the script to be run before riSurface is processed.
+  > parameters
+    + filename - The path of the script.
+  > attention
+    Global transient variables named Renderer that refers to the current DzRenderer, SurfaceName that refers to the name of the current surface, and Material that refers to the current DzMaterial, exist for the duration of filename. Referencing these variables from outside filename will result in an error.
+
+### signals
+
+SIG void : defintionFileChanged()
+  > summary
+    Emitted when the definition file has changed.

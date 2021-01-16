@@ -1,0 +1,348 @@
+CLS DzWidget : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/widget_dz
+  > summary
+    DAZScript wrapper for QWidget.
+
+### description
+  > summary
+    The base class for all wrapped widgets. This is an abstract base class that provides general functionality for DAZScript widget components.
+
+### enumerations
+
+ENU AlignmentFlags
+  > summary
+    Enumerated values for describing how widgets should be aligned.
+  > since
+    4.9.3.93
+  + AlignLeft - Aligns horizontally with the left edge.
+  + AlignLeading - TODO: Add description.
+  + AlignRight - Aligns horizontally with the right edge.
+  + AlignTrailing - TODO: Add description.
+  + AlignHCenter - Aligns horizontally in the center.
+  + AlignJustify - Justifies the text in the available space.
+  + AlignAbsolute - TODO: Add description.
+  + AlignHorizontal_Mask - TODO: Add description.
+  + AlignTop - Aligns vertically with the top edge.
+  + AlignBottom - Aligns vertically with the bottom edge.
+  + AlignVCenter - Aligns vertically in the center.
+  + AlignVertical_Mask - TODO: Add description.
+  + AlignCenter - Aligns in the center in both dimensions.
+  + AlignAuto - Aligns horizontally according to the language (left for most).
+
+ENU Orientation
+  > summary
+    Enumerated values for describing how widgets should be oriented.
+  > since
+    4.9.3.93
+  + Horizontal - Horizontal orientation (Left to Right).
+  + Vertical - Vertical orientation (Top to Bottom).
+
+ENU SortOrder
+  > summary
+    Enumerated values for describing the order that items should be sorted.
+  > since
+    4.9.3.93
+  + AscendingOrder - Sort in ascending order.
+  + DescendingOrder - Sort in descending order.
+  + Ascending - Provided for backward compatability.
+  + Descending - Provided for backward compatability.
+
+ENU TextElideMode
+  > summary
+    Enumerated values that describe how the text string is elided.
+  > since
+    4.10.0.22
+  + ElideLeft - TODO: Add description.
+  + ElideRight - TODO: Add description.
+  + ElideMiddle - TODO: Add description.
+  + ElideNone - TODO: Add description.
+
+ENU TextFlag
+  > summary
+    Enumerated values for describing text modifiers.
+  > since
+    4.10.0.22
+  + TextSingleLine - Treat all whitespace as spaces and print one line.
+  + TextDontClip - If it is impossible to stay within the bounds, print outside.
+  + TextExpandTabs - Makes the ASCII tab character move to the next tab stop.
+  + TextShowMnemonic - Diplays the string “&P” as P. For an ampersand, use “&&”.
+  + TextWordWrap - Break lines at appropriate points, e.g., word boundaries.
+  + TextWrapAnywhere - Break lines anywhere, even within words.
+  + TextDontPrint - Treat this text as “hidden” and do not print it.
+  + TextIncludeTrailingSpaces - TODO: Add description.
+  + TextHideMnemonic - Same as TextShowMnemonic but does not draw the underlines.
+  + TextJustificationForced - Ensures that text lines are justified.
+  + TextForceLeftToRight - TODO: Add description.
+  + TextForceRightToLeft - TODO: Add description.
+  + TextLongestVariant - TODO: Add description.
+  + TextBypassShaping - TODO: Add description.
+
+ENU TextInteractionFlags
+  > summary
+    Enumerated values that describe how a label reacts to user input.
+  > since
+    4.9.3.93
+  + NoTextInteraction - TODO: Add description.
+  + TextSelectableByMouse - No interaction with the text is possible.
+  + TextSelectableByKeyboard - Text can be selected with the mouse and copied to the clipboard using a context menu or standard keyboard shortcuts.
+  + LinksAccessibleByMouse - Text can be selected with the cursor keys on the keyboard. A text cursor is shown.
+  + LinksAccessibleByKeyboard - Links can be highlighted and activated with the mouse.
+  + TextEditable - Links can be focused using tab and activated with enter.
+  + TextEditorInteraction - The text is fully editable.
+  + TextBrowserInteraction - The default for a DzTextEdit.
+
+### properties
+
+PRP Number : colorCount
+  > summary
+    Holds the number of different colors available for the widget. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : depth
+  > summary
+    Holds the bit depth (number of bit planes) of the widget. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Boolean : enabled
+  > summary
+    Holds whether the widget is enabled or disabled.
+
+PRP Font : font
+  > summary
+    Holds the Font for the widget and all child widgets that do not have a custom font of their own.
+
+PRP Number : globalX
+  > summary
+    Holds the x position of the widget, relative to the desktop. (Read Only)
+
+PRP Number : globalY
+  > summary
+    Holds the y position of the widget, relative to the desktop. (Read Only)
+
+PRP Number : height
+  > summary
+    Holds the height of the widget.
+
+PRP Number : heightMM
+  > summary
+    Holds the height of the widget in millimeters. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : logicalDpiX
+  > summary
+    Holds the horizontal resolution of the widget in dots per inch. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : logicalDpiY
+  > summary
+    Holds the vertical resolution of the widget in dots per inch. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : maxHeight
+  > summary
+    Holds the maximum height of the widget.
+
+PRP Number : maxWidth
+  > summary
+    Holds the maximum width of the widget.
+
+PRP Number : minHeight
+  > summary
+    Holds the minimum height of the widget.
+
+PRP Number : minWidth
+  > summary
+    Holds the minimum width of the widget.
+
+PRP Palette : palette
+  > summary
+    Holds the Palette for the widget and all child widgets that do not have a custom palette of their own.
+
+PRP Color : paletteBackgroundColor
+  > summary
+    Holds the background color of the widget.
+
+PRP Pixmap : paletteBackgroundPixmap
+  > summary
+    Holds the background Pixmap of the widget.
+
+PRP Color : paletteForegroundColor
+  > summary
+    Holds the foreground color of the widget.
+
+PRP Number : physicalDpiX
+  > summary
+    Holds the horizontal resolution of the widget in dots per inch. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : physicalDpiY
+  > summary
+    Holds the vertical resolution of the widget in dots per inch. (Read Only)
+  > since
+    4.9.0.9
+
+PRP String : toolTip
+  > summary
+    Holds the tool tip text for the widget and all child widgets that do not have a custom tool tip text of their own.
+
+PRP String : whatsThis
+  > summary
+    Holds the “Whats This” text for the widget and all child widgets that do not have a custom “Whats This” text of their own.
+
+PRP Number : width
+  > summary
+    Holds the width of the widget.
+
+PRP Number : widthMM
+  > summary
+    Holds the width of the widget in millimeters. (Read Only)
+  > since
+    4.9.0.9
+
+PRP Number : x
+  > summary
+    Holds the x position of the widget, relative to its parent.
+
+PRP Number : y
+  > summary
+    Holds the y position of the widget, relative to its parent.
+
+### constructors
+
+CTR DzWidget( DzWidget parent )
+  > summary
+    Creates a new widget as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the widget.
+
+### methods
+
+FUN DzWidget : findChildOfWidget( String name )
+  > returns
+    The child widget named name, otherwise undefined.
+
+FUN Array : getChildrenOfWidget( String name=“” )
+  > returns
+    A list of this widget's children.
+
+FUN DzLayout : getLayout()
+  > returns
+    The layout managing this widget.
+
+FUN QWidget : getWidget()
+  > returns
+    The wrapped QWidget.
+
+FUN Pixmap : grab( Rect rectangle )
+  > summary
+    Paints the widget, restricted by the given rectangle, into a pixmap. If the widget has any children, they are also painted in the appropriate positions.
+  > parameters
+    + rectangle - The rectangle, relative to the top left corner of the widget, to capture.
+  > returns
+    If the rectangle doesn't overlap the widget's rectangle, or an error occurs, the pixmap will be null. If the rectangle is a superset of the widget, the areas outside the widget are covered with the widget's background.
+  > since
+    4.9.3.105
+
+FUN Pixmap : grab( Number x=0, Number y=0, Number width=-1, Number height=-1 )
+  > summary
+    Paints the widget, restricted by the given rectangle, into a pixmap. If the widget has any children, they are also painted in the appropriate positions.
+  > parameters
+    + x - The relative x position of the rectangle to capture.
+    + y - The relative y position of the rectangle to capture.
+    + w - The width of the rectangle to capture.
+    + h - The height of the rectangle to capture.
+  > returns
+    If the rectangle defined by x, y, w, and h doesn't overlap the widget's rectangle, or an error occurs, the pixmap will be null. If the rectangle is a superset of the widget, the areas outside the widget are covered with the widget's background.
+  > since
+    4.9.3.105
+
+FUN void : hide()
+  > summary
+    Hide the widget; make it invisible.
+
+FUN Point : mapFrom( DzWidget parent, Point pos )
+  > summary
+    Translates the widget coordinate pos from the coordinate system of parent to this widget's coordinate system. parent must not be undefined and must be a parent of the calling widget.
+  > parameters
+    + parent - The widget in the parent chain to map from.
+    + pos - The position to map.
+  > since
+    4.9.0.9
+
+FUN Point : mapFromGlobal( Point pos )
+  > summary
+    Translates the global screen coordinate pos to widget coordinates.
+  > parameters
+    + pos - The position to map.
+  > seealso
+    Point::cursorPos()
+  > since
+    4.9.0.9
+
+FUN Point : mapFromParent( Point pos )
+  > summary
+    Translates the widget coordinate pos from the coordinate system of the parent widget to this widget's coordinate system.
+  > parameters
+    + pos - The position to map.
+  > since
+    4.9.0.9
+
+FUN Point : mapTo( DzWidget parent, Point pos )
+  > summary
+    Translates the widget coordinate pos to the coordinate system of parent. parent must not be undefined and must be a parent of the calling widget.
+  > parameters
+    + parent - The widget in the parent chain to map to.
+    + pos - The position to map.
+  > since
+    4.9.0.9
+
+FUN Point : mapToGlobal( Point pos )
+  > summary
+    Translates the widget coordinate pos to global screen coordinates. For example, mapToGlobal( Point(0, 0) ) would give the global coordinates of the top-left pixel of the widget.
+  > parameters
+    + pos - The position to map.
+  > since
+    4.9.0.9
+
+FUN Point : mapToParent( Point pos )
+  > summary
+    Translates the widget coordinate pos to a coordinate in the parent widget.
+  > parameters
+    + pos - The position to map.
+  > since
+    4.9.0.9
+
+FUN void : reparent( DzWidget parent, Point pnt, Boolean showIt=false )
+  > summary
+    Reparents the widget.
+  > parameters
+    + parent - The new parent widget for this widget.
+    + pnt - The location in the new parent widget to place this widget.
+    + showIt - If true, show() is called on the widget after it is reparented.
+
+FUN void : setFixedHeight( Number height )
+  > summary
+    Sets a fixed height for the widget.
+
+FUN void : setFixedSize( Number width, Number height )
+  > summary
+    Sets a fixed width and height for the widget.
+
+FUN void : setFixedWidth( Number width )
+  > summary
+    Sets a fixed width for the widget.
+
+FUN void : setGeometry( Number x, Number y, Number w, Number h )
+  > summary
+    Sets the position and size for the widget (relative to its parent).
+
+FUN void : show()
+  > summary
+    Show the widget; make it visible if its parent is visible.

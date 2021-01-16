@@ -1,0 +1,15 @@
+CLS DzPaneSettings : DzSettings
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/panesettings_dz
+  > summary
+    Settings class for interface panes.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzPaneSettings()
+  > summary
+    Default Constructor

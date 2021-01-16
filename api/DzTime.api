@@ -1,0 +1,37 @@
+CLS DzTime
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/time_dz
+  > summary
+    DAZScript time type.
+
+### description
+  > summary
+    DzTime is used for storing and passing time values. Time references in DAZ Studio are stored in 'ticks' - there are 4800 ticks per second. This number was chosen because of its divisibility by typical frame rates. For example, at 60 fps (frames per second) there are 80 ticks between each frame; at 30 fps, 160 ticks; at 20 fps, 180 ticks; etc.
+  > attention
+    Methods throughout the DAZ Studio API that take a DzTime as an argument can also take a Number in its place.
+  > example
+    var oTimeStep = Scene.getTimeStep();
+    print( typeof oTimeStep );
+     
+    var nTimeStep = oTimeStep.valueOf();
+    print( nTimeStep );
+     
+    var oTime = Scene.getTime();
+    print( typeof oTime );
+     
+    var nTime = oTime.valueOf();
+    print( nTime );
+     
+    Scene.setTime( nTimeStep * 2 );
+     
+    oTime = Scene.getTime();
+    print( typeof oTime );
+     
+    nTime = oTime.valueOf();
+    print( nTime );
+
+### methods
+
+FUN Number : valueOf()
+  > returns
+    The value of the DzTime as a Number.

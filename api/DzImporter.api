@@ -1,0 +1,48 @@
+CLS DzImporter : DzFileIO
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/importer_dz
+  > summary
+    Base class for all file importers.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN String : getDescription()
+  > returns
+    A description of the importer that can be placed in a file type selection combobox (e.g. “Acclaim Skeleton”).
+
+FUN String : getExtension( Number i )
+  > returns
+    The i'th file extension (excluding the preceding dot) supported by this importer.
+
+FUN Number : getNumExtensions()
+  > returns
+    The number of supported file extensions for this importer.
+
+FUN DzError : readFile( String filename, DzFileIOSettings options )
+  > summary
+    Imports from a file.
+  > parameters
+    + filename - The full path of the file to import
+    + options - The options to use while importing the file
+  > returns
+    DZ_NO_ERROR on success, or an error code if the import failed.
+
+FUN DzError : readFile( String filename )
+  > summary
+    Imports from a file.
+  > parameters
+    + filename - Name of the file to import.
+  > returns
+    DZ_NO_ERROR on success, or an error code if the import failed.
+
+FUN Boolean : recognize( String filename )
+  > summary
+    Test the given filename and file contents to see if this importer can read it.
+  > parameters
+    + filename - The name of the file to test.
+  > returns
+    true if the importer can import the file, otherwise false.

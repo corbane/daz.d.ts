@@ -1,0 +1,63 @@
+CLS DzEdge : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/edge_dz
+  > summary
+    Represents a segment on a face between two vertices.
+
+### description
+  > summary
+    Represents an edge between two vertices.
+
+### properties
+
+PRP Number : cageOffsetA
+  > summary
+    The offset from the cage
+
+PRP Number : facetA
+  > summary
+    The index of a DzFacet this edge belongs to
+
+PRP Number : facetB
+  > summary
+    The index of the other DzFacet this edge belongs to (if any), otherwise this is an open edge
+
+PRP Number : index
+  > summary
+    The index of this edge
+
+PRP Number : offsetA
+  > summary
+    The offset …
+
+PRP Number : offsetB
+  > summary
+    The offset …
+
+PRP Number : vertIdx1
+  > summary
+    The index of the vertex this edge originates at
+
+PRP Number : vertIdx2
+  > summary
+    The index of the vertex this edge ends at
+
+### constructors
+
+CTR DzEdge()
+  > summary
+    Default Constructor.
+
+CTR DzEdge( Number vertex1, Number vertex2 )
+  > summary
+    TODO: Add description.
+
+CTR DzEdge( DzEdge edge )
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN Boolean : isOpenEdge()
+  > returns
+    true if this is an open edge, otherwise false

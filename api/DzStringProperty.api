@@ -1,0 +1,32 @@
+CLS DzStringProperty : DzProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/stringproperty_dz
+  > summary
+    A static (non-animatable) string property.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzStringProperty()
+  > summary
+    Default Constructor. Creates a non-user property.
+
+CTR DzStringProperty( String name, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN String : getValue()
+  > returns
+    The string value of this property.
+
+FUN Boolean : setValue( String val )
+  > summary
+    Sets the string value.
+  > parameters
+    + str - The string value to set.

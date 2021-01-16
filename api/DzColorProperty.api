@@ -1,0 +1,137 @@
+CLS DzColorProperty : DzIntProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/colorproperty_dz
+  > summary
+    An animatable color property.
+
+### description
+  > summary
+    This class provides an animatable color property that is stored and can be accessed as an integer property. The integer value represents a color as a 32 bit rgba value with each byte representing a component with the range [0, 255].
+
+### enumerations
+
+ENU AnimationBlendMode
+  > summary
+    The color model that will used for blending values between keyframes in an animation.
+  + HSV - Hue, Saturation, and Value.
+  + HSL - Hue, Saturation, and Lightness (or Luminosity).
+  + RGB - Red, Green, Blue.
+
+### statics
+
+STA DzColorProperty.AnimationBlendMode : animationBlendModeFromStr( String str )
+  > summary
+    Converts a string to an enumerated animation blend mode value.
+  > parameters
+    + str - The string to convert.
+  > returns
+    The AnimationBlendMode corresponding to str.
+  > since
+    4.6.4.84
+
+STA String : animationBlendModeToStr( DzColorProperty.AnimationBlendMode type )
+  > summary
+    Converts an enumerated animation blend mode value to a string.
+  > parameters
+    + type - The AnimationBlendMode to convert.
+  > returns
+    A string representation of the enumerated AnimationBlendMode value.
+  > since
+    4.6.4.84
+
+### constructors
+
+CTR DzColorProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzColorProperty( String name, Boolean canAnimate, Boolean isUserProperty, Color initVal )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + initVal - Sets the default value of this property.
+
+CTR DzColorProperty( String name, Boolean canAnimate, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN DzColorProperty.AnimationBlendMode : getAnimationBlendMode()
+  > returns
+    The animation blend mode for the property.
+  > since
+    4.6.4.84
+
+FUN Color : getColorValue()
+  > returns
+    The color value of the property at the current time.
+
+FUN Color : getColorValue( DzTime tm )
+  > parameters
+    + tm - The scene time to get the color value at.
+  > returns
+    The color value of the property at the given time.
+
+FUN Color : getDefaultColorValue()
+  > returns
+    The default color value of the property.
+
+FUN Color : getKeyColorValue( Number i )
+  > parameters
+    + i - The index of the key to get the color value of.
+  > returns
+    The raw color value of the property at the given key.
+
+FUN Color : getRawColorValue( DzTime tm )
+  > parameters
+    + tm - The scene time at which to get the raw color value.
+  > returns
+    The raw color value of the property at the given time.
+
+FUN Color : getRawColorValue()
+  > returns
+    The raw color value of the property.
+
+FUN void : setAnimationBlendMode( DzColorProperty.AnimationBlendMode mode )
+  > summary
+    Sets the animation blend mode for the property.
+  > parameters
+    + mode - The animation blend mode to set.
+  > since
+    4.6.4.84
+
+FUN void : setColorValue( DzTime tm, Color val )
+  > summary
+    Sets the color value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time at which to set the value.
+    + val - The new value for the property.
+
+FUN void : setColorValue( Color val )
+  > summary
+    Sets the color value for this property at the current time; or the default value if this property is not animatable.
+  > parameters
+    + val - The new value for the property.
+
+FUN void : setDefaultColorValue( Color val )
+  > summary
+    Sets the default color value for this property.
+  > parameters
+    + val - The new default value for the property.
+
+FUN void : setKeyColorValue( Number i, Color val )
+  > summary
+    Sets the color value of this property for the given key.
+  > parameters
+    + i - The index of the key to set the value of.
+    + val - The new default value for the property.
+
+### signals
+
+SIG void : animationBlendModeChanged()
+  > summary
+    Emitted when the animation blend mode for this property has changed.

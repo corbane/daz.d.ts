@@ -1,0 +1,30 @@
+NOT JSON : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/json
+  > summary
+    The ECMAScript JSON object.
+
+### description
+  > summary
+    This object implements ECMAScript JSON functions. One instance of the object is automatically created in the global namespace when the script engine is initialized. That instance is accessible via Global::JSON. Additional instances of the object cannot be created. See the ECMA script specification for more information.
+
+### methods
+
+FUN Object : parse( String text, Function reviver=undefined )
+  > summary
+    Parses a JSON formatted String and converts it to an ECMAScript Object.
+  > parameters
+    + text - A JSON formatted String.
+    + reviver - An optional Function that takes two parameters (key, value). It can filter and transform the results. It is called with each of the key/value pairs produced by the parse, and its return value is used instead of the original value. If it returns what it received, the structure is not modified. If it returns undefined then the property is deleted from the result.
+  > returns
+    An ECMAScript Object of the converted text input.
+
+FUN String : stringify( Object value, Object replacer=undefined, Object space=undefined )
+  > summary
+    Converts an ECMAScript Object into a JSON formatted String.
+  > parameters
+    + value - The ECMAScript Object to convert.
+    + replacer - Either a Function that takes two parameters (key, value) and alters the way objects and arrays are stringified, or an Array of strings and numbers that acts as a white list for selecting the object properties that will be stringified.
+    + space - A string or Number that allows the result to have white space injected into it to improve human readability.
+  > returns
+    A string in JSON format representing the value input.

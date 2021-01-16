@@ -1,0 +1,33 @@
+CLS DzDFormZone : DzNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dformzone_dz
+  > summary
+    Zone class for DForm deformer.
+
+### description
+  > summary
+    The Zone is one component of a DForm deformer. The others are the DzDForm, DzDFormBase and dformmodifier_dz.
+    The Zone is an independent DzNode derived object that is used to set the area of influence of the DForm's effect.
+    It is spherical in shape but can be scaled into any form of ellipsoid.
+    The Zone has an effect falloff zone based on a naturalspline_dz object. The falloff is the same along the x,y and z axis.
+    The Zone has draws itself as a wireframe sphere. The base size of this sphere is controlled by the DzFloatProperty “Radius”. This sphere can be made transparent and is controlled by the DzFloatProperty “Opacity”. The Zone is drawn with the maximum gradient color of the DForm.
+
+### constructors
+
+CTR DzDFormZone()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzDForm : getDForm()
+  > summary
+    Returns the DForm for the Zone.
+  > returns
+    A pointer to the DForm for this Zone.
+
+FUN naturalspline_dz : getSpline()
+  > summary
+    Returns the spline used to compute the falloff for the Zone.
+  > returns
+    A pointer to the spline for this Zone.

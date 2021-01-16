@@ -1,0 +1,294 @@
+CLS DzMatrix3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/matrix3_dz
+  > summary
+    A 4 x 3 transformation matrix.
+
+### description
+  > summary
+    A transformation matrix consisting of 4 rows and 3 columns.
+
+### properties
+
+PRP Boolean : isIdentity
+  > summary
+    Whether or not the matrix is identity
+
+PRP Number : m11
+  > summary
+    The value of the matrix at [1, 1]
+
+PRP Number : m12
+  > summary
+    The value of the matrix at [1, 2]
+
+PRP Number : m13
+  > summary
+    The value of the matrix at [1, 3]
+
+PRP Number : m14
+  > summary
+    The value of the matrix at [1, 4]
+
+PRP Number : m21
+  > summary
+    The value of the matrix at [2, 1]
+
+PRP Number : m22
+  > summary
+    The value of the matrix at [2, 2]
+
+PRP Number : m23
+  > summary
+    The value of the matrix at [2, 3]
+
+PRP Number : m24
+  > summary
+    The value of the matrix at [2, 4]
+
+PRP Number : m31
+  > summary
+    The value of the matrix at [3, 1]
+
+PRP Number : m32
+  > summary
+    The value of the matrix at [3, 2]
+
+PRP Number : m33
+  > summary
+    The value of the matrix at [3, 3]
+
+PRP Number : m34
+  > summary
+    The value of the matrix at [3, 4]
+
+### constructors
+
+CTR DzMatrix3( Boolean initIdentity=false )
+  > summary
+    Default Constructor.
+  > parameters
+    + initIdentity - If true, the matrix will be set to the identity matrix, otherwise, the matrix values will be indeterminate.
+
+CTR DzMatrix3( Number m11, Number m21, Number m31, Number m12, Number m22, Number m32, Number m13, Number m23, Number m33, Number m14, Number m24, Number m34 )
+  > summary
+    Constructs a 4×3 matrix from 12 elements in “Column Major” order.
+  > parameters
+    + m11 - The value of the matrix at [1, 1]
+    + m21 - The value of the matrix at [2, 1]
+    + m31 - The value of the matrix at [3, 1]
+    + m12 - The value of the matrix at [1, 2]
+    + m22 - The value of the matrix at [2, 2]
+    + m32 - The value of the matrix at [3, 2]
+    + m13 - The value of the matrix at [1, 3]
+    + m23 - The value of the matrix at [2, 3]
+    + m33 - The value of the matrix at [3, 3]
+    + m14 - The value of the matrix at [1, 4]
+    + m24 - The value of the matrix at [2, 4]
+    + m34 - The value of the matrix at [3, 4]
+  > example
+    // Create a new 4x3 matrix
+    var mtx3 = new DzMatrix3( 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0 );
+    // Print the input sequence, for comparison
+
+    print( 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0 );
+    // Print elements of the matrix in column major order
+
+    print(
+    	mtx3.m11, mtx3.m21, mtx3.m31,
+    	mtx3.m12, mtx3.m22, mtx3.m32,
+    	mtx3.m13, mtx3.m23, mtx3.m33,
+    	mtx3.m14, mtx3.m24, mtx3.m34 );
+
+CTR DzMatrix3( DzVec3 xAxis, DzVec3 yAxis, DzVec3 zAxis )
+  > summary
+    Constructor from three axes of the rotation coord system. These are assumed to be (but do not have to be if a sheared or warped coord system is desired) to be orthogonal unit vectors.
+  > since
+    4.6.4.98
+
+CTR DzMatrix3( DzQuat rot )
+  > summary
+    Constructs a 4×3 matrix from a quaternion. Initializes the matrix to the given rotation.
+  > parameters
+    + rot - The rotation to initialize the matrix to.
+  > since
+    4.6.4.98
+
+CTR DzMatrix3( DzMatrix3 mat )
+  > summary
+    Copy Constructor.
+  > parameters
+    + mat - The matrix to copy.
+
+### methods
+
+FUN Number : det3()
+  > returns
+    The determinant of the upper 3×3 part of the matrix.
+  > since
+    4.9.2.18
+
+FUN DzMatrix3 : inverse()
+  > returns
+    The inverse of the matrix.
+
+FUN void : makeIdentity()
+  > summary
+    Sets the matrix to be identity
+
+FUN DzMatrix4 : matrix4()
+  > returns
+    this matrix as a 4×4 matrix
+  > since
+    4.9.2.18
+
+FUN DzMatrix3 : multiply( DzMatrix3 mat )
+  > summary
+    Calculates the multiplication of this matrix by the given matrix.
+  > parameters
+    + mat - The matrix to multiply by
+  > returns
+    The result of the multiplication
+
+FUN DzVec3 : multMatrixVec( DzVec3 vec )
+  > summary
+    Multiplies matrix by given column vector, giving column vector result
+  > parameters
+    + vec - The vector to multiplying this matrix by
+  > returns
+    The result of multiplying the given vector through this matrix
+
+FUN DzVec3 : multVec( DzVec3 vec )
+  > summary
+    Transforms the given vector through this matrix.
+  > parameters
+    + vec - The vector to transform through this matrix
+  > since
+    4.9.2.18
+
+FUN void : noRot()
+  > summary
+    Zero rotation part of the matrix.
+
+FUN void : noScale()
+  > summary
+    Set scale to unity.
+
+FUN void : noTrans()
+  > summary
+    Zero translation part of the matrix.
+
+FUN Boolean : orthogonal()
+  > summary
+    Test for orthogonal 3×3 sub-matrix (orthonormal rows)
+
+FUN void : orthogonalize()
+  > summary
+    Orthogonalize the matrix.
+
+FUN void : preRotate( DzQuat rot )
+  > summary
+    Accumulate rotation by pre-multiplying.
+
+FUN void : preRotateX( Number radians )
+  > summary
+    Accumulate rotation around the X axis by pre-multiplying.
+
+FUN void : preRotateY( Number radians )
+  > summary
+    Accumulate rotation around the Y axis by pre-multiplying.
+
+FUN void : preRotateZ( Number radians )
+  > summary
+    Accumulate rotation around the Z axis by pre-multiplying.
+
+FUN void : preTranslate( DzVec3 vec )
+  > summary
+    Accumulate a translation by pre-multiplying.
+  > parameters
+    + vec - The point at which to translate
+
+FUN void : rotate( DzQuat rot )
+  > summary
+    Accumulate rotation (by post-multiplying).
+
+FUN void : rotateX( Number radians )
+  > summary
+    Accumulate rotation around the X axis (by post-multiplying).
+
+FUN void : rotateY( Number radians )
+  > summary
+    Accumulate rotation around the Y axis (by post-multiplying).
+
+FUN void : rotateZ( Number radians )
+  > summary
+    Accumulate rotation around the Z axis (by post-multiplying).
+
+FUN DzVec3 : row( Number i )
+  > returns
+    The i'th row of the matrix.
+  > since
+    4.9.2.18
+
+FUN void : scale( Number scale, Boolean affectTrans=false )
+  > summary
+    TODO: Add description.
+
+FUN void : scale( Number scale, DzVec3 direction, Boolean affectTrans=false )
+  > summary
+    Accumulates a scale along an arbitrary axis (by post-multiplying).
+  > parameters
+    + scale - The scale to apply
+    + dir - The direction to scale
+    + affectTrans - Whether or not to affect the transform rows
+  > since
+    4.9.2.18
+
+FUN void : scale( DzVec3 vec, Boolean affectTrans=false )
+  > summary
+    TODO: Add description.
+
+FUN void : setTrans( DzVec3 vec )
+  > summary
+    Set translation part.
+  > parameters
+    + vec - The point to use for translation
+
+FUN void : shearXY( Number xShear, Number yShear )
+  > summary
+    Shears the matrix along the x and y axis (by post-multiplying).
+  > parameters
+    + xShear - The value to shear along the x axis
+    + yShear - The value to shear along the y axis
+  > since
+    4.9.2.18
+
+FUN void : shearXZ( Number xShear, Number zShear )
+  > summary
+    Shears the matrix along the x and z axis (by post-multiplying).
+  > parameters
+    + xShear - The value to shear along the x axis
+    + zShear - The value to shear along the z axis
+  > since
+    4.9.2.18
+
+FUN void : shearYZ( Number yShear, Number zShear )
+  > summary
+    Shears the matrix along the y and z axis (by post-multiplying).
+  > parameters
+    + yShear - The value to shear along the y axis
+    + zShear - The value to shear along the z axis
+  > since
+    4.9.2.18
+
+FUN Number : trace()
+  > returns
+    The trace of the matrix
+  > since
+    4.9.2.18
+
+FUN void : translate( DzVec3 vec )
+  > summary
+    Accumulate a translation (by post-multiplying).
+  > parameters
+    + vec - The point at which to translate

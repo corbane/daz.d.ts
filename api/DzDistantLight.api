@@ -1,0 +1,200 @@
+CLS DzDistantLight : DzLight
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/distantlight_dz
+  > summary
+    Base class for all lights. A light that emits in one direction.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU AreaShape
+  > summary
+    TODO: Add description.
+  + Point - TODO: Add description.
+  + Rectangle - TODO: Add description.
+  + Disc - TODO: Add description.
+  + Sphere - TODO: Add description.
+  + Cylinder - TODO: Add description.
+
+### constructors
+
+CTR DzDistantLight()
+  > summary
+    Default Constructor. Creates a new distant light.
+
+### methods
+
+FUN Color : getDiffuseColor()
+  > returns
+    The diffuse color of the light
+
+FUN DzColorProperty : getDiffuseColorControl()
+  > returns
+    A pointer to the property that controls the color this light
+
+FUN Number : getFarClippingPlane()
+  > returns
+    The far clipping plane when viewing from the light in OpenGL
+
+FUN Number : getFlux()
+  > returns
+    The luminous flux of the light.
+  > since
+    4.8.0.18
+
+FUN DzEnumProperty : getIlluminationControl()
+  > returns
+    A pointer to the property that controls Illumination for this light
+
+FUN Number : getIntensity()
+  > returns
+    The current light intensity.
+
+FUN DzFloatProperty : getIntensityControl()
+  > returns
+    A pointer to the property that controls the intensity of this light
+
+FUN Number : getIntensityScale()
+  > returns
+    The current light intensity scale.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getIntensityScaleControl()
+  > returns
+    The property that controls the intensity scale.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getLightFluxControl()
+  > returns
+    The property that controls the luminous flux of the light.
+  > since
+    4.8.0.18
+
+FUN DzDistantLight.AreaShape : getLightGeometry()
+  > returns
+    The type of geometry for the light; 0 = Point, 1 = Rectangle, 2 = Disc, 3 = Sphere, 4 = Cylinder.
+  > since
+    4.8.0.18
+
+FUN DzEnumProperty : getLightGeometryControl()
+  > returns
+    The property that controls the geometry of the light.
+  > since
+    4.8.0.18
+
+FUN Number : getLightHeight()
+  > returns
+    The height of the light (emitter) geometry, as measured in centimeters, in local space.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getLightHeightControl()
+  > returns
+    The property that controls the height of the light.
+  > since
+    4.8.0.18
+
+FUN DzBoolProperty : getLightPortalControl()
+  > returns
+    The property that controls whether or not the light represents a light portal.
+  > since
+    4.9.2.61
+
+FUN Number : getLightTempature()
+  > returns
+    The color temperature of the light, as measured in Kelvin (K).
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getLightTemperatureControl()
+  > returns
+    The property that controls the temperature of the light.
+  > since
+    4.8.0.18
+
+FUN Boolean : getLightTwoSided()
+  > returns
+    true if the light is two-sided (emits light in both directions), otherwise false.
+  > since
+    4.8.0.18
+
+FUN DzBoolProperty : getLightTwoSidedControl()
+  > returns
+    The property that controls whether the light is two sided.
+  > since
+    4.8.0.18
+
+FUN Number : getLightWidth()
+  > returns
+    The width of the light (emitter) geometry, as measured in centimeters, in local space.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getLightWidthControl()
+  > returns
+    The property that controls the width (diameter) of the light.
+  > since
+    4.8.0.18
+
+FUN Number : getNearClippingPlane()
+  > returns
+    The near clipping plane when viewing from the light in OpenGL
+
+FUN DzBoolProperty : getPhotometricModeControl()
+  > returns
+    The property that controls whether the light is in physically-based mode.
+  > since
+    4.8.0.18
+
+FUN DzBoolProperty : getRenderEmitterControl()
+  > returns
+    The property that controls whether the emitter is rendered.
+  > since
+    4.8.0.18
+
+FUN DzFloatProperty : getShadowBiasControl()
+  > returns
+    A pointer to the property that controls the bias for the shadow of this light
+
+FUN DzColorProperty : getShadowColorControl()
+  > returns
+    A pointer to the property that controls the color this light
+
+FUN DzFloatProperty : getShadowIntensityControl()
+  > returns
+    A pointer to the property that controls the shadow intensity of this light
+
+FUN DzFloatProperty : getShadowSoftnessControl()
+  > returns
+    A pointer to the property that controls the softness for the shadow of this light
+
+FUN DzVec3 : getWSDirection()
+  > returns
+    The direction the light is pointing in world-space
+
+FUN Boolean : isLightPortal()
+  > returns
+    true if this light represents a light portal, otherwise false.
+  > since
+    4.9.2.61
+
+FUN Boolean : isOn()
+  > returns
+    true if the light is lighting the scene, false if the light has no effect on the scene.
+
+FUN Boolean : photometricMode()
+  > returns
+    true if the light is in photometric mode (physically based), otherwise false.
+  > since
+    4.8.0.18
+
+FUN Boolean : renderEmitter()
+  > returns
+    true if the geometry of the light (emitter) should be rendered, otherwise false.
+  > since
+    4.8.0.18

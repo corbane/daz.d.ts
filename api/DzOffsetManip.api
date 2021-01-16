@@ -1,0 +1,35 @@
+CLS DzOffsetManip : DzImageManip
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/offsetmanip_dz
+  > summary
+    A manipulator that offsets an image layer horizontally and/or vertically.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP Number : xOffset
+  > summary
+    TODO: Add description.
+
+PRP Number : yOffset
+  > summary
+    Holds the horizontal offset.
+
+### constructors
+
+CTR DzOffsetManip( Number x=0, Number y=0 )
+  > summary
+    Holds the vertical offset.
+    Default Constructor
+
+### methods
+
+FUN void : setOffset( Number x, Number y )
+  > summary
+    Sets the offset for the image.
+  > parameters
+    + x - The offset for the image in x.
+    + y - The offset for the image in y.

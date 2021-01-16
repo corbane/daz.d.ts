@@ -1,0 +1,50 @@
+CLS DzController : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/controller_dz
+  > summary
+    Base class for all property controller types.
+
+### description
+  > summary
+    The controller class is like a modifier for DzProperty types. Controllers allow implementation of custom modulation of properties without changing the properties actual value. Common implementations of controllers include: controllers that adjust one property based on the value of another property, controllers that replace the value of one property with the value of another property, controllers that use a script expression to drive a property, etc.
+
+### enumerations
+
+ENU ControllerEffect
+  > summary
+    The type of modifications that a controller performs on the value of a property
+  + None - Has no effect on the property
+  + Additive - Uses the current value of the property to calculate the result
+  + Replace - Ignores the current value of the property, and calculates the result from unrelated factors.
+
+### properties
+
+PRP String : description
+  > summary
+    The description of the controller (Read Only)
+
+PRP DzController.ControllerEffect : effect
+  > summary
+    The effect of the controller (Read Only)
+
+PRP String : slaveDescription
+  > summary
+    The description of the controller when slave (Read Only)
+  > since
+    4.9.0.53
+
+### methods
+
+FUN DzProperty : getOwner()
+  > summary
+    TODO: Add description.
+
+### signals
+
+SIG void : attributeChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : currentValueChanged()
+  > summary
+    Emitted when the value of this controller has changed.

@@ -1,0 +1,17 @@
+CLS DzParentProductContainer : DzAbstractAssetContainer DzRefCountedItem
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/parentproductcontainer_dz
+  > summary
+    lass for containing parent product assets.
+
+### description
+  > summary
+    This class is used to contain all assets related to a parent product.
+
+### methods
+
+FUN Boolean : updateChildren()
+  > summary
+    Attempts to update the child containers of this container.
+  > returns
+    true if the update was successful, otherwise false.

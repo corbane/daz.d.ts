@@ -1,0 +1,58 @@
+CLS DzNumericNodeProperty : DzFloatProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/numericnodeproperty_dz
+  > summary
+    Numeric (float) property that has an associated node pointer.
+
+### description
+  > summary
+    This property tracks both a numeric value and a node value - it is essentially a combination of a DzFloatProperty and a DzNodeProperty in a single property. The main benefit of this is to display the settings to the user as a single parameter, it also provides several conveniences for the programmer in linking the two values together. Currently, this property is used by DzNode to implement the 'Point At' parameter.
+
+### constructors
+
+CTR DzNumericNodeProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzNumericNodeProperty( String name, Boolean canAnimate, Boolean isUserProperty, Number initVal=0.0 )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + initVal - The initial value of the property.
+
+### methods
+
+FUN DzNode : getNode()
+  > returns
+    The node that is assigned to this property.
+
+FUN Boolean : isInvalidWithoutNode()
+  > returns
+    true if the value of this property is invalid unless a node is assigned, otherwise false.
+
+FUN void : setMustHaveNode( Boolean onOff )
+  > summary
+    Sets whether or not this property value is valid when no node is assigned.
+  > parameters
+    + onOff - If true, this property must have a node associated with it.
+
+FUN void : setNode( DzNode node )
+  > summary
+    Set the node for this property.
+  > parameters
+    + node - The node to associate with this property.
+
+### signals
+
+SIG void : invalidWithoutNodeChanged( Boolean onOff )
+  > summary
+    Emitted when this property's invalid without node state has changed.
+  > parameters
+    + onOff - If true, then this property is invalid without a node.
+
+SIG void : nodeChanged( DzNode node )
+  > summary
+    Emitted when the node associated with this property has changed.
+  > parameters
+    + node - The node that was changed.

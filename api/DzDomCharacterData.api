@@ -1,0 +1,47 @@
+CLS DzDomCharacterData : DzDomNode
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domcharacterdata_dz
+  > summary
+    DAZ Script DOM character data node.
+
+### description
+  > summary
+    Represents a character data node in a DOM document.
+
+### properties
+
+PRP String : data
+  > summary
+    The text data for the node
+
+PRP Number : length
+  > summary
+    [Read Only] The length of the data
+
+### constructors
+
+CTR DzDomCharacterData()
+  > summary
+    Default constructor. Typically, you will not construct these directly, but will call DzDomDocument::createText() or DzDomDocument::createCDATASection() to create a new character data node as a member of a document.
+
+### methods
+
+FUN void : appendData( String arg )
+  > summary
+    Appends arg to the end of the current text for this node.
+
+FUN void : deleteData( Number offset, Number count )
+  > summary
+    Removes count characters from this node's data beginning at offset.
+
+FUN void : insertData( Number offset, String arg )
+  > summary
+    Inserts arg into the current text for this node at position offset.
+
+FUN void : replaceData( Number offset, Number count, String arg )
+  > summary
+    Replaces count characters in this node's data beginning at offset with the string arg
+
+FUN String : substringData( Number offset, Number count )
+  > returns
+    A substring from the this node's data beginning with offset, and count characters long

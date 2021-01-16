@@ -1,0 +1,253 @@
+CLS DzFloatColor : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/floatcolor_dz
+  > summary
+    A 4-component floating point color value.
+
+### description
+  > summary
+    This class manages 4-component colors (colors that can include an alpha value).
+
+### properties
+
+PRP String : blue
+  > summary
+    Holds the blue value for the color. Should be in the [0,1] range.
+
+PRP String : green
+  > summary
+    Holds the green value for the color. Should be in the [0,1] range.
+
+PRP String : red
+  > summary
+    Holds the red value for the color. Should be in the [0,1] range.
+
+### constructors
+
+CTR DzFloatColor()
+  > summary
+    Default constructor. Initializes a new color to opaque black.
+
+CTR DzFloatColor( Number r, Number g, Number b, Number a=1.0 )
+  > summary
+    Constructor that takes individual floating-point RGBA components. Initializes the color to the given values. Values should be in the [0,1] range.
+  > parameters
+    + r - The red value for the color
+    + g - The green value for the color
+    + b - The blue value for the color
+    + a - The alpha value for the color
+  > example
+    var oFloatColor4Arg = new DzFloatColor( 1, 0.5, 0.5, 1 );
+    print( oFloatColor4Arg ); //[1,0.5,0.5,1]
+
+CTR DzFloatColor( Number val, Number alpha=1.0 )
+  > summary
+    Constructor that creates an achromatic color.
+  > parameters
+    + val - The value to use for each color component.
+    + alpha - The value to use for the alpha component.
+  > example
+    var oFloatColor1Arg = new DzFloatColor( 0.5 );
+    print( oFloatColor1Arg ); //[0.5,0.5,0.5,1]
+     
+    var oFloatColor2Arg = new DzFloatColor( 0.5, 1 );
+    print( oFloatColor2Arg ); //[0.5,0.5,0.5,1]
+
+CTR DzFloatColor( Array color )
+  > summary
+    Constructor that takes a floating-point array to define RGBA colors. Initializes the color to the given values.
+  > parameters
+    + color - An array of float values for the color. The array can have 1, 2, 3 or 4 float values. The length of the array has meanings that correspond with the other constructors. Values should be in the [0,1] range.
+  > example
+    var oFloatColorArray1Arg = new DzFloatColor( [ 1 ] );
+    print( oFloatColorArray1Arg ); //[1,1,1,1]
+     
+    var oFloatColorArray2Arg = new DzFloatColor( [ 0.5, 1 ] );
+    print( oFloatColorArray2Arg ); //[0.5,0.5,0.5,1]
+     
+    var oFloatColorArray3Arg = new DzFloatColor( [ 1, 0.5, 0.25 ] );
+    print( oFloatColorArray3Arg ); //[1,0.5,0.25,1]
+     
+    var oFloatColorArray4Arg = new DzFloatColor( [ 1, 0.5, 0.25, 1 ] );
+    print( oFloatColorArray4Arg ); //[1,0.5,0.25,1]
+
+CTR DzFloatColor( Color color )
+  > summary
+    Constructor that takes a QColor. Initializes the color to the given color. The color is assumed to be completely opaque.
+  > parameters
+    + color - The color value to copy into this color.
+  > example
+    var oColor = new Color( 255, 128, 0 );
+     
+    var oFloatColorCopyColor = new DzFloatColor( oColor );
+    print( oFloatColorCopyColor ); //[1,0.501961,0,1]
+
+CTR DzFloatColor( DzFloatColor color )
+  > summary
+    Copy Constructor.
+  > parameters
+    + color - The color object to copy.
+  > example
+    var oColor = new Color( 255, 128, 0 );
+     
+    var oFloatColorCopyColor = new DzFloatColor( oColor );
+    print( oFloatColorCopyColor ); //[1,0.501961,0,1]
+     
+    var oFloatColorCopyFloatColor = new DzFloatColor( oFloatColorCopyColor );
+    print( oFloatColorCopyFloatColor ); //[1,0.501961,0,1]
+
+### methods
+
+FUN void : clamp( Number min, Number max, Boolean includeAlpha=false )
+  > summary
+    Modifies the color such that the value of no component is less than min and no more than max.
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+
+FUN DzFloatColor : clamped( Number min, Number max, Boolean includeAlpha=false )
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+  > returns
+    A copy of this color where the value of no component is less than min and no more than max.
+
+FUN DzFloatColor : clampedMax( Number max, Boolean includeAlpha=false )
+  > parameters
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+  > returns
+    A copy of this color where the value of no component is more than max.
+
+FUN DzFloatColor : clampedMin( Number min, Boolean includeAlpha=false )
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+  > returns
+    A copy of this color where the value of no component is less than min.
+
+FUN void : clampMax( Number max, Boolean includeAlpha=false )
+  > summary
+    Modifies the color such that the value of no component is more than max.
+  > parameters
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+
+FUN void : clampMin( Number min, Boolean includeAlpha=false )
+  > summary
+    Modifies the color such that the value of no component is less than min.
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+
+FUN Boolean : equals( DzFloatColor color, Number tolerance=0.000001 )
+  > parameters
+    + color - The color to test this color against.
+    + tolerance - The amount of deviation to allow in each component of the color.
+  > returns
+    true if this color is within tolerance of color, otherwise false.
+
+FUN void : gammaColor( Number gamma=2.2, Boolean doAlpha=false )
+  > summary
+    Applies a gamma value to the color.
+  > parameters
+    + gamma - The gamma value to apply.
+    + doAlpha - If true, applies gamma to the alpha channel of the color.
+
+FUN Color : getColor()
+  > summary
+    Holds the alpha value for the color. Should be in the [0,1] range.
+
+FUN Number : getGrayscale()
+  > returns
+    A suitable grayscale equivalent of this color.
+
+FUN Array : getHsl()
+  > returns
+    An array consisting of the hue, saturation, lightness and alpha component values.
+
+FUN Array : getHsv()
+  > returns
+    An array consisting of the hue, saturation, value and alpha component values.
+
+FUN Number : getMaxRGBValue()
+  > returns
+    The maximum value for this color.
+
+FUN Number : getRelativeLuminance()
+  > returns
+    The relative luminance for this color, calculated as: Y = 0.212671*R + 0.715160*G + 0.072169*B
+
+FUN Array : getRgba()
+  > returns
+    An array consisting of the red, green, blue and alpha component values.
+
+FUN void : linearizeColor( Number gamma=2.2, Boolean doAlpha=false )
+  > summary
+    Linerizes the color based on a gamma value.
+  > parameters
+    + gamma - The gamma value to linearize by.
+    + doAlpha - If true, linearizes the alpha channel of the color by gamma.
+
+FUN DzFloatColor : modulate( Number min, Number max, Boolean includeAlpha=false )
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also clamped.
+  > returns
+    A copy of this color where the value of each component is modulated between min and max.
+
+FUN void : modulo( Number min, Number max, Boolean includeAlpha=false )
+  > summary
+    Modifies the color such that the value of each component is modulated between min and max.
+  > parameters
+    + min - The minimum value to allow in each component of the color.
+    + max - The maximum value to allow in each component of the color.
+    + includeAlpha - If true, the alpha component is also modulated.
+
+FUN void : setHsl( Array list )
+  > summary
+    Sets the color according to an array of the hue, saturation, lightness and (optionally) alpha component values.
+
+FUN void : setHsl( Number h, Number s, Number l, Number a=1.0 )
+  > summary
+    Sets a HSL value on the color.
+  > parameters
+    + h - The value to set on the hue component.
+    + s - The value to set on the saturation component.
+    + l - The value to set on the lightness component.
+    + a - The value to set on the alpha component.
+
+FUN void : setHsv( Number h, Number s, Number v, Number a=1.0 )
+  > summary
+    Sets a HSV value on the color.
+  > parameters
+    + h - The value to set on the hue component.
+    + s - The value to set on the saturation component.
+    + v - The value to set on the value component.
+    + a - The value to set on the alpha component.
+
+FUN void : setHsv( Array list )
+  > summary
+    Sets the color according to an array of the hue, saturation, value and alpha component values.
+
+FUN void : setRgba( Array list )
+  > summary
+    Sets the color according to an array of the red, green, blue and alpha component values.
+
+FUN void : setValue( Number r, Number g, Number b, Number a=1.0 )
+  > summary
+    Sets the color values. Values should be in the [0,1] range.
+  > parameters
+    + r - The red value for the color
+    + g - The green value for the color
+    + b - The blue value for the color
+    + a - The alpha value for the color
+  > seealso
+    getValue()
+
+FUN void : setValue( Color color )
+  > summary
+    TODO: Add description.

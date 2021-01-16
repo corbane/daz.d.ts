@@ -1,0 +1,61 @@
+CLS DzOrientedBox3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/orientedbox3_dz
+  > summary
+    An oriented 3D box.
+
+### description
+  > summary
+    Represents a 3D box by storing two 3D vectors - an upper and lower corner for the box, and a transformation for its orientation.
+
+### properties
+
+PRP DzBox3 : localBox
+  > summary
+    The box in 'local space' (without transforms applied)
+
+PRP DzMatrix3 : transform
+  > summary
+    The transform matrix of the box in 3D space
+
+### constructors
+
+CTR DzOrientedBox3()
+  > summary
+    Constructor. Creates an uninitialized box with an identity transform - the first point included in an uninitialized box will become the min and max for the box.
+
+CTR DzOrientedBox3( DzOrientedBox3 box )
+  > summary
+    Copy constructor.
+  > parameters
+    + box - The box to copy from
+
+CTR DzOrientedBox3( DzMatrix3 transform )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Creates an uninitialized box with the given transform - the first point included in an uninitialized box will become the min and max for the box.
+  > parameters
+    + transform - The transformation to apply to this box
+
+CTR DzOrientedBox3( DzBox3 box, DzMatrix3 transform )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Creates an oriented box that is the given box with the given transform.
+  > parameters
+    + box - The box to copy from
+    + transform - The transformation to apply to this box
+
+CTR DzOrientedBox3( DzBox3 box, DzVec3 translation, DzQuat rotation, DzVec3 scale )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Creates an oriented box that is the given box with the given transform.
+  > parameters
+    + box - The box to copy from
+    + translation - The translation to apply to this box
+    + rotation - The rotation to apply to this box
+    + scale - The scale to apply to this box
+
+CTR DzOrientedBox3( DzVec3 translation, DzQuat rotation, DzVec3 scale )
+  > summary
+    This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Creates an uninitialized box with the given transform - the first point included in an uninitialized box will become the min and max for the box.
+  > parameters
+    + translation - The translation to apply to this box
+    + rotation - The rotation to apply to this box
+    + scale - The scale to apply to this box

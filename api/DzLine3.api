@@ -1,0 +1,137 @@
+CLS DzLine3 : Object
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/line3_dz
+  > summary
+    A three dimensional line segment.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### properties
+
+PRP DzVec3 : end
+  > summary
+    Holds the line's ending point in three dimensional space.
+
+PRP DzVec3 : origin
+  > summary
+    Holds the line's starting point in three dimensional space.
+
+### constructors
+
+CTR DzLine3()
+  > summary
+    Default Constructor. Creates an uninitialized line.
+
+CTR DzLine3( DzLine3 line )
+  > summary
+    Copy Constructor.
+
+CTR DzLine3( DzVec3 origin, DzVec3 end )
+  > summary
+    Parameterized Constructor.
+  > parameters
+    + origin - The origin point of the line.
+    + end - The end point of the line.
+
+### methods
+
+FUN DzVec3 : getDirection()
+  > returns
+    The vector direction of this line (end - origin).
+  > since
+    4.9.3.121
+
+FUN DzVec3 : getPoint( Number t )
+  > returns
+    The point with the given parametric distance along the line.
+  > since
+    4.9.3.121
+
+FUN Number : length( Number t=1.0 )
+  > returns
+    The length of the line given a parametric distance along the line.
+  > seealso
+    setLength()
+  > since
+    4.9.3.121
+
+FUN Boolean : linesIntersect( DzLine3 line, DzVec3 intersection, Number tolerance=0.0 )
+  > summary
+    Tests the intersection of two lines. This line and the given line are assumed to be infinitely long in both directions (i.e. the intersection can be outside the origin-end segment of either line).
+  > parameters
+    + line - The line to test intersection with.
+    + intersection - This vector will be set to the intersection point if the lines intersect.
+    + tolerance - If not zero, specifies the maximum distance between lines that will be counted as an intersection.
+  > returns
+    true if this line intersects with the given line, otherwise false.
+  > since
+    4.9.3.121
+
+FUN Number : minDistance( DzVec3 pnt, Number s, Boolean clampEnds=false )
+  > returns
+    The minimum distance from this line to the given point. s is the parametric distance along the line to the minimum perpendicular distance point. If clampEnds is true, the parametric distance is clamped to the [0-1] range and the nearest point to the line segment is returned rather than the nearest distance to the infinite line formed by the two end points of the segment.
+  > since
+    4.9.3.121
+
+FUN Number : minDistance( DzLine3 line1, Number s, Number t )
+  > parameters
+    + line - The line to calculate min distance from.
+    + s - The parametric distance along this line.
+    + t - The parametric distance along the given line.
+  > returns
+    The minimum distance between this line and another line.
+  > since
+    4.9.3.121
+
+FUN Number : minDistanceSquared( DzVec3 pnt, Number s, Boolean clampEnds=false )
+  > returns
+    The square of the minimum distance along the line to the minimum perpendicular distance point. If clampEnds is true, the parametric distance is clamped to the [0-1] range and the nearest point to the line segment is returned rather than the distance to the infinite line formed by two end points of a segment.
+  > since
+    4.9.3.121
+
+FUN void : negate()
+  > summary
+    Reverses the direction of the line by mirroring the endpoint.
+  > since
+    4.9.3.121
+
+FUN Boolean : planeIntersect( DzVec3 planePoint, DzVec3 planeNormal, Number t, DzVec3 intersection )
+  > summary
+    Calculates the intersection of this line and the plane specified. The plane is defined by a point on the plane and the normal to the plane.
+  > parameters
+    + planePoint - A point on the plane (to define the plane).
+    + planeNormal - The normal to the plane (to define the plane).
+    + t - This will be set to the parametric distance along this line to the intersection point, if there is one.
+    + intersection - This vector will be set to the intersection point if the line and plane intersect.
+  > returns
+    true if this line intersects the given plane, false if not (i.e. the two are parallel).
+  > since
+    4.9.3.121
+
+FUN Boolean : segmentsIntersect( DzLine3 line, DzVec3 intersection, Number tolerance=0.0 )
+  > summary
+    Tests the intersection of two line segments.
+  > parameters
+    + line - The line to test intersection with.
+    + intersection - This vector will be set to the intersection point if the lines intersect.
+    + tolerance - If not zero, specifies the maximum distance between lines that will be counted as an intersection.
+  > returns
+    true if this line segment intersects with the given line segment, otherwise false.
+  > since
+    4.9.3.121
+
+FUN void : setLength( Number length )
+  > summary
+    Sets the line to have the length given by setting the endpoint relative to the current origin.
+  > seealso
+    length()
+  > since
+    4.9.3.121
+
+FUN void : swapEnds()
+  > summary
+    Swaps the origin for the endpoint.
+  > since
+    4.9.3.121

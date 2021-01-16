@@ -1,0 +1,243 @@
+CLS DzObject : DzElement
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/object_dz
+  > summary
+    The main object class.
+
+### description
+  > summary
+    Responsible for evaluating the geometry pipeline, including caching and drawing of the world-space transformed shape. Can have multiple shapes assigned, though only one can be active at a time.
+
+### constructors
+
+CTR DzObject()
+  > summary
+    Default Constructor.
+
+### methods
+
+FUN DzError : addModifier( DzModifier modifier, Number index=-1 )
+  > summary
+    Adds a modifier to the modifier stack.
+  > parameters
+    + modifier - The modifier to add to this object's modifier stack.
+    + index - The position in the list to insert the modifer. If this is less than 0 (default), the modifier is appended to the end of the list.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : addShape( shape_dz shape, Number index=-1 )
+  > summary
+    Add a shape to this object.
+  > parameters
+    + shape - The shape that will be added to this object's list of possible shapes.
+    + index - The position in the list to insert the shape. If this is less than 0 (default), the shape is appended to the end of the list.
+
+FUN DzModifier : findModifier( String name )
+  > parameters
+    + name - The name of the modifier to get.
+  > returns
+    The modifier in the stack with the given name (if any), otherwise NULL.
+
+FUN Number : findModifierIndex( DzModifier mod )
+  > parameters
+    + mod - The modifier to find the index for.
+  > returns
+    The index of the modifier in the modifier stack (if any), otherwise -1.
+
+FUN Number : findModifierIndexFromEnd( DzModifier mod )
+  > parameters
+    + mod - The modifier to find the index for.
+  > returns
+    The index of the modifier in the modifier stack (if any), otherwise -1.
+
+FUN void : forceCacheUpdate( DzNode node, Boolean isRender=false )
+  > summary
+    TODO: Add description.
+
+FUN DzBox3 : getBoundingBox()
+  > returns
+    A world space bounding box for this object.
+
+FUN vertexmesh_dz : getCachedGeom()
+  > returns
+    The final world-space transformed mesh for the current shape.
+  > attention
+    Re-evaluates the pipeline if necessary.
+
+FUN shape_dz : getCurrentShape()
+  > summary
+    Get the current shape.
+  > returns
+    The current shape this object is caching/drawing.
+
+FUN DzEnumProperty : getGeometryControl()
+  > returns
+    The property that controls the current shape of this object.
+
+FUN DzBox3 : getLocalBoundingBox()
+  > returns
+    A local space bounding box for this object; cached by the last call to evaluate().
+
+FUN DzOrientedBox3 : getLocalOrientedBox()
+  > returns
+    A local space oriented bounding box for this object; cached by the last call to evaluate().
+
+FUN DzModifier : getModifier( Number which )
+  > parameters
+    + which - The index of the modifier in the stack to get.
+  > returns
+    The modifier at the given position in the modifier stack (if any), otherwise NULL.
+
+FUN Number : getNumModifiers()
+  > returns
+    The number of modifiers in the local modifier stack for this object.
+
+FUN Number : getNumShapes()
+  > returns
+    The number of possible shapes that this object can display.
+
+FUN shape_dz : getShape( Number which )
+  > parameters
+    + which - Index of the shape to get.
+  > returns
+    The shape at the given index (if any), otherwise NULL.
+
+FUN void : invalidateCache()
+  > summary
+    Flags this object to reevaluate its geometry pipeline the next time the cached shape is requested.
+
+FUN DzError : moveModifier( DzModifier modifier, Number index=-1 )
+  > summary
+    Moves the modifier from its source obj to this modifier stack. DZ_ILLEGAL_ARGUMENT_ERROR is returned if there is not a modifier, the modifier's element parent is not an object, or the modifier is already an element child of this object. This move is not undo-able.
+  > parameters
+    + modifier - The modifier to add to this object's modifier stack.
+    + index - The position in the list to insert the modifer. If this is less than 0 (default), the modifier is appended to the end of the list.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : moveShape( shape_dz shape, Number index=-1 )
+  > summary
+    Moves the given shape from its source object to this object. Operation fails if the shape's element parent is not a different dzobject with this shape in its shape list.
+  > parameters
+    + shape - The shape that will be added to this object's list of possible shapes.
+    + index - The position in the list to insert the shape. If this is less than 0 (default), the shape is appended to the end of the list.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : removeAllModifiers()
+  > summary
+    Removes all the modifiers from the modifier stack.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : removeAllShapes()
+  > summary
+    Remove all shapes from this object.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : removeModifier( DzModifier modifier )
+  > summary
+    Removes a modifier from the modifier stack.
+  > parameters
+    + modifier - The modifier to remove from this object's modifier stack.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+FUN DzError : removeShape( Number index )
+  > summary
+    Remove a shape from this object.
+  > parameters
+    + index - The index of the shape to remove from this object's list of possible shapes.
+  > returns
+    DZ_NO_ERROR on success, otherwise an appropriate error code.
+
+### signals
+
+SIG void : aboutToAddModifier( DzModifier mod )
+  > summary
+    Emitted when a modifier is about to be added to this object.
+  > parameters
+    + mod - The modifier that is about to be added to the object.
+
+SIG void : aboutToDelete()
+  > summary
+    Emitted when this object is about to be deleted.
+
+SIG void : aboutToFinalize( vertexmesh_dz mesh )
+  > summary
+    Emitted when the vertex mesh for this object is about to be finalized.
+  > parameters
+    + mesh - The vertex mesh about to be finalized.
+
+SIG void : cachedGeomFinalized()
+  > summary
+    Emitted when the cached geometry for this object has been finalized.
+
+SIG void : cachedGeomInvalidated()
+  > summary
+    Emitted when the cached geometry for this object has been invalidated.
+
+SIG void : cachedGeomUpdated()
+  > summary
+    Emitted when the cached geometry for this object has been updated.
+
+SIG void : cachedTopologyChanged()
+  > summary
+    Emitted when the cached topology for this object has changed.
+
+SIG void : currentShapeSwitched()
+  > summary
+    Emitted when the current shape is swapped out.
+
+SIG void : drawnDataChanged()
+  > summary
+    Emitted when this object needs to be redrawn.
+
+SIG void : materialListChanged()
+  > summary
+    Emitted when the material list for the current shape changes.
+
+SIG void : materialSelectionChanged()
+  > summary
+    Emitted when the material selection state for the current shape changes.
+
+SIG void : materialSelectionSetsChanged()
+  > summary
+    Emitted when the material selection state for the current shape changes.
+
+SIG void : modifierAdded( DzModifier mod )
+  > summary
+    Emitted when a modifier is added to this object.
+  > parameters
+    + mod - The modifier added to the object.
+
+SIG void : modifierRemoved( DzModifier mod )
+  > summary
+    Emitted when a modifier is removed from this object.
+  > parameters
+    + mod - The modifier removed from the object.
+
+SIG void : modifierStackChanged()
+  > summary
+    Emitted when a modifier is added to or removed from this object.
+
+SIG void : shapeAdded( shape_dz shape )
+  > summary
+    Emitted when a shape is added to this object.
+  > parameters
+    + shape - The shape added to the object.
+
+SIG void : shapeRemoved( shape_dz shape )
+  > summary
+    Emitted when a shape is removed from this object.
+  > parameters
+    + shape - The shape removed from the object.
+
+SIG void : shapeTopologyChanged()
+  > summary
+    Emitted when the topology of the current shape for this object has changed.
+
+SIG void : uvsChanged()
+  > summary
+    Emitted when the current uv set for the object has changed.

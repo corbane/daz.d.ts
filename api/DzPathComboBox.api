@@ -1,0 +1,67 @@
+CLS DzPathComboBox : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/pathcombobox_dz
+  > summary
+    DAZScript combobox widget with a custom popup designed for choosing a path.
+
+### description
+  > summary
+    A DzPathComboBox provides a DzComboBox like widget with a popup that is designed for choosing a path.
+
+### constructors
+
+CTR DzPathComboBox( DzWidget parent, Boolean useMarkableView=false )
+  > summary
+    Instantiates DzPathComboBox
+    Creates a path combobox as a child of the given parent widget.
+  > parameters
+    + parent - The widget parent for the path combobox.
+    + useMarkableView - Whether or not to use a view with check boxes.
+
+### methods
+
+FUN void : clearSelection()
+  > summary
+    Clear selection
+
+FUN DzTypeAssetContainer : currentType()
+  > returns
+    current type
+
+FUN String : currentType()
+  > returns
+    current type
+
+FUN DzTypeAssetContainer : getRoot()
+  > summary
+    TODO: Add description.
+
+PRP Array : getSelectionPath
+  > returns
+    returns selected paths.
+
+FUN void : setEmptyText( String text )
+  > summary
+    Sets empty text
+
+FUN void : setSelection( Array idPath )
+  > summary
+    sets the current selection
+
+FUN void : setTopLevelType( Array idPath )
+  > returns
+    current type
+
+FUN void : setTypes( Array list )
+  > summary
+    Sets paths for the combobox.
+
+### signals
+
+SIG void : pathSelectionChanged( String path )
+  > summary
+    TODO: Add description.
+
+SIG void : viewAboutToShow()
+  > summary
+    TODO: Add description.

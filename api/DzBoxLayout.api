@@ -1,0 +1,63 @@
+CLS DzBoxLayout : DzLayout
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/boxlayout_dz
+  > summary
+    DAZScript wrapper for QBoxLayout.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU Direction
+  > summary
+    Used to determine the direction of a box layout.
+  + LeftToRight - Horizontal from left to right.
+  + RightToLeft - Horizontal from right to left.
+  + TopToBottom - Vertical from top to bottom.
+  + BottomToTop - Vertical from bottom to top.
+
+### properties
+
+PRP DzBoxLayout.Direction : direction
+  > summary
+    The direction of the layout
+
+### constructors
+
+CTR DzBoxLayout( DzWidget parent, DzBoxLayout.Direction direction=DzBoxLayout.Direction.LeftToRight )
+  > summary
+    Creates a box layout that manages the children widgets of the given parent widget
+
+CTR DzBoxLayout( DzLayout parent, DzBoxLayout.Direction direction=DzBoxLayout.Direction.LeftToRight )
+  > summary
+    Creates a vertical box layout as a sub-layout of the given layout
+
+### methods
+
+FUN void : addLayout( DzLayout layout, Number stretch=0 )
+  > summary
+    Adds the given layout to the items managed by this layout
+  > parameters
+    + item - The layout to add
+    + stretch - The stretch factor to set for the layout
+
+FUN void : addSpacing( Number size )
+  > summary
+    Adds a non-stretchable space with size size to the end of this layout
+
+FUN void : addStretch( Number stretch=0 )
+  > summary
+    Adds a stretchable space with stretch factor stretch to the end of this layout
+
+FUN void : addStrut( Number size )
+  > summary
+    Limits the minimum dimension perpendicular to the direction the box, to size
+
+FUN void : addWidget( DzWidget widget, Number stretch=0 )
+  > summary
+    Adds the given widget to the items managed by this layout
+  > parameters
+    + item - The widget to add
+    + stretch - The stretch factor to set for the widget

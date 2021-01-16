@@ -1,0 +1,90 @@
+CLS DzLayeredImage : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/layeredimage_dz
+  > summary
+    Class that implements multi-layered images.
+
+### description
+  > summary
+    This class uses explicit sharing to make it very efficient to copy. This does, however, mean that modifying one copy of the image modifies all copies. DzLayeredImage does not currently support detach() or copy() functions for creating unique instances or deep copies.
+
+### methods
+
+FUN void : addLayer( DzImageLayer layer )
+  > summary
+    Add a layer to the image.
+  > parameters
+    + layer - The layer to add to the image. The image takes ownership of this object and deletes it when it is no longer needed.
+
+FUN Image : getFlattenedImage( Boolean freeMem=false )
+  > parameters
+    + freeMem - If true, any image layers loaded from file will be unloaded immediately after flattening. They will have to be re-loaded again for future flattening operations.
+  > returns
+    An image that is the final result of merging all the visible layers in the image.
+
+FUN DzImageLayer : getLayer( Number which )
+  > returns
+    The layer at index which. This object is owned by the image.
+
+FUN Number : getLayerCount()
+  > returns
+    The number of layers in this image.
+
+FUN Size : getSize()
+  > returns
+    The size of the canvas for this image.
+
+FUN void : insertLayer( DzImageLayer layer, Number idx )
+  > summary
+    Insert a layer at a specific index.
+  > parameters
+    + layer - The layer to add to the image. The image takes ownership of this object and deletes it when it is no longer needed.
+    + idx - The index in the list to insert the layer at.
+
+FUN void : moveLayer( Number from, Number to )
+  > summary
+    Adjust layer order.
+  > parameters
+    + from - The index of the layer to move.
+    + to - The index in the list to move the layer to.
+
+FUN Boolean : removeLayer( DzImageLayer layer )
+  > summary
+    Remove the specified layer.
+  > parameters
+    + layer - The layer to remove from the image. The layer will be deleted if it is owned by the image.
+  > returns
+    true if the layer was removed from the image, otherwise false.
+
+FUN Boolean : replaceLayer( DzImageLayer oldLayer, DzImageLayer newLayer )
+  > summary
+    Replace a layer with a new layer.
+  > parameters
+    + oldLayer - A pointer to the layer to remove from the image. The layer will be deleted if it is owned by the image.
+    + newLayer - The new layer to add to the image in place of the old layer. The image takes ownership of this object and deletes it when it is no longer used.
+  > returns
+    true if the layer was successfully replaced, otherwise false.
+
+FUN void : setSize( Size size )
+  > summary
+    Sets the size of the image's canvas.
+  > parameters
+    + size - The new size for the image's canvas.
+
+FUN Boolean : toLayeredTexture( DzLayeredTexture img )
+  > parameters
+    + img - The layered texture to copy/convert the layered image into.
+  > returns
+    true if the image was successfully copied to img, otherwise false.
+
+### signals
+
+SIG void : layerListChanged()
+  > summary
+    Emits a signal when the list of layers has changed.
+
+SIG void : sizeChanged( Size size )
+  > summary
+    Emits a signal that the size of canvas has changed.
+  > parameters
+    + size - The new size of the canvas.

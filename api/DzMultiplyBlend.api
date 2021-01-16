@@ -1,0 +1,15 @@
+CLS DzMultiplyBlend : DzImageBlend
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/multiplyblend_dz
+  > summary
+    A multiplicative image blending operation.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzMultiplyBlend()
+  > summary
+    Default Constructor

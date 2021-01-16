@@ -1,0 +1,112 @@
+CLS DzImageProperty : DzProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/imageproperty_dz
+  > summary
+    A static (non-animatable) image property.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### constructors
+
+CTR DzImageProperty()
+  > summary
+    Default Constructor. Creates a non-user property.
+
+CTR DzImageProperty( String name, Boolean isUserProperty )
+  > parameters
+    + name - The name of this property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+
+### methods
+
+FUN Number : getDefaultMapGamma()
+  > returns
+    The default map gamma.
+  > since
+    4.5.2.23
+
+FUN Number : getDefaultMapTextureType()
+  > returns
+    The default map texture type.
+  > since
+    4.6.4.30
+
+FUN DzTextureModifier : getTextureModifier()
+  > returns
+    The texture modifier for this property (if any), otherwise NULL.
+  > since
+    4.6.4.80
+
+FUN Number : getTextureModifierFlags()
+  > returns
+    The texture modifier flags.
+  > since
+    4.6.4.82
+
+FUN DzTexture : getValue()
+  > returns
+    The image value of this property.
+
+FUN void : setDefaultMapGamma( Number gamma )
+  > summary
+    Sets the default map gamma.
+  > parameters
+    + gamma - The gamma value to set.
+  > since
+    4.5.2.23
+
+FUN void : setDefaultMapTextureType( Number type )
+  > summary
+    Sets the default map texture type.
+  > parameters
+    + type - The map texture type to set.
+  > since
+    4.6.4.30
+
+FUN void : setTextureModifier( DzTextureModifier txtMod )
+  > summary
+    Sets the texture modifier.
+  > parameters
+    + txtMod - The texture modifier to set.
+  > since
+    4.6.4.80
+
+FUN void : setTextureModifierFlags( Number flags )
+  > summary
+    Sets texture modifier flags for this property.
+  > parameters
+    + flags - The texture modifier flags to set.
+  > since
+    4.6.4.82
+
+FUN Boolean : setValue( DzTexture val )
+  > summary
+    Sets the texture value on this property.
+  > parameters
+    + val - The texture value to set.
+
+FUN Boolean : setValue( String imgFile )
+  > summary
+    Sets the image value.
+  > parameters
+    + imgFile - The path of the image to set as the value; can be absolute or relative to a mapped directory.
+
+### signals
+
+SIG void : defaultMapGammaChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : defaultMapTextureTypeChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : textureModifierChanged()
+  > summary
+    TODO: Add description.
+
+SIG void : textureModifierFlagsChanged()
+  > summary
+    TODO: Add description.

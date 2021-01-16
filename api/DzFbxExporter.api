@@ -1,0 +1,17 @@
+CLS DzFbxExporter : DzExporter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fbxexporter_dz
+  > summary
+    Class for exporting to the Autodesk FBX (*.fbx) format.
+
+### description
+  > seealso
+    DzExportMgr::findExporterByClassName()
+    DzExportMgr::findExporter()
+    Silent FBX Export
+
+### constructors
+
+CTR DzFbxExporter()
+  > summary
+    Default Constructor.

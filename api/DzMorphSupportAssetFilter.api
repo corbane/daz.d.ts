@@ -1,0 +1,17 @@
+CLS DzMorphSupportAssetFilter : DzAssetFileOutFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/morphsupportassetfilter_dz
+  > summary
+    Class for saving DSON-based Morph Support Asset(s).
+
+### description
+  > summary
+    An asset save filter for saving Morph Support Asset(s) in the DSON format.
+  > seealso
+    Sample: Save Morph Support Asset(s)
+
+### constructors
+
+CTR DzMorphSupportAssetFilter()
+  > summary
+    TODO: Add description.

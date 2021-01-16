@@ -1,0 +1,108 @@
+CLS DzGZFile : DzFileInfo
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/gzfile_dz
+  > summary
+    DAZ Script *.gz (gzip) file I/O class.
+
+### description
+  > summary
+    This class provides DAZ Script functionality for reading and writing *.gz ('gzipped') files. A high-level interface for zipping/unzipping files is provided with the functions zip() and unzip(). Also, a low-level interface is provided, allowing scripts to read and write compressed files directly.
+
+### enumerations
+
+ENU AccessMode
+  > summary
+    Enumerated values used with open() to describe the mode in which a file is opened.
+  + ReadOnly - Open the file for reading only.
+  + WriteOnly - Open the file for writing only.
+  + ReadWrite - Open the file for reading and writing.
+  + Append - The file is opened in append mode, so that all data is written to the end of the file.
+  + Truncate - If possible, the file is truncated before it is opened. All earlier contents of the file are lost.
+  + Text - When reading, the end-of-line terminators are translated to '
+    '. When writing, the end-of-line terminators are translated to the local encoding.
+  + Translate - Alias for Text.
+
+### constructors
+
+CTR DzGZFile( String file )
+  > summary
+    Creates a gzip file with the given file name.
+  > parameters
+    + file - The path of the *.gz file.
+
+### methods
+
+FUN void : close()
+  > summary
+    Closes the file.
+
+FUN Boolean : eof()
+  > returns
+    true if the current file position is at the end of the file, otherwise false.
+
+FUN Boolean : open( DzGZFile.AccessMode accessMode )
+  > summary
+    Open the file with the given mode.
+  > parameters
+    + accessMode - The access mode to open with.
+  > returns
+    true if the file was opened successfully, otherwise false.
+
+FUN String : read()
+  > summary
+    Reads the entire file.
+  > returns
+    The uncompressed file contents as a string.
+
+FUN Number : readByte()
+  > summary
+    Read one uncompressed character from the file buffer.
+  > returns
+    The next uncompressed character read from the file.
+
+FUN String : readLine()
+  > summary
+    Read an uncompressed line of text from the file.
+  > returns
+    The next uncompressed file line as a string.
+
+FUN Array : readLines()
+  > summary
+    Uncompresses the entire file and splits it into lines of text.
+  > returns
+    A list of uncompressed text lines from the file.
+
+FUN Boolean : unzip( String filename )
+  > summary
+    Unzips this file into the given filename.
+  > parameters
+    + filename - The name of the file to write to.
+  > returns
+    true if the file was successfully unzipped, otherwise false.
+
+FUN void : write( String data, Number length=-1 )
+  > summary
+    Write a string to the file compression buffer.
+  > parameters
+    + data - The string to write to the file.
+    + length - The maximum number of characters to write to the file. If this is less than 1 (default), the whole string is written.
+
+FUN void : writeByte( Number byte )
+  > summary
+    Write a single byte (character) to the file compression buffer.
+  > parameters
+    + byte - The character to write to the file.
+
+FUN void : writeLine( String data )
+  > summary
+    Write a line of text to the file compression buffer.
+  > parameters
+    + data - The string to write to the file - a new line character will be written immediately following the string contents.
+
+FUN Boolean : zip( String filename )
+  > summary
+    Replaces this file's contents with the gzipped contents of the given file. If this file does not exist, it will be created.
+  > parameters
+    + filename - The name of the file to replace this file's contents with.
+  > returns
+    true if the file was successfully zipped, otherwise false.

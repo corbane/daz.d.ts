@@ -1,0 +1,33 @@
+CLS DzSimpleSceneScriptData : DzSimpleSceneData
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/simplescenescriptdata_dz
+  > summary
+    DzCustomData implementation that can be associated with a DzScene.
+
+### description
+  > summary
+    Implements a custom data item that causes a specified script to be executed after the scene has been loaded.
+    A global transient variable named DataItem, which refers to the DzSimpleSceneScriptData that invoked the execution of the script, is provided to the script in the global context at runtime. Attempts to use this global variable outside of the associated script will result in a ReferenceError.
+    A global transient variable named FileIOSettings, which refers to the DzFileIOSettings that was used when the scene was loaded, is provided to the script in the global context at runtime. Attempts to use this global variable outside of the associated script will result in a ReferenceError. (since 4.9.4.109)
+    If the DzSettings for this data item contains a boolean setting named RunOnce set to true, the specified script will be run once and then the data item will be deleted from the scene.
+
+### constructors
+
+CTR DzSimpleSceneScriptData( String name, Boolean persistent=true )
+  > summary
+    Default constructor.
+  > parameters
+    + name - The name for the data item. This must be unique for all data items on the scene - i.e. a scene can not have two data items with the same name.
+    + persistent - If true, the data item will be saved with the scene to the native file format.
+
+### methods
+
+FUN String : getScriptFilePath()
+  > returns
+    The file path of the script for this data item (if any), otherwise an empty string.
+
+FUN void : setScriptFilePath( String script )
+  > summary
+    Sets the file path of the script for this data item.
+  > parameters
+    + script - The file path of the script.

@@ -1,0 +1,36 @@
+/**
+ * @file
+ * @version 1.0.0
+ * @author Vrecq Jean-marie
+ */
+
+.resizable-stack {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.resizable-stack > * {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.resizable-stack.horizontal > * {
+    height: 100%;
+    top: 0px;
+}
+.resizable-stack.vertical > * {
+    width: 100%;
+    left: 0px;
+}
+.resizable-stack > .sizer-handle.horizontal:hover {
+    transform: scaleY(2);
+    background-color: rgb(155, 188, 231);
+    cursor: ns-resize;
+}
+.resizable-stack > .sizer-handle.vertical:hover {
+    transform: scaleX(2);
+    background-color: rgb(155, 188, 231);
+    cursor: ew-resize;
+}

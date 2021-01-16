@@ -1,0 +1,17 @@
+CLS DzHierarchicalPoseAssetFilter : DzAssetFileOutFilter
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/hierarchicalposeassetfilter_dz
+  > summary
+    Class for saving DSON-based Hierarchical Pose Presets.
+
+### description
+  > summary
+    An asset save filter for saving a Hierarchical Pose Preset in the DSON format.
+  > seealso
+    Sample: Save a Hierarchical Pose Preset
+
+### constructors
+
+CTR DzHierarchicalPoseAssetFilter()
+  > summary
+    TODO: Add description.

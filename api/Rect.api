@@ -1,0 +1,139 @@
+CLS Rect : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/rect
+  > summary
+    AZScript wrapper for QRect.
+
+### description
+  > summary
+    This is the DAZScript counterpart to the QRect type used in the DAZ Studio SDK. A Rect object is a two dimensional representation of a rectangle.
+  > attention
+    Inheritance will change to Object in a pending update.
+
+### properties
+
+PRP Number : bottom
+  > summary
+    Holds the rectangle's bottom.
+
+PRP Point : center
+  > summary
+    Holds the rectangle's center.
+
+PRP Number : height
+  > summary
+    Holds the rectangle's height.
+
+PRP Number : left
+  > summary
+    Holds the rectangle's left.
+
+PRP Number : right
+  > summary
+    Holds the rectangle's right.
+
+PRP Number : top
+  > summary
+    Holds the rectangle's top.
+
+PRP Number : width
+  > summary
+    Holds the rectangle's width.
+
+PRP Number : x
+  > summary
+    Holds the rectangle's x position.
+
+PRP Number : y
+  > summary
+    Holds the rectangle's y position.
+
+### constructors
+
+CTR Rect()
+  > summary
+    Default Constructor.
+
+CTR Rect( Rect rect )
+  > parameters
+    + rect - The rectangle to copy.
+
+CTR Rect( Number xVal, Number yVal, Number wVal, Number hVal )
+  > parameters
+    + xVal - The x coordinate of the rectangle.
+    + yVal - The y coordinate of the rectangle.
+    + wVal - The width of the rectangle.
+    + hVal - The height of the rectangle.
+
+### methods
+
+FUN Boolean : contains( Rect rect )
+  > parameters
+    + rect - The rectangle to test against this rectangle.
+  > returns
+    true if this rectangle contains the given rectangle, otherwise false.
+
+FUN Rect : intersection( Rect rect )
+  > parameters
+    + rect - The rectangle to intersect with this rectangle.
+  > returns
+    The intersection of this rectangle with the given rectangle, or an empty rectangle if the two do not intersect.
+
+FUN Boolean : intersects( Rect rect )
+  > parameters
+    + rect - The rectangle to test against this rectangle.
+  > returns
+    true if this rectangle intersects with the given rectangle, otherwise false.
+
+FUN Boolean : isEmpty()
+  > returns
+    true if the rectangle is empty, i.e the width and height of the rectangle are negative, otherwise false.
+
+FUN Boolean : isNull()
+  > returns
+    true if the width and height of the rectangle are 0, otherwise false.
+
+FUN void : moveBottom( Number pos )
+  > summary
+    Moves the rectangle so its bottom property is equal to pos.
+  > parameters
+    + pos - The new bottom boundary of the triangle.
+
+FUN void : moveBy( Number dx, Number dy )
+  > summary
+    Translates the rectangle by dx and dy, the width and height remain unchanged.
+  > parameters
+    + dx - The distance in x to move the rectangle.
+    + dy - The distance in y to move the rectangle.
+
+FUN void : moveLeft( Number pos )
+  > summary
+    Moves the rectangle so its left property is equal to pos.
+  > parameters
+    + pos - The new left boundary of the triangle.
+
+FUN void : moveRight( Number pos )
+  > summary
+    Moves the rectangle so its right property is equal to pos.
+  > parameters
+    + pos - The new right boundary of the triangle.
+
+FUN void : moveTop( Number pos )
+  > summary
+    Moves the rectangle so its top property is equal to pos.
+  > parameters
+    + pos - The new top boundary of the triangle.
+
+FUN void : normalize()
+  > summary
+    Normalizes the rectangle - changes the prefix of width/height if they are negative. The rectangle will no longer be empty after it is normalized.
+
+FUN void : normalize()
+  > summary
+    Normalizes the rectangle - changes the prefix of width/height if they are negative. The rectangle will no longer be empty after it is normalized.
+
+FUN Rect : union( Rect rect )
+  > parameters
+    + rect - The rectangle to add to this rectangle.
+  > returns
+    The union of this rectangle with the given rectangle, i.e. a rectangle that contains both rectangles.

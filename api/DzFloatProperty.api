@@ -1,0 +1,308 @@
+CLS DzFloatProperty : DzNumericProperty
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/floatproperty_dz
+  > summary
+    An animatable floating-point property.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### enumerations
+
+ENU InterpolationType
+  > summary
+    TODO: Add description.
+  + LINEAR_INTERP - Linear interpolation between key values.
+  + CONSTANT_INTERP - Constant interpolation between key values.
+  + TCB_INTERP - TCB (Kochanek-Bartels) Spline interpolation between key values.
+  + HERMITE_INTERP - Hermite Spline interpolation between key values.
+
+ENU TransformType
+  > summary
+    TODO: Add description.
+  + NON_TRANSFORM - This property is not a transform property.
+  + SCALE - This property is a scale transform.
+  + TRANSLATE - This property is a translation transform property.
+  + ROT_FIRST_AXIS - This property is a rotation on the first axis of the rotation order.
+  + ROT_SECOND_AXIS - This property is a rotation on the second axis of the rotation order.
+  + ROT_THIRD_AXIS - This property is a rotation on the third axis of the rotation order.
+
+### constructors
+
+CTR DzFloatProperty()
+  > summary
+    Default Constructor. Creates a non-animatable, non-user property.
+
+CTR DzFloatProperty( String name, Boolean canAnimate, Boolean isUserProperty, Number defaultVal=0.0 )
+  > parameters
+    + name - The name of this property.
+    + canAnimate - If true, creates an animatable property.
+    + isUserProperty - If true, creates a user property; user properties are properties that can be added/deleted by users.
+    + defaultVal - Sets the default value of this property.
+
+### methods
+
+FUN void : add( Number val, Boolean applyToDefault=true )
+  > summary
+    Adds the given value to all the key values.
+  > parameters
+    + val - The addend for the values.
+    + applyToDefault - If true, val will also be added to the default value for the property.
+
+FUN Number : adjustValue( Number val )
+  > summary
+    Adjust the value of the property based on the contribution of property controllers.
+  > parameters
+    + val - The 'final' value desired for the property.
+  > returns
+    A 'raw' value for the property that will result in the property having the given value with the current controllers.
+
+FUN Number : adjustValue( DzTime tm, Number val )
+  > summary
+    Adjust the value of the property at the given time based on the contribution of property controllers.
+  > parameters
+    + tm - The scene time at which to adjust the value.
+    + val - The 'final' value desired for the property.
+  > returns
+    A 'raw' value for the property that will result in the property having the given value with the current controllers.
+
+FUN void : divide( Number val, Boolean applyToDefault=true )
+  > summary
+    Divides all key values by the given amount.
+  > parameters
+    + val - The divisor for the values.
+    + applyToDefault - If true, the default value for the property will also be divided.
+
+FUN Number : getDefaultValue()
+  > returns
+    The default value of the property.
+
+FUN Boolean : getDisplayAsPercent()
+  > returns
+    true if this property should be displayed as a percentage, false if this property should be displayed as a decimal.
+
+FUN Number : getDoubleDefaultValue()
+  > returns
+    The default value of this property as a double precision value.
+
+FUN Number : getDoubleValue( DzTime tm? )
+  > parameters
+    + tm - The scene time to get the value for.
+  > returns
+    The value of this property as a double at the given time.
+
+FUN DzFloatProperty.InterpolationType : getKeyInterpolationType( Number i )
+  > parameters
+    + i - The index of the key to get the interpolation values for.
+    + param0 - If not NULL, its value will be set to value of interpolation param 0.
+    + param1 - If not NULL, its value will be set to value of interpolation param 1.
+    + param2 - If not NULL, its value will be set to value of interpolation param 2.
+  > returns
+    The type of interpolation performed for the i'th key in the property.
+
+FUN Array : getKeyInterpolationTypeValues( Number i )
+  > parameters
+    + i - The index of the key to get the interpolation type values for.
+  > returns
+    The interpolation type values for this property.
+
+FUN Number : getKeyValue( Number i )
+  > parameters
+    + index - The index of the key to get the value for.
+  > returns
+    The value of the i'th key in the property.
+
+FUN Number : getLocalValue()
+  > summary
+    This function is provided for the special case of ERC link redirection; sometimes called 'cross-talk'. For example, if Figure A (a piece of clothing, for example) is 'Fit To' Figure B, the ERC links on Figure A are redirected to follow channels on Figure B; this is how morphs on an item of clothing will follow morphs on the figure, etc. This function will provide the value of the property ignoring any redirection of ERC links. So, for a figure that is not 'Fit To' another figure, this will return the same value as getValue(). For a figure that is 'Fit To' another figure, this will return the value that the property would have if the ERC link had not been redirected.
+  > returns
+    The value of the property at the current time without any ERC link redirection.
+
+FUN Number : getLocalValue( DzTime tm )
+  > summary
+    This function is provided for the special case of ERC link redirection; sometimes called 'cross-talk'. For example, if Figure A (a piece of clothing, for example) is 'Fit To' Figure B, the ERC links on Figure A are redirected to follow channels on Figure B; this is how morphs on an item of clothing will follow morphs on the figure, etc. This function will provide the value of the property ignoring any redirection of ERC links. So, for a figure that is not 'Fit To' another figure, this will return the same value as getValue(). For a figure that is 'Fit To' another figure, this will return the value that the property would have if the ERC link had not been redirected.
+  > parameters
+    + tm - The scene time to get the local value for.
+  > returns
+    The value of the property at the given time without any ERC link redirection.
+
+FUN Number : getMax()
+  > returns
+    The maximum allowable value of the property.
+
+FUN Number : getMin()
+  > returns
+    The minimum allowable value of the property.
+
+FUN Number : getRawValue()
+  > summary
+    This function is provided to make it easy to get the 'keyed' value of the property without any modifications. When the value of a property is evaluated, first the value based on key interpolation is calculated, that value is then passed to each of the controllers on the property (ERC links for example) which can modify that value. This modified value is then returned as the value of the property by getValue(). This function returns the value of the property before the application of the controllers; strictly the result of key interpolation.
+  > returns
+    The 'raw' value of the property at the current time; this is the actual value of the property without the contribution of property links, etc.
+
+FUN Number : getRawValue( DzTime tm )
+  > summary
+    This function is provided to make it easy to get the 'keyed' value of the property without any modifications. When the value of a property is evaluated, first the value based on key interpolation is calculated, that value is then passed to each of the controllers on the property (ERC links for example) which can modify that value. This modified value is then returned as the value of the property by getValue(). This function returns the value of the property before the application of the controllers; strictly the result of key interpolation.
+  > parameters
+    + tm - The scene time to get the raw value for.
+  > returns
+    The 'raw' value of the property at the given time; this is the actual value of the property without the contribution of property links, etc.
+
+FUN Number : getScaledFollowValue( DzTime tm )
+  > summary
+    TODO: Add description.
+
+FUN Number : getSensitivity()
+  > returns
+    The sensitivity value for this property.
+
+FUN DzFloatProperty.TransformType : getTransformType()
+  > returns
+    The transform type for this property.
+
+FUN Number : getValue()
+  > returns
+    The value of the property at the current time.
+
+FUN Number : getValue( DzTime tm )
+  > parameters
+    + tm - The scene time to get the value for.
+  > returns
+    The value of the property at the given time.
+
+FUN void : multiply( Number val, Boolean applyToDefault=true )
+  > summary
+    Multiplies all key values by the given amount.
+  > parameters
+    + val - The multiplier for the values.
+    + applyToDefault - If true, the default value for the property will also be multiplied.
+
+FUN void : setDefaultValue( Number val )
+  > summary
+    Sets the default value for this property.
+  > parameters
+    + val - The value to set as the default for this property.
+
+FUN void : setDisplayAsPercent( Boolean onOff )
+  > summary
+    Sets whether this property should have its value displayed as a percentage; the default is false (value is displayed as a decimal).
+
+FUN void : setDoubleDefaultValue( Number val )
+  > summary
+    Sets the default value for this property.
+  > parameters
+    + val - The value to set as the default for this property.
+
+FUN void : setDoubleValue( DzTime tm, Number val? )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time to set the value for.
+    + val - The value to set for this property.
+
+FUN void : setKeyInterpolation( Number i, DzFloatProperty.InterpolationType interp )
+  > summary
+    Sets the interpolation method for the i'th key.
+  > parameters
+    + i - The index of the key to change.
+    + interp - The type of interpolation to perform between this keyframe and the next.
+  > Attention
+    You are responsible to ensure the key index is within the valid range.
+
+FUN void : setKeyInterpolation( Number i, DzFloatProperty.InterpolationType interp, Number param0, Number param1, Number param2 )
+  > summary
+    Sets the interpolation method for the i'th key.
+  > parameters
+    + i - The index of the key to change.
+    + interp - The type of interpolation to perform between this keyframe and the next.
+    + param0 - The parameter 0 for key interpolation: T value for TCB interpolation, starting slope value for Hermite interpolation.
+    + param1 - The parameter 1 for key interpolation: C value for TCB interpolation, ending slope value for Hermite interpolation.
+    + param2 - The parameter 2 for key interpolation: B value for TCB interpolation.
+  > Attention
+    You are responsible to ensure the key index is within the valid range.
+
+FUN void : setKeyValue( Number i, Number val )
+  > summary
+    Sets the value of the i'th key.
+  > parameters
+    + keyIndex - The index of the key to set the value for.
+    + val - The value to set.
+  > Attention
+    You are responsible to ensure the key index is within the valid range.
+
+FUN void : setMax( Number max )
+  > summary
+    Set the maximum allowable value.
+  > parameters
+    + max - The maximum value to set.
+
+FUN void : setMin( Number min )
+  > summary
+    Set the mininimum allowable value.
+  > parameters
+    + min - The minimum value to set.
+
+FUN void : setMinMax( Number min, Number max )
+  > summary
+    Set the mininimum and maximum allowable values.
+  > parameters
+    + min - The minimum value to set.
+    + max - The maximum value to set.
+
+FUN void : setSensitivity( Number sens )
+  > summary
+    Set the sensitivity for this property. This value describes the amount of change in the value of this property caused by adjustment in the interface, especially if limits are off.
+  > parameters
+    + sens - The value to set.
+
+FUN void : setTransformType( DzFloatProperty.TransformType type )
+  > summary
+    Sets the transform type for this property.
+  > parameters
+    + type - The enumeration value for the type of transform.
+
+FUN void : setValue( DzTime tm, Number val, DzFloatProperty.InterpolationType interp, Number param0, Number param1, Number param2 )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable.
+  > parameters
+    + tm - The scene time to set the value at.
+    + val - The value to set the property to.
+    + interp - The type of interpolation to perform between this keyframe and the next.
+    + param0 - The parameter 0 for key interpolation: T value for TCB interpolation, starting slope value for Hermite interpolation.
+    + param1 - The parameter 1 for key interpolation: C value for TCB interpolation, ending slope value for Hermite interpolation.
+    + param2 - The parameter 2 for key interpolation: B value for TCB interpolation
+
+FUN void : setValue( DzTime tm, Number val )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable. This function differs from setRawValue() in that it takes into account any controllers on the property such that calling setValue( getValue() ) should not change the value of the property.
+  > parameters
+    + tm - The scene time to set the value at.
+    + val - The value to set.
+
+FUN void : setValue( DzTime tm, Number val, DzFloatProperty.InterpolationType interp )
+  > summary
+    Sets the value for this property at the given time; or the default value if this property is not animatable. This function differs from setRawValue() in that it takes into account any controllers on the property such that calling setValue( getValue() ) should not change the value of the property.
+  > parameters
+    + tm - The scene time to set the value at.
+    + val - The value to set.
+    + interp - The type of interpolation to perform between this keyframe and the next. Parameters for interpolation are set to defaults.
+
+FUN void : setValue( Number val )
+  > summary
+    Sets the value for this property at the current time; or the default value if this property is not animatable. This function differs from setRawValue() in that it takes into account any controllers on the property such that calling setValue( getValue() ) should not change the value of the property.
+  > parameters
+    + val - The value to set.
+
+FUN void : subtract( Number val, Boolean applyToDefault=true )
+  > summary
+    Subtracts the given value to all the key values.
+  > parameters
+    + val - The value to be subtracted from the key values.
+    + applyToDefault - If true, val will also be subtracted from the default value for the property.
+
+### signals
+
+SIG void : displayAsPercentChanged()
+  > summary
+    Emitted if the way this property is displayed changed.

@@ -1,0 +1,36 @@
+CLS DzFileIO : DzBase
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/fileio_dz
+  > summary
+    Base class for all file importers/exporters.
+
+### description
+  > summary
+    This class provides functionality common to all file importers and exporters such as the ability to edit options before file import/export. Also, this class provides functions for importers/exporters to report errors to the user/log file, and provides static convenience functions for dissecting file paths into their parts.
+
+### properties
+
+PRP Boolean : optionsShown
+  > summary
+    Holds whether or not the options for the importer/exporter has been shown.
+  > since
+    4.9.3.23
+
+### methods
+
+FUN void : getDefaultOptions( DzFileIOSettings options )
+  > summary
+    TODO: Add description.
+
+FUN Boolean : getOptions( DzFileIOSettings options, Boolean useInterface, String filename )
+  > summary
+    Gets the options for an import operation.
+  > parameters
+    + options - The settings object that the selected options will be added to.
+    + useInterface - If true and the importer/exporter implements the getOptionsFrame() virtual member function, the options interface for the importer/exporter will be displayed to the user. If the default (or last-used) options will be added to or updated in options.
+  > returns
+    if options has been updated, otherwise false.
+
+FUN Boolean : showOptions()
+  > returns
+    true if this importer/exporter should display an options dialog by default, otherwise false.

@@ -1,0 +1,272 @@
+CLS QWidget : QObject
+  > summary
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/widget_q
+    DAZScript accessible portions of the Qt native QWidget class.
+
+### description
+  > summary
+    This pages exists in order to indicate the DAZScript accessible properties and signals of the Qt native QWidget class.
+
+### properties
+
+PRP Boolean : acceptDrops
+  > summary
+    TODO: Add description.
+
+PRP String : accessibleDescription
+  > summary
+    TODO: Add description.
+
+PRP String : accessibleName
+  > summary
+    TODO: Add description.
+
+PRP Boolean : autoFillBackground
+  > summary
+    TODO: Add description.
+
+PRP Size : baseSize
+  > summary
+    TODO: Add description.
+
+PRP Rect : childrenRect
+  > summary
+    TODO: Add description.
+
+PRP Boolean : enabled
+  > summary
+    TODO: Add description.
+
+PRP Boolean : focus
+  > summary
+    TODO: Add description.
+
+PRP Font : font
+  > summary
+    TODO: Add description.
+
+PRP Rect : frameGeometry
+  > summary
+    TODO: Add description.
+
+PRP Size : frameSize
+  > summary
+    TODO: Add description.
+
+PRP Boolean : fullScreen
+  > summary
+    TODO: Add description.
+
+PRP Rect : geometry
+  > summary
+    TODO: Add description.
+
+PRP Number : height
+  > summary
+    TODO: Add description.
+
+PRP Boolean : isActiveWindow
+  > summary
+    TODO: Add description.
+
+PRP Boolean : maximized
+  > summary
+    TODO: Add description.
+
+PRP Number : maximumHeight
+  > summary
+    TODO: Add description.
+
+PRP Size : maximumSize
+  > summary
+    TODO: Add description.
+
+PRP Number : maximumWidth
+  > summary
+    TODO: Add description.
+
+PRP Boolean : minimized
+  > summary
+    TODO: Add description.
+
+PRP Number : minimumHeight
+  > summary
+    TODO: Add description.
+
+PRP Size : minimumSize
+  > summary
+    TODO: Add description.
+
+PRP Size : minimumSizeHint
+  > summary
+    TODO: Add description.
+
+PRP Number : minimumWidth
+  > summary
+    TODO: Add description.
+
+PRP Boolean : mouseTracking
+  > summary
+    TODO: Add description.
+
+PRP Rect : normalGeometry
+  > summary
+    TODO: Add description.
+
+PRP Palette : palette
+  > summary
+    TODO: Add description.
+
+PRP Point : pos
+  > summary
+    TODO: Add description.
+
+PRP Rect : rect
+  > summary
+    TODO: Add description.
+
+PRP Size : size
+  > summary
+    TODO: Add description.
+
+PRP Size : sizeHint
+  > summary
+    TODO: Add description.
+
+PRP Size : sizeIncrement
+  > summary
+    TODO: Add description.
+
+PRP String : statusTip
+  > summary
+    TODO: Add description.
+
+PRP String : styleSheet
+  > summary
+    TODO: Add description.
+
+PRP String : toolTip
+  > summary
+    TODO: Add description.
+
+PRP Boolean : updatesEnabled
+  > summary
+    TODO: Add description.
+
+PRP Boolean : visible
+  > summary
+    TODO: Add description.
+
+PRP String : whatsThis
+  > summary
+    TODO: Add description.
+
+PRP Number : width
+  > summary
+    TODO: Add description.
+
+PRP String : windowFilePath
+  > summary
+    TODO: Add description.
+
+PRP String : windowIconText
+  > summary
+    TODO: Add description.
+
+PRP Boolean : windowModified
+  > summary
+    TODO: Add description.
+
+PRP Number : windowOpacity
+  > summary
+    TODO: Add description.
+
+PRP String : windowTitle
+  > summary
+    TODO: Add description.
+
+PRP Number : x
+  > summary
+    TODO: Add description.
+
+PRP Number : y
+  > summary
+    TODO: Add description.
+
+### methods
+
+FUN Boolean : close()
+  > summary
+    TODO: Add description.
+
+FUN void : hide()
+  > summary
+    TODO: Add description.
+
+FUN void : lower()
+  > summary
+    TODO: Add description.
+
+FUN void : raise()
+  > summary
+    TODO: Add description.
+
+FUN void : repaint()
+  > summary
+    TODO: Add description.
+
+FUN void : setDisabled( Boolean disable )
+  > summary
+    TODO: Add description.
+
+FUN void : setEnabled( Boolean enabled )
+  > summary
+    TODO: Add description.
+
+FUN void : setFocus()
+  > summary
+    TODO: Add description.
+
+FUN void : setHidden( Boolean hidden )
+  > summary
+    TODO: Add description.
+
+FUN void : setStyleSheet( String styleSheet )
+  > summary
+    TODO: Add description.
+
+FUN void : setVisible( Boolean visible )
+  > summary
+    TODO: Add description.
+
+FUN void : setWindowModified( Boolean modified )
+  > summary
+    TODO: Add description.
+
+FUN void : setWindowTitle( String title )
+  > summary
+    TODO: Add description.
+
+FUN void : show()
+  > summary
+    TODO: Add description.
+
+FUN void : showFullScreen()
+  > summary
+    TODO: Add description.
+
+FUN void : showMaximized()
+  > summary
+    TODO: Add description.
+
+FUN void : showMinimized()
+  > summary
+    TODO: Add description.
+
+FUN void : showNormal()
+  > summary
+    TODO: Add description.
+
+FUN void : update()
+  > summary
+    TODO: Add description.

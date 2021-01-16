@@ -1,0 +1,57 @@
+CLS DzDockAreaColumn : QWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dockareacolumn_dz
+  > summary
+    Widget that makes up a column in a DzDockArea.
+
+### description
+  > summary
+    TODO: Add detailed description.
+
+### methods
+
+FUN Number : depth()
+  > returns
+    The current depth of the column. This is the same as width() for Right and Left dock areas, or height() for Top and Bottom dock areas.
+
+FUN Number : getNumWindows()
+  > returns
+    The number of windows docked in this column
+
+FUN Number : getPreferredDepth()
+  > returns
+    The preferred depth of the column.
+
+FUN DzDockWindow : getWindow( Number which )
+  > parameters
+    + which - The index of the window to return.
+  > returns
+    The docked window at the given index
+
+FUN Boolean : isMinimized()
+  > returns
+    true if this column is currently minimized
+
+FUN void : minimize()
+  > summary
+    Minimizes the column, if it is not already. The column shrinks so that only its resizing handle is visible.
+
+FUN Number : minimumDepth()
+  > returns
+    The minimum depth of the column.
+
+FUN void : restore()
+  > summary
+    Restores the column to its previous depth if the column is currently minimized.
+
+FUN void : setPreferredDepth( Number depth )
+  > summary
+    Sets the 'depth' of the column.
+  > parameters
+    + depth - The new depth for the column. If depth is less than the minimum depth, the column becomes the minimum depth.
+      Note:
+      'Depth' refers to the distance between the handle/divider used to resize the column and the opposite edge. If the column is in the Left, Center or Right DzDockArea, 'depth' refers to the width of the column. If the column is in the Top or Bottom DzDockArea, 'depth' refers to the height of the column (or row).
+
+FUN void : toggleMinimized()
+  > summary
+    Toggles whether this column is minimized - if minimized, the column restores itself, if full size the column becomes minimized.

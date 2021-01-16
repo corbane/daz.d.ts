@@ -1,0 +1,162 @@
+CLS DzDynamicDividerWgt : DzWidget
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/dynamicdividerwgt_dz
+  > summary
+    A divider bar that handles resize events and toggling automatically.
+
+### description
+  > summary
+    A Dynamic Divider takes two DzWidget objects and places a divider bar between them. It handles resize events, as well as toggling of the divider bar if toggling is enabled.
+    For complex arrangements you can nest instances of this class by specifying them as one of the widgets via setFirstWidget( DzWidget ) or setSecondWidget( DzWidget )
+
+### enumerations
+
+ENU BarStyle
+  > summary
+    TODO: Add description.
+  + BSFull - Use the thick divider bar.
+  + BSSemi - Use the medium sized divider bar.
+  + BSThin - Use the thin divider bar.
+
+ENU DividerOrientation
+  > summary
+    TODO: Add description.
+  + DOHorizontal - Represents a horizontal divider bar (widgets are top and bottom).
+  + DOVertical - Represents a vertical divider bar (widgets are left and right).
+
+ENU ResizeType
+  > summary
+    TODO: Add description.
+  + RTStretchFirst - Stretch the left (or top) widget when resizing.
+  + RTStretchSecond - Stretch the right (or bottom) widget when resizing.
+  + RTStretchBoth - Stretch both widgets equally when resizing.
+
+ENU WidgetType
+  > summary
+    TODO: Add description.
+  + WTLeftOrTop - References the widget to the left of the divider if the orientation is vertical or the widget to the top of the divider if the orientation is horizontal.
+  + WTRightOrBottom - References the widget to the right of the divider if the orientation is vertical or the widget to the bottom of the divider if the orientation is horizontal.
+  + WTBoth - References both widgets of the divider bar.
+  + WTNone - References neither widget of the divider bar.
+
+### properties
+
+PRP Number : actualDividerPercent
+  > summary
+    Holds the actual position of the divider bar as a percentage in decimal format (0.5 = 50%).
+
+PRP DzDynamicDividerWgt.DividerOrientation : dividerOrientation
+  > summary
+    Holds the orientation of the divider bar.
+
+PRP DzDynamicDividerWgt.BarStyle : dividerType
+  > summary
+    Holds the type of divider bar used.
+
+PRP Number : margin
+  > summary
+    Holds the margin surrounding this object.
+
+PRP Boolean : minimized
+  > summary
+    Holds whether the divider bar is currently minimized.
+
+PRP Boolean : moveDisabled
+  > summary
+    Holds whether the divider bar can be moved by dragging.
+
+PRP Number : preferredDividerPercent
+  > summary
+    Holds the preferred position of the divider bar as a percentage in decimal format (0.5 = 50%).
+
+PRP DzDynamicDividerWgt.WidgetType : preferredWidget
+  > summary
+    Holds the preferred widget type.
+
+PRP Number : preferredWidgetExtent
+  > summary
+    Holds the preferred extent of the widget. This value is only used if the value of DzDynamicDividerWgt::preferredWidget is not DzDividerBar::WTNone.
+
+PRP Number : spacing
+  > summary
+    Holds the spacing between the widgets and the divider bar.
+
+PRP DzDynamicDividerWgt.WidgetType : toggleDirection
+  > summary
+    Holds the direction the toggle bar will be minimized when clicked.
+
+PRP Boolean : toggleEnabled
+  > summary
+    Holds whether the divider bar can be minimized when clicked.
+
+### constructors
+
+CTR DzDynamicDividerWgt( DzWidget parent )
+  > summary
+    Instantiates DzDynamicDividerWgt.
+  > attention
+    This constructor creates an instance of this object in an undefined state until both setFirstWidget( DzWidget ) and setSecondWidget( DzWidget ) are called.
+  > parameters
+    + parent - The parent of this object (should not be undefined).
+
+CTR DzDynamicDividerWgt( DzWidget parent, DzWidget firstChild, DzWidget secondChild )
+  > summary
+    Instantiates DzDynamicDividerWgt.
+  > parameters
+    + parent - The parent of this object (should not be undefined).
+    + firstChild - The left (or top) widget (should not be undefined).
+    + secondChild - The right (or bottom) widget (should not be undefined).
+
+### methods
+
+FUN void : moveDivider( Number distance )
+  > summary
+    Moves the divider distance pixels from the current location. If the new location will cause the divider to be displayed in an invalid location (based on minimum size requirements of the widgets), it will be moved and displayed as close as possible to the desired location.
+  > parameters
+    + distance - The distance in pixels from the current location.
+
+FUN void : setDividerBar( DzDynamicDividerWgt.DividerOrientation orientation, DzDynamicDividerWgt.BarStyle barStyle )
+  > summary
+    Sets the divider bar to be used for this object
+  > parameters
+    + orientation - The orientation of the divider bar.
+    + type - The type of divider bar to be used.
+
+FUN void : setFirstWidget( DzWidget first )
+  > summary
+    Sets the left (or top) widget, depending on the orientation.
+  > parameters
+    + first - The widget to be used in the left (or top) position. (should not be undefined)
+
+FUN void : setPreferredWidgetExtent( DzDynamicDividerWgt.WidgetType widget, Number extent )
+  > summary
+    Sets the preferred extent (width or height depending on orientation) for the specified widget. If this extent cannot be used (usually due to minimum size constraints) then the divider will be positioned as close as possible to the preferred extent.
+  > parameters
+    + widget - The widget that should be sized. Values other than WTLeftOrTop or WTRightOrBottom will cause this method to have no effect.
+    + extent - The extent to be set for the widget.
+  > since
+    4.9.0.33
+
+FUN void : setSecondWidget( DzWidget second )
+  > summary
+    Sets the right (or bottom) widget, depending on the orientation.
+  > parameters
+    + second - The widget to be used in the right (or bottom) position. (should not be undefined)
+
+FUN void : setToggleState( Boolean minimized )
+  > summary
+    Toggles the widget to the specified minimized state, if needed.
+  > parameters
+    + minimized - Whether the divider should be minimized or not.
+  > since
+    4.9.0.33
+
+FUN void : swapFirstAndSecondWidgets()
+  > summary
+    Swaps the left (or top) and right (or bottom) widget.
+  > since
+    4.9.0.33
+
+FUN void : toggleWidget()
+  > summary
+    Toggles the widget in the direction specified by toggleDirection. If toggling is disabled, this method has no effect. If either the first or second widget is undefined, this method will also have no effect.

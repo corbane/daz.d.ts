@@ -1,0 +1,211 @@
+CLS DzDomNode : QObject
+  > online
+    http://docs.daz3d.com/doku.php/public/software/dazstudio/4/referenceguide/scripting/api_reference/object_index/domnode_dz
+  > summary
+    DAZ Script DOM base class.
+
+### description
+  > summary
+    This is an abstract base class that provides general functionality for DAZ Script DOM components.
+
+### enumerations
+
+ENU NodeType
+  > summary
+    TODO: Add description.
+  + ElementNode - A DOM Element. See Also: DzDomElement
+  + AttributeNode - A DOM Attribute. See Also: DzDomAttr
+  + TextNode - Plain Text in the DOM. See Also: DzDomText
+  + CDATASectionNode - Character DATA node in the DOM. See Also: DzDomCDATASection
+  + EntityReferenceNode - A Reference to a DOM Entity. See Also: DzDomEntityReference
+  + EntityNode - A DOM Entity. See Also: DzDomEntity
+  + ProcessingInstructionNode - A DOM Processing Instruction. See Also: DzDomProcessingInstruction
+  + CommentNode - A DOM Comment. See Also: DzDomComment
+  + DocumentNode - A DOM Document. See Also: DzDomDocument
+  + DocumentTypeNode - A DOM Document Type. See Also: DzDomDocumentType
+  + DocumentFragmentNode - A DOM Document Fragment. See Also: DzDomDocumentFragment
+  + NotationNode - A DOM Notation. See Also: DzDomNotation
+  + BaseNode - A basic node. See Also: DzDomBasicNode
+  + CharacterDataNode - A Character Data node. See Also: DzDomCharacterData
+
+### properties
+
+PRP String : localName
+  > summary
+    The local name of the node. (Read Only)
+
+PRP String : namespaceURI
+  > summary
+    The namespace of the node. (Read Only)
+
+PRP String : nodeName
+  > summary
+    The name of the node. (Read Only)
+
+PRP DzDomNode.NodeType : nodeType
+  > summary
+    The type of the node. (Read Only)
+
+PRP String : nodeValue
+  > summary
+    The node value.
+
+PRP String : prefix
+  > summary
+    The node prefix.
+
+### methods
+
+FUN void : appendChild( DzDomNode child )
+  > summary
+    Appends child to the end of this node's child list.
+
+FUN Boolean : clear()
+  > summary
+    Converts the node into an invalid (Null) node. Its type and contents are cleared.
+
+FUN DzDomNode : cloneNode( Boolean deep=true )
+  > returns
+    A new node that is a (deep) copy of this node. If deep is true, it will recursively copy the node's children as well.
+
+FUN DzDomNode : firstChild()
+  > returns
+    This node's first child node. If this node has no children, it will return and invalid (Null) node.
+
+FUN Boolean : hasAttributes()
+  > returns
+    true if the node has attributes, otherwise false.
+
+FUN Boolean : hasChildNodes()
+  > returns
+    true if this node has children, otherwise false.
+
+FUN void : insertAfter( DzDomNode newChild, DzDomNode refChild )
+  > summary
+    Inserts newChild into this node's child list following refChild.
+
+FUN void : insertBefore( DzDomNode newChild, DzDomNode refChild )
+  > summary
+    Inserts newChild into this node's child list in front of refChild.
+
+FUN Boolean : isAttr()
+  > returns
+    true if the node is an attribute.
+  > seealso
+    DzDomAttr
+
+FUN Boolean : isCDATASection()
+  > returns
+    true if the node is an CDATA section.
+  > seealso
+    DzDomCDATASection
+
+FUN Boolean : isCharacterData()
+  > returns
+    true if the node is a character data.
+  > seealso
+    DzDomCharacterData
+
+FUN Boolean : isComment()
+  > returns
+    true if the node is a comment.
+  > seealso
+    DzDomComment
+
+FUN Boolean : isDocument()
+  > returns
+    true if the node is a document.
+  > seealso
+    DzDomDocument
+
+FUN Boolean : isDocumentFragment()
+  > returns
+    true if the node is a document fragment.
+  > seealso
+    DzDomDocumentFragment
+
+FUN Boolean : isDocumentType()
+  > returns
+    true if the node is a document type.
+  > seealso
+    DzDomDocumentType
+
+FUN Boolean : isElement()
+  > returns
+    true if the node is an element.
+  > seealso
+    DzDomElement
+
+FUN Boolean : isEntity()
+  > returns
+    true if the node is an entity.
+  > seealso
+    DzDomEntity
+
+FUN Boolean : isEntityReference()
+  > returns
+    true if the node is an entity reference.
+  > seealso
+    DzDomEntityReference
+
+FUN Boolean : isNotation()
+  > returns
+    true if the node is a notation.
+  > seealso
+    DzDomNotation
+
+FUN Boolean : isNull()
+  > returns
+    true if this node is invalid (Null).
+
+FUN Boolean : isProcessingInstruction()
+  > returns
+    true if the node is a processing instruction.
+  > seealso
+    DzDomProcessingInstruction
+
+FUN Boolean : isSupported( String feature, String version )
+  > returns
+    true if the DOM implementation supports the given feature, otherwise false.
+
+FUN Boolean : isText()
+  > returns
+    true if the node is text.
+  > seealso
+    DzDomText
+
+FUN DzDomNode : lastChild()
+  > returns
+    This node's last child node. If this node has no children, it will return an invalid (Null) node.
+
+FUN DzDomNode : namedItem( String name )
+  > returns
+    The first direct child node with a matching name. If none is found, returns an invalid (Null) node.
+
+FUN DzDomNode : nextSibling()
+  > returns
+    This node's next sibling. If this node does not have a next sibling, it returns an invalid (Null) node.
+
+FUN void : normalize()
+  > summary
+    Converts all the node's children into standard form (e.g. adjacent text nodes will be merged )
+
+FUN DzDomNode : ownerDocument()
+  > returns
+    The document that this node belongs to, or an invalid (Null) node if this node is not part of a document.
+
+FUN DzDomNode : parentNode()
+  > returns
+    This node's parent node. If this node is top level it will return an invalid (Null) node.
+
+FUN DzDomNode : previousSibling()
+  > returns
+    This node's previous sibling. If this node does not have a previous sibling, it returns an invalid (Null) node.
+
+FUN void : removeChild( DzDomNode oldChild )
+  > summary
+    Removes oldChild from this node's child list.
+
+FUN void : replaceChild( DzDomNode newChild, DzDomNode oldChild )
+  > summary
+    Inserts newChild into this node's child list in place of refChild.
